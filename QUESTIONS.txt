@@ -1,0 +1,8 @@
+BoardBench questions / problems / uncertainties
+Append-only. Do not delete or reorder entries automatically.
+
+- Which pilot game should be used for the first end-to-end run?
+- Which existing subscription handles board-game PDFs most reliably?
+- Should difficult PDFs be converted to plain text manually before prompting?
+- How strict should the future comparison to OpenSpiel be: code structure, behavior, or benchmark outcomes?
+- When should the project move from manual subscription usage to API-based automation?
