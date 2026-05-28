@@ -218,3 +218,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 .pi/
+!.pi/
+.pi/*
+!.pi/extensions/
+.pi/extensions/*
+!.pi/extensions/boardbench-context.ts
