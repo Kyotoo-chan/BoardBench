@@ -55,6 +55,7 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 5. Do not delete, reorder, or clean up entries in `QUESTIONS.txt` automatically.
 6. Prefer readable files and explicit documentation over hidden magic.
 7. Call out deviations from the agreed plan explicitly.
+8. When the user specifies commit times, use explicit `hh:mm:ss` timestamps and do not use `00` seconds.
 
 ## Coding style expectations
 
