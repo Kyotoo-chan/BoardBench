@@ -6,6 +6,21 @@ This repository supports a bachelor thesis workflow around **board game rulebook
 
 The current repo focus is **repo building and experiment preparation**, not yet automated benchmarking.
 
+## Long-term direction
+
+The broader thesis goal is to build a board-game benchmark idea inspired by PaperBench:
+
+- start from a board-game rulebook as source material
+- generate a Python game environment with an LLM
+- compare against OpenSpiel where possible
+- later derive more general evaluation rules across games
+
+Coding agents should therefore optimize for:
+
+- a reusable and understandable workflow
+- prompts and outputs that are easy to compare later
+- preservation of intermediate artifacts useful for the final written thesis
+
 ## Scope for coding agents
 
 Coding agents working in this repository should primarily help with:
