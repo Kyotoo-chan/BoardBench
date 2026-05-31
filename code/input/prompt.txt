@@ -1,0 +1,22 @@
+You will receive rule text.
+
+Use only that information.
+Do not use outside knowledge.
+
+Write one simple, self-contained Python file using only the standard library.
+If rules are unclear or incomplete, state the assumptions briefly in comments.
+
+If possible, include:
+- `GameState`
+- `Game`
+- `initial_state(self)`
+- `current_player(self, state)`
+- `legal_actions(self, state)`
+- `apply_action(self, state, action)`
+- `is_terminal(self, state)`
+- `returns(self, state)` or `winner(self, state)`
+- `render(self, state)`
+
+Output:
+1. `Open questions / assumptions`
+2. one fenced `python` code block with the full file
