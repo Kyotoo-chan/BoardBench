@@ -14,27 +14,29 @@ BoardBench/
 ├─ CURRENT.md
 ├─ QUESTIONS.txt
 ├─ README.md
+├─ requirements.txt
 ├─ workflow_description.md
 ├─ code/
-│  ├─ compare_to_openspiel.ipynb
+│  ├─ evaluation.ipynb
 │  ├─ evaluation_draft.md
-│  ├─ input_rules/
-│  │  └─ rules.txt
-│  ├─ outputs/
-│  └─ prompts/
-│     ├─ game_to_python.md
-│     └─ system.md
+│  ├─ input/
+│  │  ├─ game_rules.txt
+│  │  └─ prompt.txt
+│  └─ outputs/
 └─ exposé/
    └─ Bachelorarbeit_Exposé.pdf
 ```
 
 ## What is already in place
 
-- reusable prompt files exist under `code/prompts/`
-- an input rules folder exists under `code/input_rules/`
+- a single prompt input file exists under `code/input/prompt.txt`
+- a rules input file exists under `code/input/game_rules.txt`
 - an outputs folder exists under `code/outputs/`
-- the comparison notebook exists under `code/compare_to_openspiel.ipynb`
-- the notebook already points to `code/outputs/`
+- a `requirements.txt` file exists for the Python notebook workflow
+- the evaluation notebook exists under `code/evaluation.ipynb`
+- the notebook now keeps game, model, timeout, and output settings directly inside the notebook
+- the notebook is set up for the `Python (boardbench)` kernel on Python 3.12.3
+- OpenSpiel is installed in the `boardbench` Python 3.12.3 environment
 - a project-local pi extension exists under `.pi/extensions/boardbench-context.ts`
 - a usage guide for that extension exists in `workflow_description.md`
 - the repo now explicitly distinguishes between target state (`README.md`) and actual state (`CURRENT.md`)
@@ -43,7 +45,7 @@ BoardBench/
 
 - the working folders are still nested under `code/`
 - there are no root-level `inputs/`, `outputs/`, or `prompts/` folders yet
-- the comparison notebook is still inside `code/`
+- the evaluation notebook is still inside `code/`
 - `code/evaluation_draft.md` currently holds a broad draft of possible evaluation rules
 - there is no automated benchmark pipeline yet
 
@@ -61,20 +63,23 @@ The current build phase is mainly about:
 
 Today, the repository is best understood as a staging version of the target workflow:
 
-1. store rule text in `code/input_rules/`
-2. use `code/prompts/system.md` and `code/prompts/game_to_python.md`
-3. save raw model output and extracted Python files in `code/outputs/`
-4. compare files in `code/compare_to_openspiel.ipynb`
-5. track unresolved issues in `QUESTIONS.txt`
+1. store the prompt text in `code/input/prompt.txt`
+2. store the game rules in `code/input/game_rules.txt`
+3. create or activate a Python 3.12.3 environment and install `requirements.txt`
+4. update the game, model, timeout, and output variables directly in `code/evaluation.ipynb`
+5. save raw model output and extracted Python files in `code/outputs/`
+6. run the minimal smoke tests in `code/evaluation.ipynb`
+7. track unresolved issues in `QUESTIONS.txt`
 
 ## Local pi extension behavior
 
 The local extension currently:
 
-- defaults pi to a readonly workflow mode
-- keeps tool access focused on BoardBench workflow files
-- blocks bash
-- offers `/bb-readonly`, `/bb-authoring`, and `/bb-status`
+- defaults pi to authoring mode
+- can switch into a restricted readonly workflow mode
+- keeps readonly tool access focused on BoardBench workflow files
+- blocks bash only in readonly mode
+- offers `/bb-readonly`, `/bb-generate`, `/bb-authoring`, and `/bb-status`
 
 ## Transition intention
 
@@ -83,7 +88,8 @@ The intended cleanup direction is still the minimal target layout from `README.m
 - `inputs/`
 - `outputs/`
 - `prompts/`
-- `compare_to_openspiel.ipynb`
+- `requirements.txt`
+- `evaluation.ipynb`
 - `QUESTIONS.txt`
 
 The current `code/` layout is acceptable for now, but it is a transitional structure rather than the intended end state.

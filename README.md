@@ -37,7 +37,8 @@ BoardBench/
 ├─ inputs/
 ├─ outputs/
 ├─ prompts/
-├─ compare_to_openspiel.ipynb
+├─ requirements.txt
+├─ evaluation.ipynb
 ├─ CURRENT.md
 ├─ workflow_description.md
 ├─ QUESTIONS.txt
@@ -53,8 +54,9 @@ BoardBench/
 
 - `inputs/` – rulebooks or extracted rule text
 - `outputs/` – raw model responses, extracted Python files, reference files, and other intermediate artifacts
-- `prompts/` – reusable prompts for rulebook-to-Python runs
-- `compare_to_openspiel.ipynb` – manual comparison notebook
+- `prompts/` – reusable prompt text for rulebook-to-Python runs
+- `requirements.txt` – dependency list for the local setup
+- `evaluation.ipynb` – manual evaluation notebook with inline settings, an optional `pi` call, and minimal smoke tests
 - `CURRENT.md` – current repo state and deviations from the target layout
 - `workflow_description.md` – how to test the workflow with pi and the local extension
 - `QUESTIONS.txt` – append-only list of open research questions and problems
@@ -75,12 +77,14 @@ Keep at least:
 ## Minimal workflow
 
 1. put a rulebook or extracted rule text into `inputs/`
-2. use `prompts/system.md` and `prompts/game_to_python.md`
-3. generate one self-contained Python module from the provided rules only
-4. save the full raw answer in `outputs/`
-5. save the extracted `.py` file separately in `outputs/`
-6. compare the result later in `compare_to_openspiel.ipynb`
-7. record open questions in `QUESTIONS.txt`
+2. note that `requirements.txt` exists for the local setup
+3. use the current input files for prompt text and rules
+4. set the current game, model, timeout, and filenames directly in `evaluation.ipynb`
+5. generate one self-contained Python module from the provided rules only
+6. save the full raw answer in `outputs/`
+7. save the extracted `.py` file separately in `outputs/`
+8. inspect the result later in `evaluation.ipynb`
+9. record open questions in `QUESTIONS.txt`
 
 ## Notes
 

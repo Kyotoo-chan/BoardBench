@@ -1,15 +1,16 @@
 # Local Extension Model Testing
 
-This file explains how to use the project-local pi extension in `.pi/extensions/boardbench-context.ts` to test the BoardBench workflow with supported models.
+This file explains the current BoardBench workflow with the project-local pi extension in `.pi/extensions/boardbench-context.ts`.
 
 ## What the extension does
 
 - loads automatically when pi is started from this repo
-- defaults to a readonly tool set: `read`, `grep`, `find`, `ls`
-- blocks `bash`
-- blocks file access outside the BoardBench workflow allowlist
+- defaults to authoring mode with `read`, `grep`, `find`, `ls`, `edit`, `write`, `bash`
+- can switch into a restricted readonly workflow mode
+- uses the BoardBench workflow allowlist in readonly mode
 - offers these commands:
   - `/bb-readonly`
+  - `/bb-generate`
   - `/bb-authoring`
   - `/bb-status`
 
@@ -22,12 +23,12 @@ Current repo paths:
 - `AGENTS.md`
 - `QUESTIONS.txt`
 - `workflow_description.md`
+- `requirements.txt`
 - `code/`
-- `code/input_rules/`
-- `code/prompts/`
+- `code/input/`
 - `code/outputs/`
 - `code/evaluation_draft.md`
-- `code/compare_to_openspiel.ipynb`
+- `code/evaluation.ipynb`
 - `.pi/extensions/`
 
 Target-state paths are also allowed already:
@@ -35,13 +36,15 @@ Target-state paths are also allowed already:
 - `inputs/`
 - `outputs/`
 - `prompts/`
-- `compare_to_openspiel.ipynb`
+- `requirements.txt`
+- `evaluation.ipynb`
 
 ## Before you start
 
 1. Start pi from the repo root.
 2. Make sure you are authenticated for the provider you want to test.
 3. List supported models before choosing one.
+4. For the notebook workflow, use Python 3.12.3, install `requirements.txt`, and use your local Jupyter setup.
 
 Examples:
 
@@ -58,11 +61,22 @@ pi
 /login
 ```
 
-Or use environment variables for API-key providers before starting pi.
+## Notebook environment
+
+Create a Python 3.12.3 environment and install the repo dependencies:
+
+```bash
+conda create -n boardbench python=3.12.3 -y
+conda activate boardbench
+python -m pip install -r requirements.txt
+```
+
+Then open `code/evaluation.ipynb` in your local Jupyter setup.
+If needed, install `notebook` or `ipykernel` separately in your local environment.
 
 ## Start pi with the local extension
 
-The extension is project-local and auto-discovered from `.pi/extensions/`, so in the normal case this is enough:
+In the normal case this is enough:
 
 ```bash
 pi
@@ -78,9 +92,9 @@ pi --no-context-files --no-skills --no-prompt-templates
 
 Notes:
 
-- `--no-context-files` disables automatic `AGENTS.md` loading.
-- the extension still loads unless you explicitly disable extensions.
-- print mode (`-p`) also uses the extension, but slash commands are not available there.
+- `--no-context-files` disables automatic `AGENTS.md` loading
+- the extension still loads unless you explicitly disable extensions
+- print mode (`-p`) also uses the extension, but slash commands are not available there
 
 ## Extension commands
 
@@ -89,16 +103,25 @@ Inside pi:
 ```text
 /bb-status
 /bb-readonly
+/bb-generate
 /bb-authoring
 ```
 
 - `/bb-readonly` keeps the session in restricted read-only mode
-- `/bb-authoring` also enables `edit` and `write`
+- `/bb-generate` currently behaves like the restricted readonly workflow mode
+- `/bb-authoring` enables editing and bash across the repo
 - `/bb-status` shows the current mode
+
+## Current input files
+
+- `code/input/prompt.txt`
+- `code/input/game_rules.txt`
+
+The evaluation notebook reads these two input files directly.
 
 ## Recommended test patterns
 
-### 1. Safe workflow check (interactive, read-only)
+### 1. Safe workflow check
 
 Start pi, then run:
 
@@ -109,43 +132,33 @@ Start pi, then run:
 Prompt example:
 
 ```text
-Read CURRENT.md, code/prompts/system.md, code/prompts/game_to_python.md, and code/input_rules/rules.txt.
+Read CURRENT.md, code/input/prompt.txt, and code/input/game_rules.txt.
 Summarize the current BoardBench workflow and list the exact files that matter for one manual generation run.
 ```
 
-Use this when you want to check whether a model can understand the workflow without writing files.
-
 ### 2. Prompt + rulebook test with explicit file context
-
-You can also pass the files directly on the command line:
 
 ```bash
 pi --model <provider/model> \
   @README.md \
   @CURRENT.md \
-  @code/prompts/system.md \
-  @code/prompts/game_to_python.md \
-  @code/input_rules/rules.txt \
+  @code/input/prompt.txt \
+  @code/input/game_rules.txt \
   "Use only these files. Explain the workflow and say what output artifacts should be kept."
 ```
 
-This is the most deterministic way to keep context small.
-
-### 3. One-shot model comparison in print mode
+### 3. One-shot model run in print mode
 
 ```bash
 pi -p --model <provider/model> \
-  @code/prompts/system.md \
-  @code/prompts/game_to_python.md \
-  @code/input_rules/rules.txt \
-  "Game name: <replace_me>. Use the provided files only and generate the Python module."
+  @code/input/prompt.txt \
+  @code/input/game_rules.txt \
+  "Use the provided files only and generate the Python module."
 ```
-
-This is useful when you want comparable runs across several models.
 
 ### 4. Authoring run that writes outputs
 
-If you want pi to save files into `code/outputs/`, switch to authoring mode first:
+Switch first:
 
 ```text
 /bb-authoring
@@ -154,38 +167,25 @@ If you want pi to save files into `code/outputs/`, switch to authoring mode firs
 Prompt example:
 
 ```text
-Read code/prompts/system.md, code/prompts/game_to_python.md, and code/input_rules/rules.txt.
+Read code/input/prompt.txt and code/input/game_rules.txt.
 
-Generate the result for game name: <replace_me>.
+Generate the result.
 
 Then save:
 - the full raw answer as code/outputs/<game>__<model>__response.md
 - the extracted Python module as code/outputs/<game>__<model>.py
-
-Do not edit files outside the BoardBench workflow allowlist.
 ```
 
-## Switching models
+## Notebook workflow
 
-Inside pi:
+`code/evaluation.ipynb` contains the current minimal evaluation flow:
 
-```text
-/model
-```
+1. edit the inline variables in the setup cell
+2. optionally run the `pi` call cell
+3. run the generated-code smoke test
+4. run the OpenSpiel loading cell and the simple random test cell
 
-Or start separate runs from the shell:
-
-```bash
-pi --model <provider/model>
-```
-
-Recommended pattern:
-
-1. pick one rules file
-2. keep the same prompt files
-3. run the same task across multiple supported models
-4. store each raw answer and each extracted `.py` file separately
-5. compare later in the notebook
+The notebook prints only errors.
 
 ## Reload after changing the extension
 
@@ -197,21 +197,16 @@ If you edit `.pi/extensions/boardbench-context.ts`, reload inside pi:
 
 ## Expected restrictions
 
-The extension is intentionally narrow.
+In readonly mode:
 
-Expected behavior:
-
-- `bash` tool calls are blocked
-- broad file exploration outside the workflow allowlist is blocked
-- in readonly mode, `edit` and `write` are blocked
-- if a model needs a file outside the allowlist, ask the user first and then adjust the extension deliberately
+- `bash` is blocked
+- `edit` and `write` are blocked
+- file access outside the workflow allowlist is blocked
 
 ## Suggested first model test
 
-A simple first test is:
-
-1. choose `code/input_rules/rules.txt`
-2. use the two prompt files in `code/prompts/`
-3. run one readonly understanding pass
-4. run one authoring pass
-5. inspect the saved files in `code/outputs/`
+1. choose `code/input/game_rules.txt`
+2. use `code/input/prompt.txt`
+3. run one authoring pass
+4. inspect the saved files in `code/outputs/`
+5. open `code/evaluation.ipynb` with the `Python (boardbench)` kernel

@@ -23,16 +23,16 @@ const RESTRICTED_FILES = [
   "AGENTS.md",
   "QUESTIONS.txt",
   "workflow_description.md",
+  "requirements.txt",
   "code/evaluation_draft.md",
-  "code/compare_to_openspiel.ipynb",
-  "compare_to_openspiel.ipynb",
+  "code/evaluation.ipynb",
+  "evaluation.ipynb",
 ];
 
 const RESTRICTED_DIRS = [
   ".pi/extensions",
   "code",
-  "code/input_rules",
-  "code/prompts",
+  "code/input",
   "code/outputs",
   "inputs",
   "prompts",
@@ -201,7 +201,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     return {
       systemPrompt:
         event.systemPrompt +
-        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In readonly mode, prefer the workflow files first: README.md, CURRENT.md, code/prompts/, code/input_rules/, code/outputs/, and the comparison notebook.\n- If readonly mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
+        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In readonly mode, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If readonly mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
     };
   });
 
@@ -243,7 +243,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
         block: true,
         reason:
           mode === "readonly"
-            ? `${event.toolName} requires an explicit restricted workflow path, for example code, code/prompts, code/input_rules, or code/outputs.`
+            ? `${event.toolName} requires an explicit restricted workflow path, for example requirements.txt, code, code/input, or code/outputs.`
             : `${event.toolName} requires an explicit path inside the repository.`,
       };
     }

@@ -56,6 +56,9 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 6. Prefer readable files and explicit documentation over hidden magic.
 7. Call out deviations from the agreed plan explicitly.
 8. When the user specifies commit times, use explicit `hh:mm:ss` timestamps and do not use `00` seconds.
+9. When writing commit messages, keep them lowercase and stylistically close to the existing short commit history.
+10. If a task is split into multiple commits, space the commit timestamps according to the rough effort split, and set the final commit to the current time unless the user says otherwise.
+11. When estimating commit spacing, count planning, thinking, and deciding time as part of the work, not only the file editing time.
 
 ## Coding style expectations
 
