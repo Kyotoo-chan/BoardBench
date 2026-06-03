@@ -23,6 +23,8 @@ Current repo paths:
 - `AGENTS.md`
 - `QUESTIONS.txt`
 - `workflow_description.md`
+- `boardbench_checkliste.md`
+- `boardbench_checkliste_einschaetzung.md`
 - `requirements.txt`
 - `code/`
 - `code/input/`
@@ -112,12 +114,12 @@ Inside pi:
 - `/bb-authoring` enables editing and bash across the repo
 - `/bb-status` shows the current mode
 
-## Current input files
+## Current workflow files
 
 - `code/input/prompt.txt`
 - `code/input/game_rules.txt`
 
-The evaluation notebook reads these two input files directly.
+The evaluation notebook reads the prompt and rule text directly.
 
 ## Recommended test patterns
 

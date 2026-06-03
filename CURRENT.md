@@ -11,6 +11,8 @@ BoardBench/
 │  └─ extensions/
 │     └─ boardbench-context.ts
 ├─ AGENTS.md
+├─ boardbench_checkliste.md
+├─ boardbench_checkliste_einschaetzung.md
 ├─ CURRENT.md
 ├─ QUESTIONS.txt
 ├─ README.md
@@ -35,6 +37,7 @@ BoardBench/
 - a `requirements.txt` file exists for the Python notebook workflow
 - the evaluation notebook exists under `code/evaluation.ipynb`
 - the notebook now keeps game, model, timeout, and output settings directly inside the notebook
+- the prompt now asks for a slightly stricter minimal game API and stable action names
 - the notebook is set up for the `Python (boardbench)` kernel on Python 3.12.3
 - OpenSpiel is installed in the `boardbench` Python 3.12.3 environment
 - a project-local pi extension exists under `.pi/extensions/boardbench-context.ts`

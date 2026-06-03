@@ -84,7 +84,8 @@ Keep at least:
 6. save the full raw answer in `outputs/`
 7. save the extracted `.py` file separately in `outputs/`
 8. inspect the result later in `evaluation.ipynb`
-9. record open questions in `QUESTIONS.txt`
+9. preserve manual evaluation notes when they matter
+10. record open questions in `QUESTIONS.txt`
 
 ## Notes
 

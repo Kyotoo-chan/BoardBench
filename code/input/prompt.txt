@@ -1,21 +1,37 @@
 You will receive rule text.
 
 Use only that information.
-Do not use outside knowledge.
+Do not use outside knowledge or remembered rules for the game.
 
 Write one simple, self-contained Python file using only the standard library.
-If rules are unclear or incomplete, state the assumptions briefly in comments.
+Do not import OpenSpiel.
+Do not require external files, images, environment variables, network access, subprocesses, API keys, or interactive input.
+Keep top-level code limited to definitions and constants.
 
-If possible, include:
+If rules are unclear or incomplete, state the assumptions briefly before the code and in comments where relevant.
+Do not silently fill missing rules with outside knowledge.
+
+If possible, include this minimal game API:
 - `GameState`
 - `Game`
 - `initial_state(self)`
 - `current_player(self, state)`
 - `legal_actions(self, state)`
-- `apply_action(self, state, action)`
+- `apply_action(self, state, action)` returning the next state, or clearly documenting in-place mutation
 - `is_terminal(self, state)`
-- `returns(self, state)` or `winner(self, state)`
-- `render(self, state)`
+- `returns(self, state)` returning one numeric value per player
+- `render(self, state)` returning a stable human-readable string
+- `action_to_name(self, action)` returning a unique canonical action name
+- `name_to_action(self, name)` reversing a canonical action name
+
+Rules for actions:
+- `legal_actions` must only return actions that `apply_action` accepts.
+- Action names must be human-readable, stable, unique in sampled states, and suitable for later comparison without relying on raw action indices.
+- Terminal states should have no legal actions and stable returns.
+
+Only if required by the rule text, include:
+- `chance_outcomes(self, state)` for stochastic rules
+- `information_state(self, state, player)` for hidden-information rules
 
 Output:
 1. `Open questions / assumptions`

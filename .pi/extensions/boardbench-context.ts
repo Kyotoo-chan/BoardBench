@@ -23,6 +23,8 @@ const RESTRICTED_FILES = [
   "AGENTS.md",
   "QUESTIONS.txt",
   "workflow_description.md",
+  "boardbench_checkliste.md",
+  "boardbench_checkliste_einschaetzung.md",
   "requirements.txt",
   "code/evaluation_draft.md",
   "code/evaluation.ipynb",
