@@ -7,3 +7,9 @@ Append-only. Do not delete or reorder entries automatically.
 - How strict should the future comparison to OpenSpiel be: code structure, behavior, or benchmark outcomes?
 - When should the project move from manual subscription usage to API-based automation?
 - We are testing the rulebook not the LLm right, so should we ask for errors or logic issues in the given ruleset? -> bewertungsregel?
+- How can "rulebook clarity" be operationally separated from model ability, game complexity, and possible training-data contamination?
+- Should the BoardBench output contract be a hard scoring requirement, or should semantically usable but differently named APIs receive partial credit?
+- Who creates and validates Tier-B rubric scenarios, and is double-coding feasible within the bachelor thesis scope?
+- Which rulebook licenses or usage permissions are acceptable for storing input texts, raw model outputs, and extracted code in this repo?
+- Should OpenSpiel alignment be used only for calibration, or should it contribute to the main score for games with references?
+- At what point must generated-code execution move from manual notebook smoke tests to sandboxed or containerized execution?
