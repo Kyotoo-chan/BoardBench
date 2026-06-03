@@ -1,15 +1,15 @@
-BoardBench questions / problems / uncertainties
-Append-only. Do not delete or reorder entries automatically.
+BoardBench - Fragen für Besprechungen mit dem Professor
+Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 
-- Which pilot game should be used for the first end-to-end run? Mühle?
-- Which existing subscription handles board-game PDFs most reliably?
-- Should difficult PDFs be converted to plain text manually before prompting?
-- How strict should the future comparison to OpenSpiel be: code structure, behavior, or benchmark outcomes?
-- When should the project move from manual subscription usage to API-based automation?
-- We are testing the rulebook not the LLm right, so should we ask for errors or logic issues in the given ruleset? -> bewertungsregel?
-- How can "rulebook clarity" be operationally separated from model ability, game complexity, and possible training-data contamination?
-- Should the BoardBench output contract be a hard scoring requirement, or should semantically usable but differently named APIs receive partial credit?
-- Who creates and validates Tier-B rubric scenarios, and is double-coding feasible within the bachelor thesis scope?
-- Which rulebook licenses or usage permissions are acceptable for storing input texts, raw model outputs, and extracted code in this repo?
-- Should OpenSpiel alignment be used only for calibration, or should it contribute to the main score for games with references?
-- At what point must generated-code execution move from manual notebook smoke tests to sandboxed or containerized execution?
+- Welches Pilotspiel eignet sich für den ersten End-to-End-Lauf? Mühle?
+- Welcher vorhandene Modellzugang bzw. welche Subscription verarbeitet Brettspiel-PDFs voraussichtlich am zuverlässigsten?
+- Sollen schwierige PDFs vor dem Prompting manuell in Klartext umgewandelt werden?
+- Wie streng soll der spätere Vergleich mit OpenSpiel sein: Code-Struktur, Verhalten oder Benchmark-Ergebnis?
+- Ab wann sollte das Projekt von manueller Subscription-Nutzung auf API-basierte Automatisierung wechseln?
+- Wenn primär die Klarheit des Regelwerks getestet werden soll: Soll das Modell auch nach Fehlern, Lücken oder Logikproblemen im gegebenen Regeltext gefragt werden, und wie würde das in die Bewertung eingehen?
+- Wie kann "Regelwerk-Klarheit" methodisch von Modellfähigkeit, Spielkomplexität und möglicher Trainingsdaten-Kontamination getrennt werden?
+- Soll die vorgegebene minimale Spiel-API eine harte Bewertungsanforderung sein, oder sollen semantisch nutzbare, aber anders benannte APIs Teilpunkte bekommen?
+- Wer erstellt und validiert Tier-B-Rubriken bzw. Testszenarien, und ist eine Doppelkodierung im Bachelorarbeits-Scope realistisch?
+- Welche Lizenz- oder Nutzungsbedingungen sind für das Speichern von Regeltexten, Rohoutputs und extrahiertem Code im Repo akzeptabel?
+- Soll OpenSpiel-Alignment nur zur Kalibrierung dienen, oder in den Hauptscore für Spiele mit Referenz eingehen?
+- Ab welchem Punkt muss die Ausführung von generiertem Code von manuellen Notebook-Smoke-Tests in eine Sandbox oder einen Container verlagert werden?

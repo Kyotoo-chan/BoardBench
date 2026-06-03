@@ -72,7 +72,7 @@ Today, the repository is best understood as a staging version of the target work
 4. update the game, model, timeout, and output variables directly in `code/evaluation.ipynb`
 5. save raw model output and extracted Python files in `code/outputs/`
 6. run the minimal smoke tests in `code/evaluation.ipynb`
-7. track unresolved issues in `QUESTIONS.txt`
+7. track questions for professor discussions in `QUESTIONS.txt`
 
 ## Local pi extension behavior
 

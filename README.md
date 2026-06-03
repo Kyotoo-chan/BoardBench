@@ -59,7 +59,7 @@ BoardBench/
 - `evaluation.ipynb` – manual evaluation notebook with inline settings, an optional `pi` call, and minimal smoke tests
 - `CURRENT.md` – current repo state and deviations from the target layout
 - `workflow_description.md` – how to test the workflow with pi and the local extension
-- `QUESTIONS.txt` – append-only list of open research questions and problems
+- `QUESTIONS.txt` – append-only list of questions and discussion points for professor meetings
 - `AGENTS.md` – instructions for coding agents working in this repo
 - `.pi/extensions/boardbench-context.ts` – optional project-local pi extension for restricted workflow tests
 
@@ -85,7 +85,7 @@ Keep at least:
 7. save the extracted `.py` file separately in `outputs/`
 8. inspect the result later in `evaluation.ipynb`
 9. preserve manual evaluation notes when they matter
-10. record open questions in `QUESTIONS.txt`
+10. record professor discussion questions in `QUESTIONS.txt`
 
 ## Notes
 

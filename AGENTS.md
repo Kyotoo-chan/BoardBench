@@ -42,7 +42,7 @@ Prefer the smallest useful setup:
 - one `outputs/` folder
 - one `prompts/` folder
 - one comparison notebook
-- one append-only question/problem tracker
+- one append-only professor discussion/questions tracker
 
 Avoid introducing large frameworks, provider abstractions, or complex evaluation pipelines unless explicitly requested.
 
@@ -99,6 +99,7 @@ If a workflow produces model artifacts, prefer storing:
 
 Use simple, human-readable filenames.
 
-## Questions and problems
+## Professor discussion questions
 
+`QUESTIONS.txt` is for questions and discussion points to bring to the professor, not for ordinary implementation TODOs.
 If a task reveals ambiguity, uncertainty, or a research decision that should be discussed with the professor, record it in `QUESTIONS.txt` as a new appended bullet instead of silently resolving it in architecture.
