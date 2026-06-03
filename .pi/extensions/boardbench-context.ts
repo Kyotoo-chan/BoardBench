@@ -21,7 +21,6 @@ const RESTRICTED_FILES = [
   "README.md",
   "CURRENT.md",
   "AGENTS.md",
-  "QUESTIONS.txt",
   "workflow_description.md",
   "boardbench_checkliste.md",
   "boardbench_checkliste_einschaetzung.md",

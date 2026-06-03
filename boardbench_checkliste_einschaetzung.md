@@ -9,7 +9,6 @@ Sinnvoll ist deshalb: die stabilisierenden Teile jetzt klein einbauen, forschung
 ## Direkt umgesetzt
 
 - `code/input/prompt.txt` fordert jetzt eine etwas klarere minimale Spiel-API, kanonische Aktionsnamen, Standardbibliothek-only und keine I/O-/Netz-/Subprozess-Nutzung ein.
-- `QUESTIONS.txt` enthält zusätzliche Besprechungspunkte für den Professor aus der Checkliste.
 - `CURRENT.md`, `workflow_description.md` und die lokale pi-Extension wurden nur dort angepasst, wo die neue Checklisten-Einschätzung sichtbar sein sollte.
 
 Nicht umgesetzt wurden zusätzliche Dateien wie ein eigener Output-Vertrag oder eine separate Evaluation-Template-Datei, weil das Repo bewusst klein bleiben soll. Die nötigen Hinweise stehen im Prompt, in `code/evaluation_draft.md` und in dieser Einschätzung.

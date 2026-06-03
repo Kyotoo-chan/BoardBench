@@ -42,7 +42,6 @@ Prefer the smallest useful setup:
 - one `outputs/` folder
 - one `prompts/` folder
 - one comparison notebook
-- one append-only professor discussion/questions tracker
 
 Avoid introducing large frameworks, provider abstractions, or complex evaluation pipelines unless explicitly requested.
 
@@ -52,7 +51,7 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 2. Do not silently introduce API-key based workflows when the current task is subscription-first/manual.
 3. Do not assume external game knowledge if the task says to rely only on the provided rulebook/text.
 4. Keep raw model outputs whenever the workflow touches model generations.
-5. Do not delete, reorder, or clean up entries in `QUESTIONS.txt` automatically.
+5. Do not delete or rewrite `QUESTIONS.txt` automatically; it is user-maintained.
 6. Prefer readable files and explicit documentation over hidden magic.
 7. Call out deviations from the agreed plan explicitly.
 8. When the user specifies commit times, use explicit `hh:mm:ss` timestamps and do not use `00` seconds.
@@ -98,8 +97,3 @@ If a workflow produces model artifacts, prefer storing:
 - any important assumptions or unresolved issues
 
 Use simple, human-readable filenames.
-
-## Professor discussion questions
-
-`QUESTIONS.txt` is for questions and discussion points to bring to the professor, not for ordinary implementation TODOs.
-If a task reveals ambiguity, uncertainty, or a research decision that should be discussed with the professor, record it in `QUESTIONS.txt` as a new appended bullet instead of silently resolving it in architecture.

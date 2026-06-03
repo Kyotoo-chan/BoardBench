@@ -14,7 +14,6 @@ BoardBench/
 ├─ boardbench_checkliste.md
 ├─ boardbench_checkliste_einschaetzung.md
 ├─ CURRENT.md
-├─ QUESTIONS.txt
 ├─ README.md
 ├─ requirements.txt
 ├─ workflow_description.md
@@ -72,7 +71,6 @@ Today, the repository is best understood as a staging version of the target work
 4. update the game, model, timeout, and output variables directly in `code/evaluation.ipynb`
 5. save raw model output and extracted Python files in `code/outputs/`
 6. run the minimal smoke tests in `code/evaluation.ipynb`
-7. track questions for professor discussions in `QUESTIONS.txt`
 
 ## Local pi extension behavior
 
@@ -93,7 +91,6 @@ The intended cleanup direction is still the minimal target layout from `README.m
 - `prompts/`
 - `requirements.txt`
 - `evaluation.ipynb`
-- `QUESTIONS.txt`
 
 The current `code/` layout is acceptable for now, but it is a transitional structure rather than the intended end state.
 
