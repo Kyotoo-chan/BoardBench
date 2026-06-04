@@ -69,17 +69,6 @@ Ausführbare Szenarien und PaperBench-artige Teilpunkte sind wahrscheinlich der 
 Vor dem ersten Pilotlauf sollten aber noch keine Gewichtungen festgeschrieben werden.
 Zuerst muss klarer werden, welche Fehlerarten in echten Modelloutputs auftreten.
 
-### Sandbox / Container
-
-Generierter Code ist untrusted code.
-Eine Sandbox ist wichtig, sobald mehr als manuelle, kontrollierte Smoke-Tests laufen.
-Für den aktuellen manuellen Stand ist es ausreichend, das Risiko sichtbar zu halten und keine zusätzliche Automatisierung einzuführen.
-
-### Coverage, Random-Rollouts und mehrere Läufe
-
-Diese Punkte sind methodisch sinnvoll, aber erst nach stabiler Schnittstelle und Pilotspiel sinnvoll.
-Sonst optimiert man zu früh an Metriken, bevor klar ist, was die Module überhaupt zuverlässig liefern.
-
 ## Kritisch zu hinterfragen
 
 ### Misst BoardBench wirklich Regelwerk-Klarheit?
@@ -109,15 +98,3 @@ Für die erste Phase sollten Tier-A- und Tier-B-Ergebnisse getrennt bleiben.
 
 Die Checkliste deckt Zufall und hidden information ab, aber v1 sollte wahrscheinlich deterministische Spiele mit perfekter Information bevorzugen.
 Sonst wird die Schnittstelle komplex, bevor der einfache Fall verstanden ist.
-
-### Rechtliche Fragen zu Regelwerken
-
-Urheberrecht und Speicherung von Regeltexten/PDFs im Repo müssen geklärt werden.
-Das ist kein technisches Detail, sondern kann bestimmen, welche Inputs später veröffentlicht werden dürfen.
-
-## Empfohlene nächste Schritte
-
-1. Ein Pilotspiel mit dem neuen Prompt laufen lassen.
-2. Rohantwort, extrahierten Code und kurze manuelle Notizen in `code/outputs/` speichern.
-3. Nach dem Pilotlauf prüfen, welche Gate-Checks aus `code/evaluation_draft.md` wirklich nützlich waren und welche fehlen.
-4. Erst danach entscheiden, ob der nächste Schritt ein kleiner OpenSpiel-Adapter oder zuerst handgeschriebene Szenarien sein sollte.

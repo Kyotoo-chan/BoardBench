@@ -1,15 +1,13 @@
-BoardBench - Fragen für Besprechungen mit dem Professor
 Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 
-- Welches Pilotspiel eignet sich für den ersten End-to-End-Lauf? Mühle?
-- Welcher vorhandene Modellzugang bzw. welche Subscription verarbeitet Brettspiel-PDFs voraussichtlich am zuverlässigsten?
-- Sollen schwierige PDFs vor dem Prompting manuell in Klartext umgewandelt werden?
-- Wie streng soll der spätere Vergleich mit OpenSpiel sein: Code-Struktur, Verhalten oder Benchmark-Ergebnis?
-- Ab wann sollte das Projekt von manueller Subscription-Nutzung auf API-basierte Automatisierung wechseln?
-- Wenn primär die Klarheit des Regelwerks getestet werden soll: Soll das Modell auch nach Fehlern, Lücken oder Logikproblemen im gegebenen Regeltext gefragt werden, und wie würde das in die Bewertung eingehen?
-- Wie kann "Regelwerk-Klarheit" methodisch von Modellfähigkeit, Spielkomplexität und möglicher Trainingsdaten-Kontamination getrennt werden?
-- Soll die vorgegebene minimale Spiel-API eine harte Bewertungsanforderung sein, oder sollen semantisch nutzbare, aber anders benannte APIs Teilpunkte bekommen?
-- Wer erstellt und validiert Tier-B-Rubriken bzw. Testszenarien, und ist eine Doppelkodierung im Bachelorarbeits-Scope realistisch?
-- Welche Lizenz- oder Nutzungsbedingungen sind für das Speichern von Regeltexten, Rohoutputs und extrahiertem Code im Repo akzeptabel?
-- Soll OpenSpiel-Alignment nur zur Kalibrierung dienen, oder in den Hauptscore für Spiele mit Referenz eingehen?
-- Ab welchem Punkt muss die Ausführung von generiertem Code von manuellen Notebook-Smoke-Tests in eine Sandbox oder einen Container verlagert werden?
+Organisatorisch:
+- wann anmeldung, damit ich zum wintersemester in den master starten kann
+
+Inhaltsfragen:
+- Welches Spiel für erste tests? Mühle?
+- Code als einmaliger Prompt zu Output? Oder doch lieber mittels Agenten implementieren
+- Wir testen die Anleitungen und nicht die LLMs. Sollte man daher mehrere Modelle pro Anleitung testen,
+  um Logikfehler in der Anleitung nicht mit LLM Verständnissfehlern verwechselt werden
+- Nehmen wir auch Textoutput des LLMs welches die Anleitung schriftlich (ohne Python code bewertet)?
+- Wäre vorab eine anonymisierung sinnvoll, um nur auf Verständniss zu testen?
+  Erweitert könnte man Prompt nur durch Titel & ohne Regeln und einmal ohne Titel & nur mit Regeln testen
