@@ -79,8 +79,9 @@ The local extension currently:
 - defaults pi to authoring mode
 - can switch into a restricted readonly workflow mode
 - keeps readonly tool access focused on BoardBench workflow files
-- blocks bash only in readonly mode
-- offers `/bb-readonly`, `/bb-generate`, `/bb-authoring`, and `/bb-status`
+- blocks bash, edit, and write in readonly mode
+- offers `/bb-start`, `/bb-readonly`, `/bb-generate`, `/bb-authoring`, and `/bb-status`
+- `/bb-start` opens a fresh restricted session with a minimal prompt that reads only `code/input/prompt.txt` and `code/input/game_rules.txt`
 
 ## Transition intention
 

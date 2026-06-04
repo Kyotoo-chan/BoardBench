@@ -9,6 +9,7 @@ This file explains the current BoardBench workflow with the project-local pi ext
 - can switch into a restricted readonly workflow mode
 - uses the BoardBench workflow allowlist in readonly mode
 - offers these commands:
+  - `/bb-start`
   - `/bb-readonly`
   - `/bb-generate`
   - `/bb-authoring`
@@ -103,11 +104,13 @@ Inside pi:
 
 ```text
 /bb-status
+/bb-start
 /bb-readonly
 /bb-generate
 /bb-authoring
 ```
 
+- `/bb-start` creates a fresh restricted session and pre-fills the minimal generation prompt
 - `/bb-readonly` keeps the session in restricted read-only mode
 - `/bb-generate` currently behaves like the restricted readonly workflow mode
 - `/bb-authoring` enables editing and bash across the repo
@@ -121,6 +124,26 @@ Inside pi:
 The evaluation notebook reads the prompt and rule text directly.
 
 ## Recommended test patterns
+
+### 0. Minimal fresh generation session
+
+Inside pi, run:
+
+```text
+/bb-start
+```
+
+This opens a new restricted session and pre-fills the editor with:
+
+```text
+Lies nur code/input/prompt.txt und code/input/game_rules.txt.
+Nutze ausschließlich diese Inhalte.
+Generiere die Python-Implementation im geforderten Format.
+Gib das Ergebnis nur im Chat aus; speichere nichts.
+Lies keine weiteren Dateien.
+```
+
+Submit that prompt to generate only from the two input files. It does not write output files.
 
 ### 1. Safe workflow check
 

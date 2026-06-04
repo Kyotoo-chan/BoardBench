@@ -6,6 +6,16 @@ import type {
 
 type Mode = "readonly" | "authoring";
 
+const MODE_ENTRY_TYPE = "boardbench-mode";
+
+const MINIMAL_START_PROMPT = [
+  "Lies nur code/input/prompt.txt und code/input/game_rules.txt.",
+  "Nutze ausschließlich diese Inhalte.",
+  "Generiere die Python-Implementation im geforderten Format.",
+  "Gib das Ergebnis nur im Chat aus; speichere nichts.",
+  "Lies keine weiteren Dateien.",
+].join("\n");
+
 const READONLY_BUILTINS = ["read", "grep", "find", "ls"];
 const AUTHORING_BUILTINS = [
   "read",
@@ -82,6 +92,15 @@ function normalizeForDisplay(repoPath: string): string {
   return repoPath.replace(/\\/g, "/");
 }
 
+function modeFromEntryData(data: unknown): Mode | undefined {
+  if (!data || typeof data !== "object") {
+    return undefined;
+  }
+
+  const mode = (data as { mode?: unknown }).mode;
+  return mode === "readonly" || mode === "authoring" ? mode : undefined;
+}
+
 export default function boardbenchContextExtension(pi: ExtensionAPI) {
   let mode: Mode = "authoring";
 
@@ -98,6 +117,25 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     const builtins =
       mode === "readonly" ? READONLY_BUILTINS : AUTHORING_BUILTINS;
     return Array.from(new Set([...builtins, ...extraTools]));
+  }
+
+  function restoreModeFromSession(ctx: ExtensionContext): void {
+    mode = "authoring";
+
+    for (const entry of ctx.sessionManager.getBranch()) {
+      if (entry.type !== "custom" || entry.customType !== MODE_ENTRY_TYPE) {
+        continue;
+      }
+
+      const restoredMode = modeFromEntryData(entry.data);
+      if (restoredMode) {
+        mode = restoredMode;
+      }
+    }
+  }
+
+  function persistMode(): void {
+    pi.appendEntry(MODE_ENTRY_TYPE, { mode });
   }
 
   function applyMode(ctx?: ExtensionContext, notify = false): void {
@@ -140,7 +178,41 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
   }
 
   pi.on("session_start", async (_event, ctx) => {
+    restoreModeFromSession(ctx);
     applyMode(ctx, true);
+  });
+
+  pi.registerCommand("bb-start", {
+    description:
+      "Start a fresh restricted BoardBench workflow session with the minimal prompt",
+    handler: async (_args, ctx) => {
+      if (!ctx.isIdle()) {
+        ctx.ui.notify(
+          "Wait until the agent is idle before starting a new BoardBench session.",
+          "warning",
+        );
+        return;
+      }
+
+      const result = await ctx.newSession({
+        parentSession: ctx.sessionManager.getSessionFile(),
+        setup: async (session) => {
+          session.appendCustomEntry(MODE_ENTRY_TYPE, { mode: "readonly" });
+          session.appendSessionInfo("boardbench minimal generation");
+        },
+        withSession: async (replacementCtx) => {
+          replacementCtx.ui.setEditorText(MINIMAL_START_PROMPT);
+          replacementCtx.ui.notify(
+            "New BoardBench readonly session ready. Submit the prefilled prompt to generate in chat.",
+            "info",
+          );
+        },
+      });
+
+      if (result.cancelled) {
+        ctx.ui.notify("BoardBench start cancelled", "info");
+      }
+    },
   });
 
   pi.registerCommand("bb-readonly", {
@@ -148,6 +220,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       "Switch BoardBench extension to restricted readonly workflow mode",
     handler: async (_args, ctx) => {
       mode = "readonly";
+      persistMode();
       applyMode(ctx, true);
     },
   });
@@ -157,6 +230,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       "Switch BoardBench extension to restricted generation workflow mode",
     handler: async (_args, ctx) => {
       mode = "readonly";
+      persistMode();
       applyMode(ctx, true);
     },
   });
@@ -166,6 +240,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       "Switch BoardBench extension to full authoring mode (edit/write/bash enabled)",
     handler: async (_args, ctx) => {
       mode = "authoring";
+      persistMode();
       applyMode(ctx, true);
     },
   });
@@ -202,7 +277,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     return {
       systemPrompt:
         event.systemPrompt +
-        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In readonly mode, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If readonly mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
+        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-start for a fresh restricted workflow session with the minimal starter prompt.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In readonly mode, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If readonly mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
     };
   });
 
