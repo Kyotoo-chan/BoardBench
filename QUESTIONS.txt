@@ -11,6 +11,10 @@ Inhaltsfragen:
 - Nehmen wir auch Textoutput des LLMs welches die Anleitung schriftlich (ohne Python code bewertet)?
 - Wäre vorab eine anonymisierung sinnvoll, um nur auf Verständniss zu testen?
   Erweitert könnte man Prompt nur durch Titel & ohne Regeln und einmal ohne Titel & nur mit Regeln testen
+- Spiele in C++ implementiert und nur mit Python ansteuer bar. Machen wir das auch so oder einfach full Python?
 
 - Spielidee, Antichess: Spieler der im Patt oder ohne Figuren ist gewinnt. Falls eine Figur geschlagen werden kann muss dies passieren.
   Spiel ist Mathematisch gelöst: Bei perfektem Spiel gewinnt weiß nach e3
+
+Erster Test:
+Gpt 5.5 xhigh - Start 22:02, Ende: 22:09
