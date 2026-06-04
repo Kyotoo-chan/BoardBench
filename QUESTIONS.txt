@@ -11,3 +11,6 @@ Inhaltsfragen:
 - Nehmen wir auch Textoutput des LLMs welches die Anleitung schriftlich (ohne Python code bewertet)?
 - Wäre vorab eine anonymisierung sinnvoll, um nur auf Verständniss zu testen?
   Erweitert könnte man Prompt nur durch Titel & ohne Regeln und einmal ohne Titel & nur mit Regeln testen
+
+- Spielidee, Antichess: Spieler der im Patt oder ohne Figuren ist gewinnt. Falls eine Figur geschlagen werden kann muss dies passieren.
+  Spiel ist Mathematisch gelöst: Bei perfektem Spiel gewinnt weiß nach e3
