@@ -7,7 +7,8 @@ This file explains the current BoardBench workflow with the project-local pi ext
 - loads automatically when pi is started from this repo
 - defaults to authoring mode with `read`, `grep`, `find`, `ls`, `edit`, `write`, `bash`
 - can switch into a restricted readonly workflow mode
-- uses the BoardBench workflow allowlist in readonly mode
+- can switch into a restricted generation mode with writes limited to output folders
+- uses the BoardBench workflow allowlist in restricted modes
 - offers these commands:
   - `/bb-start`
   - `/bb-readonly`
@@ -110,9 +111,9 @@ Inside pi:
 /bb-authoring
 ```
 
-- `/bb-start` creates a fresh restricted session and pre-fills the minimal generation prompt
+- `/bb-start` creates a fresh restricted generation session and pre-fills the minimal prompt
 - `/bb-readonly` keeps the session in restricted read-only mode
-- `/bb-generate` currently behaves like the restricted readonly workflow mode
+- `/bb-generate` enables restricted generation mode with output writes only
 - `/bb-authoring` enables editing and bash across the repo
 - `/bb-status` shows the current mode
 
@@ -139,11 +140,14 @@ This opens a new restricted session and pre-fills the editor with:
 Lies nur code/input/prompt.txt und code/input/game_rules.txt.
 Nutze ausschließlich diese Inhalte.
 Generiere die Python-Implementation im geforderten Format.
-Gib das Ergebnis nur im Chat aus; speichere nichts.
+Schreibe genau die vollständige Python-Datei nach code/outputs/nine_mens_morris.py.
+Der Dateiname ist der OpenSpiel-Name für Mühle: nine_mens_morris.py.
+Nutze dafür das write-Tool; schreibe keine anderen Dateien.
+Antworte danach nur kurz mit dem Pfad.
 Lies keine weiteren Dateien.
 ```
 
-Submit that prompt to generate only from the two input files. It does not write output files.
+Submit that prompt to generate only from the two input files and write `code/outputs/nine_mens_morris.py`, which `code/evaluation.ipynb` can load directly.
 
 ### 1. Safe workflow check
 
@@ -227,10 +231,16 @@ In readonly mode:
 - `edit` and `write` are blocked
 - file access outside the workflow allowlist is blocked
 
+In generate mode:
+
+- `bash` and `edit` are blocked
+- reads stay inside the workflow allowlist
+- `write` is allowed only under `code/outputs/` or `outputs/`
+
 ## Suggested first model test
 
 1. choose `code/input/game_rules.txt`
 2. use `code/input/prompt.txt`
-3. run one authoring pass
-4. inspect the saved files in `code/outputs/`
+3. run `/bb-start` and submit the prefilled prompt
+4. inspect `code/outputs/nine_mens_morris.py`
 5. open `code/evaluation.ipynb` with the `Python (boardbench)` kernel

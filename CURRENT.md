@@ -78,10 +78,12 @@ The local extension currently:
 
 - defaults pi to authoring mode
 - can switch into a restricted readonly workflow mode
-- keeps readonly tool access focused on BoardBench workflow files
+- can switch into a restricted generation mode with writes limited to `code/outputs/` and `outputs/`
+- keeps restricted tool access focused on BoardBench workflow files
 - blocks bash, edit, and write in readonly mode
+- blocks bash and edit in generation mode
 - offers `/bb-start`, `/bb-readonly`, `/bb-generate`, `/bb-authoring`, and `/bb-status`
-- `/bb-start` opens a fresh restricted session with a minimal prompt that reads only `code/input/prompt.txt` and `code/input/game_rules.txt`
+- `/bb-start` opens a fresh restricted generation session with a minimal prompt that reads only `code/input/prompt.txt` and `code/input/game_rules.txt`, then writes `code/outputs/nine_mens_morris.py`
 
 ## Transition intention
 

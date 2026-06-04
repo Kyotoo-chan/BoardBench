@@ -1,0 +1,32 @@
+Ziel des Spiels:
+Wer alle gegnerischen Steine geschlagen hat, gewinnt das Mühlespiel.
+
+Vorbereitung:
+Der Mühleplan wird in die Mitte gelegt. Die Spielerfarbe wird ausgelost. Jeder Spieler nimmt neun Steine seiner Farbe zu sich.
+
+Spielregel:
+- Spielsteine setzen
+Abwechselnd, beginnend mit Weiß, setzen die Spieler je einen Stein auf einen beliebigen freien Punkt des Spielplans. Bereits beim Setzen versuchen sie,
+eine Mühle zu bilden. Der Gegner kann dies durch rechtzeitiges Dazwischensetzen seiner Steine verhindern. Eine Mühle besteht aus drei Steinen einer Farbe ineiner Reihe.
+Sobald ein Spieler eine Mühle geschlossen hat, nimmt er einen beliebigen gegnerischen Stein vom Spielbrett, der aus dem Spiel geht.
+Wichtig dabei: Dieser Stein darf kein Bestandteil einer geschlossenen Mühle sein.
+
+- Spielsteine ziehen
+Sind alle Spielsteine gesetzt, wird abwechselnd ein eigener Stein von einem Punkt zu einem benachbarten freien Punkt gezogen. Auch hier versuchen die Spieler,
+Mühlen zu bilden und gegnerische Steine zu schlagen. Mühlen werden geöffnet, indem man einen Stein über die Linien zum nächsten freien Punkt zieht und wieder geschlossen,
+indem man ihn wieder zurückzieht.
+
+Achtung: Beim Öffnen einer Mühle sollte man aufpassen, dass kein gegnerischer Stein den frei gewordenen Platz besetzen kann!
+
+Doppelmühle oder Zwickmühle:
+Wird durch das Öffnen einer Mühle gleichzeitig eine andere geschlossen, nennt man das eine Doppel- oder Zwickmühle.
+Sie besteht demnach aus fünf Steinen, wobei ein Stein zu beiden Mühlen gehört.
+
+Springen:
+Sobald ein Spieler nur noch drei Steine hat, darf er springen. Er kann einen Stein auf jeden freien Punkt setzen und versuchen, eine Mühle
+seines Mitspielers zu verhindern oder selbst eine Mühle zu schließen.
+
+Ende des Spiels:
+Gelingt es dem Gegner eines Springer-Spielers, eine Mühle zu schließen, hat er sofort das Spiel gewonnen.
+Der Springer verliert alle drei Steine – auch wenn sie sich in einer Mühle befinden.
+Ein Spieler gewinnt ebenfalls, wenn er die gegnerischen Steine so einschließen konnte, dass kein Zug mehr möglich ist

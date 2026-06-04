@@ -4,19 +4,25 @@ import type {
   ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
 
-type Mode = "readonly" | "authoring";
+type Mode = "readonly" | "generate" | "authoring";
 
 const MODE_ENTRY_TYPE = "boardbench-mode";
+const OPEN_SPIEL_GAME = "nine_mens_morris";
+const GENERATED_CODE_PATH = `code/outputs/${OPEN_SPIEL_GAME}.py`;
 
 const MINIMAL_START_PROMPT = [
   "Lies nur code/input/prompt.txt und code/input/game_rules.txt.",
   "Nutze ausschließlich diese Inhalte.",
   "Generiere die Python-Implementation im geforderten Format.",
-  "Gib das Ergebnis nur im Chat aus; speichere nichts.",
+  `Schreibe genau die vollständige Python-Datei nach ${GENERATED_CODE_PATH}.`,
+  `Der Dateiname ist der OpenSpiel-Name für Mühle: ${OPEN_SPIEL_GAME}.py.`,
+  "Nutze dafür das write-Tool; schreibe keine anderen Dateien.",
+  "Antworte danach nur kurz mit dem Pfad.",
   "Lies keine weiteren Dateien.",
 ].join("\n");
 
 const READONLY_BUILTINS = ["read", "grep", "find", "ls"];
+const GENERATE_BUILTINS = ["read", "grep", "find", "ls", "write"];
 const AUTHORING_BUILTINS = [
   "read",
   "grep",
@@ -49,6 +55,8 @@ const RESTRICTED_DIRS = [
   "prompts",
   "outputs",
 ];
+
+const OUTPUT_DIRS = ["code/outputs", "outputs"];
 
 function toAbsolute(cwd: string, repoPath: string): string {
   return path.resolve(cwd, repoPath);
@@ -98,7 +106,9 @@ function modeFromEntryData(data: unknown): Mode | undefined {
   }
 
   const mode = (data as { mode?: unknown }).mode;
-  return mode === "readonly" || mode === "authoring" ? mode : undefined;
+  return mode === "readonly" || mode === "generate" || mode === "authoring"
+    ? mode
+    : undefined;
 }
 
 export default function boardbenchContextExtension(pi: ExtensionAPI) {
@@ -108,15 +118,37 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     return [...RESTRICTED_FILES, ...RESTRICTED_DIRS].map(normalizeForDisplay);
   }
 
+  function getBuiltinToolsForMode(): string[] {
+    if (mode === "readonly") {
+      return READONLY_BUILTINS;
+    }
+
+    if (mode === "generate") {
+      return GENERATE_BUILTINS;
+    }
+
+    return AUTHORING_BUILTINS;
+  }
+
+  function getScopeLabel(): string {
+    if (mode === "readonly") {
+      return "workflow paths only; bash/edit/write blocked";
+    }
+
+    if (mode === "generate") {
+      return "workflow paths only; write limited to outputs; bash/edit blocked";
+    }
+
+    return "full repo authoring; bash allowed";
+  }
+
   function buildActiveTools(): string[] {
     const extraTools = pi
       .getAllTools()
       .filter((tool) => tool.sourceInfo.source !== "builtin")
       .map((tool) => tool.name);
 
-    const builtins =
-      mode === "readonly" ? READONLY_BUILTINS : AUTHORING_BUILTINS;
-    return Array.from(new Set([...builtins, ...extraTools]));
+    return Array.from(new Set([...getBuiltinToolsForMode(), ...extraTools]));
   }
 
   function restoreModeFromSession(ctx: ExtensionContext): void {
@@ -146,14 +178,8 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       ctx.ui.setStatus("boardbench", `BoardBench ${mode}`);
 
       if (notify) {
-        const toolLabel =
-          mode === "readonly"
-            ? READONLY_BUILTINS.join(", ")
-            : AUTHORING_BUILTINS.join(", ");
-        const scopeLabel =
-          mode === "readonly"
-            ? "workflow paths only; bash blocked"
-            : "full repo authoring; bash allowed";
+        const toolLabel = getBuiltinToolsForMode().join(", ");
+        const scopeLabel = getScopeLabel();
 
         ctx.ui.notify(
           `BoardBench ${mode} mode active (${toolLabel}; ${scopeLabel})`,
@@ -172,6 +198,14 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     }
 
     const absoluteDirs = RESTRICTED_DIRS.map((dir) => toAbsolute(cwd, dir));
+    return absoluteDirs.some((dir) =>
+      isInsideDirectory(absoluteRequestedPath, dir),
+    );
+  }
+
+  function isOutputPath(cwd: string, requestedPath: string): boolean {
+    const absoluteRequestedPath = toAbsolute(cwd, requestedPath);
+    const absoluteDirs = OUTPUT_DIRS.map((dir) => toAbsolute(cwd, dir));
     return absoluteDirs.some((dir) =>
       isInsideDirectory(absoluteRequestedPath, dir),
     );
@@ -197,13 +231,13 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       const result = await ctx.newSession({
         parentSession: ctx.sessionManager.getSessionFile(),
         setup: async (session) => {
-          session.appendCustomEntry(MODE_ENTRY_TYPE, { mode: "readonly" });
+          session.appendCustomEntry(MODE_ENTRY_TYPE, { mode: "generate" });
           session.appendSessionInfo("boardbench minimal generation");
         },
         withSession: async (replacementCtx) => {
           replacementCtx.ui.setEditorText(MINIMAL_START_PROMPT);
           replacementCtx.ui.notify(
-            "New BoardBench readonly session ready. Submit the prefilled prompt to generate in chat.",
+            `New BoardBench generate session ready. Submit the prefilled prompt to write ${GENERATED_CODE_PATH}.`,
             "info",
           );
         },
@@ -229,7 +263,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     description:
       "Switch BoardBench extension to restricted generation workflow mode",
     handler: async (_args, ctx) => {
-      mode = "readonly";
+      mode = "generate";
       persistMode();
       applyMode(ctx, true);
     },
@@ -248,8 +282,9 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
   pi.registerCommand("bb-status", {
     description: "Show BoardBench extension status",
     handler: async (_args, ctx) => {
+      const paths = getRestrictedPathList().join(", ");
+
       if (mode === "readonly") {
-        const paths = getRestrictedPathList().join(", ");
         ctx.ui.notify(
           `BoardBench readonly mode. Restricted workflow paths: ${paths}`,
           "info",
@@ -257,8 +292,16 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
         return;
       }
 
+      if (mode === "generate") {
+        ctx.ui.notify(
+          `BoardBench generate mode. Restricted workflow paths: ${paths}. Writes are limited to code/outputs/ and outputs/.`,
+          "info",
+        );
+        return;
+      }
+
       ctx.ui.notify(
-        "BoardBench authoring mode. Read/edit/write/bash allowed across the repository. Use /bb-readonly or /bb-generate for the restricted workflow mode.",
+        "BoardBench authoring mode. Read/edit/write/bash allowed across the repository. Use /bb-readonly or /bb-generate for restricted workflow modes.",
         "info",
       );
     },
@@ -268,7 +311,9 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     const modeLine =
       mode === "readonly"
         ? "- Current mode is readonly. Do not attempt edit, write, or bash. Stay inside the restricted BoardBench workflow paths."
-        : "- Current mode is authoring. You may read, edit, write, and use bash across the repository.";
+        : mode === "generate"
+          ? "- Current mode is generate. Do not attempt edit or bash. Read only restricted workflow paths, and write only under code/outputs/ or outputs/."
+          : "- Current mode is authoring. You may read, edit, write, and use bash across the repository.";
 
     const restrictedPaths = getRestrictedPathList()
       .map((entry) => `- ${entry}`)
@@ -277,25 +322,34 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     return {
       systemPrompt:
         event.systemPrompt +
-        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-start for a fresh restricted workflow session with the minimal starter prompt.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In readonly mode, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If readonly mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
+        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-start for a fresh restricted workflow session with the minimal starter prompt.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In restricted modes, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If a restricted mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
     };
   });
 
   pi.on("tool_call", async (event, ctx) => {
-    if (mode === "readonly") {
+    if (mode === "readonly" || mode === "generate") {
       if (event.toolName === "bash") {
         return {
           block: true,
           reason:
-            "BoardBench readonly mode blocks bash. Use read, grep, find, or ls on the restricted workflow paths instead.",
+            mode === "generate"
+              ? "BoardBench generate mode blocks bash. Use read, grep, find, ls, or write under code/outputs/ or outputs/ instead."
+              : "BoardBench readonly mode blocks bash. Use read, grep, find, or ls on the restricted workflow paths instead.",
         };
       }
 
-      if (event.toolName === "write" || event.toolName === "edit") {
+      if (event.toolName === "edit") {
+        return {
+          block: true,
+          reason: `BoardBench ${mode} mode blocks edit. Use /bb-authoring to return to full repo authoring mode.`,
+        };
+      }
+
+      if (mode === "readonly" && event.toolName === "write") {
         return {
           block: true,
           reason:
-            "BoardBench readonly mode blocks edit and write. Use /bb-authoring to return to full repo authoring mode.",
+            "BoardBench readonly mode blocks write. Use /bb-generate for restricted output writes or /bb-authoring for full authoring mode.",
         };
       }
     }
@@ -318,18 +372,28 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
       return {
         block: true,
         reason:
-          mode === "readonly"
+          mode === "readonly" || mode === "generate"
             ? `${event.toolName} requires an explicit restricted workflow path, for example requirements.txt, code, code/input, or code/outputs.`
             : `${event.toolName} requires an explicit path inside the repository.`,
       };
     }
 
-    if (mode === "readonly") {
+    if (mode === "readonly" || mode === "generate") {
       if (!isRestrictedPath(ctx.cwd, requestedPath)) {
         return {
           block: true,
           reason: `Path "${requestedPath}" is outside the restricted BoardBench workflow allowlist.`,
         };
+      }
+
+      if (mode === "generate" && event.toolName === "write") {
+        if (!isOutputPath(ctx.cwd, requestedPath)) {
+          return {
+            block: true,
+            reason:
+              "BoardBench generate mode allows write only under code/outputs/ or outputs/.",
+          };
+        }
       }
 
       return undefined;
