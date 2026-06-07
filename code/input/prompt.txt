@@ -4,7 +4,7 @@ Use only that information.
 Do not use outside knowledge or remembered rules for the game.
 
 Write one simple, self-contained Python file using only the standard library.
-Do not import OpenSpiel.
+Do not import any non-standard-library package or external game framework.
 Do not require external files, images, environment variables, network access, subprocesses, API keys, or interactive input.
 Keep top-level code limited to definitions and constants.
 
@@ -20,13 +20,17 @@ If possible, include this minimal game API:
 - `apply_action(self, state, action)` returning the next state, or clearly documenting in-place mutation
 - `is_terminal(self, state)`
 - `returns(self, state)` returning one numeric value per player
-- `render(self, state)` returning a stable human-readable string
+- `render(self, state)` returning a stable, compact, human-readable string suitable for side-by-side inspection
 - `action_to_name(self, action)` returning a unique canonical action name
 - `name_to_action(self, name)` reversing a canonical action name
 
-Rules for actions:
+Rules for actions and state presentation:
 - `legal_actions` must only return actions that `apply_action` accepts.
-- Action names must be human-readable, stable, unique in sampled states, and suitable for later comparison without relying on raw action indices.
+- `action_to_name` and `name_to_action` must round-trip exactly.
+- Action names must be human-readable, stable, unique in sampled states, and must not rely on raw internal indices alone.
+- If the rule text defines labels for squares, points, regions, cards, or other move targets, use those labels in action names and render output.
+- If the rule text explicitly defines or clearly implies a standard move notation, use that notation consistently; otherwise use a simple explicit format such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, or similarly clear equivalents.
+- `render` should be deterministic across repeated calls on the same state and avoid decorative prose.
 - Terminal states should have no legal actions and stable returns.
 
 Only if required by the rule text, include:
