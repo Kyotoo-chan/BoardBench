@@ -4,7 +4,6 @@ Organisatorisch:
 - wann anmeldung, damit ich zum wintersemester in den master starten kann
 
 Inhaltsfragen:
-- Welches Spiel für erste tests? Mühle?
 - Code als einmaliger Prompt zu Output? Oder doch lieber mittels Agenten implementieren
 - Wir testen die Anleitungen und nicht die LLMs. Sollte man daher mehrere Modelle pro Anleitung testen,
   um Logikfehler in der Anleitung nicht mit LLM Verständnissfehlern verwechselt werden
@@ -13,8 +12,9 @@ Inhaltsfragen:
   Erweitert könnte man Prompt nur durch Titel & ohne Regeln und einmal ohne Titel & nur mit Regeln testen
 - Spiele in C++ implementiert und nur mit Python ansteuer bar. Machen wir das auch so oder einfach full Python?
 
-- Spielidee, Antichess: Spieler der im Patt oder ohne Figuren ist gewinnt. Falls eine Figur geschlagen werden kann muss dies passieren.
-  Spiel ist Mathematisch gelöst: Bei perfektem Spiel gewinnt weiß nach e3
+OpenGame: https://github.com/leigest519/OpenGame beschreibt sich als: Open Agentic Coding for Games
+Und hat auch ein OpenGameBench, welches die Implementierung des Agenten testet nach: "Build Health", "Visual Usability" und "Intent Alignment"
+Sie haben Benchmarks,  in welchen sie mit Ihrem Framework und Frontiermodellen z.B Cursor mit diesen Modellen schlagen (Gpt 5.1, Sonnet 4.6, Gemini 3.1 Pro)
 
 Erster Test:
 Gpt 5.5 xhigh - Start 22:02, Ende: 22:09

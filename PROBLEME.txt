@@ -1,0 +1,2 @@
+- Outputs zu Openspiel schwer vergleichbar, da Zugsyntax immer unterschiedlich ist
+- Woher weiß ich, dass der Output über haupt das gewünschte Spiel ist. Woran kann man das ableiten?
