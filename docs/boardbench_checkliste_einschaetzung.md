@@ -8,10 +8,10 @@ Sinnvoll ist deshalb: die stabilisierenden Teile jetzt klein einbauen, forschung
 
 ## Direkt umgesetzt
 
-- `code/input/prompt.txt` fordert jetzt eine etwas klarere minimale Spiel-API, kanonische Aktionsnamen, Standardbibliothek-only und keine I/O-/Netz-/Subprozess-Nutzung ein.
+- `prompts/rulebook_to_python.txt` fordert jetzt eine etwas klarere minimale Spiel-API, kanonische Aktionsnamen, Standardbibliothek-only und keine I/O-/Netz-/Subprozess-Nutzung ein.
 - `CURRENT.md`, `workflow_description.md` und die lokale pi-Extension wurden nur dort angepasst, wo die neue Checklisten-Einschätzung sichtbar sein sollte.
 
-Nicht umgesetzt wurden zusätzliche Dateien wie ein eigener Output-Vertrag oder eine separate Evaluation-Template-Datei, weil das Repo bewusst klein bleiben soll. Die nötigen Hinweise stehen im Prompt, in `code/evaluation_draft.md` und in dieser Einschätzung.
+Nicht umgesetzt wurden zusätzliche Dateien wie ein eigener Output-Vertrag oder eine separate Evaluation-Template-Datei, weil das Repo bewusst klein bleiben soll. Die nötigen Hinweise stehen im Prompt, in `docs/evaluation_draft.md` und in dieser Einschätzung.
 
 ## Was jetzt besonders sinnvoll ist
 
@@ -61,7 +61,7 @@ Zuerst sollte ein Pilotspiel zeigen, ob der minimale Vertrag und die manuelle Au
 
 OpenSpiel ist für Kalibrierung sehr nützlich, aber nicht für jedes Spiel verfügbar und nicht automatisch dasselbe wie „Regelwerk-Klarheit".
 Sinnvoll ist später ein Adapter, der über kanonische Aktionsnamen vergleicht, nicht über rohe Aktionsindizes.
-Für jetzt reicht es, diese Richtung im Prompt und in `code/evaluation_draft.md` vorzubereiten.
+Für jetzt reicht es, diese Richtung im Prompt und in `docs/evaluation_draft.md` vorzubereiten.
 
 ### Rubriken und Szenarien
 

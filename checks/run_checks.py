@@ -53,7 +53,7 @@ def selected_checks(check_dir: Path, requested: list[str], include_final: bool) 
 def main() -> int:
     args = parse_args()
     repo_root = resolve_repo_root()
-    raw_code_path = args.code_path or f"code/outputs/{args.game}.py"
+    raw_code_path = args.code_path or f"outputs/{args.game}.py"
     ctx = CheckContext(
         repo_root=repo_root,
         game=args.game,

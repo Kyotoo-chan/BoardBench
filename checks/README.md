@@ -2,10 +2,10 @@
 
 This folder contains small checks for the generated game result, not for the input workflow.
 
-Run the normal result checks from the `Generated result checks` cell in `code/evaluation.ipynb`, or from the repository root:
+Run the normal result checks from the `Generated result checks` cell in `evaluation.ipynb`, or from the repository root:
 
 ```bash
-python checks/run_checks.py --game antichess --code-path code/outputs/antichess.py
+python checks/run_checks.py --game antichess --code-path outputs/antichess.py
 ```
 
 The normal checks verify that:
