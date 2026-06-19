@@ -21,7 +21,7 @@ BoardBench/
 │  ├─ evaluation.ipynb
 │  ├─ evaluation_draft.md
 │  ├─ input/
-│  │  ├─ game_rules.txt
+│  │  ├─ game_rules.txt or game_rules.pdf
 │  │  └─ prompt.txt
 │  └─ outputs/
 └─ exposé/
@@ -31,11 +31,12 @@ BoardBench/
 ## What is already in place
 
 - a single prompt input file exists under `code/input/prompt.txt`
-- a rules input file exists under `code/input/game_rules.txt`
+- the rules input file can be `code/input/game_rules.txt` or `code/input/game_rules.pdf`
 - an outputs folder exists under `code/outputs/`
-- a `requirements.txt` file exists for the Python notebook workflow
+- a `requirements.txt` file exists for the Python notebook workflow, including `pypdf` for PDF rulebooks
 - the evaluation notebook exists under `code/evaluation.ipynb`
 - the notebook now keeps game, model, timeout, and output settings directly inside the notebook
+- the notebook automatically uses the single supported `game_rules` file in `code/input/`, either `.txt` or `.pdf`
 - the prompt now asks for a slightly stricter minimal game API and stable action names
 - the notebook is set up for the `Python (boardbench)` kernel on Python 3.12.3
 - OpenSpiel is installed in the `boardbench` Python 3.12.3 environment
@@ -66,7 +67,7 @@ The current build phase is mainly about:
 Today, the repository is best understood as a staging version of the target workflow:
 
 1. store the prompt text in `code/input/prompt.txt`
-2. store the game rules in `code/input/game_rules.txt`
+2. store the game rules in exactly one of `code/input/game_rules.txt` or `code/input/game_rules.pdf`
 3. create or activate a Python 3.12.3 environment and install `requirements.txt`
 4. update the game, model, timeout, and output variables directly in `code/evaluation.ipynb`
 5. save raw model output and extracted Python files in `code/outputs/`
@@ -83,7 +84,7 @@ The local extension currently:
 - blocks bash, edit, and write in readonly mode
 - blocks bash and edit in generation mode
 - offers `/bb-start`, `/bb-readonly`, `/bb-generate`, `/bb-authoring`, and `/bb-status`
-- `/bb-start` opens a fresh restricted generation session with a minimal prompt that reads only `code/input/prompt.txt` and `code/input/game_rules.txt`, then writes `code/outputs/nine_mens_morris.py`
+- `/bb-start` opens a fresh restricted generation session with a minimal prompt that reads `code/input/prompt.txt` and exactly one of `code/input/game_rules.txt` or `code/input/game_rules.pdf`, then writes `code/outputs/nine_mens_morris.py`
 
 ## Transition intention
 

@@ -74,7 +74,7 @@ Keep at least:
 
 ## Minimal workflow
 
-1. put a rulebook or extracted rule text into `inputs/`
+1. put a rulebook or extracted rule text into `inputs/` as `game_rules.txt` or `game_rules.pdf`
 2. note that `requirements.txt` exists for the local setup
 3. use the current input files for prompt text and rules
 4. set the current game, model, timeout, and filenames directly in `evaluation.ipynb`

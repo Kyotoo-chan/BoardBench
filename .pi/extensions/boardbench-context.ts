@@ -11,7 +11,7 @@ const OPEN_SPIEL_GAME = "nine_mens_morris";
 const GENERATED_CODE_PATH = `code/outputs/${OPEN_SPIEL_GAME}.py`;
 
 const MINIMAL_START_PROMPT = [
-  "Lies nur code/input/prompt.txt und code/input/game_rules.txt.",
+  "Lies code/input/prompt.txt und genau eine vorhandene Regeldatei: code/input/game_rules.txt oder code/input/game_rules.pdf.",
   "Nutze ausschließlich diese Inhalte.",
   "Generiere die Python-Implementation im geforderten Format.",
   `Schreibe genau die vollständige Python-Datei nach ${GENERATED_CODE_PATH}.`,

@@ -120,9 +120,9 @@ Inside pi:
 ## Current workflow files
 
 - `code/input/prompt.txt`
-- `code/input/game_rules.txt`
+- exactly one of `code/input/game_rules.txt` or `code/input/game_rules.pdf`
 
-The evaluation notebook reads the prompt and rule text directly.
+The evaluation notebook reads the prompt and the single supported `game_rules` file directly.
 
 ## Recommended test patterns
 
@@ -137,7 +137,7 @@ Inside pi, run:
 This opens a new restricted session and pre-fills the editor with:
 
 ```text
-Lies nur code/input/prompt.txt und code/input/game_rules.txt.
+Lies code/input/prompt.txt und genau eine vorhandene Regeldatei: code/input/game_rules.txt oder code/input/game_rules.pdf.
 Nutze ausschließlich diese Inhalte.
 Generiere die Python-Implementation im geforderten Format.
 Schreibe genau die vollständige Python-Datei nach code/outputs/nine_mens_morris.py.
@@ -147,7 +147,7 @@ Antworte danach nur kurz mit dem Pfad.
 Lies keine weiteren Dateien.
 ```
 
-Submit that prompt to generate only from the two input files and write `code/outputs/nine_mens_morris.py`, which `code/evaluation.ipynb` can load directly.
+Submit that prompt to generate only from the prompt and rules input files and write `code/outputs/nine_mens_morris.py`, which `code/evaluation.ipynb` can load directly.
 
 ### 1. Safe workflow check
 
@@ -160,7 +160,7 @@ Start pi, then run:
 Prompt example:
 
 ```text
-Read CURRENT.md, code/input/prompt.txt, and code/input/game_rules.txt.
+Read CURRENT.md, code/input/prompt.txt, and the existing code/input/game_rules.txt or code/input/game_rules.pdf.
 Summarize the current BoardBench workflow and list the exact files that matter for one manual generation run.
 ```
 
@@ -175,6 +175,8 @@ pi --model <provider/model> \
   "Use only these files. Explain the workflow and say what output artifacts should be kept."
 ```
 
+Use `@code/input/game_rules.pdf` instead when the rulebook is stored as PDF.
+
 ### 3. One-shot model run in print mode
 
 ```bash
@@ -183,6 +185,8 @@ pi -p --model <provider/model> \
   @code/input/game_rules.txt \
   "Use the provided files only and generate the Python module."
 ```
+
+Use `@code/input/game_rules.pdf` instead when the rulebook is stored as PDF.
 
 ### 4. Authoring run that writes outputs
 
@@ -195,7 +199,7 @@ Switch first:
 Prompt example:
 
 ```text
-Read code/input/prompt.txt and code/input/game_rules.txt.
+Read code/input/prompt.txt and the existing code/input/game_rules.txt or code/input/game_rules.pdf.
 
 Generate the result.
 

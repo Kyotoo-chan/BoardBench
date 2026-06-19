@@ -58,6 +58,7 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 9. When writing commit messages, keep them lowercase and stylistically close to the existing short commit history.
 10. If a task is split into multiple commits, space the commit timestamps according to the rough effort split, and set the final commit to the current time unless the user says otherwise.
 11. When estimating commit spacing, count planning, thinking, and deciding time as part of the work, not only the file editing time.
+12. Keep code changes minimal and focused unless the user explicitly asks for a broader refactor.
 
 ## Coding style expectations
 
