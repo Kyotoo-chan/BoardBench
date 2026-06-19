@@ -16,7 +16,18 @@ BoardBench/
 ├─ CURRENT.md
 ├─ README.md
 ├─ requirements.txt
+├─ TODO.md
 ├─ workflow_description.md
+├─ checks/
+│  ├─ README.md
+│  ├─ common.py
+│  ├─ check_01_result_file.py
+│  ├─ check_02_python_syntax.py
+│  ├─ check_03_startable_game.py
+│  ├─ check_04_required_api.py
+│  ├─ check_05_random_rollouts.py
+│  ├─ check_99_openspiel_compare.py
+│  └─ run_checks.py
 ├─ code/
 │  ├─ evaluation.ipynb
 │  ├─ evaluation_draft.md
@@ -37,17 +48,20 @@ BoardBench/
 - the evaluation notebook exists under `code/evaluation.ipynb`
 - the notebook now keeps game, model, timeout, and output settings directly inside the notebook
 - the notebook automatically uses the single supported `game_rules` file in `code/input/`, either `.txt` or `.pdf`
+- the notebook has an optional generated-result check cell that runs `checks/run_checks.py`
 - the prompt now asks for a slightly stricter minimal game API and stable action names
 - the notebook is set up for the `Python (boardbench)` kernel on Python 3.12.3
 - OpenSpiel is installed in the `boardbench` Python 3.12.3 environment
 - a project-local pi extension exists under `.pi/extensions/boardbench-context.ts`
 - a usage guide for that extension exists in `workflow_description.md`
+- `TODO.md` tracks follow-up ideas for improving generation inputs and comparing prompting modes
 - the repo now explicitly distinguishes between target state (`README.md`) and actual state (`CURRENT.md`)
 
 ## Main deviations from the target state
 
 - the working folders are still nested under `code/`
 - there are no root-level `inputs/`, `outputs/`, or `prompts/` folders yet
+- the checks folder exists for generated-result checks, including result presence, Python syntax, startup, API, random rollout, and optional OpenSpiel comparison checks
 - the evaluation notebook is still inside `code/`
 - `code/evaluation_draft.md` currently holds a broad draft of possible evaluation rules
 - there is no automated benchmark pipeline yet
@@ -72,6 +86,7 @@ Today, the repository is best understood as a staging version of the target work
 4. update the game, model, timeout, and output variables directly in `code/evaluation.ipynb`
 5. save raw model output and extracted Python files in `code/outputs/`
 6. run the minimal smoke tests in `code/evaluation.ipynb`
+7. optionally run generated-result checks from the notebook or from the repo root with `python checks/run_checks.py`
 
 ## Local pi extension behavior
 

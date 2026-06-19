@@ -37,6 +37,7 @@ BoardBench/
 ├─ inputs/
 ├─ outputs/
 ├─ prompts/
+├─ checks/
 ├─ requirements.txt
 ├─ evaluation.ipynb
 ├─ CURRENT.md
@@ -54,6 +55,7 @@ BoardBench/
 - `inputs/` – rulebooks or extracted rule text
 - `outputs/` – raw model responses, extracted Python files, reference files, and other intermediate artifacts
 - `prompts/` – reusable prompt text for rulebook-to-Python runs
+- `checks/` – small result checks for generated Python game files
 - `requirements.txt` – dependency list for the local setup
 - `evaluation.ipynb` – manual evaluation notebook with inline settings, an optional `pi` call, and minimal smoke tests
 - `CURRENT.md` – current repo state and deviations from the target layout

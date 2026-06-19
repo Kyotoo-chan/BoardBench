@@ -41,6 +41,7 @@ Prefer the smallest useful setup:
 - one `inputs/` folder
 - one `outputs/` folder
 - one `prompts/` folder
+- one lightweight `checks/` folder for small runnable checks of generated results
 - one comparison notebook
 
 Avoid introducing large frameworks, provider abstractions, or complex evaluation pipelines unless explicitly requested.

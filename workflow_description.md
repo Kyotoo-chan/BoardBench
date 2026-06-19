@@ -24,6 +24,7 @@ Current repo paths:
 - `CURRENT.md`
 - `AGENTS.md`
 - `workflow_description.md`
+- `TODO.md`
 - `boardbench_checkliste.md`
 - `boardbench_checkliste_einschaetzung.md`
 - `requirements.txt`
@@ -32,6 +33,7 @@ Current repo paths:
 - `code/outputs/`
 - `code/evaluation_draft.md`
 - `code/evaluation.ipynb`
+- `checks/`
 - `.pi/extensions/`
 
 Target-state paths are also allowed already:
@@ -123,6 +125,18 @@ Inside pi:
 - exactly one of `code/input/game_rules.txt` or `code/input/game_rules.pdf`
 
 The evaluation notebook reads the prompt and the single supported `game_rules` file directly.
+
+## Checks
+
+Run the generated-result checks from the `Generated result checks` cell in `code/evaluation.ipynb`, or from the repository root:
+
+```bash
+python checks/run_checks.py --game antichess --code-path code/outputs/antichess.py
+```
+
+Normal checks verify result existence, Python syntax, startup, required API, and 100 capped random rollouts without crashes or invalid dead states. Run one check with `--check check_05_random_rollouts`. Run the optional OpenSpiel comparison with `--include-final`.
+
+Add future checks as `checks/check_*.py` files with a `run(ctx)` function.
 
 ## Recommended test patterns
 

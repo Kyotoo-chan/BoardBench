@@ -38,6 +38,7 @@ const RESTRICTED_FILES = [
   "CURRENT.md",
   "AGENTS.md",
   "workflow_description.md",
+  "TODO.md",
   "boardbench_checkliste.md",
   "boardbench_checkliste_einschaetzung.md",
   "requirements.txt",
@@ -51,6 +52,7 @@ const RESTRICTED_DIRS = [
   "code",
   "code/input",
   "code/outputs",
+  "checks",
   "inputs",
   "prompts",
   "outputs",
@@ -322,7 +324,7 @@ export default function boardbenchContextExtension(pi: ExtensionAPI) {
     return {
       systemPrompt:
         event.systemPrompt +
-        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-start for a fresh restricted workflow session with the minimal starter prompt.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In restricted modes, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, and the evaluation notebook.\n- If a restricted mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
+        `\n\n## BoardBench Local Extension\nDefault mode is authoring.\n- Use /bb-start for a fresh restricted workflow session with the minimal starter prompt.\n- Use /bb-readonly or /bb-generate only when the user explicitly wants the restricted BoardBench workflow.\n${modeLine}\n- In restricted modes, prefer the workflow files first: README.md, CURRENT.md, requirements.txt, code/input/, code/outputs/, checks/, and the evaluation notebook.\n- If a restricted mode is active, do not leave the restricted workflow paths below.\n\nRestricted workflow paths:\n${restrictedPaths}\n`,
     };
   });
 
