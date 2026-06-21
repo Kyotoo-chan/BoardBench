@@ -29,7 +29,7 @@ Run normal generated-result checks from the `Checks` cell in `evaluation.ipynb`,
 python checks/run_checks.py --game antichess --code-path outputs/antichess.py
 ```
 
-Normal checks verify result existence, Python syntax, startup, required API, and 100 capped random rollouts without crashes or invalid dead states.
+Normal checks verify result existence, Python syntax, startup, required API, and 1000 capped random rollouts without crashes or invalid dead states.
 
 Run one check:
 

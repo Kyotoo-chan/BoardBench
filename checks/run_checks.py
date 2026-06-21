@@ -28,7 +28,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--game", default="antichess", help="OpenSpiel/game name used for output lookup")
     parser.add_argument("--code-path", default=None, help="Generated Python file to check")
     parser.add_argument("--judge-path", default=None, help="Saved LLM-judge review markdown file")
-    parser.add_argument("--rollouts", type=int, default=100, help="Random games to run in rollout checks")
+    parser.add_argument("--rollouts", type=int, default=1000, help="Random games to run in rollout checks")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per random game")
     parser.add_argument("--seed", type=int, default=1, help="Random seed for reproducible checks")
     parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
@@ -91,18 +91,19 @@ def main() -> int:
     try:
         check_paths = selected_checks(check_dir, args.check, args.include_judge, args.include_final)
     except Exception as exc:
-        print(f"FAIL check selection: {exc}")
+        print(f"FAIL check selection: {exc}", flush=True)
         return 1
 
     if not check_paths:
-        print("no checks selected")
+        print("no checks selected", flush=True)
         return 0
 
-    print(f"checking: {ctx.code_path}")
+    print(f"checking: {ctx.code_path}", flush=True)
     total_started = time.perf_counter()
     failed = 0
     passed_units = 0
     total_units = 0
+    name_width = max(len(path.stem) for path in check_paths)
 
     for path in check_paths:
         started = time.perf_counter()
@@ -118,15 +119,16 @@ def main() -> int:
         passed_units += result.passed
         total_units += result.total
         status = "OK" if result.message is None else "FAIL"
+        units = f"{result.passed}/{result.total}"
+        line = f"{status:<4} {path.stem:<{name_width}} {units:>9} {elapsed:>7.2f}s"
         if result.message:
             failed += 1
-            print(f"{status:<4} {path.stem} ({result.passed}/{result.total}, {elapsed:.2f}s): {result.message}")
-        else:
-            print(f"{status:<4} {path.stem} ({result.passed}/{result.total}, {elapsed:.2f}s)")
+            line += f"  {result.message}"
+        print(line, flush=True)
 
     total_elapsed = time.perf_counter() - total_started
     passed_checks = len(check_paths) - failed
-    print(f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, {total_elapsed:.2f}s")
+    print(f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, {total_elapsed:.2f}s", flush=True)
     return 1 if failed else 0
 
 

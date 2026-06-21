@@ -81,7 +81,7 @@ Normal checks verify:
 2. result is valid Python syntax
 3. generated game imports and starts
 4. required API methods are present
-5. 100 capped random rollouts do not crash or produce invalid dead states
+5. 1000 capped random rollouts do not crash or produce invalid dead states
 
 The optional `90_llm_judge.py` check validates a saved LLM-judge review verdict.
 The optional final OpenSpiel check compares sampled states against OpenSpiel when `pyspiel` is available: current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.
