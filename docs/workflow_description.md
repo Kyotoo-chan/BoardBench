@@ -5,6 +5,7 @@ This file explains the current BoardBench workflow with the project-local pi ext
 ## Current workflow files
 
 - `prompts/rulebook_to_python.txt`
+- `prompts/open_spiel_backbone.md`
 - exactly one of `inputs/game_rules.txt` or `inputs/game_rules.pdf`
 - generated artifacts under `outputs/`
 - generated-result checks under `checks/`
@@ -22,7 +23,7 @@ Then open `evaluation.ipynb`.
 
 ## Checks
 
-Run normal generated-result checks from the `Generated result checks` cell in `evaluation.ipynb`, or from the repository root:
+Run normal generated-result checks from the `Checks` cell in `evaluation.ipynb`, or from the repository root:
 
 ```bash
 python checks/run_checks.py --game antichess --code-path outputs/antichess.py
@@ -33,7 +34,13 @@ Normal checks verify result existence, Python syntax, startup, required API, and
 Run one check:
 
 ```bash
-python checks/run_checks.py --check check_05_random_rollouts
+python checks/run_checks.py --check 05_random_rollouts
+```
+
+Check a saved LLM-judge review:
+
+```bash
+python checks/run_checks.py --include-judge --judge-path outputs/antichess_judge_gpt.md
 ```
 
 Run the optional OpenSpiel comparison:

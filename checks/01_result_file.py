@@ -1,3 +1,7 @@
+"""Check that the generated result file exists and is non-empty.
+Why: every later check needs a real Python artifact to inspect or import.
+"""
+
 from __future__ import annotations
 
 from common import CheckContext

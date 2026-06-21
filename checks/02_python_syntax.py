@@ -1,3 +1,7 @@
+"""Check that the generated artifact is UTF-8 Python with valid syntax.
+Why: import and rollout checks should only run on parseable code.
+"""
+
 from __future__ import annotations
 
 import ast

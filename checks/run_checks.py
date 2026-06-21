@@ -1,10 +1,16 @@
+"""Run selected BoardBench checks and print timing plus passed/total counts.
+Why: the notebook and CLI both need one small, consistent check entry point.
+"""
+
 from __future__ import annotations
 
 import argparse
 import importlib.util
+import time
 from pathlib import Path
+from typing import Any
 
-from common import CheckContext, resolve_code_path, resolve_repo_root
+from common import CheckContext, CheckResult, resolve_code_path, resolve_optional_path, resolve_repo_root
 
 
 def load_check(path: Path):
@@ -21,33 +27,50 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run BoardBench checks for a generated game result.")
     parser.add_argument("--game", default="antichess", help="OpenSpiel/game name used for output lookup")
     parser.add_argument("--code-path", default=None, help="Generated Python file to check")
+    parser.add_argument("--judge-path", default=None, help="Saved LLM-judge review markdown file")
     parser.add_argument("--rollouts", type=int, default=100, help="Random games to run in rollout checks")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per random game")
     parser.add_argument("--seed", type=int, default=1, help="Random seed for reproducible checks")
-    parser.add_argument("--check", action="append", default=[], help="Run only this check name, e.g. check_05_random_rollouts")
+    parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
+    parser.add_argument("--include-judge", action="store_true", help="Also check the saved LLM-judge review")
     parser.add_argument("--include-final", action="store_true", help="Also run final/slow checks such as OpenSpiel comparison")
     return parser.parse_args()
 
 
-def selected_checks(check_dir: Path, requested: list[str], include_final: bool) -> list[Path]:
-    paths = sorted(check_dir.glob("check_*.py"))
+def check_key(name: str) -> str:
+    stem = name[:-3] if name.endswith(".py") else name
+    if stem.startswith("check_"):
+        stem = stem[6:]
+    return stem
+
+
+def selected_checks(check_dir: Path, requested: list[str], include_judge: bool, include_final: bool) -> list[Path]:
+    paths = sorted(check_dir.glob("[0-9][0-9]_*.py"))
     if requested:
-        names = {name[:-3] if name.endswith(".py") else name for name in requested}
-        paths = [path for path in paths if path.stem in names]
-        missing = names - {path.stem for path in paths}
+        names = {check_key(name) for name in requested}
+        selected = [path for path in paths if check_key(path.stem) in names]
+        missing = names - {check_key(path.stem) for path in selected}
         if missing:
             raise RuntimeError("unknown checks: " + ", ".join(sorted(missing)))
-        return paths
-
-    if include_final:
-        return paths
+        return selected
 
     kept = []
     for path in paths:
         module = load_check(path)
-        if not getattr(module, "FINAL_CHECK", False):
-            kept.append(path)
+        if getattr(module, "JUDGE_CHECK", False) and not include_judge:
+            continue
+        if getattr(module, "FINAL_CHECK", False) and not include_final:
+            continue
+        kept.append(path)
     return kept
+
+
+def normalize_result(value: Any) -> CheckResult:
+    if isinstance(value, CheckResult):
+        return value
+    if value is None:
+        return CheckResult(1, 1)
+    return CheckResult(0, 1, str(value))
 
 
 def main() -> int:
@@ -58,6 +81,7 @@ def main() -> int:
         repo_root=repo_root,
         game=args.game,
         code_path=resolve_code_path(raw_code_path, repo_root),
+        judge_path=resolve_optional_path(args.judge_path, repo_root),
         rollouts=args.rollouts,
         max_steps=args.max_steps,
         seed=args.seed,
@@ -65,7 +89,7 @@ def main() -> int:
 
     check_dir = Path(__file__).resolve().parent
     try:
-        check_paths = selected_checks(check_dir, args.check, args.include_final)
+        check_paths = selected_checks(check_dir, args.check, args.include_judge, args.include_final)
     except Exception as exc:
         print(f"FAIL check selection: {exc}")
         return 1
@@ -75,23 +99,34 @@ def main() -> int:
         return 0
 
     print(f"checking: {ctx.code_path}")
+    total_started = time.perf_counter()
     failed = 0
+    passed_units = 0
+    total_units = 0
+
     for path in check_paths:
+        started = time.perf_counter()
         try:
             module = load_check(path)
             if not hasattr(module, "run"):
                 raise RuntimeError("missing run(ctx)")
-
-            message = module.run(ctx)
+            result = normalize_result(module.run(ctx))
         except Exception as exc:
-            message = str(exc) or exc.__class__.__name__
+            result = CheckResult(0, 1, str(exc) or exc.__class__.__name__)
 
-        if message:
+        elapsed = time.perf_counter() - started
+        passed_units += result.passed
+        total_units += result.total
+        status = "OK" if result.message is None else "FAIL"
+        if result.message:
             failed += 1
-            print(f"FAIL {path.name}: {message}")
+            print(f"{status:<4} {path.stem} ({result.passed}/{result.total}, {elapsed:.2f}s): {result.message}")
         else:
-            print(f"OK   {path.name}")
+            print(f"{status:<4} {path.stem} ({result.passed}/{result.total}, {elapsed:.2f}s)")
 
+    total_elapsed = time.perf_counter() - total_started
+    passed_checks = len(check_paths) - failed
+    print(f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, {total_elapsed:.2f}s")
     return 1 if failed else 0
 
 

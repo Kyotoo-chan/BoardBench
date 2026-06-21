@@ -1,6 +1,6 @@
 # LLM-as-judge workflow
 
-This workflow adds a qualitative review step to BoardBench without introducing API-key automation. It is manual/subscription-first for now: copy the prompt and artifacts into the chosen model and save the raw review output.
+This workflow adds a qualitative check to BoardBench without introducing API-key automation. It is manual/subscription-first for now: copy the prompt and artifacts into the chosen model, save the raw review output, then validate it with `checks/90_llm_judge.py`.
 
 ## Purpose
 
@@ -31,13 +31,14 @@ Recommended order:
 
 1. Create or update `inputs/game_rules.txt` or `inputs/game_rules.pdf`.
 2. Optionally run `prompts/rulebook_to_implementation_brief.md` to produce an implementation brief.
-3. Generate code with `prompts/rulebook_to_python.txt`, `prompts/open_spiel_base_backbone.md`, the relevant game-type profile, and the implementation brief if available.
+3. Generate code with `prompts/rulebook_to_python.txt`, `prompts/open_spiel_backbone.md`, and the implementation brief if available.
 4. Save the raw model response and extracted `.py` in `outputs/`.
 5. Run normal checks with `python checks/run_checks.py`.
 6. Run the LLM judge using `prompts/llm_judge_review.md`.
 7. Save the raw judge response in `outputs/`, for example:
    - `outputs/<game>_judge_<model>.md`
    - `outputs/<game>_judge_<model>_after_checks.md`
+8. Validate it with `python checks/run_checks.py --include-judge --judge-path outputs/<game>_judge_<model>.md`.
 
 ## What to give the judge
 
@@ -92,6 +93,6 @@ For games outside OpenSpiel:
 
 This keeps the workflow useful after moving beyond games that the model may already know or that OpenSpiel already implements.
 
-## Future automation idea
+## Automation boundary
 
-A later `checks/` integration could verify that a judge review file exists and parse the final YAML-like summary. A later notebook/API cell could run the judge automatically. Do not add that automation until the workflow really needs it, because it would introduce provider/API-key choices that this repository currently avoids.
+`checks/90_llm_judge.py` only validates the saved review verdict. A later notebook/API cell could run the judge automatically, but do not add that until the workflow really needs it because it would introduce provider/API-key choices that this repository currently avoids.

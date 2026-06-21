@@ -1,10 +1,14 @@
+"""Optionally compare sampled trajectories against an OpenSpiel reference.
+Why: reference games help calibrate action names, terminal timing, and returns.
+"""
+
 from __future__ import annotations
 
 import random
 import re
 from typing import Any
 
-from common import CheckContext, apply_action, is_terminal, legal_actions, make_game
+from common import CheckContext, CheckResult, apply_action, is_terminal, legal_actions, make_game
 
 FINAL_CHECK = True
 
@@ -86,7 +90,7 @@ def choose_from_custom(open_state: Any, custom_game: Any, custom_state: Any, rng
     return open_actions[key], custom_actions[key]
 
 
-def run(ctx: CheckContext) -> str | None:
+def run(ctx: CheckContext) -> CheckResult | str | None:
     try:
         import pyspiel
     except ImportError as exc:
@@ -115,9 +119,11 @@ def run(ctx: CheckContext) -> str | None:
 
             if open_terminal or custom_terminal:
                 if open_terminal != custom_terminal:
-                    return (
+                    return CheckResult(
+                        rollout_index,
+                        ctx.rollouts,
                         f"terminal mismatch in rollout {rollout_index + 1}, step {step}: "
-                        f"openspiel={open_terminal}, generated={custom_terminal}"
+                        f"openspiel={open_terminal}, generated={custom_terminal}",
                     )
                 break
 
@@ -128,14 +134,26 @@ def run(ctx: CheckContext) -> str | None:
                     open_action, custom_action = choose_from_custom(open_state, custom_game, custom_state, rng)
             except Exception as exc:
                 mode = "openspiel-driven" if open_drives else "generated-driven"
-                return f"{mode} action matching failed in rollout {rollout_index + 1}, step {step}: {exc}"
+                return CheckResult(
+                    rollout_index,
+                    ctx.rollouts,
+                    f"{mode} action matching failed in rollout {rollout_index + 1}, step {step}: {exc}",
+                )
 
             open_state.apply_action(open_action)
             try:
                 custom_state = apply_action(custom_game, custom_state, custom_action)
             except Exception as exc:
-                return f"generated apply_action crashed in rollout {rollout_index + 1}, step {step}: {exc}"
+                return CheckResult(
+                    rollout_index,
+                    ctx.rollouts,
+                    f"generated apply_action crashed in rollout {rollout_index + 1}, step {step}: {exc}",
+                )
         else:
-            return f"comparison rollout {rollout_index + 1} did not terminate within {ctx.max_steps} steps"
+            return CheckResult(
+                rollout_index,
+                ctx.rollouts,
+                f"comparison rollout {rollout_index + 1} did not terminate within {ctx.max_steps} steps",
+            )
 
-    return None
+    return CheckResult(ctx.rollouts, ctx.rollouts)

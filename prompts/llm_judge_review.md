@@ -1,6 +1,6 @@
 # LLM judge review prompt
 
-Use this as a manual qualitative test after a game implementation has been generated and the normal BoardBench checks have run.
+Use this as a manual qualitative check after a game implementation has been generated and the normal BoardBench checks have run.
 
 The judge is not the source of truth. Its job is to find likely rule coverage gaps, logic errors, unsupported assumptions, and missing tests that deterministic checks may miss.
 

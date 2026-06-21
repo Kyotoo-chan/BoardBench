@@ -16,7 +16,7 @@ Do not write code. Produce an implementation brief that can be given to a later 
 - perfect information or hidden/private information
 - zero-sum, constant-sum, team-based, identical-interest, or general-sum scoring
 - terminal-only scoring or repeated/step scoring
-- matching BoardBench game-type profiles from `open_spiel_game_type_backbones.md`
+- matching BoardBench game-type add-ons from `open_spiel_backbone.md`
 
 ### 2. Rulebook-grounded entities and labels
 

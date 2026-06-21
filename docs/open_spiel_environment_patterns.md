@@ -193,11 +193,11 @@ BoardBench already has checks for import, syntax, required API, action-name roun
 - manual LLM-as-judge review for rule coverage and likely logic errors
 - optional OpenSpiel comparison by canonical action names when an OpenSpiel reference exists
 
-## Do we need multiple backbones?
+## Do we need multiple backbone files?
 
-Yes, but not one full prompt for every board game.
+No. One OpenSpiel-inspired backbone file is enough for now.
 
-Use a stable **base backbone** for all generated games and add a small **game-type profile** only when the rulebook requires it. This avoids contradictory prompts while still covering important OpenSpiel distinctions:
+Use one stable **OpenSpiel backbone** for all generated games. It contains the base interface plus short game-type add-ons that should be applied only when the rulebook requires them. This avoids contradictory prompts while still covering important OpenSpiel distinctions:
 
 - deterministic sequential perfect-information games
 - stochastic/chance games
@@ -206,7 +206,6 @@ Use a stable **base backbone** for all generated games and add a small **game-ty
 - multiplayer/team/general-sum games
 - repeated/scoring games with step rewards
 
-The ready-to-use files are:
+The ready-to-use file is:
 
-- `prompts/open_spiel_base_backbone.md`
-- `prompts/open_spiel_game_type_backbones.md`
+- `prompts/open_spiel_backbone.md`

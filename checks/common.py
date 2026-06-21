@@ -1,3 +1,7 @@
+"""Shared helpers for BoardBench checks.
+Why: keeps import, rollout, path, and result-reporting code out of tiny check files.
+"""
+
 from __future__ import annotations
 
 import contextlib
@@ -25,6 +29,13 @@ REQUIRED_GAME_METHODS = [
 
 
 @dataclass(frozen=True)
+class CheckResult:
+    passed: int
+    total: int
+    message: str | None = None
+
+
+@dataclass(frozen=True)
 class CheckContext:
     repo_root: Path
     game: str
@@ -32,6 +43,7 @@ class CheckContext:
     rollouts: int
     max_steps: int
     seed: int
+    judge_path: Path | None = None
 
 
 def resolve_repo_root() -> Path:
@@ -52,6 +64,18 @@ def resolve_code_path(raw_path: str | Path, repo_root: Path) -> Path:
             return candidate.resolve()
 
     return candidates[0].resolve()
+
+
+def resolve_optional_path(raw_path: str | Path | None, repo_root: Path) -> Path | None:
+    if raw_path is None:
+        return None
+    requested = Path(raw_path)
+    if requested.is_absolute():
+        return requested
+    for candidate in [Path.cwd() / requested, repo_root / requested]:
+        if candidate.exists():
+            return candidate.resolve()
+    return (repo_root / requested).resolve()
 
 
 def import_generated_module(ctx: CheckContext) -> ModuleType:

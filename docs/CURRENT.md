@@ -17,19 +17,18 @@ BoardBench/
 ├─ prompts/
 │  ├─ rulebook_to_python.txt
 │  ├─ rulebook_to_implementation_brief.md
-│  ├─ open_spiel_base_backbone.md
-│  ├─ open_spiel_game_type_backbones.md
+│  ├─ open_spiel_backbone.md
 │  └─ llm_judge_review.md
 ├─ outputs/
 ├─ checks/
-│  ├─ README.md
 │  ├─ common.py
-│  ├─ check_01_result_file.py
-│  ├─ check_02_python_syntax.py
-│  ├─ check_03_startable_game.py
-│  ├─ check_04_required_api.py
-│  ├─ check_05_random_rollouts.py
-│  ├─ check_99_openspiel_compare.py
+│  ├─ 01_result_file.py
+│  ├─ 02_python_syntax.py
+│  ├─ 03_startable_game.py
+│  ├─ 04_required_api.py
+│  ├─ 05_random_rollouts.py
+│  ├─ 90_llm_judge.py
+│  ├─ 99_openspiel_compare.py
 │  └─ run_checks.py
 ├─ docs/
 │  ├─ CURRENT.md
@@ -49,7 +48,7 @@ BoardBench/
 - root-level `evaluation.ipynb`
 - root-level `inputs/`, `prompts/`, `outputs/`, and `checks/`
 - a prompt file at `prompts/rulebook_to_python.txt`
-- OpenSpiel-inspired prompt backbones at `prompts/open_spiel_base_backbone.md` and `prompts/open_spiel_game_type_backbones.md`
+- an OpenSpiel-inspired prompt backbone at `prompts/open_spiel_backbone.md`
 - an implementation-brief prompt at `prompts/rulebook_to_implementation_brief.md`
 - an LLM-judge review prompt at `prompts/llm_judge_review.md`
 - OpenSpiel environment pattern notes at `docs/open_spiel_environment_patterns.md`
@@ -65,14 +64,14 @@ BoardBench/
 
 1. store the prompt text in `prompts/rulebook_to_python.txt`
 2. optionally create an implementation brief with `prompts/rulebook_to_implementation_brief.md`
-3. optionally add `prompts/open_spiel_base_backbone.md` and the relevant game-type profile as extra LLM context
+3. optionally add `prompts/open_spiel_backbone.md` as extra LLM context
 4. store the game rules in exactly one of `inputs/game_rules.txt` or `inputs/game_rules.pdf`
 5. create or activate a Python 3.12.3 environment and install `requirements.txt`
 6. update game, model, timeout, and output variables in `evaluation.ipynb`
 7. save raw model output and extracted Python files in `outputs/`
 8. run generated-result checks from the notebook or from the repo root with `python checks/run_checks.py`
 9. use optional final OpenSpiel comparison with `python checks/run_checks.py --include-final`
-10. optionally run an LLM judge review with `prompts/llm_judge_review.md` and save the raw review in `outputs/`
+10. optionally run an LLM judge review with `prompts/llm_judge_review.md`, save it in `outputs/`, and validate it with `python checks/run_checks.py --include-judge`
 
 ## Checks
 
@@ -84,6 +83,7 @@ Normal checks verify:
 4. required API methods are present
 5. 100 capped random rollouts do not crash or produce invalid dead states
 
+The optional `90_llm_judge.py` check validates a saved LLM-judge review verdict.
 The optional final check compares against OpenSpiel when `pyspiel` is available.
 
 The LLM-as-judge review is a manual qualitative check for now, documented in `docs/llm_judge_workflow.md`. It should not introduce provider/API-key automation until that is explicitly needed.
