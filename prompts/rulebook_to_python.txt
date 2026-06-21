@@ -2,6 +2,7 @@ You will receive rule text.
 
 Use only that information.
 Do not use outside knowledge or remembered rules for the game.
+If an implementation brief or backbone context is provided, use it only as an interpretation aid; the rule text wins if there is a conflict.
 
 Write one simple, self-contained Python file using only the standard library.
 Do not import any non-standard-library package or external game framework.
@@ -10,6 +11,7 @@ Keep top-level code limited to definitions and constants.
 
 If rules are unclear or incomplete, state the assumptions briefly before the code and in comments where relevant.
 Do not silently fill missing rules with outside knowledge.
+Prefer a smaller explicit implementation with documented gaps over broad invented mechanics.
 
 If possible, include this minimal game API:
 - `GameState`

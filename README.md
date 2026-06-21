@@ -25,10 +25,10 @@ BoardBench/
 ## What goes where
 
 - `inputs/` – current rulebook input as `game_rules.txt` or `game_rules.pdf`
-- `prompts/` – reusable prompt text, currently `rulebook_to_python.txt`
+- `prompts/` – reusable prompt text, including generation, implementation-brief, OpenSpiel-inspired backbone, and LLM-judge prompts
 - `outputs/` – raw model responses, generated Python files, references, and preserved artifacts
 - `checks/` – result checks for generated Python game files
-- `docs/` – workflow notes, checklists, current-state notes, drafts, and problem notes
+- `docs/` – workflow notes, checklists, current-state notes, LLM-judge workflow notes, drafts, and problem notes
 - `evaluation.ipynb` – manual generation/evaluation notebook
 - `TODO.md` – follow-up ideas to investigate
 - `requirements.txt` – local Python dependencies
@@ -37,12 +37,15 @@ BoardBench/
 ## Minimal workflow
 
 1. Put the rulebook into `inputs/game_rules.txt` or `inputs/game_rules.pdf`.
-2. Keep the generation prompt in `prompts/rulebook_to_python.txt`.
-3. Set game/model/output variables in `evaluation.ipynb`.
-4. Generate one self-contained Python module from the provided rules only.
-5. Save the raw response and extracted `.py` file in `outputs/`.
-6. Run the generated-result checks from the notebook or with `python checks/run_checks.py`.
-7. Preserve notes and artifacts that may matter for the thesis write-up.
+2. Optionally create an implementation brief with `prompts/rulebook_to_implementation_brief.md`.
+3. Keep the generation prompt in `prompts/rulebook_to_python.txt`.
+4. Optionally add `prompts/open_spiel_base_backbone.md` and a matching game-type profile as extra LLM context.
+5. Set game/model/output variables in `evaluation.ipynb`.
+6. Generate one self-contained Python module from the provided rules only.
+7. Save the raw response and extracted `.py` file in `outputs/`.
+8. Run the generated-result checks from the notebook or with `python checks/run_checks.py`.
+9. Optionally run an LLM judge review with `prompts/llm_judge_review.md` and save the raw review in `outputs/`.
+10. Preserve notes and artifacts that may matter for the thesis write-up.
 
 ## Notes
 
