@@ -68,7 +68,7 @@ It is still useful to give the LLM OpenSpiel-inspired context: `Game`, `State`, 
 
 ## Calibration vs transfer risk
 
-Testing the workflow first on OpenSpiel games is the right calibration step because it gives a reference implementation for action matching, terminal timing, and returns. But this can overestimate quality on new games:
+Testing the workflow first on OpenSpiel games is the right calibration step because it gives a reference implementation for action matching, turn order, and returns. But this can overestimate quality on new games:
 
 - popular OpenSpiel games may be memorized by the model
 - reference-game rules are often cleaner than real rulebooks
@@ -191,7 +191,7 @@ BoardBench already has checks for import, syntax, required API, action-name roun
 - hidden-information leakage checks for `information_state`
 - scenario/regression tests from rulebook examples
 - manual LLM-as-judge review for rule coverage and likely logic errors
-- optional OpenSpiel comparison by canonical action names when an OpenSpiel reference exists
+- optional OpenSpiel comparison by canonical action names, legal action sets, turn order, and terminal returns when an OpenSpiel reference exists
 
 ## Do we need multiple backbone files?
 

@@ -119,15 +119,47 @@ def legal_actions(game: Any, state: Any) -> list[Any]:
         return list(game.legal_actions(state))
 
 
+def current_player(game: Any, state: Any) -> int:
+    with suppress_generated_output():
+        return int(game.current_player(state))
+
+
 def is_terminal(game: Any, state: Any) -> bool:
     with suppress_generated_output():
         return bool(game.is_terminal(state))
+
+
+def returns(game: Any, state: Any) -> list[float]:
+    with suppress_generated_output():
+        return list(game.returns(state))
+
+
+def validate_state_basics(game: Any, state: Any, actions: list[Any]) -> str | None:
+    with suppress_generated_output():
+        rendered = game.render(state)
+        if rendered != game.render(state):
+            return "render(state) is not deterministic"
+
+    names: set[str] = set()
+    for action in actions:
+        with suppress_generated_output():
+            name = game.action_to_name(action)
+            roundtrip = game.name_to_action(name)
+        if name in names:
+            return f"duplicate action name {name!r}"
+        names.add(name)
+        if roundtrip != action:
+            return f"action name did not round-trip: {name!r}"
+    return None
 
 
 def random_rollout(game: Any, state: Any, rng: random.Random, max_steps: int) -> str | None:
     for _step in range(max_steps):
         terminal = is_terminal(game, state)
         actions = legal_actions(game, state)
+        message = validate_state_basics(game, state, actions)
+        if message:
+            return message
 
         if terminal:
             if actions:

@@ -84,7 +84,7 @@ Normal checks verify:
 5. 100 capped random rollouts do not crash or produce invalid dead states
 
 The optional `90_llm_judge.py` check validates a saved LLM-judge review verdict.
-The optional final check compares against OpenSpiel when `pyspiel` is available.
+The optional final OpenSpiel check compares sampled states against OpenSpiel when `pyspiel` is available: current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.
 
 The LLM-as-judge review is a manual qualitative check for now, documented in `docs/llm_judge_workflow.md`. It should not introduce provider/API-key automation until that is explicitly needed.
 

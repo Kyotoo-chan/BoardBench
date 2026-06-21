@@ -49,6 +49,8 @@ Run the optional OpenSpiel comparison:
 python checks/run_checks.py --include-final
 ```
 
+The OpenSpiel comparison checks sampled current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.
+
 ## Local extension commands
 
 Inside pi:
