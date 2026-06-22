@@ -178,17 +178,25 @@ def main() -> int:
 
     if isinstance(result, CheckResult):
         status = "OK" if result.message is None else "FAIL"
-        print(f"{status:<4} pair_action_compare {result.passed}/{result.total} {elapsed:.2f}s" + (f"  {result.message}" if result.message else ""), flush=True)
-        print(f"summary: {1 if result.message is None else 0}/1 checks, {result.passed}/{result.total} units, {elapsed:.2f}s", flush=True)
+        print(
+            f"{status:<4} pair_action_compare {result.passed}/{result.total} score={result.score:.3f} {elapsed:.2f}s"
+            + (f"  {result.message}" if result.message else ""),
+            flush=True,
+        )
+        print(
+            f"summary: {1 if result.message is None else 0}/1 checks, {result.passed}/{result.total} units, "
+            f"score={result.score:.3f}, {elapsed:.2f}s",
+            flush=True,
+        )
         return 1 if result.message else 0
 
     if result is None:
-        print(f"OK   pair_action_compare {args.rollouts}/{args.rollouts} {elapsed:.2f}s", flush=True)
-        print(f"summary: 1/1 checks, {args.rollouts}/{args.rollouts} units, {elapsed:.2f}s", flush=True)
+        print(f"OK   pair_action_compare {args.rollouts}/{args.rollouts} score=1.000 {elapsed:.2f}s", flush=True)
+        print(f"summary: 1/1 checks, {args.rollouts}/{args.rollouts} units, score=1.000, {elapsed:.2f}s", flush=True)
         return 0
 
-    print(f"FAIL pair_action_compare 0/1 {elapsed:.2f}s  {result}", flush=True)
-    print(f"summary: 0/1 checks, 0/1 units, {elapsed:.2f}s", flush=True)
+    print(f"FAIL pair_action_compare 0/1 score=0.000 {elapsed:.2f}s  {result}", flush=True)
+    print(f"summary: 0/1 checks, 0/1 units, score=0.000, {elapsed:.2f}s", flush=True)
     return 1
 
 

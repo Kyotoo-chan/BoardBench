@@ -120,7 +120,7 @@ def main() -> int:
         total_units += result.total
         status = "OK" if result.message is None else "FAIL"
         units = f"{result.passed}/{result.total}"
-        line = f"{status:<4} {path.stem:<{name_width}} {units:>9} {elapsed:>7.2f}s"
+        line = f"{status:<4} {path.stem:<{name_width}} {units:>9} score={result.score:.3f} {elapsed:>7.2f}s"
         if result.message:
             failed += 1
             line += f"  {result.message}"
@@ -128,7 +128,12 @@ def main() -> int:
 
     total_elapsed = time.perf_counter() - total_started
     passed_checks = len(check_paths) - failed
-    print(f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, {total_elapsed:.2f}s", flush=True)
+    normalized_score = (passed_units / total_units) if total_units else 0.0
+    print(
+        f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, "
+        f"score={normalized_score:.3f}, {total_elapsed:.2f}s",
+        flush=True,
+    )
     return 1 if failed else 0
 
 

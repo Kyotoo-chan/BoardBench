@@ -34,6 +34,18 @@ class CheckResult:
     total: int
     message: str | None = None
 
+    @property
+    def score(self) -> float:
+        """Normalized 0..1 score for this check.
+
+        Checks report passed/total units. The score makes every check directly
+        comparable while preserving the detailed unit counts.
+        """
+
+        if self.total <= 0:
+            return 0.0
+        return max(0.0, min(1.0, self.passed / self.total))
+
 
 @dataclass(frozen=True)
 class CheckContext:

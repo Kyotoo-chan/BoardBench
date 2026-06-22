@@ -90,6 +90,7 @@ Normal checks verify:
 5. 1000 capped random rollouts do not crash or produce invalid dead states
 6. sampled action names normalize to an unambiguous comparison language
 
+Each check reports passed units and a normalized 0–1 score for comparable implementation scoring.
 The action normalizer maps only names emitted by `action_to_name`; it does not add missing legal actions.
 The optional `90_llm_judge.py` check validates a saved LLM-judge review verdict.
 The optional final OpenSpiel check compares sampled states against OpenSpiel when `pyspiel` is available: current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.

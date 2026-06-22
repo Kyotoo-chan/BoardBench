@@ -20,7 +20,11 @@ conda activate boardbench
 python -m pip install -r requirements.txt
 ```
 
-Then open `evaluation.ipynb`.
+Then open `evaluation.ipynb` for the agentic run or `evaluation2.ipynb` for the one-shot run.
+
+If `inputs/game_rules.pdf` has no extractable text, the notebooks render it to page images under `outputs/rulebook_pages/` and pass those images to pi as rulebook attachments.
+
+For the agentic run, the notebook creates a temporary isolated workspace containing only copied source material under `inputs/` and an `outputs/` folder for the generated file. The BoardBench `checks/` directory is not present in that workspace, so the generator can self-review syntax and logic without seeing the benchmark checks.
 
 ## Checks
 
@@ -30,7 +34,7 @@ Run normal generated-result checks from the notebook check cells, or from the re
 python checks/run_checks.py --game antichess --code-path outputs/antichess.py
 ```
 
-Normal checks verify result existence, Python syntax, startup, required API, 1000 capped random rollouts without crashes or invalid dead states, and unambiguous normalized action names.
+Normal checks verify result existence, Python syntax, startup, required API, 1000 capped random rollouts without crashes or invalid dead states, and unambiguous normalized action names. Each check prints passed units and a normalized 0–1 score so implementations can be compared numerically.
 
 Run one check:
 
