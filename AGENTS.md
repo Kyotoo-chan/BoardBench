@@ -43,7 +43,7 @@ Prefer the smallest useful setup:
 - one `prompts/` folder
 - one lightweight `checks/` folder for small runnable checks of generated results
 - one `docs/` folder for secondary notes, drafts, checklists, and current-state details
-- one root-level comparison notebook
+- root-level evaluation notebooks for agentic and one-shot comparison runs
 
 Avoid introducing large frameworks, provider abstractions, or complex evaluation pipelines unless explicitly requested.
 
@@ -61,6 +61,7 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 10. If a task is split into multiple commits, space the commit timestamps according to the rough effort split, and set the final commit to the current time unless the user says otherwise.
 11. When estimating commit spacing, count planning, thinking, and deciding time as part of the work, not only the file editing time.
 12. Keep code changes minimal and focused unless the user explicitly asks for a broader refactor.
+13. Use the `boardbench` Conda environment for Python commands, checks, notebook smoke tests, and dependency validation. In Git Bash, use `/c/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench ...` when `conda` is not on PATH.
 
 ## Coding style expectations
 

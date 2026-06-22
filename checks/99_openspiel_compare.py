@@ -9,6 +9,7 @@ import random
 import re
 from typing import Any
 
+from action_normalizer import normalize_action_name
 from common import (
     CheckContext,
     CheckResult,
@@ -22,42 +23,6 @@ from common import (
 )
 
 FINAL_CHECK = True
-
-PROMOTION_WORDS = {
-    "q": "q",
-    "queen": "q",
-    "dame": "q",
-    "r": "r",
-    "rook": "r",
-    "turm": "r",
-    "b": "b",
-    "bishop": "b",
-    "laeufer": "b",
-    "läufer": "b",
-    "n": "n",
-    "knight": "n",
-    "springer": "n",
-    "k": "k",
-    "king": "k",
-    "koenig": "k",
-    "könig": "k",
-}
-
-
-def canonical_action_name(name: str) -> str:
-    lowered = name.lower()
-    squares = re.findall(r"[a-h][1-8]", lowered)
-    if len(squares) >= 2:
-        promotion = ""
-        after_target = lowered.split(squares[1], 1)[1]
-        if "=" in after_target:
-            promotion_text = re.split(r"[^a-zäöü]+", after_target.split("=", 1)[1])[0]
-            promotion = PROMOTION_WORDS.get(promotion_text, "")
-        elif after_target[:1] in PROMOTION_WORDS:
-            promotion = PROMOTION_WORDS[after_target[:1]]
-        return squares[0] + squares[1] + promotion
-
-    return re.sub(r"[^a-z0-9]+", "", lowered)
 
 
 def describe_diff(open_keys: set[str], custom_keys: set[str]) -> str:
@@ -84,7 +49,7 @@ def build_custom_action_map(game: Any, state: Any) -> dict[str, Any]:
             raise RuntimeError(f"duplicate generated action name {name!r}")
         raw_names.add(name)
 
-        key = canonical_action_name(name)
+        key = normalize_action_name(name)
         if key in action_map:
             raise RuntimeError(f"ambiguous generated action key {key!r}")
         action_map[key] = action
@@ -149,8 +114,8 @@ def fen_transition_key(open_state: Any, action: Any, action_name: str) -> str | 
 
     promotion = ""
     if before[source].lower() == "p" and moved.lower() != "p":
-        promotion = moved.lower()
-    return source + target + promotion
+        promotion = "=" + moved.lower()
+    return normalize_action_name(f"move:{source}->{target}{promotion}")
 
 
 def build_open_action_map(open_game: Any, open_state: Any) -> dict[str, Any]:
@@ -160,7 +125,7 @@ def build_open_action_map(open_game: Any, open_state: Any) -> dict[str, Any]:
         action_items = []
     elif open_state.is_chance_node():
         action_items = [
-            (canonical_action_name(open_state.action_to_string(open_state.current_player(), action)), action)
+            (normalize_action_name(open_state.action_to_string(open_state.current_player(), action)), action)
             for action, _probability in open_state.chance_outcomes()
         ]
     elif open_state.is_simultaneous_node():
@@ -171,13 +136,13 @@ def build_open_action_map(open_game: Any, open_state: Any) -> dict[str, Any]:
                 f"p{player}:{open_state.action_to_string(player, action)}"
                 for player, action in enumerate(joint_action)
             )
-            action_items.append((canonical_action_name(name), tuple(joint_action)))
+            action_items.append((normalize_action_name(name), tuple(joint_action)))
     else:
         player = open_state.current_player()
         action_items = []
         for action in open_state.legal_actions(player):
             name = open_state.action_to_string(player, action)
-            key = fen_transition_key(open_state, action, name) or canonical_action_name(name)
+            key = fen_transition_key(open_state, action, name) or normalize_action_name(name)
             action_items.append((key, action))
 
     for key, action in action_items:

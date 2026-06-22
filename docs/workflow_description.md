@@ -9,7 +9,8 @@ This file explains the current BoardBench workflow with the project-local pi ext
 - exactly one of `inputs/game_rules.txt` or `inputs/game_rules.pdf`
 - generated artifacts under `outputs/`
 - generated-result checks under `checks/`
-- notebook at `evaluation.ipynb`
+- agentic notebook at `evaluation.ipynb`
+- one-shot notebook at `evaluation2.ipynb`
 
 ## Notebook environment
 
@@ -23,13 +24,13 @@ Then open `evaluation.ipynb`.
 
 ## Checks
 
-Run normal generated-result checks from the `Checks` cell in `evaluation.ipynb`, or from the repository root:
+Run normal generated-result checks from the notebook check cells, or from the repository root:
 
 ```bash
 python checks/run_checks.py --game antichess --code-path outputs/antichess.py
 ```
 
-Normal checks verify result existence, Python syntax, startup, required API, and 1000 capped random rollouts without crashes or invalid dead states.
+Normal checks verify result existence, Python syntax, startup, required API, 1000 capped random rollouts without crashes or invalid dead states, and unambiguous normalized action names.
 
 Run one check:
 
@@ -42,6 +43,17 @@ Check a saved LLM-judge review:
 ```bash
 python checks/run_checks.py --include-judge --judge-path outputs/antichess_judge_gpt.md
 ```
+
+Run the pair action-language comparison after both generated variants exist:
+
+```bash
+python checks/compare_pair.py \
+  --game antichess \
+  --left-code-path outputs/antichess_oneshot.py \
+  --right-code-path outputs/antichess_agentic.py
+```
+
+This comparison normalizes emitted action names only. It does not add missing legal actions.
 
 Run the optional OpenSpiel comparison:
 
@@ -99,7 +111,7 @@ Use `@inputs/game_rules.pdf` instead when the rulebook is stored as PDF.
 
 The local extension allowlist includes:
 
-- root workflow files: `README.md`, `AGENTS.md`, `TODO.md`, `requirements.txt`, `evaluation.ipynb`
+- root workflow files: `README.md`, `AGENTS.md`, `TODO.md`, `requirements.txt`, `evaluation.ipynb`, `evaluation2.ipynb`
 - `docs/`
 - `inputs/`
 - `prompts/`
