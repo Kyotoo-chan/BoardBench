@@ -22,7 +22,7 @@ python -m pip install -r requirements.txt
 
 Then open `evaluation.ipynb` for the agentic run or `evaluation2.ipynb` for the one-shot run.
 
-If `inputs/game_rules.pdf` has no extractable text, the notebooks render it to page images under `outputs/rulebook_pages/` and pass those images to pi as rulebook attachments.
+If `inputs/game_rules.pdf` has no extractable text, the notebooks render it to page images under `inputs/rulebook_pages/` and pass those images to pi as rulebook attachments.
 
 For the agentic run, the notebook creates a temporary isolated workspace containing only copied source material under `inputs/` and an `outputs/` folder for the generated file. The BoardBench `checks/` directory is not present in that workspace, so the generator can self-review syntax and logic without seeing the benchmark checks.
 

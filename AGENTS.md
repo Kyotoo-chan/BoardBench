@@ -101,3 +101,24 @@ If a workflow produces model artifacts, prefer storing:
 - any important assumptions or unresolved issues
 
 Use simple, human-readable filenames.
+
+## Artifact and path rules
+
+- `outputs/` holds generated game code, raw LLM answers, check logs, judge reviews, align backups, and other experiment artifacts needed for later thesis analysis.
+- **Do not gitignore `outputs/`** or hide generated artifacts to make `git status` look clean.
+- Commit `outputs/` artifacts when they belong to an intentional experiment run the user wants preserved.
+- Rendered PDF rulebook page images belong under `inputs/rulebook_pages/`, never `outputs/rulebook_pages/`.
+- Judge packets and pi attachments should reference `inputs/rulebook_pages/` paths for page images.
+- Notebook cell execution output inside `.ipynb` files is not the same as `outputs/` artifacts; clear stale notebook outputs before commit instead of ignoring `outputs/`.
+
+## Evaluation notebook rules
+
+- `evaluation.ipynb` = agentic run; `evaluation2.ipynb` = oneshot run.
+- Pair action-language comparison belongs only in `evaluation.ipynb`, not `evaluation2.ipynb`.
+- `run_full_evaluation()` is the one-cell full pipeline when the user wants everything at once.
+- Pipeline order: base checks (01–06) → LLM judge → **only** `90_llm_judge` → action-language align → **only** `99_openspiel_compare`.
+- Never re-run the full base-check suite after the judge step.
+- Print **one** aggregated `---- summary` line at the very end; intermediate phases use `--no-summary`.
+- On check failures, continue through judge and OpenSpiel phases when enabled; raise only at the end with the list of failed phases.
+- Keep notebook output minimal: stream only `OK` / `FAIL` / final `summary` lines, no admin prints (`running checks`, `Saved check log`, `CompletedProcess`, etc.).
+- Action-language align runs immediately before OpenSpiel compare, not before the base checks.

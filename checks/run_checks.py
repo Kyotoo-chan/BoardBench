@@ -34,6 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
     parser.add_argument("--include-judge", action="store_true", help="Also check the saved LLM-judge review")
     parser.add_argument("--include-final", action="store_true", help="Also run final/slow checks such as OpenSpiel comparison")
+    parser.add_argument("--no-summary", action="store_true", help="Skip the final summary line (for notebook pipeline phases)")
     return parser.parse_args()
 
 
@@ -98,12 +99,21 @@ def main() -> int:
         print("no checks selected", flush=True)
         return 0
 
-    print(f"checking: {ctx.code_path}", flush=True)
     total_started = time.perf_counter()
     failed = 0
     passed_units = 0
     total_units = 0
     name_width = max(len(path.stem) for path in check_paths)
+    units_width = 11
+
+    def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
+        line = (
+            f"{status:<4} {name:<{name_width}} {units:>{units_width}} "
+            f"score={score:.3f} {elapsed:>7.2f}s"
+        )
+        if message:
+            line += f"  {message}"
+        return line
 
     for path in check_paths:
         started = time.perf_counter()
@@ -120,20 +130,28 @@ def main() -> int:
         total_units += result.total
         status = "OK" if result.message is None else "FAIL"
         units = f"{result.passed}/{result.total}"
-        line = f"{status:<4} {path.stem:<{name_width}} {units:>9} score={result.score:.3f} {elapsed:>7.2f}s"
         if result.message:
             failed += 1
-            line += f"  {result.message}"
-        print(line, flush=True)
+        print(
+            format_line(status, path.stem, units, result.score, elapsed, result.message),
+            flush=True,
+        )
 
     total_elapsed = time.perf_counter() - total_started
-    passed_checks = len(check_paths) - failed
-    normalized_score = (passed_units / total_units) if total_units else 0.0
-    print(
-        f"summary: {passed_checks}/{len(check_paths)} checks, {passed_units}/{total_units} units, "
-        f"score={normalized_score:.3f}, {total_elapsed:.2f}s",
-        flush=True,
-    )
+    if not args.no_summary:
+        passed_checks = len(check_paths) - failed
+        normalized_score = (passed_units / total_units) if total_units else 0.0
+        print(
+            format_line(
+                "----",
+                "summary",
+                f"{passed_checks}/{len(check_paths)}",
+                normalized_score,
+                total_elapsed,
+                f"({passed_units}/{total_units} units)" if total_units else None,
+            ),
+            flush=True,
+        )
     return 1 if failed else 0
 
 

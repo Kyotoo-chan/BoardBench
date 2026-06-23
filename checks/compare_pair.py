@@ -169,34 +169,48 @@ def compare(args: argparse.Namespace) -> CheckResult | str | None:
     return CheckResult(args.rollouts, args.rollouts)
 
 
+def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
+    name_width = len(name)
+    units_width = 11
+    line = f"{status:<4} {name:<{name_width}} {units:>{units_width}} score={score:.3f} {elapsed:>7.2f}s"
+    if message:
+        line += f"  {message}"
+    return line
+
+
 def main() -> int:
     args = parse_args()
-    print(f"comparing action language: {args.left_code_path} <-> {args.right_code_path}", flush=True)
     started = time.perf_counter()
     result = compare(args)
     elapsed = time.perf_counter() - started
+    name = "pair_action_compare"
 
     if isinstance(result, CheckResult):
         status = "OK" if result.message is None else "FAIL"
+        units = f"{result.passed}/{result.total}"
+        print(format_line(status, name, units, result.score, elapsed, result.message), flush=True)
+        passed_checks = 0 if result.message else 1
         print(
-            f"{status:<4} pair_action_compare {result.passed}/{result.total} score={result.score:.3f} {elapsed:.2f}s"
-            + (f"  {result.message}" if result.message else ""),
-            flush=True,
-        )
-        print(
-            f"summary: {1 if result.message is None else 0}/1 checks, {result.passed}/{result.total} units, "
-            f"score={result.score:.3f}, {elapsed:.2f}s",
+            format_line(
+                "----",
+                "summary",
+                f"{passed_checks}/1",
+                result.score,
+                elapsed,
+                f"({result.passed}/{result.total} units)",
+            ),
             flush=True,
         )
         return 1 if result.message else 0
 
     if result is None:
-        print(f"OK   pair_action_compare {args.rollouts}/{args.rollouts} score=1.000 {elapsed:.2f}s", flush=True)
-        print(f"summary: 1/1 checks, {args.rollouts}/{args.rollouts} units, score=1.000, {elapsed:.2f}s", flush=True)
+        units = f"{args.rollouts}/{args.rollouts}"
+        print(format_line("OK", name, units, 1.0, elapsed), flush=True)
+        print(format_line("----", "summary", "1/1", 1.0, elapsed, f"({units} units)"), flush=True)
         return 0
 
-    print(f"FAIL pair_action_compare 0/1 score=0.000 {elapsed:.2f}s  {result}", flush=True)
-    print(f"summary: 0/1 checks, 0/1 units, score=0.000, {elapsed:.2f}s", flush=True)
+    print(format_line("FAIL", name, "0/1", 0.0, elapsed, str(result)), flush=True)
+    print(format_line("----", "summary", "0/1", 0.0, elapsed, "(0/1 units)"), flush=True)
     return 1
 
 

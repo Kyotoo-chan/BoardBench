@@ -203,6 +203,11 @@ cython_debug/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
+# Rendered rulebook page images derived from inputs/game_rules.pdf
+inputs/rulebook_pages/
+# Wrong location if notebooks ever render pages into outputs/ by mistake
+outputs/rulebook_pages/
+
 # Ruff stuff:
 .ruff_cache/
 
