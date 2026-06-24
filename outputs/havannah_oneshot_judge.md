@@ -1,75 +1,93 @@
 ### 1. Score
 
-score: 0.0  
-confidence: high  
+- score: 0.85
+- confidence: medium
 
-The generated file is not benchmark-ready because it contains a Python syntax error in `_point_strictly_inside_polygon`, so the module cannot be imported or used. Apart from that fatal issue, the intended rules mostly match the provided Havannah rulebook: 169-point board, two players, alternating placements, Red first, and bridge/fork/ring win conditions are attempted.
+The implementation matches the visible rulebook on the core game: 169-point board, 55 stones per color, Red starts, alternating placement on empty points, no captures or movement, and wins by ring/bridge/fork. Bridge and fork logic closely follows the text, including corners not counting as sides. The main uncertainty is the custom ring-detection algorithm and a few benchmark conventions not fully specified by the rulebook, such as fixed player-color assignment and numeric draw returns.
 
 ### 2. Top findings
 
-1. **severity: critical**  
-   **evidence:** Generated code line in `_point_strictly_inside_polygon`: `x2, y2 = poly[(i + 1) % n)]` has an extra closing parenthesis.  
-   **why it matters:** The Python file cannot parse, so no BoardBench API calls can run.  
-   **suggested next action:** Fix the syntax error and add a minimal import/smoke test.
+1. **severity: question**  
+   **evidence:** Rulebook: “Ein Ring ist eine geschlossene Verbindung, die mindestens einen Punkt umschließt” and enclosed points may be occupied by anyone. Code: `_has_ring`, `_component_has_enclosing_cycle`, `_cycle_encloses_board_point`.  
+   **why it matters:** Ring is one of the three winning conditions; a false positive or false negative would directly change terminal outcomes.  
+   **suggested next action:** Add deterministic tests for minimal rings, occupied-center rings, almost-rings, and larger/branched components.
 
-2. **severity: question**  
-   **evidence:** Rulebook defines a ring as a connected line of stones enclosing at least one point; code implements a geometric face-walk/cycle-detection algorithm.  
-   **why it matters:** Ring detection is one of the three terminal win conditions and is easy to mis-detect in branched or complex groups.  
-   **suggested next action:** Add deterministic tests for minimal rings, larger rings, rings around occupied points, and non-ring connected cycles/branches.
+2. **severity: minor**  
+   **evidence:** Rulebook says “Die Farbe wird ausgelost. Rot fängt an.” Code fixes player 0 as Red and player 1 as Black, with Red always starting.  
+   **why it matters:** If benchmark players are meant to be identities independent of color, this omits a pregame chance/color-assignment step. Usually this is harmless if players are defined as colors.  
+   **suggested next action:** Document fixed player-to-color mapping, or clarify whether color lottery should be modeled.
 
 3. **severity: minor**  
-   **evidence:** Rulebook says colors are assigned by lot and Red starts; implementation deterministically maps player 0 to Red and player 1 to Black.  
-   **why it matters:** Usually harmless for benchmarking, but it omits the pre-game color draw.  
-   **suggested next action:** Document this as a benchmark convention.
+   **evidence:** Rulebook includes 55 stones each and says draws are theoretically possible, but does not define draw scoring. Code ends in draw when stone supply/board prevents further play and returns `[0.0, 0.0]`.  
+   **why it matters:** Numeric returns are a benchmark convention; draw handling only matters in rare no-winner exhaustion cases.  
+   **suggested next action:** Confirm zero-zero draw payoff is desired.
 
 ### 3. Rule coverage review
 
 | rule area | covered correctly / partially covered / missing / unclear | evidence | notes |
 |---|---|---|---|
-| setup | partially covered | Rulebook: 169 points, 55 red and 55 black stones; code: `SIDE_LENGTH = 8`, 169 axial points, `STONES_PER_PLAYER = 55` | Intended setup is good, but file cannot run due syntax error. |
-| player count and turn order | covered correctly | Rulebook: 2 players, Red starts, alternate placing stones; code: `num_players = 2`, `current=RED`, switches player after each move | Color lottery omitted as convention. |
-| legal actions | covered correctly | Rulebook: place one stone on a free point, no moving/capturing; code returns empty-point `place` actions only | Good intended behavior. |
-| state transitions | covered correctly | Code places stone, decrements remaining stones, switches player, checks win | Intended transition matches rules. |
-| terminal conditions | partially covered | Rulebook: first ring/bridge/fork wins; code checks ring, bridge, fork after each placement | Bridge/fork look aligned; ring algorithm needs scenario validation. |
-| scoring/returns | partially covered | Rulebook says winner is first to achieve figure; code returns `[1,-1]`, `[-1,1]`, or draw `[0,0]` | Numeric zero-sum returns are a BoardBench convention, not specified by rulebook. |
-| rendering/action names | covered correctly | Code uses stable axial coordinate names like `place:qp1_rn2` | Rulebook gives no coordinate labels, so invented labels are reasonable. |
-| chance/hidden/simultaneous | unclear / not relevant | No hidden information or simultaneous moves in rulebook; color assignment by lot is pre-game | Could document deterministic player-color mapping. |
+| setup | covered correctly | Code uses `SIDE_LENGTH = 8`, `RADIUS = 7`, 169 axial points, `STONES_PER_PLAYER = 55`, empty initial board | Matches rulebook’s 169 intersections and 55 red/55 black stones |
+| player count and turn order | partially covered | `num_players = 2`, `current=RED`, alternates Red/Black | Red starts correctly; color lottery is not modeled |
+| legal actions | covered correctly | `legal_actions` returns `("place", q, r)` for empty points only | Matches “setzen ... einen Stein auf einen freien Punkt”; no moving/capturing |
+| state transitions | covered correctly | `apply_action` validates empty point, places stone, decrements supply, switches player | Returns fresh immutable `GameState` |
+| bridge condition | covered correctly | `_has_bridge_and_fork` checks connected component with `corner_count >= 2` | Matches connection between two arbitrary corners |
+| fork condition | covered correctly | Sides exclude `CORNERS`; fork requires `len(side_labels) >= 3` | Matches “Eckpunkte gehören nicht zu den Seiten” |
+| ring condition | partially covered | Code detects same-color cycles enclosing at least one board point | Conceptually matches rulebook, but geometric implementation needs scenario tests |
+| terminal conditions | partially covered | Win after ring/bridge/fork; draw on exhaustion/full board | Win conditions covered; draw rule is inferred from limited stones and theoretical draw note |
+| scoring/returns | partially covered | Winner gets `+1/-1`; draw/nonterminal returns zero | Rulebook defines winner, not numeric payoffs |
+| rendering/action names | covered correctly | Stable axial names like `place:qp1_rn1`; deterministic render | Rulebook has no coordinate notation, so this is a harmless convention |
+| chance/hidden/simultaneous | partially covered / mostly not relevant | No hidden information or simultaneous play in rulebook; color lottery omitted | Only chance-like item is initial color draw |
 
 ### 4. Unsupported assumptions or invented rules
 
-- **Harmless convention:** Player 0 is always Red and player 1 is always Black, instead of modeling color assignment by lot.
-- **Harmless convention:** Numeric returns are `+1/-1/0`; the rulebook only defines winning, not utility values.
-- **Harmless convention:** Axial coordinate labels are invented for actions/rendering because the rulebook gives no move notation.
-- **Risky/uncertain:** Ring detection is interpreted as a same-color graph cycle whose polygon strictly contains at least one board point. This seems aligned, but needs tests against the rulebook examples and edge cases.
-- **Unclear but plausible:** Draw when all supplied stones are used. The rulebook notes draws are theoretically possible but does not give a formal draw procedure.
+- **Harmless convention:** Player 0 is always Red and player 1 is always Black, rather than modeling “color is drawn by lot.”
+- **Harmless convention:** Axial coordinate action names/rendering are invented because the rulebook gives no coordinate labels.
+- **Harmless convention:** Returns use `+1/-1` for a win and `0/0` for a draw.
+- **Risky but reasonable interpretation:** A ring is implemented as a same-color graph cycle whose polygon strictly encloses at least one board point.
+- **Harmless/inferred rule:** Game is drawn when no stones remain and no player has won.
 
 ### 5. Missing scenario tests
 
-- Import/syntax smoke test for `outputs/havannah_oneshot.py`.
-- Initial state has 169 legal actions and current player Red.
-- Alternating legal placements reduce remaining stones and reject occupied points.
-- Bridge win: same-color connected group reaches two distinct corners.
-- Fork win: same-color connected group reaches three sides, excluding corners as side points.
-- Minimal ring win: six stones surrounding one board point.
-- Ring around an occupied point still wins.
-- Connected near-ring with one gap does not win.
-- Corner-only contacts do not count as fork side contacts.
-- Terminal states have no legal actions and stable returns.
+Suggested deterministic tests:
+
+1. **Minimal ring enclosing an occupied point should win for Red**  
+   Sequence:
+   `place:qp1_r0, place:q0_r0, place:qp1_rn1, place:qp4_r0, place:q0_rn1, place:qn4_r0, place:qn1_r0, place:q0_rp4, place:qn1_rp1, place:q0_rn4, place:q0_rp1`
+
+2. **Almost-ring should not be terminal**  
+   Same as above, but stop before final `place:q0_rp1`.
+
+3. **Bridge between two corners should win**  
+   Sequence:
+   `place:qp7_r0, place:q0_r0, place:qp7_rn1, place:qn2_r0, place:qp7_rn2, place:qn4_r0, place:qp7_rn3, place:q0_rp2, place:qp7_rn4, place:q0_rp4, place:qp7_rn5, place:qn2_rp4, place:qp7_rn6, place:qn4_rp2, place:qp7_rn7`
+
+4. **Fork touching three sides but only one corner should win**  
+   Sequence:
+   `place:qp7_rn1, place:q0_r0, place:qp7_r0, place:qn2_r0, place:qp6_rp1, place:qn4_r0, place:qp5_rp2, place:q0_rn2, place:qp4_rp3, place:q0_rn4, place:qp3_rp4, place:qp2_rn4, place:qp2_rp5, place:qp4_rn4, place:qp1_rp6, place:qn2_rn2, place:q0_rp6, place:qn4_rp2, place:qn1_rp7`
+
+5. **Corner does not count as a side**  
+   Use a short prefix such as `place:qp7_rn1, place:q0_r0, place:qp7_r0, place:qn2_r0, place:qp6_rp1` and assert no fork yet.
+
+6. **Occupied point illegal**  
+   After `place:q0_r0`, verify the opponent cannot also play `place:q0_r0`.
+
+7. **Terminal stability**  
+   After any winning sequence, verify `legal_actions == []`, `current_player == TERMINAL`, and returns stay stable.
 
 ### 6. Open questions for the human
 
-- Should the pre-game color draw be modeled as chance, or is fixed player 0 = Red acceptable for BoardBench?
-- What exact draw rule should apply if both players exhaust their 55 stones without a win?
+1. Should the initial color lottery be modeled as chance, or are benchmark players fixed as Red/Black?
+2. Is `[0.0, 0.0]` the intended numeric return for the theoretically possible draw?
 
 ### 7. Machine-readable summary
 
 ```text
-score: 0.0
-confidence: high
-critical_issues: 1
+score: 0.85
+confidence: medium
+critical_issues: 0
 major_issues: 0
-minor_issues: 1
+minor_issues: 3
 needs_rulebook_clarification: true
-needs_code_change: true
+needs_code_change: false
 needs_more_tests: true
 ```
