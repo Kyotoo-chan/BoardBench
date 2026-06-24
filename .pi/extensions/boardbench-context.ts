@@ -7,15 +7,15 @@ import type {
 type Mode = "readonly" | "generate" | "authoring";
 
 const MODE_ENTRY_TYPE = "boardbench-mode";
-const OPEN_SPIEL_GAME = "nine_mens_morris";
-const GENERATED_CODE_PATH = `outputs/${OPEN_SPIEL_GAME}.py`;
+const GAME = "abalone";
+const GENERATED_CODE_PATH = `outputs/${GAME}.py`;
 
 const MINIMAL_START_PROMPT = [
   "Lies prompts/rulebook_to_python.txt und genau eine vorhandene Regeldatei: inputs/game_rules.txt oder inputs/game_rules.pdf.",
   "Nutze ausschließlich diese Inhalte.",
   "Generiere die Python-Implementation im geforderten Format.",
   `Schreibe genau die vollständige Python-Datei nach ${GENERATED_CODE_PATH}.`,
-  `Der Dateiname ist der OpenSpiel-Name für Mühle: ${OPEN_SPIEL_GAME}.py.`,
+  `Der Dateiname ist: ${GAME}.py.`,
   "Nutze dafür das write-Tool; schreibe keine anderen Dateien.",
   "Antworte danach nur kurz mit dem Pfad.",
   "Lies keine weiteren Dateien.",
