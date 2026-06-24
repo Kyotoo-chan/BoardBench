@@ -37,7 +37,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--right-code-path", required=True, help="Second generated Python file")
     parser.add_argument("--left-label", default="oneshot", help="Label for the first implementation")
     parser.add_argument("--right-label", default="agentic", help="Label for the second implementation")
-    parser.add_argument("--rollouts", type=int, default=100, help="Random lockstep trajectories to compare")
+    parser.add_argument("--rollouts", type=int, default=1000, help="Random lockstep trajectories to compare")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per trajectory")
     parser.add_argument("--seed", type=int, default=1, help="Random seed")
     return parser.parse_args()

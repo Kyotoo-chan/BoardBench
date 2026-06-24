@@ -1,3 +1,10 @@
+## Action naming changes
+
+- Kept Havannah actions in canonical `place:<target>` form.
+- Targets use axial labels `q..._r...` with explicit sign words `p`, `n`, and `z` (example: `place:qp1_rn6`) to avoid normalization collisions.
+- `name_to_action` remains strict and only accepts canonical emitted names, preserving exact round-trips.
+
+```python
 """Rulebook-derived implementation of Havannah.
 
 Source rules used here (translated/summarized from the supplied rulebook):
@@ -386,3 +393,4 @@ class Game:
     @staticmethod
     def _player_stone_count(board: Dict[Coord, int], player: int) -> int:
         return sum(1 for owner in board.values() if owner == player)
+```

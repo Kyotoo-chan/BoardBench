@@ -1,0 +1,2 @@
+OK   pair_action_compare          1000/1000 score=1.000  812.34s
+---- summary                            1/1 score=1.000  812.34s  (1000/1000 units)

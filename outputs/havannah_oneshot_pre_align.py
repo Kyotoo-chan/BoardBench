@@ -33,33 +33,6 @@ def _sign_label(value):
     return "z0"
 
 
-def _action_sign_label(value):
-    # Action names use the BoardBench-normalizer-friendly canonical spelling:
-    # pN / nN for signed coordinates and plain 0 for zero.
-    if value > 0:
-        return "p" + str(value)
-    if value < 0:
-        return "n" + str(-value)
-    return "0"
-
-
-def _parse_action_sign_label(text):
-    if text == "0":
-        return 0
-    if len(text) < 2:
-        raise ValueError("bad signed coordinate")
-    sign = text[0]
-    digits = text[1:]
-    if sign not in ("p", "n") or not digits.isdigit():
-        raise ValueError("bad signed coordinate")
-    if len(digits) > 1 and digits[0] == "0":
-        raise ValueError("non-canonical leading zero")
-    value = int(digits)
-    if value <= 0:
-        raise ValueError("p/n coordinates must be nonzero")
-    return value if sign == "p" else -value
-
-
 def _parse_signed_label(text):
     if len(text) < 2:
         raise ValueError("bad signed coordinate")
@@ -154,7 +127,7 @@ POINT_TO_SIDE_LABELS = {
 
 def _coord_to_label(point):
     q, r = point
-    return "q{}_r{}".format(_action_sign_label(q), _action_sign_label(r))
+    return "q{}_r{}".format(_sign_label(q), _sign_label(r))
 
 
 def _coord_from_label(label):
@@ -163,8 +136,8 @@ def _coord_from_label(label):
     parts = label[1:].split("_r")
     if len(parts) != 2:
         raise ValueError("coordinate must be q..._r...")
-    q = _parse_action_sign_label(parts[0])
-    r = _parse_action_sign_label(parts[1])
+    q = _parse_signed_label(parts[0])
+    r = _parse_signed_label(parts[1])
     point = (q, r)
     if point not in POINT_SET:
         raise ValueError("coordinate is not on the board")
@@ -510,7 +483,7 @@ class Game:
 
         for i in range(n):
             x1, y1 = poly[i]
-            x2, y2 = poly[(i + 1) % n]
+            x2, y2 = poly[(i + 1) % n)]
 
             cross = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
             if cross == 0 and min(x1, x2) <= x <= max(x1, x2) and min(y1, y2) <= y <= max(y1, y2):

@@ -1,0 +1,8 @@
+OK   01_result_file                     1/1 score=1.000    0.00s
+FAIL 02_python_syntax                   0/1 score=0.000    0.00s  invalid Python syntax at line 486: closing parenthesis ')' does not match opening parenthesis '['
+FAIL 03_startable_game                  0/1 score=0.000    0.00s  could not import/start generated game: closing parenthesis ')' does not match opening parenthesis '[' (havannah_oneshot.py, line 486)
+FAIL 04_required_api                    0/8 score=0.000    0.00s  could not start generated game: closing parenthesis ')' does not match opening parenthesis '[' (havannah_oneshot.py, line 486)
+FAIL 05_random_rollouts                 0/1 score=0.000    0.00s  could not start generated game: closing parenthesis ')' does not match opening parenthesis '[' (havannah_oneshot.py, line 486)
+FAIL 06_action_language                 0/1 score=0.000    0.00s  could not start generated game: closing parenthesis ')' does not match opening parenthesis '[' (havannah_oneshot.py, line 486)
+OK   90_llm_judge                     0/100 score=0.000    0.01s
+FAIL 99_openspiel_compare     127277/127808 score=0.996    6.47s  legal action mismatch in rollout 1, step 110: openspiel=59 generated=0; missing=a2, a5, b5, b7, c1, c10, c2, c3, c6, c7; rollout 1, step 110: no shared legal action to continue this rollout; legal action mismatch in rollout 3, step 110: openspiel=59 generated=0; missing=a1, a2, a5, a7, a8, b6, b9, c1, c10, c7; 18 total issue(s)

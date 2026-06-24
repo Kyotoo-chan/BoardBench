@@ -1,3 +1,347 @@
+# BoardBench judge packet
+
+- game: havannah
+
+- OpenSpiel reference: havannah(board_size=8)
+
+- variant: oneshot
+
+- generated code: outputs/havannah_oneshot.py
+
+- expected judge reply path: outputs/havannah_oneshot_judge.md
+
+
+
+## Judge prompt
+
+# LLM judge scoring prompt
+
+Use this as a qualitative scoring step after a game implementation has been generated. The judge is not the source of truth and must not rewrite the implementation. Its job is to score how well the generated BoardBench environment appears to implement the provided rulebook.
+
+## Inputs to use
+
+Use only the artifacts provided in the packet:
+
+1. the original rulebook text, or the attached/rendered rulebook page images
+2. the implementation brief, if one was created
+3. the generation prompt/backbones used
+4. the generated Python file
+
+Do **not** use outside game knowledge, remembered rules, internet knowledge, or OpenSpiel knowledge unless that material is explicitly included in the packet. If something is not clear from the rulebook, mark it as uncertain rather than wrong.
+
+Do not rerun deterministic checks and do not judge mainly by check logs. The deterministic BoardBench checks are separate. This review should focus on rule fidelity, game logic, assumptions, and testability.
+
+## Scoring target
+
+Give one overall score from `0.0` to `1.0`:
+
+- `1.0`: faithful, complete, and benchmark-ready based on the provided rulebook
+- `0.8`: mostly correct with only minor issues or harmless assumptions
+- `0.6`: playable but with notable uncertain or partially implemented rule areas
+- `0.4`: major rule or state-transition issues likely affect gameplay
+- `0.2`: severe missing mechanics or unreliable terminal/scoring logic
+- `0.0`: unusable or largely unrelated to the rulebook
+
+Use the full range when justified. Do not give a high score only because the API exists or the code looks clean.
+
+## Review focus
+
+Prioritize:
+
+- setup and board/components
+- player count and turn order
+- legal actions
+- state transitions
+- terminal/win/loss/draw conditions
+- scoring/returns
+- chance handling, if any
+- hidden information, if any
+- simultaneous moves, if any
+- action names/rendering as a BoardBench interface
+- unsupported assumptions or invented rules
+- likely missing deterministic scenario tests
+
+## Required output format
+
+### 1. Score
+
+Give:
+
+- `score: <number from 0.0 to 1.0>`
+- `confidence: low|medium|high`
+- a short 2-4 sentence justification
+
+### 2. Top findings
+
+List the most important findings first. For each finding include:
+
+- severity: critical / major / minor / question
+- evidence from the rulebook, generated code, or provided artifacts
+- why it matters for gameplay or benchmarking
+- suggested next action
+
+### 3. Rule coverage review
+
+Create a table with columns:
+
+- rule area
+- covered correctly / partially covered / missing / unclear
+- evidence
+- notes
+
+Cover at least: setup, player count and turn order, legal actions, state transitions, terminal conditions, scoring/returns, rendering/action names, chance/hidden/simultaneous if relevant.
+
+### 4. Unsupported assumptions or invented rules
+
+List every place where the implementation appears to decide something not specified by the provided rulebook. Distinguish harmless conventions from risky invented rules.
+
+### 5. Missing scenario tests
+
+Suggest concrete additional deterministic tests. Prefer action-name sequences that could later be turned into checks.
+
+### 6. Open questions for the human
+
+Ask only questions that materially affect implementation correctness or benchmark scoring.
+
+### 7. Machine-readable summary
+
+End with exactly this compact YAML-like block:
+
+```text
+score: <0.0-1.0>
+confidence: low|medium|high
+critical_issues: <number>
+major_issues: <number>
+minor_issues: <number>
+needs_rulebook_clarification: true|false
+needs_code_change: true|false
+needs_more_tests: true|false
+```
+
+
+
+
+## Generation prompt (prompts/rulebook_to_python.txt)
+
+You will receive rule text.
+
+Use only that information.
+Do not use outside knowledge or remembered rules for the game.
+If an implementation brief or backbone context is provided, use it only as an interpretation aid; the rule text wins if there is a conflict.
+
+Write one simple, self-contained Python file using only the standard library.
+Do not import any non-standard-library package or external game framework.
+Do not require external files, images, environment variables, network access, subprocesses, API keys, or interactive input.
+Keep top-level code limited to definitions and constants.
+
+If rules are unclear or incomplete, state the assumptions briefly before the code and in comments where relevant.
+Do not silently fill missing rules with outside knowledge.
+Prefer a smaller explicit implementation with documented gaps over broad invented mechanics.
+
+If possible, include this minimal game API:
+- `GameState`
+- `Game`
+- `initial_state(self)`
+- `current_player(self, state)`
+- `legal_actions(self, state)`
+- `apply_action(self, state, action)` returning the next state, or clearly documenting in-place mutation
+- `is_terminal(self, state)`
+- `returns(self, state)` returning one numeric value per player
+- `render(self, state)` returning a stable, compact, human-readable string suitable for side-by-side inspection
+- `action_to_name(self, action)` returning a unique canonical action name
+- `name_to_action(self, name)` reversing a canonical action name
+
+Rules for actions and state presentation:
+- `legal_actions` must only return actions that `apply_action` accepts.
+- `action_to_name` and `name_to_action` must round-trip exactly.
+- Action names must be human-readable, stable, unique in sampled states, and must not rely on raw internal indices alone.
+- If action names contain signed numeric coordinates, encode signs unambiguously (for example `pos1`/`neg1` or `p1`/`n1`) so different points cannot collapse when punctuation is normalized.
+- If the rule text defines labels for squares, points, regions, cards, or other move targets, use those labels in action names and render output.
+- If the rule text explicitly defines or clearly implies a standard move notation, use that notation consistently; otherwise use a simple explicit format such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, or similarly clear equivalents.
+- `render` should be deterministic across repeated calls on the same state and avoid decorative prose.
+- Terminal states should have no legal actions and stable returns.
+
+Only if required by the rule text, include:
+- `chance_outcomes(self, state)` for stochastic rules
+- `information_state(self, state, player)` for hidden-information rules
+
+Output:
+1. `Open questions / assumptions`
+2. one fenced `python` code block with the full file
+
+
+
+
+## OpenSpiel backbone (prompts/open_spiel_backbone.md)
+
+# OpenSpiel-inspired BoardBench backbone
+
+Use this as extra context with `prompts/rulebook_to_python.txt` and the rulebook.
+
+This is an interface/backbone, not a dependency. Generated code must stay one self-contained standard-library Python file. Do not import `pyspiel`, `open_spiel`, external frameworks, files, network, subprocesses, or API keys.
+
+Use OpenSpiel only for structure: explicit state, legal actions, deterministic transitions, optional chance nodes, optional information states, stable action names, and numeric returns. The rulebook is always the source of truth.
+
+## Required shape
+
+Implement:
+
+```python
+class GameState:
+    ...
+
+class Game:
+    def initial_state(self): ...
+    def current_player(self, state): ...
+    def legal_actions(self, state): ...
+    def apply_action(self, state, action): ...
+    def is_terminal(self, state): ...
+    def returns(self, state): ...
+    def render(self, state): ...
+    def action_to_name(self, action): ...
+    def name_to_action(self, name): ...
+```
+
+Optional only if the rulebook needs them:
+
+```python
+def chance_outcomes(self, state): ...        # [(action, probability), ...]
+def information_state(self, state, player): ...
+def observation(self, state, player): ...
+def rewards(self, state): ...               # latest step rewards if separate from returns
+```
+
+Suggested sentinel constants:
+
+```python
+TERMINAL = -1
+CHANCE = -2
+SIMULTANEOUS = -3
+```
+
+`current_player(state)` should return a player index, `TERMINAL`, `CHANCE`, or `SIMULTANEOUS`.
+
+## Implementation recipe
+
+1. Classify the game from the rulebook: player count, turn structure, chance, hidden information, scoring type.
+2. Define `GameState` fields first: public state, private state, phase, current player, scores/returns, history.
+3. Define action objects and canonical action names before transition logic.
+4. Implement `legal_actions` as a pure deterministic function of state.
+5. Implement `apply_action` by validating the action, updating state, switching player/phase, and updating terminal/returns.
+6. Keep scoring and terminal rules separate enough to inspect and test.
+7. Make `render` compact, deterministic, and useful for side-by-side comparison.
+8. Document assumptions exactly where the rulebook is unclear.
+
+Prefer returning a fresh state from `apply_action`. If mutating in place, document it clearly.
+
+## Invariants
+
+- `initial_state()` returns a fresh state.
+- terminal states have no legal actions.
+- non-terminal player states have legal actions unless the rulebook explicitly allows a dead state.
+- `legal_actions` lists only actions accepted by `apply_action`.
+- `returns` always has one numeric value per player.
+- `render` is deterministic for the same state.
+- `action_to_name` and `name_to_action` round-trip for legal actions.
+- chance probabilities, if present, are non-negative and sum to 1.
+- hidden-information views, if present, do not reveal private data to the wrong player.
+- max length / repetition / pass rules are encoded when needed to avoid accidental infinite games.
+
+## Action names
+
+Use rulebook labels whenever available. Otherwise use explicit names:
+
+- `place:<target>`
+- `move:<source>-><target>`
+- `remove:<target>`
+- `claim:<item>`
+- `bid:<amount>`
+- `pass`
+- `chance:deal:<card>`
+- `chance:roll:<value>`
+- `p0:<a0>|p1:<a1>` for simultaneous joint actions
+
+Avoid names that only expose internal indices unless the rulebook itself uses those indices.
+
+## Game-type add-ons
+
+### Sequential perfect-information games
+
+Use when exactly one player acts and all relevant state is public.
+
+- no `chance_outcomes` or `information_state` needed
+- switch the current player after each normal action unless the rules say otherwise
+- test wins/draws, blocked/illegal moves, and terminal no-actions behavior
+
+### Chance/stochastic games
+
+Use when cards, dice, random setup, or random events affect play.
+
+- model randomness as explicit chance actions, never hidden calls to `random`
+- `current_player` returns `CHANCE` at chance nodes
+- `chance_outcomes(state)` returns probabilities for the same chance actions that `legal_actions(state)` returns without probabilities
+- `apply_action` consumes the selected chance action deterministically
+
+### Hidden-information games
+
+Use when hands, cards, objectives, or other facts are private.
+
+- keep full truth in `GameState` for correctness
+- expose player-visible data through `information_state(state, player)`
+- `render(state)` may be full debug state, but document that it is not player-visible
+- action names must not leak hidden data unless the action legally reveals it
+
+### Simultaneous-move games
+
+Use when players commit actions before seeing others' choices.
+
+```python
+def legal_actions(self, state, player=None): ...
+def legal_joint_actions(self, state): ...
+def apply_actions(self, state, actions_by_player): ...
+```
+
+For simple BoardBench rollouts, `legal_actions(state)` at a simultaneous node should return joint actions that `apply_action(state, joint_action)` can resolve. Name joint actions as `p0:<a0>|p1:<a1>`.
+
+### Multiplayer, teams, or general-sum scoring
+
+- set `num_players` from the rulebook
+- `returns(state)` length must equal `num_players`
+- map team scores to each individual player explicitly
+- handle skipped/eliminated players in turn order
+
+### Repeated rounds or step rewards
+
+- keep cumulative returns separate from latest `rewards(state)` if step rewards matter
+- reset round-local state without losing cumulative scores
+- encode round limits, target score, or other stop rules
+
+### Games with OpenSpiel references
+
+If comparing against OpenSpiel later:
+
+- prefer rulebook-compatible action names that canonicalize well against OpenSpiel action strings
+- keep `render` compact enough for side-by-side inspection
+- document deliberate mismatches caused by incomplete rulebook text
+
+
+
+
+## Rulebook PDF (inputs/game_rules.pdf)
+
+The PDF has no extractable text. Use these rendered page images as the rulebook source:
+
+![page-1.png](inputs/rulebook_pages/game_rules/page-1.png)
+
+![page-2.png](inputs/rulebook_pages/game_rules/page-2.png)
+
+![page-3.png](inputs/rulebook_pages/game_rules/page-3.png)
+
+
+
+## Generated code (outputs/havannah_oneshot.py)
+
+```python
 from dataclasses import dataclass
 import math
 
@@ -31,33 +375,6 @@ def _sign_label(value):
     if value < 0:
         return "n" + str(-value)
     return "z0"
-
-
-def _action_sign_label(value):
-    # Action names use the BoardBench-normalizer-friendly canonical spelling:
-    # pN / nN for signed coordinates and plain 0 for zero.
-    if value > 0:
-        return "p" + str(value)
-    if value < 0:
-        return "n" + str(-value)
-    return "0"
-
-
-def _parse_action_sign_label(text):
-    if text == "0":
-        return 0
-    if len(text) < 2:
-        raise ValueError("bad signed coordinate")
-    sign = text[0]
-    digits = text[1:]
-    if sign not in ("p", "n") or not digits.isdigit():
-        raise ValueError("bad signed coordinate")
-    if len(digits) > 1 and digits[0] == "0":
-        raise ValueError("non-canonical leading zero")
-    value = int(digits)
-    if value <= 0:
-        raise ValueError("p/n coordinates must be nonzero")
-    return value if sign == "p" else -value
 
 
 def _parse_signed_label(text):
@@ -154,7 +471,7 @@ POINT_TO_SIDE_LABELS = {
 
 def _coord_to_label(point):
     q, r = point
-    return "q{}_r{}".format(_action_sign_label(q), _action_sign_label(r))
+    return "q{}_r{}".format(_sign_label(q), _sign_label(r))
 
 
 def _coord_from_label(label):
@@ -163,8 +480,8 @@ def _coord_from_label(label):
     parts = label[1:].split("_r")
     if len(parts) != 2:
         raise ValueError("coordinate must be q..._r...")
-    q = _parse_action_sign_label(parts[0])
-    r = _parse_action_sign_label(parts[1])
+    q = _parse_signed_label(parts[0])
+    r = _parse_signed_label(parts[1])
     point = (q, r)
     if point not in POINT_SET:
         raise ValueError("coordinate is not on the board")
@@ -510,7 +827,7 @@ class Game:
 
         for i in range(n):
             x1, y1 = poly[i]
-            x2, y2 = poly[(i + 1) % n]
+            x2, y2 = poly[(i + 1) % n)]
 
             cross = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)
             if cross == 0 and min(x1, x2) <= x <= max(x1, x2) and min(y1, y2) <= y <= max(y1, y2):
@@ -522,3 +839,4 @@ class Game:
                     inside = not inside
 
         return inside
+```

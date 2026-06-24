@@ -109,7 +109,9 @@ Use simple, human-readable filenames.
 - Commit `outputs/` artifacts when they belong to an intentional experiment run the user wants preserved.
 - Rendered PDF rulebook page images belong under `inputs/rulebook_pages/`, never `outputs/rulebook_pages/`.
 - Judge packets and pi attachments should reference `inputs/rulebook_pages/` paths for page images.
-- Notebook cell execution output inside `.ipynb` files is not the same as `outputs/` artifacts; clear stale notebook outputs before commit instead of ignoring `outputs/`.
+- Notebook cell execution output complements `outputs/` text logs. For intentional test or experiment commits, **keep** the relevant notebook stdout (`OK` / `FAIL` / `---- summary` lines and per-phase run times) so the saved run is visible without re-execution.
+- Clear only stale or noisy notebook outputs before commit (unrelated cells, huge tracebacks, admin noise). Do **not** strip outputs from cells that belong to the committed test run.
+- Mirror important notebook results in `outputs/` where applicable (e.g. `*_checks.txt`, `*_pair_action_compare.txt`).
 
 ## Evaluation notebook rules
 
@@ -120,5 +122,7 @@ Use simple, human-readable filenames.
 - Never re-run the full base-check suite after the judge step.
 - Print **one** aggregated `---- summary` line at the very end; intermediate phases use `--no-summary`.
 - On check failures, continue through judge and OpenSpiel phases when enabled; raise only at the end with the list of failed phases.
-- Keep notebook output minimal: stream only `OK` / `FAIL` / final `summary` lines, no admin prints (`running checks`, `Saved check log`, `CompletedProcess`, etc.).
+- During iterative development, keep notebook output minimal: stream only `OK` / `FAIL` / final `summary` lines, no admin prints (`running checks`, `Saved check log`, `CompletedProcess`, etc.).
+- For intentional test-run commits, preserve those same minimal result lines **with timings** in the executed notebook cells and matching `outputs/` logs.
+- Pair oneshot-vs-agentic comparison uses `PAIR_ROLLOUTS` (default 1000, same scale as OpenSpiel comparison) — many independent lockstep games, not a handful of sampled actions.
 - Action-language align runs immediately before OpenSpiel compare, not before the base checks.

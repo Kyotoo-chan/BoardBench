@@ -49,7 +49,7 @@ _NEIGHBOR_DELTAS: Tuple[Coord, ...] = (
 class GameState:
     """Public state for Havannah.
 
-    board maps occupied coordinates to player numbers: 0 for red and 1 for black.
+    board maps occupied coordinates to player numbers: 0 for red, 1 for black.
     apply_action returns a fresh GameState and does not mutate the input state.
     """
 

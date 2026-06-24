@@ -1,3 +1,10 @@
+## Action naming changes
+
+- Renamed zero axial coordinates from `z0` to `0` in emitted action labels, e.g. `place:q0_r0`.
+- Kept explicit signed words for nonzero coordinates: `pN` / `nN`, avoiding `+` / `-` normalization collisions.
+- Added action-only coordinate sign parsing helpers so `action_to_name` / `name_to_action` round-trip the canonical comparison language.
+
+```python
 from dataclasses import dataclass
 import math
 
@@ -522,3 +529,4 @@ class Game:
                     inside = not inside
 
         return inside
+```
