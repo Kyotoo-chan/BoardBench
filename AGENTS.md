@@ -63,6 +63,17 @@ Avoid introducing large frameworks, provider abstractions, or complex evaluation
 12. Keep code changes minimal and focused unless the user explicitly asks for a broader refactor.
 13. Use the `boardbench` Conda environment for Python commands, checks, notebook smoke tests, and dependency validation. In Git Bash, use `/c/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench ...` when `conda` is not on PATH.
 
+## Git history and commit workflow
+
+This repository uses git history as part of the thesis workflow record, not only as a deployment log.
+
+- **Preserve step-by-step commits.** Keep separate commits for distinct workflow phases such as repo setup, generation, check runs, judge runs, fixes, calibration, and switching to a new game.
+- **Do not squash, soft-reset, or rewrite away intermediate commits** unless the user explicitly asks for history rewriting.
+- **Do not collapse diverged local/remote histories into one commit** when the user asks to "clean up the graph". In that case, prefer restoring/replacing the remote branch with the user's intentional local commit chain (`git push --force-with-lease`) instead of deleting intermediate commits.
+- When the user asks to remove old `outputs/` files for a new game, delete them in a **new commit** only. Do not assume earlier experiment commits should disappear from history; they remain part of the recorded workflow.
+- Match the existing short lowercase commit style and split commits by meaningful experiment steps rather than by arbitrary file batches.
+- When the user specifies commit times, keep the existing spacing rules in the hard rules above.
+
 ## Coding style expectations
 
 When adding code to this repo, prefer:
