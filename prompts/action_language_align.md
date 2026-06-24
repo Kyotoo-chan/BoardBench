@@ -14,8 +14,8 @@ Your only job is to make `action_to_name` and `name_to_action` emit a stable, un
 - Every legal action in a state must keep a distinct raw name and a distinct normalized comparison key.
 - Two different legal actions must not normalize to the same key.
 - Prefer simple explicit names such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, `pass`, or `chance:<kind>:<value>`.
-- Avoid coordinate formats that collide after normalization, for example signed `q+1,r-6` and `q-1,r-6` both becoming the same key.
-- If the rule text or code already defines board labels, use those labels consistently.
+- Avoid coordinate formats that collide after normalization, for example signed `q+1,r-6` and `q-1,r-6` both becoming the same key; use explicit sign words such as `pos`/`neg` or `p`/`n`.
+- If the rule text, code, or provided reference context already defines board labels, use those labels consistently.
 
 ## Allowed edits
 

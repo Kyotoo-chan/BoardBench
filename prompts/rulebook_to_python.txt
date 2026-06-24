@@ -30,6 +30,7 @@ Rules for actions and state presentation:
 - `legal_actions` must only return actions that `apply_action` accepts.
 - `action_to_name` and `name_to_action` must round-trip exactly.
 - Action names must be human-readable, stable, unique in sampled states, and must not rely on raw internal indices alone.
+- If action names contain signed numeric coordinates, encode signs unambiguously (for example `pos1`/`neg1` or `p1`/`n1`) so different points cannot collapse when punctuation is normalized.
 - If the rule text defines labels for squares, points, regions, cards, or other move targets, use those labels in action names and render output.
 - If the rule text explicitly defines or clearly implies a standard move notation, use that notation consistently; otherwise use a simple explicit format such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, or similarly clear equivalents.
 - `render` should be deterministic across repeated calls on the same state and avoid decorative prose.

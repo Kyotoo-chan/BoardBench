@@ -39,6 +39,10 @@ REMOVE_PREFIXES = ("remove", "rem", "capture", "capt", "take")
 
 CHESS_SQUARE_RE = re.compile(r"(?<![a-z0-9])[a-h][1-8](?![a-z0-9])")
 GENERIC_LABEL_RE = re.compile(r"[a-z][a-z0-9_]*")
+SIGNED_TOKEN_RE = r"(?:[+-]?\d+|(?:pos|plus|neg|minus|negative|p|m|n|z|zero)[_ -]?\d+)"
+QR_RE = re.compile(
+    rf"(?<![a-z0-9])q[_:=\s]*(?P<q>{SIGNED_TOKEN_RE})[,;_\s]*r[_:=\s]*(?P<r>{SIGNED_TOKEN_RE})(?![a-z0-9])"
+)
 
 
 def _prepare(name: str) -> str:
@@ -59,10 +63,92 @@ def _prepare(name: str) -> str:
     return text
 
 
+def _parse_signed_token(token: str) -> int | None:
+    text = _prepare(token).strip(" :;/,()[]{}")
+    text = text.replace(" ", "_").replace("-", "_")
+    if re.fullmatch(r"[+]?\d+", text):
+        return int(text.lstrip("+"))
+    if re.fullmatch(r"-\d+", token.strip()):
+        return int(token.strip())
+
+    compact = text.replace("_", "")
+    if re.fullmatch(r"\d+", compact):
+        return int(compact)
+
+    prefixes = {
+        "pos": 1,
+        "plus": 1,
+        "p": 1,
+        "neg": -1,
+        "negative": -1,
+        "minus": -1,
+        "m": -1,
+        "n": -1,
+        "z": 0,
+        "zero": 0,
+    }
+    for prefix, sign in prefixes.items():
+        if not compact.startswith(prefix):
+            continue
+        magnitude_text = compact[len(prefix) :]
+        if not magnitude_text.isdigit():
+            continue
+        magnitude = int(magnitude_text)
+        if sign == 0:
+            return 0 if magnitude == 0 else None
+        return sign * magnitude
+    return None
+
+
+def parse_qr_coordinates(text: str) -> tuple[int, int] | None:
+    """Parse common axial q/r coordinate spellings from an action label.
+
+    This is deliberately conservative: it only recognizes labels that explicitly
+    mention both q and r axes. It does not map q/r coordinates to another board's
+    official labels; optional reference checks may do that separately.
+    """
+
+    prepared = _prepare(text)
+    match = QR_RE.search(prepared)
+    if match is None:
+        return None
+    q = _parse_signed_token(match.group("q"))
+    r = _parse_signed_token(match.group("r"))
+    if q is None or r is None:
+        return None
+    return q, r
+
+
+def _signed_int_label(value: int) -> str:
+    if value < 0:
+        return f"n{abs(value)}"
+    if value > 0:
+        return f"p{value}"
+    return "0"
+
+
+def _normalize_target_label(text: str) -> str:
+    coords = parse_qr_coordinates(text)
+    if coords is not None:
+        q, r = coords
+        return f"q{_signed_int_label(q)}_r{_signed_int_label(r)}"
+    return _clean_label(text)
+
+
+def _encode_numeric_signs(text: str) -> str:
+    # Keep sign information before punctuation cleanup. Without this,
+    # q-1/r-6 and q+1/r-6 both collapse to q1r6.
+    text = re.sub(r"\+(\d+)", r"_pos\1", text)
+    text = re.sub(r"-(\d+)", r"_neg\1", text)
+    return text
+
+
 def _clean_label(text: str) -> str:
     text = _prepare(text)
+    text = _encode_numeric_signs(text)
     text = text.strip(" :;/,()[]{}")
     text = re.sub(r"[^a-z0-9_]+", "", text)
+    text = re.sub(r"_+", "_", text).strip("_")
     return text
 
 
@@ -99,14 +185,14 @@ def _normalize_route(text: str) -> tuple[str, str, str] | None:
         if sep not in text:
             continue
         source_text, target_text = text.split(sep, 1)
-        source = _clean_label(source_text)
-        target = _clean_label(target_text)
+        source = _normalize_target_label(source_text)
+        target = _normalize_target_label(target_text)
         if source and target:
             return source, target, promotion
 
     labels = GENERIC_LABEL_RE.findall(text)
     if len(labels) >= 2:
-        return _clean_label(labels[0]), _clean_label(labels[1]), promotion
+        return _normalize_target_label(labels[0]), _normalize_target_label(labels[1]), promotion
     return None
 
 
@@ -149,12 +235,12 @@ def normalize_action_name(name: str) -> str:
 
     for prefix in PLACE_PREFIXES:
         if text.startswith(prefix + " "):
-            target = _clean_label(text[len(prefix) :])
+            target = _normalize_target_label(text[len(prefix) :])
             return f"place:{target}" if target else "place"
 
     for prefix in REMOVE_PREFIXES:
         if text.startswith(prefix + " "):
-            target = _clean_label(text[len(prefix) :])
+            target = _normalize_target_label(text[len(prefix) :])
             return f"remove:{target}" if target else "remove"
 
     prefixed = _split_prefix(text)
@@ -163,7 +249,7 @@ def normalize_action_name(name: str) -> str:
         if prefix == "chance":
             return "chance:" + re.sub(r"[^a-z0-9:_-]+", "", body.replace(" ", ":"))
         if prefix in PLACE_PREFIXES:
-            target = _clean_label(body)
+            target = _normalize_target_label(body)
             return f"place:{target}" if target else "place"
         if prefix in MOVE_PREFIXES:
             route = _normalize_route(body)
@@ -172,7 +258,7 @@ def normalize_action_name(name: str) -> str:
                 suffix = f"={promotion}" if promotion else ""
                 return f"move:{source}->{target}{suffix}"
         if prefix in REMOVE_PREFIXES:
-            target = _clean_label(body)
+            target = _normalize_target_label(body)
             return f"remove:{target}" if target else "remove"
 
     route = _normalize_route(text)
@@ -181,4 +267,5 @@ def normalize_action_name(name: str) -> str:
         suffix = f"={promotion}" if promotion else ""
         return f"move:{source}->{target}{suffix}"
 
-    return re.sub(r"[^a-z0-9:_>\-=|/]+", "", text)
+    target = _normalize_target_label(text)
+    return re.sub(r"[^a-z0-9:_>\-=|/]+", "", target)

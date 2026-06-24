@@ -77,7 +77,7 @@ BoardBench/
 8. run generated-result checks from the notebooks or from the repo root with `python checks/run_checks.py`
 9. when both generated variants exist, run the pair action-language comparison from the notebook or with `python checks/compare_pair.py`
 10. use optional final OpenSpiel comparison with `python checks/run_checks.py --include-final`
-11. optionally run an LLM judge review with `prompts/llm_judge_review.md`, save it in `outputs/`, and validate it with `python checks/run_checks.py --include-judge`
+11. optionally run an LLM judge scoring review with `prompts/llm_judge_review.md`, save it in `outputs/`, and parse it with `python checks/run_checks.py --include-judge`
 
 ## Checks
 
@@ -92,10 +92,10 @@ Normal checks verify:
 
 Each check reports passed units and a normalized 0–1 score for comparable implementation scoring.
 The action normalizer maps only names emitted by `action_to_name`; it does not add missing legal actions.
-The optional `90_llm_judge.py` check validates a saved LLM-judge review verdict.
-The optional final OpenSpiel check compares sampled states against OpenSpiel when `pyspiel` is available: current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.
+The optional `90_llm_judge.py` check parses a saved LLM-judge 0–1 score; low scores are recorded as data rather than treated as runner failures.
+The optional final OpenSpiel check compares sampled states against OpenSpiel when `pyspiel` is available: current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed. OpenSpiel-specific action mapping belongs only in this optional final check, not in the general checks.
 
-The LLM-as-judge review is a manual qualitative check for now, documented in `docs/llm_judge_workflow.md`. It should not introduce provider/API-key automation until that is explicitly needed.
+The LLM-as-judge review is a qualitative scoring step documented in `docs/llm_judge_workflow.md`. The judge gets the same rule source as generation and should not be driven by deterministic check logs.
 
 ## Notes
 

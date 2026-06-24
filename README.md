@@ -47,7 +47,7 @@ BoardBench/
 7. Save the raw response and extracted `.py` file in `outputs/`.
 8. Run the generated-result checks from the notebooks or with `python checks/run_checks.py`; each check reports a normalized 0–1 score.
 9. Use the pair action-language comparison when both generated variants exist; it normalizes emitted action names only and does not add moves.
-10. Optionally run an LLM judge check with `prompts/llm_judge_review.md`, save it in `outputs/`, and validate it with `python checks/run_checks.py --include-judge`.
+10. Optionally run an LLM judge scoring step with `prompts/llm_judge_review.md`, save it in `outputs/`, and parse its 0–1 score with `python checks/run_checks.py --include-judge`.
 11. Preserve notes and artifacts that may matter for the thesis write-up.
 
 ## Notes

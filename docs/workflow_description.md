@@ -42,11 +42,13 @@ Run one check:
 python checks/run_checks.py --check 05_random_rollouts
 ```
 
-Check a saved LLM-judge review:
+Parse a saved LLM-judge score:
 
 ```bash
 python checks/run_checks.py --include-judge --judge-path outputs/antichess_judge_gpt.md
 ```
+
+This checks the machine-readable `score: 0.0-1.0` format. A low judge score is data, not a runner failure.
 
 Run the pair action-language comparison after both generated variants exist:
 
@@ -65,7 +67,7 @@ Run the optional OpenSpiel comparison:
 python checks/run_checks.py --include-final
 ```
 
-The OpenSpiel comparison checks sampled current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed.
+The OpenSpiel comparison checks sampled current player, legal action set, apply step, and terminal returns when both sides are terminal. It does not compare render strings or move speed. Reference-specific notation adapters, such as Havannah q/r coordinates to OpenSpiel point labels, live only in this optional final comparison.
 
 ## Local extension commands
 

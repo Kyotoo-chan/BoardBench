@@ -9,7 +9,7 @@ import random
 import re
 from typing import Any
 
-from action_normalizer import normalize_action_name
+from action_normalizer import normalize_action_name, parse_qr_coordinates
 from common import (
     CheckContext,
     CheckResult,
@@ -36,7 +36,53 @@ def describe_diff(open_keys: set[str], custom_keys: set[str]) -> str:
     return "; ".join(parts)
 
 
-def build_custom_action_map(game: Any, state: Any) -> dict[str, Any]:
+def parse_open_spiel_board_size(game_name: str) -> int | None:
+    match = re.search(r"board_size\s*=\s*(\d+)", game_name)
+    if match is None:
+        return None
+    return int(match.group(1))
+
+
+def havannah_reference_label(game_name: str, action_name: str) -> str | None:
+    """Map generated axial q/r Havannah names to OpenSpiel point labels.
+
+    OpenSpiel Havannah labels rows with numbers and columns with letters
+    (`a1`, `b1`, ...). Generated implementations often use axial q/r
+    coordinates instead because the scanned rulebook has no point labels. This
+    adapter is only used inside the optional OpenSpiel comparison; general
+    BoardBench checks keep using generated action names and the generic
+    normalizer.
+    """
+
+    if not game_name.startswith("havannah"):
+        return None
+    board_size = parse_open_spiel_board_size(game_name)
+    if board_size is None:
+        return None
+    coords = parse_qr_coordinates(action_name)
+    if coords is None:
+        return None
+
+    q, r = coords
+    radius = board_size - 1
+    if max(abs(q), abs(r), abs(q + r)) > radius:
+        return None
+    row = r + radius + 1
+    q_min = max(-radius, -r - radius)
+    q_max = min(radius, -r + radius)
+    if q < q_min or q > q_max:
+        return None
+    column_index = q - q_min
+    if column_index < 0 or column_index >= 26:
+        return None
+    return f"{chr(ord('a') + column_index)}{row}"
+
+
+def custom_reference_key(game_name: str, action_name: str) -> str | None:
+    return havannah_reference_label(game_name, action_name)
+
+
+def build_custom_action_map(game_name: str, game: Any, state: Any) -> dict[str, Any]:
     action_map: dict[str, Any] = {}
     raw_names: set[str] = set()
     for action in legal_actions(game, state):
@@ -49,7 +95,7 @@ def build_custom_action_map(game: Any, state: Any) -> dict[str, Any]:
             raise RuntimeError(f"duplicate generated action name {name!r}")
         raw_names.add(name)
 
-        key = normalize_action_name(name)
+        key = custom_reference_key(game_name, str(name)) or normalize_action_name(name)
         if key in action_map:
             raise RuntimeError(f"ambiguous generated action key {key!r}")
         action_map[key] = action
@@ -247,7 +293,7 @@ def run(ctx: CheckContext) -> CheckResult | str | None:
         for step in range(ctx.max_steps):
             try:
                 open_actions = build_open_action_map(open_game, open_state)
-                custom_actions = build_custom_action_map(custom_game, custom_state)
+                custom_actions = build_custom_action_map(ctx.game, custom_game, custom_state)
             except Exception as exc:
                 return CheckResult(rollout_index, ctx.rollouts, f"rollout {rollout_index + 1}, step {step}: {exc}")
 
