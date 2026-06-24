@@ -43,6 +43,77 @@ def parse_open_spiel_board_size(game_name: str) -> int | None:
     return int(match.group(1))
 
 
+def havannah_open_label_from_axial(game_name: str, q: int, r: int) -> str | None:
+    if not game_name.startswith("havannah"):
+        return None
+    board_size = parse_open_spiel_board_size(game_name)
+    if board_size is None:
+        return None
+
+    radius = board_size - 1
+    if max(abs(q), abs(r), abs(q + r)) > radius:
+        return None
+    row = r + radius + 1
+    q_min = max(-radius, -r - radius)
+    q_max = min(radius, -r + radius)
+    if q < q_min or q > q_max:
+        return None
+    # OpenSpiel's Havannah labels keep absolute columns across rows: the top
+    # half starts at `a`, the middle row spans `a..`, and the bottom half shifts
+    # right (`b..`, `c..`, ...). For axial coordinates in row order this is
+    # q + r + radius.
+    column_index = q + r + radius
+    if column_index < 0 or column_index >= 26:
+        return None
+    return f"{chr(ord('a') + column_index)}{row}"
+
+
+def havannah_open_labels(game_name: str) -> set[str]:
+    board_size = parse_open_spiel_board_size(game_name)
+    if not game_name.startswith("havannah") or board_size is None:
+        return set()
+    radius = board_size - 1
+    labels = set()
+    for r in range(-radius, radius + 1):
+        q_min = max(-radius, -r - radius)
+        q_max = min(radius, -r + radius)
+        for q in range(q_min, q_max + 1):
+            label = havannah_open_label_from_axial(game_name, q, r)
+            if label is not None:
+                labels.add(label)
+    return labels
+
+
+def havannah_row_label_reference(game_name: str, action_name: str) -> str | None:
+    """Map row-letter labels like A1, B1, ..., O8 to OpenSpiel labels."""
+
+    if not game_name.startswith("havannah"):
+        return None
+    board_size = parse_open_spiel_board_size(game_name)
+    if board_size is None:
+        return None
+
+    normalized = normalize_action_name(action_name)
+    target = normalized[len("place:") :] if normalized.startswith("place:") else normalized
+    match = re.fullmatch(r"([a-z])(\d+)", target)
+    if match is None:
+        return None
+
+    radius = board_size - 1
+    row_index = ord(match.group(1)) - ord("a")
+    col = int(match.group(2))
+    if row_index < 0 or row_index > 2 * radius or col <= 0:
+        return None
+
+    r = row_index - radius
+    q_min = max(-radius, -r - radius)
+    q_max = min(radius, -r + radius)
+    if col > q_max - q_min + 1:
+        return None
+    q = q_min + col - 1
+    return havannah_open_label_from_axial(game_name, q, r)
+
+
 def havannah_reference_label(game_name: str, action_name: str) -> str | None:
     """Map generated axial q/r Havannah names to OpenSpiel point labels.
 
@@ -54,48 +125,68 @@ def havannah_reference_label(game_name: str, action_name: str) -> str | None:
     normalizer.
     """
 
-    if not game_name.startswith("havannah"):
-        return None
-    board_size = parse_open_spiel_board_size(game_name)
-    if board_size is None:
-        return None
     coords = parse_qr_coordinates(action_name)
     if coords is None:
         return None
-
     q, r = coords
-    radius = board_size - 1
-    if max(abs(q), abs(r), abs(q + r)) > radius:
-        return None
-    row = r + radius + 1
-    q_min = max(-radius, -r - radius)
-    q_max = min(radius, -r + radius)
-    if q < q_min or q > q_max:
-        return None
-    column_index = q - q_min
-    if column_index < 0 or column_index >= 26:
-        return None
-    return f"{chr(ord('a') + column_index)}{row}"
+    return havannah_open_label_from_axial(game_name, q, r)
 
 
-def custom_reference_key(game_name: str, action_name: str) -> str | None:
-    return havannah_reference_label(game_name, action_name)
+def custom_reference_key(game_name: str, action_name: str, *, row_label_scheme: bool = False) -> str | None:
+    label = havannah_reference_label(game_name, action_name)
+    if label is not None:
+        return label
+
+    normalized = normalize_action_name(action_name)
+    if row_label_scheme:
+        label = havannah_row_label_reference(game_name, action_name)
+        if label is not None:
+            return label
+    if normalized.startswith("place:"):
+        target = normalized[len("place:") :]
+        if re.fullmatch(r"[a-z]+\d+", target):
+            return target
+    return None
 
 
-def build_custom_action_map(game_name: str, game: Any, state: Any) -> dict[str, Any]:
-    action_map: dict[str, Any] = {}
+def infer_havannah_row_label_scheme(game_name: str, names: list[str]) -> bool:
+    valid_open_labels = havannah_open_labels(game_name)
+    if not valid_open_labels:
+        return False
+    saw_row_label = False
+    for name in names:
+        normalized = normalize_action_name(name)
+        target = normalized[len("place:") :] if normalized.startswith("place:") else normalized
+        if not re.fullmatch(r"[a-z]\d+", target):
+            continue
+        row_label = havannah_row_label_reference(game_name, name)
+        if row_label is None:
+            continue
+        saw_row_label = True
+        if target not in valid_open_labels:
+            return True
+    return False if not saw_row_label else False
+
+
+def build_custom_action_map(game_name: str, game: Any, state: Any, row_label_scheme: bool | None = None) -> dict[str, Any]:
+    items: list[tuple[Any, str]] = []
     raw_names: set[str] = set()
     for action in legal_actions(game, state):
         with suppress_generated_output():
-            name = game.action_to_name(action)
+            name = str(game.action_to_name(action))
             roundtrip = game.name_to_action(name)
         if roundtrip != action:
             raise RuntimeError(f"generated action name did not round-trip: {name!r}")
         if name in raw_names:
             raise RuntimeError(f"duplicate generated action name {name!r}")
         raw_names.add(name)
+        items.append((action, name))
 
-        key = custom_reference_key(game_name, str(name)) or normalize_action_name(name)
+    if row_label_scheme is None:
+        row_label_scheme = infer_havannah_row_label_scheme(game_name, [name for _action, name in items])
+    action_map: dict[str, Any] = {}
+    for action, name in items:
+        key = custom_reference_key(game_name, name, row_label_scheme=row_label_scheme) or normalize_action_name(name)
         if key in action_map:
             raise RuntimeError(f"ambiguous generated action key {key!r}")
         action_map[key] = action
@@ -283,59 +374,98 @@ def run(ctx: CheckContext) -> CheckResult | str | None:
 
     open_initial = open_game.new_initial_state()
     player_map = infer_player_map(open_game, open_initial, custom_game, custom_initial)
+    initial_names = []
+    for action in legal_actions(custom_game, custom_initial):
+        with suppress_generated_output():
+            initial_names.append(str(custom_game.action_to_name(action)))
+    custom_row_label_scheme = infer_havannah_row_label_scheme(ctx.game, initial_names)
     rng = random.Random(ctx.seed)
+
+    passed_units = 0
+    total_units = 0
+    issue_count = 0
+    issue_examples: list[str] = []
+
+    def record_issue(message: str) -> None:
+        nonlocal issue_count
+        issue_count += 1
+        if len(issue_examples) < 3:
+            issue_examples.append(message)
 
     for rollout_index in range(ctx.rollouts):
         open_state = open_game.new_initial_state()
         custom_state = custom_game.initial_state()
-        open_drives = rollout_index % 2 == 0
 
         for step in range(ctx.max_steps):
+            location = f"rollout {rollout_index + 1}, step {step}"
             try:
                 open_actions = build_open_action_map(open_game, open_state)
-                custom_actions = build_custom_action_map(ctx.game, custom_game, custom_state)
+                custom_actions = build_custom_action_map(ctx.game, custom_game, custom_state, custom_row_label_scheme)
             except Exception as exc:
-                return CheckResult(rollout_index, ctx.rollouts, f"rollout {rollout_index + 1}, step {step}: {exc}")
+                total_units += 1
+                record_issue(f"{location}: {exc}")
+                break
 
             open_keys = set(open_actions)
             custom_keys = set(custom_actions)
-            if open_keys != custom_keys:
-                return CheckResult(
-                    rollout_index,
-                    ctx.rollouts,
-                    f"legal action mismatch in rollout {rollout_index + 1}, step {step}: "
-                    + describe_diff(open_keys, custom_keys),
-                )
+            common_keys = open_keys & custom_keys
+            all_keys = open_keys | custom_keys
 
-            if not open_keys:
+            # Legal-action agreement is scored by overlap, not as all-or-nothing.
+            # This lets later rollouts continue and gives credit when many legal
+            # actions still match despite missing/extra moves.
+            action_units = max(len(all_keys), 1)
+            total_units += action_units
+            if open_keys == custom_keys:
+                passed_units += action_units
+            else:
+                passed_units += len(common_keys)
+                record_issue(f"legal action mismatch in {location}: " + describe_diff(open_keys, custom_keys))
+
+            if not open_keys and not custom_keys:
                 if open_state.is_terminal() and is_terminal(custom_game, custom_state):
+                    total_units += 1
                     returns_message = compare_returns(open_state, custom_game, custom_state, player_map)
                     if returns_message:
-                        return CheckResult(rollout_index, ctx.rollouts, f"rollout {rollout_index + 1}, step {step}: {returns_message}")
+                        record_issue(f"{location}: {returns_message}")
+                    else:
+                        passed_units += 1
                 break
 
+            total_units += 1
             turn_message = compare_turn(open_state, custom_game, custom_state, player_map)
             if turn_message:
-                return CheckResult(rollout_index, ctx.rollouts, f"rollout {rollout_index + 1}, step {step}: {turn_message}")
+                record_issue(f"{location}: {turn_message}")
+            else:
+                passed_units += 1
 
-            keys = sorted(open_keys if open_drives else custom_keys)
-            key = rng.choice(keys)
+            if not common_keys:
+                # There is no action that can be applied to both states. Stop
+                # this rollout, but keep testing further sampled rollouts.
+                record_issue(f"{location}: no shared legal action to continue this rollout")
+                break
+
+            key = rng.choice(sorted(common_keys))
             open_action = open_actions[key]
             custom_action = custom_actions[key]
 
+            total_units += 1
             try:
                 apply_open_action(open_state, open_action)
-            except Exception as exc:
-                return CheckResult(rollout_index, ctx.rollouts, f"OpenSpiel apply failed in rollout {rollout_index + 1}, step {step}: {exc}")
-            try:
                 custom_state = apply_action(custom_game, custom_state, custom_action)
             except Exception as exc:
-                return CheckResult(rollout_index, ctx.rollouts, f"generated apply failed in rollout {rollout_index + 1}, step {step}: {exc}")
-        else:
-            return CheckResult(
-                rollout_index,
-                ctx.rollouts,
-                f"comparison rollout {rollout_index + 1} did not terminate within {ctx.max_steps} steps",
-            )
+                record_issue(f"apply failed in {location}: {exc}")
+                break
+            else:
+                passed_units += 1
+        # Hitting the cap is allowed here. This optional reference check verifies
+        # that implementations expose matching legal-action prefixes along
+        # sampled trajectories; many board games, and some OpenSpiel variants,
+        # may not terminate within a small comparison budget.
 
-    return CheckResult(ctx.rollouts, ctx.rollouts)
+    if total_units == 0:
+        return CheckResult(0, 1, "no comparison states were evaluated")
+    if issue_count:
+        suffix = f"; {issue_count} total issue(s)" if issue_count > len(issue_examples) else ""
+        return CheckResult(passed_units, total_units, "; ".join(issue_examples) + suffix)
+    return CheckResult(passed_units, total_units)

@@ -26,6 +26,10 @@ from common import (
 )
 
 
+DISPLAY_NAME_WIDTH = 22
+UNITS_WIDTH = 15
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare two generated game files by normalized legal-action language.")
     parser.add_argument("--game", default="antichess", help="Game name for reporting")
@@ -170,8 +174,8 @@ def compare(args: argparse.Namespace) -> CheckResult | str | None:
 
 
 def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
-    name_width = len(name)
-    units_width = 11
+    name_width = max(DISPLAY_NAME_WIDTH, len("summary"), len(name))
+    units_width = UNITS_WIDTH
     line = f"{status:<4} {name:<{name_width}} {units:>{units_width}} score={score:.3f} {elapsed:>7.2f}s"
     if message:
         line += f"  {message}"

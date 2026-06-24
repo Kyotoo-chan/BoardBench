@@ -13,6 +13,10 @@ from typing import Any
 from common import CheckContext, CheckResult, resolve_code_path, resolve_optional_path, resolve_repo_root
 
 
+DISPLAY_NAME_WIDTH = 22
+UNITS_WIDTH = 15
+
+
 def load_check(path: Path):
     spec = importlib.util.spec_from_file_location(path.stem, path)
     if spec is None or spec.loader is None:
@@ -103,8 +107,8 @@ def main() -> int:
     failed = 0
     passed_units = 0
     total_units = 0
-    name_width = max(len(path.stem) for path in check_paths)
-    units_width = 11
+    name_width = max(DISPLAY_NAME_WIDTH, len("summary"), *(len(path.stem) for path in check_paths))
+    units_width = UNITS_WIDTH
 
     def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
         line = (
