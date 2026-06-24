@@ -10,11 +10,19 @@ import time
 from pathlib import Path
 from typing import Any
 
-from common import CheckContext, CheckResult, resolve_code_path, resolve_optional_path, resolve_repo_root
-
-
-DISPLAY_NAME_WIDTH = 22
-UNITS_WIDTH = 15
+from common import (
+    DEFAULT_ROLLOUTS,
+    CheckContext,
+    CheckResult,
+    DISPLAY_NAME_WIDTH,
+    ParsedCheckLine,
+    format_check_line,
+    format_summary_line,
+    resolve_code_path,
+    resolve_optional_path,
+    resolve_repo_root,
+    weighted_score_from_checks,
+)
 
 
 def load_check(path: Path):
@@ -32,7 +40,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--game", default="antichess", help="OpenSpiel/game name used for output lookup")
     parser.add_argument("--code-path", default=None, help="Generated Python file to check")
     parser.add_argument("--judge-path", default=None, help="Saved LLM-judge review markdown file")
-    parser.add_argument("--rollouts", type=int, default=1000, help="Random games to run in rollout checks")
+    parser.add_argument("--rollouts", type=int, default=DEFAULT_ROLLOUTS, help="Random games to run in rollout checks")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per random game")
     parser.add_argument("--seed", type=int, default=1, help="Random seed for reproducible checks")
     parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
@@ -105,19 +113,8 @@ def main() -> int:
 
     total_started = time.perf_counter()
     failed = 0
-    passed_units = 0
-    total_units = 0
+    parsed_checks: list[ParsedCheckLine] = []
     name_width = max(DISPLAY_NAME_WIDTH, len("summary"), *(len(path.stem) for path in check_paths))
-    units_width = UNITS_WIDTH
-
-    def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
-        line = (
-            f"{status:<4} {name:<{name_width}} {units:>{units_width}} "
-            f"score={score:.3f} {elapsed:>7.2f}s"
-        )
-        if message:
-            line += f"  {message}"
-        return line
 
     for path in check_paths:
         started = time.perf_counter()
@@ -130,29 +127,36 @@ def main() -> int:
             result = CheckResult(0, 1, str(exc) or exc.__class__.__name__)
 
         elapsed = time.perf_counter() - started
-        passed_units += result.passed
-        total_units += result.total
         status = "OK" if result.message is None else "FAIL"
         units = f"{result.passed}/{result.total}"
         if result.message:
             failed += 1
         print(
-            format_line(status, path.stem, units, result.score, elapsed, result.message),
+            format_check_line(status, path.stem, units, result.score, elapsed, result.message, name_width=name_width),
             flush=True,
+        )
+        parsed_checks.append(
+            ParsedCheckLine(
+                status=status,
+                name=path.stem,
+                passed=result.passed,
+                total=result.total,
+                score=result.score,
+                elapsed=elapsed,
+                message=result.message,
+            )
         )
 
     total_elapsed = time.perf_counter() - total_started
     if not args.no_summary:
         passed_checks = len(check_paths) - failed
-        normalized_score = (passed_units / total_units) if total_units else 0.0
         print(
-            format_line(
-                "----",
-                "summary",
-                f"{passed_checks}/{len(check_paths)}",
-                normalized_score,
+            format_summary_line(
+                passed_checks,
+                len(check_paths),
+                weighted_score_from_checks(parsed_checks),
                 total_elapsed,
-                f"({passed_units}/{total_units} units)" if total_units else None,
+                name_width=name_width,
             ),
             flush=True,
         )

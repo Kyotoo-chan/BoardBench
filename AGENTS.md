@@ -135,5 +135,10 @@ Use simple, human-readable filenames.
 - On check failures, continue through judge and OpenSpiel phases when enabled; raise only at the end with the list of failed phases.
 - During iterative development, keep notebook output minimal: stream only `OK` / `FAIL` / final `summary` lines, no admin prints (`running checks`, `Saved check log`, `CompletedProcess`, etc.).
 - For intentional test-run commits, preserve those same minimal result lines **with timings** in the executed notebook cells and matching `outputs/` logs.
+- Checks report normalized `passed/total` unit scores per check line. The final `---- summary` score is a **weighted average of per-check scores**, not a raw sum of all units. Smoke checks `01`–`04` weight 1 each; quality checks (`05`, `06`, `90`, `99`, pair compare) weight 10 each and count equally among themselves.
+- Rollout, action-language, and pair-comparison checks keep running after failures and score proportionally within each check (for example `987/1000`), not as immediate `0/N`.
+- `05_random_rollouts` uses the notebook `ROLLOUTS` budget (default 100). `06_action_language` always uses 100 rollouts and counts one unit per legal action checked in visited states; per-check score is still proportional, but summary weighting keeps it comparable to other quality checks.
+- Manual evaluation notebooks use `ROLLOUTS = 100` by default. Coding agents should not run the full evaluation pipeline unless the user explicitly asks.
 - Pair oneshot-vs-agentic comparison uses `PAIR_ROLLOUTS` (default 1000, same scale as OpenSpiel comparison) — many independent lockstep games, not a handful of sampled actions.
-- Action-language align runs immediately before OpenSpiel compare, not before the base checks.
+- Before pair comparison or OpenSpiel comparison, run LLM action-language align on the generated code so `action_to_name` / `name_to_action` use an unambiguous comparison language.
+- Action-language align runs immediately before OpenSpiel compare or pair compare, not before the base checks.

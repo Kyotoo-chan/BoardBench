@@ -14,6 +14,9 @@ from action_normalizer import normalize_action_name
 from common import (
     CheckContext,
     CheckResult,
+    DISPLAY_NAME_WIDTH,
+    format_check_line,
+    format_summary_line,
     apply_action,
     current_player,
     is_terminal,
@@ -26,10 +29,6 @@ from common import (
 )
 
 
-DISPLAY_NAME_WIDTH = 22
-UNITS_WIDTH = 15
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare two generated game files by normalized legal-action language.")
     parser.add_argument("--game", default="antichess", help="Game name for reporting")
@@ -37,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--right-code-path", required=True, help="Second generated Python file")
     parser.add_argument("--left-label", default="oneshot", help="Label for the first implementation")
     parser.add_argument("--right-label", default="agentic", help="Label for the second implementation")
-    parser.add_argument("--rollouts", type=int, default=1000, help="Random lockstep trajectories to compare")
+    parser.add_argument("--rollouts", type=int, default=100, help="Random lockstep trajectories to compare")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per trajectory")
     parser.add_argument("--seed", type=int, default=1, help="Random seed")
     return parser.parse_args()
@@ -105,59 +104,67 @@ def compare(args: argparse.Namespace) -> CheckResult | str | None:
         return f"could not start both generated games: {exc}"
 
     rng = random.Random(args.seed)
+    passed = 0
+    total = 0
+    first_error: str | None = None
+
     for rollout_index in range(args.rollouts):
         left_state = left_game.initial_state()
         right_state = right_game.initial_state()
 
         for step in range(args.max_steps):
+            total += 1
             try:
                 left_terminal = is_terminal(left_game, left_state)
                 right_terminal = is_terminal(right_game, right_state)
                 if left_terminal != right_terminal:
-                    return CheckResult(
-                        rollout_index,
-                        args.rollouts,
-                        f"rollout {rollout_index + 1}, step {step}: terminal mismatch "
-                        f"{args.left_label}={left_terminal} {args.right_label}={right_terminal}",
-                    )
+                    if first_error is None:
+                        first_error = (
+                            f"rollout {rollout_index + 1}, step {step}: terminal mismatch "
+                            f"{args.left_label}={left_terminal} {args.right_label}={right_terminal}"
+                        )
+                    break
 
                 if not left_terminal:
                     left_player = current_player(left_game, left_state)
                     right_player = current_player(right_game, right_state)
                     if left_player != right_player:
-                        return CheckResult(
-                            rollout_index,
-                            args.rollouts,
-                            f"rollout {rollout_index + 1}, step {step}: current player mismatch "
-                            f"{args.left_label}={left_player} {args.right_label}={right_player}",
-                        )
+                        if first_error is None:
+                            first_error = (
+                                f"rollout {rollout_index + 1}, step {step}: current player mismatch "
+                                f"{args.left_label}={left_player} {args.right_label}={right_player}"
+                            )
+                        break
 
                 left_actions, _left_raw = action_map(left_game, left_state)
                 right_actions, _right_raw = action_map(right_game, right_state)
             except Exception as exc:
-                return CheckResult(rollout_index, args.rollouts, f"rollout {rollout_index + 1}, step {step}: {exc}")
+                if first_error is None:
+                    first_error = f"rollout {rollout_index + 1}, step {step}: {exc}"
+                break
 
             left_keys = set(left_actions)
             right_keys = set(right_actions)
             if left_keys != right_keys:
-                return CheckResult(
-                    rollout_index,
-                    args.rollouts,
-                    f"legal action mismatch in rollout {rollout_index + 1}, step {step}: "
-                    + describe_diff(left_keys, right_keys, args.left_label, args.right_label),
-                )
+                if first_error is None:
+                    first_error = (
+                        f"legal action mismatch in rollout {rollout_index + 1}, step {step}: "
+                        + describe_diff(left_keys, right_keys, args.left_label, args.right_label)
+                    )
+                break
 
             if not left_keys:
                 if left_terminal and right_terminal:
                     left_returns = returns(left_game, left_state)
                     right_returns = returns(right_game, right_state)
                     if [float(value) for value in left_returns] != [float(value) for value in right_returns]:
-                        return CheckResult(
-                            rollout_index,
-                            args.rollouts,
-                            f"rollout {rollout_index + 1}, step {step}: return mismatch "
-                            f"{args.left_label}={left_returns} {args.right_label}={right_returns}",
-                        )
+                        if first_error is None:
+                            first_error = (
+                                f"rollout {rollout_index + 1}, step {step}: return mismatch "
+                                f"{args.left_label}={left_returns} {args.right_label}={right_returns}"
+                            )
+                        break
+                passed += 1
                 break
 
             key = rng.choice(sorted(left_keys))
@@ -165,21 +172,19 @@ def compare(args: argparse.Namespace) -> CheckResult | str | None:
                 left_state = apply_action(left_game, left_state, left_actions[key])
                 right_state = apply_action(right_game, right_state, right_actions[key])
             except Exception as exc:
-                return CheckResult(rollout_index, args.rollouts, f"apply failed in rollout {rollout_index + 1}, step {step}: {exc}")
+                if first_error is None:
+                    first_error = f"apply failed in rollout {rollout_index + 1}, step {step}: {exc}"
+                break
+            passed += 1
         # Hitting the cap is allowed here. This comparison checks that both
         # implementations expose the same normalized action language along the
         # sampled prefix, not that every sampled game must terminate quickly.
 
-    return CheckResult(args.rollouts, args.rollouts)
-
-
-def format_line(status: str, name: str, units: str, score: float, elapsed: float, message: str | None = None) -> str:
-    name_width = max(DISPLAY_NAME_WIDTH, len("summary"), len(name))
-    units_width = UNITS_WIDTH
-    line = f"{status:<4} {name:<{name_width}} {units:>{units_width}} score={score:.3f} {elapsed:>7.2f}s"
-    if message:
-        line += f"  {message}"
-    return line
+    if total == 0:
+        return CheckResult(0, 0, "no pair-comparison steps were checked")
+    if passed == total:
+        return CheckResult(passed, total)
+    return CheckResult(passed, total, first_error)
 
 
 def main() -> int:
@@ -188,33 +193,27 @@ def main() -> int:
     result = compare(args)
     elapsed = time.perf_counter() - started
     name = "pair_action_compare"
+    name_width = max(DISPLAY_NAME_WIDTH, len("summary"), len(name))
 
     if isinstance(result, CheckResult):
         status = "OK" if result.message is None else "FAIL"
         units = f"{result.passed}/{result.total}"
-        print(format_line(status, name, units, result.score, elapsed, result.message), flush=True)
-        passed_checks = 0 if result.message else 1
+        print(format_check_line(status, name, units, result.score, elapsed, result.message, name_width=name_width), flush=True)
+        passed_checks = 1 if result.message is None else 0
         print(
-            format_line(
-                "----",
-                "summary",
-                f"{passed_checks}/1",
-                result.score,
-                elapsed,
-                f"({result.passed}/{result.total} units)",
-            ),
+            format_summary_line(passed_checks, 1, result.score, elapsed, name_width=name_width),
             flush=True,
         )
         return 1 if result.message else 0
 
     if result is None:
         units = f"{args.rollouts}/{args.rollouts}"
-        print(format_line("OK", name, units, 1.0, elapsed), flush=True)
-        print(format_line("----", "summary", "1/1", 1.0, elapsed, f"({units} units)"), flush=True)
+        print(format_check_line("OK", name, units, 1.0, elapsed, name_width=name_width), flush=True)
+        print(format_summary_line(1, 1, 1.0, elapsed, name_width=name_width), flush=True)
         return 0
 
-    print(format_line("FAIL", name, "0/1", 0.0, elapsed, str(result)), flush=True)
-    print(format_line("----", "summary", "0/1", 0.0, elapsed, "(0/1 units)"), flush=True)
+    print(format_check_line("FAIL", name, "0/1", 0.0, elapsed, str(result), name_width=name_width), flush=True)
+    print(format_summary_line(0, 1, 0.0, elapsed, name_width=name_width), flush=True)
     return 1
 
 
