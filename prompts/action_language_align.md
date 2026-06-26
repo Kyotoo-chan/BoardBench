@@ -2,7 +2,9 @@
 
 You receive a generated BoardBench Python game file and the BoardBench action normalizer.
 
-Your only job is to make `action_to_name` and `name_to_action` emit a stable, unambiguous comparison language for benchmark checks: the optional OpenSpiel reference comparison and the oneshot-vs-agentic pair comparison.
+Your only job is to make `action_to_name` and `name_to_action` emit a stable, unambiguous comparison language for the optional **OpenSpiel reference comparison** (`99_openspiel_compare`).
+
+For **oneshot vs agentic** comparison, use `prompts/action_language_pair_align.md` instead (one joint LLM pass over both files).
 
 ## Hard constraints
 

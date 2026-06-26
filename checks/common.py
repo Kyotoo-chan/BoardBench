@@ -389,6 +389,96 @@ def aggregate_phase_stats(phase_stats: list[dict[str, int | float]]) -> dict[str
     }
 
 
+def synthetic_phase_stats(seconds: float, *, passed: bool = True) -> dict[str, int | float]:
+    """Build phase stats for timed steps that do not run a BoardBench check script."""
+
+    ok = 1 if passed else 0
+    score = 1.0 if passed else 0.0
+    weight = QUALITY_CHECK_WEIGHT
+    return {
+        "checks_passed": ok,
+        "checks_total": 1,
+        "units_passed": ok,
+        "units_total": 1,
+        "score": score,
+        "seconds": float(seconds),
+        "weight_total": weight,
+        "weighted_score_sum": score * weight,
+    }
+
+
+def format_phase_summary_line(label: str, stats: dict[str, int | float]) -> str:
+    return format_check_line(
+        "----",
+        f"phase {label}",
+        f"{int(stats['checks_passed'])}/{int(stats['checks_total'])}",
+        float(stats["score"]),
+        float(stats["seconds"]),
+    )
+
+
+def evaluation_summary_lines(
+    phase_stats: list[dict[str, int | float]],
+    *,
+    phase_labels: list[str] | None = None,
+) -> list[str]:
+    if not phase_stats:
+        return []
+
+    labels = phase_labels or [f"{index + 1}" for index in range(len(phase_stats))]
+    if len(labels) != len(phase_stats):
+        raise ValueError("phase_labels must match phase_stats length")
+
+    lines = [format_phase_summary_line(label, stats) for label, stats in zip(labels, phase_stats, strict=True)]
+    summary = aggregate_phase_stats(phase_stats)
+    lines.append(
+        format_summary_line(
+            int(summary["checks_passed"]),
+            int(summary["checks_total"]),
+            float(summary["score"]),
+            float(summary["seconds"]),
+        )
+    )
+    return lines
+
+
+def append_lines_to_log(log_path: Path, lines: list[str]) -> None:
+    if not lines:
+        return
+    block = "\n".join(lines) + "\n"
+    if log_path.exists():
+        existing = log_path.read_text(encoding="utf-8")
+        if existing and not existing.endswith("\n"):
+            existing += "\n"
+        log_path.write_text(existing + block, encoding="utf-8")
+    else:
+        log_path.write_text(block, encoding="utf-8")
+
+
+def print_evaluation_summary(
+    phase_stats: list[dict[str, int | float]],
+    *,
+    phase_labels: list[str] | None = None,
+    log_path: Path | None = None,
+) -> None:
+    lines = evaluation_summary_lines(phase_stats, phase_labels=phase_labels)
+    for line in lines:
+        print(line, flush=True)
+    if log_path is not None:
+        append_lines_to_log(log_path, lines)
+
+
+def strip_trailing_summary_lines(text: str) -> str:
+    lines = text.splitlines(keepends=True)
+    while lines and lines[-1].strip() == "":
+        lines.pop()
+    while lines and SUMMARY_LINE_RE.match(lines[-1].rstrip("\n")):
+        lines.pop()
+        while lines and lines[-1].strip() == "":
+            lines.pop()
+    return "".join(lines)
+
+
 def add_elapsed_to_result_output(output: str, extra_elapsed: float) -> str:
     if extra_elapsed <= 0:
         return output

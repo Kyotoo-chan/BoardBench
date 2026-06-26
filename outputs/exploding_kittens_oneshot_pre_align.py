@@ -59,9 +59,8 @@ TITLE_TO_CODE = {
 CODE_TO_TITLE = {v: k for k, v in TITLE_TO_CODE.items()}
 
 
-# Action names use lowercase TITLE_TO_CODE labels with BoardBench grammar
-# prefixes. The separators below are not card-label substrings, so raw names
-# and normalized comparison keys stay 1-to-1.
+# Action names use lowercase TITLE_TO_CODE labels. The separators below are not
+# card-label substrings, so raw names and normalized comparison keys stay 1-to-1.
 def _card_label(title):
     return TITLE_TO_CODE[title].lower()
 
@@ -284,9 +283,9 @@ class Game:
         if k == "nope":
             return "nope"
         if k == "play":
-            return "remove:%s" % _card_label(action[1])
+            return "remove:play_%s" % _card_label(action[1])
         if k == "favor":
-            return "remove:%s_target_player%d" % (_card_label(FAVOR), action[1])
+            return "remove:play_%s_target_player%d" % (_card_label(FAVOR), action[1])
         if k == "pair":
             return "remove:pair_%s_target_player%d" % (_card_label(action[1]), action[2])
         if k == "triplet":
@@ -299,7 +298,7 @@ class Game:
                 _card_label(action[2]),
             )
         if k == "give":
-            return "move:hand_%s->favor_requester" % _card_label(action[1])
+            return "move:hand->favor_requester_%s" % _card_label(action[1])
         if k == "insert":
             return "place:deck_pos_%d_%s" % (action[1], _card_label(EXPLODING))
         if k == "chance_steal":
@@ -319,9 +318,12 @@ class Game:
         if name.startswith("remove:"):
             rest = name[len("remove:"):]
 
-            favor_prefix = "%s_target_player" % _card_label(FAVOR)
+            favor_prefix = "play_%s_target_player" % _card_label(FAVOR)
             if rest.startswith(favor_prefix):
                 return ("favor", int(rest[len(favor_prefix):]))
+
+            if rest.startswith("play_"):
+                return ("play", _title_from_label(rest[len("play_"):]))
 
             if rest.startswith("pair_"):
                 payload = rest[len("pair_"):]
@@ -339,13 +341,9 @@ class Game:
                 played_s, take_s = payload.rsplit("_take_", 1)
                 return ("five", _split_card_labels(played_s), _title_from_label(take_s))
 
-            return ("play", _title_from_label(rest))
-
-        give_prefix = "move:hand_"
-        give_suffix = "->favor_requester"
-        if name.startswith(give_prefix) and name.endswith(give_suffix):
-            code = name[len(give_prefix):-len(give_suffix)]
-            return ("give", _title_from_label(code))
+        give_prefix = "move:hand->favor_requester_"
+        if name.startswith(give_prefix):
+            return ("give", _title_from_label(name[len(give_prefix):]))
 
         insert_prefix = "place:deck_pos_"
         insert_suffix = "_" + _card_label(EXPLODING)

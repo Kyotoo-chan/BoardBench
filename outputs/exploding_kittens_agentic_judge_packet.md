@@ -1,3 +1,643 @@
+# BoardBench judge packet
+
+- game: exploding_kittens
+
+- OpenSpiel reference: none
+
+- variant: agentic
+
+- generated code: outputs/exploding_kittens_agentic.py
+
+- expected judge reply path: outputs/exploding_kittens_agentic_judge.md
+
+
+
+## Judge prompt
+
+# LLM judge scoring prompt
+
+Use this as a qualitative scoring step after a game implementation has been generated. The judge is not the source of truth and must not rewrite the implementation. Its job is to score how well the generated BoardBench environment appears to implement the provided rulebook.
+
+## Inputs to use
+
+Use only the artifacts provided in the packet:
+
+1. the original rulebook text, or the attached/rendered rulebook page images
+2. the implementation brief, if one was created
+3. the generation prompt/backbones used
+4. the generated Python file
+
+Do **not** use outside game knowledge, remembered rules, internet knowledge, or OpenSpiel knowledge unless that material is explicitly included in the packet. If something is not clear from the rulebook, mark it as uncertain rather than wrong.
+
+Do not rerun deterministic checks and do not judge mainly by check logs. The deterministic BoardBench checks are separate. This review should focus on rule fidelity, game logic, assumptions, and testability.
+
+## Scoring target
+
+Give one overall score from `0.0` to `1.0`:
+
+- `1.0`: faithful, complete, and benchmark-ready based on the provided rulebook
+- `0.8`: mostly correct with only minor issues or harmless assumptions
+- `0.6`: playable but with notable uncertain or partially implemented rule areas
+- `0.4`: major rule or state-transition issues likely affect gameplay
+- `0.2`: severe missing mechanics or unreliable terminal/scoring logic
+- `0.0`: unusable or largely unrelated to the rulebook
+
+Use the full range when justified. Do not give a high score only because the API exists or the code looks clean.
+
+## Review focus
+
+Prioritize:
+
+- setup and board/components
+- player count and turn order
+- legal actions
+- state transitions
+- terminal/win/loss/draw conditions
+- scoring/returns
+- chance handling, if any
+- hidden information, if any
+- simultaneous moves, if any
+- action names/rendering as a BoardBench interface
+- unsupported assumptions or invented rules
+- likely missing deterministic scenario tests
+
+## Required output format
+
+### 1. Score
+
+Give:
+
+- `score: <number from 0.0 to 1.0>`
+- `confidence: low|medium|high`
+- a short 2-4 sentence justification
+
+### 2. Top findings
+
+List the most important findings first. For each finding include:
+
+- severity: critical / major / minor / question
+- evidence from the rulebook, generated code, or provided artifacts
+- why it matters for gameplay or benchmarking
+- suggested next action
+
+### 3. Rule coverage review
+
+Create a table with columns:
+
+- rule area
+- covered correctly / partially covered / missing / unclear
+- evidence
+- notes
+
+Cover at least: setup, player count and turn order, legal actions, state transitions, terminal conditions, scoring/returns, rendering/action names, chance/hidden/simultaneous if relevant.
+
+### 4. Unsupported assumptions or invented rules
+
+List every place where the implementation appears to decide something not specified by the provided rulebook. Distinguish harmless conventions from risky invented rules.
+
+### 5. Missing scenario tests
+
+Suggest concrete additional deterministic tests. Prefer action-name sequences that could later be turned into checks.
+
+### 6. Open questions for the human
+
+Ask only questions that materially affect implementation correctness or benchmark scoring.
+
+### 7. Machine-readable summary
+
+End with exactly this compact YAML-like block:
+
+```text
+score: <0.0-1.0>
+confidence: low|medium|high
+critical_issues: <number>
+major_issues: <number>
+minor_issues: <number>
+needs_rulebook_clarification: true|false
+needs_code_change: true|false
+needs_more_tests: true|false
+```
+
+
+
+
+## Generation prompt (prompts/rulebook_to_python.txt)
+
+You will receive rule text.
+
+Use only that information.
+Do not use outside knowledge or remembered rules for the game.
+If an implementation brief or backbone context is provided, use it only as an interpretation aid; the rule text wins if there is a conflict.
+
+Write one simple, self-contained Python file using only the standard library.
+Do not import any non-standard-library package or external game framework.
+Do not require external files, images, environment variables, network access, subprocesses, API keys, or interactive input.
+Keep top-level code limited to definitions and constants.
+
+If rules are unclear or incomplete, state the assumptions briefly before the code and in comments where relevant.
+Do not silently fill missing rules with outside knowledge.
+Prefer a smaller explicit implementation with documented gaps over broad invented mechanics.
+
+If possible, include this minimal game API:
+- `GameState`
+- `Game`
+- `initial_state(self)`
+- `current_player(self, state)`
+- `legal_actions(self, state)`
+- `apply_action(self, state, action)` returning the next state, or clearly documenting in-place mutation
+- `is_terminal(self, state)`
+- `returns(self, state)` returning one numeric value per player
+- `render(self, state)` returning a stable, compact, human-readable string suitable for side-by-side inspection
+- `action_to_name(self, action)` returning a unique canonical action name
+- `name_to_action(self, name)` reversing a canonical action name
+
+Rules for actions and state presentation:
+- `legal_actions` must only return actions that `apply_action` accepts.
+- `action_to_name` and `name_to_action` must round-trip exactly.
+- Action names must be human-readable, stable, unique in sampled states, and must not rely on raw internal indices alone.
+- If action names contain signed numeric coordinates, encode signs unambiguously (for example `pos1`/`neg1` or `p1`/`n1`) so different points cannot collapse when punctuation is normalized.
+- If the rule text defines labels for squares, points, regions, cards, or other move targets, use those labels in action names and render output.
+- If the rule text explicitly defines or clearly implies a standard move notation, use that notation consistently; otherwise use a simple explicit format such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, or similarly clear equivalents.
+- `render` should be deterministic across repeated calls on the same state and avoid decorative prose.
+- Terminal states should have no legal actions and stable returns.
+
+Only if required by the rule text, include:
+- `chance_outcomes(self, state)` for stochastic rules
+- `information_state(self, state, player)` for hidden-information rules
+
+Output:
+1. `Open questions / assumptions`
+2. one fenced `python` code block with the full file
+
+
+
+
+## OpenSpiel backbone (prompts/open_spiel_backbone.md)
+
+# OpenSpiel-inspired BoardBench backbone
+
+Use this as extra context with `prompts/rulebook_to_python.txt` and the rulebook.
+
+This is an interface/backbone, not a dependency. Generated code must stay one self-contained standard-library Python file. Do not import `pyspiel`, `open_spiel`, external frameworks, files, network, subprocesses, or API keys.
+
+Use OpenSpiel only for structure: explicit state, legal actions, deterministic transitions, optional chance nodes, optional information states, stable action names, and numeric returns. The rulebook is always the source of truth.
+
+## Required shape
+
+Implement:
+
+```python
+class GameState:
+    ...
+
+class Game:
+    def initial_state(self): ...
+    def current_player(self, state): ...
+    def legal_actions(self, state): ...
+    def apply_action(self, state, action): ...
+    def is_terminal(self, state): ...
+    def returns(self, state): ...
+    def render(self, state): ...
+    def action_to_name(self, action): ...
+    def name_to_action(self, name): ...
+```
+
+Optional only if the rulebook needs them:
+
+```python
+def chance_outcomes(self, state): ...        # [(action, probability), ...]
+def information_state(self, state, player): ...
+def observation(self, state, player): ...
+def rewards(self, state): ...               # latest step rewards if separate from returns
+```
+
+Suggested sentinel constants:
+
+```python
+TERMINAL = -1
+CHANCE = -2
+SIMULTANEOUS = -3
+```
+
+`current_player(state)` should return a player index, `TERMINAL`, `CHANCE`, or `SIMULTANEOUS`.
+
+## Implementation recipe
+
+1. Classify the game from the rulebook: player count, turn structure, chance, hidden information, scoring type.
+2. Define `GameState` fields first: public state, private state, phase, current player, scores/returns, history.
+3. Define action objects and canonical action names before transition logic.
+4. Implement `legal_actions` as a pure deterministic function of state.
+5. Implement `apply_action` by validating the action, updating state, switching player/phase, and updating terminal/returns.
+6. Keep scoring and terminal rules separate enough to inspect and test.
+7. Make `render` compact, deterministic, and useful for side-by-side comparison.
+8. Document assumptions exactly where the rulebook is unclear.
+
+Prefer returning a fresh state from `apply_action`. If mutating in place, document it clearly.
+
+## Invariants
+
+- `initial_state()` returns a fresh state.
+- terminal states have no legal actions.
+- non-terminal player states have legal actions unless the rulebook explicitly allows a dead state.
+- `legal_actions` lists only actions accepted by `apply_action`.
+- `returns` always has one numeric value per player.
+- `render` is deterministic for the same state.
+- `action_to_name` and `name_to_action` round-trip for legal actions.
+- chance probabilities, if present, are non-negative and sum to 1.
+- hidden-information views, if present, do not reveal private data to the wrong player.
+- max length / repetition / pass rules are encoded when needed to avoid accidental infinite games.
+
+## Action names
+
+Use rulebook labels whenever available. Otherwise use explicit names:
+
+- `place:<target>`
+- `move:<source>-><target>`
+- `remove:<target>`
+- `claim:<item>`
+- `bid:<amount>`
+- `pass`
+- `chance:deal:<card>`
+- `chance:roll:<value>`
+- `p0:<a0>|p1:<a1>` for simultaneous joint actions
+
+Avoid names that only expose internal indices unless the rulebook itself uses those indices.
+
+## Game-type add-ons
+
+### Sequential perfect-information games
+
+Use when exactly one player acts and all relevant state is public.
+
+- no `chance_outcomes` or `information_state` needed
+- switch the current player after each normal action unless the rules say otherwise
+- test wins/draws, blocked/illegal moves, and terminal no-actions behavior
+
+### Chance/stochastic games
+
+Use when cards, dice, random setup, or random events affect play.
+
+- model randomness as explicit chance actions, never hidden calls to `random`
+- `current_player` returns `CHANCE` at chance nodes
+- `chance_outcomes(state)` returns probabilities for the same chance actions that `legal_actions(state)` returns without probabilities
+- `apply_action` consumes the selected chance action deterministically
+
+### Hidden-information games
+
+Use when hands, cards, objectives, or other facts are private.
+
+- keep full truth in `GameState` for correctness
+- expose player-visible data through `information_state(state, player)`
+- `render(state)` may be full debug state, but document that it is not player-visible
+- action names must not leak hidden data unless the action legally reveals it
+
+### Simultaneous-move games
+
+Use when players commit actions before seeing others' choices.
+
+```python
+def legal_actions(self, state, player=None): ...
+def legal_joint_actions(self, state): ...
+def apply_actions(self, state, actions_by_player): ...
+```
+
+For simple BoardBench rollouts, `legal_actions(state)` at a simultaneous node should return joint actions that `apply_action(state, joint_action)` can resolve. Name joint actions as `p0:<a0>|p1:<a1>`.
+
+### Multiplayer, teams, or general-sum scoring
+
+- set `num_players` from the rulebook
+- `returns(state)` length must equal `num_players`
+- map team scores to each individual player explicitly
+- handle skipped/eliminated players in turn order
+
+### Repeated rounds or step rewards
+
+- keep cumulative returns separate from latest `rewards(state)` if step rewards matter
+- reset round-local state without losing cumulative scores
+- encode round limits, target score, or other stop rules
+
+### Games with OpenSpiel references
+
+If comparing against OpenSpiel later:
+
+- prefer rulebook-compatible action names that canonicalize well against OpenSpiel action strings
+- keep `render` compact enough for side-by-side inspection
+- document deliberate mismatches caused by incomplete rulebook text
+
+
+
+
+## Rule text (inputs/game_rules.pdf)
+
+NSFW EDITION!
+so funktioniert’s spielaufbau Spielzug
+spielende
+Einige Karten in diesem Spiel zeigen Exploding 
+Kittens. Ihr spielt, indem ihr reihum eine 
+verdeckte Karte vom Spielstapel zieht. So 
+lange, bis jemand ein Exploding Kitten zieht.
+In dem Augenblick explodiert dieser Spieler. 
+Er ist tot und scheidet aus dem Spiel aus.
+Legt alle 4 Exploding Kittens und alle 
+6 Karten „Entschärfung“ beiseite.
+Nimm deine 8 Startkarten auf die Hand, 
+schau sie dir an und entscheide dich für:
+Du beendest deinen Zug, indem du die 
+oberste Karte vom Spielstapel ziehst.
+Hoffentlich ist es kein Exploding Kitten.
+(Im Gegensatz zu vielen anderen Spielen 
+ziehst du die Karte am ENDE deines Zuges.)
+Die Partie geht im Uhrzeigersinn weiter.
+Mischt die restlichen Karten sorgfältig. Teilt 
+danach an jeden Spieler verdeckt 7 Karten aus.
+Mischt zuletzt alle übrigen Karten „Entschärfung“ 
+in den Spielstapel.
+Bestimmt einen Startspieler. (Mögliche Kriterien: 
+der beeindruckendste Bart, dominanter Geruch 
+oder die Länge des Blinddarms etc.)
+Mischt den Spielstapel und legt ihn verdeckt in 
+die Mitte des Tisches. Von diesem Stapel werdet 
+ihr im Spielverlauf reihum Karten ziehen.
+Das ist der Spielstapel.
+(Lasst etwas Platz für einen Ablagestapel.)
+Zusätzlich erhält jeder Spieler eine 
+Karte „Entschärfung“. So starten 
+alle mit 8 Karten auf der Hand. 
+Halte dein Blatt stets verdeckt.
+Nehmt jetzt von den zur Seite gelegten 
+Exploding Kittens eine Karte weniger als Spieler 
+teilnehmen und mischt sie in den Spielstapel. 
+Legt die übrigen Exploding Kittens in die 
+Schachtel zurück.
+Eine Runde endet, wenn nur noch ein 
+Spieler am Leben ist: der Gewinner.
+Je mehr Karten du ziehst, desto wahr­
+scheinlicher ziehst du ein Exploding Kitten.
+blick in die zukunft
+hops!
+Du kannst die Karte Blick 
+in die Zukunft ausspielen, 
+um dir die oberen drei Karten des 
+Spielstapels anzusehen. Wenn 
+dort ein Exploding Kitten lauert, 
+kannst du mit der Hops!­Karte 
+deinen Zug beenden, ohne eine 
+Karte vom Spielstapel zu ziehen.
+Jeder Spieler beginnt mit einer Karte „Entschärfung“, 
+der mächtigsten Karte im Spiel. Sie ist deine einzige 
+Rettung vor Exploding Kittens. Wenn du mit dieser 
+Karte auf ein Exploding Kitten reagierst, darfst du es 
+zurück in den Spielstapel legen, ohne zu explodieren. 
+Und zwar geheim an eine Stelle deiner Wahl.
+Sammle so viele Karten „Entschärfung“ wie möglich.
+Nehmt 3 Exploding Kittens bei 4 Spielern 
+und 2 Exploding Kittens bei 3 Spielern.
+Auf diese Weise ist ganz sicher, dass 
+alle Spieler explodieren – außer einem.
+Mischt nur 2 Karten „Entschärfung“ in den 
+Spielstapel und legt die übrigen in die 
+Schachtel zurück.
+beispiel
+Beispiel
+variante für zwei spieler
+ENTSchärfung
+denk dran
+Gut zu wissen
+PASSEn 
+Spiele keine Karte aus.
+spielen 
+Wähle eine deiner Handkarten aus, lege sie OFFEN 
+auf den Ablagestapel und befolge ihre Anweisung.
+Der Text auf der 
+Karte beschreibt, 
+was die Karte macht.
+Nachdem du die Anweisung der Karte befolgt hast, 
+kannst du weitere Karten spielen, so viele du möchtest.
+Spiele so viele (oder so wenige) Karten aus, wie du 
+möchtest, und ziehe am Ende eine Karte nach.
+Passen oder spielen, dann ziehen. 
+Passen oder spielen, dann ziehen.
+Der Spieler, der nicht explodiert 
+und als Letzter übrig ist, gewinnt.
+Keine Sorge, der Spielstapel wird nie leer, 
+weil alle Spieler (außer einem) vorher Exploding 
+Kittens ziehen werden – Explosionen garantiert!
+Versuche zu Beginn ein paar Karten auf der Hand 
+zu behalten, wenn die Wahrscheinlichkeit zu 
+explodieren noch gering ist.
+Du darfst die Anzahl der übrigen Karten im 
+Spielstapel jederzeit nachzählen.
+Es gibt keine minimale oder maximale Handkarten­
+zahl. Falls du keine Karten mehr auf der Hand 
+hast – keine Panik. Spiele einfach weiter. Am Ende 
+deines nächsten Zuges ziehst du wieder eine!
+schluss mit lesen! geh spielen!  
+falls ihr fragen zu bestimmten Karten habt, dreht die spielregel um.
+exploding kittens
+spielregeln
+spieler: 2–5
+spielmaterial: 56 Karten
+komm, leg die anleitung weg!
+ein spiel lernt man nicht,
+indem man regeln liest.
+schau dir lieber dieses
+video online an:
+WWW.EXPLODINGKITTENS.COM/HOW
+gründsätzlich
+wer explodiert, verliert.
+du bist ein verlierer, ein armseliges HÄUFCHEN elend.
+wer nicht explodiert, gewinnt.
+du bist zu etwas höherem bestimmt. gut gemacht!
+alle weiteren karten 
+reduzieren die WAHRSCHEINLICHKEIT, 
+durch exploding kittens zu explodieren.
+oder
+Copyright Exploding Kittens 2018
+
+kittensEXPLODING
+Krieche in einen Ziegenarsch und erblicke 
+lauter wundersame Dinge
+NSFW
+Blick in die Zukunft
+Blick in die Zukunft
+Schau dir die obersten drei 
+Karten des Spielstapels an.
+Beende deinen Zug, ohne eine Karte zu ziehen. 
+Der nächste Spieler muss zwei Züge machen.
+Angriff
+Lass die Folterhäschen frei
+Angriff
+NSFW
+NSFW
+Nö!
+Das NÖ! Zum Sonntag
+Nö!
+GELOBET SEI DAS  
+NÖÖÖ!
+Verhindere eine Aktion eines Mitspielers. 
+Immer einsetzbar.
+Misch den Spielstapel neu.
+Mischen
+Rauch Crack mit einer Baby-Eule
+Mischen
+NSFW
+LASS ‘MA EINEN DURCHZIEHEN, 
+BRO!
+Zombiekatze
+Zombiekatze
+Augenmampfende
+Augenmampfende
+Alleine ist diese Katzen-Karte machtlos.  
+Spiele zwei Zombiekatzen als Pärchen aus,  
+um eine Karte von einem Mitspieler zu stehlen.
+NSFW
+ MAMPF
+SCHMATZ
+SCHMATZ
+Zombiekatze
+Zombiekatze
+Augenmampfende
+Augenmampfende
+Alleine ist diese Katzen-Karte machtlos.  
+Spiele zwei Zombiekatzen als Pärchen aus,  
+um eine Karte von einem Mitspieler zu stehlen.
+NSFW
+ MAMPF
+SCHMATZ
+SCHMATZ
+beispielzug
+Exploding Kitten 4 karten angriff 4 karten
+hops! 4 karten
+katzen-karten  
+4 jeder art
+wunsch 4 karten
+mischen 4 karten
+blick in die zukunft 5 karten
+entschärfung 6 karten
+Nö! 5 karten
+Du spielst die KArte  
+„blick in die zukunft“ aus.
+du schaust dir die 3 obersten karten 
+an und siehst, dass du gleich ein 
+exploding kitten ziehen würdest.
+du ENTSCHEIDEST dich, eine 
+karte „angriff“ auszuspielen. 
+dadurch beendest du deinen 
+zug und zwingst gleichzeitig 
+den nächsten spieler, zwei 
+spielzüge zu machen.
+doch dann spielt ein anderer 
+spieler eine nö!-karte aus und 
+setzt deinen angriff ausser 
+kraft. du bist weiter am zug.
+du willst auf keinen fall 
+die nächste karte ziehen 
+und explodieren. Daher 
+spielst du eine karte 
+„mischen“ aus und darfst den 
+spielstapel neu mischen.
+neuE reihenfolge, 
+neues glück! du ziehst 
+die oberste karte und 
+beendest deinen spiel-
+zug. hoffentlich ist es 
+kein exploding kitten.
+Diese Karte musst du sofort offen zeigen. Solltest 
+du keine „Entschärfung“ mehr besitzen, war’s das.
+Alle deine restlichen Karten und das Exploding Kitten 
+wandern auf den Ablagestapel.
+Beende sofort deinen Zug, ohne eine Karte zu 
+ziehen. (Falls du „Hops!“ ausspielst, um einen 
+Angriff abzuwehren, überspringst du nur einen der 
+zwei Züge. Du müsstest schon zweimal „Hops!“ 
+ausspielen, um beide Züge zu beenden.)
+Pärchen
+Jetzt können ALLE gleichen Karten als Pärchen 
+gespielt werden, um einem Mitspieler eine 
+zufällige Karte zu stehlen. Die Regel gilt also 
+nicht mehr nur für Katzen­Karten, sondern für 
+alle Karten mit dem gleichen Titel (ein Pärchen 
+Wunsch­Karten, ein Pärchen Hops!­Karten ...).
+drilling 
+Wie ein Pärchen, außer dass du dir eine Karte 
+von dem Mitspieler wünschen darfst. Besitzt er 
+solch eine Karte, muss er sie dir geben. Hat er 
+keine solche Karte, hast du Pech gehabt.
+fünfling 
+Wenn du 5 verschiedene Karten (jede mit 
+einem anderen Titel) spielst, darfst du dir eine 
+beliebige Karte aus dem Ablagestapel nehmen.
+(Nicht trödeln, sonst hält dich noch jemand mit 
+einem NÖ! von deinem Vorhaben ab.)
+Wenn du eine Kombination spielst, gelten die 
+Anweisungen auf den Karten nicht.
+Einzeln sind diese Karten machtlos, doch wenn 
+du 2 gleiche Katzen­Karten hast, kannst du sie als 
+Pärchen spielen, um eine zufällige Karte von einem 
+Mitspieler zu stehlen. Oder du nutzt sie für eine 
+andere Kombination, siehe rechts.
+Zwinge einen Mitspieler deiner Wahl, dir eine Karte 
+zu geben. Dieser Spieler entscheidet, welche Karte 
+du bekommst.
+Misch den Spielstapel sorgfältig neu. (Diese Karte 
+ist besonders nützlich, wenn du weißt, dass ein 
+Exploding Kitten oben auf dem Stapel liegt.)
+Schau dir die obersten drei Karten des 
+Spielstapels an und lege sie zurück, ohne deren 
+Reihenfolge zu verändern. Zeige diese Karten bloß 
+nicht deinen Mitspielern.
+Du beendest deinen eigenen Zug, ohne eine Karte 
+zu ziehen, und zwingst den nächsten Spieler, zwei 
+Spielzüge direkt nacheinander auszuführen. Dein 
+Opfer macht seinen ersten Zug und direkt danach 
+noch einen. (Spielt dein Opfer dabei selbst eine Karte 
+„Angriff“ aus, ist er nicht mehr an der Reihe und der 
+nächste Spieler muss zwei Spielzüge ausführen.)
+Wenn du ein Exploding Kitten ziehst, kannst du eine 
+„Entschärfung“ ausspielen, statt zu sterben. Spiele 
+sie einfach aus und lege sie auf den Ablagestapel.
+Mit NÖ! setzt du eine 
+andere Karte und deren 
+Aktion außer Kraft, 
+ausgenommen Exploding 
+Kittens und Entschärfung. 
+Es ist so, als würde sich 
+die Karte, das Pärchen oder die Kombination 
+durch ein NÖ! in Luft auflösen. 
+Du kannst ein NÖ! auf ein anderes NÖ! legen, um 
+es aufzuheben und daraus ein DOCH! zu machen.
+Du kannst ein NÖ! auch 
+spielen, wenn du nicht 
+an der Reihe bist. Alle 
+Karten, die ge­NÖ!­t 
+wurden, sind raus 
+und bleiben auf dem 
+Ablagestapel.
+Lege danach das Exploding Kitten zurück in den 
+Spielstapel, und zwar geheim an eine Stelle deiner 
+Wahl, ohne die anderen Karten anzusehen oder 
+umzusortieren.
+Du willst dem nächsten Spieler eins auswischen? 
+Lege das Exploding Kitten ganz oben auf den 
+Spielstapel. Mach das z. B. unter dem Tisch, damit 
+niemand sieht, an welche Stelle du das Kitten 
+zurücklegst. Dann ist dein Spielzug beendet.
+Ich spiele Blick in die Zukunft. NO!
+Mist.
+PAFF!
+Doch!
+Gib mir deine 
+ENTSCHARFUNG. Bitte.
+kombinationen
+(lies das hier erst nach ein paar partien.)
+schlachtplan
+schaue hier nur nach, wenn du eine frage zu einer bestimmten karte hast.
+
+
+
+## Generated code (outputs/exploding_kittens_agentic.py)
+
+```python
 """A small rulebook-driven model of Exploding Kittens (German NSFW rule text).
 
 The implementation intentionally uses only the supplied rule text.  It models the
@@ -86,153 +726,6 @@ FULL_DECK_COUNTS: Dict[str, int] = {
 }
 
 _CARD_INDEX = {card: i for i, card in enumerate(CARD_ORDER)}
-_COMBO_SEPARATOR = "_and_"
-
-
-class _ActionName(str):
-    """Comparison-facing action name that preserves the raw action string.
-
-    The transition code in this generated game compares action_to_name(action)
-    to the raw strings returned by legal_actions. Keeping the underlying string
-    value raw preserves that API, while str(name) exposes the stable comparison
-    language used by BoardBench normalization.
-    """
-
-    def __new__(cls, raw: str, comparison: str):
-        obj = str.__new__(cls, raw)
-        obj._raw = raw
-        obj._comparison = comparison
-        return obj
-
-    @property
-    def raw_action(self) -> str:
-        return self._raw
-
-    def __str__(self) -> str:
-        return self._comparison
-
-    def __repr__(self) -> str:
-        return repr(self._comparison)
-
-    def __format__(self, format_spec: str) -> str:
-        return format(self._comparison, format_spec)
-
-
-def _combo_label(cards: Sequence[str]) -> str:
-    return _COMBO_SEPARATOR.join(cards)
-
-
-def _raw_action_from_name(name: str) -> Optional[str]:
-    if isinstance(name, _ActionName):
-        return name.raw_action
-
-    text = str(name).strip().lower()
-
-    if text in ("pass", "decline_nope"):
-        return text
-    if text.startswith(("play:", "pair:", "triple:", "five:", "give:", "chance:", "insert_exploding_kitten:")):
-        return text
-
-    if text == "pass_nope_response":
-        return "decline_nope"
-
-    insert_prefix = "place:exploding_kitten_at_draw_pile_pos"
-    if text.startswith(insert_prefix):
-        position = text[len(insert_prefix) :]
-        if position.isdigit():
-            return f"insert_exploding_kitten:pos{position}"
-
-    if not text.startswith("move:") or "->" not in text:
-        return None
-
-    source, target = text[len("move:") :].split("->", 1)
-
-    if source == f"hand_{FAVOR}" and target.startswith("discard_for_p"):
-        player = target[len("discard_for_p") :]
-        if player.isdigit():
-            return f"play:{FAVOR}->p{player}"
-
-    if source.startswith("hand_") and target == "discard":
-        return f"play:{source[len('hand_') :]}"
-
-    if source.startswith("pair_") and target.startswith("discard_for_p"):
-        player = target[len("discard_for_p") :]
-        if player.isdigit():
-            return f"pair:{source[len('pair_') :]}->p{player}"
-
-    if source.startswith("triple_") and target.startswith("discard_for_p") and "_ask_" in target:
-        player, requested = target[len("discard_for_p") :].split("_ask_", 1)
-        if player.isdigit() and requested:
-            return f"triple:{source[len('triple_') :]}->p{player}:ask:{requested}"
-
-    if source.startswith("five_") and target.startswith("discard_take_"):
-        combo = source[len("five_") :]
-        take = target[len("discard_take_") :]
-        cards = combo.split(_COMBO_SEPARATOR)
-        if combo and take and all(cards):
-            return f"five:{'+'.join(cards)}->discard:{take}"
-
-    if source.startswith("hand_") and target.startswith("player_p"):
-        player = target[len("player_p") :]
-        if player.isdigit():
-            return f"give:{source[len('hand_') :]}->p{player}"
-
-    return None
-
-
-def _comparison_name_for_raw_action(raw: str) -> str:
-    text = str.__str__(raw).strip().lower() if isinstance(raw, _ActionName) else str(raw).strip().lower()
-
-    if text == "pass":
-        return "pass"
-    if text == "decline_nope":
-        return "pass_nope_response"
-
-    if text.startswith(f"play:{FAVOR}->p"):
-        target = text.split("->", 1)[1]
-        return f"move:hand_{FAVOR}->discard_for_{target}"
-
-    if text.startswith("play:"):
-        card = text[len("play:") :]
-        return f"move:hand_{card}->discard"
-
-    if text.startswith("pair:"):
-        try:
-            title, target = text[len("pair:") :].split("->p", 1)
-        except ValueError:
-            return text
-        return f"move:pair_{title}->discard_for_p{target}"
-
-    if text.startswith("triple:"):
-        try:
-            before_ask, requested = text[len("triple:") :].split(":ask:", 1)
-            title, target = before_ask.split("->p", 1)
-        except ValueError:
-            return text
-        return f"move:triple_{title}->discard_for_p{target}_ask_{requested}"
-
-    if text.startswith("five:"):
-        try:
-            combo, take = text[len("five:") :].split("->discard:", 1)
-        except ValueError:
-            return text
-        return f"move:five_{_combo_label(combo.split('+'))}->discard_take_{take}"
-
-    if text.startswith("give:"):
-        try:
-            card, actor = text[len("give:") :].split("->p", 1)
-        except ValueError:
-            return text
-        return f"move:hand_{card}->player_p{actor}"
-
-    if text.startswith("insert_exploding_kitten:pos"):
-        position = text.rsplit("pos", 1)[1]
-        return f"place:exploding_kitten_at_draw_pile_pos{position}"
-
-    if text.startswith("chance:"):
-        return text
-
-    return text
 
 
 @dataclass
@@ -276,7 +769,7 @@ class Game:
         """Return a fresh canonical setup.
 
         The physical rules say to shuffle and choose a start player by any agreed
-        criterion. This model uses a deterministic canonical deal and p0 (or the
+        criterion.  This model uses a deterministic canonical deal and p0 (or the
         configured start_player) so tests and renders are reproducible.
         """
 
@@ -353,7 +846,7 @@ class Game:
             if self._count_in_hand(state, player, NOPE) > 0:
                 actor = int(state.pending["actor"])  # type: ignore[index]
                 # The rule text says Nö! prevents another player's action, but
-                # Nö! may be played on another Nö!. Therefore the actor cannot
+                # Nö! may be played on another Nö!.  Therefore the actor cannot
                 # start by noping their own card, but can answer a Nö!.
                 if state.nope_count > 0 or player != actor:
                     actions.append("play:noe")
@@ -431,13 +924,12 @@ class Game:
     def action_to_name(self, action: str) -> str:
         if not isinstance(action, str):
             raise TypeError("Actions in this implementation are canonical strings.")
-        raw = _raw_action_from_name(action) or str(action)
-        return _ActionName(raw, _comparison_name_for_raw_action(raw))
+        return action
 
     def name_to_action(self, name: str) -> str:
         if not isinstance(name, str):
             raise TypeError("Action names must be strings.")
-        return _raw_action_from_name(name) or str(name)
+        return name
 
     def chance_outcomes(self, state: GameState) -> List[Tuple[str, float]]:
         if self.is_terminal(state):
@@ -728,7 +1220,7 @@ class Game:
         player = state.current
         if not state.draw_pile:
             # The rulebook says the draw pile will not run out because exploding
-            # kittens ensure all but one player leave first. This fallback keeps
+            # kittens ensure all but one player leave first.  This fallback keeps
             # custom test states finite without inventing a card.
             return self._finish_one_turn_unit(state)
 
@@ -738,7 +1230,7 @@ class Game:
 
         if card == EXPLODING_KITTEN:
             if DEFUSE in state.hands[player]:
-                # Playing Entschärfung is the only rescue described. The model
+                # Playing Entschärfung is the only rescue described.  The model
                 # uses it automatically when available, then asks where to put
                 # the Exploding Kitten back into the draw pile.
                 self._move_from_hand_to_discard(state, player, [DEFUSE])
@@ -955,3 +1447,4 @@ __all__ = [
     "CARD_TITLES",
     "FULL_DECK_COUNTS",
 ]
+```

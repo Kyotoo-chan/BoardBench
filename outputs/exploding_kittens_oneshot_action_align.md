@@ -1,3 +1,10 @@
+## Action naming changes
+
+- Renamed single card plays from `remove:play_<card>` to `remove:<card>` because `remove:` already encodes the action kind.
+- Renamed Favor plays from `remove:play_wunsch_target_playerN` to `remove:wunsch_target_playerN` for cleaner normalized keys.
+- Renamed Favor-give transfers from `move:hand->favor_requester_<card>` to `move:hand_<card>->favor_requester` so the moved card is encoded unambiguously in the route.
+
+```python
 from dataclasses import dataclass, replace
 from itertools import combinations
 from collections import Counter
@@ -694,3 +701,4 @@ class Game:
         if method == "even_then_odd":
             return deck[::2] + deck[1::2]
         raise ValueError("Unknown shuffle method.")
+```

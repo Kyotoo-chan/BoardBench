@@ -123,6 +123,7 @@ Use simple, human-readable filenames.
 - Notebook cell execution output complements `outputs/` text logs. For intentional test or experiment commits, **keep** the relevant notebook stdout (`OK` / `FAIL` / `---- summary` lines and per-phase run times) so the saved run is visible without re-execution.
 - Clear only stale or noisy notebook outputs before commit (unrelated cells, huge tracebacks, admin noise). Do **not** strip outputs from cells that belong to the committed test run.
 - Mirror important notebook results in `outputs/` where applicable (e.g. `*_checks.txt`, `*_pair_action_compare.txt`).
+- `run_full_evaluation()` and `run_pair_action_compare()` always append per-phase `---- phase ...` lines plus a final weighted `---- summary` (with total seconds) to the matching `outputs/` log. Commits that include test artifacts therefore preserve run timings even when notebook cell outputs are omitted.
 
 ## Evaluation notebook rules
 
@@ -140,5 +141,6 @@ Use simple, human-readable filenames.
 - `05_random_rollouts` uses the notebook `ROLLOUTS` budget (default 100). `06_action_language` always uses 100 rollouts and counts one unit per legal action checked in visited states; per-check score is still proportional, but summary weighting keeps it comparable to other quality checks.
 - Manual evaluation notebooks use `ROLLOUTS = 100` by default. Coding agents should not run the full evaluation pipeline unless the user explicitly asks.
 - Pair oneshot-vs-agentic comparison uses `PAIR_ROLLOUTS` (default 1000, same scale as OpenSpiel comparison) — many independent lockstep games, not a handful of sampled actions.
-- Before pair comparison or OpenSpiel comparison, run LLM action-language align on the generated code so `action_to_name` / `name_to_action` use an unambiguous comparison language.
+- Before OpenSpiel comparison, run single-file LLM action-language align on the generated code.
+- Before oneshot-vs-agentic pair comparison, run **one joint** LLM pair align (`prompts/action_language_pair_align.md`) on both variants so normalized action keys match across implementations.
 - Action-language align runs immediately before OpenSpiel compare or pair compare, not before the base checks.

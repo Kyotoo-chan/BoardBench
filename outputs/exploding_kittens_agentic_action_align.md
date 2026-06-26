@@ -1,3 +1,11 @@
+## Action naming changes
+
+- Raw card actions (`play:`, `pair:`, `triple:`, `five:`, `give:`) emit normalized `move:<source>-><target>` names.
+- Defuse reinsertion emits `place:exploding_kitten_at_draw_pile_pos<N>`.
+- Chance outcomes keep explicit `chance:<kind>:...` names.
+- `decline_nope` is distinguished as `pass_nope_response` so it cannot collide with the normal turn `pass`.
+
+```python
 """A small rulebook-driven model of Exploding Kittens (German NSFW rule text).
 
 The implementation intentionally uses only the supplied rule text.  It models the
@@ -955,3 +963,4 @@ __all__ = [
     "CARD_TITLES",
     "FULL_DECK_COUNTS",
 ]
+```

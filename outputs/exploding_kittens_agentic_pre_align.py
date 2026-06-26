@@ -93,7 +93,7 @@ class _ActionName(str):
     """Comparison-facing action name that preserves the raw action string.
 
     The transition code in this generated game compares action_to_name(action)
-    to the raw strings returned by legal_actions. Keeping the underlying string
+    to the raw strings returned by legal_actions.  Keeping the underlying string
     value raw preserves that API, while str(name) exposes the stable comparison
     language used by BoardBench normalization.
     """
@@ -276,7 +276,7 @@ class Game:
         """Return a fresh canonical setup.
 
         The physical rules say to shuffle and choose a start player by any agreed
-        criterion. This model uses a deterministic canonical deal and p0 (or the
+        criterion.  This model uses a deterministic canonical deal and p0 (or the
         configured start_player) so tests and renders are reproducible.
         """
 
@@ -353,7 +353,7 @@ class Game:
             if self._count_in_hand(state, player, NOPE) > 0:
                 actor = int(state.pending["actor"])  # type: ignore[index]
                 # The rule text says Nö! prevents another player's action, but
-                # Nö! may be played on another Nö!. Therefore the actor cannot
+                # Nö! may be played on another Nö!.  Therefore the actor cannot
                 # start by noping their own card, but can answer a Nö!.
                 if state.nope_count > 0 or player != actor:
                     actions.append("play:noe")
@@ -728,7 +728,7 @@ class Game:
         player = state.current
         if not state.draw_pile:
             # The rulebook says the draw pile will not run out because exploding
-            # kittens ensure all but one player leave first. This fallback keeps
+            # kittens ensure all but one player leave first.  This fallback keeps
             # custom test states finite without inventing a card.
             return self._finish_one_turn_unit(state)
 
@@ -738,7 +738,7 @@ class Game:
 
         if card == EXPLODING_KITTEN:
             if DEFUSE in state.hands[player]:
-                # Playing Entschärfung is the only rescue described. The model
+                # Playing Entschärfung is the only rescue described.  The model
                 # uses it automatically when available, then asks where to put
                 # the Exploding Kitten back into the draw pile.
                 self._move_from_hand_to_discard(state, player, [DEFUSE])
