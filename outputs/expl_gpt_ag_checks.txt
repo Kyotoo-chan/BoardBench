@@ -1,0 +1,10 @@
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.02s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    8/8 score=1.000    0.00s
+FAIL 05_random_rollouts               0/100 score=0.000    0.53s  random rollout 1 crashed: _ActionName.__new__() missing 1 required positional argument: 'comparison'
+FAIL 06_action_language         29184/29284 score=0.997    0.65s  action-language rollout 1 crashed: _ActionName.__new__() missing 1 required positional argument: 'comparison'
+OK   90_llm_judge                   71/100 score=0.710    0.00s
+---- phase base checks                  7/7 score=1.000    0.00s
+---- phase llm judge                    1/1 score=0.710    0.00s
+---- summary                            9/9 score=0.793    0.00s
