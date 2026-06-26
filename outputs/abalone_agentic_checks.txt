@@ -1,7 +1,0 @@
-OK   01_result_file                     1/1 score=1.000    0.00s
-OK   02_python_syntax                   1/1 score=1.000    0.00s
-OK   03_startable_game                  1/1 score=1.000    0.00s
-OK   04_required_api                    8/8 score=1.000    0.00s
-OK   05_random_rollouts             100/100 score=1.000   43.41s
-OK   06_action_language     1990103/1990103 score=1.000   61.55s
-OK   90_llm_judge                    78/100 score=0.780  193.67s

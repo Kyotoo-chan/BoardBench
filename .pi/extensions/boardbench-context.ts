@@ -7,7 +7,7 @@ import type {
 type Mode = "readonly" | "generate" | "authoring";
 
 const MODE_ENTRY_TYPE = "boardbench-mode";
-const GAME = "abalone";
+const GAME = "exploding_kittens";
 const GENERATED_CODE_PATH = `outputs/${GAME}.py`;
 
 const MINIMAL_START_PROMPT = [
