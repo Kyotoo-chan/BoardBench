@@ -1,0 +1,4 @@
+OK   pair_action_compare      299924/299924 score=1.000 1374.51s
+---- phase pair align                   1/1 score=1.000 1714.18s
+---- phase pair compare                 1/1 score=1.000 1374.51s
+---- summary                            2/2 score=1.000 3088.69s
