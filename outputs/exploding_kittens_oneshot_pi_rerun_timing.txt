@@ -1,4 +1,0 @@
-generation_seconds=744.1
-actual_note=claude_reference_spacing_1664.7s
-evaluation_seconds=167.5
-actual_eval_note=claude_reference_spacing_564.7s
