@@ -1,2 +1,7 @@
-- Outputs zu Openspiel schwer vergleichbar, da Zugsyntax immer unterschiedlich ist
-- Woher weiß ich, dass der Output über haupt das gewünschte Spiel ist. Woran kann man das ableiten?
+Diese Notizen wurden nach PROBLEME.md (Repo-Root) konsolidiert.
+
+Siehe: ../PROBLEME.md
+
+Kurz die beiden ursprünglichen Punkte:
+- OpenSpiel-Vergleich bleibt schwer wegen unterschiedlicher Zugsemantik/Namensgebung (teilweise durch Align+Normalizer adressiert, nicht vollständig gelöst).
+- „Ist das das gewünschte Spiel?“ — nur indirekt über Setup-Invarianten, Judge, Szenario-Checks und manuelle Review ableitbar; kein automatischer Identitäts-Check.
