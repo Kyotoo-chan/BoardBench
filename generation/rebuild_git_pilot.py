@@ -29,7 +29,9 @@ INFRA_RESTORE_PATHS = [
     "generation/llm_cli.py",
     "generation/run_codex_series.py",
     "generation/run_codex_eval.py",
-    "docs/codex_pilot_workflow.md",
+    "generation/config.py",
+    "generation/activate_game.py",
+    "generation/prepare_game_run.py",
 ]
 
 CODE_INFRA_PATHS = [
@@ -317,13 +319,23 @@ def snapshot_workspace() -> Path:
 
 def clear_outputs_dir() -> None:
     out = REPO_ROOT / "outputs"
-    for path in out.iterdir():
+    out.mkdir(parents=True, exist_ok=True)
+    for path in list(out.iterdir()):
         if path.name == ".gitkeep":
             continue
         if path.is_file():
             path.unlink()
         elif path.is_dir():
             shutil.rmtree(path)
+    try:
+        tracked = run_git("ls-files", "outputs")
+        for rel in tracked.splitlines():
+            if rel.endswith(".gitkeep"):
+                continue
+            run_git("rm", "-f", "--cached", rel)
+    except RuntimeError:
+        pass
+    (out / ".gitkeep").touch(exist_ok=True)
 
 
 def restore_paths(snap: Path, rel_paths: list[str]) -> None:
@@ -356,6 +368,7 @@ def apply_plan(plan: list[PlannedCommit], snap: Path) -> None:
             run_git("checkout", "pilot-rebuild-backup", "--", rel)
         except RuntimeError:
             restore_paths(snap, [rel])
+    clear_outputs_dir()
     date = "2026-06-27 23:33:00"
     run_git("add", "-A")
     run_git(
