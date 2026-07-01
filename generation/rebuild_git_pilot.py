@@ -311,7 +311,7 @@ def snapshot_workspace() -> Path:
     for game in ("havannah", "abalone", "exploding_kittens"):
         src = REPO_ROOT / "inputs" / "games" / game / "game_rules.pdf"
         if src.exists():
-            dst = snap / "inputs" / "game_rules.pdf"
+            dst = snap / "inputs" / "games" / game / "game_rules.pdf"
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
     return snap
@@ -384,7 +384,21 @@ def apply_plan(plan: list[PlannedCommit], snap: Path) -> None:
             clear_outputs_dir()
         output_paths = filter_existing(snap, item.output_paths)
         restore_paths(snap, output_paths)
-        restore_paths(snap, filter_existing(snap, item.extra_paths))
+        for rel in item.extra_paths:
+            if rel == "inputs/game_rules.pdf":
+                game_key = {
+                    "prepare havannah for claude oneshot and agentic generations": "havannah",
+                    "prepare abalone for claude oneshot and agentic generations": "abalone",
+                    "prepare exploding kittens for claude oneshot and agentic generations": "exploding_kittens",
+                }.get(item.message)
+                if game_key:
+                    src = snap / "inputs" / "games" / game_key / "game_rules.pdf"
+                    if src.exists():
+                        dst = REPO_ROOT / rel
+                        dst.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(src, dst)
+                continue
+            restore_paths(snap, [rel])
 
         run_git("add", "-A")
         # Drop judge packets if any slipped in
@@ -395,6 +409,10 @@ def apply_plan(plan: list[PlannedCommit], snap: Path) -> None:
                 path = REPO_ROOT / line
                 if path.exists():
                     path.unlink()
+
+        if not run_git("status", "--porcelain").strip():
+            print(f"skip empty: {item.message}")
+            continue
 
         date = commit_date(item.date_key)
         env = {"GIT_AUTHOR_DATE": date, "GIT_COMMITTER_DATE": date}
