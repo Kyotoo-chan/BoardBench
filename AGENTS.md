@@ -113,6 +113,60 @@ If a workflow produces model artifacts, prefer storing:
 
 Use simple, human-readable filenames.
 
+### Output artifact naming
+
+Pattern: `{game}_{backend}_{variant}` plus optional suffix.
+
+| Part | Values | Example stem |
+|------|--------|--------------|
+| game | `hav`, `aba`, `expl` | `expl_codex_os` |
+| backend | `gpt` (pi era), `claude`, `codex` | |
+| variant | `os` (one-shot), `ag` (agentic) | |
+
+Helper: `generation.config.output_stem(game, backend, variant)`.
+
+Standard files per run:
+
+- `{stem}.md` — raw LLM response
+- `{stem}.py` — extracted module
+- `{stem}_checks.txt` — check log (mechanical + judge + OpenSpiel when enabled)
+- `{stem}_judge_{backend}.md` — LLM judge reviews (`gpt` = pi, `codex`, `claude`)
+- Judge packets are assembled ephemerally at run time; **do not commit** `*_judge_packet.md`
+- `{stem}_pre_align.py`, `{stem}_action_align.md` — only when OpenSpiel compare runs
+
+Do **not** keep Claude-only `*_generation_packet.md`, pi `*_first_gen.*`, or temp `boardbench_*_codex_*.md` in `outputs/`.
+
+### One active game in `outputs/`
+
+`outputs/` should contain **only the current game** being worked on. Older games live in git history and can be restored with `git checkout <commit> -- outputs/...`. Cross-game comparison plots pin scores in `plots/make_plots.py`, not live reads from `outputs/`.
+
+### Generation backends (pilot trio)
+
+| Label in plots | Invocation | Model / effort |
+|----------------|------------|----------------|
+| pi | `pi -p --model openai-codex/gpt-5.5:xhigh` | GPT-5.5, xhigh |
+| Codex | `npx @openai/codex exec` via `generation/run_codex_series.py` | GPT-5.5, xhigh |
+| Claude | `claude -p` in evaluation notebooks | Opus 4.8, max effort |
+
+All pilot comparison runs used **maximum reasoning** for the respective backend.
+
+### Codex pilot workflow notes
+
+- `generation/run_codex_series.py` — generation + base checks 01–06 only.
+- `generation/run_codex_eval.py` — judge (+ OpenSpiel for Havannah) after generation.
+- `configure_namespace()` must set **all** path variables including `JUDGE_REVIEW_PATH`; otherwise judge steps can pick up the wrong game's review file.
+- Codex subprocess cwd must be repo root; `-C` paths must be absolute (PDF rulebooks otherwise fail on Windows).
+- UTF-8 stdin for Codex prompts (`errors="replace"` on encode) when rulebooks contain odd bytes.
+
+### Git rhythm per game
+
+1. `prepare <game> rulebook and clear <previous> outputs`
+2. save oneshot generation
+3. save agentic generation
+4. save test artifacts (judge, updated checks)
+
+Do not bundle unrelated games in `outputs/` at commit time. Do not add Cursor or other tools as co-authors on commits.
+
 ## Artifact and path rules
 
 - `outputs/` holds generated game code, raw LLM answers, check logs, judge reviews, align backups, and other experiment artifacts needed for later thesis analysis.
