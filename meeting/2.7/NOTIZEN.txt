@@ -1,0 +1,8 @@
+Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
+
+Hinweis: Die ursprüngliche meeting/29.6/NOTIZEN.txt war nur lokal und nie in git.
+Sie ging bei einem lokalen Cleanup verloren. Inhalt bitte aus dem Gespräch vom 2.7 hier nachtragen.
+
+Meeting: 2.7.2026 (Prof)
+
+- 

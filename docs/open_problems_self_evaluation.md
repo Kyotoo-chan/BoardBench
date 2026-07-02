@@ -193,7 +193,7 @@
 
 ### 2.7 „Es hängt am LLM Output“ (Prof-Meeting) ist strukturell korrekt
 
-**Kurz:** `meeting/.../QUESTIONS.txt` — Pipeline-Ergebnis = Qualität des generierten Moduls + nachgelagerter LLM-Schritte.
+**Kurz:** `meeting/2.7/QUESTIONS.txt` — Pipeline-Ergebnis = Qualität des generierten Moduls + nachgelagerter LLM-Schritte.
 
 **Selbst-Evaluation:**
 - [ ] Trifft zu? ___
@@ -960,7 +960,7 @@ Geh diese Fragen schriftlich an (aus `evaluation_draft.md` §22 + `QUESTIONS.txt
 | Judge-Workflow | `docs/llm_judge_workflow.md` |
 | Eval-Ideen (breit) | `docs/evaluation_draft.md` |
 | Architektur-Checkliste DE | `docs/boardbench_checkliste.md` |
-| Prof-Fragen | `meeting/9.6/29.6/QUESTIONS.txt` |
+| Prof-Fragen | `meeting/2.7/QUESTIONS.txt` |
 | Konsolidierte Analyse | `PROBLEME.md` |
 | Ältere Kurznotiz | `docs/PROBLEME.txt` |
 | Letzter EK-Lauf | `outputs/exploding_kittens_*` |

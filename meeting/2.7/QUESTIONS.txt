@@ -1,0 +1,22 @@
+Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
+
+- Wie gehts weiter? Es hängt am LLM OUTput
+- Mehr vergleichen mit weniger oder mehr output
+
+- Das OpenGame nutzen für Implementierung und dann nur Tests schreiben??
+- Anleitungen verbessern (= Nur Text, Pdfs brauchen visionprocessing)
+- Ganzes Beispiel Game ablegen?
+
+
+- Bei Gpt (5.5 xhigh) dauert oneshot >> agentic bei claude (opus 4.8 max) ist es agentic >> oneshot
+
+- Beim Versuch es mit Claude zu machen, bin ich schnell ins 5h limit gelaufen
+- Beim Exploding-Kittens-Generieren bin ich wieder direkt ins 5h-Limit gelaufen (neue Session)
+- Falls wir weiter mit Claude arbeiten wollen: mit meinem Account nicht möglich; ich habe das Abo auch gekündigt
+
+- Weitere Ideen für tests?
+- Cross Judge, damit nicht von einem Modell abhängig
+
+
+- Karte doch für lokale Räume freischalten
+- Er meint, dass Anmeldung chill ist und man das auch im Nachgang anmelden kann
