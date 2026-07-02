@@ -54,9 +54,17 @@ JUDGE_PROFILES = {
         "timeout_oneshot": 2000,
         "timeout_agentic": 4000,
     },
+    "claude": {
+        "cli_backend": "claude",
+        "model": "opus",
+        "effort": "max",
+        "timeout_oneshot": 2000,
+        "timeout_agentic": 4000,
+    },
 }
 
 ACTIVE_JUDGE_BACKENDS = ("gpt", "codex")
+CLAUDE_JUDGE_BACKEND = "claude"
 
 
 def judge_review_path(stem: str, judge_backend: str) -> Path:
@@ -172,7 +180,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--game", choices=RERUN_ORDER)
     parser.add_argument("--impl-backend", choices=("gpt", "claude", "codex"))
     parser.add_argument("--variant", choices=("oneshot", "agentic"))
-    parser.add_argument("--judge-backend", choices=ACTIVE_JUDGE_BACKENDS)
+    parser.add_argument("--judge-backend", choices=(*ACTIVE_JUDGE_BACKENDS, CLAUDE_JUDGE_BACKEND))
+    parser.add_argument(
+        "--claude-judges",
+        action="store_true",
+        help="Run claude judge on claude-generated implementations only",
+    )
     parser.add_argument("--all", action="store_true", help="All missing gpt+codex judges")
     parser.add_argument("--force", action="store_true", help="Re-run even if review exists")
     return parser.parse_args()
@@ -181,6 +194,21 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     ran = 0
+
+    if args.claude_judges:
+        for run in PILOT_RUNS:
+            if run.impl_backend != "claude":
+                continue
+            if run_one_judge(
+                run.game,
+                run.impl_backend,
+                run.variant,
+                CLAUDE_JUDGE_BACKEND,
+                force=args.force,
+            ):
+                ran += 1
+        print(f"\ncompleted {ran} new claude judge run(s)", flush=True)
+        return 0
 
     if args.all:
         for run in PILOT_RUNS:

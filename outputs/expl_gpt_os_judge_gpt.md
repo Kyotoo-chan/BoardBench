@@ -1,78 +1,90 @@
 ### 1. Score
 
-score: 0.65  
-confidence: medium
+- `score: 0.65`
+- `confidence: medium`
 
-The implementation is playable and covers many core card effects, setup counts, elimination, defuse, combinations, and terminal winner logic. The largest fidelity gaps are stochastic handling: setup shuffles/deals are deterministic, and “Mischen” uses a small invented set of shuffle outcomes rather than the rulebook’s physical shuffle. The out-of-turn `Nö!` timing is also approximated with a serial pass/nope phase, which is testable but partly invented.
+The implementation is playable and covers many major card effects, player elimination, turn order, Defuse, Attack/Skip, Nope, Favor, pairs/triples/five-card combos, and terminal winner logic. However, the rulebook’s random setup/shuffling and hidden-information nature are only approximated, with deterministic setup and invented shuffle outcomes. Several legal-action/timing choices are also invented or uncertain, so it is not fully benchmark-ready.
 
 ### 2. Top findings
 
 1. **severity: major**  
-   **evidence:** Rulebook repeatedly says to shuffle the remaining cards / draw pile; code comments say “physical random setup shuffle is replaced by deterministic setup,” and `chance_shuffle` offers only `keep`, `reverse`, `cut1`, `cut_half`, `even_then_odd`.  
-   **why it matters:** Deck order, deal, and shuffle outcomes are central to Exploding Kitten risk and hidden information.  
-   **suggested next action:** Model shuffling/dealing as explicit chance, or clearly scope this as a deterministic variant.
+   **evidence:** Rulebook repeatedly says to shuffle the deck and deal cards hidden; code uses `_deterministic_setup_shuffle()` and `chance_shuffle` with only `keep/reverse/cut1/cut_half/even_then_odd`.  
+   **why it matters:** The deck/hands and Shuffle card behavior materially affect gameplay probabilities.  
+   **suggested next action:** Model setup and shuffle as explicit chance outcomes or document this as a deterministic benchmark variant.
 
 2. **severity: major**  
-   **evidence:** Rulebook: `Nö!` is “Immer einsetzbar” and can counter another `Nö!`; code creates a turn-ordered `nope` phase with required `pass` actions.  
-   **why it matters:** This invents timing/pass mechanics and may reveal or constrain hidden response opportunities.  
-   **suggested next action:** Document this as a BoardBench response-window convention or redesign with clearer simultaneous/out-of-turn response handling.
+   **evidence:** Rulebook requires hands to be hidden; code has `information_state`, but `render()` reveals all hands and full deck, and some action names reveal hidden transfer/steal results.  
+   **why it matters:** Hidden information is central to the game and affects agent/legal-action assumptions.  
+   **suggested next action:** Clearly separate debug render from player observations and test `information_state`.
 
-3. **severity: minor**  
-   **evidence:** Rulebook says a player “kannst” play `Entschärfung` instead of dying; code automatically uses it when available.  
-   **why it matters:** Removes a legal choice, though usually harmless/rational.  
-   **suggested next action:** Either add explicit `defuse` / `explode` choice or document automatic defuse as an assumption.
+3. **severity: major**  
+   **evidence:** Rulebook says `Nö!` is playable any time to cancel another card/combo; code implements a serialized `nope` phase requiring explicit `pass` actions.  
+   **why it matters:** This changes the action protocol and can make benchmark traces artificial, though outcomes may often match.  
+   **suggested next action:** Document this interrupt-window convention and add tests for Nope chains.
 
 4. **severity: minor**  
-   **evidence:** Only one cat-card name is visible in the provided text; code invents `Katzenkarte 2` through `Katzenkarte 5`.  
-   **why it matters:** Action/render labels are less faithful if original labels exist elsewhere in the rulebook images.  
-   **suggested next action:** Use actual labels if available, otherwise keep as documented assumption.
+   **evidence:** Code disallows single powerless cat-card plays, auto-uses Defuse, forbids triplet requests for Exploding Kitten, and restricts Favor/pair targets to players with cards.  
+   **why it matters:** These are plausible but not all explicitly specified by the provided rulebook.  
+   **suggested next action:** Clarify these assumptions or expose them as explicit choices.
+
+5. **severity: minor**  
+   **evidence:** Cat card titles 2–5 are placeholders; scoring returns are `+1/-1`; “pass” is represented as `draw`.  
+   **why it matters:** Mostly harmless, but affects action names, rendering, and benchmark comparisons.  
+   **suggested next action:** Use exact titles if available and document payoff/action-name conventions.
 
 ### 3. Rule coverage review
 
 | rule area | coverage | evidence | notes |
 |---|---|---|---|
-| setup | partially covered | Correct card counts, player defuses, kittens = players - 1; deterministic shuffle/deal | Main count logic is good, randomness is not faithful |
-| player count and turn order | covered correctly | Supports 2–5 players, clockwise next alive player | Start player parameter is reasonable |
-| legal actions | partially covered | Draw, card plays, combos, favor, pair/triplet/five implemented | `Nö!` timing and some target restrictions are assumptions |
-| state transitions | partially covered | Defuse, explosion, skip, attack, favor, combos mostly implemented | Shuffle and response windows are invented/approximate |
-| terminal conditions | covered correctly | Terminal when one player alive | Matches “last alive wins” |
-| scoring/returns | partially covered | Winner gets `1.0`, losers `-1.0` | Numeric convention not specified by rulebook but acceptable |
-| rendering/action names | mostly covered | Stable names and compact render | Render exposes full hidden state as debug |
-| chance | partially covered | Pair stealing uses chance by card title | Setup and shuffle chance are not faithfully modeled |
-| hidden information | partially covered | `information_state` hides other hands/deck order | Full state/render reveal all; response phase may leak `Nö!` existence |
-| simultaneous/out-of-turn | partially covered | `Nö!` represented by serial phase | Not the same as “always playable” interrupt timing |
+| setup | partially covered | Deals 7 cards plus 1 Defuse each; inserts `players - 1` Exploding Kittens; special 2-player Defuse count | Card counts mostly match, but setup shuffle/deal is deterministic |
+| player count and turn order | covered correctly | `2 <= num_players <= 5`, `_next_alive`, eliminated players skipped | Start player is numeric parameter rather than rulebook-style table choice |
+| legal actions | partially covered | Supports draw, Attack, Skip, Shuffle, See Future, Favor, pairs, triplets, five-card combo, Nope windows | Some legal/illegal choices are assumptions |
+| state transitions | partially covered | Implements draw, explosion, Defuse insertion, death, Skip, Attack, Favor, steal, combo effects | Shuffle and Nope timing are approximated |
+| terminal conditions | covered correctly | Terminal when one or fewer players alive | Matches “last alive wins” |
+| scoring/returns | partially covered | Winner gets `1.0`, eliminated players `-1.0` | Numeric payoff convention is invented |
+| rendering/action names | partially covered | Stable names and render exist | Render exposes hidden state; placeholder cat names |
+| chance handling | partially covered | Pair steal and Shuffle use chance phases | Initial deal is not chance; Shuffle outcomes are invented/incomplete |
+| hidden information | partially covered | `information_state()` hides other hands/deck size only | Full `GameState`/`render` expose everything; needs tests |
+| simultaneous/asynchronous moves | partially covered | Nope interrupt modeled as sequential phase | No true simultaneous/anytime interrupt handling |
 
 ### 4. Unsupported assumptions or invented rules
 
-- **Risky:** Deterministic setup shuffle/deal instead of random shuffled setup.
-- **Risky:** `Mischen` has five invented shuffle outcomes with equal probability.
-- **Risky:** `Nö!` uses serial `pass`/`nope` turns rather than free out-of-turn play.
-- **Risky/minor:** `Entschärfung` is automatic, not an explicit player choice.
-- **Minor:** Generic names for four cat-card types.
-- **Minor:** Returns use `+1/-1`; rulebook only says winner/losers.
-- **Minor:** Favor/pair target only legal if target has cards.
-- **Minor:** Triplet cannot request `Exploding Kitten`.
+- Deterministic setup shuffle replaces physical shuffling.
+- Shuffle card has five artificial equiprobable outcomes.
+- Cat card titles 2–5 are placeholder names.
+- Start player is chosen by numeric constructor argument.
+- `Nö!` timing is represented by a forced sequential pass/nope phase.
+- Defuse is automatically used if available.
+- Triplet requests cannot ask for Exploding Kitten.
+- Favor/pair targets must currently have cards.
+- Five-card combo can only take a card already in discard before the combo cards are discarded.
+- Single powerless cat cards are not legal plays.
+- Returns use `+1/-1`.
+- `draw` represents “pass/do not play a card, then draw.”
 
 ### 5. Missing scenario tests
 
-- Setup counts for 2, 3, 4, and 5 players: hand size 8, one `Entschärfung` each, kittens in deck = players - 1.
-- Top-deck normal draw: `draw` adds card to hand and advances turn.
-- Explosion without defuse: `draw` on top `Exploding Kitten` eliminates player and discards hand.
-- Defuse flow: `draw`, then `insert:Exploding_Kitten@pos0`; assert defuse discarded, player alive, turn ends.
-- `play:Hops` during an attack should consume only one pending turn.
-- `play:Angriff` during an attack should pass two turns to the next player.
-- `Nö!` cancels `play:Angriff`; `Nö!` on `Nö!` restores the attack.
-- `play:Wunsch->player1`, then `give:<card>` transfers chosen card.
-- Pair steal enters chance and probabilities sum to 1.
-- Triplet request succeeds if target has card and fails otherwise.
-- Five-card combo retrieves selected discard card.
-- `play:Blick_in_die_Zukunft` updates only acting player’s information state.
+- Setup counts for 2, 3, 4, and 5 players.
+- Basic `draw` of a non-Exploding card advances turn.
+- Drawing Exploding Kitten without Defuse eliminates player and discards hand.
+- Drawing Exploding Kitten with Defuse enters `insert_kitten`, then `place:deck_pos_...`.
+- `remove:hops` during an Attack skips only one of two turns.
+- `remove:angriff` during an Attack passes two turns to the next player.
+- Nope chain: `remove:mischen`, `nope`, `nope`, then resolution.
+- Favor: `remove:wunsch_target_player1`, then `move:hand_<card>->favor_requester`.
+- Pair steal enters chance and transfers one random card.
+- Triplet hit and miss cases.
+- Five-card combo retrieves a discard card and is cancelable by Nope.
+- `remove:blick_in_die_zukunft` only exposes top cards in that player’s `information_state`.
 
 ### 6. Open questions for the human
 
-- Should this benchmark model real shuffle/deal randomness, or is a deterministic fixed-deck variant acceptable?
-- Should `Nö!` be represented as a sequential response window, simultaneous opportunity, or simplified away?
-- Should defusing an `Exploding Kitten` be mandatory or an explicit choice?
+- Should BoardBench model the real random setup/shuffle as chance nodes, or is deterministic setup acceptable for this variant?
+- Are exact NSFW cat-card titles required?
+- Is playing a single powerless cat card legal?
+- Should Defuse use be optional or automatic?
+- Are stolen/given card identities public to all players or only to involved players?
+- What numeric payoff convention should be used for winner/losers?
 
 ### 7. Machine-readable summary
 
@@ -80,7 +92,7 @@ The implementation is playable and covers many core card effects, setup counts, 
 score: 0.65
 confidence: medium
 critical_issues: 0
-major_issues: 2
+major_issues: 3
 minor_issues: 2
 needs_rulebook_clarification: true
 needs_code_change: true

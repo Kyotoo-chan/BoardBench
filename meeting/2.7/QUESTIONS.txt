@@ -17,6 +17,9 @@ Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 - Weitere Ideen für tests?
 - Cross Judge, damit nicht von einem Modell abhängig
 
+- Nicht vergessen: Es gab ursprünglich eine kaputte Version (das muss im Verlauf dokumentiert bleiben).
+- Nicht vergessen: Es gab auch eine Version mit Angriff-Logik, die nicht richtig funktioniert hat.
+
 
 - Karte doch für lokale Räume freischalten
 - Er meint, dass Anmeldung chill ist und man das auch im Nachgang anmelden kann

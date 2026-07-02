@@ -1,0 +1,12 @@
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.00s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    8/8 score=1.000    0.00s
+OK   05_random_rollouts             100/100 score=1.000    6.80s
+OK   06_action_language     1248873/1248873 score=1.000   26.26s
+OK   90_llm_judge                   85/100 score=0.850    0.00s
+FAIL 99_openspiel_compare   1250096/1254736 score=0.996  476.73s  legal action mismatch in rollout 1, step 110: openspiel=59 generated=0; missing=a2, a5, b5, b7, c1, c10, c2, c3, c6, c7; rollout 1, step 110: no shared legal action to continue this rollout; legal action mismatch in rollout 3, step 110: openspiel=59 generated=0; missing=a1, a2, a5, a7, a8, b6, b9, c1, c10, c7; 156 total issue(s)
+---- phase base checks                  7/7 score=1.000    0.00s
+---- phase llm judge                    1/1 score=0.850    0.00s
+---- phase openspiel compare             1/1 score=0.996  476.73s
+---- summary                            10/10 score=0.936  476.73s
