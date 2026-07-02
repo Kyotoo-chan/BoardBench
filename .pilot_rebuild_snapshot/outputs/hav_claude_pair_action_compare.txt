@@ -1,4 +1,0 @@
-FAIL pair_action_compare      106806/107566 score=0.993  595.38s  rollout 1, step 110: terminal mismatch oneshot=False agentic=True
----- phase pair align                   1/1 score=1.000  332.68s
----- phase pair compare                 0/1 score=0.993  595.38s
----- summary                            1/2 score=0.996  928.06s
