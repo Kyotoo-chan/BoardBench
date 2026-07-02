@@ -1,25 +1,28 @@
 Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 
-- Wie gehts weiter? Es hängt am LLM OUTput
+--- LLM Stuff ---
+- Bei Gpt (5.5 xhigh) dauert oneshot >> agentic bei claude (opus 4.8 max) ist es agentic >> oneshot
+
+- Pi mehrfach Probleme gehabt mit einmal falschem action namen "ngriff"
+- Bei Pi gab es auch eine fehlerhafte Implementierung, die in einem Test auf score=0 gefallen ist.
+
+- Beim Versuch es mit Claude zu generieren machen, bin ich schnell ins 5h limit gelaufen (ohne Judge Aufrufe)
+- Beim Exploding-Kittens-Generieren bin ich wieder direkt ins 5h-Limit gelaufen (neue Session)
+- Falls wir weiter mit Claude arbeiten wollen: mit meinem Account nicht möglich; ich habe das Abo auch gekündigt
+
+--- Ideen ---
 - Mehr vergleichen mit weniger oder mehr output
 
 - Das OpenGame nutzen für Implementierung und dann nur Tests schreiben??
 - Anleitungen verbessern (= Nur Text, Pdfs brauchen visionprocessing)
-- Ganzes Beispiel Game ablegen?
+- Mehr Input mit Wikipedia? Ganzes Beispiel Game ablegen?
 
-
-- Bei Gpt (5.5 xhigh) dauert oneshot >> agentic bei claude (opus 4.8 max) ist es agentic >> oneshot
-
-- Beim Versuch es mit Claude zu machen, bin ich schnell ins 5h limit gelaufen
-- Beim Exploding-Kittens-Generieren bin ich wieder direkt ins 5h-Limit gelaufen (neue Session)
-- Falls wir weiter mit Claude arbeiten wollen: mit meinem Account nicht möglich; ich habe das Abo auch gekündigt
-
+--- Fragen ---
 - Weitere Ideen für tests?
-- Cross Judge, damit nicht von einem Modell abhängig
+- Wie gehts weiter? Es hängt am LLM OUTput
+- Wie geht man in der Arbeit formal mit KI-Nutzung um (Angabe/Transparenz/Unterschrift)?
 
-- Nicht vergessen: Es gab ursprünglich eine kaputte Version (das muss im Verlauf dokumentiert bleiben).
-- Nicht vergessen: Es gab auch eine Version mit Angriff-Logik, die nicht richtig funktioniert hat.
-
-
-- Karte doch für lokale Räume freischalten
+--- Allgemeines ---
+- Studentenkarte doch für lokale Räume freischalten
 - Er meint, dass Anmeldung chill ist und man das auch im Nachgang anmelden kann
+- Regeöm 

@@ -1,0 +1,31 @@
+BoardBench progress (seit 09.06.2026)
+
+09.06
+- OpenSpiel action checks ergänzt.
+
+19.06
+- PDF-Rulebooks + erste automatische Ergebnis-Checks eingebaut.
+- Repo aufgeräumt.
+
+21.-22.06
+- Prompt-Backbones ergänzt.
+- Judge als regulären Check integriert.
+- Vergleichs-Checks verbessert.
+- Evaluations-Workflow im Notebook umgebaut.
+- Havannah-Rulebook-Setup angelegt.
+
+24.-26.06
+- Pro-Game Workflow etabliert: prepare -> generation -> test artifacts.
+- Havannah, Abalone und Exploding Kittens jeweils mit Generation + Checks durchgezogen.
+- Erste Reruns/Kalibrierungen bei Scoring und OpenSpiel-Vergleich.
+
+27.-01.07
+- Pilot auf drei Backends erweitert (gpt/pi, claude, codex).
+- Für alle drei Spiele cross-model judge reviews erzeugt.
+
+02.07
+- Cross-judge Tooling + Plot-Updates gebaut.
+- Plot-Logik auf Git-History als Quelle umgestellt.
+- Meeting-Notizen ergänzt und Workflow/Artefakt-Regeln nachgezogen.
+- Evaluation-Notebooks auf neue Naming-/Artifact-Logik angepasst
+  (kurze output_stems, keine persistenten judge_packet-Dateien).
