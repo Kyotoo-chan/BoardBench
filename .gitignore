@@ -207,6 +207,8 @@ tempCodeRunnerFile.py
 inputs/rulebook_pages/
 # Wrong location if notebooks ever render pages into outputs/ by mistake
 outputs/rulebook_pages/
+# Ephemeral LLM judge input packets (see AGENTS.md)
+outputs/judge_packet_*.md
 
 # Ruff stuff:
 .ruff_cache/

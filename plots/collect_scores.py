@@ -33,6 +33,7 @@ GAME_TITLES = {
     "havannah": "Havannah",
     "abalone": "Abalone",
     "exploding_kittens": "Exploding Kittens",
+    "mahjong": "Mahjong",
 }
 
 PLOT_BACKEND = {
@@ -117,4 +118,10 @@ def collect_game_scores(game: str) -> dict:
 
 
 def collect_all_games() -> dict[str, dict]:
-    return {GAME_SHORT[game]: collect_game_scores(game) for game in RERUN_ORDER}
+    games: dict[str, dict] = {}
+    for game in RERUN_ORDER:
+        slug = GAME_SHORT[game]
+        if not any(OUT_DIR.glob(f"{slug}_*_checks.txt")):
+            continue
+        games[slug] = collect_game_scores(game)
+    return games
