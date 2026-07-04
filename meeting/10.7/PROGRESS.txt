@@ -7,12 +7,12 @@ erledigt:
 - klärung: step ≠ fester zugindex; summary delta <0.05 = rauschen
 - mahjong rulebook unter inputs/games/mahjong/
 - notebooks auf mahjong, timeout oneshot 1800 / agentic 3600
+- pi mahjong generation: mjh_gpt_os + mjh_gpt_ag
 
 noch offen:
 - EK hand-test (manual_test_expl.ipynb → NOTIZEN.txt)
 - GLM-5.2 testen (siehe QUESTIONS.txt link)
-- pi mahjong oneshot: evaluation2.ipynb → run_generation → run_full_evaluation
-- pi mahjong agentic: evaluation.ipynb → run_generation → run_full_evaluation
+- pi mahjong tests: evaluation2.ipynb + evaluation.ipynb → run_full_evaluation
 - codex mahjong oneshot: python generation/run_codex_series.py --game mahjong --variant oneshot
 - codex mahjong agentic: python generation/run_codex_series.py --game mahjong --variant agentic
 - codex eval/judge: python generation/run_codex_eval.py --game mahjong --variant oneshot (nach generation)
