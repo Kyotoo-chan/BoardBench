@@ -161,9 +161,8 @@ All pilot comparison runs used **maximum reasoning** for the respective backend.
 ### Git rhythm per game
 
 1. `prepare <game> rulebook and clear <previous> outputs`
-2. save oneshot generation
-3. save agentic generation
-4. save test artifacts (judge, updated checks)
+2. save both variants generation (oneshot + agentic in one commit)
+3. save test artifacts (judge, updated checks)
 
 Do not bundle unrelated games in `outputs/` at commit time. Do not add Cursor or other tools as co-authors on commits.
 

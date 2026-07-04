@@ -58,9 +58,8 @@ Cross-backend comparison plots pin GPT/Claude/Codex scores in `plots/make_plots.
 Match `docs/claude_rerun_series.md`:
 
 1. `prepare <game> rulebook and clear <previous> outputs`
-2. `save <game> codex oneshot generation`
-3. `save <game> codex agentic generation`
-4. `save <game> codex test artifacts` (judge + updated checks)
+2. `save <game> codex generations` (oneshot + agentic together)
+3. `save <game> codex test artifacts` (judge + updated checks)
 
 ## Compare against pi / Claude
 

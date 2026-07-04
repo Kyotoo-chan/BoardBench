@@ -46,9 +46,8 @@ For each game:
 Match existing repo style (lowercase, step-by-step):
 
 1. `prepare <game> rulebook and clear <previous> outputs`
-2. `save <game> oneshot generation`
-3. `save <game> agentic generation`
-4. `save <game> test artifacts`
+2. `save <game> generations` (oneshot + agentic in one commit)
+3. `save <game> test artifacts`
 
 Do **not** squash intermediate experiment commits.
 
