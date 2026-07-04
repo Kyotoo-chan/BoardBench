@@ -1,4 +1,17 @@
 Meeting: 10.7.2026 (Prof)
 
+judge blindheit (zusatz-check):
+- frage: erkennen judges mismatch nur über spielnamen in paket/code?
+- test: rulebook + code vor judge anonymisiert (generische labels, keine pfade)
+- EK-code × mahjong-regeln → pi+codex 0.0 (karten vs. steine)
+- havannah-code × abalone-regeln → pi 0.05, codex 0.0 (beide steinspiele, aber setzen/ring vs. schieben/6 raus)
+- takeaway: judges vergleichen mechanik, nicht nur namen; pi etwas großzügiger bei oberflächlicher ähnlichkeit
+- artefakte: outputs/judge_blind_*_pi.md, outputs/judge_blind_*_codex.md
 
+mahjong os×ag pair compare (warum fail?):
+- nicht nur „andere steinpositionen“ — unterschiedliches setup-modell zwischen os und ag
+- einzel-checks 01–06 pro variante laufen durch; fail ist pair_action_compare (lockstep os vs ag)
+- codex: os startet leer in deal/chance-phase (CHANCE=-2), ag initial_state() already dealt → phase=discard, player=0 → mismatch ab step 0
+- pi: beide starten mit chance-deal, sync ~98% (54277/55277), bricht ab step 54 (oneshot player 1, agentic CHANCE) — vermutlich unterschiedlicher deal→discard-übergang / current_player, nicht nur andere hände
+- folge: pair vergleich für mahjong derzeit kein fairer os-vs-ag-signal; erst klären ob setup vereinheitlicht werden soll
 
