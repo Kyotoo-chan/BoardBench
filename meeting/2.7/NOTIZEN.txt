@@ -1,8 +1,12 @@
-Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
-
-Hinweis: Die ursprüngliche meeting/29.6/NOTIZEN.txt war nur lokal und nie in git.
-Sie ging bei einem lokalen Cleanup verloren. Inhalt bitte aus dem Gespräch vom 2.7 hier nachtragen.
-
 Meeting: 2.7.2026 (Prof)
 
-- 
+- ist zugindex zahl immer der selbe zug oder stateabhängig
+- was heißt failed, wie ist score zu interpretieren
+- sind spiele in llm drin oder kann es das wirklich so gut implementieren? genauer aufdrösseln oder jz viele implementieren
+- mit llm was bauen was mit viele spielanleitunge ziehen muss
+- gibt es openspiel test cases wie neue spiele getestet werden
+- gute günstige llms testen: glm, kimi,
+- scores besser verstehen, wirken zu gut wahr zu sein
+- wie stehts um majong oder uno
+- klappt llm judge richtig, falsches spiel mit andere anleitung geben und berwerten lassen
+- gibt es zu neue spiele, welche noch nicht in trainningsdaten sein können
