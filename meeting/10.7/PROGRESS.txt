@@ -1,0 +1,7 @@
+BoardBench progress (seit Meeting 2.7.2026)
+
+04.07
+- manual_test_expl.ipynb + judge calibration tooling
+- judge cal: EK×Havannah score 0.0 (expl_gpt/codex/claude os)
+- judge cal: Abalone×EK (aba_gpt_os, pi+codex)
+- meeting/10.7

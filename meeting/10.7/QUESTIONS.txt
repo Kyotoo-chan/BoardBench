@@ -1,0 +1,27 @@
+Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
+
+--- Erledigt (Repo, seit 2.7) ---
+- Judge-Kalibrierung: EK-Code × Havannah-Regeln → score 0.0 (3 oneshot-Varianten, pi)
+- Judge-Kalibrierung: Abalone-Code × EK-Regeln → siehe outputs/judge_cal_aba_gpt_os_vs_expl*.md
+- manual_test_expl.ipynb für Hand-Test EK
+- checks/run_judge_calibration.py (--scenario ek_vs_hav | aba_vs_ek)
+
+--- Du (vor 10.7) ---
+- EK per Hand: manual_test_expl.ipynb → Notizen unten eintragen
+- GLM oneshot: API + gleicher Prompt → outputs/expl_glm_os.py → run_checks.py
+
+--- Prof (10.7) ---
+- Scope: EK vertiefen vs. 4. Spiel?
+- Summary eine Zahl vs. Tabelle pro Check?
+- KI-Nutzung formal — Fußnote/Anhang?
+
+--- LLM Stuff ---
+- Claude-Abo weg; weiter mit pi + Codex + gespeicherte Claude-Artefakte
+- pi oneshot >> agentic; Claude war agentic >> oneshot (historisch)
+
+--- Fragen ---
+- Wie gehts weiter nach EK-Pilot?
+- Weitere deterministische Tests (Judge-Szenarien → checks/07)?
+
+--- Allgemeines ---
+- Anmeldung Master / Wintersemester
