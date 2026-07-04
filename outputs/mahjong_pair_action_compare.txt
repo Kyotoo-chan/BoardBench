@@ -1,4 +1,0 @@
-FAIL pair_action_compare        54277/55277 score=0.982   69.64s  rollout 1, step 54: current player mismatch oneshot=1 agentic=-2
----- phase pair align                   1/1 score=1.000  854.77s
----- phase pair compare                 0/1 score=0.982   69.64s
----- summary                            1/2 score=0.991  924.41s
