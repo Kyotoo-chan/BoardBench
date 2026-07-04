@@ -47,6 +47,14 @@ PLOT_VARIANT = {
     "agentic": "agentic",
 }
 
+# Quality rows [05, 06, 90] when outputs/ was cleared but scores live in git history.
+PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
+    "mjh": {
+        ("pi", "one-shot"): [1.0, 1.0, 0.60],
+        ("pi", "agentic"): [1.0, 1.0, 0.65],
+    },
+}
+
 
 def judge_backends_for(impl_backend: str) -> tuple[str, ...]:
     if impl_backend == "claude":
@@ -109,6 +117,14 @@ def collect_game_scores(game: str) -> dict:
                     row.append(1.0 if value is None else value)
             plot_key = (PLOT_BACKEND[impl], PLOT_VARIANT[variant])
             scores[plot_key] = row
+
+    slug = GAME_SHORT[game]
+    for plot_key, pinned in PINNED_QUALITY.get(slug, {}).items():
+        impl = "gpt" if plot_key[0] == "pi" else plot_key[0]
+        variant = "oneshot" if plot_key[1] == "one-shot" else "agentic"
+        stem = output_stem(game, impl, variant)
+        if not (OUT_DIR / f"{stem}_checks.txt").exists():
+            scores[plot_key] = pinned
 
     return {
         "title": GAME_TITLES[game],
