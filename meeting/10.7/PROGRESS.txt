@@ -1,16 +1,20 @@
 BoardBench progress (seit Meeting 2.7.2026)
 
-04.07
-- manual_test_expl.ipynb (Hand-Test EK, noch offen)
-- judge calibration: falsches Regelwerk → score 0.0
-    EK-code × Havannah (expl gpt/codex/claude os, pi)
-    Abalone-code × EK-regeln (aba_gpt_os, pi+codex)
-- judge personas: prompts/judge_personas/ + checks/run_judge_personas.py
-- klärung step vs action-index (für prof):
-    „step“ in checks = n-ter apply_action in einer trajektorie (0,1,2…), kein fester zug wie schach e3
-    legal_actions(state) ist zustandsabhängig — index 3 in schritt 5 ≠ index 3 in schritt 1
-- klärung summary-score / rauschen:
-    gewichteter mittelwert pro check (01–04 w1, 05/06/90/99 w10)
-    delta < ~0.05 (z.b. 0.923 vs 0.943) = praktisch rauschen
-    echter gap im pilot: pi ek os 0.63 vs claude ek ag 0.96
-- meeting/10.7 vorbereitet
+erledigt:
+- judge calibration (EK×Havannah, Abalone×EK → score 0.0)
+- judge personas in prompts/judge_personas/ (nach meeting testen)
+- manual_test_expl.ipynb (EK hand-test)
+- klärung: step ≠ fester zugindex; summary delta <0.05 = rauschen
+- mahjong rulebook unter inputs/games/mahjong/
+- notebooks auf mahjong, timeout oneshot 1800 / agentic 3600
+
+noch offen:
+- EK hand-test (manual_test_expl.ipynb → NOTIZEN.txt)
+- GLM-5.2 testen (siehe QUESTIONS.txt link)
+- pi mahjong oneshot: evaluation2.ipynb → run_generation → run_full_evaluation
+- pi mahjong agentic: evaluation.ipynb → run_generation → run_full_evaluation
+- codex mahjong oneshot: python generation/run_codex_series.py --game mahjong --variant oneshot
+- codex mahjong agentic: python generation/run_codex_series.py --game mahjong --variant agentic
+- codex eval/judge: python generation/run_codex_eval.py --game mahjong --variant oneshot (nach generation)
+- meeting 10.7 prof (Scope, score-darstellung, KI-angabe)
+- checks/07 + judge personas (erst nach prof-meeting)

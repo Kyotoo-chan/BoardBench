@@ -1,27 +1,22 @@
 Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 
---- Erledigt (Repo, seit 2.7) ---
-- Judge-Kalibrierung: EK-Code × Havannah-Regeln → score 0.0 (3 oneshot-Varianten, pi)
-- Judge-Kalibrierung: Abalone-Code × EK-Regeln → siehe outputs/judge_cal_aba_gpt_os_vs_expl*.md
-- manual_test_expl.ipynb für Hand-Test EK
-- checks/run_judge_calibration.py (--scenario ek_vs_hav | aba_vs_ek)
-
---- Du (vor 10.7) ---
-- EK per Hand: manual_test_expl.ipynb → Notizen unten eintragen
-- GLM oneshot: API + gleicher Prompt → outputs/expl_glm_os.py → run_checks.py
-
 --- Prof (10.7) ---
-- Scope: EK vertiefen vs. 4. Spiel?
-- Summary eine Zahl vs. Tabelle pro Check?
-- KI-Nutzung formal — Fußnote/Anhang?
+- EK vertiefen vs. mahjong vs. 4. spiel?
+- summary eine zahl vs. tabelle pro check?
+- KI-nutzung formal — fußnote/anhang?
+
+--- GLM-5.2 testen (du) ---
+- coding plan + ZCode (empfohlen): https://zcode.z.ai/en/docs/configuration
+- pay-as-you-go api: https://docs.z.ai/guides/llm/glm-5.2  endpoint /api/coding/paas/v4, model glm-5.2
+- api key: https://z.ai/manage-apikey/apikey-list
+- fair vs boardbench: gleicher prompt wie pi, ergebnis als outputs/mjh_glm_os.py + run_checks.py (nicht claude-code-endpoint)
 
 --- LLM Stuff ---
-- Claude-Abo weg; weiter mit pi + Codex + gespeicherte Claude-Artefakte
-- pi oneshot >> agentic; Claude war agentic >> oneshot (historisch)
+- claude abo weg; pilot pi + codex + alte claude-artefakte in git history
 
 --- Fragen ---
-- Wie gehts weiter nach EK-Pilot?
-- Weitere deterministische Tests (Judge-Szenarien → checks/07)?
+- wie gehts weiter nach mahjong-pilot?
+- judge personas / checks/07 erst nach meeting?
 
 --- Allgemeines ---
-- Anmeldung Master / Wintersemester
+- anmeldung master / wintersemester
