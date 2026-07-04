@@ -621,130 +621,6 @@ def parse_chi_name(name: str):
     return suit, start
 
 
-CANONICAL_SUIT_PREFIXES = {
-    "Bambus": "bamboo",
-    "Kreis": "circle",
-    "Farbe3": "character",
-}
-CANONICAL_WIND_LABELS = {
-    "Osten": "eastwind",
-    "Sueden": "southwind",
-    "Westen": "westwind",
-    "Norden": "northwind",
-}
-CANONICAL_DRAGON_LABELS = {
-    "Drache1": "reddragon",
-    "Drache2": "whitedragon",
-    "GruenerDrache": "greendragon",
-}
-CANONICAL_TILE_TO_INTERNAL = {
-    **{label: tile for tile, label in CANONICAL_WIND_LABELS.items()},
-    **{label: tile for tile, label in CANONICAL_DRAGON_LABELS.items()},
-}
-DRAW_REASON_ORDER = (
-    "normal_draw",
-    "concealed_kang_replacement",
-    "extended_kang_replacement",
-    "claim_kang_replacement",
-)
-
-
-def canonical_tile_name(tile: str) -> str:
-    info = suited_info(tile)
-    if info is not None:
-        suit, rank = info
-        return f"{CANONICAL_SUIT_PREFIXES[suit]}{rank}"
-    if tile in CANONICAL_WIND_LABELS:
-        return CANONICAL_WIND_LABELS[tile]
-    if tile in CANONICAL_DRAGON_LABELS:
-        return CANONICAL_DRAGON_LABELS[tile]
-    raise ValueError(f"Unknown tile for action naming: {tile}")
-
-
-def parse_canonical_tile_name(name: str) -> str:
-    text = str(name).strip().lower()
-    for suit, prefix in CANONICAL_SUIT_PREFIXES.items():
-        if text.startswith(prefix):
-            rank_text = text[len(prefix):]
-            if rank_text.isdigit():
-                rank = int(rank_text)
-                if 1 <= rank <= 9:
-                    return make_suited_tile(suit, rank)
-    if text in CANONICAL_TILE_TO_INTERNAL:
-        return CANONICAL_TILE_TO_INTERNAL[text]
-    raise ValueError(f"Bad canonical tile name: {name}")
-
-
-def canonical_chi_name(suit: str, start: int) -> str:
-    return "_".join(canonical_tile_name(t) for t in sequence_tiles(suit, start))
-
-
-def parse_canonical_chi_name(name: str):
-    labels = str(name).split("_")
-    if len(labels) != 3:
-        raise ValueError(f"Bad canonical chi name: {name}")
-    tiles = tuple(parse_canonical_tile_name(label) for label in labels)
-    info = suited_info(tiles[0])
-    if info is None:
-        raise ValueError(f"Bad canonical chi start: {name}")
-    suit, start = info
-    if tiles != sequence_tiles(suit, start):
-        raise ValueError(f"Non-consecutive canonical chi: {name}")
-    return suit, start
-
-
-def hidden_player_suffix(player: int) -> str:
-    if not 0 <= player < NUM_PLAYERS:
-        raise ValueError(f"Player out of range: {player}")
-    return "!" * (player + 1)
-
-
-def split_hidden_player(text: str):
-    count = len(text) - len(text.rstrip("!"))
-    if count <= 0:
-        raise ValueError(f"Missing hidden player suffix: {text}")
-    player = count - 1
-    if not 0 <= player < NUM_PLAYERS:
-        raise ValueError(f"Hidden player out of range: {text}")
-    return text[:-count], player
-
-
-def hidden_chance_suffix(tag: str, player: int, reason: str = "") -> str:
-    if not 0 <= player < NUM_PLAYERS:
-        raise ValueError(f"Player out of range: {player}")
-    if tag == "deal":
-        code = player
-    elif tag == "draw":
-        if reason not in DRAW_REASON_ORDER:
-            raise ValueError(f"Unknown draw reason for action naming: {reason}")
-        code = NUM_PLAYERS * (1 + DRAW_REASON_ORDER.index(reason)) + player
-    else:
-        raise ValueError(f"Unknown chance tag for action naming: {tag}")
-    return "!" * (code + 1)
-
-
-def split_hidden_chance_payload(payload: str):
-    count = len(payload) - len(payload.rstrip("!"))
-    if count <= 0:
-        raise ValueError(f"Missing hidden chance suffix: {payload}")
-    code = count - 1
-    tile_label = payload[:-count]
-    if code < NUM_PLAYERS:
-        return tile_label, "deal", code, ""
-    reason_index = code // NUM_PLAYERS - 1
-    player = code % NUM_PLAYERS
-    if not 0 <= reason_index < len(DRAW_REASON_ORDER):
-        raise ValueError(f"Hidden chance code out of range: {payload}")
-    return tile_label, "draw", player, DRAW_REASON_ORDER[reason_index]
-
-
-def parse_player_payload(rest: str):
-    if "_" not in rest:
-        raise ValueError(f"Missing player payload separator: {rest}")
-    player_s, payload = rest.split("_", 1)
-    return parse_player_token(player_s), payload
-
-
 class Game:
     """A compact, explicit Mahjong hand model from the provided German rule text.
 
@@ -1288,103 +1164,80 @@ class Game:
 
         if tag == "chance_deal":
             _, p, tile = action
-            return f"chance:draw:{canonical_tile_name(tile)}{hidden_chance_suffix('deal', p)}"
+            return f"chance:deal:{player_token(p)}:{tile}"
         if tag == "chance_draw":
             _, p, reason, tile = action
-            return f"chance:draw:{canonical_tile_name(tile)}{hidden_chance_suffix('draw', p, reason)}"
+            return f"chance:draw:{player_token(p)}:{reason}:{tile}"
         if tag == "discard":
             _, p, tile = action
-            return f"discard_{canonical_tile_name(tile)}{hidden_player_suffix(p)}"
+            return f"discard:{player_token(p)}:{tile}"
         if tag == "declare_mahjong":
             _, p = action
-            return f"mahjong_self{hidden_player_suffix(p)}"
+            return f"mahjong:{player_token(p)}:self"
         if tag == "declare_kang":
             _, p, kind, tile = action
-            kind_s = "concealed" if kind == "concealed" else "extend"
-            return f"kong_{kind_s}_{canonical_tile_name(tile)}{hidden_player_suffix(p)}"
+            return f"kang:{player_token(p)}:{kind}:{tile}"
         if tag == "pass":
             _, p = action
-            return f"pass{hidden_player_suffix(p)}"
+            return f"pass:{player_token(p)}"
         if tag == "claim_pong":
             _, p, tile = action
-            return f"claim_pong_{player_token(p)}_{canonical_tile_name(tile)}"
+            return f"claim:{player_token(p)}:pong:{tile}"
         if tag == "claim_kang":
             _, p, tile = action
-            return f"claim_kong_{player_token(p)}_{canonical_tile_name(tile)}"
+            return f"claim:{player_token(p)}:kang:{tile}"
         if tag == "claim_chi":
             _, p, suit, start = action
-            return f"claim_chi_{player_token(p)}_{canonical_chi_name(suit, start)}"
+            return f"claim:{player_token(p)}:chi:{chi_name(suit, start)}"
         if tag in ("claim_mahjong", "rob_mahjong"):
             _, p, kind, data = action
-            data_s = canonical_chi_name(*data) if kind == "chi" else canonical_tile_name(data)
-            prefix = "mahjong_discard" if tag == "claim_mahjong" else "mahjong_rob_kong"
-            return f"{prefix}_{player_token(p)}_{kind}_{data_s}"
+            data_s = chi_name(*data) if kind == "chi" else data
+            prefix = "claim" if tag == "claim_mahjong" else "rob_kang"
+            return f"{prefix}:{player_token(p)}:mahjong:{kind}:{data_s}"
 
         raise ValueError(f"Unknown action tag: {tag}")
 
     def name_to_action(self, name: str):
-        text = str(name)
+        parts = name.split(":")
+        if not parts:
+            raise ValueError("empty action name")
 
-        if text.startswith("chance:draw:"):
-            payload = text[len("chance:draw:"):]
-            tile_label, chance_kind, player, reason = split_hidden_chance_payload(payload)
-            tile = parse_canonical_tile_name(tile_label)
-            if chance_kind == "deal":
-                return ("chance_deal", player, tile)
-            return ("chance_draw", player, reason, tile)
+        if parts[0] == "chance":
+            if len(parts) == 4 and parts[1] == "deal":
+                return ("chance_deal", parse_player_token(parts[2]), parts[3])
+            if len(parts) == 5 and parts[1] == "draw":
+                return ("chance_draw", parse_player_token(parts[2]), parts[3], parts[4])
 
-        if text.startswith("discard_"):
-            base, player = split_hidden_player(text)
-            tile = parse_canonical_tile_name(base[len("discard_"):])
-            return ("discard", player, tile)
+        if parts[0] == "discard" and len(parts) == 3:
+            return ("discard", parse_player_token(parts[1]), parts[2])
 
-        if text.startswith("mahjong_self"):
-            base, player = split_hidden_player(text)
-            if base == "mahjong_self":
-                return ("declare_mahjong", player)
+        if parts[0] == "mahjong" and len(parts) == 3 and parts[2] == "self":
+            return ("declare_mahjong", parse_player_token(parts[1]))
 
-        if text.startswith("kong_concealed_"):
-            base, player = split_hidden_player(text)
-            tile = parse_canonical_tile_name(base[len("kong_concealed_"):])
-            return ("declare_kang", player, "concealed", tile)
+        if parts[0] == "kang" and len(parts) == 4:
+            return ("declare_kang", parse_player_token(parts[1]), parts[2], parts[3])
 
-        if text.startswith("kong_extend_"):
-            base, player = split_hidden_player(text)
-            tile = parse_canonical_tile_name(base[len("kong_extend_"):])
-            return ("declare_kang", player, "extend_pong", tile)
+        if parts[0] == "pass" and len(parts) == 2:
+            return ("pass", parse_player_token(parts[1]))
 
-        if text.startswith("pass"):
-            base, player = split_hidden_player(text)
-            if base == "pass":
-                return ("pass", player)
+        if parts[0] == "claim" and len(parts) >= 4:
+            p = parse_player_token(parts[1])
+            if parts[2] == "mahjong" and len(parts) == 5:
+                kind = parts[3]
+                data = parse_chi_name(parts[4]) if kind == "chi" else parts[4]
+                return ("claim_mahjong", p, kind, data)
+            if parts[2] == "pong" and len(parts) == 4:
+                return ("claim_pong", p, parts[3])
+            if parts[2] == "kang" and len(parts) == 4:
+                return ("claim_kang", p, parts[3])
+            if parts[2] == "chi" and len(parts) == 4:
+                suit, start = parse_chi_name(parts[3])
+                return ("claim_chi", p, suit, start)
 
-        if text.startswith("claim_pong_"):
-            player, payload = parse_player_payload(text[len("claim_pong_"):])
-            return ("claim_pong", player, parse_canonical_tile_name(payload))
-
-        if text.startswith("claim_kong_"):
-            player, payload = parse_player_payload(text[len("claim_kong_"):])
-            return ("claim_kang", player, parse_canonical_tile_name(payload))
-
-        if text.startswith("claim_chi_"):
-            player, payload = parse_player_payload(text[len("claim_chi_"):])
-            suit, start = parse_canonical_chi_name(payload)
-            return ("claim_chi", player, suit, start)
-
-        if text.startswith("mahjong_discard_"):
-            player, payload = parse_player_payload(text[len("mahjong_discard_"):])
-            if "_" not in payload:
-                raise ValueError(f"Bad mahjong discard name: {name}")
-            kind, data_s = payload.split("_", 1)
-            data = parse_canonical_chi_name(data_s) if kind == "chi" else parse_canonical_tile_name(data_s)
-            return ("claim_mahjong", player, kind, data)
-
-        if text.startswith("mahjong_rob_kong_"):
-            player, payload = parse_player_payload(text[len("mahjong_rob_kong_"):])
-            if "_" not in payload:
-                raise ValueError(f"Bad rob-kong mahjong name: {name}")
-            kind, data_s = payload.split("_", 1)
-            data = parse_canonical_chi_name(data_s) if kind == "chi" else parse_canonical_tile_name(data_s)
-            return ("rob_mahjong", player, kind, data)
+        if parts[0] == "rob_kang" and len(parts) == 5 and parts[2] == "mahjong":
+            p = parse_player_token(parts[1])
+            kind = parts[3]
+            data = parse_chi_name(parts[4]) if kind == "chi" else parts[4]
+            return ("rob_mahjong", p, kind, data)
 
         raise ValueError(f"Cannot parse action name: {name}")
