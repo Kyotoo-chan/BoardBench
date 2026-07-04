@@ -52,6 +52,8 @@ PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
     "mjh": {
         ("pi", "one-shot"): [1.0, 1.0, 0.60],
         ("pi", "agentic"): [1.0, 1.0, 0.65],
+        ("codex", "one-shot"): [1.0, 1.0, 0.45],
+        ("codex", "agentic"): [1.0, 1.0, 0.55],
     },
 }
 
