@@ -1,7 +1,16 @@
 BoardBench progress (seit Meeting 2.7.2026)
 
 04.07
-- manual_test_expl.ipynb + judge calibration tooling
-- judge cal: EK×Havannah score 0.0 (expl_gpt/codex/claude os)
-- judge cal: Abalone×EK (aba_gpt_os, pi+codex)
-- meeting/10.7
+- manual_test_expl.ipynb (Hand-Test EK, noch offen)
+- judge calibration: falsches Regelwerk → score 0.0
+    EK-code × Havannah (expl gpt/codex/claude os, pi)
+    Abalone-code × EK-regeln (aba_gpt_os, pi+codex)
+- judge personas: prompts/judge_personas/ + checks/run_judge_personas.py
+- klärung step vs action-index (für prof):
+    „step“ in checks = n-ter apply_action in einer trajektorie (0,1,2…), kein fester zug wie schach e3
+    legal_actions(state) ist zustandsabhängig — index 3 in schritt 5 ≠ index 3 in schritt 1
+- klärung summary-score / rauschen:
+    gewichteter mittelwert pro check (01–04 w1, 05/06/90/99 w10)
+    delta < ~0.05 (z.b. 0.923 vs 0.943) = praktisch rauschen
+    echter gap im pilot: pi ek os 0.63 vs claude ek ag 0.96
+- meeting/10.7 vorbereitet

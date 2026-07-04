@@ -7,7 +7,27 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PROMPT_PATH = REPO_ROOT / "prompts" / "rulebook_to_python.txt"
 JUDGE_PROMPT_PATH = REPO_ROOT / "prompts" / "llm_judge_review.md"
+PERSONAS_DIR = REPO_ROOT / "prompts" / "judge_personas"
 BACKBONE_PATH = REPO_ROOT / "prompts" / "open_spiel_backbone.md"
+
+
+def resolve_persona_prompt(persona: str | None) -> Path | None:
+    if not persona:
+        return None
+    path = PERSONAS_DIR / f"{persona}.md"
+    if not path.exists():
+        known = sorted(p.stem for p in PERSONAS_DIR.glob("*.md"))
+        raise FileNotFoundError(f"Unknown persona {persona!r}; known: {', '.join(known)}")
+    return path
+
+
+def compose_judge_prompt(*, persona: str | None = None, persona_path: Path | None = None) -> str:
+    base = JUDGE_PROMPT_PATH.read_text(encoding="utf-8")
+    overlay_path = persona_path or resolve_persona_prompt(persona)
+    if overlay_path is None:
+        return base
+    overlay = overlay_path.read_text(encoding="utf-8")
+    return f"{base}\n\n---\n\n{overlay}"
 
 
 def read_rules_text(rules_path: Path) -> str:
@@ -37,6 +57,8 @@ def build_judge_packet(
     variant: str = "oneshot",
     open_spiel_game: str = "none",
     note: str | None = None,
+    persona: str | None = None,
+    persona_path: Path | None = None,
 ) -> Path:
     if not code_path.exists():
         raise FileNotFoundError(f"Missing code: {code_path}")
@@ -55,10 +77,12 @@ def build_judge_packet(
     ]
     if note:
         sections.append(f"- calibration note: {note}")
+    if persona:
+        sections.append(f"- judge persona: {persona}")
     sections += [
         "",
         "## Judge prompt",
-        JUDGE_PROMPT_PATH.read_text(encoding="utf-8"),
+        compose_judge_prompt(persona=persona, persona_path=persona_path),
         "",
         f"## Generation prompt ({PROMPT_PATH.as_posix()})",
         PROMPT_PATH.read_text(encoding="utf-8"),
