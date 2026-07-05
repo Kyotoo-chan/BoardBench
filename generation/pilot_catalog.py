@@ -39,6 +39,12 @@ PILOT_RUNS: tuple[PilotRun, ...] = (
     PilotRun("exploding_kittens", "claude", "agentic", "c1ab5b9", "exploding_kittens_agentic"),
     PilotRun("exploding_kittens", "codex", "oneshot", "b20ef7f", "expl_codex_os"),
     PilotRun("exploding_kittens", "codex", "agentic", "b20ef7f", "expl_codex_ag"),
+    PilotRun("mahjong", "gpt", "oneshot", "fd5e1a0", "mjh_gpt_os"),
+    PilotRun("mahjong", "gpt", "agentic", "fd5e1a0", "mjh_gpt_ag"),
+    PilotRun("mahjong", "codex", "oneshot", "e395b19", "mjh_codex_os"),
+    PilotRun("mahjong", "codex", "agentic", "e395b19", "mjh_codex_ag"),
+    PilotRun("mahjong", "claude", "oneshot", "25e6f97", "mjh_claude_os"),
+    PilotRun("mahjong", "claude", "agentic", "b1710c2", "mjh_claude_ag"),
 )
 
 # Optional extra judge-only sources when judge was committed separately from code.

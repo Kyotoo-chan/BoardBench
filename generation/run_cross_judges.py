@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""Run cross-model LLM judges (pi + codex) on pilot implementations.
+"""Run cross-model LLM judges on generated implementations.
 
 Judge reviews are saved as ``{stem}_judge_{judge_backend}.md`` where
-``judge_backend`` is ``gpt`` (pi) or ``codex``. Existing reviews are skipped.
-Judge packets are assembled in a temp file only (not committed).
+``judge_backend`` is ``gpt`` (pi), ``codex``, or ``claude``. Existing
+reviews are skipped unless ``--force``. Judge packets are temp-only.
+
+Examples::
+
+  python generation/run_cross_judges.py --game mahjong --judges gpt,codex
+  python generation/run_cross_judges.py --game mahjong --judges claude --impl-backend claude
+  python generation/run_cross_judges.py --all --judges gpt,codex --pilot-only
 
 Use the boardbench conda env (pypdf + poppler for PDF rulebooks).
 """
@@ -24,15 +30,12 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
-import importlib.util
-
-from generation.config import RERUN_ORDER, activate_game_rules, game_spec, output_stem  # noqa: E402
+from generation.config import RERUN_ORDER, activate_game_rules, game_spec, normalize_backend, output_stem  # noqa: E402
 from generation.llm_cli import build_llm_command, ensure_direct_llm_response, run_llm_subprocess  # noqa: E402
 from generation.pdf_pages import render_pdf_pages as render_pdf_pages_fallback  # noqa: E402
 from generation.pilot_catalog import PILOT_RUNS  # noqa: E402
 from generation.run_codex_series import load_notebook_namespace  # noqa: E402
 
-# Reuse score parser from check 90
 _spec = importlib.util.spec_from_file_location("judge90", REPO_ROOT / "checks" / "90_llm_judge.py")
 _judge_mod = importlib.util.module_from_spec(_spec)
 assert _spec and _spec.loader
@@ -63,8 +66,48 @@ JUDGE_PROFILES = {
     },
 }
 
-ACTIVE_JUDGE_BACKENDS = ("gpt", "codex")
-CLAUDE_JUDGE_BACKEND = "claude"
+DEFAULT_JUDGE_BACKENDS = ("gpt", "codex")
+
+
+def parse_judge_backends(raw: str | None) -> tuple[str, ...]:
+    if raw is None:
+        return DEFAULT_JUDGE_BACKENDS
+    backends: list[str] = []
+    for part in raw.split(","):
+        token = part.strip()
+        if not token:
+            continue
+        key = normalize_backend(token)
+        if key not in JUDGE_PROFILES:
+            raise SystemExit(f"Unknown judge backend {token!r}; known: {', '.join(JUDGE_PROFILES)}")
+        if key not in backends:
+            backends.append(key)
+    if not backends:
+        raise SystemExit("--judges must list at least one backend")
+    return tuple(backends)
+
+
+def iter_targets(
+    *,
+    game: str | None,
+    impl_backend: str | None,
+    variant: str | None,
+    pilot_only: bool,
+) -> list[tuple[str, str, str]]:
+    if pilot_only:
+        runs = PILOT_RUNS
+        if game:
+            runs = [run for run in runs if run.game == game]
+        if impl_backend:
+            runs = [run for run in runs if run.impl_backend == impl_backend]
+        if variant:
+            runs = [run for run in runs if run.variant == variant]
+        return [(run.game, run.impl_backend, run.variant) for run in runs]
+
+    games = (game,) if game else RERUN_ORDER
+    impls = (impl_backend,) if impl_backend else ("gpt", "codex", "claude")
+    variants = (variant,) if variant else ("oneshot", "agentic")
+    return [(g, impl, var) for g in games for impl in impls for var in variants]
 
 
 def judge_review_path(stem: str, judge_backend: str) -> Path:
@@ -175,59 +218,67 @@ def run_one_judge(
         packet_path.unlink(missing_ok=True)
 
 
+def run_judges(
+    targets: list[tuple[str, str, str]],
+    judge_backends: tuple[str, ...],
+    *,
+    force: bool,
+) -> int:
+    ran = 0
+    for game, impl_backend, variant in targets:
+        for judge_backend in judge_backends:
+            if run_one_judge(game, impl_backend, variant, judge_backend, force=force):
+                ran += 1
+    return ran
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game", choices=RERUN_ORDER)
     parser.add_argument("--impl-backend", choices=("gpt", "claude", "codex"))
     parser.add_argument("--variant", choices=("oneshot", "agentic"))
-    parser.add_argument("--judge-backend", choices=(*ACTIVE_JUDGE_BACKENDS, CLAUDE_JUDGE_BACKEND))
     parser.add_argument(
-        "--claude-judges",
-        action="store_true",
-        help="Run claude judge on claude-generated implementations only",
+        "--judges",
+        help="Comma-separated judge backends to run (gpt/pi, codex, claude). Default: gpt,codex",
     )
-    parser.add_argument("--all", action="store_true", help="All missing gpt+codex judges")
+    parser.add_argument("--all", action="store_true", help="All target implementations")
+    parser.add_argument(
+        "--pilot-only",
+        action="store_true",
+        help="Limit --all to PILOT_RUNS (hav/aba/expl/mjh catalog entries)",
+    )
     parser.add_argument("--force", action="store_true", help="Re-run even if review exists")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    ran = 0
-
-    if args.claude_judges:
-        for run in PILOT_RUNS:
-            if run.impl_backend != "claude":
-                continue
-            if run_one_judge(
-                run.game,
-                run.impl_backend,
-                run.variant,
-                CLAUDE_JUDGE_BACKEND,
-                force=args.force,
-            ):
-                ran += 1
-        print(f"\ncompleted {ran} new claude judge run(s)", flush=True)
-        return 0
+    judge_backends = parse_judge_backends(args.judges)
 
     if args.all:
-        for run in PILOT_RUNS:
-            for judge_backend in ACTIVE_JUDGE_BACKENDS:
-                if run_one_judge(
-                    run.game,
-                    run.impl_backend,
-                    run.variant,
-                    judge_backend,
-                    force=args.force,
-                ):
-                    ran += 1
-        print(f"\ncompleted {ran} new judge run(s)", flush=True)
-        return 0
+        targets = iter_targets(
+            game=args.game,
+            impl_backend=args.impl_backend,
+            variant=args.variant,
+            pilot_only=args.pilot_only,
+        )
+    elif args.game and args.impl_backend and args.variant and args.judges:
+        targets = [(args.game, args.impl_backend, args.variant)]
+    elif args.game and not (args.impl_backend or args.variant):
+        targets = iter_targets(
+            game=args.game,
+            impl_backend=args.impl_backend,
+            variant=args.variant,
+            pilot_only=False,
+        )
+    else:
+        raise SystemExit(
+            "Provide --all, or --game with --judges, or "
+            "--game --impl-backend --variant --judges"
+        )
 
-    if not args.game or not args.impl_backend or not args.variant or not args.judge_backend:
-        raise SystemExit("Provide --all or --game --impl-backend --variant --judge-backend")
-    if run_one_judge(args.game, args.impl_backend, args.variant, args.judge_backend, force=args.force):
-        ran += 1
+    ran = run_judges(targets, judge_backends, force=args.force)
+    print(f"\ncompleted {ran} new judge run(s)", flush=True)
     return 0
 
 

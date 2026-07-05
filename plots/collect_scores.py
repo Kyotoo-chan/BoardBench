@@ -47,13 +47,32 @@ PLOT_VARIANT = {
     "agentic": "agentic",
 }
 
-# Quality rows [05, 06, 90] when outputs/ was cleared but scores live in git history.
+# Quality rows when outputs/ was cleared but pilot scores live in git history.
+# hav rows include 99_openspiel_compare as the fourth value.
 PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
-    "mjh": {
+    "hav": {
+        ("pi", "one-shot"): [0.0, 0.0, 0.0, 0.996],
+        ("pi", "agentic"): [1.0, 1.0, 0.90, 0.996],
+        ("codex", "one-shot"): [1.0, 1.0, 0.88, 1.0],
+        ("codex", "agentic"): [1.0, 1.0, 0.88, 1.0],
+        ("claude", "one-shot"): [1.0, 1.0, 0.75, 0.999],
+        ("claude", "agentic"): [1.0, 1.0, 0.85, 0.996],
+    },
+    "aba": {
         ("pi", "one-shot"): [1.0, 1.0, 0.60],
-        ("pi", "agentic"): [1.0, 1.0, 0.65],
-        ("codex", "one-shot"): [1.0, 1.0, 0.45],
-        ("codex", "agentic"): [1.0, 1.0, 0.55],
+        ("pi", "agentic"): [1.0, 1.0, 0.78],
+        ("codex", "one-shot"): [1.0, 1.0, 0.62],
+        ("codex", "agentic"): [1.0, 1.0, 0.76],
+        ("claude", "one-shot"): [1.0, 1.0, 0.80],
+        ("claude", "agentic"): [1.0, 1.0, 0.85],
+    },
+    "expl": {
+        ("pi", "one-shot"): [0.09, 0.971, 0.685],
+        ("pi", "agentic"): [1.0, 1.0, 0.71],
+        ("codex", "one-shot"): [1.0, 1.0, 0.55],
+        ("codex", "agentic"): [1.0, 1.0, 0.75],
+        ("claude", "one-shot"): [1.0, 1.0, 0.767],
+        ("claude", "agentic"): [1.0, 1.0, 0.853],
     },
 }
 
@@ -136,10 +155,4 @@ def collect_game_scores(game: str) -> dict:
 
 
 def collect_all_games() -> dict[str, dict]:
-    games: dict[str, dict] = {}
-    for game in RERUN_ORDER:
-        slug = GAME_SHORT[game]
-        if not any(OUT_DIR.glob(f"{slug}_*_checks.txt")):
-            continue
-        games[slug] = collect_game_scores(game)
-    return games
+    return {GAME_SHORT[game]: collect_game_scores(game) for game in RERUN_ORDER}

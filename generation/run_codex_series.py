@@ -44,7 +44,13 @@ CHECK_SEED = 1
 def load_notebook_namespace(variant: str) -> dict:
     notebook_path = REPO_ROOT / ("evaluation2.ipynb" if variant == "oneshot" else "evaluation.ipynb")
     payload = json.loads(notebook_path.read_text(encoding="utf-8"))
-    code = payload["cells"][0]["source"]
+    code = None
+    for cell in payload["cells"]:
+        if cell.get("cell_type") == "code":
+            code = cell["source"]
+            break
+    if code is None:
+        raise RuntimeError(f"No code cell in {notebook_path.name}")
     if isinstance(code, list):
         code = "".join(code)
     namespace: dict = {"__name__": "__main__", "Path": Path}

@@ -3,13 +3,13 @@ Mahjong - overall weighted score
 
 pi     · GPT-5.5 xhigh  one-shot : 0.882
 Codex  · GPT-5.5 xhigh  one-shot : 0.838
-Claude · Opus 4.8 max  one-shot : 0.706
-pi     · GPT-5.5 xhigh  agentic  : 0.897
+Claude · Opus 4.8 max  one-shot : 0.860
+pi     · GPT-5.5 xhigh  agentic  : 0.887
 Codex  · GPT-5.5 xhigh  agentic  : 0.868
-Claude · Opus 4.8 max  agentic  : 0.706
+Claude · Opus 4.8 max  agentic  : 0.888
 
 per check                pi_os  cod_os  cla_os   pi_ag  cod_ag  cla_ag
 05_random_rollouts       1.000   1.000   1.000   1.000   1.000   1.000
 06_action_language       1.000   1.000   1.000   1.000   1.000   1.000
-90_llm_judge             0.600   0.450   0.000   0.650   0.550   0.000
+90_llm_judge             0.600   0.450   0.523   0.615   0.550   0.620
 01-04 smoke              1.000   1.000   1.000   1.000   1.000   1.000
