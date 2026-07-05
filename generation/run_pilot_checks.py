@@ -17,7 +17,7 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
-from generation.config import RERUN_ORDER, game_output_dir, game_spec, output_stem  # noqa: E402
+from generation.config import RERUN_ORDER, game_spec, output_stem  # noqa: E402
 from generation.pilot_catalog import PILOT_RUNS  # noqa: E402
 
 ROLLOUTS = 100
@@ -45,16 +45,17 @@ def judge_backends_for(impl_backend: str) -> tuple[str, ...]:
     return ("gpt", "codex")
 
 
-def collect_judge_scores(stem: str, impl_backend: str, game_dir: Path) -> list[tuple[str, float]]:
+def collect_judge_scores(stem: str, impl_backend: str) -> list[tuple[str, float]]:
     scores: list[tuple[str, float]] = []
+    out = REPO_ROOT / "outputs"
     for backend in judge_backends_for(impl_backend):
-        path = game_dir / f"{stem}_judge_{backend}.md"
+        path = out / f"{stem}_judge_{backend}.md"
         if not path.exists():
             continue
         score = parse_score(path.read_text(encoding="utf-8"))
         if score is not None:
             scores.append((backend, score))
-    legacy = game_dir / f"{stem}_judge.md"
+    legacy = out / f"{stem}_judge.md"
     if legacy.exists() and not scores:
         score = parse_score(legacy.read_text(encoding="utf-8"))
         if score is not None:
@@ -62,8 +63,8 @@ def collect_judge_scores(stem: str, impl_backend: str, game_dir: Path) -> list[t
     return scores
 
 
-def average_judge_score(stem: str, impl_backend: str, game: str) -> float | None:
-    scores = collect_judge_scores(stem, impl_backend, game_output_dir(game))
+def average_judge_score(stem: str, impl_backend: str) -> float | None:
+    scores = collect_judge_scores(stem, impl_backend)
     if not scores:
         return None
     return sum(value for _, value in scores) / len(scores)
@@ -134,9 +135,8 @@ def append_judge_and_summary(
 
 def refresh_run(game: str, impl_backend: str, variant: str, *, rerun_base: bool) -> None:
     stem = output_stem(game, impl_backend, variant)
-    game_dir = game_output_dir(game)
-    code_path = game_dir / f"{stem}.py"
-    check_log = game_dir / f"{stem}_checks.txt"
+    code_path = REPO_ROOT / "outputs" / f"{stem}.py"
+    check_log = REPO_ROOT / "outputs" / f"{stem}_checks.txt"
     if not code_path.exists():
         print(f"SKIP missing {code_path.name}")
         return
@@ -158,7 +158,7 @@ def refresh_run(game: str, impl_backend: str, variant: str, *, rerun_base: bool)
         base_output, _, _ = run_base_checks(game, code_path, check_game)
         base_lines = [line for line in base_output.splitlines() if CHECK_LINE_RE.match(line)]
 
-    judge_avg = average_judge_score(stem, impl_backend, game)
+    judge_avg = average_judge_score(stem, impl_backend)
     if judge_avg is None:
         print(f"WARN no judge scores for {stem}")
         judge_avg = 0.0

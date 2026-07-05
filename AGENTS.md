@@ -39,7 +39,7 @@ It is **not** the specification for later gameplay agents or benchmark agents.
 Prefer the smallest useful setup:
 
 - one `inputs/` folder
-- one `outputs/` root with **one subdirectory per active game run** (`outputs/mjh/`, `outputs/hav/`, …)
+- one flat `outputs/` folder (no game subdirs)
 - one `prompts/` folder
 - one lightweight `checks/` folder for small runnable checks of generated results
 - one `docs/` folder for secondary notes, drafts, checklists, and current-state details
@@ -136,12 +136,18 @@ Standard files per run:
 
 Do **not** keep Claude-only `*_generation_packet.md`, pi `*_first_gen.*`, or temp `boardbench_*_codex_*.md` in `outputs/`.
 
-### One active game run in `outputs/`
+### Flat `outputs/` — commit then clear
 
-Each experiment run writes under ``outputs/<game_short>/`` (e.g. ``outputs/mjh/mjh_claude_os.py``).
-`outputs/` should contain **only the current game** subdirectory (plus `.gitkeep`). Older games live in git history and can be restored with `git checkout <commit> -- outputs/...`. Cross-game comparison plots pin scores in `plots/collect_scores.py`, not live reads from `outputs/`.
+All run artifacts live **directly** in ``outputs/`` (e.g. ``outputs/mjh_claude_os.py``). There are **no game subdirectories**.
 
-Before a new game run, clear the target dir with ``python generation/prepare_game_run.py <game> --clear`` or ``generation.config.clear_for_new_game_run(game)``. That removes other game subdirs from the working tree and wipes ``outputs/<game_short>/`` for a fresh run.
+Workflow:
+
+1. Work on one game; ``outputs/`` holds only that run's artifacts.
+2. **Commit** those files with the experiment (scores for plots are mirrored in ``plots/*_scores.txt``).
+3. **Clear** ``outputs/`` before the next game or run: ``python generation/prepare_game_run.py <game> --clear`` or ``generation.config.clear_outputs()``.
+4. Older artifacts remain in **git history** (`git checkout <commit> -- outputs/...`).
+
+``outputs/`` in the working tree should usually be **empty** (``.gitkeep`` only) between runs. Cross-game charts read pinned/live scores from ``plots/collect_scores.py``, not stale ``outputs/``.
 
 ### Generation backends (pilot trio)
 
@@ -171,7 +177,7 @@ Do not bundle unrelated games in `outputs/` at commit time. Do not add Cursor or
 
 ## Artifact and path rules
 
-- `outputs/<game_short>/` holds generated game code, raw LLM answers, check logs, judge reviews, align backups, and other experiment artifacts needed for later thesis analysis.
+- flat ``outputs/`` holds generated game code, raw LLM answers, check logs, judge reviews, and other artifacts **for the current commit only**; clear after commit when starting the next run.
 - **Do not gitignore `outputs/`** or hide generated artifacts to make `git status` look clean.
 - Commit `outputs/` artifacts when they belong to an intentional experiment run the user wants preserved.
 - Rendered PDF rulebook page images belong under `inputs/rulebook_pages/`, never `outputs/rulebook_pages/`.

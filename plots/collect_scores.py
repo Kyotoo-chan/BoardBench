@@ -13,8 +13,8 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
-from generation.config import GAME_SHORT, RERUN_ORDER, game_output_dir, output_stem  # noqa: E402
-OUT_ROOT = REPO_ROOT / "outputs"
+from generation.config import GAME_SHORT, RERUN_ORDER, output_stem  # noqa: E402
+OUT_DIR = REPO_ROOT / "outputs"
 
 CHECK_LINE_RE = re.compile(
     r"^(?P<status>OK|FAIL)\s+"
@@ -74,6 +74,14 @@ PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
         ("claude", "one-shot"): [1.0, 1.0, 0.767],
         ("claude", "agentic"): [1.0, 1.0, 0.853],
     },
+    "mjh": {
+        ("pi", "one-shot"): [1.0, 1.0, 0.60],
+        ("pi", "agentic"): [1.0, 1.0, 0.615],
+        ("codex", "one-shot"): [1.0, 1.0, 0.45],
+        ("codex", "agentic"): [1.0, 1.0, 0.55],
+        ("claude", "one-shot"): [1.0, 1.0, 0.523],
+        ("claude", "agentic"): [1.0, 1.0, 0.620],
+    },
 }
 
 
@@ -117,7 +125,6 @@ def read_check_score(check_log: Path, check_name: str) -> float | None:
 
 def collect_game_scores(game: str) -> dict:
     slug = GAME_SHORT[game]
-    game_dir = game_output_dir(game)
     quality_metrics = ["05_random_rollouts", "06_action_language", "90_llm_judge"]
     if game == "havannah":
         quality_metrics.append("99_openspiel_compare")
@@ -126,11 +133,11 @@ def collect_game_scores(game: str) -> dict:
     for impl in ("gpt", "codex", "claude"):
         for variant in ("oneshot", "agentic"):
             stem = output_stem(game, impl, variant)
-            check_log = game_dir / f"{stem}_checks.txt"
+            check_log = OUT_DIR / f"{stem}_checks.txt"
             row: list[float] = []
             for metric in quality_metrics:
                 if metric == "90_llm_judge":
-                    value = average_judge_score(stem, impl, game_dir)
+                    value = average_judge_score(stem, impl, OUT_DIR)
                     if value is None:
                         value = 0.0
                     row.append(value)
@@ -145,7 +152,7 @@ def collect_game_scores(game: str) -> dict:
         impl = "gpt" if plot_key[0] == "pi" else plot_key[0]
         variant = "oneshot" if plot_key[1] == "one-shot" else "agentic"
         stem = output_stem(game, impl, variant)
-        if not (game_dir / f"{stem}_checks.txt").exists():
+        if not (OUT_DIR / f"{stem}_checks.txt").exists():
             scores[plot_key] = pinned
 
     return {

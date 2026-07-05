@@ -143,30 +143,20 @@ def agentic_workspace_dir(slug: str) -> Path:
     return WORKSPACES_DIR / f"{slug}_agentic"
 
 
-def game_output_dir(game: str, *, create: bool = False) -> Path:
-    """Per-game run directory: ``outputs/<game_short>/`` (e.g. ``outputs/mjh/``)."""
-    path = OUTPUTS_ROOT / GAME_SHORT[game]
-    if create:
-        path.mkdir(parents=True, exist_ok=True)
-    return path
-
-
-def clear_for_new_game_run(game: str) -> Path:
-    """Keep only ``outputs/<game_short>/``; wipe it for a fresh run.
-
-    Older runs live in git history (``git checkout <commit> -- outputs/...``).
-    """
-    short = GAME_SHORT[game]
+def clear_outputs(*, keep_gitkeep: bool = True) -> None:
+    """Wipe ``outputs/``; committed artifacts remain in git history."""
     OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
     for child in OUTPUTS_ROOT.iterdir():
-        if child.name in {".gitkeep", short}:
+        if child.name == ".gitkeep" and keep_gitkeep:
             continue
         if child.is_dir():
             shutil.rmtree(child)
         else:
             child.unlink()
-    game_dir = OUTPUTS_ROOT / short
-    if game_dir.exists():
-        shutil.rmtree(game_dir)
-    game_dir.mkdir(parents=True, exist_ok=True)
-    return game_dir
+
+
+def clear_for_new_game_run(game: str) -> Path:
+    """Empty ``outputs/`` before a new experiment run (``game`` labels intent in logs)."""
+    _ = game
+    clear_outputs()
+    return OUTPUTS_ROOT

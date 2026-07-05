@@ -30,7 +30,7 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
-from generation.config import RERUN_ORDER, activate_game_rules, game_output_dir, game_spec, normalize_backend, output_stem  # noqa: E402
+from generation.config import RERUN_ORDER, activate_game_rules, game_spec, normalize_backend, output_stem  # noqa: E402
 from generation.llm_cli import build_llm_command, ensure_direct_llm_response, run_llm_subprocess  # noqa: E402
 from generation.pdf_pages import render_pdf_pages as render_pdf_pages_fallback  # noqa: E402
 from generation.pilot_catalog import PILOT_RUNS  # noqa: E402
@@ -110,8 +110,8 @@ def iter_targets(
     return [(g, impl, var) for g in games for impl in impls for var in variants]
 
 
-def judge_review_path(game: str, stem: str, judge_backend: str) -> Path:
-    return game_output_dir(game) / f"{stem}_judge_{judge_backend}.md"
+def judge_review_path(stem: str, judge_backend: str) -> Path:
+    return REPO_ROOT / "outputs" / f"{stem}_judge_{judge_backend}.md"
 
 
 def has_valid_judge(path: Path) -> bool:
@@ -132,8 +132,8 @@ def run_one_judge(
     force: bool,
 ) -> bool:
     stem = output_stem(game, impl_backend, variant)
-    review_path = judge_review_path(game, stem, judge_backend)
-    code_path = game_output_dir(game) / f"{stem}.py"
+    review_path = judge_review_path(stem, judge_backend)
+    code_path = REPO_ROOT / "outputs" / f"{stem}.py"
 
     if not code_path.exists():
         print(f"SKIP missing code {code_path.as_posix()}", flush=True)
@@ -154,9 +154,9 @@ def run_one_judge(
     ns["USE_IMPLEMENTATION_BRIEF"] = spec.use_implementation_brief
     ns["RUN_STEM"] = stem
     ns["CODE_PATH"] = code_path
-    ns["RESPONSE_PATH"] = game_output_dir(game) / f"{stem}.md"
-    ns["CHECK_LOG_PATH"] = game_output_dir(game) / f"{stem}_checks.txt"
-    ns["IMPLEMENTATION_BRIEF_PATH"] = game_output_dir(game) / f"{game}_implementation_brief.md"
+    ns["RESPONSE_PATH"] = REPO_ROOT / "outputs" / f"{stem}.md"
+    ns["CHECK_LOG_PATH"] = REPO_ROOT / "outputs" / f"{stem}_checks.txt"
+    ns["IMPLEMENTATION_BRIEF_PATH"] = REPO_ROOT / "outputs" / f"{game}_implementation_brief.md"
     ns["TIMEOUT_SECONDS"] = (
         profile["timeout_agentic"] if variant == "agentic" else profile["timeout_oneshot"]
     )
@@ -167,8 +167,7 @@ def run_one_judge(
 
     ns["render_pdf_pages"] = _render_pdf_pages
 
-    output_dir: Path = game_output_dir(game, create=True)
-    ns["OUTPUT_DIR"] = output_dir
+    output_dir: Path = ns["OUTPUT_DIR"]
     ns["run_llm_subprocess"] = partial(run_llm_subprocess, output_dir=output_dir)
 
     with tempfile.NamedTemporaryFile(
