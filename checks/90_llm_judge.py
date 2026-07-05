@@ -16,7 +16,7 @@ CONFIDENCE_RE = re.compile(r"(?im)^\s*confidence\s*:\s*(low|medium|high)\b")
 
 def find_judge_paths(ctx: CheckContext) -> list[Path]:
     code_stem = ctx.code_path.stem
-    outputs = ctx.repo_root / "outputs"
+    outputs = ctx.code_path.parent
     tagged = sorted(outputs.glob(f"{code_stem}_judge_*.md"))
     if tagged:
         return tagged

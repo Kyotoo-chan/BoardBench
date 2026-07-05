@@ -26,7 +26,7 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
-from generation.config import RERUN_ORDER, activate_game_rules, game_spec, output_stem  # noqa: E402
+from generation.config import RERUN_ORDER, activate_game_rules, game_output_dir, game_spec, output_stem  # noqa: E402
 from generation.llm_cli import (  # noqa: E402
     build_llm_command,
     extract_code_block,
@@ -171,7 +171,8 @@ def configure_namespace(ns: dict, game: str, variant: str) -> None:
     ns["INCLUDE_OPENSPIEL_COMPARE"] = spec.include_openspiel_compare
     ns["USE_IMPLEMENTATION_BRIEF"] = spec.use_implementation_brief
 
-    output_dir: Path = ns["OUTPUT_DIR"]
+    output_dir = game_output_dir(game, create=True)
+    ns["OUTPUT_DIR"] = output_dir
     stem = output_stem(game, "codex", variant)
     ns["VARIANT_STEMS"] = {
         "oneshot": output_stem(game, "codex", "oneshot"),
