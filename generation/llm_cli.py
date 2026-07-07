@@ -27,9 +27,16 @@ _TOOL_USE_LINE = re.compile(
 
 
 def get_claude_path() -> str:
-    claude_path = shutil.which("claude") or shutil.which("claude.cmd")
-    if claude_path is not None:
-        return claude_path
+    repo_root = Path(__file__).resolve().parents[1]
+    candidates = (
+        shutil.which("claude"),
+        shutil.which("claude.cmd"),
+        repo_root / "node_modules" / ".bin" / "claude",
+        repo_root / "node_modules" / ".bin" / "claude.cmd",
+    )
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return str(candidate)
     raise FileNotFoundError(
         "Could not find the claude CLI. Install Claude Code and run `claude auth login`."
     )

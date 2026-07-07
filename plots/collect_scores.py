@@ -34,6 +34,7 @@ GAME_TITLES = {
     "abalone": "Abalone",
     "exploding_kittens": "Exploding Kittens",
     "mahjong": "Mahjong",
+    "catan": "CATAN",
 }
 
 PLOT_BACKEND = {

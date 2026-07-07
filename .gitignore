@@ -200,8 +200,9 @@ cython_debug/
 #   and can be added to the global gitignore or merged into this file. However, if you prefer, 
 #   you could uncomment the following to ignore the entire vscode folder
 # .vscode/
-# Temporary file for partial code execution
-tempCodeRunnerFile.py
+# Local Claude Code CLI (subscription runs); see docs/claude_generation_workflow.md
+node_modules/
+
 
 # Rendered rulebook page images derived from inputs/game_rules.pdf
 inputs/rulebook_pages/
@@ -209,6 +210,7 @@ inputs/rulebook_pages/
 outputs/rulebook_pages/
 # Ephemeral LLM judge input packets (see AGENTS.md)
 outputs/judge_packet_*.md
+generation_workspaces/
 
 # Ruff stuff:
 .ruff_cache/

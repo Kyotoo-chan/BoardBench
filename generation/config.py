@@ -56,15 +56,24 @@ GAME_CATALOG: dict[str, GameSpec] = {
         display_name="Mahjong",
         notes="Complex tile game; no OpenSpiel reference; PDF rulebook from user.",
     ),
+    "catan": GameSpec(
+        slug="catan",
+        open_spiel_game="none",
+        include_openspiel_compare=False,
+        use_implementation_brief=True,
+        display_name="CATAN",
+        notes="Classic resource/trading game; official Kosmos PDF; no OpenSpiel reference.",
+    ),
 }
 
-RERUN_ORDER: tuple[str, ...] = ("havannah", "abalone", "exploding_kittens", "mahjong")
+RERUN_ORDER: tuple[str, ...] = ("havannah", "abalone", "exploding_kittens", "mahjong", "catan")
 
 GAME_SHORT: dict[str, str] = {
     "havannah": "hav",
     "abalone": "aba",
     "exploding_kittens": "expl",
     "mahjong": "mjh",
+    "catan": "cat",
 }
 
 VARIANT_SHORT: dict[str, str] = {
