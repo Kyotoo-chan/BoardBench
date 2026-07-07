@@ -22,9 +22,10 @@ One backend per cycle, **both variants in the same commit**. No separate clear c
    `python -c "from generation.run_pilot_checks import refresh_run; refresh_run('<game>','<impl>','oneshot', rerun_base=False); refresh_run('<game>','<impl>','agentic', rerun_base=False)"`
 5. **Commit tests** — both variants' `*_checks.txt`, `*_judge_gpt.md`, `*_judge_codex.md`.
 6. **Pin + plot both variants** — `python generation/game_run_workflow.py plot --game <game> --backend <backend>`
+   (auto-clears `outputs/` run artifacts after pin; scores stay in `plots/`)
 7. **Commit plot** — `plots/<slug>_pinned.json`, `plots/<slug>_scores.png`, `plots/<slug>_scores.txt`.
 
-Next backend: step 2 (oneshot auto-clears `outputs/`). Next game: step 1.
+Next backend: step 2 (oneshot also clears stale run files; brief is kept). Next game: step 1 (full clear).
 
 ## Staging helper
 
@@ -49,7 +50,8 @@ Optional `--variant oneshot|agentic` limits staging to one variant.
 - **Do** bundle oneshot + agentic for the same backend in one generation commit and one tests commit.
 - **Never** commit judge packets (`*_judge_packet.md`).
 - **Never** commit claude judge reviews (`*_judge_claude.md`) until explicitly re-enabled.
-- **Never** add a separate clear-outputs commit — clearing is automatic.
+- **Never** add a separate clear-outputs commit — clearing is automatic after each plot pin and before each backend oneshot.
+- After plot + commit, `outputs/` should hold at most the implementation brief (`.gitkeep` only between games).
 - Space commit timestamps by real effort (generation > judges > plot).
 - Scores survive in `plots/<slug>_pinned.json` + git history.
 

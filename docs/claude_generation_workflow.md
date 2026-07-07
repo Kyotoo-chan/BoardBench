@@ -66,7 +66,7 @@ Raw answers are saved to `outputs/<game>_<variant>.md`; extracted code to `outpu
 
 ## Manual fallback
 
-Set `LLM_BACKEND = "manual"` only if you want to run Claude in the Cursor chat yourself:
+Set `LLM_BACKEND = "manual"` only if you want to run Claude in the IDE chat yourself:
 
 1. `run_generation()` writes `outputs/<game>_<variant>_generation_packet.md`
 2. save Claude's answer to `outputs/<game>_<variant>.md`

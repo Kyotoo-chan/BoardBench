@@ -174,12 +174,12 @@ All pilot comparison runs used **maximum reasoning** for the respective backend.
 1. `prepare <game>` — auto-clears `outputs/`, activates rulebook → commit
 2. generate **both** variants → commit (four `{stem}` files)
 3. tests + cross judges (**gpt + codex only**) for both → commit
-4. pin plot for both variants → commit (`plots/<slug>_pinned.json` + `plots/<slug>_scores.*`)
-5. repeat from step 2 for the next backend (`outputs/` auto-clears on the next oneshot run)
+4. pin plot for both variants → commit (`plots/<slug>_pinned.json` + `plots/<slug>_scores.*`); **`plot` auto-clears run artifacts** from `outputs/`
+5. repeat from step 2 for the next backend (oneshot also clears stale files; brief kept)
 
-No separate clear-outputs commit. `outputs/` clears on `prepare` and before each backend's oneshot generation.
+No separate clear-outputs commit. Full clear on `prepare`; between backends only run artifacts are removed (brief stays until next game).
 
-Do not bundle unrelated games or backends in one commit. Do not add Cursor or other tools as co-authors on commits.
+Do not bundle unrelated games or backends in one commit. Do not add coding agents or other tools as co-authors on commits.
 
 ## Artifact and path rules
 

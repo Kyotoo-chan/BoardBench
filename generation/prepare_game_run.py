@@ -100,7 +100,7 @@ def write_agentic_packet(slug: str, workspace: Path) -> Path:
         f"- expected repo response path: outputs/<stem>.md",
         f"- expected repo code path after ingest: outputs/<stem>.py",
         "",
-        "## Instructions for Claude / Cursor",
+        "## Instructions for Claude Code",
         "Work only inside the workspace inputs/ and outputs/ directories.",
         "Do not read BoardBench checks/ or other repo evaluation files.",
         "You may run small syntax/import smoke checks on your own generated file.",

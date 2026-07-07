@@ -152,16 +152,26 @@ def agentic_workspace_dir(slug: str) -> Path:
     return WORKSPACES_DIR / f"{slug}_agentic"
 
 
-def clear_outputs(*, keep_gitkeep: bool = True) -> None:
+def clear_outputs(*, keep_gitkeep: bool = True, keep_names: frozenset[str] | None = None) -> None:
     """Wipe ``outputs/``; committed artifacts remain in git history."""
+    keep = keep_names or frozenset()
     OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
     for child in OUTPUTS_ROOT.iterdir():
         if child.name == ".gitkeep" and keep_gitkeep:
+            continue
+        if child.name in keep:
             continue
         if child.is_dir():
             shutil.rmtree(child)
         else:
             child.unlink()
+
+
+def clear_run_artifacts(game: str) -> None:
+    """Drop generated run files; keep implementation brief for later backends."""
+    brief = f"{game}_implementation_brief.md"
+    keep = frozenset({brief}) if (OUTPUTS_ROOT / brief).exists() else frozenset()
+    clear_outputs(keep_names=keep)
 
 
 def clear_for_new_game_run(game: str) -> Path:

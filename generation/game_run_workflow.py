@@ -27,7 +27,14 @@ if str(REPO_ROOT) not in sys.path:
 if str(REPO_ROOT / "plots") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "plots"))
 
-from generation.config import GAME_SHORT, activate_game_rules, clear_outputs, game_spec, output_stem  # noqa: E402
+from generation.config import (  # noqa: E402
+    GAME_SHORT,
+    activate_game_rules,
+    clear_outputs,
+    clear_run_artifacts,
+    game_spec,
+    output_stem,
+)
 from plots.collect_scores import (  # noqa: E402
     PLOT_BACKEND,
     PLOT_VARIANT,
@@ -113,11 +120,17 @@ def run_plot(game: str) -> None:
 
 
 def auto_clear_before_run(game: str, backend: str, variant: str) -> None:
-    """Clear stale outputs before the first variant of a backend batch."""
+    """Clear stale run files before the first variant of a backend batch."""
     if variant != "oneshot":
         return
-    clear_outputs()
-    print(f"cleared outputs/ before {game} {normalize_backend(backend)} oneshot")
+    clear_run_artifacts(game)
+    print(f"cleared run artifacts before {game} {normalize_backend(backend)} oneshot")
+
+
+def finish_backend_cycle(game: str) -> None:
+    """Clear outputs/ after plot pin; scores live in plots/ and git history."""
+    clear_run_artifacts(game)
+    print(f"cleared run artifacts after {game} backend cycle")
 
 
 def pin_backend(game: str, backend: str, variant: str | None = None) -> list[Path]:
@@ -162,6 +175,7 @@ def cmd_pin(args: argparse.Namespace) -> int:
 
 def cmd_plot(args: argparse.Namespace) -> int:
     plot_backend(args.game, args.backend, args.variant or None)
+    finish_backend_cycle(args.game)
     return 0
 
 

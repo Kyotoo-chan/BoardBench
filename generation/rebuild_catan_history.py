@@ -14,6 +14,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+
+from generation.config import clear_run_artifacts  # noqa: E402
 STAGING = REPO_ROOT / ".game_run_staging"
 OUTPUTS = REPO_ROOT / "outputs"
 BASE = "533a116"
@@ -155,6 +157,7 @@ def paths_for_step(step: dict) -> list[str]:
         restore_prepare_files(game)
         return ["inputs/game_rules.pdf", f"outputs/{game}_implementation_brief.md"]
     if kind == "generation":
+        clear_run_artifacts(game)
         restore_backend_files(game, backend, include_tests=False)
         return [p.relative_to(REPO_ROOT).as_posix() for p in generation_files(game, backend)]
     if kind == "tests":
@@ -189,9 +192,12 @@ def commit_step(step: dict) -> None:
         "GIT_COMMITTER_DATE": step["at"],
     }
     existing = [path for path in paths if (REPO_ROOT / path).exists()]
-    if not existing:
+    if not existing and step["kind"] != "plot":
         raise RuntimeError(f"No files for {step['msg']}: {paths}")
-    run(["git", "add", *existing], env=env)
+    if existing:
+        run(["git", "add", *existing], env=env)
+    if step["kind"] in {"plot", "generation"}:
+        run(["git", "add", "-u", "outputs/"], env=env)
     run(["git", "commit", "-m", step["msg"]], env=env)
 
 
