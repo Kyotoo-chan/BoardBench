@@ -28,26 +28,26 @@ Other backends:
 
 ## Prerequisites
 
-1. Install Claude Code CLI (`claude` on PATH)
-2. Log in once: `claude auth login`
-3. Verify: `claude auth status --text`
-4. Use the `boardbench` conda env for checks (`requirements.txt`)
+1. `conda` env `boardbench` with `pip install -r requirements.txt`
+2. `npm install` in repo root (local `claude` CLI at `node_modules/.bin/claude`)
+3. `claude auth login` once; verify with `claude auth status --text`
+4. Unset `ANTHROPIC_API_KEY` for subscription billing
 
-Important billing note: if `ANTHROPIC_API_KEY` is set in your shell, Claude Code may bill API usage instead of your subscription. Unset it for subscription-based runs.
+The setup cell calls `generation.notebook_bootstrap.bootstrap_notebook()`, which activates the archived rulebook, checks Claude auth, and generates a missing implementation brief when the game catalog requests one. Generation and judge steps use a **2 hour** timeout each.
 
 ## Normal workflow (like before)
 
 ### Oneshot — `evaluation2.ipynb`
 
-1. Run setup cell (`GAME`, `RUN_VARIANT = "oneshot"`)
-2. `run_generation()`
-3. `run_full_evaluation(...)`
+1. Run setup cell (set `GAME`; bootstrap activates rulebook + Claude auth)
+2. Run generation cell (`run_generation()`)
+3. Run evaluation cell (`run_full_evaluation(...)`)
 
 ### Agentic — `evaluation.ipynb`
 
-1. Run setup cell (`GAME`, `RUN_VARIANT = "agentic"`)
-2. `run_generation()`
-3. `run_full_evaluation(...)`
+1. Run setup cell (set `GAME`; bootstrap activates rulebook + Claude auth)
+2. Run generation cell (`run_generation()`)
+3. Run evaluation cell (`run_full_evaluation(...)`)
 4. After both variants exist: pair compare cell
 
 No manual ingest step is needed when `LLM_BACKEND = "claude"`.
