@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import re
 import sys
 from pathlib import Path
@@ -48,6 +49,11 @@ PLOT_VARIANT = {
     "agentic": "agentic",
 }
 
+# Per-game-run workflow: cross-judge with gpt + codex only (no claude judge for now).
+WORKFLOW_JUDGE_BACKENDS: tuple[str, ...] = ("gpt", "codex")
+
+PLOTS_DIR = Path(__file__).resolve().parent
+
 # Quality rows when outputs/ was cleared but pilot scores live in git history.
 # hav rows include 99_openspiel_compare as the fourth value.
 PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
@@ -87,9 +93,42 @@ PINNED_QUALITY: dict[str, dict[tuple[str, str], list[float]]] = {
 
 
 def judge_backends_for(impl_backend: str) -> tuple[str, ...]:
-    if impl_backend == "claude":
-        return ("gpt", "codex", "claude")
-    return ("gpt", "codex")
+    return WORKFLOW_JUDGE_BACKENDS
+
+
+def pin_key(plot_backend: str, plot_variant: str) -> str:
+    return f"{plot_backend}|{plot_variant}"
+
+
+def parse_pin_key(key: str) -> tuple[str, str]:
+    backend, variant = key.split("|", 1)
+    return backend, variant
+
+
+def pinned_path(slug: str) -> Path:
+    return PLOTS_DIR / f"{slug}_pinned.json"
+
+
+def read_pinned_file(slug: str) -> dict[str, list[float]]:
+    path = pinned_path(slug)
+    if not path.exists():
+        return {}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    return {key: [float(x) for x in row] for key, row in raw.items()}
+
+
+def write_pinned_file(slug: str, data: dict[str, list[float]]) -> Path:
+    path = pinned_path(slug)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def merged_pinned_rows(slug: str) -> dict[tuple[str, str], list[float]]:
+    rows: dict[tuple[str, str], list[float]] = dict(PINNED_QUALITY.get(slug, {}))
+    for key, row in read_pinned_file(slug).items():
+        rows[parse_pin_key(key)] = row
+    return rows
 
 
 def average_judge_score(stem: str, impl_backend: str, game_dir: Path) -> float | None:
@@ -149,7 +188,7 @@ def collect_game_scores(game: str) -> dict:
             scores[plot_key] = row
 
     slug = GAME_SHORT[game]
-    for plot_key, pinned in PINNED_QUALITY.get(slug, {}).items():
+    for plot_key, pinned in merged_pinned_rows(slug).items():
         impl = "gpt" if plot_key[0] == "pi" else plot_key[0]
         variant = "oneshot" if plot_key[1] == "one-shot" else "agentic"
         stem = output_stem(game, impl, variant)

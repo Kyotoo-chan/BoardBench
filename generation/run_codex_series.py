@@ -27,6 +27,7 @@ if str(REPO_ROOT / "checks") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "checks"))
 
 from generation.config import RERUN_ORDER, activate_game_rules, game_spec, output_stem  # noqa: E402
+from generation.game_run_workflow import auto_clear_before_run  # noqa: E402
 from generation.llm_cli import (  # noqa: E402
     build_llm_command,
     extract_code_block,
@@ -190,6 +191,7 @@ def configure_namespace(ns: dict, game: str, variant: str) -> None:
 
 
 def run_one(game: str, variant: str, *, skip_checks: bool) -> None:
+    auto_clear_before_run(game, "codex", variant)
     activate_game_rules(game)
     ns = load_notebook_namespace(variant)
     configure_namespace(ns, game, variant)

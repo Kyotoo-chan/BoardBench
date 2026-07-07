@@ -136,7 +136,7 @@ Standard files per run:
 
 Do **not** keep Claude-only `*_generation_packet.md`, pi `*_first_gen.*`, or temp `boardbench_*_codex_*.md` in `outputs/`.
 
-### Flat `outputs/` — commit then clear
+### Flat `outputs/` — commit, auto-clear between backends
 
 All run artifacts live **directly** in ``outputs/`` (e.g. ``outputs/mjh_claude_os.py``). There are **no game subdirectories**.
 
@@ -144,7 +144,7 @@ Workflow:
 
 1. Work on one game; ``outputs/`` holds only that run's artifacts.
 2. **Commit** those files with the experiment (scores for plots are mirrored in ``plots/*_scores.txt``).
-3. **Clear** ``outputs/`` before the next game or run: ``python generation/prepare_game_run.py <game> --clear`` or ``generation.config.clear_outputs()``.
+3. **Clear** ``outputs/`` automatically on ``prepare`` or before the next backend's oneshot run (``generation/game_run_workflow.py`` / ``prepare_game_run.py``). Artifacts stay in git history.
 4. Older artifacts remain in **git history** (`git checkout <commit> -- outputs/...`).
 
 ``outputs/`` in the working tree should usually be **empty** (``.gitkeep`` only) between runs. Cross-game charts read pinned/live scores from ``plots/collect_scores.py``, not stale ``outputs/``.
@@ -169,15 +169,21 @@ All pilot comparison runs used **maximum reasoning** for the respective backend.
 
 ### Git rhythm per game
 
-1. `prepare <game> rulebook and clear <previous> outputs`
-2. save both variants generation (oneshot + agentic in one commit)
-3. save test artifacts (judge, updated checks)
+**Default: one backend per cycle, oneshot + agentic bundled** (see `.cursor/skills/boardbench-game-run/SKILL.md` and `generation/game_run_workflow.py`).
 
-Do not bundle unrelated games in `outputs/` at commit time. Do not add Cursor or other tools as co-authors on commits.
+1. `prepare <game>` — auto-clears `outputs/`, activates rulebook → commit
+2. generate **both** variants → commit (four `{stem}` files)
+3. tests + cross judges (**gpt + codex only**) for both → commit
+4. pin plot for both variants → commit (`plots/<slug>_pinned.json` + `plots/<slug>_scores.*`)
+5. repeat from step 2 for the next backend (`outputs/` auto-clears on the next oneshot run)
+
+No separate clear-outputs commit. `outputs/` clears on `prepare` and before each backend's oneshot generation.
+
+Do not bundle unrelated games or backends in one commit. Do not add Cursor or other tools as co-authors on commits.
 
 ## Artifact and path rules
 
-- flat ``outputs/`` holds generated game code, raw LLM answers, check logs, judge reviews, and other artifacts **for the current commit only**; clear after commit when starting the next run.
+- flat ``outputs/`` holds generated game code, raw LLM answers, check logs, judge reviews, and other artifacts **until the next prepare or backend oneshot run**; clearing is automatic, not a separate commit.
 - **Do not gitignore `outputs/`** or hide generated artifacts to make `git status` look clean.
 - Commit `outputs/` artifacts when they belong to an intentional experiment run the user wants preserved.
 - Rendered PDF rulebook page images belong under `inputs/rulebook_pages/`, never `outputs/rulebook_pages/`.

@@ -21,6 +21,9 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.patches import Patch
 
 from plots.collect_scores import collect_all_games
+from generation.config import GAME_SHORT, RERUN_ORDER
+
+GAME_SLUGS = {game: GAME_SHORT[game] for game in RERUN_ORDER}
 
 OUT_DIR = Path(__file__).resolve().parent
 
@@ -129,7 +132,19 @@ def write_detail(slug: str, spec: dict, overall: dict[tuple[str, str], float]) -
 
 
 def main() -> None:
-    for slug, spec in GAMES.items():
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--game", choices=list(RERUN_ORDER) + list(GAME_SLUGS.values()), help="Render one game chart only")
+    args = parser.parse_args()
+    if args.game:
+        slug = GAME_SLUGS.get(args.game, args.game)
+        if slug not in GAMES:
+            raise SystemExit(f"Unknown game {args.game!r}")
+        targets = {slug: GAMES[slug]}
+    else:
+        targets = GAMES
+    for slug, spec in targets.items():
         overall = {key: overall_score(values) for key, values in spec["scores"].items()}
         png = render_plot(slug, spec, overall)
         txt = write_detail(slug, spec, overall)

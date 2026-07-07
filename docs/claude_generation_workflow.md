@@ -39,16 +39,18 @@ The setup cell calls `generation.notebook_bootstrap.bootstrap_notebook()`, which
 
 ### Oneshot — `evaluation2.ipynb`
 
-1. Run setup cell (set `GAME`; bootstrap activates rulebook + Claude auth)
-2. Run generation cell (`run_generation()`)
-3. Run evaluation cell (`run_full_evaluation(...)`)
+1. Run setup cell (set `GAME`)
+2. Run bootstrap cell (`bootstrap_notebook` — rulebook, Claude auth, optional brief)
+3. Run generation cell (`run_generation()`)
+4. Run evaluation cell (`run_full_evaluation(...)`)
 
 ### Agentic — `evaluation.ipynb`
 
-1. Run setup cell (set `GAME`; bootstrap activates rulebook + Claude auth)
-2. Run generation cell (`run_generation()`)
-3. Run evaluation cell (`run_full_evaluation(...)`)
-4. After both variants exist: pair compare cell
+1. Run setup cell (set `GAME`)
+2. Run bootstrap cell (`bootstrap_notebook` — rulebook, Claude auth, optional brief)
+3. Run generation cell (`run_generation()`)
+4. Run evaluation cell (`run_full_evaluation(...)`)
+5. After both variants exist: pair compare cell
 
 No manual ingest step is needed when `LLM_BACKEND = "claude"`.
 

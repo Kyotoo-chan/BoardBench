@@ -123,13 +123,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("slug")
     parser.add_argument(
-        "--clear",
+        "--no-clear",
         action="store_true",
-        help="Empty outputs/ before preparing (artifacts stay in git history)",
+        help="Keep existing outputs/ (default clears before preparing a new game)",
     )
     args = parser.parse_args()
 
-    if args.clear:
+    if not args.no_clear:
         cleared = clear_for_new_game_run(args.slug)
         print(f"Cleared run dir: {cleared.as_posix()}")
 
