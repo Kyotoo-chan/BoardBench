@@ -10,3 +10,4 @@ Meeting: 2.7.2026 (Prof)
 - wie stehts um majong oder uno
 - klappt llm judge richtig, falsches spiel mit andere anleitung geben und berwerten lassen
 - gibt es zu neue spiele, welche noch nicht in trainningsdaten sein können
+- script um spielanleitungen zu scrapen bauen und testen
