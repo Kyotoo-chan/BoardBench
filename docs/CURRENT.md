@@ -100,3 +100,5 @@ The LLM-as-judge review is a qualitative scoring step documented in `docs/llm_ju
 ## Notes
 
 The old loose root notes have been moved into `docs/` to keep the project root focused on the main workflow files.
+
+Conect is the current new-game probe: a May 2024 Mark Steere connection game with a short free PDF rulebook. Treat it as plausibly low-exposure rather than guaranteed unseen for newest models.
