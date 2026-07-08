@@ -56,12 +56,22 @@ def overall_score(quality_scores: list[float]) -> float:
     return weighted / total
 
 
+def active_backends(overall: dict[tuple[str, str], float]) -> list[tuple[str, str, str, str]]:
+    return [
+        backend
+        for backend in BACKENDS
+        if all((backend[0], group_label) in overall for group_label, _ in GROUPS)
+    ]
+
+
 def render_plot(slug: str, spec: dict, overall: dict[tuple[str, str], float]) -> Path:
     fig, ax = plt.subplots(figsize=(7.0, 4.6))
+    backends = active_backends(overall)
+    center_shift = (len(backends) - 1) / 2
 
     for group_label, group_center in GROUPS:
-        for idx, (backend_key, _channel, _model, color) in enumerate(BACKENDS):
-            offset = group_center + (idx - 1) * INNER_GAP
+        for idx, (backend_key, _channel, _model, color) in enumerate(backends):
+            offset = group_center + (idx - center_shift) * INNER_GAP
             score = overall[(backend_key, group_label)]
             ax.bar(offset, score, width=BAR_WIDTH, color=color, edgecolor="white", linewidth=1.0)
             ax.text(offset, score + 0.014, f"{score:.3f}", ha="center", va="bottom", fontsize=8)
@@ -77,7 +87,7 @@ def render_plot(slug: str, spec: dict, overall: dict[tuple[str, str], float]) ->
 
     legend_handles = [
         Patch(facecolor=color, edgecolor="white", label=legend_label(channel, model))
-        for _, channel, model, color in BACKENDS
+        for _, channel, model, color in backends
     ]
     legend_font = FontProperties(family="DejaVu Sans Mono", size=8.5)
     ax.legend(
@@ -99,7 +109,8 @@ def render_plot(slug: str, spec: dict, overall: dict[tuple[str, str], float]) ->
 
 
 def write_detail(slug: str, spec: dict, overall: dict[tuple[str, str], float]) -> Path:
-    columns = [(backend_key, group_label) for group_label, _ in GROUPS for backend_key, _, _, _ in BACKENDS]
+    backends = active_backends(overall)
+    columns = [(backend_key, group_label) for group_label, _ in GROUPS for backend_key, _, _, _ in backends]
     short = {
         ("pi", "one-shot"): "pi_os",
         ("codex", "one-shot"): "cod_os",

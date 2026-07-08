@@ -36,6 +36,7 @@ GAME_TITLES = {
     "exploding_kittens": "Exploding Kittens",
     "mahjong": "Mahjong",
     "catan": "CATAN",
+    "conect": "Conect",
 }
 
 PLOT_BACKEND = {
@@ -170,7 +171,8 @@ def collect_game_scores(game: str) -> dict:
         quality_metrics.append("99_openspiel_compare")
 
     scores: dict[tuple[str, str], list[float]] = {}
-    for impl in ("gpt", "codex", "claude"):
+    impl_backends = ("gpt", "codex") if game == "conect" else ("gpt", "codex", "claude")
+    for impl in impl_backends:
         for variant in ("oneshot", "agentic"):
             stem = output_stem(game, impl, variant)
             check_log = OUT_DIR / f"{stem}_checks.txt"
