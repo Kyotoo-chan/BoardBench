@@ -64,9 +64,24 @@ GAME_CATALOG: dict[str, GameSpec] = {
         display_name="CATAN",
         notes="Classic resource/trading game; official Kosmos PDF; no OpenSpiel reference.",
     ),
+    "conect": GameSpec(
+        slug="conect",
+        open_spiel_game="none",
+        include_openspiel_compare=False,
+        use_implementation_brief=True,
+        display_name="Conect",
+        notes="Mark Steere 2024 connection game on a cone; free PDF; unlikely in training data.",
+    ),
 }
 
-RERUN_ORDER: tuple[str, ...] = ("havannah", "abalone", "exploding_kittens", "mahjong", "catan")
+RERUN_ORDER: tuple[str, ...] = (
+    "havannah",
+    "abalone",
+    "exploding_kittens",
+    "mahjong",
+    "catan",
+    "conect",
+)
 
 GAME_SHORT: dict[str, str] = {
     "havannah": "hav",
@@ -74,6 +89,7 @@ GAME_SHORT: dict[str, str] = {
     "exploding_kittens": "expl",
     "mahjong": "mjh",
     "catan": "cat",
+    "conect": "con",
 }
 
 VARIANT_SHORT: dict[str, str] = {
