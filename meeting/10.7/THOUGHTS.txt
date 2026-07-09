@@ -6,7 +6,9 @@
 - blind EK×Mahjong: pi+codex score 0.0 (karten vs. steine)
 - blind Havannah×Abalone (beide steinspiele): pi 0.05, codex 0.0 — nur oberflächliche hex-ähnlichkeit, mechanik klar falsch
 
-- manual_test_expl.ipynb (EK hand-test)
+- manual_test_expl.ipynb (EK hand-test): alle expl_*_ag.py in outputs/ (gpt/codex/claude/glm)
+- notebook: BACKEND-Umschalter, AUTO_VIEW pro current_player, play_session für zwei menschliche Spieler
+- rulebook exploding_kittens aktiviert; outputs/ danach wieder geleert (Artefakte in git c4617e1)
 
 - siedler generation hat claude 4.8 max und highx komplett gesprengt
 
@@ -16,8 +18,16 @@
 - kosten ~1.5 USD/game (glm_usage_log.csv); kein json-dump in outputs, nur csv + standard-artefakte
 
 
-noch offen:
-- EK hand-test (manual_test_expl.ipynb → NOTIZEN.txt)
+EK Tests:
+- Pi fehler beim Spielen von 'Attack' es fehlt Code die Karte sinnvoll zu verarbeiten
+- Claude lässt einen selbst karten verteilen, dass ist bei einem kartenspiel, dass zufällige hände möchte unpraktisch
+
+spielen klappt bei den anderen 3 sonst gut. mit folgenden ausnahmen (regelwerk zeigen)
+- alle lassen es zu beliebig viele karten abzuwerfen
+- fix: RL agent antrainieren. dann diesen auf random states schicken und allg züge sampeln:
+  - wenn varianz hoch und neutraler erwartungswert -> zug sinnvoll
+  - wenn varianz klein und erwartungswert extrem -> zug schlecht fürs game (im positven als auch negativen)
+  -> dies würde auch balancing des games bewerten
 
 Ideen:
 - judge personas in prompts/judge_personas (...)
