@@ -1,24 +1,23 @@
-BoardBench progress (seit Meeting 2.7.2026)
+- zug idx ist pro state nicht pro zug
+- scores sind nur grober richtwert und haben untereinander schon gut was an noise
 
-erledigt:
-- judge calibration (EK×Havannah, Abalone×EK → score 0.0)
-- blind judge probe: anonymisierte pakete (keine spielnamen/pfade/calibration-note) → mismatch weiter erkannt
+- judge game blindness test; (EK × Havannah, Abalon e ×EK → score 0.0), also klappt Judge dafür
+- blind judge test: anonymisierte pakete (keine spielnamen/pfade/calibration-note) → mismatch weiter erkannt
 - blind EK×Mahjong: pi+codex score 0.0 (karten vs. steine)
 - blind Havannah×Abalone (beide steinspiele): pi 0.05, codex 0.0 — nur oberflächliche hex-ähnlichkeit, mechanik klar falsch
-- judge personas in prompts/judge_personas/ (nach meeting testen)
+
 - manual_test_expl.ipynb (EK hand-test)
-- klärung: step ≠ fester zugindex; summary delta <0.05 = rauschen
-- mahjong rulebook unter inputs/games/mahjong/
-- notebooks auf mahjong, timeout oneshot 1800 / agentic 3600
-- pi mahjong generation: mjh_gpt_os + mjh_gpt_ag
-- pi mahjong einzeltests (01–06 + judge): os+ag base checks OK; pair compare os×ag fail (54277/55277, step 54 player 1 vs CHANCE)
-- codex mahjong generation + einzeltests: os+ag base checks OK; pair compare os×ag fail sofort (step 0 CHANCE vs player 0)
-- claude mahjong agentic generation: mjh_claude_ag (2132s)
+
+- siedler generation hat claude 4.8 max und highx komplett gesprengt
+
+- GLM-5.2 pilot exploding_kittens (Z.ai API, effort high): oneshot+agentic via run_glm_series.py
+- agentic: echter multi-turn loop (read/write/run im workspace), nicht nur kurz-prompt
+- scores expl_scores_glm: os 0.875, ag 0.878; base checks beide 1.0; judge os ~0.64, ag ~0.59 (gpt+codex)
+- kosten ~1.5 USD/game (glm_usage_log.csv); kein json-dump in outputs, nur csv + standard-artefakte
+
 
 noch offen:
 - EK hand-test (manual_test_expl.ipynb → NOTIZEN.txt)
-- GLM-5.2 testen (siehe QUESTIONS.txt link)
-- claude mahjong: oneshot generation + tests (evaluation2.ipynb)
-- claude mahjong agentic tests (evaluation.ipynb → run_full_evaluation, pair compare)
-- meeting 10.7 prof (Scope, score-darstellung, KI-angabe)
-- checks/07 + judge personas (erst nach prof-meeting)
+
+Ideen:
+- judge personas in prompts/judge_personas (...)

@@ -1,22 +1,4 @@
-Append-only: Einträge nicht automatisch löschen, umsortieren oder bereinigen.
 
---- Prof (10.7) ---
-- EK vertiefen vs. mahjong vs. 4. spiel?
-- summary eine zahl vs. tabelle pro check?
-- KI-nutzung formal — fußnote/anhang?
-
---- GLM-5.2 testen (du) ---
-- coding plan + ZCode (empfohlen): https://zcode.z.ai/en/docs/configuration
-- pay-as-you-go api: https://docs.z.ai/guides/llm/glm-5.2  endpoint /api/coding/paas/v4, model glm-5.2
-- api key: https://z.ai/manage-apikey/apikey-list
-- fair vs boardbench: gleicher prompt wie pi, ergebnis als outputs/mjh_glm_os.py + run_checks.py (nicht claude-code-endpoint)
-
---- LLM Stuff ---
-- claude abo weg; pilot pi + codex + alte claude-artefakte in git history
-
---- Fragen ---
-- wie gehts weiter nach mahjong-pilot?
-- judge personas / checks/07 erst nach meeting?
-
---- Allgemeines ---
-- anmeldung master / wintersemester
+- Claude abo weg
+- Glm 5.2 1.5$ pro Game
+- Was war mit Inhouse LLM?
