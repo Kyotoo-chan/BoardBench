@@ -1,0 +1,18 @@
+Exploding Kittens (with GLM) - overall weighted score
+(smoke 01-04 weight 1; quality 05/06/90/99 weight 10)
+GLM rows read from live outputs/; pilot backends from pinned scores.
+
+pi     · GPT-5.5 xhigh  one-shot : 0.631
+Codex  · GPT-5.5 xhigh  one-shot : 0.868
+Claude · Opus 4.8 max  one-shot : 0.931
+GLM    · GLM-5.2 high  one-shot : 0.875
+pi     · GPT-5.5 xhigh  agentic  : 0.915
+Codex  · GPT-5.5 xhigh  agentic  : 0.926
+Claude · Opus 4.8 max  agentic  : 0.957
+GLM    · GLM-5.2 high  agentic  : 0.878
+
+per check                pi_os  cod_os  cla_os  glm_os   pi_ag  cod_ag  cla_ag  glm_ag
+05_random_rollouts       0.090   1.000   1.000   0.940   1.000   1.000   1.000   1.000
+06_action_language       0.971   1.000   1.000   1.000   1.000   1.000   1.000   1.000
+90_llm_judge             0.685   0.550   0.767   0.635   0.710   0.750   0.853   0.585
+01-04 smoke              1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000
