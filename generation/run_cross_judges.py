@@ -105,7 +105,7 @@ def iter_targets(
         return [(run.game, run.impl_backend, run.variant) for run in runs]
 
     games = (game,) if game else RERUN_ORDER
-    impls = (impl_backend,) if impl_backend else ("gpt", "codex", "claude")
+    impls = (impl_backend,) if impl_backend else ("gpt", "codex", "claude", "glm")
     variants = (variant,) if variant else ("oneshot", "agentic")
     return [(g, impl, var) for g in games for impl in impls for var in variants]
 
@@ -235,7 +235,7 @@ def run_judges(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game", choices=RERUN_ORDER)
-    parser.add_argument("--impl-backend", choices=("gpt", "claude", "codex"))
+    parser.add_argument("--impl-backend", choices=("gpt", "claude", "codex", "glm"))
     parser.add_argument("--variant", choices=("oneshot", "agentic"))
     parser.add_argument(
         "--judges",
@@ -264,6 +264,13 @@ def main() -> int:
         )
     elif args.game and args.impl_backend and args.variant and args.judges:
         targets = [(args.game, args.impl_backend, args.variant)]
+    elif args.game and args.impl_backend and not args.variant:
+        targets = iter_targets(
+            game=args.game,
+            impl_backend=args.impl_backend,
+            variant=None,
+            pilot_only=False,
+        )
     elif args.game and not (args.impl_backend or args.variant):
         targets = iter_targets(
             game=args.game,

@@ -49,7 +49,7 @@ from plots.collect_scores import (  # noqa: E402
 OUTPUTS = REPO_ROOT / "outputs"
 PLOTS = REPO_ROOT / "plots"
 
-BACKEND_ALIASES = {"pi": "gpt", "gpt": "gpt", "codex": "codex", "claude": "claude"}
+BACKEND_ALIASES = {"pi": "gpt", "gpt": "gpt", "codex": "codex", "claude": "claude", "glm": "glm"}
 VARIANTS = ("oneshot", "agentic")
 
 

@@ -102,6 +102,7 @@ BACKEND_SHORT: dict[str, str] = {
     "gpt": "gpt",
     "claude": "claude",
     "codex": "codex",
+    "glm": "glm",
     "manual": "manual",
 }
 
