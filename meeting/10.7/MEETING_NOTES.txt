@@ -1,0 +1,13 @@
+spielspeziische logik fehler werden eingebaut. wie findet man diese?
+- manuelle states beschreibung um bei eval drüber zu gehen
+- macht paper bench auch so, erstmal für spiel eval anpassen -> dann drüber gehen
+- unklare spielzustände sammeln
+- rl agent
+- llm run mit regelwerk um logiklücken zu schließen
+
+- catan scores wirken zu gut; genauer reingehen
+- taxonimien für spiele die es schon gibt
+- 
+
+
+ml cloud via ssh für qwen model
