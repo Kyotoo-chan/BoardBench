@@ -1,57 +1,64 @@
 # BoardBench
 
-BoardBench is a bachelor thesis repository for experimenting with board-game rulebooks, LLM-generated Python game environments, and later comparisons against OpenSpiel references.
+BoardBench is a bachelor-thesis workflow inspired by PaperBench. An LLM agent translates a board-game rulebook into an executable Python environment; cited edge cases and separate evaluator groups show what runs, what matches the rules, and what remains ambiguous.
 
-## Clean repository layout
+## Layout
 
-The root is kept intentionally small:
+- `inputs/` — active and archived rulebooks plus approved rule facts
+- `prompts/` — short generation, scenario, and review prompts
+- `outputs/` — raw responses, generated modules, logs, and reviews
+- `checks/` — technical checks and rulebook-cited scenarios
+- `generation/` — workflow helpers and historical backend runners
+- `docs/` — thesis decisions, workflow notes, and historical analysis
+- `plots/` — pilot result presentation; redesign currently deferred
+- `.pi/skills/` — project-local BoardBench commands
+- `.pi/agents/` — project-local rule-analysis, implementation, and review roles
+
+## New default workflow
+
+Place exactly one rulebook at `inputs/game_rules.pdf` or `inputs/game_rules.txt`, then use:
 
 ```text
-BoardBench/
-├─ AGENTS.md
-├─ README.md
-├─ TODO.md
-├─ evaluation.ipynb
-├─ evaluation2.ipynb
-├─ requirements.txt
-├─ inputs/
-├─ prompts/
-├─ outputs/
-├─ checks/
-├─ docs/
-├─ exposé/
-└─ .pi/
+/skill:bbedge game=<slug>
+/skill:bbimpl game=<slug>
+/skill:bbeval game=<slug>
 ```
 
-## What goes where
+Use `/skill:bb status game=<slug>` when the next phase is unclear.
 
-- `inputs/` – current rulebook input as `game_rules.txt` or `game_rules.pdf`
-- `prompts/` – reusable prompt text, including generation, implementation-brief, OpenSpiel-inspired backbone, and LLM-judge prompts
-- `outputs/` – raw model responses, generated Python files, references, and preserved artifacts
-- `checks/` – result checks for generated Python game files
-- `docs/` – workflow notes, checklists, current-state notes, LLM-judge workflow notes, drafts, and problem notes
-- `evaluation.ipynb` – agentic manual generation/evaluation notebook
-- `evaluation2.ipynb` – one-shot comparison notebook
-- `TODO.md` – follow-up ideas to investigate
-- `requirements.txt` – local Python dependencies
-- `AGENTS.md` – coding-agent instructions
+Default model:
 
-## Minimal workflow
+```text
+openai-codex/gpt-5.6-sol:low
+```
 
-1. Put the rulebook into `inputs/game_rules.txt` or `inputs/game_rules.pdf`; image-only PDFs are rendered to page images by the notebooks.
-2. Optionally create an implementation brief with `prompts/rulebook_to_implementation_brief.md`.
-3. Keep the generation prompt in `prompts/rulebook_to_python.txt`.
-4. Optionally add `prompts/open_spiel_backbone.md` as extra LLM context.
-5. Set game/model/output variables in `evaluation.ipynb` for the agentic run and `evaluation2.ipynb` for the one-shot run.
-6. Generate one self-contained Python module from the provided rules only.
-7. Save the raw response and extracted `.py` file in `outputs/`.
-8. Run the generated-result checks from the notebooks or with `python checks/run_checks.py`; each check reports a normalized 0–1 score.
-9. Use the pair action-language comparison when both generated variants exist; it normalizes emitted action names only and does not add moves.
-10. Optionally run an LLM judge scoring step with `prompts/llm_judge_review.md`, save it in `outputs/`, and parse its 0–1 score with `python checks/run_checks.py --include-judge`.
-11. Preserve notes and artifacts that may matter for the thesis write-up.
+Force and configure child agents per command with:
 
-## Notes
+```text
+subagents=on submodel=<provider/model> subthinking=<level>
+```
 
-- The repository is intentionally small and manual-first.
-- Use `docs/CURRENT.md` for the current detailed repo state.
-- Use `docs/workflow_description.md` for the local pi extension workflow.
+Without explicit child settings, the parent chooses an equal or weaker configuration; children may not exceed the parent model/thinking.
+
+The workflow is agentic-only for new experiments. One-shot notebooks and backend series remain as historical pilot infrastructure.
+
+## Evaluation groups
+
+- technical gate: checks 01–04
+- runtime robustness: check 05
+- action interface: check 06
+- rule fidelity: cited scenarios
+- independent LLM review
+- optional OpenSpiel reference, treated as secondary
+
+These groups are not interchangeable evidence and should not be collapsed into a claim of complete correctness.
+
+## Documentation
+
+- `AGENTS.md` — concise project rules
+- `docs/workflow_description.md` — command and model details
+- `docs/projektgespraech_offene_fragen_und_weiterarbeit.md` — thesis direction and priorities
+- `docs/thesis_decisions_and_changes.md` — methodological rationale and change record
+- `TODO.md` — next concrete work
+
+Run Python commands in the `boardbench` Conda environment.

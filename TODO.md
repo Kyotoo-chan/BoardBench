@@ -1,11 +1,25 @@
 # TODO
 
-Human thesis review (not for agents to auto-update on every game switch):
+## Before the next professor meeting
 
-- Read each generated `outputs/<game>_*.py` carefully. Be able to explain why the BoardBench API requires each function and what trade-offs the model made.
-- For every file in `checks/`, know what it tests and what a pass/fail means (`01`–`04` smoke/API, `05` random rollouts, `06` action-language sampling, `90` saved judge score, `99` OpenSpiel compare, `compare_pair` lockstep variants).
-- Add rulebook-derived scenario/regression checks only after that code and check review, not while still exploring a new game.
+- Exercise `/skill:bbedge` on one fresh rulebook and shorten any confusing step.
+- Extend Havannah and Conect rule facts only where they add distinct evidence.
+- Decide the intended Conect geometry before writing terminal Conect scenarios.
+- Exercise `/skill:bbimpl` with `gpt-5.6-sol:low`; escalate thinking only if a concrete failure justifies it.
+- Test whether two focused low-thinking reviewers agree on terminal and hidden/chance rules.
+- Build a small mutation set and measure which evaluation group catches each known error.
+- Decide the main-study games, repeats, and model conditions before broad generation.
 
-Optional later:
+## Deferred
 
-- Provide complete finished game implementations as examples so a model can implement a new game better.
+- Plot redesign and final result compression.
+- Broad rulebook scraping.
+- RL or coverage-guided exploration beyond the scenario prototype.
+- More one-shot comparisons.
+- OpenSpiel expansion beyond occasional calibration.
+
+## Supervisor decisions
+
+- Confirm that the thesis focuses on rulebook diagnosis and evaluator validity rather than one-shot versus agentic.
+- Confirm whether a human-validated rubric is sufficient ground truth for disputed rules.
+- Clarify formal disclosure requirements for LLM-generated code and text.

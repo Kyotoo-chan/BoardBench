@@ -1,215 +1,96 @@
 # AGENTS.md
 
-## Purpose of this repository
+## Purpose
 
-This repository supports a bachelor thesis workflow around **board game rulebooks**, **LLM-generated Python game environments**, and later **comparisons against OpenSpiel references**.
+BoardBench is a bachelor-thesis workflow inspired by PaperBench:
 
-The current repo focus is **repo building and experiment preparation**, not yet automated benchmarking.
+1. start from one board-game rulebook,
+2. turn its rules and edge cases into explicit, cited expectations,
+3. let an LLM agent implement a Python game environment,
+4. evaluate technical quality and rule fidelity as separate evidence groups.
 
-## Long-term direction
+The thesis asks where executable translation exposes rulebook ambiguity and where failures instead come from the model or evaluator. A code failure alone is not proof that the rulebook is bad.
 
-The broader thesis goal is to build a board-game benchmark idea inspired by PaperBench:
+## Current direction
 
-- start from a board-game rulebook as source material
-- generate a Python game environment with an LLM
-- compare against OpenSpiel where possible
-- later derive more general evaluation rules across games
+- Use **agentic generation** for new runs. One-shot remains historical pilot data.
+- Parent default: `openai-codex/gpt-5.6-sol`, thinking `low`.
+- Workflow commands accept `subagents=on|off|auto`, `submodel=...`, and `subthinking=...`.
+- Without an explicit child setting, the parent chooses equal or demonstrably weaker capability. A child must never receive a stronger model or higher thinking than its parent; if uncertain, inherit by omitting both fields.
+- OpenSpiel is an optional secondary reference, never the general oracle.
+- Optimize the workflow before redesigning plots or aggregate scores.
 
-Coding agents should therefore optimize for:
+Subagents are provided by `npm:@tintinweb/pi-subagents`. Project roles live in `.pi/agents/` and intentionally do not pin model or thinking.
 
-- a reusable and understandable workflow
-- prompts and outputs that are easy to compare later
-- preservation of intermediate artifacts useful for the final written thesis
+Project-local workflow skills:
 
-## Scope for coding agents
+- `/skill:bb` — status/router
+- `/skill:bbedge` — rule facts, ambiguities, edge cases
+- `/skill:bbimpl` — isolated agentic implementation
+- `/skill:bbeval` — grouped evaluation
 
-Coding agents working in this repository should primarily help with:
+## Minimal workflow
 
-- keeping the repository structure simple and understandable
-- improving the manual workflow from rulebook to Python output
-- maintaining reusable prompts and documentation
-- preserving artifacts needed for later comparison
-- preparing, but not overengineering, future benchmark steps
+1. User places exactly one active rulebook at `inputs/game_rules.pdf` or `.txt`.
+2. `bbedge` archives and hashes it, then rule facts and edge cases are discussed with the user.
+3. Approved facts live at `inputs/games/<slug>/rulefacts.md`; executable cases live at `checks/scenarios/<slug>.json`.
+4. `bbimpl` generates one agentic implementation in an isolated workspace that cannot see evaluator scenarios.
+5. `bbeval` reports technical, robustness, interface, scenario, and judge evidence separately.
 
-This file is for **general coding agents that help build the repo**.
-It is **not** the specification for later gameplay agents or benchmark agents.
+Do not continue past material ambiguities without user approval.
 
-## Current workflow philosophy
+## Scientific rules
 
-Prefer the smallest useful setup:
+- Use only the supplied rulebook for game rules; no remembered or web rules unless an experiment explicitly tests extra context.
+- Every hard scenario expectation needs rulebook edition/hash, page, and direct quote.
+- Keep ambiguous and untestable rules visible instead of scoring them as failures.
+- Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
+- Do not combine smoke checks, rollouts, action naming, judges, scenarios, and OpenSpiel into one claim of correctness.
+- Keep raw generations, raw reviews, code, logs, model/thinking settings, and timings.
+- Never silently rewrite old experimental results after methodology changes.
 
-- one `inputs/` folder
-- one flat `outputs/` folder (no game subdirs)
-- one `prompts/` folder
-- one lightweight `checks/` folder for small runnable checks of generated results
-- one `docs/` folder for secondary notes, drafts, checklists, and current-state details
-- root-level evaluation notebooks for agentic and one-shot comparison runs
+## Evaluation groups
 
-Avoid introducing large frameworks, provider abstractions, or complex evaluation pipelines unless explicitly requested.
+1. **Technical gate:** checks 01–04.
+2. **Runtime robustness:** check 05.
+3. **Interface:** check 06.
+4. **Rule fidelity:** cited scenarios.
+5. **Independent review:** LLM judges with uncertainty.
+6. **Optional reference:** OpenSpiel, clearly secondary.
 
-## Hard rules
+Run Python and checks through the `boardbench` Conda environment. In Git Bash use:
 
-1. Keep the repository minimal unless the user asks for more structure.
-2. Do not silently introduce API-key based workflows when the current task is subscription-first/manual.
-3. Do not assume external game knowledge if the task says to rely only on the provided rulebook/text.
-4. Keep raw model outputs whenever the workflow touches model generations.
-5. Do not delete or rewrite `QUESTIONS.txt` automatically; it is user-maintained.
-6. Prefer readable files and explicit documentation over hidden magic.
-7. Call out deviations from the agreed plan explicitly.
-8. When the user specifies commit times, use explicit `hh:mm:ss` timestamps and do not use `00` seconds.
-9. When writing commit messages, keep them lowercase and stylistically close to the existing short commit history.
-10. If a task is split into multiple commits, space the commit timestamps according to the rough effort split, and set the final commit to the current time unless the user says otherwise.
-11. When estimating commit spacing, count planning, thinking, and deciding time as part of the work, not only the file editing time.
-12. Keep code changes minimal and focused unless the user explicitly asks for a broader refactor.
-13. Use the `boardbench` Conda environment for Python commands, checks, notebook smoke tests, and dependency validation. In Git Bash, use `/c/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench ...` when `conda` is not on PATH.
+```bash
+/c/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench ...
+```
 
-## Git history and commit workflow
+Do not run a full evaluation unless the user asks for it.
 
-This repository uses git history as part of the thesis workflow record, not only as a deployment log.
+## Repository and artifacts
 
-- **Preserve step-by-step commits.** Keep separate commits for distinct workflow phases such as repo setup, generation, check runs, judge runs, fixes, calibration, and switching to a new game.
-- **Do not squash, soft-reset, or rewrite away intermediate commits** unless the user explicitly asks for history rewriting.
-- **Do not collapse diverged local/remote histories into one commit** when the user asks to "clean up the graph". In that case, prefer restoring/replacing the remote branch with the user's intentional local commit chain (`git push --force-with-lease`) instead of deleting intermediate commits.
-- When the user asks to remove old `outputs/` files for a new game, delete them in a **new commit** only. Do not assume earlier experiment commits should disappear from history; they remain part of the recorded workflow.
-- Match the existing short lowercase commit style and split commits by meaningful experiment steps rather than by arbitrary file batches.
-- When the user specifies commit times, keep the existing spacing rules in the hard rules above.
+Keep the repository simple: `inputs/`, `prompts/`, `outputs/`, `checks/`, `generation/`, `docs/`, and `plots/`.
 
-## Coding style expectations
+New agentic run stem:
 
-When adding code to this repo, prefer:
+```text
+<game>_<backend>_ag
+```
 
-- plain Python
-- standard library first
-- simple file layouts
-- self-contained modules where possible
-- readable names and comments
-- explicit assumptions when information is missing
+Standard artifacts:
 
-Avoid:
+- `<stem>.md` — raw generation
+- `<stem>.py` — generated module
+- `<stem>_checks.txt` — grouped check log
+- `<stem>_judge_<label>.md` — raw judge review
 
-- unnecessary dependencies
-- complex abstractions too early
-- hidden background automation
-- overfitting the repo to one provider or one model
+`outputs/` is flat. Do not gitignore generated thesis artifacts. Temporary workspaces and judge packets are not committed.
 
-## Documentation expectations
+Do not delete or rewrite `QUESTIONS.txt`; it is user-maintained. Preserve meeting notes and historical pilot artifacts.
 
-When creating or updating workflow files:
+## Code style
 
-- explain what a file is for
-- keep instructions short and actionable
-- make manual steps reproducible where possible
-- preserve the distinction between:
-  - repo-building support
-  - later gameplay/benchmark evaluation
+Prefer plain Python, standard library, explicit state, small functions, and readable assumptions. Avoid provider frameworks, large abstractions, hidden automation, or RL infrastructure unless requested.
 
-## Output conventions
+## Git
 
-If a workflow produces model artifacts, prefer storing:
-
-- the raw answer from the model
-- the extracted Python file
-- any important assumptions or unresolved issues
-
-Use simple, human-readable filenames.
-
-### Output artifact naming
-
-Pattern: `{game}_{backend}_{variant}` plus optional suffix.
-
-| Part | Values | Example stem |
-|------|--------|--------------|
-| game | `hav`, `aba`, `expl` | `expl_codex_os` |
-| backend | `gpt` (pi era), `claude`, `codex` | |
-| variant | `os` (one-shot), `ag` (agentic) | |
-
-Helper: `generation.config.output_stem(game, backend, variant)`.
-
-Standard files per run:
-
-- `{stem}.md` — raw LLM response
-- `{stem}.py` — extracted module
-- `{stem}_checks.txt` — check log (mechanical + judge + OpenSpiel when enabled)
-- `{stem}_judge_{backend}.md` — LLM judge reviews (`gpt` = pi, `codex`, `claude`)
-- Judge packets are assembled ephemerally at run time; **do not commit** `*_judge_packet.md`
-- `{stem}_pre_align.py`, `{stem}_action_align.md` — only when OpenSpiel compare runs
-
-Do **not** keep Claude-only `*_generation_packet.md`, pi `*_first_gen.*`, or temp `boardbench_*_codex_*.md` in `outputs/`.
-
-### Flat `outputs/` — commit, auto-clear between backends
-
-All run artifacts live **directly** in ``outputs/`` (e.g. ``outputs/mjh_claude_os.py``). There are **no game subdirectories**.
-
-Workflow:
-
-1. Work on one game; ``outputs/`` holds only that run's artifacts.
-2. **Commit** those files with the experiment (scores for plots are mirrored in ``plots/*_scores.txt``).
-3. **Clear** ``outputs/`` automatically on ``prepare`` or before the next backend's oneshot run (``generation/game_run_workflow.py`` / ``prepare_game_run.py``). Artifacts stay in git history.
-4. Older artifacts remain in **git history** (`git checkout <commit> -- outputs/...`).
-
-``outputs/`` in the working tree should usually be **empty** (``.gitkeep`` only) between runs. Cross-game charts read pinned/live scores from ``plots/collect_scores.py``, not stale ``outputs/``.
-
-### Generation backends (pilot trio)
-
-| Label in plots | Invocation | Model / effort |
-|----------------|------------|----------------|
-| pi | `pi -p --model openai-codex/gpt-5.5:xhigh` | GPT-5.5, xhigh |
-| Codex | `npx @openai/codex exec` via `generation/run_codex_series.py` | GPT-5.5, xhigh |
-| Claude | `claude -p` in evaluation notebooks | Opus 4.8, max effort |
-
-All pilot comparison runs used **maximum reasoning** for the respective backend.
-
-### Codex pilot workflow notes
-
-- `generation/run_codex_series.py` — generation + base checks 01–06 only.
-- `generation/run_codex_eval.py` — judge (+ OpenSpiel for Havannah) after generation.
-- `configure_namespace()` must set **all** path variables including `JUDGE_REVIEW_PATH`; otherwise judge steps can pick up the wrong game's review file.
-- Codex subprocess cwd must be repo root; `-C` paths must be absolute (PDF rulebooks otherwise fail on Windows).
-- UTF-8 stdin for Codex prompts (`errors="replace"` on encode) when rulebooks contain odd bytes.
-
-### Git rhythm per game
-
-**Default: one backend per cycle, oneshot + agentic bundled** (see `.cursor/skills/boardbench-game-run/SKILL.md` and `generation/game_run_workflow.py`).
-
-1. `prepare <game>` — auto-clears `outputs/`, activates rulebook → commit
-2. generate **both** variants → commit (four `{stem}` files)
-3. tests + cross judges (**gpt + codex only**) for both → commit
-4. pin plot for both variants → commit (`plots/<slug>_pinned.json` + `plots/<slug>_scores.*`); **`plot` auto-clears run artifacts** from `outputs/`
-5. repeat from step 2 for the next backend (oneshot also clears stale files; brief kept)
-
-No separate clear-outputs commit. Full clear on `prepare`; between backends only run artifacts are removed (brief stays until next game).
-
-Do not bundle unrelated games or backends in one commit. Do not add coding agents or other tools as co-authors on commits.
-
-## Artifact and path rules
-
-- flat ``outputs/`` holds generated game code, raw LLM answers, check logs, judge reviews, and other artifacts **until the next prepare or backend oneshot run**; clearing is automatic, not a separate commit.
-- **Do not gitignore `outputs/`** or hide generated artifacts to make `git status` look clean.
-- Commit `outputs/` artifacts when they belong to an intentional experiment run the user wants preserved.
-- Rendered PDF rulebook page images belong under `inputs/rulebook_pages/`, never `outputs/rulebook_pages/`.
-- Judge packets and pi attachments should reference `inputs/rulebook_pages/` paths for page images.
-- Notebook cell execution output complements `outputs/` text logs. For intentional test or experiment commits, **keep** the relevant notebook stdout (`OK` / `FAIL` / `---- summary` lines and per-phase run times) so the saved run is visible without re-execution.
-- **Always preserve** `OK generation N.Ns` stdout in the `run_generation()` notebook cell when committing a generation run. These wall-clock timings are intentional workflow record for later comparison; never strip, omit, or “clean up” them on generation commits.
-- Clear only stale or noisy notebook outputs before commit (unrelated cells, huge tracebacks, admin noise). Do **not** strip outputs from cells that belong to the committed test run.
-- Mirror important notebook results in `outputs/` where applicable (e.g. `*_checks.txt`, `*_pair_action_compare.txt`).
-- `run_full_evaluation()` and `run_pair_action_compare()` always append per-phase `---- phase ...` lines plus a final weighted `---- summary` (with total seconds) to the matching `outputs/` log. Commits that include test artifacts therefore preserve run timings even when notebook cell outputs are omitted.
-
-## Evaluation notebook rules
-
-- `evaluation.ipynb` = agentic run; `evaluation2.ipynb` = oneshot run.
-- Pair action-language comparison belongs only in `evaluation.ipynb`, not `evaluation2.ipynb`.
-- `run_full_evaluation()` is the one-cell full pipeline when the user wants everything at once.
-- Pipeline order: base checks (01–06) → LLM judge → **only** `90_llm_judge` → action-language align → **only** `99_openspiel_compare`.
-- Never re-run the full base-check suite after the judge step.
-- Print **one** aggregated `---- summary` line at the very end; intermediate phases use `--no-summary`.
-- On check failures, continue through judge and OpenSpiel phases when enabled; raise only at the end with the list of failed phases.
-- During iterative development, keep notebook output minimal: stream only `OK` / `FAIL` / final `summary` lines, no admin prints (`running checks`, `Saved check log`, `CompletedProcess`, etc.). Exception: always keep `OK generation N.Ns` on generation commits.
-- For intentional test-run commits, preserve those same minimal result lines **with timings** in the executed notebook cells and matching `outputs/` logs.
-- Checks report normalized `passed/total` unit scores per check line. The final `---- summary` score is a **weighted average of per-check scores**, not a raw sum of all units. Smoke checks `01`–`04` weight 1 each; quality checks (`05`, `06`, `90`, `99`, pair compare) weight 10 each and count equally among themselves.
-- Rollout, action-language, and pair-comparison checks keep running after failures and score proportionally within each check (for example `987/1000`), not as immediate `0/N`.
-- `05_random_rollouts` uses the notebook `ROLLOUTS` budget (default 100). `06_action_language` always uses 100 rollouts and counts one unit per legal action checked in visited states; per-check score is still proportional, but summary weighting keeps it comparable to other quality checks.
-- Manual evaluation notebooks use `ROLLOUTS = 100` by default. Coding agents should not run the full evaluation pipeline unless the user explicitly asks.
-- Pair oneshot-vs-agentic comparison uses `PAIR_ROLLOUTS` (default 1000, same scale as OpenSpiel comparison) — many independent lockstep games, not a handful of sampled actions.
-- Before OpenSpiel comparison, run single-file LLM action-language align on the generated code.
-- Before oneshot-vs-agentic pair comparison, run **one joint** LLM pair align (`prompts/action_language_pair_align.md`) on both variants so normalized action keys match across implementations.
-- Action-language align runs immediately before OpenSpiel compare or pair compare, not before the base checks.
+This is currently a solo repository: commit directly on `main` when the user requests commits. Follow the global `/skill:gc` workflow. Prefer large coherent commits, short clear lowercase messages, no co-author trailers, and no pushes unless requested.

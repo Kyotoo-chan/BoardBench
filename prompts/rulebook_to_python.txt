@@ -1,45 +1,32 @@
-You will receive rule text.
+Implement the provided rulebook as one self-contained Python module.
 
-Use only that information.
-Do not use outside knowledge or remembered rules for the game.
-If an implementation brief or backbone context is provided, use it only as an interpretation aid; the rule text wins if there is a conflict.
+Source rules:
+- Use only the rulebook and approved rule facts supplied with this task.
+- The rulebook wins on conflicts.
+- Do not use remembered game knowledge.
+- Do not invent missing rules. Keep unresolved gaps explicit in comments.
 
-Write one simple, self-contained Python file using only the standard library.
-Do not import any non-standard-library package or external game framework.
-Do not require external files, images, environment variables, network access, subprocesses, API keys, or interactive input.
-Keep top-level code limited to definitions and constants.
+Implementation rules:
+- Standard library only; no files, network, subprocesses, API keys, or input prompts at runtime.
+- Keep the code small and readable.
+- Model setup, turns/phases, legal actions, transitions, chance/private information, terminal conditions, and returns explicitly when the rulebook requires them.
+- Terminal states have no legal actions.
 
-If rules are unclear or incomplete, state the assumptions briefly before the code and in comments where relevant.
-Do not silently fill missing rules with outside knowledge.
-Prefer a smaller explicit implementation with documented gaps over broad invented mechanics.
+Provide `GameState` and `Game` with:
+- `initial_state()`
+- `current_player(state)`
+- `legal_actions(state)`
+- `apply_action(state, action)`
+- `is_terminal(state)`
+- `returns(state)`
+- `render(state)`
+- `action_to_name(action)`
+- `name_to_action(name)`
 
-If possible, include this minimal game API:
-- `GameState`
-- `Game`
-- `initial_state(self)`
-- `current_player(self, state)`
-- `legal_actions(self, state)`
-- `apply_action(self, state, action)` returning the next state, or clearly documenting in-place mutation
-- `is_terminal(self, state)`
-- `returns(self, state)` returning one numeric value per player
-- `render(self, state)` returning a stable, compact, human-readable string suitable for side-by-side inspection
-- `action_to_name(self, action)` returning a unique canonical action name
-- `name_to_action(self, name)` reversing a canonical action name
+Actions returned by `legal_actions` must be accepted by `apply_action`. Names must be unique, human-readable, stable, and exactly reversible. Use explicit labels such as `place:<target>` or `move:<source>-><target>` rather than state-dependent raw indices.
 
-Rules for actions and state presentation:
-- `legal_actions` must only return actions that `apply_action` accepts.
-- `action_to_name` and `name_to_action` must round-trip exactly.
-- Action names must be human-readable, stable, unique in sampled states, and must not rely on raw internal indices alone.
-- If action names contain signed numeric coordinates, encode signs unambiguously (for example `pos1`/`neg1` or `p1`/`n1`) so different points cannot collapse when punctuation is normalized.
-- If the rule text defines labels for squares, points, regions, cards, or other move targets, use those labels in action names and render output.
-- If the rule text explicitly defines or clearly implies a standard move notation, use that notation consistently; otherwise use a simple explicit format such as `place:<target>`, `move:<source>-><target>`, `remove:<target>`, or similarly clear equivalents.
-- `render` should be deterministic across repeated calls on the same state and avoid decorative prose.
-- Terminal states should have no legal actions and stable returns.
+Before finishing, run syntax and short gameplay probes and repair failures.
 
-Only if required by the rule text, include:
-- `chance_outcomes(self, state)` for stochastic rules
-- `information_state(self, state, player)` for hidden-information rules
-
-Output:
-1. `Open questions / assumptions`
-2. one fenced `python` code block with the full file
+Output only:
+1. `Open questions / assumptions` (brief)
+2. one fenced `python` block containing the complete module

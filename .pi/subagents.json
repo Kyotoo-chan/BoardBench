@@ -1,0 +1,6 @@
+{
+  "maxConcurrent": 4,
+  "defaultJoinMode": "smart",
+  "scopeModels": true,
+  "toolDescriptionMode": "compact"
+}

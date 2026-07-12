@@ -229,6 +229,9 @@ __marimo__/
 .pi/
 !.pi/
 .pi/*
-!.pi/extensions/
-.pi/extensions/*
-!.pi/extensions/boardbench-context.ts
+!.pi/settings.json
+!.pi/subagents.json
+!.pi/agents/
+!.pi/agents/**
+!.pi/skills/
+!.pi/skills/**
