@@ -162,6 +162,12 @@ def activate_game_rules(slug: str) -> Path:
 
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, target)
+
+    # All active PDFs share the stem ``game_rules``. Reusing that directory
+    # after a game switch can attach pages from the previous rulebook.
+    rendered_pages = INPUTS_DIR / "rulebook_pages" / target.stem
+    if rendered_pages.exists():
+        shutil.rmtree(rendered_pages)
     return target
 
 

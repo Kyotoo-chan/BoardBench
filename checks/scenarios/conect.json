@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "game": "conect",
+  "rulebook": {
+    "path": "inputs/games/conect/game_rules.pdf",
+    "sha256": "b73131b6206bffef3bb38374dda6616a3118f84ee776bd6b1d4b70c132c3de40",
+    "edition": "Mark Steere, May 2024, one-page English rule sheet"
+  },
+  "scenarios": [
+    {
+      "id": "CON-R01-empty-board-red-starts",
+      "source": {
+        "page": 1,
+        "quote": "The two players, Red and Blue, take turns placing their own stones onto unoccupied cells of an initially empty board, one stone per turn, starting with Red."
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false
+      }
+    },
+    {
+      "id": "CON-R02-one-stone-per-turn",
+      "source": {
+        "page": 1,
+        "quote": "The two players, Red and Blue, take turns placing their own stones onto unoccupied cells of an initially empty board, one stone per turn, starting with Red."
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false
+      },
+      "steps": [
+        {
+          "action": {"select": "first"},
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "legal_action_delta": -1,
+            "previous_action_legal": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "CON-R03-alternating-unoccupied-cells",
+      "source": {
+        "page": 1,
+        "quote": "The two players, Red and Blue, take turns placing their own stones onto unoccupied cells of an initially empty board, one stone per turn, starting with Red."
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false
+      },
+      "steps": [
+        {
+          "action": {"select": "first"},
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "legal_action_delta": -1,
+            "previous_action_legal": false
+          }
+        },
+        {
+          "action": {"select": "first"},
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "legal_action_delta": -1,
+            "previous_action_legal": false
+          }
+        }
+      ]
+    }
+  ]
+}

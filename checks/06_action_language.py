@@ -9,9 +9,9 @@ visited state. Each action check is one unit. The rollout budget is fixed at
 This check is purely internal: it verifies that `action_to_name` round-trips
 through `name_to_action` and that every legal action in a state has a distinct
 raw name. It does NOT apply `normalize_action_name`. Normalization is only
-needed when two different implementations must share one comparison syntax, so
-the normalized-key uniqueness check lives in `99_openspiel_compare` and the
-oneshot-vs-agentic pair comparison, not in this single-implementation check.
+needed when an implementation is compared with an external reference, so the
+normalized-key uniqueness check lives in `99_openspiel_compare`, not in this
+single-implementation check.
 """
 
 from __future__ import annotations

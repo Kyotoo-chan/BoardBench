@@ -41,7 +41,7 @@ CHESS_SQUARE_RE = re.compile(r"(?<![a-z0-9])[a-h][1-8](?![a-z0-9])")
 GENERIC_LABEL_RE = re.compile(r"[a-z][a-z0-9_]*")
 SIGNED_TOKEN_RE = r"(?:[+-]?\d+|(?:pos|plus|neg|minus|negative|p|m|n|z|zero)[_ -]?\d+)"
 QR_RE = re.compile(
-    rf"(?<![a-z0-9])q[_:=\s]*(?P<q>{SIGNED_TOKEN_RE})[,;_\s]*r[_:=\s]*(?P<r>{SIGNED_TOKEN_RE})(?![a-z0-9])"
+    rf"(?<![a-z0-9])q[_:=\s]*(?P<q>{SIGNED_TOKEN_RE})[,;:_\s]*r[_:=\s]*(?P<r>{SIGNED_TOKEN_RE})(?![a-z0-9])"
 )
 
 
