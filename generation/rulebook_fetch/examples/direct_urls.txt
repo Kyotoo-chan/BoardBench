@@ -1,2 +1,0 @@
-# One PDF URL per line. Good for designer pages and publisher direct links.
-https://marksteeregames.com/Conect_rules.pdf
