@@ -1,6 +1,6 @@
 ---
 name: bb
-description: Route the local BoardBench workflow through rulebook edge cases, agentic implementation, and grouped evaluation. Use for status or when the next workflow step is unclear.
+description: Show status and route the next BoardBench phase.
 ---
 
 # BoardBench workflow

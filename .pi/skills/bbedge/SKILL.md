@@ -1,6 +1,6 @@
 ---
 name: bbedge
-description: Turn one deposited BoardBench rulebook into quoted rule facts, ambiguities, and agreed edge-case scenarios before code generation.
+description: Extract cited rules and agree edge cases.
 ---
 
 # BoardBench edge cases
@@ -8,10 +8,10 @@ description: Turn one deposited BoardBench rulebook into quoted rule facts, ambi
 Example:
 
 ```text
-/skill:bbedge game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
+/bbedge game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
 ```
 
-Use the argument and subagent policy from `/skill:bb`. If child model/thinking is not explicit, omit those `Agent` fields unless choosing a demonstrably weaker setting than the parent.
+Use the argument and subagent policy from `/bb`. If child model/thinking is not explicit, omit those `Agent` fields unless choosing a demonstrably weaker setting than the parent.
 
 ## Input
 
@@ -27,4 +27,4 @@ Require exactly one active `inputs/game_rules.pdf` or `.txt`. Ask for a short sl
 6. After agreement, write `inputs/games/<slug>/rulefacts.md` with `status: approved`, rulebook hash, decisions, and unresolved questions.
 7. Write 5–10 strong public-API cases to `checks/scenarios/<slug>.json`, each with page and quote.
 
-Do not implement code. End with approved facts, unresolved decisions, paths, subagent model/thinking actually used, and the next `/skill:bbimpl` command.
+Do not implement code. End with approved facts, unresolved decisions, paths, subagent model/thinking actually used, and the next `/bbimpl` command.

@@ -1,64 +1,33 @@
 # BoardBench
 
-BoardBench is a bachelor-thesis workflow inspired by PaperBench. An LLM agent translates a board-game rulebook into an executable Python environment; cited edge cases and separate evaluator groups show what runs, what matches the rules, and what remains ambiguous.
+BoardBench turns one board-game rulebook into a Python environment and evaluates rule fidelity with cited evidence.
 
-## Layout
+## Workflow
 
-- `inputs/` — active and archived rulebooks plus approved rule facts
-- `prompts/` — short generation, scenario, and review prompts
-- `outputs/` — raw responses, generated modules, logs, and reviews
-- `checks/` — technical checks and rulebook-cited scenarios
-- `generation/` — workflow helpers and historical backend runners
-- `docs/` — thesis decisions, workflow notes, and historical analysis
-- `plots/` — pilot result presentation; redesign currently deferred
-- `.pi/skills/` — project-local BoardBench commands
-- `.pi/agents/` — project-local rule-analysis, implementation, and review roles
+1. Put one rulebook at `inputs/game_rules.pdf` or `.txt`.
+2. `/bbedge game=<slug>` — extract cited facts, resolve ambiguities, approve scenarios.
+3. `/bbimpl game=<slug>` — generate one implementation in an isolated workspace.
+4. `/bbeval game=<slug>` — run grouped checks and independent rule review.
 
-## New default workflow
+Use `/bb game=<slug>` for status.
 
-Place exactly one rulebook at `inputs/game_rules.pdf` or `inputs/game_rules.txt`, then use:
+Optional child settings:
 
 ```text
-/skill:bbedge game=<slug>
-/skill:bbimpl game=<slug>
-/skill:bbeval game=<slug>
+subagents=on|off|auto submodel=<provider/model> subthinking=<level>
 ```
 
-Use `/skill:bb status game=<slug>` when the next phase is unclear.
+Without explicit settings, children inherit or use only weaker capability than the parent.
 
-Default model:
+## Evaluation
 
-```text
-openai-codex/gpt-5.6-sol:low
-```
+Results stay separate:
 
-Force and configure child agents per command with:
-
-```text
-subagents=on submodel=<provider/model> subthinking=<level>
-```
-
-Without explicit child settings, the parent chooses an equal or weaker configuration; children may not exceed the parent model/thinking.
-
-The workflow is agentic-only for new experiments. One-shot notebooks and backend series remain as historical pilot infrastructure.
-
-## Evaluation groups
-
-- technical gate: checks 01–04
-- runtime robustness: check 05
-- action interface: check 06
-- rule fidelity: cited scenarios
+- technical checks 01–04
+- runtime robustness 05
+- interface 06
+- cited rule scenarios
 - independent LLM review
-- optional OpenSpiel reference, treated as secondary
+- optional OpenSpiel reference
 
-These groups are not interchangeable evidence and should not be collapsed into a claim of complete correctness.
-
-## Documentation
-
-- `AGENTS.md` — concise project rules
-- `docs/workflow_description.md` — command and model details
-- `docs/projektgespraech_offene_fragen_und_weiterarbeit.md` — thesis direction and priorities
-- `docs/thesis_decisions_and_changes.md` — methodological rationale and change record
-- `TODO.md` — next concrete work
-
-Run Python commands in the `boardbench` Conda environment.
+Run Python through the `boardbench` Conda environment. See `AGENTS.md` and `docs/workflow_description.md` for details.

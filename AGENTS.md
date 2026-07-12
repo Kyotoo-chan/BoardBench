@@ -24,10 +24,10 @@ Subagents are provided by `npm:@tintinweb/pi-subagents`. Project roles live in `
 
 Project-local workflow skills:
 
-- `/skill:bb` — status/router
-- `/skill:bbedge` — rule facts, ambiguities, edge cases
-- `/skill:bbimpl` — isolated agentic implementation
-- `/skill:bbeval` — grouped evaluation
+- `/bb` — status/router
+- `/bbedge` — rule facts, ambiguities, edge cases
+- `/bbimpl` — isolated agentic implementation
+- `/bbeval` — grouped evaluation
 
 ## Minimal workflow
 

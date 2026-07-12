@@ -233,5 +233,7 @@ __marimo__/
 !.pi/subagents.json
 !.pi/agents/
 !.pi/agents/**
+!.pi/prompts/
+!.pi/prompts/**
 !.pi/skills/
 !.pi/skills/**

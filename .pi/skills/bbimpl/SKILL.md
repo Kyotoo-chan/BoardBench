@@ -1,6 +1,6 @@
 ---
 name: bbimpl
-description: Implement one BoardBench game agentically from approved rule facts, optionally using a requested subagent model and thinking level.
+description: Generate one isolated game implementation.
 ---
 
 # BoardBench implementation
@@ -8,10 +8,10 @@ description: Implement one BoardBench game agentically from approved rule facts,
 Example:
 
 ```text
-/skill:bbimpl game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
+/bbimpl game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
 ```
 
-Use the argument and subagent policy from `/skill:bb`.
+Use the argument and subagent policy from `/bb`.
 
 ## Preconditions
 
@@ -36,4 +36,4 @@ Run through the `boardbench` Conda environment and keep groups separate:
 
 Do not combine them into a correctness score. Do not run OpenSpiel unless requested. Implementation defects may return to the same Agent; changed rule interpretations return to the user.
 
-End with paths, grouped results, parent and child model/thinking, assumptions, and the next `/skill:bbeval` command.
+End with paths, grouped results, parent and child model/thinking, assumptions, and the next `/bbeval` command.

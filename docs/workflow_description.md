@@ -7,12 +7,12 @@ Project-local pi skills are the primary interface. One-shot and pair-comparison 
 Place one rulebook at `inputs/game_rules.pdf` or `.txt`, then run:
 
 ```text
-/skill:bbedge game=<slug>
-/skill:bbimpl game=<slug>
-/skill:bbeval game=<slug>
+/bbedge game=<slug>
+/bbimpl game=<slug>
+/bbeval game=<slug>
 ```
 
-Use `/skill:bb status game=<slug>` when the next phase is unclear.
+Use `/bb game=<slug>` when the next phase is unclear.
 
 ## Subagents
 
@@ -34,7 +34,7 @@ subthinking=off|minimal|low|medium|high|xhigh
 Example:
 
 ```text
-/skill:bbedge game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
+/bbedge game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
 ```
 
 `model=` and `thinking=` remain accepted aliases.

@@ -6,10 +6,10 @@ BoardBench is a manual-first, agentic rulebook-to-environment workflow. The repo
 
 Project-local pi skills:
 
-- `/skill:bb`
-- `/skill:bbedge`
-- `/skill:bbimpl`
-- `/skill:bbeval`
+- `/bb`
+- `/bbedge`
+- `/bbimpl`
+- `/bbeval`
 
 The parent defaults to `openai-codex/gpt-5.6-sol:low`. Commands accept `subagents`, `submodel`, and `subthinking`; absent explicit settings, children inherit or use only demonstrably weaker capability.
 

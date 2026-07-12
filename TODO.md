@@ -2,10 +2,10 @@
 
 ## Before the next professor meeting
 
-- Exercise `/skill:bbedge` on one fresh rulebook and shorten any confusing step.
+- Exercise `/bbedge` on one fresh rulebook and shorten any confusing step.
 - Extend Havannah and Conect rule facts only where they add distinct evidence.
 - Decide the intended Conect geometry before writing terminal Conect scenarios.
-- Exercise `/skill:bbimpl` with `gpt-5.6-sol:low`; escalate thinking only if a concrete failure justifies it.
+- Exercise `/bbimpl` with `gpt-5.6-sol:low`; escalate thinking only if a concrete failure justifies it.
 - Test whether two focused low-thinking reviewers agree on terminal and hidden/chance rules.
 - Build a small mutation set and measure which evaluation group catches each known error.
 - Decide the main-study games, repeats, and model conditions before broad generation.

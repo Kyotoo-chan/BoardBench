@@ -1,6 +1,6 @@
 ---
 name: bbeval
-description: Evaluate an agentic BoardBench implementation in separate evidence groups, optionally with requested reviewer subagents and model settings.
+description: Evaluate technical quality and rule fidelity separately.
 ---
 
 # BoardBench evaluation
@@ -8,10 +8,10 @@ description: Evaluate an agentic BoardBench implementation in separate evidence 
 Example:
 
 ```text
-/skill:bbeval game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
+/bbeval game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
 ```
 
-Use the argument and subagent policy from `/skill:bb`.
+Use the argument and subagent policy from `/bb`.
 
 ## Process
 
