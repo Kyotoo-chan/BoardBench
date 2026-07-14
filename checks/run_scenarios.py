@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import random
 import sys
 from pathlib import Path
 from typing import Any
@@ -113,6 +114,15 @@ def _check_expectations(
         _assert_equal("terminal", is_terminal(game, state), bool(expected["terminal"]))
     if "legal_action_count" in expected:
         _assert_equal("legal_action_count", len(actions), int(expected["legal_action_count"]))
+    if "legal_action_count_min" in expected:
+        minimum = int(expected["legal_action_count_min"])
+        if len(actions) < minimum:
+            raise AssertionError(f"legal_action_count: expected at least {minimum}, got {len(actions)}")
+    if "legal_action_name_contains_any" in expected:
+        needles = [normalize_action_name(str(item)) for item in expected["legal_action_name_contains_any"]]
+        names = [normalize_action_name(str(game.action_to_name(action))) for action in actions]
+        if not any(needle in name for needle in needles for name in names):
+            raise AssertionError(f"no legal action name contains any of {needles!r}; got {names!r}")
     if "legal_action_delta" in expected:
         if previous_legal_action_count is None:
             raise AssertionError("legal_action_delta requires a preceding action")
@@ -123,6 +133,8 @@ def _check_expectations(
         )
     if "returns" in expected:
         _assert_equal("returns", returns(game, state), list(expected["returns"]))
+    if "returns_sorted" in expected:
+        _assert_equal("returns_sorted", sorted(returns(game, state)), sorted(expected["returns_sorted"]))
     if "previous_action_legal" in expected:
         if previous_action is None:
             raise AssertionError("previous_action_legal requires a preceding action")
@@ -144,8 +156,80 @@ def _validate_source(scenario: dict[str, Any]) -> None:
         raise AssertionError("source.quote must contain a direct rulebook quote")
 
 
+def _action_name(game: Any, action: Any) -> str:
+    with suppress_generated_output():
+        return normalize_action_name(str(game.action_to_name(action)))
+
+
+def _find_action_scenario(game: Any, scenario: dict[str, Any]) -> None:
+    search = scenario["search"]
+    needles = [normalize_action_name(str(item)) for item in search["action_contains_any"]]
+    rng = random.Random(int(search.get("seed", 1)))
+    max_rollouts = int(search.get("max_rollouts", 200))
+    max_steps = int(search.get("max_steps", 300))
+
+    for _ in range(max_rollouts):
+        with suppress_generated_output():
+            state = game.initial_state()
+        for _ in range(max_steps):
+            if is_terminal(game, state):
+                break
+            actions = legal_actions(game, state)
+            matches = [action for action in actions if any(needle in _action_name(game, action) for needle in needles)]
+            if matches:
+                before_player = current_player(game, state)
+                before_count = len(actions)
+                action = matches[0]
+                state = apply_action(game, state, action)
+                expected = scenario.get("expect", {})
+                relation = expected.get("current_player_relation")
+                after_player = current_player(game, state)
+                if relation == "same" and after_player != before_player:
+                    raise AssertionError(f"current_player changed from {before_player} to {after_player}")
+                if relation == "changed" and after_player == before_player:
+                    raise AssertionError(f"current_player did not change from {before_player}")
+                _check_expectations(
+                    game,
+                    state,
+                    {key: value for key, value in expected.items() if key != "current_player_relation"},
+                    previous_action=action,
+                    previous_legal_action_count=before_count,
+                )
+                return
+            if not actions:
+                break
+            state = apply_action(game, state, rng.choice(actions))
+    raise AssertionError(f"could not reach legal action containing any of {needles!r}")
+
+
+def _terminal_rollout_scenario(game: Any, scenario: dict[str, Any]) -> None:
+    search = scenario["terminal_rollout"]
+    rng = random.Random(int(search.get("seed", 1)))
+    max_rollouts = int(search.get("max_rollouts", 100))
+    max_steps = int(search.get("max_steps", 1000))
+    for _ in range(max_rollouts):
+        with suppress_generated_output():
+            state = game.initial_state()
+        for _ in range(max_steps):
+            if is_terminal(game, state):
+                _check_expectations(game, state, scenario.get("expect", {}))
+                return
+            actions = legal_actions(game, state)
+            if not actions:
+                break
+            state = apply_action(game, state, rng.choice(actions))
+    raise AssertionError("no terminal state reached by public random actions")
+
+
 def run_scenario(game: Any, scenario: dict[str, Any]) -> None:
     _validate_source(scenario)
+    if "search" in scenario:
+        _find_action_scenario(game, scenario)
+        return
+    if "terminal_rollout" in scenario:
+        _terminal_rollout_scenario(game, scenario)
+        return
+
     with suppress_generated_output():
         state = game.initial_state()
     _check_expectations(game, state, scenario.get("initial", {}))
@@ -170,8 +254,8 @@ def run_scenario(game: Any, scenario: dict[str, Any]) -> None:
 
 def load_suite(path: Path, repo_root: Path) -> dict[str, Any]:
     suite = json.loads(path.read_text(encoding="utf-8"))
-    if suite.get("version") != 1:
-        raise ValueError("scenario suite version must be 1")
+    if suite.get("version") not in {1, 2}:
+        raise ValueError("scenario suite version must be 1 or 2")
     rulebook = suite.get("rulebook", {})
     raw_path = rulebook.get("path")
     expected_hash = str(rulebook.get("sha256", "")).lower()

@@ -1,0 +1,136 @@
+{
+  "version": 2,
+  "game": "expl",
+  "rulebook": {
+    "path": "inputs/games/expl/game_rules.pdf",
+    "sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853",
+    "edition": "Exploding Kittens NSFW Edition, German, 2018, 2 pages, 2-5 players, 56 cards"
+  },
+  "scenarios": [
+    {
+      "id": "EXPL-R01-two-player-start",
+      "source": {
+        "page": 1,
+        "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“. So starten alle mit 8 Karten auf der Hand."
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false,
+        "returns": [0, 0],
+        "legal_action_count_min": 1
+      }
+    },
+    {
+      "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+      "source": {
+        "page": 1,
+        "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
+      },
+      "initial": {
+        "terminal": false,
+        "legal_action_name_contains_any": ["draw", "ziehen", "pass"]
+      }
+    },
+    {
+      "id": "EXPL-R03-attack-hands-turn-to-next-player",
+      "source": {
+        "page": 2,
+        "quote": "Du beendest deinen eigenen Zug, ohne eine Karte zu ziehen, und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+      },
+      "search": {
+        "action_contains_any": ["attack", "angriff", "doppelzug"],
+        "max_rollouts": 300,
+        "max_steps": 300,
+        "seed": 11
+      },
+      "expect": {
+        "terminal": false,
+        "current_player_relation": "changed"
+      }
+    },
+    {
+      "id": "EXPL-R04-skip-does-not-end-game",
+      "source": {
+        "page": 2,
+        "quote": "Beende sofort deinen Zug, ohne eine Karte zu ziehen."
+      },
+      "search": {
+        "action_contains_any": ["skip", "hops", "überspringen"],
+        "max_rollouts": 300,
+        "max_steps": 300,
+        "seed": 12
+      },
+      "expect": {
+        "terminal": false
+      }
+    },
+    {
+      "id": "EXPL-R05-preview-keeps-current-turn",
+      "source": {
+        "page": 2,
+        "quote": "Schau dir die obersten drei Karten des Spielstapels an und lege sie zurück, ohne deren Reihenfolge zu verändern."
+      },
+      "search": {
+        "action_contains_any": ["see future", "future", "blick in die zukunft", "vorschau"],
+        "max_rollouts": 300,
+        "max_steps": 300,
+        "seed": 13
+      },
+      "expect": {
+        "terminal": false,
+        "current_player_relation": "same"
+      }
+    },
+    {
+      "id": "EXPL-R06-shuffle-keeps-current-turn",
+      "source": {
+        "page": 2,
+        "quote": "Misch den Spielstapel sorgfältig neu."
+      },
+      "search": {
+        "action_contains_any": ["shuffle", "mischen", "neuordnen"],
+        "max_rollouts": 300,
+        "max_steps": 300,
+        "seed": 14
+      },
+      "expect": {
+        "terminal": false,
+        "current_player_relation": "same"
+      }
+    },
+    {
+      "id": "EXPL-R07-favor-keeps-current-turn",
+      "source": {
+        "page": 2,
+        "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben. Dieser Spieler entscheidet, welche Karte du bekommst."
+      },
+      "search": {
+        "action_contains_any": ["favor", "wunsch", "auswahl"],
+        "max_rollouts": 300,
+        "max_steps": 300,
+        "seed": 15
+      },
+      "expect": {
+        "terminal": false,
+        "current_player_relation": "same"
+      }
+    },
+    {
+      "id": "EXPL-R08-last-survivor-wins",
+      "source": {
+        "page": 1,
+        "quote": "Der Spieler, der nicht explodiert und als Letzter übrig ist, gewinnt."
+      },
+      "terminal_rollout": {
+        "max_rollouts": 100,
+        "max_steps": 1000,
+        "seed": 16
+      },
+      "expect": {
+        "terminal": true,
+        "returns_sorted": [-1, 1],
+        "legal_action_count": 0
+      }
+    }
+  ]
+}
