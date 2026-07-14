@@ -1,0 +1,24 @@
+=== technical gate 01-04 ===
+exit_code=0 elapsed_seconds=0.103
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    8/8 score=1.000    0.00s
+---- summary                            4/4 score=1.000    0.02s
+
+=== runtime robustness 05 ===
+exit_code=0 elapsed_seconds=1.952
+OK   05_random_rollouts             100/100 score=1.000    1.87s
+---- summary                            1/1 score=1.000    1.87s
+
+=== interface 06 ===
+exit_code=0 elapsed_seconds=1.701
+OK   06_action_language         16532/16532 score=1.000    1.62s
+---- summary                            1/1 score=1.000    1.62s
+
+=== canonical cited scenarios ===
+exit_code=1 elapsed_seconds=9.375
+FAIL EXPL-R05-preview-keeps-current-turn: could not reach legal action containing any of ['move:see->future', 'future', 'move:blick->in', 'vorschau']
+FAIL EXPL-R06-shuffle-keeps-current-turn: current_player changed from 0 to 1
+FAIL EXPL-R07-favor-keeps-current-turn: current_player changed from 0 to 1
+FAIL rulebook_scenarios 5/8 score=0.625
