@@ -1,0 +1,32 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T20:55:31.327248+00:00",
+  "ended_at": "2026-07-14T20:59:03.432867+00:00",
+  "elapsed_seconds": 212.106,
+  "exit_code": 0,
+  "token_summary": {
+    "reasoning_output_tokens": 2756,
+    "input_tokens": 104317,
+    "cached_input_tokens": 63488,
+    "output_tokens": 7580
+  },
+  "provider_usage_records": [
+    {
+      "line": 9,
+      "path": "$.usage",
+      "input_tokens": 104317,
+      "cached_input_tokens": 63488,
+      "output_tokens": 7580,
+      "reasoning_output_tokens": 2756
+    }
+  ],
+  "events_path": "outputs/expl_edge_reviewer_events.jsonl",
+  "response_path": "outputs/expl_edge_reviewer.md",
+  "image_paths": [
+    "generation_workspaces/expl_edge_reviewer/page-1.png",
+    "generation_workspaces/expl_edge_reviewer/page-2.png"
+  ],
+  "stderr": "2026-07-14T20:55:47.768627Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-ChildItem -Force | Select-Object Name,Length,LastWriteTime; Get-FileHash -Algorithm SHA256 .\\\\rulebook.pdf, .\\\\page-1.png, .\\\\page-2.png | Select-Object Path,Hash; Get-Command pdftotext,pdfinfo -ErrorAction SilentlyContinue | Select-Object Name,Source\"` rejected: blocked by policy\n2026-07-14T20:55:56.157773Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Format-Table -AutoSize'` rejected: blocked by policy\n"
+}
