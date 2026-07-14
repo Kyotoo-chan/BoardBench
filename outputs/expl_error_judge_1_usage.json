@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T22:19:17.383603+00:00",
+  "ended_at": "2026-07-14T22:22:03.167962+00:00",
+  "elapsed_seconds": 165.785,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 8,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 598690,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 8,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 598524,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "output_tokens": 5731,
+    "cached_input_tokens": 84992,
+    "input_tokens": 121655,
+    "reasoning_output_tokens": 3188
+  },
+  "provider_usage_records": [
+    {
+      "line": 17,
+      "path": "$.usage",
+      "input_tokens": 121655,
+      "cached_input_tokens": 84992,
+      "output_tokens": 5731,
+      "reasoning_output_tokens": 3188
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_error_judge_1_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_error_judge_1.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_error_judge1_lj2esnqi/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_error_judge1_lj2esnqi/page-2.png"
+  ],
+  "stderr": "2026-07-14T22:19:28.025225Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Where-Object { $_.Name -in @('\"'canonical_rulebook.pdf','canonical_rulefacts.md','implementation.py','page-1.png','page-2.png') } | Select-Object Name,Length,FullName\"` rejected: blocked by policy\n2026-07-14T22:20:40.084845Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path implementation.py -Pattern 'actions = \\\\[\\\"defuse:decline\\\"\\\\]','state.turn_debt = 3','state.turn_debt \\\\+= 1','Hops ends all','available =','if recovered == EXPLODING','for target in self._other_alive','REQUESTABLE_CARDS','if not state.deck' | Select-Object LineNumber,Line\"` rejected: blocked by policy\n"
+}
