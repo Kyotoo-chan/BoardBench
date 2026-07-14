@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T21:34:44.996411+00:00",
+  "ended_at": "2026-07-14T21:37:35.910396+00:00",
+  "elapsed_seconds": 170.914,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 6,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 601362,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 6,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 601191,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "reasoning_output_tokens": 3873,
+    "cached_input_tokens": 76800,
+    "output_tokens": 5776,
+    "input_tokens": 112973
+  },
+  "provider_usage_records": [
+    {
+      "line": 16,
+      "path": "$.usage",
+      "input_tokens": 112973,
+      "cached_input_tokens": 76800,
+      "output_tokens": 5776,
+      "reasoning_output_tokens": 3873
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_judge_3_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_judge_3.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_judge3_aj_k7htq/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_judge3_aj_k7htq/page-2.png"
+  ],
+  "stderr": "2026-07-14T21:34:53.486343Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n"
+}

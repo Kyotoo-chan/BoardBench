@@ -1,7 +1,0 @@
-stem,game,variant,prompt_tokens,completion_tokens,reasoning_tokens,input_cost_usd,output_cost_usd,reasoning_cost_usd,total_cost_usd
-expl_glm_os,exploding_kittens,oneshot,4824,52268,0,0.00675360,0.22997920,0.00000000,0.23673280
-expl_glm_os,exploding_kittens,oneshot,4824,46047,0,0.00675360,0.20260680,0.00000000,0.20936040
-expl_glm_ag,exploding_kittens,agentic,252,19225,0,0.00035280,0.08459000,0.00000000,0.08494280
-expl_glm_ag,exploding_kittens,agentic,642265,73245,46290,0.89917100,0.32227800,0.20367600,1.42512500
-expl_glm_ag,exploding_kittens,agentic,341079,100643,80946,0.47751060,0.44282920,0.35616240,1.27650220
-expl_glm_ag,exploding_kittens,agentic,742347,110156,85885,1.03928580,0.48468640,0.37789400,1.90186620
