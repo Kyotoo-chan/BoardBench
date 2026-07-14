@@ -1,0 +1,207 @@
+{
+  "stem": "expl_txt",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "generated_at": "2026-07-14T21:46:32.940218+00:00",
+  "call_count": 4,
+  "token_totals": {
+    "reasoning_output_tokens": 12727,
+    "input_tokens": 474826,
+    "output_tokens": 23728,
+    "cached_input_tokens": 366848
+  },
+  "elapsed_seconds_total": 663.131,
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "agentic",
+      "started_at": "2026-07-14T21:39:53.931948+00:00",
+      "ended_at": "2026-07-14T21:43:21.063945+00:00",
+      "elapsed_seconds": 207.132,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 601054,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600846,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 4133,
+        "input_tokens": 29448,
+        "output_tokens": 8805,
+        "cached_input_tokens": 20992
+      },
+      "provider_usage_records": [
+        {
+          "line": 7,
+          "path": "$.usage",
+          "input_tokens": 29448,
+          "cached_input_tokens": 20992,
+          "output_tokens": 8805,
+          "reasoning_output_tokens": 4133
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_generation_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt.md",
+      "image_paths": [],
+      "stderr": ""
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-14T21:43:30.198539+00:00",
+      "ended_at": "2026-07-14T21:46:32.286854+00:00",
+      "elapsed_seconds": 182.089,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600837,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600655,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 3846,
+        "input_tokens": 105739,
+        "output_tokens": 5776,
+        "cached_input_tokens": 80640
+      },
+      "provider_usage_records": [
+        {
+          "line": 15,
+          "path": "$.usage",
+          "input_tokens": 105739,
+          "cached_input_tokens": 80640,
+          "output_tokens": 5776,
+          "reasoning_output_tokens": 3846
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_1_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_1.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge1_6t3iyndz/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge1_6t3iyndz/page-2.png"
+      ],
+      "stderr": "2026-07-14T21:43:43.812405Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command '$files = @('\"'canonical_rulefacts.md','implementation.py','canonical_rulebook.pdf'); foreach (\"'$f in $files) { if (Test-Path -LiteralPath $f) { $i = Get-Item -LiteralPath $f; Write-Output ($f + \"`t\" + $i.Length) } else { Write-Output ($f + \"`tMISSING\") } }'` rejected: blocked by policy\n2026-07-14T21:43:48.043390Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Item canonical_rulefacts.md, implementation.py, canonical_rulebook.pdf | Select-Object Name, Length'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-14T21:43:29.936645+00:00",
+      "ended_at": "2026-07-14T21:46:05.586642+00:00",
+      "elapsed_seconds": 155.65,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600837,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600681,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 2252,
+        "input_tokens": 219504,
+        "output_tokens": 4529,
+        "cached_input_tokens": 176384
+      },
+      "provider_usage_records": [
+        {
+          "line": 33,
+          "path": "$.usage",
+          "input_tokens": 219504,
+          "cached_input_tokens": 176384,
+          "output_tokens": 4529,
+          "reasoning_output_tokens": 2252
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_2_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_2.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge2_1l9ozdld/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge2_1l9ozdld/page-2.png"
+      ],
+      "stderr": "2026-07-14T21:43:39.675882Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Attributes'` rejected: blocked by policy\n2026-07-14T21:44:39.218839Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -LiteralPath .\\\\implementation.py -Pattern 'accept:explode','if DEFUSE in','opponents =','play:favor:target','combo:pair','combo:five','discard.append\\\\(card\\\\)','kind == \\\"five\\\"','take_discard','def _eliminate','def _returns','turns_left = 2','state.deck\\\\[:3\\\\]' | Select-Object LineNumber,Line\"` rejected: blocked by policy\n2026-07-14T21:44:48.050552Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2 seconds\nOutput:\nrg: _eliminate|def: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: _returns|turns_left: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: =: Das System kann die angegebene Datei nicht finden. (os error 2)\nrg: 2|deck\\[:3\\] implementation.py: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\n\n2026-07-14T21:45:06.669764Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2 seconds\nOutput:\n\n2026-07-14T21:45:14.709717Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.4 seconds\nOutput:\n\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-14T21:43:30.081394+00:00",
+      "ended_at": "2026-07-14T21:45:28.340935+00:00",
+      "elapsed_seconds": 118.26,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600837,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 7,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 600719,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 2496,
+        "input_tokens": 120135,
+        "output_tokens": 4618,
+        "cached_input_tokens": 88832
+      },
+      "provider_usage_records": [
+        {
+          "line": 17,
+          "path": "$.usage",
+          "input_tokens": 120135,
+          "cached_input_tokens": 88832,
+          "output_tokens": 4618,
+          "reasoning_output_tokens": 2496
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_3_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_judge_3.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge3_dzeln__w/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_judge3_dzeln__w/page-2.png"
+      ],
+      "stderr": "2026-07-14T21:43:41.510991Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command '$files = @('\"'canonical_rulebook.pdf','canonical_rulefacts.md','implementation.py'); foreach (\"'$f in $files) { if (Test-Path -LiteralPath $f) { $i = Get-Item -LiteralPath $f; Write-Output \"$($i.Name)`t$($i.Length)\" } else { Write-Output \"MISSING`t$f\" } }'` rejected: blocked by policy\n"
+    }
+  ],
+  "actual_subscription_cost": null,
+  "cost_note": "Codex OAuth subscription calls expose tokens/quota but no trustworthy per-call monetary charge."
+}
