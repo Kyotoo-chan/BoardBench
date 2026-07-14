@@ -5,6 +5,7 @@ edition: "Exploding Kittens NSFW Edition, German, 2018, 2 pages, 2-5 players, 56
 rulebook: inputs/games/expl/game_rules.pdf
 sha256: f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853
 approved_by_user: 2026-07-14
+corrected_by_user: 2026-07-15
 ---
 
 # Approved canonical rule facts
@@ -78,7 +79,7 @@ Only the archived PDF above is a rule source. API conventions and human decision
 | PAIR-01 | 2 | “Jetzt können ALLE gleichen Karten als Pärchen gespielt werden, um einem Mitspieler eine zufällige Karte zu stehlen.” | Any two same-title cards can steal one random card. Empty-handed players are not legal targets. |
 | TRI-01 | 2 | “Wie ein Pärchen, außer dass du dir eine Karte von dem Mitspieler wünschen darfst.” | Three same-title cards request a named card. |
 | TRI-02 | 2 | “Besitzt er solch eine Karte, muss er sie dir geben. Hat er keine solche Karte, hast du Pech gehabt.” | Transfer occurs only if the target holds the requested title. |
-| FIVE-01 | 2 | “Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst, darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen.” | Five distinct titles retrieve any chosen discard card, including an Exploding Kitten. The selected card must already have been in the discard before playing the combination. |
+| FIVE-01 | 2 | “Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst, darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen.” | Five distinct titles are played to the discard, then the player retrieves any chosen card now in that discard, including an Exploding Kitten or one of the five just-played component cards. |
 | FIVE-02 | 1-2 | “Wenn du ein Exploding Kitten ziehst …” / “eine beliebige Karte aus dem Ablagestapel nehmen” | **Human decision:** taking a Kitten from the discard is not drawing it from the draw pile, so it does not explode and remains in hand. It cannot be played singly but may participate in same-title combinations. |
 | COMBO-01 | 2 | “Wenn du eine Kombination spielst, gelten die Anweisungen auf den Karten nicht.” | Printed instructions of cards used in a pair/triple/five-card combination do not execute. |
 
@@ -93,6 +94,10 @@ These conventions make the fixed BoardBench API executable and are not sourced g
 - Rulebook choices, including targets, requested titles, donated cards, reinsertion positions, and discard retrieval, must be explicit legal actions/phases rather than silently selected by the engine.
 - For the physical real-time NÖ! rule, the turn-based environment uses a deterministic clockwise reaction opportunity. Each eligible living player may pass or play NÖ!; the chain closes after all eligible players consecutively pass. Targets/parameters are announced before that window. Reaction priority itself is not a hard rule-fidelity scenario.
 
+## Adjudication correction
+
+On 2026-07-15, after rereading the action order, the user corrected the earlier pre-existing-discard restriction: the five cards are played and discarded before retrieval, so one of those five components may be selected immediately. Historical generation and judge artifacts remain unchanged; judge findings that penalize this self-retrieval are evaluator false positives under the corrected rubric.
+
 ## Still ambiguous or not hard-testable
 
 The following remain visible rather than being scored as failures:
@@ -100,7 +105,7 @@ The following remain visible rather than being scored as failures:
 - the physical timing/priority speed of NÖ! reactions;
 - probability distributions for shuffling and random theft;
 - social start-player selection;
-- whether a five-card combination may retrieve one of its own just-discarded components (the benchmark uses the approved pre-existing-discard interpretation);
+- which physical copy is selected when multiple identical cards are in the discard; title-equivalent copies have the same public behaviour;
 - secret information cannot be fully verified without player-specific observations;
 - setup/card-count internals and rare hands cannot be forced through the current minimal public API;
 - exact numeric action encoding and display language are evaluator interface choices.

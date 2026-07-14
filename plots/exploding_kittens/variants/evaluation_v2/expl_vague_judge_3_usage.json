@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T23:46:37.308534+00:00",
+  "ended_at": "2026-07-14T23:48:40.642072+00:00",
+  "elapsed_seconds": 123.334,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 593450,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 593326,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 95306,
+    "output_tokens": 4455,
+    "reasoning_output_tokens": 2841,
+    "cached_input_tokens": 60672
+  },
+  "provider_usage_records": [
+    {
+      "line": 14,
+      "path": "$.usage",
+      "input_tokens": 95306,
+      "cached_input_tokens": 60672,
+      "output_tokens": 4455,
+      "reasoning_output_tokens": 2841
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_vague_judge_3_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_vague_judge_3.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_vague_judge3_epgu3grw/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_vague_judge3_epgu3grw/page-2.png"
+  ],
+  "stderr": ""
+}

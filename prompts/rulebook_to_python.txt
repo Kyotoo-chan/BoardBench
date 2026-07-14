@@ -23,7 +23,7 @@ Provide `GameState` and `Game` with:
 - `action_to_name(action)`
 - `name_to_action(name)`
 
-Actions returned by `legal_actions` must be accepted by `apply_action`. Names must be unique, human-readable, stable, and exactly reversible. Use explicit labels such as `place:<target>` or `move:<source>-><target>` rather than state-dependent raw indices.
+Actions returned by `legal_actions` must be accepted by `apply_action`. Names must be unique, human-readable, stable, and exactly reversible. Preserve the supplied source's card/effect labels rather than inventing or translating synonyms. Use explicit labels such as `place:<target>` or `move:<source>-><target>` rather than state-dependent raw indices.
 
 Before finishing, run syntax and short gameplay probes and repair failures.
 

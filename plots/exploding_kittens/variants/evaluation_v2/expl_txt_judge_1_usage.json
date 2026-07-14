@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T23:33:46.555827+00:00",
+  "ended_at": "2026-07-14T23:35:10.368167+00:00",
+  "elapsed_seconds": 83.812,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 594221,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 594137,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 65430,
+    "output_tokens": 3701,
+    "reasoning_output_tokens": 2079,
+    "cached_input_tokens": 34304
+  },
+  "provider_usage_records": [
+    {
+      "line": 12,
+      "path": "$.usage",
+      "input_tokens": 65430,
+      "cached_input_tokens": 34304,
+      "output_tokens": 3701,
+      "reasoning_output_tokens": 2079
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_txt_judge_1_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_txt_judge_1.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_txt_judge1_k53yekl8/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_txt_judge1_k53yekl8/page-2.png"
+  ],
+  "stderr": "2026-07-14T23:33:56.901752Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command '$names = @('\"'canonical_rulebook.pdf','canonical_rulefacts.md','implementation.py','page-1.png','page-2.png'); Get-ChildItem -LiteralPath . -File | Where-Object { \"'$names -contains $_.Name } | Select-Object Name,Length | Format-Table -AutoSize'` rejected: blocked by policy\n"
+}

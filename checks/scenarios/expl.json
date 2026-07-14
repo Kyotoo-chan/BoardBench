@@ -1,6 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "game": "expl",
+  "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
     "path": "inputs/games/expl/game_rules.pdf",
     "sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853",
@@ -9,6 +10,8 @@
   "scenarios": [
     {
       "id": "EXPL-R01-two-player-start",
+      "fact_ids": ["SET-03"],
+      "basis": "clear",
       "source": {
         "page": 1,
         "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“. So starten alle mit 8 Karten auf der Hand."
@@ -22,6 +25,8 @@
     },
     {
       "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+      "fact_ids": ["TURN-04"],
+      "basis": "clear",
       "source": {
         "page": 1,
         "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
@@ -32,105 +37,449 @@
       }
     },
     {
-      "id": "EXPL-R03-attack-hands-turn-to-next-player",
+      "id": "EXPL-R03-attack-gives-next-player-two-turns",
+      "fact_ids": ["ATK-01"],
+      "basis": "clear",
       "source": {
         "page": 2,
         "quote": "Du beendest deinen eigenen Zug, ohne eine Karte zu ziehen, und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
       },
-      "search": {
-        "action_contains_any": ["attack", "angriff", "doppelzug"],
-        "max_rollouts": 300,
-        "max_steps": 300,
-        "seed": 11
+      "fixture": {
+        "hands": {"0": ["attack"], "1": []},
+        "deck": ["shuffle"],
+        "active_player": 0,
+        "turns_owed": 1
       },
-      "expect": {
-        "terminal": false,
-        "current_player_relation": "changed"
-      }
+      "steps": [{
+        "action": {"contains_any": ["attack", "angriff", "doppelzug", "double turn"]},
+        "settle": [{
+          "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+          "choose_contains_any": ["pass"],
+          "max_steps": 10
+        }],
+        "expect": {
+          "current_player": 1,
+          "terminal": false,
+          "adapter": {"turns_owed": 2}
+        }
+      }]
     },
     {
-      "id": "EXPL-R04-skip-does-not-end-game",
+      "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+      "fact_ids": ["SKIP-02"],
+      "basis": "clear",
       "source": {
         "page": 2,
-        "quote": "Beende sofort deinen Zug, ohne eine Karte zu ziehen."
+        "quote": "Falls du „Hops!“ ausspielst, um einen Angriff abzuwehren, überspringst du nur einen der zwei Züge. Du müsstest schon zweimal „Hops!“ ausspielen, um beide Züge zu beenden."
       },
-      "search": {
-        "action_contains_any": ["skip", "hops", "überspringen"],
-        "max_rollouts": 300,
-        "max_steps": 300,
-        "seed": 12
+      "fixture": {
+        "hands": {"0": ["skip", "skip"], "1": []},
+        "deck": ["shuffle"],
+        "active_player": 0,
+        "turns_owed": 2
       },
-      "expect": {
-        "terminal": false
-      }
+      "steps": [
+        {
+          "action": {"contains_any": ["skip", "hops", "überspringen"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }],
+          "expect": {"current_player": 0, "adapter": {"turns_owed": 1}}
+        },
+        {
+          "action": {"contains_any": ["skip", "hops", "überspringen"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }],
+          "expect": {"current_player": 1, "adapter": {"turns_owed": 1}}
+        }
+      ]
     },
     {
       "id": "EXPL-R05-preview-keeps-current-turn",
+      "fact_ids": ["TURN-03", "FUT-01"],
+      "basis": "clear",
       "source": {
-        "page": 2,
-        "quote": "Schau dir die obersten drei Karten des Spielstapels an und lege sie zurück, ohne deren Reihenfolge zu verändern."
+        "page": 1,
+        "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
       },
-      "search": {
-        "action_contains_any": ["see future", "future", "blick in die zukunft", "vorschau"],
-        "max_rollouts": 300,
-        "max_steps": 300,
-        "seed": 13
+      "fixture": {
+        "hands": {"0": ["future"], "1": []},
+        "deck": ["shuffle", "attack", "skip"],
+        "active_player": 0
       },
-      "expect": {
-        "terminal": false,
-        "current_player_relation": "same"
-      }
+      "steps": [{
+        "action": {"contains_any": ["see future", "future", "blick in die zukunft", "vorschau", "preview"]},
+        "settle": [{
+          "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+          "choose_contains_any": ["pass"],
+          "max_steps": 10
+        }],
+        "expect": {"current_player": 0, "terminal": false, "adapter": {"turns_owed": 1}}
+      }]
     },
     {
       "id": "EXPL-R06-shuffle-keeps-current-turn",
+      "fact_ids": ["TURN-03", "SHUF-01"],
+      "basis": "clear",
       "source": {
-        "page": 2,
-        "quote": "Misch den Spielstapel sorgfältig neu."
+        "page": 1,
+        "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
       },
-      "search": {
-        "action_contains_any": ["shuffle", "mischen", "neuordnen"],
-        "max_rollouts": 300,
-        "max_steps": 300,
-        "seed": 14
+      "fixture": {
+        "hands": {"0": ["shuffle"], "1": []},
+        "deck": ["skip", "attack", "future"],
+        "active_player": 0
       },
-      "expect": {
-        "terminal": false,
-        "current_player_relation": "same"
-      }
+      "steps": [{
+        "action": {"contains_any": ["shuffle", "mischen", "neuordnen", "reorder"]},
+        "settle": [{
+          "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+          "choose_contains_any": ["pass"],
+          "max_steps": 10
+        }],
+        "expect": {"current_player": 0, "terminal": false, "adapter": {"turns_owed": 1}}
+      }]
     },
     {
-      "id": "EXPL-R07-favor-keeps-current-turn",
+      "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+      "fact_ids": ["TURN-03", "FAV-01"],
+      "basis": "clear",
       "source": {
         "page": 2,
         "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben. Dieser Spieler entscheidet, welche Karte du bekommst."
       },
-      "search": {
-        "action_contains_any": ["favor", "wunsch", "auswahl"],
-        "max_rollouts": 300,
-        "max_steps": 300,
-        "seed": 15
+      "fixture": {
+        "hands": {"0": ["favor"], "1": ["defuse"]},
+        "deck": ["shuffle"],
+        "active_player": 0
       },
-      "expect": {
-        "terminal": false,
-        "current_player_relation": "same"
-      }
+      "steps": [{
+        "action": {"contains_any": ["favor", "wunsch", "auswahl", "choice"]},
+        "settle": [
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          },
+          {
+            "while_all_contains_any": ["give", "geben", "donate"],
+            "choose_contains_any": ["give", "geben", "donate"],
+            "max_steps": 1
+          }
+        ],
+        "expect": {
+          "current_player": 0,
+          "terminal": false,
+          "adapter": {
+            "hand_count": {"0": {"defuse": 1}, "1": {"defuse": 0}}
+          }
+        }
+      }]
     },
     {
       "id": "EXPL-R08-last-survivor-wins",
+      "fact_ids": ["TERM-01", "TERM-02"],
+      "basis": "clear",
       "source": {
         "page": 1,
         "quote": "Der Spieler, der nicht explodiert und als Letzter übrig ist, gewinnt."
       },
-      "terminal_rollout": {
-        "max_rollouts": 100,
-        "max_steps": 1000,
-        "seed": 16
+      "fixture": {
+        "hands": {"0": [], "1": []},
+        "deck": ["kitten"],
+        "active_player": 0
       },
-      "expect": {
-        "terminal": true,
-        "returns_sorted": [-1, 1],
-        "legal_action_count": 0
+      "steps": [{
+        "action": {"contains_any": ["draw", "ziehen", "pass"]},
+        "settle": [{
+          "while_all_contains_any": ["explode", "explodieren", "sterben", "decline"],
+          "choose_contains_any": ["explode", "explodieren", "sterben", "decline"],
+          "max_steps": 1
+        }],
+        "expect": {
+          "terminal": true,
+          "returns_sorted": [-1, 1],
+          "legal_action_count": 0,
+          "adapter": {"alive": [false, true]}
+        }
+      }]
+    },
+    {
+      "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+      "fact_ids": ["ATK-02"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Spielt dein Opfer dabei selbst eine Karte „Angriff“ aus, ist er nicht mehr an der Reihe und der nächste Spieler muss zwei Spielzüge ausführen."
+      },
+      "fixture": {
+        "hands": {"0": ["attack"], "1": ["attack"]},
+        "deck": ["shuffle"],
+        "active_player": 0,
+        "turns_owed": 1
+      },
+      "steps": [
+        {
+          "action": {"contains_any": ["attack", "angriff", "doppelzug", "double turn"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }],
+          "expect": {"current_player": 1, "adapter": {"turns_owed": 2}}
+        },
+        {
+          "action": {"contains_any": ["attack", "angriff", "doppelzug", "double turn"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }],
+          "expect": {"current_player": 0, "adapter": {"turns_owed": 2}}
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R10-defuse-is-mandatory-when-held",
+      "fact_ids": ["DEF-01"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Wenn du ein Exploding Kitten ziehst, kannst du eine „Entschärfung“ ausspielen, statt zu sterben."
+      },
+      "fixture": {
+        "hands": {"0": ["defuse"], "1": []},
+        "deck": ["kitten"],
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {"contains_any": ["draw", "ziehen", "pass"]},
+          "expect": {
+            "terminal": false,
+            "current_player": 0,
+            "legal_action_name_contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"],
+            "legal_action_name_not_contains_any": ["decline", "explode", "sterben"]
+          }
+        },
+        {
+          "action": {"contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"]},
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "adapter": {
+              "turns_owed": 1,
+              "hand_count": {"0": {"defuse": 0}},
+              "discard_count": {"defuse": 1}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+      "fact_ids": ["DEF-04"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Dann ist dein Spielzug beendet."
+      },
+      "fixture": {
+        "hands": {"0": ["defuse"], "1": []},
+        "deck": ["kitten"],
+        "active_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {"contains_any": ["draw", "ziehen", "pass"]},
+          "expect": {"terminal": false, "current_player": 0}
+        },
+        {
+          "action": {"contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"]},
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "adapter": {"turns_owed": 1}
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+      "fact_ids": ["FIVE-01"],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst, darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen."
+      },
+      "fixture": {
+        "hands": {"0": ["attack", "skip", "future", "shuffle", "favor"], "1": []},
+        "deck": ["shuffle"],
+        "discard": [],
+        "active_player": 0
+      },
+      "steps": [{
+        "action": {"contains_any": ["five", "fünf", "funf", "5"]},
+        "settle": [
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          },
+          {
+            "while_all_contains_any": ["take", "retrieve", "nehmen", "discard", "ablage"],
+            "choose_contains_any": ["take", "retrieve", "nehmen", "discard", "ablage"],
+            "max_steps": 1
+          }
+        ],
+        "expect": {
+          "current_player": 0,
+          "terminal": false,
+          "adapter": {"hand_size": {"0": 1}, "discard_size": 4}
+        }
+      }]
+    },
+    {
+      "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+      "fact_ids": ["FIVE-01", "FIVE-02"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst, darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen."
+      },
+      "fixture": {
+        "hands": {"0": ["attack", "skip", "future", "shuffle", "favor"], "1": []},
+        "deck": ["shuffle"],
+        "discard": ["kitten"],
+        "active_player": 0
+      },
+      "steps": [{
+        "action": {
+          "contains_any": ["five", "fünf", "funf", "5"],
+          "prefer_contains_all_groups": [
+            ["five", "fünf", "funf", "5"],
+            ["exploding kitten", "kitten", "danger"]
+          ]
+        },
+        "settle": [
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          },
+          {
+            "while_all_contains_any": ["take", "retrieve", "nehmen", "discard", "ablage"],
+            "choose_contains_all_groups": [
+              ["take", "retrieve", "nehmen", "discard", "ablage"],
+              ["exploding kitten", "kitten", "danger"]
+            ],
+            "max_steps": 1
+          }
+        ],
+        "expect": {
+          "current_player": 0,
+          "terminal": false,
+          "adapter": {
+            "alive": [true, true],
+            "hand_count": {"0": {"kitten": 1}}
+          }
+        }
+      }]
+    },
+    {
+      "id": "EXPL-R14-favor-cannot-target-empty-player",
+      "fact_ids": ["FAV-01"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben. Dieser Spieler entscheidet, welche Karte du bekommst."
+      },
+      "fixture": {
+        "hands": {"0": ["favor"], "1": []},
+        "deck": ["shuffle"],
+        "active_player": 0
+      },
+      "initial": {
+        "legal_action_name_not_contains_all_groups": [[
+          ["favor", "wunsch", "auswahl", "choice"],
+          ["target 1", "player1", "player 1", "to 1", "1"]
+        ]]
       }
+    },
+    {
+      "id": "EXPL-R15-pair-cannot-target-empty-player",
+      "fact_ids": ["PAIR-01"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Jetzt können ALLE gleichen Karten als Pärchen gespielt werden, um einem Mitspieler eine zufällige Karte zu stehlen."
+      },
+      "fixture": {
+        "hands": {"0": ["skip", "skip"], "1": []},
+        "deck": ["shuffle"],
+        "active_player": 0
+      },
+      "initial": {
+        "legal_action_name_not_contains_all_groups": [[
+          ["pair", "pärchen", "paerchen", "combo 2"],
+          ["target 1", "player1", "player 1", "to 1", "1"]
+        ]]
+      }
+    },
+    {
+      "id": "EXPL-R16-triple-may-request-held-kitten",
+      "fact_ids": ["TRI-01", "TRI-02", "FIVE-02"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Wie ein Pärchen, außer dass du dir eine Karte von dem Mitspieler wünschen darfst."
+      },
+      "fixture": {
+        "hands": {"0": ["skip", "skip", "skip"], "1": ["kitten"]},
+        "deck": ["shuffle"],
+        "active_player": 0
+      },
+      "initial": {
+        "legal_action_name_contains_all_groups": [
+          ["triple", "drilling", "drei", "3"],
+          ["exploding kitten", "kitten", "danger"]
+        ]
+      }
+    },
+    {
+      "id": "EXPL-R17-cat-pair-action-is-executable",
+      "fact_ids": ["PAIR-01"],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Jetzt können ALLE gleichen Karten als Pärchen gespielt werden, um einem Mitspieler eine zufällige Karte zu stehlen."
+      },
+      "fixture": {
+        "hands": {"0": ["cat", "cat"], "1": ["defuse"]},
+        "deck": ["shuffle"],
+        "active_player": 0
+      },
+      "steps": [{
+        "action": {"contains_any": ["pair", "pärchen", "paerchen", "combo 2"]},
+        "settle": [{
+          "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+          "choose_contains_any": ["pass"],
+          "max_steps": 10
+        }],
+        "expect": {
+          "current_player": 0,
+          "terminal": false,
+          "adapter": {
+            "hand_count": {"0": {"defuse": 1}, "1": {"defuse": 0}}
+          }
+        }
+      }]
     }
   ]
 }

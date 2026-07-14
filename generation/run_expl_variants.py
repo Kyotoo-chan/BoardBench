@@ -39,7 +39,7 @@ This is evaluator-neutral infrastructure, not an additional source of game rules
 - Nonterminal returns are zero for every player. Terminal returns are +1 for the winner and -1 for each loser.
 - Provide `GameState` and `Game` with initial_state, current_player, legal_actions, apply_action, is_terminal, returns, render, action_to_name, and name_to_action.
 - Terminal states have no legal actions.
-- Every legal action must round-trip through a unique, stable, human-readable name. Prefer semantic names containing recognizable card/action words.
+- Every legal action must round-trip through a unique, stable, human-readable name. Preserve the supplied source's card/effect labels in action names instead of inventing or translating synonyms.
 - Choices required by the source (targets, donated/requested cards, positions, reactions) must be explicit states/actions rather than silently chosen.
 """
 
@@ -143,7 +143,7 @@ def run_checks(stem: str, code_path: Path) -> None:
         ),
         ("runtime robustness 05", [python, "checks/run_checks.py", "--game", "expl", "--code-path", str(code_path), "--check", "05_random_rollouts", "--rollouts", "100", "--max-steps", "1000", "--seed", "1"]),
         ("interface 06", [python, "checks/run_checks.py", "--game", "expl", "--code-path", str(code_path), "--check", "06_action_language", "--max-steps", "1000", "--seed", "1"]),
-        ("canonical cited scenarios", [python, "checks/run_scenarios.py", "--code-path", str(code_path), "--scenarios", "checks/scenarios/expl.json"]),
+        ("canonical cited scenarios", [python, "checks/run_scenarios.py", "--code-path", str(code_path), "--scenarios", "checks/scenarios/expl.json", "--json-output", str(OUTPUTS / f"{stem}_scenarios.json")]),
     ]
     sections: list[str] = []
     for label, command in groups:

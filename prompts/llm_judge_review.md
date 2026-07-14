@@ -6,11 +6,13 @@ Review one generated module against the supplied rulebook. Do not edit code, run
 
 For every `critical` or `major` finding include:
 
-- exact rulebook quote and page/section,
-- conflicting code symbol or transition,
+- canonical fact ID;
+- evidence type: `rule_quote` or `human_decision`;
+- exact rulebook quote and page/section;
+- conflicting code symbol or transition;
 - expected versus implemented behaviour.
 
-If the packet does not decide the issue, use `question`; do not treat remembered rules as truth.
+Verify the complete approved fact before scoring. Do not penalize behaviour that the approved fact permits, including a five-card combination retrieving one of its own just-discarded components. If the packet does not decide the issue, use `question`; do not treat remembered rules as truth. Keep adjudication-dependent deviations visibly separate from contradictions of clear printed rules.
 
 Severity:
 

@@ -130,3 +130,13 @@ Efficiency information is contextual metadata for the current study, not a rule-
 - Never expose check logs or previous reviews to judges.
 - Do not silently edit completed experimental artifacts after methodology changes.
 - Use real execution and commit timestamps; do not backdate or fabricate chronology.
+
+## Evaluator revision policy
+
+Evaluator changes after inspecting results are labelled post-hoc and versioned instead of replacing historical evidence. A version manifest hashes the rulebook, approved facts, scenario suite, state adapter, runner, and judge prompt, and points to the unchanged implementation commits.
+
+Scenario outcomes are `PASS`, `FAIL`, `CRASH`, `UNREACHED`, or `UNTESTABLE`. Fidelity is calculated only over evaluated cases (`PASS+FAIL+CRASH`) and evaluated coverage is reported separately. Clear printed-rule scenarios and approved human-decision scenarios remain separate evidence columns.
+
+Rare material interactions use evaluator-only deterministic state adapters. An adapter may construct and observe state but cannot encode the expected rule result. Search or LLM-proposed traces remain exploratory until replayed, human-approved, and included in a later frozen evaluator version.
+
+Every hard scenario records stable fact IDs, page, direct quote, basis (`clear` or `human_decision`), exact starting state or public trace, selected action, expected observable transition, and the temporal point after reactions or choices at which it is checked.

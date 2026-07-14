@@ -54,6 +54,19 @@ PLOT_VARIANT = {
 WORKFLOW_JUDGE_BACKENDS: tuple[str, ...] = ("gpt", "codex")
 
 PLOTS_DIR = Path(__file__).resolve().parent
+PLOT_GAME_DIR = {
+    "hav": "havannah",
+    "aba": "abalone",
+    "expl": "exploding_kittens",
+    "mjh": "mahjong",
+    "cat": "catan",
+    "con": "conect",
+}
+
+
+def game_plot_dir(slug: str) -> Path:
+    return PLOTS_DIR / PLOT_GAME_DIR[slug]
+
 
 # Quality rows when outputs/ was cleared but pilot scores live in git history.
 # hav rows include 99_openspiel_compare as the fourth value.
@@ -107,7 +120,7 @@ def parse_pin_key(key: str) -> tuple[str, str]:
 
 
 def pinned_path(slug: str) -> Path:
-    return PLOTS_DIR / f"{slug}_pinned.json"
+    return game_plot_dir(slug) / f"{slug}_pinned.json"
 
 
 def read_pinned_file(slug: str) -> dict[str, list[float]]:

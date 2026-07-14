@@ -15,14 +15,17 @@ Use the argument and subagent policy from `/bb`.
 
 ## Process
 
-1. Resolve one matching `outputs/<slug>_*_ag.py` and verify the archived rulebook hash.
+1. Read `checks/scenarios/README.md`, resolve one matching generated module, and verify the archived rulebook plus frozen rubric hashes. A changed fact, scenario, adapter, runner, or judge prompt is a new evaluator version.
 2. Run technical 01–04, robustness 05, interface 06, and cited scenarios in the `boardbench` Conda environment.
-3. Read `prompts/llm_judge_review.md`.
-4. When subagents are enabled, launch fresh read-only `rulereviewer` Agents. Pass explicit child settings exactly; otherwise inherit or choose only demonstrably weaker settings. Reviewers receive rulebook, approved facts, and code, but no prior reviews or scores.
-5. Require page, quote, code location, expected behaviour, and actual behaviour for major/critical findings.
-6. Save raw reviews as `outputs/<stem>_judge_<label>.md` and grouped results as `outputs/<stem>_checks.txt`.
-7. Report agreement, disagreement, uncertainty, and uncovered rules separately.
+3. Scenario results must be reported as `PASS`, confirmed `FAIL`, `CRASH`, `UNREACHED`, or `UNTESTABLE`. Compute fidelity only over `PASS+FAIL+CRASH` and report evaluated coverage separately. Never convert `UNREACHED` or `UNTESTABLE` into failure.
+4. Prefer deterministic approved fixtures for material or rare rules. Random/search scenarios are exploratory unless they save and replay a deterministic trace. Resolve reaction and choice phases before checking a post-effect expectation.
+5. Read `prompts/llm_judge_review.md`.
+6. When subagents are enabled, launch exactly the requested fresh read-only `rulereviewer` Agents. Reviewers receive rulebook, approved facts, and code, but no checks, prior reviews, scores, or variants.
+7. Require fact ID, evidence type (`rule_quote` or `human_decision`), page, quote, code location, expected behaviour, and actual behaviour for major/critical findings. Unsupported issues are questions, not penalties.
+8. Save every raw review. Main reporting uses one `Judge mean (n=<count>)`; keep individual scores and sample SD only as audit evidence. Never combine the judge mean with technical, robustness, interface, or scenario evidence.
+9. Repeated judge findings are scenario candidates only. An LLM may propose a seed, trace, or fixture, but it does not decide deterministic pass/fail; replay, human approval, and a later rubric freeze are required first.
+10. Report confirmed defects, evaluator failures, adjudication-dependent deviations, disagreement, uncertainty, and uncovered rule areas separately.
 
-Run OpenSpiel only with explicit `openspiel=true`; label it secondary reference agreement. Do not create plots or aggregate unlike evidence.
+Run OpenSpiel only with explicit `openspiel=true`; label it secondary reference agreement. Do not aggregate unlike evidence.
 
-End with confirmed defects, disputed findings, new regression scenarios, and parent/child model and thinking actually used.
+End with evaluator version/hashes, confirmed defects, disputed findings, new regression candidates, coverage, `Judge mean (n=...)`, and parent/child model and thinking actually used.

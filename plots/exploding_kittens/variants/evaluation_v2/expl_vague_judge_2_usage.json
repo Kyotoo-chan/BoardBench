@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-14T23:46:37.311541+00:00",
+  "ended_at": "2026-07-14T23:48:11.381634+00:00",
+  "elapsed_seconds": 94.07,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 593450,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 20,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 593356,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 113415,
+    "output_tokens": 4001,
+    "reasoning_output_tokens": 2276,
+    "cached_input_tokens": 88832
+  },
+  "provider_usage_records": [
+    {
+      "line": 14,
+      "path": "$.usage",
+      "input_tokens": 113415,
+      "cached_input_tokens": 88832,
+      "output_tokens": 4001,
+      "reasoning_output_tokens": 2276
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_vague_judge_2_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/plots/exploding_kittens/variants/evaluation_v2/expl_vague_judge_2.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_vague_judge2_yy359gfe/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_v2_expl_vague_judge2_yy359gfe/page-2.png"
+  ],
+  "stderr": "2026-07-14T23:46:47.646832Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n2026-07-14T23:47:04.726672Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'pdftotext -layout canonical_rulebook.pdf -'` rejected: blocked by policy\n"
+}

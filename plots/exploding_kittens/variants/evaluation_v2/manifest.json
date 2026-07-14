@@ -1,0 +1,26 @@
+{
+  "evaluation_version": 2,
+  "status": "posthoc_after_evaluator_correction",
+  "generated_at": "2026-07-14T23:53:17.359630+00:00",
+  "implementations_unchanged": true,
+  "judges_rerun": true,
+  "judge_model": "gpt-5.6-sol",
+  "judge_reasoning_effort": "medium",
+  "experiment_commits": {
+    "expl_pdf": "d703218514d92ca6243966928e03bdae86cd10c1",
+    "expl_txt": "8a0a89ee69e2d9b25419f30c4c48610090d1ec74",
+    "expl_anon": "fd10842a9226d539e87c5b7cabd67e81236430de",
+    "expl_omit": "6b64b256f2ed1e800d093db72fa2cfc23ce09477",
+    "expl_error": "adbd388d71ffd479853916a9ced97ddbe47755f9",
+    "expl_vague": "9a7896e0c9091dcb8b92dc394d6816f52b43f563"
+  },
+  "rubric_files": {
+    "inputs/games/expl/game_rules.pdf": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853",
+    "inputs/games/expl/rulefacts.md": "2f903ee82e665f20e1b1bd1231b2e69dd8e378011b043a397ebae32d540a9042",
+    "checks/scenarios/expl.json": "ca4e7b0c2bea365619d72ad40c96b21915ffaa838c59044fcc5719ff6f9fbcc8",
+    "checks/scenario_adapters/expl.py": "e2583494eff383f1545e979d16e34faf570fd8e0c390d1ae123ff46d1ce90fac",
+    "checks/run_scenarios.py": "6fa5140b6cacc89c39c2d822fd0a876668f458bff2a5125e97c37a7247b32ec4",
+    "prompts/llm_judge_review.md": "ef5b63acec09607d6bfef5f7a24ba06ac16cca81d877bfb187a5afcafc93d00c"
+  },
+  "note": "Post-hoc evaluator development; preserve v1 results and do not describe v2 as preregistered evidence."
+}

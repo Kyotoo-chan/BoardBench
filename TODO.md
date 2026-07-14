@@ -7,14 +7,16 @@
 - Decide the intended Conect geometry before writing terminal Conect scenarios.
 - Exercise `/bbimpl` with `gpt-5.6-sol:low`; escalate thinking only if a concrete failure justifies it.
 - Test whether two focused low-thinking reviewers agree on terminal and hidden/chance rules.
+- Review and approve the complete material-assumption and exact-scenario matrix before freezing the next game.
 - Build a small mutation set and measure which evaluation group catches each known error.
+- Add deterministic NÖ!/DOCH!, hidden-information, setup-count, and short-deck preview fixtures.
 - Decide the main-study games, repeats, and model conditions before broad generation.
 
 ## Deferred
 
 - Plot redesign and final result compression.
 - Broad rulebook scraping.
-- RL or coverage-guided exploration beyond the scenario prototype.
+- RL or coverage-guided exploration beyond deterministic fixtures and replayable targeted traces.
 - More one-shot comparisons.
 - OpenSpiel expansion beyond occasional calibration.
 

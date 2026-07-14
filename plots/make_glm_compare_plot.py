@@ -30,10 +30,10 @@ from plots.collect_scores import (
     GAME_TITLES,
     PLOT_VARIANT,
     WORKFLOW_JUDGE_BACKENDS,
+    game_plot_dir,
     merged_pinned_rows,
 )
 
-OUT_DIR = Path(__file__).resolve().parent
 OUTPUTS = _REPO_ROOT / "outputs"
 
 SMOKE_COUNT = 4
@@ -179,7 +179,8 @@ def render_plot(slug: str, spec: dict, overall: dict[tuple[str, str], float]) ->
     )
 
     fig.subplots_adjust(bottom=0.24)
-    out_path = OUT_DIR / f"{slug}_scores_glm.png"
+    out_path = game_plot_dir(slug) / f"{slug}_scores_glm.png"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     return out_path
@@ -217,7 +218,8 @@ def write_detail(slug: str, spec: dict, overall: dict[tuple[str, str], float]) -
         lines.append(f"{metric:<22}{row}")
     lines.append(f"{'01-04 smoke':<22}" + "".join(f"{1.0:>8.3f}" for _ in columns))
 
-    out_path = OUT_DIR / f"{slug}_scores_glm.txt"
+    out_path = game_plot_dir(slug) / f"{slug}_scores_glm.txt"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return out_path
 
