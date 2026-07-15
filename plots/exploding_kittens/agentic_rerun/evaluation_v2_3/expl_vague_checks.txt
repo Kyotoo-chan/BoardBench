@@ -1,0 +1,38 @@
+=== technical gate 01-04 ===
+exit_code=0
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api                    8/8 score=1.000    0.00s
+---- summary                            4/4 score=1.000    0.02s
+
+=== runtime robustness 05 ===
+exit_code=0
+OK   05_random_rollouts             100/100 score=1.000    0.28s
+---- summary                            1/1 score=1.000    0.28s
+
+=== interface 06 ===
+exit_code=0
+OK   06_action_language         21279/21279 score=1.000    0.25s
+---- summary                            1/1 score=1.000    0.25s
+
+=== cited scenarios expl-v2.3 ===
+exit_code=1
+PASS EXPL-R01-two-player-start
+PASS EXPL-R02-normal-turn-can-end-by-drawing
+FAIL EXPL-R03-attack-gives-next-player-two-turns: step 1: turns_owed: expected 2, got 1
+FAIL EXPL-R04-two-skips-consume-two-owed-turns: step 1: current_player: expected 0, got 1
+FAIL EXPL-R05-preview-keeps-current-turn: step 1: current_player: expected 0, got 1
+FAIL EXPL-R06-shuffle-keeps-current-turn: step 1: current_player: expected 0, got 1
+FAIL EXPL-R07-favor-resolves-and-keeps-current-turn: step 1: current_player: expected 0, got 1
+PASS EXPL-R08-last-survivor-wins
+FAIL EXPL-R09-chained-attack-replaces-debt-with-two: step 1: turns_owed: expected 2, got 1
+PASS EXPL-R10-defuse-is-mandatory-when-held
+PASS EXPL-R11-defuse-consumes-only-one-owed-turn
+FAIL EXPL-R12-five-card-combo-may-retrieve-component: semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['draw', 'play:Angriff', 'play:Blick in die Zukunft', 'play:Hops!', 'play:Mischen', 'play:Wunsch|target:1']
+FAIL EXPL-R13-discard-kitten-retrieval-is-safe: step 1: current_player: expected 0, got 1
+FAIL EXPL-R14-favor-cannot-target-empty-player: forbidden semantic legal action names ['play:Wunsch|target:1']
+FAIL EXPL-R15-pair-cannot-target-empty-player: forbidden semantic legal action names ['combo:pair|card:Hops!|target:1']
+FAIL EXPL-R16-triple-may-request-held-kitten: no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['combo:pair|card:Hops!|target:1', 'combo:triple|card:Hops!|target:1|request:Angriff', 'combo:triple|card:Hops!|target:1|request:Augenmampfende', 'combo:triple|card:Hops!|target:1|request:Blick in die Zukunft', 'combo:triple|card:Hops!|target:1|request:Entschaerfung', 'combo:triple|card:Hops!|target:1|request:Hops!', 'combo:triple|card:Hops!|target:1|request:Mischen', 'combo:triple|card:Hops!|target:1|request:Noe!', 'combo:triple|card:Hops!|target:1|request:Unbenannte Katzenkarte A', 'combo:triple|card:Hops!|target:1|request:Unbenannte Katzenkarte B', 'combo:triple|card:Hops!|target:1|request:Unbenannte Katzenkarte C', 'combo:triple|card:Hops!|target:1|request:Wunsch', 'combo:triple|card:Hops!|target:1|request:Zombiekatze', 'draw', 'play:Hops!']
+FAIL EXPL-R17-cat-pair-action-is-executable: step 1: current_player: expected 0, got 1
+SCENARIOS PASS=5 FAIL=12 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=17/17 score=0.294 coverage=1.000

@@ -38,6 +38,8 @@ class ScenarioRunnerTests(unittest.TestCase):
         self.assertTrue(_contains("play:Blick_in_die_Zukunft", "blick in die zukunft"))
         self.assertTrue(_contains("play:Doppel-Zug", "doppel zug"))
         self.assertTrue(_contains("play:FÜNF", "funf"))
+        self.assertTrue(_contains("play:Schutzkarte", "protection"))
+        self.assertTrue(_contains("request:Gefahrenkarte", "danger"))
 
     def test_semantic_selector_can_prefer_a_specific_combination_result(self):
         game = DummyGame()

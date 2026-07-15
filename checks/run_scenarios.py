@@ -72,7 +72,8 @@ def _assert_equal(label: str, actual: Any, expected: Any) -> None:
 
 def _fold(value: object) -> str:
     text = unicodedata.normalize("NFKD", str(value).casefold()).replace("ß", "ss")
-    return " ".join(re.findall(r"[a-z0-9]+", text))
+    folded = " ".join(re.findall(r"[a-z0-9]+", text))
+    return folded.replace("schutzkarte", "protection").replace("gefahrenkarte", "danger")
 
 
 def _contains(value: object, needle: object) -> bool:
