@@ -119,7 +119,7 @@ These six pairs support a limited workflow conclusion:
 
 They do not isolate a causal protocol effect because each cell still contains only one pilot and one r2 generation. A main comparison needs at least three independent implementations per central condition.
 
-Protocol `agentic-v2.1` adds a source-only `rule_coverage.md` audit for every section, named card, and combination. It was deliberately not mixed into this r2 series; all six r2 conditions use the exact frozen v2 prompt. A later repeated series can test whether the coverage audit reduces recurrent five-card and target-legality omissions.
+Protocol `agentic-v2.1` adds a source-only `rule_coverage.md` audit for every section, named card, and combination. It was deliberately not mixed into this r2 series; all six r2 conditions use the exact frozen v2 prompt. The separate clarified-source diagnostic using v2.1 is reported in `../clarified_run/README.md`; repeated faithful/clarified controls are still needed to separate source precision from the protocol change.
 
 ## Files
 
