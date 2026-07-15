@@ -73,10 +73,16 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
     missing = [key for key in required if key not in item]
     if missing:
         raise ValueError(f"run missing fields: {missing}")
+    redundant = {"protocol", "model", "thinking", "verbosity", "judge_model", "judge_thinking"} & item.keys()
+    if redundant:
+        raise ValueError("run settings belong in raw artifacts, not result_spec: " + ", ".join(sorted(redundant)))
     paths = {key: resolve(base, item[key]) for key in ("agentic_evidence", "checks", "scenarios", "usage", "code")}
     if any(path is None or not path.is_file() for path in paths.values()):
         raise FileNotFoundError(f"run {item['stem']} has missing artifact")
     evidence = load_json(paths["agentic_evidence"])
+    missing_evidence = [key for key in ("protocol", "model", "reasoning_effort") if not evidence.get(key)]
+    if missing_evidence:
+        raise ValueError(f"agentic evidence missing settings: {missing_evidence}")
     scenarios = load_json(paths["scenarios"])
     usage = load_json(paths["usage"])
     checks = paths["checks"].read_text(encoding="utf-8")
@@ -109,7 +115,7 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
     calls = usage.get("calls", [])
     pricing_calls = list(calls) + persona_usage
     if not calls:
-        pricing_calls.insert(0, {"model": item.get("model", evidence.get("model")), "token_summary": usage.get("token_totals", {})})
+        pricing_calls.insert(0, {"model": evidence.get("model"), "token_summary": usage.get("token_totals", {})})
     estimated_costs = [estimate_call_cost(call) for call in pricing_calls]
     api_equivalent_cost = sum(estimated_costs) if estimated_costs and all(value is not None for value in estimated_costs) else None
     judge_calls = [call for call in calls if call.get("mode") == "judge"]
@@ -118,10 +124,10 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
     verbosities = sorted({str(call.get("verbosity")) for call in pricing_calls if call.get("verbosity")})
     return {
         "stem": str(item["stem"]),
-        "protocol": item.get("protocol", evidence.get("protocol")),
-        "model": item.get("model", evidence.get("model")),
-        "thinking": item.get("thinking", evidence.get("reasoning_effort")),
-        "verbosity": item.get("verbosity", verbosities[0] if len(verbosities) == 1 else None),
+        "protocol": evidence.get("protocol"),
+        "model": evidence.get("model"),
+        "thinking": evidence.get("reasoning_effort"),
+        "verbosity": verbosities[0] if len(verbosities) == 1 else None,
         "agentic_gate": bool(evidence.get("independent_gate_passed") and evidence.get("agent_ran_self_check")),
         "repairs": int(evidence.get("repair_count", 0)),
         "technical_gate": bool(re.search(r"summary\s+4/4\s+score=1\.000", checks)),
@@ -138,8 +144,8 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
             "results": scenarios.get("results", []),
         },
         "neutral_judges": [parse_judge(path) for path in reviews if path],
-        "judge_model": item.get("judge_model", judge_models[0] if len(judge_models) == 1 else None),
-        "judge_thinking": item.get("judge_thinking", judge_efforts[0] if len(judge_efforts) == 1 else None),
+        "judge_model": judge_models[0] if len(judge_models) == 1 else None,
+        "judge_thinking": judge_efforts[0] if len(judge_efforts) == 1 else None,
         "personas": personas,
         "assumptions": assumptions,
         "resources": {
@@ -300,7 +306,7 @@ def markdown(result: dict[str, Any]) -> str:
     lines += [
         "",
         "Sample SD measures variation across repeated runs; `n/a` means only one run is available.",
-        "The USD value is an API-equivalent estimate from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.",
+        f"The USD value is an API-equivalent estimate for {', '.join(result['reproducibility']['models'])} from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.",
         "Persona reviews and raw per-run evidence remain in `result.json`.",
         "",
     ]

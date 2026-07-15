@@ -1,14 +1,19 @@
-Progress bis 23.7.2026
+Stand für das Gespräch am 23.7.2026
 
-- Aktueller Workflow: Anleitung -> Regelfakten -> isolierte Implementierung -> ausführbare Checks -> drei neutrale Judges -> drei getrennte Personas.
-- Aktueller Vergleich: originale Verlags-PDF gegen sichtbar präzisierte Textfassung.
-- Beide neuen Implementierungen: gpt-5.6-sol, thinking low; Judges: gpt-5.6-sol, thinking medium.
-- PDF: Technical 4/4, Robustheit 1.0, Interface 1.0, klare Regeln 11/12, Human Decisions 7/10, Judge-Mittel 0.467.
-- Clarified: Technical 4/4, Robustheit 1.0, Interface 1.0, Szenarien 22/22, Judge-Mittel 0.953.
-- Übersicht für das Professorengespräch:
+Ergebnis:
+- Zwei frische, vergleichbare Implementierungen: Original-PDF und präzisierte Fassung.
+- Original-PDF: Technical 4/4, Robustheit 100/100, Interface 1,000, klare Regeln 11/12, klarstellungsabhängig 7/10, Judge-Mittel 0,467.
+- Präzisierte Fassung: Technical 4/4, Robustheit 100/100, Interface 1,000, alle 22 Szenarien bestanden, Judge-Mittel 0,953.
+- Beide Bedingungen erreichen alle 22 Szenarien; offene Fragen bleiben als Ergebnis sichtbar.
+
+Direkt öffnen:
+- Kurzüberblick mit Plot und Kernzahlen:
   results/scores/exploding_kittens/README.md
-- Abbildung:
-  results/plots/exploding_kittens/pdf_vs_clarified/evidence_profile.png
-- Vollständige Einzelresultate:
-  results/scores/exploding_kittens/pdf/result.md
-  results/scores/exploding_kittens/clarified/result.md
+- Detailansicht mit Checks 01–06, allen Szenarien, Judges und Personas:
+  results/scores/exploding_kittens/DETAILS.md
+
+Methodischer Stand:
+- Implementierung: gpt-5.6-sol, thinking low.
+- Drei neutrale Judges und drei getrennte Personas: gpt-5.6-sol, thinking medium.
+- Technische, Szenario-, Judge-, Persona-, Annahmen- und Ressourcenevidenz bleiben getrennt.
+- Forschungsfrage und Entscheidungen für das Gespräch stehen in QUESTIONS.txt.

@@ -23,7 +23,15 @@ Actual Codex OAuth subscription cost remains `null` when the provider does not e
 
 ## Input specification
 
-`generation/result_card.py` consumes a JSON spec whose relative paths are resolved beside that spec:
+`result_spec.json` is a small manifest, not another result file. It has three jobs:
+
+1. identify and hash the source condition;
+2. provide presentation labels (`game`, `condition`, `source_format`, `headline`, `source_diagnosis`);
+3. point to the raw artifacts that the collector must parse.
+
+Each run requires `stem`, `agentic_evidence`, `checks`, `scenarios`, `usage`, `code`, and exactly three `neutral_reviews`. Current full evaluations also include `assumptions` and the three named `personas`. Model, protocol, thinking, verbosity, and judge settings do **not** belong in the spec: they are read from raw agentic/usage artifacts so the manifest cannot silently override experimental evidence.
+
+`generation/result_card.py` resolves relative paths beside the spec:
 
 ```json
 {

@@ -61,6 +61,16 @@ class ResultCardTests(unittest.TestCase):
         })
         self.assertAlmostEqual(cost, 1.7)
 
+    def test_spec_cannot_override_raw_model_settings(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "rules.txt"
+            source.write_text("rules", encoding="utf-8")
+            run = self.make_run(root, 1, 1.0)
+            run["model"] = "spoofed-model"
+            with self.assertRaisesRegex(ValueError, "settings belong in raw artifacts"):
+                aggregate({"identity": {"source_path": source.name}, "runs": [run]}, root)
+
     def test_plot_rejects_more_than_two_conditions(self):
         with self.assertRaisesRegex(ValueError, "one or two"):
             plot([{}, {}, {}], Path("unused.png"))

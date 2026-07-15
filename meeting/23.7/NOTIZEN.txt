@@ -1,34 +1,13 @@
-Mentale Stützpunkte / Ideen
+Meeting 23.7.2026 – Live-Notizen
 
-Direkte Übersicht für das Gespräch:
-results/scores/exploding_kittens/README.md
+Entscheidungen:
+-
 
-Ergebnis pro Anleitung:
-- Metadaten: Name, Format, Hash, Modell, Anzahl Läufe.
-- Technical Gate, Robustheit und Interface getrennt.
-- Klare Regeln: bestanden / getestet.
-- Menschlich entschiedene Regeln: bestanden / getestet.
-- Abdeckung und ungetestete Regeln.
-- Judge-Mittel plus einzelne Persona-Hinweise.
-- Fehlerursachen: Anleitung fehlt / unklar / falsch, Modellfehler, Evaluatorfehler.
-- Kosten: Tokens, Zeit, Aufrufe; zusätzlich Codezeilen.
-- Eine Markdown/JSON-Datei als Quelle und eine kompakte Ergebnis-Karte als Bild.
-- Kein künstlicher Gesamtscore; oben ein kurzer Satz als Fazit.
+Feedback zur Methode und Ergebnisdarstellung:
+-
 
-Optimierung:
-- Mindestens 3 unabhängige Läufe je wichtiger Bedingung; Mittelwert und Streuung zeigen.
-- Gleiches Modell und Protokoll für Original gegen präzisiert.
-- Erst billige technische Tests, nur gültige Runs an teure Judges geben.
-- Judges parallel ausführen.
-- Neutrale Judges für den Hauptscore; Personas separat anzeigen.
-- Bekannte Fehler als Mutationen einbauen und prüfen, welcher Test sie findet.
-- Evaluator vor Hauptstudie einfrieren.
-- Neue Judge-Hinweise erst nach menschlicher Prüfung zu Tests machen.
-- Wenige unterschiedliche Spiele sauber testen statt viele oberflächlich.
+Offene Punkte:
+-
 
-Noch offen:
-- NÖ!/DOCH!-Zeitpunkt und wann Ziele/Parameter angekündigt werden.
-- Vorschauwissen nach Mischen.
-- Ziel verliert letzte Karte während einer Reaktion.
-- Setup-Kartenanzahlen, Hidden Information, kurzer Stapel und Zufall noch genauer testen.
-- Wiederholungszahl, Hauptspiele, Personas und endgültiges Ergebnisformat entscheiden.
+Nächste Schritte:
+-

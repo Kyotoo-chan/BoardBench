@@ -3,7 +3,8 @@
     "game": "Exploding Kittens",
     "condition": "pdf",
     "source_path": "inputs/games/expl/game_rules.pdf",
-    "source_format": "pdf"
+    "source_format": "pdf",
+    "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
   },
   "source_diagnosis": {
     "summary": "Original publisher source; approved decisions remain separate from printed rules."
@@ -12,11 +13,6 @@
   "runs": [
     {
       "stem": "expl_pdf_current",
-      "protocol": "agentic-v2.2",
-      "model": "gpt-5.6-sol",
-      "thinking": "low",
-      "judge_model": "gpt-5.6-sol",
-      "judge_thinking": "medium",
       "agentic_evidence": "raw/expl_pdf_current_agentic_evidence.json",
       "checks": "raw/expl_pdf_current_checks.txt",
       "scenarios": "raw/expl_pdf_current_scenarios.json",

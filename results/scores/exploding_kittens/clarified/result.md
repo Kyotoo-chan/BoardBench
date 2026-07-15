@@ -40,5 +40,5 @@
 | code_lines | 320.000 | n/a |
 
 Sample SD measures variation across repeated runs; `n/a` means only one run is available.
-The USD value is an API-equivalent estimate from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.
+The USD value is an API-equivalent estimate for gpt-5.6-sol from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.
 Persona reviews and raw per-run evidence remain in `result.json`.

@@ -3,7 +3,8 @@
     "game": "Exploding Kittens",
     "condition": "clarified",
     "source_path": "inputs/games/expl/variants/expl_clarified.txt",
-    "source_format": "txt"
+    "source_format": "txt",
+    "source_sha256": "6bca9d100d4fb665d5989f41eefe682f8a03f0faab001e2f08ed29911fc92c5d"
   },
   "source_diagnosis": {
     "summary": "Publisher text plus the current visible clarification appendix."
@@ -12,11 +13,6 @@
   "runs": [
     {
       "stem": "expl_clarified_current",
-      "protocol": "agentic-v2.2",
-      "model": "gpt-5.6-sol",
-      "thinking": "low",
-      "judge_model": "gpt-5.6-sol",
-      "judge_thinking": "medium",
       "agentic_evidence": "raw/expl_clarified_current_agentic_evidence.json",
       "checks": "raw/expl_clarified_current_checks.txt",
       "scenarios": "raw/expl_clarified_current_scenarios.json",

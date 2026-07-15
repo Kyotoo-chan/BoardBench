@@ -1,16 +1,16 @@
 Meeting 23.7.2026 – Fragen
 
-Forschungsfrage zur Rückmeldung:
+Meinung uzr Forschungsfrage:
 „Welche Probleme treten auf, wenn ein LLM eine Spielanleitung in eine ausführbare Spielumgebung übersetzt, und welche davon werden durch gezielte Klarstellungen vor einer erneuten Generierung reduziert?“
 
-- Ist diese Forschungsfrage inhaltlich und vom Umfang her passend?
-- Dürfen wir eine Anleitung durch ein Profil mit getrennten Werten bewerten, statt durch einen einzigen Gesamtscore?
 - Ist der Vergleich Originalanleitung gegen präzisierte Anleitung eine sinnvolle Hauptmethode?
 - Reicht eine von Menschen bestätigte Entscheidung als Ground Truth für unklare Regeln?
 - Wie viele Spiele und Wiederholungen werden erwartet? Vorschlag: mindestens 3 Läufe pro Hauptbedingung.
-- Soll im Hauptversuch nur ein festes Modell benutzt werden, damit nicht Modell- und Anleitungseffekte vermischt werden?
+
 - Welche Spiele sollen in die Hauptstudie: einfaches Strategiespiel, Zufall/Karten, Hidden Information?
 - Judge-Personas: als getrennte qualitative Sichtweisen oder als gemeinsamer Score?
 - Ist eine Ergebnis-Karte pro Anleitung mit Regeln, Fehlerarten, Kosten und Laufzeit ausreichend?
-- Wann müssen Evaluator und Szenarien endgültig eingefroren sein?
-- Wie soll die KI-Nutzung in der Bachelorarbeit formal angegeben werden?
+
+LLM:
+- Neue Tests waren Mit GPT-5.6-Sol
+- Klappt gut. Eignes Abo??

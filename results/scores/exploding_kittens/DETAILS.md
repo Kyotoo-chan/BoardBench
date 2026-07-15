@@ -2,6 +2,8 @@
 
 [← Kurzüberblick](README.md)
 
+**Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges und drei Personas mit `gpt-5.6-sol`, Thinking `medium`. Alle aktuellen Vergleichsläufe wurden direkt über die native Codex-CLI ausgeführt.
+
 ## Auswertungsfolge
 
 1. Für Original-PDF und präzisierte Fassung wird jeweils eine frische, isolierte Implementierung erzeugt.
@@ -122,6 +124,8 @@ Zusätzlich gilt: Mit einem Implementierungslauf pro Bedingung (`n=1`) lässt si
 
 | Ressource | Original-PDF | Präzisierte Fassung |
 |---|---:|---:|
+| Implementierungsmodell | `gpt-5.6-sol` (`low`) | `gpt-5.6-sol` (`low`) |
+| Reviewmodell für EV7/EV8 | `gpt-5.6-sol` (`medium`) | `gpt-5.6-sol` (`medium`) |
 | LLM-Aufrufe inklusive EV7/EV8 | 7 | 7 |
 | Provider-Zeit | 1.598,681 s | 1.605,015 s |
 | Input-Tokens (davon gecacht) | 1.035.093 (802.304) | 1.523.405 (1.251.584) |

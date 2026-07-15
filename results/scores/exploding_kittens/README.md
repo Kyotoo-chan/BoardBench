@@ -4,6 +4,8 @@
 
 Beide Spielumgebungen sind technisch stabil. Die Implementierung aus dem Original-PDF verfehlt vier getestete Regelinteraktionen. Nach Präzisierung der gefundenen Regelungslücken besteht eine frische Implementierung alle 22 Szenarien; der neutrale Judge-Mittelwert steigt von `0,467` auf `0,953`.
 
+**Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges und drei Personas mit `gpt-5.6-sol`, Thinking `medium`.
+
 | Evidenz | Original-PDF | Präzisierte Fassung |
 |---|---:|---:|
 | Technical Gate (**EV1**) | 4/4 | 4/4 |
@@ -39,6 +41,8 @@ Die präzisierte Implementierung besteht EV1–EV6 vollständig. Das stützt die
 
 | Ressource | Original-PDF | Präzisierte Fassung |
 |---|---:|---:|
+| Implementierungsmodell | `gpt-5.6-sol` (`low`) | `gpt-5.6-sol` (`low`) |
+| Reviewmodell für Judges/Personas | `gpt-5.6-sol` (`medium`) | `gpt-5.6-sol` (`medium`) |
 | LLM-Aufrufe | 7 | 7 |
 | Input-Tokens (davon gecacht) | 1.035.093 (802.304) | 1.523.405 (1.251.584) |
 | Output-Tokens | 48.345 | 44.734 |
