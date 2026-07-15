@@ -237,7 +237,10 @@ def _build_codex_command(
         command += ["-c", f'model_reasoning_effort="{effort}"']
 
     if mode == "agentic":
-        command += ["-s", "workspace-write"]
+        # Codex workspace-write currently degrades to read-only on this Windows host.
+        # Agentic workspaces are therefore created outside the repository and use
+        # full access only inside that ephemeral task directory by convention.
+        command += ["-s", "danger-full-access"]
     else:
         command += ["-s", "read-only"]
 

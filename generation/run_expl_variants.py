@@ -130,7 +130,7 @@ def _agentic_gate(workspace: Path) -> tuple[bool, str]:
 
 
 def run_implementation(stem: str, source: Path) -> Path:
-    workspace = Path(tempfile.mkdtemp(prefix=f"boardbench_{stem}_", dir=WORKSPACES))
+    workspace = Path(tempfile.mkdtemp(prefix=f"boardbench_{stem}_"))
     try:
         local_source = workspace / ("rulebook.pdf" if source.suffix.lower() == ".pdf" else "rulebook.txt")
         shutil.copy2(source, local_source)
