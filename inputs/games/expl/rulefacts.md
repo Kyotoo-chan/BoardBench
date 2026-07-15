@@ -25,6 +25,7 @@ Only the archived PDF above is a rule source. API conventions and human decision
 | SET-07 | 1 | “Mischt nur 2 Karten „Entschärfung“ in den Spielstapel und legt die übrigen in die Schachtel zurück.” | With two players, exactly two additional Defuses enter the deck. |
 | SET-08 | 1 | “Halte dein Blatt stets verdeckt.” | Hands are private to their owners. |
 | SET-09 | 1 | “Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches.” | The draw pile is shuffled and hidden. |
+| SET-10 | 1-2 | “eine Karte weniger als Spieler teilnehmen” / “Lege danach das Exploding Kitten zurück in den Spielstapel” | Valid setup has `living_players - 1` Kittens in the draw pile. Elimination removes one Kitten and one player; successful Defuse reinserts the drawn Kitten, preserving this invariant. |
 
 ## Turn flow
 
@@ -50,6 +51,7 @@ Only the archived PDF above is a rule source. API conventions and human decision
 | DEF-02 | 2 | “Spiele sie einfach aus und lege sie auf den Ablagestapel.” | The used Defuse enters the discard pile. |
 | DEF-03 | 2 | “Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl, ohne die anderen Karten anzusehen oder umzusortieren.” | The player chooses any reinsertion position; the position is secret and other cards keep their relative order. |
 | DEF-04 | 2 | “Dann ist dein Spielzug beendet.” | Defuse ends the current individual turn. **Human decision:** any further turn owed by Attack must still be taken. |
+| DEF-05 | 2 | “Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl, ohne die anderen Karten anzusehen oder umzusortieren.” | After Defuse, the Kitten occurs exactly once in the draw pile at the chosen position, is absent from discard, and every unrelated draw-pile card keeps its relative order. |
 | TERM-01 | 1 | “Eine Runde endet, wenn nur noch ein Spieler am Leben ist: der Gewinner.” | The game becomes terminal immediately when one player remains. |
 | TERM-02 | 1 | “Der Spieler, der nicht explodiert und als Letzter übrig ist, gewinnt.” | The sole survivor wins. API returns are `+1` for the winner and `-1` for every eliminated player. |
 
@@ -64,6 +66,7 @@ Only the archived PDF above is a rule source. API conventions and human decision
 | ATK-03 | 1-2 | “scheidet aus dem Spiel aus” / “Die Partie geht im Uhrzeigersinn weiter.” | **Human decision:** if an attacked player is eliminated, that player's remaining owed turns disappear. |
 | FUT-01 | 2 | “Schau dir die obersten drei Karten des Spielstapels an und lege sie zurück, ohne deren Reihenfolge zu verändern.” | The current player privately sees the top three without reordering. **Human decision:** if fewer than three remain, show all remaining cards. |
 | FUT-02 | 2 | “Zeige diese Karten bloß nicht deinen Mitspielern.” | Other players do not receive the preview. |
+| FUT-03 | 2 | “Misch den Spielstapel sorgfältig neu.” | **Human decision:** after Shuffle changes the draw-pile order, an earlier preview is stale and must not be presented as current top-card knowledge. |
 | SHUF-01 | 2 | “Misch den Spielstapel sorgfältig neu.” | Shuffle changes only draw-pile order. No exact probability distribution is hard-scored. |
 | FAV-01 | 2 | “Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben. Dieser Spieler entscheidet, welche Karte du bekommst.” | Target selects and transfers a card. **Human decision:** empty-handed players are not legal targets. |
 | NOPE-01 | 2 | “Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft, ausgenommen Exploding Kittens und Entschärfung.” | Nope cancels a pending card/combination except Kitten and Defuse. |
@@ -71,6 +74,8 @@ Only the archived PDF above is a rule source. API conventions and human decision
 | NOPE-03 | 2 | “Du kannst ein NÖ! auch spielen, wenn du nicht an der Reihe bist.” | Every living player holding Nope may react out of turn. |
 | NOPE-04 | 2 | “Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel.” | Played and cancelled cards remain discarded. |
 | NOPE-05 | 2 | “setzt deinen Angriff außer Kraft. Du bist weiter am Zug.” | A cancelled action has no effect and the original player continues the turn. |
+| NOPE-06 | 2 | “Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft” | **Human decision:** the complete proposed action—including target, requested title, and discard retrieval—is announced before the NÖ!/DOCH! reaction window. |
+| NOPE-07 | 2 | “Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel.” | **Human decision:** if a target legally had a card when an action was announced, spends its last card during the NÖ!/DOCH! chain, and the action is restored, the action resolves without a transfer; played reaction cards remain discarded. |
 
 ## Combinations and discard retrieval
 
@@ -107,5 +112,5 @@ The following remain visible rather than being scored as failures:
 - social start-player selection;
 - which physical copy is selected when multiple identical cards are in the discard; title-equivalent copies have the same public behaviour;
 - secret information cannot be fully verified without player-specific observations;
-- setup/card-count internals and rare hands cannot be forced through the current minimal public API;
+- setup/card-count internals not exposed by an implementation remain untestable through the minimal public API; deterministic evaluator fixtures may test valid rare hands and the Defuse reinsertion invariant;
 - exact numeric action encoding and display language are evaluator interface choices.

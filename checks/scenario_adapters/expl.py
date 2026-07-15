@@ -135,6 +135,26 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
 
 
 def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
+    if "deck" in expected:
+        actual = _cards(state.deck)
+        wanted = [_card(module, name) for name in expected["deck"]]
+        if actual != wanted:
+            raise AssertionError(f"deck: expected {wanted!r}, got {actual!r}")
+    if "deck_count" in expected:
+        cards = _cards(state.deck)
+        for semantic_name, wanted in expected["deck_count"].items():
+            actual = cards.count(_card(module, semantic_name))
+            if actual != int(wanted):
+                raise AssertionError(f"deck_count[{semantic_name}]: expected {wanted}, got {actual}")
+    if expected.get("preview_empty"):
+        values = []
+        for field in ("viewed_top", "peek", "knowledge", "known_top"):
+            if not hasattr(state, field):
+                continue
+            value = getattr(state, field)
+            values.extend(value.values() if isinstance(value, MutableMapping) else [value])
+        if values and any(bool(value) for value in values):
+            raise AssertionError(f"preview_empty: stale preview remains in {values!r}")
     if "turns_owed" in expected:
         actual = int(_get_first(state, DEBT_FIELDS))
         wanted = int(expected["turns_owed"])

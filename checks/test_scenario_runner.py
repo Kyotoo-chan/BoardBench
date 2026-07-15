@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import json
 import unittest
 from dataclasses import dataclass
+from pathlib import Path
 from types import SimpleNamespace
 
 from checks.run_scenarios import _contains, _resolve_action, _settle
@@ -34,6 +36,15 @@ class ImmutableState:
 
 
 class ScenarioRunnerTests(unittest.TestCase):
+    def test_expl_mutations_target_frozen_scenarios(self):
+        root = Path(__file__).resolve().parents[1]
+        suite = json.loads((root / "checks/scenarios/expl.json").read_text(encoding="utf-8"))
+        manifest = json.loads((root / "checks/mutations/expl.json").read_text(encoding="utf-8"))
+        scenario_ids = {item["id"] for item in suite["scenarios"]}
+        self.assertEqual(manifest["rubric_version"], suite["rubric_version"])
+        self.assertTrue(all(set(item["scenarios"]) <= scenario_ids for item in manifest["mutations"]))
+        self.assertEqual(len({item["id"] for item in manifest["mutations"]}), len(manifest["mutations"]))
+
     def test_semantic_matching_handles_case_separators_and_umlauts(self):
         self.assertTrue(_contains("play:Blick_in_die_Zukunft", "blick in die zukunft"))
         self.assertTrue(_contains("play:Doppel-Zug", "doppel zug"))
@@ -98,6 +109,14 @@ class ScenarioRunnerTests(unittest.TestCase):
         game = SimpleNamespace(initial_state=lambda: state)
         configured = expl.setup(module, game, {"active_player": 1, "deck": ["shuffle"]})
         self.assertEqual(configured.active, 1)
+
+    def test_expl_adapter_checks_deck_and_stale_preview(self):
+        module = SimpleNamespace(ATTACK="attack", EXPLODING="kitten", SHUFFLE="shuffle")
+        state = SimpleNamespace(deck=["attack", "kitten"], viewed_top=(), hands=[[], []], discard=[])
+        expl.check(module, None, state, {"deck": ["attack", "kitten"], "deck_count": {"kitten": 1}, "preview_empty": True})
+        state.viewed_top = ("attack",)
+        with self.assertRaisesRegex(AssertionError, "stale preview"):
+            expl.check(module, None, state, {"preview_empty": True})
 
     def test_expl_adapter_supports_immutable_tuple_states(self):
         module = SimpleNamespace(ATTACK="attack", SHUFFLE="shuffle")

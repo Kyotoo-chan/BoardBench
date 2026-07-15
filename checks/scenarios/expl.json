@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "expl-v2.6",
+  "rubric_version": "expl-v2.7",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
@@ -488,6 +488,178 @@
           "terminal": false,
           "adapter": {
             "hand_count": {"0": {"defuse": 1}, "1": {"defuse": 0}}
+          }
+        }
+      }]
+    },
+    {
+      "id": "EXPL-R18-valid-setup-has-one-kitten-per-future-elimination",
+      "fact_ids": ["SET-04", "SET-10"],
+      "basis": "clear",
+      "source": {
+        "page": 1,
+        "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+      },
+      "initial": {
+        "adapter": {"deck_count": {"kitten": 1}}
+      }
+    },
+    {
+      "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "fact_ids": ["DEF-02", "DEF-03", "DEF-04", "DEF-05", "SET-10"],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl, ohne die anderen Karten anzusehen oder umzusortieren."
+      },
+      "fixture": {
+        "hands": {"0": ["defuse"], "1": []},
+        "deck": ["kitten", "attack", "skip", "shuffle"],
+        "active_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {"contains_any": ["draw", "ziehen", "pass"]},
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "legal_action_name_not_contains_any": ["decline", "explode", "explodieren", "sterben"]
+          }
+        },
+        {
+          "action": {
+            "contains_any": ["defuse", "entschärfung", "entschaerfung", "protection", "place", "position", "insert", "platzieren", "einschieben"],
+            "prefer_contains_all_groups": [
+              ["place", "position", "insert", "platzieren", "einschieben"],
+              ["1"]
+            ]
+          },
+          "settle": [{
+            "while_all_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "choose_contains_all_groups": [
+              ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+              ["1"]
+            ],
+            "max_steps": 1
+          }],
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "adapter": {
+              "turns_owed": 1,
+              "deck": ["attack", "kitten", "skip", "shuffle"],
+              "deck_count": {"kitten": 1},
+              "discard_count": {"kitten": 0, "defuse": 1},
+              "hand_count": {"0": {"defuse": 0}}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R20-shuffle-invalidates-preview",
+      "fact_ids": ["FUT-01", "FUT-03", "SHUF-01"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Misch den Spielstapel sorgfältig neu."
+      },
+      "fixture": {
+        "hands": {"0": ["future", "shuffle"], "1": []},
+        "deck": ["attack", "skip", "favor"],
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {"contains_any": ["future", "blick in die zukunft", "vorschau", "preview"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }]
+        },
+        {
+          "action": {"contains_any": ["shuffle", "mischen", "neuordnen", "reorder"]},
+          "settle": [{
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }],
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "adapter": {"preview_empty": true}
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R21-five-card-retrieval-announced-before-nope",
+      "fact_ids": ["FIVE-01", "NOPE-06"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft."
+      },
+      "fixture": {
+        "hands": {"0": ["attack", "skip", "future", "shuffle", "favor"], "1": ["nope"]},
+        "deck": ["shuffle"],
+        "discard": ["kitten"],
+        "active_player": 0
+      },
+      "initial": {
+        "legal_action_name_contains_all_groups": [
+          ["five", "fünf", "funf", "5"],
+          ["take", "retrieve", "nehmen", "discard", "ablage"],
+          ["exploding kitten", "kitten", "danger"]
+        ]
+      }
+    },
+    {
+      "id": "EXPL-R22-restored-action-with-empty-target-is-noop",
+      "fact_ids": ["FAV-01", "NOPE-02", "NOPE-04", "NOPE-07"],
+      "basis": "human_decision",
+      "source": {
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auf ein anderes NÖ! legen, um es aufzuheben und daraus ein DOCH! zu machen."
+      },
+      "fixture": {
+        "hands": {"0": ["favor", "nope"], "1": ["nope"]},
+        "deck": ["shuffle", "shuffle"],
+        "active_player": 0
+      },
+      "steps": [{
+        "action": {
+          "contains_all_groups": [
+            ["favor", "wunsch", "auswahl", "choice"],
+            ["target 1", "player1", "player 1", "to 1", "1"]
+          ]
+        },
+        "settle": [
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["nope", "noe", "nö"],
+            "max_steps": 1
+          },
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["nope", "noe", "nö"],
+            "max_steps": 1
+          },
+          {
+            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+            "choose_contains_any": ["pass"],
+            "max_steps": 10
+          }
+        ],
+        "expect": {
+          "current_player": 0,
+          "terminal": false,
+          "legal_action_count_min": 1,
+          "adapter": {
+            "hand_size": {"0": 0, "1": 0},
+            "discard_count": {"favor": 1, "nope": 2}
           }
         }
       }]

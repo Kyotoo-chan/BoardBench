@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "game": "expl",
+  "rubric_version": "expl-v2.7",
+  "mutations": [
+    {"id": "attack-one-turn", "description": "Attack gives one instead of two turns", "scenarios": ["EXPL-R03-attack-gives-next-player-two-turns"], "expected_groups": ["scenarios"]},
+    {"id": "attack-adds-debt", "description": "Chained Attack adds to remaining turns", "scenarios": ["EXPL-R09-chained-attack-replaces-debt-with-two"], "expected_groups": ["scenarios"]},
+    {"id": "skip-clears-all", "description": "One Skip clears every owed turn", "scenarios": ["EXPL-R04-two-skips-consume-two-owed-turns"], "expected_groups": ["scenarios"]},
+    {"id": "optional-defuse", "description": "Player may decline held Defuse", "scenarios": ["EXPL-R10-defuse-is-mandatory-when-held"], "expected_groups": ["scenarios"]},
+    {"id": "kitten-not-reinserted", "description": "Defused Kitten is lost or left in discard", "scenarios": ["EXPL-R19-defuse-reinserts-kitten-without-reordering"], "expected_groups": ["scenarios"]},
+    {"id": "kitten-duplicated", "description": "Defused Kitten is inserted twice", "scenarios": ["EXPL-R19-defuse-reinserts-kitten-without-reordering"], "expected_groups": ["scenarios"]},
+    {"id": "forced-top-reinsert", "description": "Chosen reinsertion position is ignored", "scenarios": ["EXPL-R19-defuse-reinserts-kitten-without-reordering"], "expected_groups": ["scenarios"]},
+    {"id": "reinsert-reorders-deck", "description": "Unrelated draw-pile order changes during Defuse", "scenarios": ["EXPL-R19-defuse-reinserts-kitten-without-reordering"], "expected_groups": ["scenarios"]},
+    {"id": "five-preexisting-discard-only", "description": "Five-card combo cannot retrieve a just-played component", "scenarios": ["EXPL-R12-five-card-combo-may-retrieve-component"], "expected_groups": ["scenarios"]},
+    {"id": "discard-kitten-explodes", "description": "Retrieved discard Kitten triggers explosion", "scenarios": ["EXPL-R13-discard-kitten-retrieval-is-safe"], "expected_groups": ["scenarios"]},
+    {"id": "empty-favor-target", "description": "Favor may target an empty hand", "scenarios": ["EXPL-R14-favor-cannot-target-empty-player"], "expected_groups": ["scenarios"]},
+    {"id": "empty-pair-target", "description": "Pair may target an empty hand", "scenarios": ["EXPL-R15-pair-cannot-target-empty-player"], "expected_groups": ["scenarios"]},
+    {"id": "stale-preview", "description": "Shuffle leaves old top-card knowledge current", "scenarios": ["EXPL-R20-shuffle-invalidates-preview"], "expected_groups": ["scenarios"]},
+    {"id": "late-five-parameter", "description": "Five-card retrieval is chosen only after the Nope window", "scenarios": ["EXPL-R21-five-card-retrieval-announced-before-nope"], "expected_groups": ["scenarios"]},
+    {"id": "empty-restored-target-stalls", "description": "Restored action against now-empty target stalls or transfers", "scenarios": ["EXPL-R22-restored-action-with-empty-target-is-noop"], "expected_groups": ["scenarios"]},
+    {"id": "action-name-parser-crash", "description": "A legal named action cannot round-trip or execute", "scenarios": ["EXPL-R17-cat-pair-action-is-executable"], "expected_groups": ["robustness", "interface", "scenarios"]}
+  ]
+}

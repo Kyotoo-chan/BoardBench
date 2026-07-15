@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "rubric_version": "expl-v2.7",
+  "reference": "experiment 13 implementation from commit 17c7067",
+  "synthetic_reinsertion_mutations": {
+    "kitten-not-reinserted": {
+      "scenario": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "detected": true,
+      "status": "FAIL",
+      "actual": "Kitten absent from draw pile"
+    },
+    "kitten-duplicated": {
+      "scenario": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "detected": true,
+      "status": "FAIL",
+      "actual": "two Kittens in draw pile"
+    },
+    "forced-top-reinsert": {
+      "scenario": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "detected": true,
+      "status": "FAIL",
+      "actual": "Kitten inserted at position 0 instead of selected position 1"
+    },
+    "reinsert-reorders-deck": {
+      "scenario": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "detected": true,
+      "status": "FAIL",
+      "actual": "unrelated draw-pile order reversed"
+    }
+  },
+  "calibration_evidence": {
+    "attack-one-turn": ["EXPL-R03-attack-gives-next-player-two-turns"],
+    "attack-adds-debt": ["EXPL-R09-chained-attack-replaces-debt-with-two"],
+    "skip-clears-all": ["EXPL-R04-two-skips-consume-two-owed-turns"],
+    "optional-defuse": ["EXPL-R10-defuse-is-mandatory-when-held"],
+    "five-preexisting-discard-only": ["EXPL-R12-five-card-combo-may-retrieve-component"],
+    "discard-kitten-explodes": ["EXPL-R13-discard-kitten-retrieval-is-safe"],
+    "empty-favor-target": ["EXPL-R14-favor-cannot-target-empty-player"],
+    "empty-pair-target": ["EXPL-R15-pair-cannot-target-empty-player"],
+    "action-name-parser-crash": ["runtime robustness", "interface", "EXPL-R17-cat-pair-action-is-executable"]
+  },
+  "current_reference_findings": {
+    "stale-preview": "detected by EXPL-R20",
+    "late-five-parameter": "detected by EXPL-R21",
+    "empty-restored-target-stalls": "detected by EXPL-R22"
+  }
+}
