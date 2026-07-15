@@ -5,29 +5,29 @@
   "suite_sha256": "8a297623f439c5916702f9d8c18c61c74dc09c8f628667bc448b81a70e8e58c7",
   "adapter": "checks/scenario_adapters/expl.py",
   "adapter_sha256": "51b040477cf752dfaa56c9972c8f1c3e7332f6926ec8c10b908465e879c47d69",
-  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_anon_r2.py",
-  "code_sha256": "4fe0b786a657690f4f28e45e8843cacaf9788d0212400bf1039c80733a57ccbd",
+  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_omit_r2.py",
+  "code_sha256": "2fafda1d7a4538ac6a5ae5c116337a3139700498c336ce7968675d7461b801a2",
   "counts": {
-    "PASS": 2,
-    "FAIL": 0,
+    "PASS": 10,
+    "FAIL": 6,
     "CRASH": 0,
     "UNREACHED": 0,
-    "UNTESTABLE": 15
+    "UNTESTABLE": 1
   },
-  "evaluated": 2,
+  "evaluated": 16,
   "total": 17,
-  "score": 1.0,
-  "coverage": 0.11764705882352941,
+  "score": 0.625,
+  "coverage": 0.9411764705882353,
   "basis_scores": {
     "clear": {
-      "passed": 2,
-      "evaluated": 2,
-      "score": 1.0
+      "passed": 8,
+      "evaluated": 9,
+      "score": 0.8888888888888888
     },
     "human_decision": {
-      "passed": 0,
-      "evaluated": 0,
-      "score": null
+      "passed": 2,
+      "evaluated": 7,
+      "score": 0.2857142857142857
     }
   },
   "results": [
@@ -51,8 +51,8 @@
     },
     {
       "id": "EXPL-R03-attack-gives-next-player-two-turns",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'attack'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "ATK-01"
@@ -60,8 +60,8 @@
     },
     {
       "id": "EXPL-R04-two-skips-consume-two-owed-turns",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'skip'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "SKIP-02"
@@ -69,8 +69,8 @@
     },
     {
       "id": "EXPL-R05-preview-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'future'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -79,8 +79,8 @@
     },
     {
       "id": "EXPL-R06-shuffle-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'shuffle'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -89,8 +89,8 @@
     },
     {
       "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'favor'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -99,8 +99,8 @@
     },
     {
       "id": "EXPL-R08-last-survivor-wins",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'kitten'",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TERM-01",
@@ -109,8 +109,8 @@
     },
     {
       "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'attack'",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "ATK-02"
@@ -118,8 +118,8 @@
     },
     {
       "id": "EXPL-R10-defuse-is-mandatory-when-held",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'defuse'",
+      "status": "FAIL",
+      "message": "step 1: forbidden legal action names ['exploding:explode']",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-01"
@@ -127,8 +127,8 @@
     },
     {
       "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'defuse'",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-04"
@@ -136,8 +136,8 @@
     },
     {
       "id": "EXPL-R12-five-card-combo-may-retrieve-component",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'attack'",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['draw', 'play:Blick in die Zukunft', 'play:Mischen', 'play:Hops!', 'play:Angriff', 'play:Wunsch->player:1']",
       "basis": "clear",
       "fact_ids": [
         "FIVE-01"
@@ -145,8 +145,8 @@
     },
     {
       "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'attack'",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5'], 'prefer_contains_all_groups': [['five', 'fünf', 'funf', '5'], ['exploding kitten', 'kitten', 'danger']]}; got ['draw', 'play:Blick in die Zukunft', 'play:Mischen', 'play:Hops!', 'play:Angriff', 'play:Wunsch->player:1']",
       "basis": "human_decision",
       "fact_ids": [
         "FIVE-01",
@@ -155,8 +155,8 @@
     },
     {
       "id": "EXPL-R14-favor-cannot-target-empty-player",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'favor'",
+      "status": "FAIL",
+      "message": "forbidden semantic legal action names ['play:Wunsch->player:1']",
       "basis": "human_decision",
       "fact_ids": [
         "FAV-01"
@@ -164,8 +164,8 @@
     },
     {
       "id": "EXPL-R15-pair-cannot-target-empty-player",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'skip'",
+      "status": "FAIL",
+      "message": "forbidden semantic legal action names ['Pärchen:Hops!->player:1']",
       "basis": "human_decision",
       "fact_ids": [
         "PAIR-01"
@@ -173,8 +173,8 @@
     },
     {
       "id": "EXPL-R16-triple-may-request-held-kitten",
-      "status": "UNTESTABLE",
-      "message": "implementation has no card constant for 'skip'",
+      "status": "FAIL",
+      "message": "no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['draw', 'play:Hops!', 'Pärchen:Hops!->player:1', 'Drilling:Hops!->player:1:request:Entschärfung', 'Drilling:Hops!->player:1:request:Angriff', 'Drilling:Hops!->player:1:request:Hops!', 'Drilling:Hops!->player:1:request:Wunsch', 'Drilling:Hops!->player:1:request:Mischen', 'Drilling:Hops!->player:1:request:Blick in die Zukunft', 'Drilling:Hops!->player:1:request:Nö!', 'Drilling:Hops!->player:1:request:Zombiekatze', 'Drilling:Hops!->player:1:request:Augenmampfende', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 1]', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 2]', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 3]']",
       "basis": "human_decision",
       "fact_ids": [
         "TRI-01",
