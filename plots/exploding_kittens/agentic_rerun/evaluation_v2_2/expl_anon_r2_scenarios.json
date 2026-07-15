@@ -1,0 +1,195 @@
+{
+  "version": 3,
+  "rubric_version": "expl-v2.2",
+  "suite": "checks/scenarios/expl.json",
+  "suite_sha256": "9e75b7c56a92ccbb957b347013916fc925ed1c7c1de9b3d4878bbe6408eea938",
+  "adapter": "checks/scenario_adapters/expl.py",
+  "adapter_sha256": "7898089131be1a72a75c2348be033887916ef05cab17487f3a2c75b080d47788",
+  "code": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-20kjdk/boardbench_compare_r2_wzdbc255/expl_anon_r2.py",
+  "code_sha256": "0b0b831568a2a85521edf428ff9ffd2cd1b9dedaf15e3b14ba60c94509f42484",
+  "counts": {
+    "PASS": 11,
+    "FAIL": 6,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 17,
+  "total": 17,
+  "score": 0.6470588235294118,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 10,
+      "evaluated": 10,
+      "score": 1.0
+    },
+    "human_decision": {
+      "passed": 1,
+      "evaluated": 7,
+      "score": 0.14285714285714285
+    }
+  },
+  "results": [
+    {
+      "id": "EXPL-R01-two-player-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-03"
+      ]
+    },
+    {
+      "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-04"
+      ]
+    },
+    {
+      "id": "EXPL-R03-attack-gives-next-player-two-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ATK-01"
+      ]
+    },
+    {
+      "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SKIP-02"
+      ]
+    },
+    {
+      "id": "EXPL-R05-preview-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FUT-01"
+      ]
+    },
+    {
+      "id": "EXPL-R06-shuffle-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "SHUF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R08-last-survivor-wins",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TERM-01",
+        "TERM-02"
+      ]
+    },
+    {
+      "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ATK-02"
+      ]
+    },
+    {
+      "id": "EXPL-R10-defuse-is-mandatory-when-held",
+      "status": "FAIL",
+      "message": "step 1: no legal action name contains any of ['defuse', 'entschärfung', 'entschaerfung', 'protection']; got ['play:Schutzkarte:place:0']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['defuse', 'entschärfung', 'entschaerfung', 'protection']}; got ['play:Schutzkarte:place:0']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-04"
+      ]
+    },
+    {
+      "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "FIVE-01"
+      ]
+    },
+    {
+      "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+      "status": "FAIL",
+      "message": "step 1: hand_count[0][kitten]: expected 1, got 0",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FIVE-01",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R14-favor-cannot-target-empty-player",
+      "status": "FAIL",
+      "message": "forbidden semantic legal action names ['play:Auswahl->player:1']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R15-pair-cannot-target-empty-player",
+      "status": "FAIL",
+      "message": "forbidden semantic legal action names ['pärchen:Überspringen->player:1']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    },
+    {
+      "id": "EXPL-R16-triple-may-request-held-kitten",
+      "status": "FAIL",
+      "message": "no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['draw', 'play:Überspringen', 'pärchen:Überspringen->player:1', 'drilling:Überspringen->player:1:request:Gefahrenkarte', 'drilling:Überspringen->player:1:request:Schutzkarte', 'drilling:Überspringen->player:1:request:Doppelzug', 'drilling:Überspringen->player:1:request:Überspringen', 'drilling:Überspringen->player:1:request:Auswahl', 'drilling:Überspringen->player:1:request:Neuordnen', 'drilling:Überspringen->player:1:request:Vorschau', 'drilling:Überspringen->player:1:request:Widerspruch', 'drilling:Überspringen->player:1:request:Symbolkarte A', 'drilling:Überspringen->player:1:request:Symbolkarte B', 'drilling:Überspringen->player:1:request:Symbolkarte (unbenannte Art 1)', 'drilling:Überspringen->player:1:request:Symbolkarte (unbenannte Art 2)', 'drilling:Überspringen->player:1:request:Symbolkarte (unbenannte Art 3)']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "TRI-01",
+        "TRI-02",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R17-cat-pair-action-is-executable",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    }
+  ]
+}

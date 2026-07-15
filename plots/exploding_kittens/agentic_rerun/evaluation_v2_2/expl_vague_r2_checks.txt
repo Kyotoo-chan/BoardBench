@@ -1,0 +1,38 @@
+=== technical gate 01-04 ===
+exit_code=0
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    8/8 score=1.000    0.01s
+---- summary                            4/4 score=1.000    0.02s
+
+=== runtime robustness 05 ===
+exit_code=0
+OK   05_random_rollouts             100/100 score=1.000    0.79s
+---- summary                            1/1 score=1.000    0.79s
+
+=== interface 06 ===
+exit_code=0
+OK   06_action_language         10339/10339 score=1.000    0.72s
+---- summary                            1/1 score=1.000    0.72s
+
+=== cited scenarios expl-v2.2 ===
+exit_code=1
+PASS EXPL-R01-two-player-start
+PASS EXPL-R02-normal-turn-can-end-by-drawing
+FAIL EXPL-R03-attack-gives-next-player-two-turns: step 1: turns_owed: expected 2, got 1
+PASS EXPL-R04-two-skips-consume-two-owed-turns
+PASS EXPL-R05-preview-keeps-current-turn
+PASS EXPL-R06-shuffle-keeps-current-turn
+PASS EXPL-R07-favor-resolves-and-keeps-current-turn
+PASS EXPL-R08-last-survivor-wins
+PASS EXPL-R09-chained-attack-replaces-debt-with-two
+PASS EXPL-R10-defuse-is-mandatory-when-held
+PASS EXPL-R11-defuse-consumes-only-one-owed-turn
+FAIL EXPL-R12-five-card-combo-may-retrieve-component: semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['Passen/ziehen', 'spielen:Hops!', 'spielen:Angriff', 'spielen:Blick in die Zukunft', 'spielen:Mischen', 'spielen:Wunsch:target:player-1']
+FAIL EXPL-R13-discard-kitten-retrieval-is-safe: semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5'], 'prefer_contains_all_groups': [['five', 'fünf', 'funf', '5'], ['exploding kitten', 'kitten', 'danger']]}; got ['Passen/ziehen', 'spielen:Hops!', 'spielen:Angriff', 'spielen:Blick in die Zukunft', 'spielen:Mischen', 'spielen:Wunsch:target:player-1']
+FAIL EXPL-R14-favor-cannot-target-empty-player: forbidden semantic legal action names ['spielen:Wunsch:target:player-1']
+FAIL EXPL-R15-pair-cannot-target-empty-player: forbidden semantic legal action names ['Pärchen:Hops!:target:player-1']
+FAIL EXPL-R16-triple-may-request-held-kitten: no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['Passen/ziehen', 'spielen:Hops!', 'Pärchen:Hops!:target:player-1', 'Drilling:Hops!:target:player-1:request:Angriff', 'Drilling:Hops!:target:player-1:request:Augenmampfende', 'Drilling:Hops!:target:player-1:request:Blick in die Zukunft', 'Drilling:Hops!:target:player-1:request:Entschärfung', 'Drilling:Hops!:target:player-1:request:Hops!', 'Drilling:Hops!:target:player-1:request:Mischen', 'Drilling:Hops!:target:player-1:request:Nö!', 'Drilling:Hops!:target:player-1:request:Wunsch', 'Drilling:Hops!:target:player-1:request:Zombiekatze']
+PASS EXPL-R17-cat-pair-action-is-executable
+SCENARIOS PASS=11 FAIL=6 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=17/17 score=0.647 coverage=1.000

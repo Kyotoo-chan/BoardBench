@@ -52,6 +52,8 @@ The original PDF is run first. Five derived conditions follow:
 
 The exact transformations are recorded before inspecting generated implementations. Derived variants never overwrite the canonical rulebook.
 
+A second paired series uses stems `<stem>_r2` and frozen generation protocol `agentic-v2` for all six conditions. The original six commits remain pilots; r2 artifacts are stored in experiments 07–12 without replacing them. Paired analysis uses one common post-hoc evaluator version and remains diagnostic because each protocol/condition cell still has only one implementation.
+
 ## Evaluation reference
 
 All six implementations are evaluated against the same frozen canonical rule facts and cited scenarios derived from the unchanged original PDF. This allows omissions, errors, and vague formulations to be detected as deviations from the canonical rules rather than accepted as their own ground truth.
