@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-15T19:35:59.323199+00:00",
+  "ended_at": "2026-07-15T19:39:59.499821+00:00",
+  "elapsed_seconds": 240.177,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 522088,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 521847,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 95046,
+    "output_tokens": 6993,
+    "cached_input_tokens": 48384,
+    "reasoning_output_tokens": 3636
+  },
+  "provider_usage_records": [
+    {
+      "line": 16,
+      "path": "$.usage",
+      "input_tokens": 95046,
+      "cached_input_tokens": 48384,
+      "output_tokens": 6993,
+      "reasoning_output_tokens": 3636
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/pdf/raw/expl_pdf_current_persona_ambiguity_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/pdf/raw/expl_pdf_current_persona_ambiguity.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_expl_pdf_current_ambiguity_pw1xfyrx/pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_expl_pdf_current_ambiguity_pw1xfyrx/pages/page-2.png"
+  ],
+  "stderr": "2026-07-15T19:36:51.170102Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Attributes; rg --files -g \"canonical_rulefacts.md\" -g \"implementation.py\" -g \"*.pdf\" -g \"AGENTS.md\"'` rejected: blocked by policy\n2026-07-15T19:36:59.742087Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Attributes'` rejected: blocked by policy\n"
+}

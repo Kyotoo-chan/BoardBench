@@ -1,0 +1,555 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "pdf",
+    "source_path": "inputs/games/expl/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "6e522ad826a460ccab1f862f3f2e5649cead27551a3b2a883e3722d17b2c29e2",
+    "adapter_sha256": "9d4d6991f8aaa7adf2ccb21e598d3d8047c25e0dfd3cdcc88854946afd4c9dd5",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ]
+  },
+  "source_diagnosis": {
+    "summary": "Original publisher source; approved decisions remain separate from printed rules."
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        0.9166666666666666
+      ],
+      "mean": 0.9166666666666666,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.7
+      ],
+      "mean": 0.7,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.42,
+        0.5,
+        0.48
+      ],
+      "mean": 0.4666666666666667,
+      "sample_sd": 0.04163331998932266,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "expl_pdf_current": {
+        "rule_fidelity": {
+          "path": "raw/expl_pdf_current_persona_rule_fidelity.md",
+          "sha256": "86a97f7a9541fb4e2fb19c431e4b777e76e4077a999951efe8a8a3fc4fbb9763"
+        },
+        "ambiguity": {
+          "path": "raw/expl_pdf_current_persona_ambiguity.md",
+          "sha256": "0f5c8395525e918c2069f4f5078f267474de5c2447ef6bebaf968c2d6024673c"
+        },
+        "executable_systems": {
+          "path": "raw/expl_pdf_current_persona_executable_systems.md",
+          "sha256": "d9c2e89bceb6eba132d45b5700d6662ae6e40e2f4466c70c5e37bb58ec72c419"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 3,
+    "interpretation_agreement": {
+      "Schlachtplan / NÖ!": {
+        "after a card or combination, each other living player gets an explicit pass/NÖ! opportunity; a NÖ! restarts the pass round and toggles cancellation": 1
+      },
+      "Schlachtplan / Angriff and Hops!": {
+        "Angriff ends the actor's entire current obligation and gives the next player exactly two turns; Hops! removes one required turn": 1
+      },
+      "Spielaufbau / card illustrations and named card counts": {
+        "model five distinct placeholder source categories Katze-1 through Katze-5, four cards each, solely to preserve pair/triple/five-distinct mechanics": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Schlachtplan / NÖ!",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "all players receive repeated reaction opportunities",
+          "a single immediate reaction is allowed"
+        ],
+        "selected": "after a card or combination, each other living player gets an explicit pass/NÖ! opportunity; a NÖ! restarts the pass round and toggles cancellation",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Schlachtplan / Angriff and Hops!",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "a chained Angriff adds two turns",
+          "a chained Angriff replaces the obligation with two turns"
+        ],
+        "selected": "Angriff ends the actor's entire current obligation and gives the next player exactly two turns; Hops! removes one required turn",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Spielaufbau / card illustrations and named card counts",
+        "source_basis": "missing",
+        "alternatives": [
+          "cat titles are mechanically distinct but unavailable in the supplied readable text",
+          "treat all cat cards as one title"
+        ],
+        "selected": "model five distinct placeholder source categories Katze-1 through Katze-5, four cards each, solely to preserve pair/triple/five-distinct mechanics",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        737.811
+      ],
+      "mean": 737.811,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        512440.0
+      ],
+      "mean": 512440.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        406016.0
+      ],
+      "mean": 406016.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        25796.0
+      ],
+      "mean": 25796.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        13236.0
+      ],
+      "mean": 13236.0,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        187.0
+      ],
+      "mean": 187.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "values": [
+      null
+    ],
+    "exact_total": null
+  },
+  "headline": "Publisher PDF: technically sound; 11/12 clear-rule and 7/10 approved-decision scenarios pass.",
+  "runs": [
+    {
+      "stem": "expl_pdf_current",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "expl-current",
+        "suite_sha256": "6e522ad826a460ccab1f862f3f2e5649cead27551a3b2a883e3722d17b2c29e2",
+        "adapter_sha256": "9d4d6991f8aaa7adf2ccb21e598d3d8047c25e0dfd3cdcc88854946afd4c9dd5",
+        "counts": {
+          "PASS": 18,
+          "FAIL": 4,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 11,
+          "evaluated": 12,
+          "score": 0.9166666666666666
+        },
+        "human_decision": {
+          "passed": 7,
+          "evaluated": 10,
+          "score": 0.7
+        },
+        "results": [
+          {
+            "id": "EXPL-R01-two-player-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03"
+            ]
+          },
+          {
+            "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-04"
+            ]
+          },
+          {
+            "id": "EXPL-R03-attack-gives-next-player-two-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ATK-01"
+            ]
+          },
+          {
+            "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SKIP-02"
+            ]
+          },
+          {
+            "id": "EXPL-R05-preview-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FUT-01"
+            ]
+          },
+          {
+            "id": "EXPL-R06-shuffle-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R08-last-survivor-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TERM-01",
+              "TERM-02"
+            ]
+          },
+          {
+            "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ATK-02"
+            ]
+          },
+          {
+            "id": "EXPL-R10-defuse-is-mandatory-when-held",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+            "status": "FAIL",
+            "message": "step 2: current_player: expected 0, got 1",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-04"
+            ]
+          },
+          {
+            "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['[\"Ziehen\"]', '[\"Angriff spielen\"]', '[\"Hops! spielen\"]', '[\"Mischen spielen\"]', '[\"Blick in die Zukunft spielen\"]']",
+            "basis": "clear",
+            "fact_ids": [
+              "FIVE-01"
+            ]
+          },
+          {
+            "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R14-favor-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R15-pair-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R16-triple-may-request-held-kitten",
+            "status": "FAIL",
+            "message": "no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['[\"Ziehen\"]', '[\"Hops! spielen\"]', '[\"Pärchen spielen\",\"Hops!\",1]', '[\"Drilling spielen\",\"Hops!\",1]']",
+            "basis": "human_decision",
+            "fact_ids": [
+              "TRI-01",
+              "TRI-02",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R17-cat-pair-action-is-executable",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R18-valid-setup-has-one-kitten-per-future-elimination",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-04",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "DEF-02",
+              "DEF-03",
+              "DEF-05",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R20-shuffle-invalidates-preview",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FUT-01",
+              "FUT-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R21-five-card-retrieval-announced-before-nope",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "NOPE-06"
+            ]
+          },
+          {
+            "id": "EXPL-R22-restored-action-with-empty-target-is-noop",
+            "status": "FAIL",
+            "message": "step 1: hand_size[0]: expected 0, got 2",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01",
+              "NOPE-02",
+              "NOPE-04",
+              "NOPE-07"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.42,
+        0.5,
+        0.48
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "raw/expl_pdf_current_persona_rule_fidelity.md",
+          "sha256": "86a97f7a9541fb4e2fb19c431e4b777e76e4077a999951efe8a8a3fc4fbb9763"
+        },
+        "ambiguity": {
+          "path": "raw/expl_pdf_current_persona_ambiguity.md",
+          "sha256": "0f5c8395525e918c2069f4f5078f267474de5c2447ef6bebaf968c2d6024673c"
+        },
+        "executable_systems": {
+          "path": "raw/expl_pdf_current_persona_executable_systems.md",
+          "sha256": "d9c2e89bceb6eba132d45b5700d6662ae6e40e2f4466c70c5e37bb58ec72c419"
+        }
+      },
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Schlachtplan / NÖ!",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "all players receive repeated reaction opportunities",
+            "a single immediate reaction is allowed"
+          ],
+          "selected": "after a card or combination, each other living player gets an explicit pass/NÖ! opportunity; a NÖ! restarts the pass round and toggles cancellation",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Schlachtplan / Angriff and Hops!",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "a chained Angriff adds two turns",
+            "a chained Angriff replaces the obligation with two turns"
+          ],
+          "selected": "Angriff ends the actor's entire current obligation and gives the next player exactly two turns; Hops! removes one required turn",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Spielaufbau / card illustrations and named card counts",
+          "source_basis": "missing",
+          "alternatives": [
+            "cat titles are mechanically distinct but unavailable in the supplied readable text",
+            "treat all cat cards as one title"
+          ],
+          "selected": "model five distinct placeholder source categories Katze-1 through Katze-5, four cards each, solely to preserve pair/triple/five-distinct mechanics",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 737.811,
+        "input_tokens": 512440,
+        "cached_input_tokens": 406016,
+        "output_tokens": 25796,
+        "reasoning_tokens": 13236,
+        "money": null,
+        "code_lines": 187
+      },
+      "hashes": {
+        "agentic_evidence": "26b7dd1ccd40309a77d819e0f9d8f904cbaacbdfc7ba407ee3481019378e2b55",
+        "checks": "079bcea1d4564b3c43c6023380fb832bc4f9bc564dd9b7c066365121a0936007",
+        "scenarios": "39969bc7c0772ab56b0d9a604b62b71fc7d89ee071caca9053b10b39113f382f",
+        "usage": "b109377a39cbafdbc125dba425f907b8bc5ba494e26724fe17c47d6228da0e23",
+        "code": "c64d311658d0d6b04b823bdacff7a2b54e16882457f406aaa29389f00bef1039"
+      }
+    }
+  ]
+}

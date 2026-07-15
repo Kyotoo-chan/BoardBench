@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Schlachtplan / NÖ!",
+      "source_basis": "ambiguous",
+      "alternatives": ["all players receive repeated reaction opportunities", "a single immediate reaction is allowed"],
+      "selected": "after a card or combination, each other living player gets an explicit pass/NÖ! opportunity; a NÖ! restarts the pass round and toggles cancellation",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Schlachtplan / Angriff and Hops!",
+      "source_basis": "ambiguous",
+      "alternatives": ["a chained Angriff adds two turns", "a chained Angriff replaces the obligation with two turns"],
+      "selected": "Angriff ends the actor's entire current obligation and gives the next player exactly two turns; Hops! removes one required turn",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "Spielaufbau / card illustrations and named card counts",
+      "source_basis": "missing",
+      "alternatives": ["cat titles are mechanically distinct but unavailable in the supplied readable text", "treat all cat cards as one title"],
+      "selected": "model five distinct placeholder source categories Katze-1 through Katze-5, four cards each, solely to preserve pair/triple/five-distinct mechanics",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+    }
+  ]
+}

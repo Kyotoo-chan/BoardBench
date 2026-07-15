@@ -1,0 +1,250 @@
+{
+  "version": 3,
+  "rubric_version": "expl-current",
+  "suite": "checks/scenarios/expl.json",
+  "suite_sha256": "6e522ad826a460ccab1f862f3f2e5649cead27551a3b2a883e3722d17b2c29e2",
+  "adapter": "checks/scenario_adapters/expl.py",
+  "adapter_sha256": "9d4d6991f8aaa7adf2ccb21e598d3d8047c25e0dfd3cdcc88854946afd4c9dd5",
+  "code": "results/scores/exploding_kittens/pdf/raw/expl_pdf_current.py",
+  "code_sha256": "c64d311658d0d6b04b823bdacff7a2b54e16882457f406aaa29389f00bef1039",
+  "counts": {
+    "PASS": 18,
+    "FAIL": 4,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 22,
+  "total": 22,
+  "score": 0.8181818181818182,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 11,
+      "evaluated": 12,
+      "score": 0.9166666666666666
+    },
+    "human_decision": {
+      "passed": 7,
+      "evaluated": 10,
+      "score": 0.7
+    }
+  },
+  "results": [
+    {
+      "id": "EXPL-R01-two-player-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-03"
+      ]
+    },
+    {
+      "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-04"
+      ]
+    },
+    {
+      "id": "EXPL-R03-attack-gives-next-player-two-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ATK-01"
+      ]
+    },
+    {
+      "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SKIP-02"
+      ]
+    },
+    {
+      "id": "EXPL-R05-preview-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FUT-01"
+      ]
+    },
+    {
+      "id": "EXPL-R06-shuffle-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "SHUF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R08-last-survivor-wins",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TERM-01",
+        "TERM-02"
+      ]
+    },
+    {
+      "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ATK-02"
+      ]
+    },
+    {
+      "id": "EXPL-R10-defuse-is-mandatory-when-held",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+      "status": "FAIL",
+      "message": "step 2: current_player: expected 0, got 1",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-04"
+      ]
+    },
+    {
+      "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['[\"Ziehen\"]', '[\"Angriff spielen\"]', '[\"Hops! spielen\"]', '[\"Mischen spielen\"]', '[\"Blick in die Zukunft spielen\"]']",
+      "basis": "clear",
+      "fact_ids": [
+        "FIVE-01"
+      ]
+    },
+    {
+      "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FIVE-01",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R14-favor-cannot-target-empty-player",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R15-pair-cannot-target-empty-player",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    },
+    {
+      "id": "EXPL-R16-triple-may-request-held-kitten",
+      "status": "FAIL",
+      "message": "no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['[\"Ziehen\"]', '[\"Hops! spielen\"]', '[\"Pärchen spielen\",\"Hops!\",1]', '[\"Drilling spielen\",\"Hops!\",1]']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "TRI-01",
+        "TRI-02",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R17-cat-pair-action-is-executable",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    },
+    {
+      "id": "EXPL-R18-valid-setup-has-one-kitten-per-future-elimination",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-04",
+        "SET-10"
+      ]
+    },
+    {
+      "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "DEF-02",
+        "DEF-03",
+        "DEF-05",
+        "SET-10"
+      ]
+    },
+    {
+      "id": "EXPL-R20-shuffle-invalidates-preview",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FUT-01",
+        "FUT-03",
+        "SHUF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R21-five-card-retrieval-announced-before-nope",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FIVE-01",
+        "NOPE-06"
+      ]
+    },
+    {
+      "id": "EXPL-R22-restored-action-with-empty-target-is-noop",
+      "status": "FAIL",
+      "message": "step 1: hand_size[0]: expected 0, got 2",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FAV-01",
+        "NOPE-02",
+        "NOPE-04",
+        "NOPE-07"
+      ]
+    }
+  ]
+}

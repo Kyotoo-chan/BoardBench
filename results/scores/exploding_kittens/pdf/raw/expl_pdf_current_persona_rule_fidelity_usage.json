@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-15T19:35:59.248590+00:00",
+  "ended_at": "2026-07-15T19:39:44.845550+00:00",
+  "elapsed_seconds": 225.597,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 522088,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 521861,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 164746,
+    "output_tokens": 5910,
+    "cached_input_tokens": 134400,
+    "reasoning_output_tokens": 3250
+  },
+  "provider_usage_records": [
+    {
+      "line": 19,
+      "path": "$.usage",
+      "input_tokens": 164746,
+      "cached_input_tokens": 134400,
+      "output_tokens": 5910,
+      "reasoning_output_tokens": 3250
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/pdf/raw/expl_pdf_current_persona_rule_fidelity_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/pdf/raw/expl_pdf_current_persona_rule_fidelity.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_expl_pdf_current_rule_fidelity_22t7k4wv/pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_expl_pdf_current_rule_fidelity_22t7k4wv/pages/page-2.png"
+  ],
+  "stderr": "2026-07-15T19:36:47.695330Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Raw canonical_rulefacts.md; \"`n---IMPLEMENTATION---`n\"; Get-Content -Raw implementation.py'` rejected: blocked by policy\n2026-07-15T19:38:23.497661Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command '$lines = Get-Content .'\"\\\\implementation.py; for (\"'$n = 64; $n -le 181; $n++) { if ($n -le $lines.Count) { '\"'{0}:{1}' -f \"'$n, $lines[$n-1] } }'` rejected: blocked by policy\n"
+}
