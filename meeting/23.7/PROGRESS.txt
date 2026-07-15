@@ -1,0 +1,11 @@
+Progress bis 23.7.2026
+
+- Reproduzierbarer Workflow: Anleitung -> Regelfakten -> Implementierung -> getrennte Tests -> drei Judges.
+- Echte agentische Generierung wird durch Schreiben, Kompilieren, Testen und unabhängigen Check belegt.
+- Exploding Kittens mit PDF, TXT, anonymisiert, Auslassungen, falschen und vagen Regeln verglichen.
+- Evaluator unterscheidet klare Regeln, menschliche Entscheidungen, Fehler, nicht erreichbare und nicht testbare Fälle.
+- Alte Ergebnisse bleiben erhalten; Evaluatoränderungen bekommen neue Versionen.
+- Präzisierte TXT-Anleitung erstellt: keine Tests verraten, nur genehmigte Regeln eindeutig formuliert.
+- Präzisierter Run: Technical 4/4, Robustheit 1.0, Interface 1.0, Szenarien 17/17, Judge-Mittel 0.94.
+- Wichtigstes Ergebnis: Viele Fehler verschwinden durch explizite Formulierungen. Andere Fehler kommen von Modell oder Evaluator.
+- Token, Laufzeit, Kostenhinweise, Code, Reviews und Rohereignisse werden gespeichert.

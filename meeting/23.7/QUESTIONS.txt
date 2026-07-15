@@ -1,0 +1,13 @@
+Meeting 23.7.2026 – Fragen
+
+- Ist die Forschungsfrage so passend: Wie gut lässt sich eine Spielanleitung eindeutig in eine ausführbare Spielumgebung übersetzen?
+- Dürfen wir eine Anleitung durch ein Profil mit getrennten Werten bewerten, statt durch einen einzigen Gesamtscore?
+- Ist der Vergleich Originalanleitung gegen präzisierte Anleitung eine sinnvolle Hauptmethode?
+- Reicht eine von Menschen bestätigte Entscheidung als Ground Truth für unklare Regeln?
+- Wie viele Spiele und Wiederholungen werden erwartet? Vorschlag: mindestens 3 Läufe pro Hauptbedingung.
+- Soll im Hauptversuch nur ein festes Modell benutzt werden, damit nicht Modell- und Anleitungseffekte vermischt werden?
+- Welche Spiele sollen in die Hauptstudie: einfaches Strategiespiel, Zufall/Karten, Hidden Information?
+- Judge-Personas: als getrennte qualitative Sichtweisen oder als gemeinsamer Score?
+- Ist eine Ergebnis-Karte pro Anleitung mit Regeln, Fehlerarten, Kosten und Laufzeit ausreichend?
+- Wann müssen Evaluator und Szenarien endgültig eingefroren sein?
+- Wie soll die KI-Nutzung in der Bachelorarbeit formal angegeben werden?
