@@ -29,7 +29,9 @@ reasoning effort: medium
 
 Implementation calls run in isolated temporary workspaces. To keep the generation condition native and comparable, the implementer receives only its assigned rulebook variant, the minimal public API contract, and an evaluator-neutral self-check. Canonical and variant-specific evaluation facts remain hidden. It cannot access repository checks, canonical scenarios, other variants, previous implementations, or reviews.
 
-A provider mode named `agentic` is not sufficient evidence. The implementation agent must create `implementation.py`, map every supplied section and named rule/card/combination to code and source-only probes in `rule_coverage.md`, run `python -m py_compile implementation.py` and `python agentic_self_check.py`, and pass the same independently repeated gate. Technical failures may trigger at most two blind repair calls in the same isolated workspace. Commands, repair calls, outputs, coverage audit, and final gate status are retained.
+A provider mode named `agentic` is not sufficient evidence. Under frozen protocol `agentic-v2`, the implementation agent must create `implementation.py`, run `python -m py_compile implementation.py` and `python agentic_self_check.py`, and pass the same independently repeated gate. Technical failures may trigger at most two blind repair calls in the same isolated workspace. Commands, repair calls, outputs, and final gate status are retained.
+
+Protocol `agentic-v2.1` additionally requires `rule_coverage.md`, mapping every supplied section and named rule/card/combination to code, source-only probes, and assumptions. Do not mix v2 and v2.1 inside one comparison series: the six `.r2` reruns use frozen v2 to match the completed PDF rerun; v2.1 is reserved for a later fully repeated series.
 
 The original six-variant pilot predates this evidence gate. Its calls used agentic-capable Codex infrastructure, but individual runs may have behaved like one-shot generation; they remain historical pilot evidence and are not silently relabelled or replaced.
 

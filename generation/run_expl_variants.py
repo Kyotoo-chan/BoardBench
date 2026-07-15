@@ -23,8 +23,10 @@ from generation.codex_native import run_codex
 
 MODEL = "gpt-5.6-sol"
 EFFORT = "medium"
-STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague", "expl_pdf_r2")
-SOURCE_FOR_STEM = {stem: stem for stem in STEMS if stem != "expl_pdf_r2"} | {"expl_pdf_r2": "expl_pdf"}
+BASE_STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague")
+STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS)
+SOURCE_FOR_STEM = {stem: stem.removesuffix("_r2") for stem in STEMS}
+PROTOCOLS = ("agentic-v2", "agentic-v2.1")
 CANONICAL_HASH = "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
 OUTPUTS = REPO_ROOT / "outputs"
 WORKSPACES = REPO_ROOT / "generation_workspaces"
@@ -73,8 +75,9 @@ def render_pdf(pdf: Path, target_dir: Path) -> list[Path]:
     return sorted(target_dir.glob("page-*.png"))
 
 
-def implementation_prompt(source_name: str) -> str:
-    task = (REPO_ROOT / "prompts" / "rulebook_to_python.txt").read_text(encoding="utf-8")
+def implementation_prompt(source_name: str, protocol: str) -> str:
+    prompt_name = "rulebook_to_python_agentic_v2.txt" if protocol == "agentic-v2" else "rulebook_to_python.txt"
+    task = (REPO_ROOT / "prompts" / prompt_name).read_text(encoding="utf-8")
     return f"""You are the sole implementation agent in an isolated BoardBench workspace.
 
 Use only `{source_name}` and any attached rendered pages as game-rule evidence. Do not use remembered rules, web knowledge, repository files, evaluator tests, or assumptions from the game title. The interface contract below is not a rule source. If the supplied source is incomplete, contradictory, or vague, make the smallest explicit implementation assumption and list it in the response.
@@ -111,12 +114,12 @@ def _event_commands(path: Path) -> list[str]:
     return list(dict.fromkeys(commands))
 
 
-def _agentic_gate(workspace: Path) -> tuple[bool, str]:
+def _agentic_gate(workspace: Path, *, require_coverage: bool) -> tuple[bool, str]:
     implementation = workspace / "implementation.py"
     if not implementation.is_file() or not implementation.read_text(encoding="utf-8", errors="replace").strip():
         return False, "implementation.py is missing or empty"
     coverage = workspace / "rule_coverage.md"
-    if not coverage.is_file() or not coverage.read_text(encoding="utf-8", errors="replace").strip():
+    if require_coverage and (not coverage.is_file() or not coverage.read_text(encoding="utf-8", errors="replace").strip()):
         return False, "rule_coverage.md is missing or empty"
     sections = []
     passed = True
@@ -132,7 +135,7 @@ def _agentic_gate(workspace: Path) -> tuple[bool, str]:
     return passed, "\n\n".join(sections)
 
 
-def run_implementation(stem: str, source: Path) -> Path:
+def run_implementation(stem: str, source: Path, protocol: str) -> Path:
     workspace = Path(tempfile.mkdtemp(prefix=f"boardbench_{stem}_"))
     try:
         local_source = workspace / ("rulebook.pdf" if source.suffix.lower() == ".pdf" else "rulebook.txt")
@@ -141,7 +144,8 @@ def run_implementation(stem: str, source: Path) -> Path:
         shutil.copy2(REPO_ROOT / "generation" / "agentic_self_check.py", self_check)
         self_check_hash = sha256(self_check)
         images = render_pdf(local_source, workspace) if local_source.suffix == ".pdf" else []
-        prompt = implementation_prompt(local_source.name)
+        require_coverage = protocol == "agentic-v2.1"
+        prompt = implementation_prompt(local_source.name, protocol)
         (OUTPUTS / f"{stem}_generation_prompt.md").write_text(prompt, encoding="utf-8")
 
         all_commands: list[str] = []
@@ -155,11 +159,15 @@ def run_implementation(stem: str, source: Path) -> Path:
             response_path = OUTPUTS / (f"{stem}.md" if attempt == 0 else f"{stem}_{label}.md")
             events_path = OUTPUTS / f"{stem}_{label}_events.jsonl"
             usage_path = OUTPUTS / f"{stem}_{label}_usage.json"
+            coverage_instruction = (
+                "Create or update `rule_coverage.md` by auditing every supplied rulebook section and named rule/card/combination against the code."
+                if require_coverage else ""
+            )
             call_prompt = prompt if attempt == 0 else f"""Continue the same isolated implementation task. Inspect and repair `implementation.py` using only the supplied rulebook and interface contract. Do not use outside game knowledge. Do not change `agentic_self_check.py`.
 
 {INTERFACE_CONTRACT}
 
-Create or update `rule_coverage.md` by auditing every supplied rulebook section and named rule/card/combination against the code.
+{coverage_instruction}
 
 The evaluator-neutral independent gate reported:
 
@@ -194,7 +202,7 @@ Return only assumptions, files changed, and exact validation outcomes.
                 gate_ok = False
                 gate_output = "agent modified agentic_self_check.py; original restored"
             else:
-                gate_ok, gate_output = _agentic_gate(workspace)
+                gate_ok, gate_output = _agentic_gate(workspace, require_coverage=require_coverage)
             ran_self_check = any("agentic_self_check.py" in command for command in all_commands)
             call_records.append(
                 {
@@ -212,10 +220,11 @@ Return only assumptions, files changed, and exact validation outcomes.
 
         evidence = {
             "stem": stem,
+            "protocol": protocol,
             "model": MODEL,
             "reasoning_effort": EFFORT,
             "implementation_file": "implementation.py",
-            "rule_coverage_file": "rule_coverage.md",
+            "rule_coverage_file": "rule_coverage.md" if require_coverage else None,
             "self_check_sha256": self_check_hash,
             "repair_count": len(call_records) - 1,
             "agent_ran_self_check": any("agentic_self_check.py" in command for command in all_commands),
@@ -229,7 +238,8 @@ Return only assumptions, files changed, and exact validation outcomes.
         )
         code_path = OUTPUTS / f"{stem}.py"
         shutil.copy2(workspace / "implementation.py", code_path)
-        shutil.copy2(workspace / "rule_coverage.md", OUTPUTS / f"{stem}_rule_coverage.md")
+        if require_coverage:
+            shutil.copy2(workspace / "rule_coverage.md", OUTPUTS / f"{stem}_rule_coverage.md")
         return code_path
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
@@ -305,8 +315,11 @@ def aggregate_usage(stem: str) -> None:
     for call in calls:
         for key, value in call.get("token_summary", {}).items():
             token_totals[key] = token_totals.get(key, 0) + int(value)
+    evidence_path = OUTPUTS / f"{stem}_agentic_evidence.json"
+    protocol = json.loads(evidence_path.read_text(encoding="utf-8")).get("protocol") if evidence_path.exists() else None
     payload = {
         "stem": stem,
+        "protocol": protocol,
         "model": MODEL,
         "reasoning_effort": EFFORT,
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -331,12 +344,12 @@ def clear_outputs() -> None:
             path.unlink()
 
 
-def run_stem(stem: str, source: Path) -> None:
+def run_stem(stem: str, source: Path, protocol: str) -> None:
     # Each experiment is committed before the next starts. Git retains the
     # complete artifact set while the working tree contains only the current run.
     clear_outputs()
     print(f"[{stem}] implementation", flush=True)
-    code_path = run_implementation(stem, source)
+    code_path = run_implementation(stem, source, protocol)
     print(f"[{stem}] grouped checks", flush=True)
     run_checks(stem, code_path)
 
@@ -352,11 +365,12 @@ def run_stem(stem: str, source: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stem", choices=STEMS, required=True)
+    parser.add_argument("--protocol", choices=PROTOCOLS, default="agentic-v2.1")
     args = parser.parse_args()
 
     WORKSPACES.mkdir(exist_ok=True)
     sources = variant_paths()
-    run_stem(args.stem, sources[SOURCE_FOR_STEM[args.stem]])
+    run_stem(args.stem, sources[SOURCE_FOR_STEM[args.stem]], args.protocol)
     return 0
 
 

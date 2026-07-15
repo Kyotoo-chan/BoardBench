@@ -44,7 +44,7 @@ class AgenticGenerationTests(unittest.TestCase):
     def test_independent_gate_runs_actual_implementation(self):
         temporary, path = self.workspace(VALID_IMPLEMENTATION)
         with temporary:
-            passed, output = _agentic_gate(path)
+            passed, output = _agentic_gate(path, require_coverage=True)
         self.assertTrue(passed, output)
         self.assertIn("agentic-self-check OK", output)
 
@@ -52,9 +52,16 @@ class AgenticGenerationTests(unittest.TestCase):
         temporary, path = self.workspace(VALID_IMPLEMENTATION)
         with temporary:
             (path / "rule_coverage.md").unlink()
-            passed, output = _agentic_gate(path)
+            passed, output = _agentic_gate(path, require_coverage=True)
         self.assertFalse(passed)
         self.assertIn("rule_coverage.md", output)
+
+    def test_agentic_v2_gate_does_not_require_later_coverage_artifact(self):
+        temporary, path = self.workspace(VALID_IMPLEMENTATION)
+        with temporary:
+            (path / "rule_coverage.md").unlink()
+            passed, output = _agentic_gate(path, require_coverage=False)
+        self.assertTrue(passed, output)
 
     def test_independent_gate_rejects_legal_action_that_crashes(self):
         broken = VALID_IMPLEMENTATION.replace(
@@ -63,7 +70,7 @@ class AgenticGenerationTests(unittest.TestCase):
         )
         temporary, path = self.workspace(broken)
         with temporary:
-            passed, output = _agentic_gate(path)
+            passed, output = _agentic_gate(path, require_coverage=True)
         self.assertFalse(passed)
         self.assertIn("legal action crashed", output)
 
