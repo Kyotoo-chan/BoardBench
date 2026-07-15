@@ -1,0 +1,210 @@
+{
+  "stem": "expl_pdf_r2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "generated_at": "2026-07-15T09:55:49.769095+00:00",
+  "call_count": 4,
+  "token_totals": {
+    "output_tokens": 24531,
+    "reasoning_output_tokens": 12649,
+    "input_tokens": 651429,
+    "cached_input_tokens": 504832
+  },
+  "elapsed_seconds_total": 770.376,
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "agentic",
+      "started_at": "2026-07-15T09:47:39.871006+00:00",
+      "ended_at": "2026-07-15T09:52:54.670497+00:00",
+      "elapsed_seconds": 314.8,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 557388,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 557072,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "output_tokens": 10318,
+        "reasoning_output_tokens": 3560,
+        "input_tokens": 291734,
+        "cached_input_tokens": 254208
+      },
+      "provider_usage_records": [
+        {
+          "line": 30,
+          "path": "$.usage",
+          "input_tokens": 291734,
+          "cached_input_tokens": 254208,
+          "output_tokens": 10318,
+          "reasoning_output_tokens": 3560
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_generation_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AibPJz/boardbench_expl_pdf_r2__ltcvj8v/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AibPJz/boardbench_expl_pdf_r2__ltcvj8v/page-2.png"
+      ],
+      "stderr": "2026-07-15T09:50:52.663211Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.9 seconds\nOutput:\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AibPJz\\boardbench_expl_pdf_r2__ltcvj8v\\agentic_self_check.py\", line 74, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AibPJz\\boardbench_expl_pdf_r2__ltcvj8v\\agentic_self_check.py\", line 27, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AibPJz\\boardbench_expl_pdf_r2__ltcvj8v\\agentic_self_check.py\", line 22, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AibPJz\\boardbench_expl_pdf_r2__ltcvj8v\\implementation.py\", line 34, in <module>\r\n    @dataclass(frozen=True)\r\n     ^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 1265, in wrap\r\n    return _process_class(cls, init, repr, eq, order, unsafe_hash,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 983, in _process_class\r\n    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 749, in _is_type\r\n    ns = sys.modules.get(cls.__module__).__dict__\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?\r\n\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T09:53:00.477756+00:00",
+      "ended_at": "2026-07-15T09:55:48.791212+00:00",
+      "elapsed_seconds": 168.313,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 557067,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 556898,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "output_tokens": 5339,
+        "reasoning_output_tokens": 3428,
+        "input_tokens": 158064,
+        "cached_input_tokens": 110336
+      },
+      "provider_usage_records": [
+        {
+          "line": 31,
+          "path": "$.usage",
+          "input_tokens": 158064,
+          "cached_input_tokens": 110336,
+          "output_tokens": 5339,
+          "reasoning_output_tokens": 3428
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_1_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_1.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge1_jl80h7zx/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge1_jl80h7zx/page-2.png"
+      ],
+      "stderr": "2026-07-15T09:54:39.211366Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.7 seconds\nOutput:\nimplementation.py:60:    * A player may decline an available Entschärfung and explode.\nrg: Kitten:explodieren|len\\(distinct\\)|state\\.discard|kombination:F|discard=s\\.discard: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: \\+: Das System kann die angegebene Datei nicht finden. (os error 2)\nrg: cards|def: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: _explode|def: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: returns|def: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: _finish_draw|kind: Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\nrg: ==: Das System kann die angegebene Datei nicht finden. (os error 2)\nrg: \\attack\\|kind: Das System kann den angegebenen Pfad nicht finden. (os error 3)\nrg: ==: Das System kann die angegebene Datei nicht finden. (os error 2)\nrg: \\skip\": Die Syntax für den Dateinamen, Verzeichnisnamen oder die Datenträgerbezeichnung ist falsch. (os error 123)\n\n2026-07-15T09:54:55.307629Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 5.3 seconds\nOutput:\n\n2026-07-15T09:55:06.417652Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -LiteralPath implementation.py -SimpleMatch -Pattern 'A player may decline','phase == \\\"defuse\\\"','Exploding Kitten:explodieren','len(distinct)','for wanted in sorted(set(state.discard))','discard=s.discard + cards','def _explode','def returns','def _finish_draw','kind == \\\"attack\\\"','kind == \\\"skip\\\"' | ForEach-Object { '{0}:{1}' -f \"'$_.LineNumber,$_.Line.Trim() }'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T09:53:00.392666+00:00",
+      "ended_at": "2026-07-15T09:55:33.648327+00:00",
+      "elapsed_seconds": 153.256,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 557067,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 556913,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "output_tokens": 4469,
+        "reasoning_output_tokens": 3056,
+        "input_tokens": 64866,
+        "cached_input_tokens": 34304
+      },
+      "provider_usage_records": [
+        {
+          "line": 11,
+          "path": "$.usage",
+          "input_tokens": 64866,
+          "cached_input_tokens": 34304,
+          "output_tokens": 4469,
+          "reasoning_output_tokens": 3056
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_2_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_2.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge2__tnt_v82/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge2__tnt_v82/page-2.png"
+      ],
+      "stderr": ""
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T09:53:00.502305+00:00",
+      "ended_at": "2026-07-15T09:55:14.510155+00:00",
+      "elapsed_seconds": 134.007,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 557067,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 28,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 556932,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "output_tokens": 4405,
+        "reasoning_output_tokens": 2605,
+        "input_tokens": 136765,
+        "cached_input_tokens": 105984
+      },
+      "provider_usage_records": [
+        {
+          "line": 17,
+          "path": "$.usage",
+          "input_tokens": 136765,
+          "cached_input_tokens": 105984,
+          "output_tokens": 4405,
+          "reasoning_output_tokens": 2605
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_3_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_3.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge3_0igx5ua0/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge3_0igx5ua0/page-2.png"
+      ],
+      "stderr": "2026-07-15T09:53:11.119617Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n2026-07-15T09:53:16.893200Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Item -LiteralPath 'canonical_rulefacts.md' | Select-Object Name,Length\"` rejected: blocked by policy\n2026-07-15T09:54:14.070526Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'pdftotext -layout canonical_rulebook.pdf -'` rejected: blocked by policy\n"
+    }
+  ],
+  "actual_subscription_cost": null,
+  "cost_note": "Codex OAuth subscription calls expose tokens/quota but no trustworthy per-call monetary charge."
+}

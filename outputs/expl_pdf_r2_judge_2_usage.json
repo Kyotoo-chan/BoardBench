@@ -1,0 +1,48 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-15T09:53:00.392666+00:00",
+  "ended_at": "2026-07-15T09:55:33.648327+00:00",
+  "elapsed_seconds": 153.256,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 28,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 557067,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 28,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 556913,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "output_tokens": 4469,
+    "reasoning_output_tokens": 3056,
+    "input_tokens": 64866,
+    "cached_input_tokens": 34304
+  },
+  "provider_usage_records": [
+    {
+      "line": 11,
+      "path": "$.usage",
+      "input_tokens": 64866,
+      "cached_input_tokens": 34304,
+      "output_tokens": 4469,
+      "reasoning_output_tokens": 3056
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_2_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_pdf_r2_judge_2.md",
+  "image_paths": [
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge2__tnt_v82/page-1.png",
+    "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_pdf_r2_judge2__tnt_v82/page-2.png"
+  ],
+  "stderr": ""
+}
