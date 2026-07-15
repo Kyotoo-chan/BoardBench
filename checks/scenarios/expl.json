@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "expl-v2.1",
+  "rubric_version": "expl-v2.2",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
@@ -75,7 +75,7 @@
       },
       "fixture": {
         "hands": {"0": ["skip", "skip"], "1": []},
-        "deck": ["shuffle"],
+        "deck": ["shuffle", "shuffle", "shuffle", "shuffle"],
         "active_player": 0,
         "turns_owed": 2
       },
@@ -366,7 +366,7 @@
       },
       "fixture": {
         "hands": {"0": ["attack", "skip", "future", "shuffle", "favor"], "1": []},
-        "deck": ["shuffle"],
+        "deck": ["shuffle", "shuffle", "shuffle", "shuffle"],
         "discard": ["kitten"],
         "active_player": 0
       },
@@ -473,7 +473,7 @@
       },
       "fixture": {
         "hands": {"0": ["cat", "cat"], "1": ["defuse"]},
-        "deck": ["shuffle"],
+        "deck": ["shuffle", "shuffle", "shuffle", "shuffle"],
         "active_player": 0
       },
       "steps": [{

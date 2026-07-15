@@ -66,6 +66,17 @@ class ScenarioRunnerTests(unittest.TestCase):
         )
         self.assertEqual(result["actions"], ["play:preview", "draw"])
 
+    def test_expl_adapter_resolves_anonymized_card_catalog(self):
+        module = SimpleNamespace(CARDS=("Gefahrenkarte", "Schutzkarte", "Doppelzug", "Neuordnen"))
+        game = SimpleNamespace(initial_state=lambda: ImmutableState())
+        state = expl.setup(
+            module,
+            game,
+            {"hands": {"0": ["attack"], "1": []}, "deck": ["shuffle"]},
+        )
+        self.assertEqual(state.hands[0], ("Doppelzug",))
+        self.assertEqual(state.deck, ("Neuordnen",))
+
     def test_expl_adapter_supports_immutable_tuple_states(self):
         module = SimpleNamespace(ATTACK="attack", SHUFFLE="shuffle")
         game = SimpleNamespace(initial_state=lambda: ImmutableState())

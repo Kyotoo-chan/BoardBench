@@ -7,8 +7,8 @@ from dataclasses import is_dataclass, replace
 from typing import Any
 
 CARD_CONSTANTS = {
-    "kitten": ("EXPLODING_KITTEN", "EXPLODING"),
-    "defuse": ("DEFUSE",),
+    "kitten": ("EXPLODING_KITTEN", "EXPLODING", "GEFAHR"),
+    "defuse": ("DEFUSE", "SCHUTZ"),
     "attack": ("ATTACK",),
     "skip": ("SKIP",),
     "future": ("SEE_FUTURE", "SEE", "FUTURE"),
@@ -16,19 +16,53 @@ CARD_CONSTANTS = {
     "favor": ("FAVOR",),
     "nope": ("NOPE",),
 }
+CARD_ALIASES = {
+    "kitten": ("Exploding Kitten", "Gefahrenkarte", "danger"),
+    "defuse": ("Entschärfung", "Schutzkarte", "protection"),
+    "attack": ("Angriff", "Doppelzug", "double_turn"),
+    "skip": ("Hops!", "Überspringen", "skip"),
+    "future": ("Blick in die Zukunft", "Vorschau", "preview"),
+    "shuffle": ("Mischen", "Neuordnen", "reorder"),
+    "favor": ("Wunsch", "Auswahl", "choice"),
+    "nope": ("Nö!", "Widerspruch", "contradiction"),
+}
 PLAYER_FIELDS = ("active_player", "turn_player", "player")
-DEBT_FIELDS = ("turns_left", "turns_remaining", "turn_debt")
+DEBT_FIELDS = ("turns_left", "turns_remaining", "turn_debt", "turns_due")
+
+
+def _catalog(module: Any) -> list[Any]:
+    cards: list[Any] = []
+    for name in ("CARDS", "CARD_TYPES", "CARD_TITLES", "PLAYABLE", "CAT_CARDS", "CAT_TYPES", "CAT_TITLES", "CATS", "SYMBOLS"):
+        value = getattr(module, name, ())
+        if isinstance(value, MutableMapping):
+            cards.extend(value)
+        elif isinstance(value, (list, tuple, set)):
+            cards.extend(value)
+    counts = getattr(module, "CARD_COUNTS", {})
+    if isinstance(counts, MutableMapping):
+        cards.extend(counts)
+    return list(dict.fromkeys(cards))
 
 
 def _card(module: Any, semantic_name: str) -> Any:
+    catalog = _catalog(module)
     if semantic_name == "cat":
-        for constant in ("CAT_CARDS", "CATS", "SYMBOLS"):
+        for constant in ("CAT_CARDS", "CAT_TYPES", "CATS", "SYMBOLS"):
             cards = getattr(module, constant, ())
             if cards:
                 return cards[0]
+        for card in catalog:
+            folded = str(card).casefold()
+            if any(fragment in folded for fragment in ("katze", "cat", "symbol", "zombie", "auge")):
+                return card
     for constant in CARD_CONSTANTS.get(semantic_name, (semantic_name,)):
         if hasattr(module, constant):
             return getattr(module, constant)
+    aliases = CARD_ALIASES.get(semantic_name, ())
+    for alias in aliases:
+        for card in catalog:
+            if str(card).casefold() == alias.casefold():
+                return card
     raise NotImplementedError(f"implementation has no card constant for {semantic_name!r}")
 
 
