@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the frozen six-variant Exploding Kittens experiment through native Codex."""
+"""Run isolated Exploding Kittens implementations through native Codex."""
 
 from __future__ import annotations
 
@@ -20,11 +20,11 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from generation.codex_native import run_codex
-from generation.llm_cli import extract_code_block
 
 MODEL = "gpt-5.6-sol"
 EFFORT = "medium"
-STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague")
+STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague", "expl_pdf_r2")
+SOURCE_FOR_STEM = {stem: stem for stem in STEMS if stem != "expl_pdf_r2"} | {"expl_pdf_r2": "expl_pdf"}
 CANONICAL_HASH = "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
 OUTPUTS = REPO_ROOT / "outputs"
 WORKSPACES = REPO_ROOT / "generation_workspaces"
@@ -53,12 +53,12 @@ def variant_paths() -> dict[str, Path]:
     if manifest["canonical_sha256"] != CANONICAL_HASH:
         raise RuntimeError("variant manifest canonical hash changed")
     result: dict[str, Path] = {}
-    for stem in STEMS:
-        item = manifest["variants"][stem]
+    for source_stem in sorted(set(SOURCE_FOR_STEM.values())):
+        item = manifest["variants"][source_stem]
         path = REPO_ROOT / item["path"]
         if sha256(path) != item["sha256"]:
-            raise RuntimeError(f"variant hash mismatch: {stem}")
-        result[stem] = path
+            raise RuntimeError(f"variant hash mismatch: {source_stem}")
+        result[source_stem] = path
     return result
 
 
@@ -90,47 +90,147 @@ def call_paths(stem: str, label: str) -> tuple[Path, Path, Path]:
     return base.with_suffix(".md"), OUTPUTS / f"{stem}_{label}_events.jsonl", OUTPUTS / f"{stem}_{label}_usage.json"
 
 
+def _event_commands(path: Path) -> list[str]:
+    commands: list[str] = []
+
+    def visit(value: object) -> None:
+        if isinstance(value, dict):
+            if value.get("type") == "command_execution" and isinstance(value.get("command"), str):
+                commands.append(value["command"])
+            for item in value.values():
+                visit(item)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        try:
+            visit(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return list(dict.fromkeys(commands))
+
+
+def _agentic_gate(workspace: Path) -> tuple[bool, str]:
+    implementation = workspace / "implementation.py"
+    if not implementation.is_file() or not implementation.read_text(encoding="utf-8", errors="replace").strip():
+        return False, "implementation.py is missing or empty"
+    sections = []
+    passed = True
+    for command in (
+        [sys.executable, "-m", "py_compile", str(implementation)],
+        [sys.executable, str(workspace / "agentic_self_check.py")],
+    ):
+        returncode, output, elapsed = run_command(command, cwd=workspace)
+        sections.append(
+            f"command={' '.join(command)}\nexit_code={returncode} elapsed_seconds={elapsed:.3f}\n{output.rstrip()}"
+        )
+        passed &= returncode == 0
+    return passed, "\n\n".join(sections)
+
+
 def run_implementation(stem: str, source: Path) -> Path:
     workspace = Path(tempfile.mkdtemp(prefix=f"boardbench_{stem}_", dir=WORKSPACES))
     try:
         local_source = workspace / ("rulebook.pdf" if source.suffix.lower() == ".pdf" else "rulebook.txt")
         shutil.copy2(source, local_source)
+        self_check = workspace / "agentic_self_check.py"
+        shutil.copy2(REPO_ROOT / "generation" / "agentic_self_check.py", self_check)
+        self_check_hash = sha256(self_check)
         images = render_pdf(local_source, workspace) if local_source.suffix == ".pdf" else []
-        prompt_path = workspace / "prompt.md"
-        prompt_path.write_text(implementation_prompt(local_source.name), encoding="utf-8")
+        prompt = implementation_prompt(local_source.name)
+        (OUTPUTS / f"{stem}_generation_prompt.md").write_text(prompt, encoding="utf-8")
 
-        response_path = OUTPUTS / f"{stem}.md"
-        events_path = OUTPUTS / f"{stem}_generation_events.jsonl"
-        usage_path = OUTPUTS / f"{stem}_generation_usage.json"
-        run_codex(
-            prompt=prompt_path.read_text(encoding="utf-8"),
-            cwd=workspace,
-            response_path=response_path,
-            events_path=events_path,
-            usage_path=usage_path,
-            model=MODEL,
-            effort=EFFORT,
-            mode="agentic",
-            image_paths=images,
+        all_commands: list[str] = []
+        call_records: list[dict[str, object]] = []
+        gate_ok = False
+        gate_output = "not run"
+        max_repairs = 2
+
+        for attempt in range(max_repairs + 1):
+            label = "generation" if attempt == 0 else f"repair_{attempt}"
+            response_path = OUTPUTS / (f"{stem}.md" if attempt == 0 else f"{stem}_{label}.md")
+            events_path = OUTPUTS / f"{stem}_{label}_events.jsonl"
+            usage_path = OUTPUTS / f"{stem}_{label}_usage.json"
+            call_prompt = prompt if attempt == 0 else f"""Continue the same isolated implementation task. Inspect and repair `implementation.py` using only the supplied rulebook and interface contract. Do not use outside game knowledge. Do not change `agentic_self_check.py`.
+
+{INTERFACE_CONTRACT}
+
+The evaluator-neutral independent gate reported:
+
+```text
+{gate_output}
+```
+
+Run both required commands yourself and keep repairing until they pass:
+
+```text
+python -m py_compile implementation.py
+python agentic_self_check.py
+```
+
+Return only assumptions, files changed, and exact validation outcomes.
+"""
+            run_codex(
+                prompt=call_prompt,
+                cwd=workspace,
+                response_path=response_path,
+                events_path=events_path,
+                usage_path=usage_path,
+                model=MODEL,
+                effort=EFFORT,
+                mode="agentic",
+                image_paths=images,
+            )
+            commands = _event_commands(events_path)
+            all_commands.extend(commands)
+            if not self_check.exists() or sha256(self_check) != self_check_hash:
+                shutil.copy2(REPO_ROOT / "generation" / "agentic_self_check.py", self_check)
+                gate_ok = False
+                gate_output = "agent modified agentic_self_check.py; original restored"
+            else:
+                gate_ok, gate_output = _agentic_gate(workspace)
+            ran_self_check = any("agentic_self_check.py" in command for command in all_commands)
+            call_records.append(
+                {
+                    "attempt": attempt,
+                    "label": label,
+                    "commands": commands,
+                    "independent_gate_passed": gate_ok,
+                    "agent_ran_self_check": ran_self_check,
+                }
+            )
+            if gate_ok and ran_self_check:
+                break
+        else:
+            raise RuntimeError(f"{stem}: agentic implementation gate failed after {max_repairs} repairs\n{gate_output}")
+
+        evidence = {
+            "stem": stem,
+            "model": MODEL,
+            "reasoning_effort": EFFORT,
+            "implementation_file": "implementation.py",
+            "self_check_sha256": self_check_hash,
+            "repair_count": len(call_records) - 1,
+            "agent_ran_self_check": any("agentic_self_check.py" in command for command in all_commands),
+            "independent_gate_passed": gate_ok,
+            "commands": list(dict.fromkeys(all_commands)),
+            "calls": call_records,
+            "final_gate_output": gate_output,
+        }
+        (OUTPUTS / f"{stem}_agentic_evidence.json").write_text(
+            json.dumps(evidence, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
         )
-
-        response = response_path.read_text(encoding="utf-8")
-        code = extract_code_block(response)
-        if code is None:
-            candidates = sorted(workspace.glob("*.py"))
-            if len(candidates) != 1:
-                raise RuntimeError(f"{stem}: no unique Python module in response/workspace")
-            code = candidates[0].read_text(encoding="utf-8")
         code_path = OUTPUTS / f"{stem}.py"
-        code_path.write_text(code, encoding="utf-8")
+        shutil.copy2(workspace / "implementation.py", code_path)
         return code_path
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
 
 
-def run_command(command: list[str]) -> tuple[int, str, float]:
+def run_command(command: list[str], *, cwd: Path = REPO_ROOT) -> tuple[int, str, float]:
     started = time.perf_counter()
-    result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    result = subprocess.run(command, cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     return result.returncode, (result.stdout or "") + (result.stderr or ""), time.perf_counter() - started
 
 
@@ -188,7 +288,11 @@ def run_one_judge(stem: str, code_path: Path, index: int) -> None:
 
 
 def aggregate_usage(stem: str) -> None:
-    paths = [OUTPUTS / f"{stem}_generation_usage.json"] + [OUTPUTS / f"{stem}_judge_{i}_usage.json" for i in range(1, 4)]
+    paths = (
+        [OUTPUTS / f"{stem}_generation_usage.json"]
+        + sorted(OUTPUTS.glob(f"{stem}_repair_*_usage.json"))
+        + [OUTPUTS / f"{stem}_judge_{i}_usage.json" for i in range(1, 4)]
+    )
     calls = [json.loads(path.read_text(encoding="utf-8")) for path in paths if path.exists()]
     token_totals: dict[str, int] = {}
     for call in calls:
@@ -245,7 +349,7 @@ def main() -> int:
 
     WORKSPACES.mkdir(exist_ok=True)
     sources = variant_paths()
-    run_stem(args.stem, sources[args.stem])
+    run_stem(args.stem, sources[SOURCE_FOR_STEM[args.stem]])
     return 0
 
 

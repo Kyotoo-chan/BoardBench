@@ -20,10 +20,12 @@ Require archived rulebook, `inputs/games/<slug>/rulefacts.md` with `status: appr
 ## Implementation
 
 1. Read `prompts/rulebook_to_python.txt`.
-2. Create an isolated temporary workspace containing only the rulebook, approved facts, prompt, and empty output directory. Do not expose repository checks or scenario expectations.
+2. Create an isolated temporary workspace containing only the rulebook, approved facts, prompt, and `generation/agentic_self_check.py`. Do not expose repository checks or scenario expectations.
 3. If subagents are enabled, launch one `implementer` Agent as the only writer. Pass explicit child model/thinking exactly. Otherwise omit those fields so it inherits, or choose only a demonstrably weaker setting than the parent.
-4. Preserve its raw response and copy the final module to `outputs/<slug>_<backend>_ag.py`; save the response as the matching `.md`.
-5. Remove the workspace.
+4. Require the Agent to create `implementation.py` and run `python -m py_compile implementation.py` plus `python agentic_self_check.py` against that actual file. A model setting named `agentic` is not evidence by itself.
+5. Independently rerun the same self-check. If it fails, return only evaluator-neutral technical output to the same isolated implementation workflow for at most two repair rounds. Never reveal cited scenarios.
+6. Preserve every raw response/event/usage record and an agentic-evidence JSON file containing commands, repair count, and final gate status. Copy `implementation.py` to the requested output path.
+7. Remove the workspace.
 
 ## Checks
 
@@ -34,6 +36,6 @@ Run through the `boardbench` Conda environment and keep groups separate:
 3. interface 06;
 4. rulebook scenarios.
 
-Do not combine them into a correctness score. Do not run OpenSpiel unless requested. Implementation defects may return to the same Agent; changed rule interpretations return to the user.
+Do not combine them into a correctness score. Do not run OpenSpiel unless requested. Only technical/API/self-check defects may enter the blind repair loop. Changed rule interpretations return to the user. Do not call a run agentic unless the actual implementation file was written, tested, and passed the independent gate.
 
 End with paths, grouped results, parent and child model/thinking, assumptions, and the next `/bbeval` command.

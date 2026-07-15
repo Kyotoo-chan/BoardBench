@@ -27,7 +27,11 @@ model: gpt-5.6-sol
 reasoning effort: medium
 ```
 
-Implementation calls run in isolated temporary workspaces. To keep the generation condition native and comparable, the implementer receives only its assigned rulebook variant, the minimal public API contract, and the implementation prompt. Canonical and variant-specific evaluation facts remain hidden. It cannot access repository checks, canonical scenarios, other variants, previous implementations, or reviews.
+Implementation calls run in isolated temporary workspaces. To keep the generation condition native and comparable, the implementer receives only its assigned rulebook variant, the minimal public API contract, and an evaluator-neutral self-check. Canonical and variant-specific evaluation facts remain hidden. It cannot access repository checks, canonical scenarios, other variants, previous implementations, or reviews.
+
+A provider mode named `agentic` is not sufficient evidence. The implementation agent must create `implementation.py`, run `python -m py_compile implementation.py` and `python agentic_self_check.py`, and pass the same independently repeated gate. Technical failures may trigger at most two blind repair calls in the same isolated workspace. Commands, repair calls, outputs, and final gate status are retained in `*_agentic_evidence.json`.
+
+The original six-variant pilot predates this evidence gate. Its calls used agentic-capable Codex infrastructure, but individual runs may have behaved like one-shot generation; they remain historical pilot evidence and are not silently relabelled or replaced.
 
 Judge calls are fresh, read-only, and mutually blind. They receive the canonical rulebook, approved canonical facts, and exactly one implementation. They do not receive deterministic check logs, other reviews, other variants, or prior scores.
 

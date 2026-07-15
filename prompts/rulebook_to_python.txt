@@ -25,8 +25,18 @@ Provide `GameState` and `Game` with:
 
 Actions returned by `legal_actions` must be accepted by `apply_action`. Names must be unique, human-readable, stable, and exactly reversible. Preserve the supplied source's card/effect labels rather than inventing or translating synonyms. Use explicit labels such as `place:<target>` or `move:<source>-><target>` rather than state-dependent raw indices.
 
-Before finishing, run syntax and short gameplay probes and repair failures.
+Work on the actual workspace file `implementation.py`; do not merely draft the module in the final response. Before finishing, run both commands below against the real file and repair every failure:
 
-Output only:
+```text
+python -m py_compile implementation.py
+python agentic_self_check.py
+```
+
+Do not modify `agentic_self_check.py`. It is an evaluator-neutral API/action-closure probe, not a source of game rules.
+
+Final response only:
 1. `Open questions / assumptions` (brief)
-2. one fenced `python` block containing the complete module
+2. files changed
+3. exact validation commands and outcomes
+
+Do not repeat the complete module in the final response.
