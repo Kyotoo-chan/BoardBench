@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "expl-v2.3",
+  "rubric_version": "expl-v2.4",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {

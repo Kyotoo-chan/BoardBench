@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Re-evaluate and compare the six pilot/r2 pairs under rubric expl-v2.2."""
+"""Re-evaluate and compare the six pilot/r2 pairs under rubric expl-v2.4."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 OUT_DIR = Path(__file__).resolve().parent
-EVAL_DIR = OUT_DIR / "evaluation_v2_2"
+EVAL_DIR = OUT_DIR / "evaluation_v2_4"
 OLD_JUDGES = OUT_DIR.parent / "variants" / "evaluation_v2"
 CONDITIONS = [
     ("Original PDF", "expl_pdf", "d703218", "expl_pdf_r2", "1cd9a33"),
@@ -60,7 +60,7 @@ def evaluate(code_path: Path, stem: str) -> tuple[dict[str, object], str]:
         ("technical gate 01-04", [python, "checks/run_checks.py", "--game", "expl", "--code-path", str(code_path), "--check", "01_result_file", "--check", "02_python_syntax", "--check", "03_startable_game", "--check", "04_required_api"]),
         ("runtime robustness 05", [python, "checks/run_checks.py", "--game", "expl", "--code-path", str(code_path), "--check", "05_random_rollouts", "--rollouts", "100", "--max-steps", "1000", "--seed", "1"]),
         ("interface 06", [python, "checks/run_checks.py", "--game", "expl", "--code-path", str(code_path), "--check", "06_action_language", "--max-steps", "1000", "--seed", "1"]),
-        ("cited scenarios expl-v2.2", [python, "checks/run_scenarios.py", "--code-path", str(code_path), "--scenarios", "checks/scenarios/expl.json", "--json-output", str(scenario_path)]),
+        ("cited scenarios expl-v2.4", [python, "checks/run_scenarios.py", "--code-path", str(code_path), "--scenarios", "checks/scenarios/expl.json", "--json-output", str(scenario_path)]),
     ]
     sections = []
     for label, command in groups:
@@ -99,7 +99,7 @@ def collect() -> list[dict[str, object]]:
         temp = Path(temporary)
         for label, old_stem, old_commit, new_stem, new_commit in CONDITIONS:
             for generation, stem, commit in (("pilot", old_stem, old_commit), ("r2", new_stem, new_commit)):
-                print(f"[{label} {generation}] evaluator v2.2", flush=True)
+                print(f"[{label} {generation}] evaluator v2.4", flush=True)
                 code = git_show(commit, f"outputs/{stem}.py")
                 code_path = temp / f"{stem}.py"
                 code_path.write_text(code, encoding="utf-8")
@@ -147,9 +147,9 @@ def collect() -> list[dict[str, object]]:
 
 
 def save(rows: list[dict[str, object]]) -> None:
-    (OUT_DIR / "r2_metrics.json").write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (OUT_DIR / "r2_metrics_v2_4.json").write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     flat_rows = [{key: json.dumps(value, ensure_ascii=False, sort_keys=True) if isinstance(value, dict) else value for key, value in row.items()} for row in rows]
-    with (OUT_DIR / "r2_metrics.csv").open("w", newline="", encoding="utf-8") as handle:
+    with (OUT_DIR / "r2_metrics_v2_4.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(flat_rows[0]))
         writer.writeheader()
         writer.writerows(flat_rows)
@@ -181,7 +181,7 @@ def plots(rows: list[dict[str, object]]) -> None:
         ax.set_title(title)
         ax.legend()
     axes[1].set_xticks(x, labels, rotation=18, ha="right")
-    finish("04_r2_rule_evidence.png")
+    finish("10_r2_rule_evidence_v2_4.png")
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
     old = ax.bar(x - width / 2, paired(rows, "judge_mean", "pilot"), width, label="Pilot corrected judge mean")
@@ -193,7 +193,7 @@ def plots(rows: list[dict[str, object]]) -> None:
     ax.set_xticks(x, labels, rotation=18, ha="right")
     ax.set_title("Three blind corrected reviews per implementation")
     ax.legend()
-    finish("05_r2_judge_means.png")
+    finish("11_r2_judge_means_v2_4.png")
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
     old = ax.bar(x - width / 2, paired(rows, "code_lines", "pilot"), width, label="Pilot")
@@ -204,14 +204,14 @@ def plots(rows: list[dict[str, object]]) -> None:
     ax.set_xticks(x, labels, rotation=18, ha="right")
     ax.set_title("Generated module size")
     ax.legend()
-    finish("06_r2_code_lines.png")
+    finish("12_r2_code_lines_v2_4.png")
 
 
 def main() -> int:
     rows = collect()
     save(rows)
     plots(rows)
-    print(f"wrote {len(rows)} rows to {OUT_DIR.relative_to(REPO_ROOT)}")
+    print(f"wrote {len(rows)} expl-v2.4 rows to {OUT_DIR.relative_to(REPO_ROOT)}")
     return 0
 
 

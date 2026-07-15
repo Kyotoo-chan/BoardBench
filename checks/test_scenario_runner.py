@@ -68,6 +68,16 @@ class ScenarioRunnerTests(unittest.TestCase):
         )
         self.assertEqual(result["actions"], ["play:preview", "draw"])
 
+    def test_settle_does_not_play_a_normal_draw_named_pass(self):
+        game = DummyGame()
+        state = {"actions": ["Passen:draw"]}
+        result = _settle(
+            game,
+            state,
+            [{"while_all_contains_any": ["pass", "nope"], "choose_contains_any": ["pass"]}],
+        )
+        self.assertEqual(result["actions"], ["Passen:draw"])
+
     def test_expl_adapter_resolves_anonymized_card_catalog(self):
         module = SimpleNamespace(CARDS=("Gefahrenkarte", "Schutzkarte", "Doppelzug", "Neuordnen"))
         game = SimpleNamespace(initial_state=lambda: ImmutableState())

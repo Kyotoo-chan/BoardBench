@@ -176,6 +176,7 @@ def _settle(game: Any, state: Any, configs: list[dict[str, Any]]) -> Any:
                 action
                 for action, name in zip(actions, names)
                 if (not chosen or _matches_any(name, chosen))
+                and not (_matches_any(name, ["draw", "ziehen"]) and _matches_any(name, ["pass"]))
                 and (not chosen_groups or all(_matches_any(name, group) for group in chosen_groups))
             ]
             if not matches:
