@@ -1,0 +1,208 @@
+{
+  "stem": "expl_txt_r2",
+  "protocol": "agentic-v2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "generated_at": "2026-07-15T10:17:42.928685+00:00",
+  "call_count": 4,
+  "token_totals": {
+    "reasoning_output_tokens": 12957,
+    "cached_input_tokens": 462848,
+    "input_tokens": 582529,
+    "output_tokens": 24304
+  },
+  "elapsed_seconds_total": 761.701,
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "agentic",
+      "started_at": "2026-07-15T10:10:06.645489+00:00",
+      "ended_at": "2026-07-15T10:13:57.705420+00:00",
+      "elapsed_seconds": 231.06,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 556041,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555809,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 3822,
+        "cached_input_tokens": 195072,
+        "input_tokens": 217408,
+        "output_tokens": 9647
+      },
+      "provider_usage_records": [
+        {
+          "line": 26,
+          "path": "$.usage",
+          "input_tokens": 217408,
+          "cached_input_tokens": 195072,
+          "output_tokens": 9647,
+          "reasoning_output_tokens": 3822
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_generation_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2.md",
+      "image_paths": [],
+      "stderr": "2026-07-15T10:12:49.314602Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.9 seconds\nOutput:\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-6jbFW3\\boardbench_expl_txt_r2_axo_unrw\\agentic_self_check.py\", line 74, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-6jbFW3\\boardbench_expl_txt_r2_axo_unrw\\agentic_self_check.py\", line 27, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-6jbFW3\\boardbench_expl_txt_r2_axo_unrw\\agentic_self_check.py\", line 22, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-6jbFW3\\boardbench_expl_txt_r2_axo_unrw\\implementation.py\", line 36, in <module>\r\n    @dataclass\r\n     ^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 1275, in dataclass\r\n    return wrap(cls)\r\n           ^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 1265, in wrap\r\n    return _process_class(cls, init, repr, eq, order, unsafe_hash,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 983, in _process_class\r\n    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 749, in _is_type\r\n    ns = sys.modules.get(cls.__module__).__dict__\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?\r\n\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T10:14:05.069553+00:00",
+      "ended_at": "2026-07-15T10:16:27.974781+00:00",
+      "elapsed_seconds": 142.905,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555802,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555659,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 2694,
+        "cached_input_tokens": 44288,
+        "input_tokens": 64812,
+        "output_tokens": 4265
+      },
+      "provider_usage_records": [
+        {
+          "line": 11,
+          "path": "$.usage",
+          "input_tokens": 64812,
+          "cached_input_tokens": 44288,
+          "output_tokens": 4265,
+          "reasoning_output_tokens": 2694
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_1_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_1.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge1_rtqwdm2r/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge1_rtqwdm2r/page-2.png"
+      ],
+      "stderr": "2026-07-15T10:14:19.774120Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Item -LiteralPath canonical_rulebook.pdf, canonical_rulefacts.md, implementation.py | Select-Object Name,Length; Get-Content -LiteralPath canonical_rulefacts.md -Raw; Get-Content -LiteralPath implementation.py -Raw'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T10:14:04.875519+00:00",
+      "ended_at": "2026-07-15T10:16:54.966658+00:00",
+      "elapsed_seconds": 170.091,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555802,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555632,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 3069,
+        "cached_input_tokens": 53248,
+        "input_tokens": 87179,
+        "output_tokens": 4296
+      },
+      "provider_usage_records": [
+        {
+          "line": 11,
+          "path": "$.usage",
+          "input_tokens": 87179,
+          "cached_input_tokens": 53248,
+          "output_tokens": 4296,
+          "reasoning_output_tokens": 3069
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_2_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_2.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge2_d51lmztj/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge2_d51lmztj/page-2.png"
+      ],
+      "stderr": "2026-07-15T10:14:19.407493Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Item -LiteralPath canonical_rulebook.pdf, canonical_rulefacts.md, implementation.py | Select-Object Name,Length'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "mode": "judge",
+      "started_at": "2026-07-15T10:14:04.904233+00:00",
+      "ended_at": "2026-07-15T10:17:42.548243+00:00",
+      "elapsed_seconds": 217.645,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555802,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 32,
+          "reset_at": 1784666246,
+          "reset_after_seconds": 555584,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 3372,
+        "cached_input_tokens": 170240,
+        "input_tokens": 213130,
+        "output_tokens": 6096
+      },
+      "provider_usage_records": [
+        {
+          "line": 20,
+          "path": "$.usage",
+          "input_tokens": 213130,
+          "cached_input_tokens": 170240,
+          "output_tokens": 6096,
+          "reasoning_output_tokens": 3372
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_3_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_txt_r2_judge_3.md",
+      "image_paths": [
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge3_e2_xf2av/page-1.png",
+        "D:/safen/Ben_T/Studium/8.Semester/BoardBench/generation_workspaces/boardbench_expl_txt_r2_judge3_e2_xf2av/page-2.png"
+      ],
+      "stderr": "2026-07-15T10:16:03.478602Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.8 seconds\nOutput:\nrg: regex parse error:\n    (?:phase == \" defuse\\|\\(\\explode\\,\\)|if)\n                            ^^\nerror: unrecognized escape sequence\n\n2026-07-15T10:16:18.417225Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command '$lines = Get-Content implementation.py; foreach ($i in 95..140) { '\"'{0}:{1}' -f \"'$i,$lines[$i-1] }; foreach ($i in 145..180) { '\"'{0}:{1}' -f \"'$i,$lines[$i-1] }; foreach ($i in 315..360) { '\"'{0}:{1}' -f \"'$i,$lines[$i-1] }'` rejected: blocked by policy\n"
+    }
+  ],
+  "actual_subscription_cost": null,
+  "cost_note": "Codex OAuth subscription calls expose tokens/quota but no trustworthy per-call monetary charge."
+}
