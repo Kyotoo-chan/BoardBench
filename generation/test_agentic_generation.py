@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from generation.prepare_expl_variants import clarified_variant
-from generation.run_expl_variants import SOURCE_FOR_STEM, _agentic_gate, _event_commands
+from generation.run_expl_variants import SOURCE_FOR_STEM, _agentic_gate, _event_commands, _validate_assumptions, implementation_prompt
 
 
 VALID_IMPLEMENTATION = '''
@@ -40,12 +40,14 @@ class AgenticGenerationTests(unittest.TestCase):
         self.assertIn("auch „Exploding Kitten“", clarified)
         self.assertIn("fünf gerade ausgespielten Komponenten", clarified)
         self.assertEqual(SOURCE_FOR_STEM["expl_clarified_r1"], "expl_clarified")
+        self.assertIn("assumptions.json", implementation_prompt("rulebook.txt", "agentic-v2.2"))
 
     def workspace(self, implementation: str):
         temporary = tempfile.TemporaryDirectory()
         path = Path(temporary.name)
         (path / "implementation.py").write_text(implementation, encoding="utf-8")
         (path / "rule_coverage.md").write_text("# Source coverage\n\nAll supplied sections mapped.\n", encoding="utf-8")
+        (path / "assumptions.json").write_text('{"version": 1, "assumptions": []}\n', encoding="utf-8")
         shutil.copy2(Path(__file__).with_name("agentic_self_check.py"), path / "agentic_self_check.py")
         return temporary, path
 
@@ -70,6 +72,14 @@ class AgenticGenerationTests(unittest.TestCase):
             (path / "rule_coverage.md").unlink()
             passed, output = _agentic_gate(path, require_coverage=False)
         self.assertTrue(passed, output)
+
+    def test_agentic_v2_2_requires_valid_material_assumptions(self):
+        temporary, path = self.workspace(VALID_IMPLEMENTATION)
+        with temporary:
+            passed, output = _agentic_gate(path, require_coverage=True, require_assumptions=True)
+            self.assertTrue(passed, output)
+            (path / "assumptions.json").write_text('{"version": 1, "assumptions": [{}]}', encoding="utf-8")
+            self.assertIn("missing required fields", _validate_assumptions(path / "assumptions.json") or "")
 
     def test_independent_gate_rejects_legal_action_that_crashes(self):
         broken = VALID_IMPLEMENTATION.replace(

@@ -27,7 +27,7 @@ BASE_STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "e
 STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS) + ("expl_clarified_r1",)
 SOURCE_FOR_STEM = {stem: stem.removesuffix("_r2") for stem in STEMS}
 SOURCE_FOR_STEM["expl_clarified_r1"] = "expl_clarified"
-PROTOCOLS = ("agentic-v2", "agentic-v2.1")
+PROTOCOLS = ("agentic-v2", "agentic-v2.1", "agentic-v2.2")
 CANONICAL_HASH = "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
 OUTPUTS = REPO_ROOT / "outputs"
 WORKSPACES = REPO_ROOT / "generation_workspaces"
@@ -77,7 +77,11 @@ def render_pdf(pdf: Path, target_dir: Path) -> list[Path]:
 
 
 def implementation_prompt(source_name: str, protocol: str) -> str:
-    prompt_name = "rulebook_to_python_agentic_v2.txt" if protocol == "agentic-v2" else "rulebook_to_python.txt"
+    prompt_name = {
+        "agentic-v2": "rulebook_to_python_agentic_v2.txt",
+        "agentic-v2.1": "rulebook_to_python.txt",
+        "agentic-v2.2": "rulebook_to_python_agentic_v2_2.txt",
+    }[protocol]
     task = (REPO_ROOT / "prompts" / prompt_name).read_text(encoding="utf-8")
     return f"""You are the sole implementation agent in an isolated BoardBench workspace.
 
@@ -115,13 +119,41 @@ def _event_commands(path: Path) -> list[str]:
     return list(dict.fromkeys(commands))
 
 
-def _agentic_gate(workspace: Path, *, require_coverage: bool) -> tuple[bool, str]:
+def _validate_assumptions(path: Path) -> str | None:
+    if not path.is_file():
+        return "assumptions.json is missing"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return f"assumptions.json is invalid: {exc}"
+    if payload.get("version") != 1 or not isinstance(payload.get("assumptions"), list):
+        return "assumptions.json needs version=1 and an assumptions list"
+    required = {"id", "material", "source_location", "source_basis", "alternatives", "selected", "affected_mechanics"}
+    for index, item in enumerate(payload["assumptions"]):
+        if not isinstance(item, dict) or not required <= item.keys():
+            return f"assumptions[{index}] is missing required fields"
+        if item["material"] is not True or item["source_basis"] not in {"ambiguous", "missing", "contradictory"}:
+            return f"assumptions[{index}] has invalid material/source_basis"
+        if not isinstance(item["alternatives"], list) or len(item["alternatives"]) < 2:
+            return f"assumptions[{index}] needs at least two alternatives"
+        if not isinstance(item["affected_mechanics"], list) or not item["affected_mechanics"]:
+            return f"assumptions[{index}] needs affected_mechanics"
+    return None
+
+
+def _agentic_gate(
+    workspace: Path, *, require_coverage: bool, require_assumptions: bool = False
+) -> tuple[bool, str]:
     implementation = workspace / "implementation.py"
     if not implementation.is_file() or not implementation.read_text(encoding="utf-8", errors="replace").strip():
         return False, "implementation.py is missing or empty"
     coverage = workspace / "rule_coverage.md"
     if require_coverage and (not coverage.is_file() or not coverage.read_text(encoding="utf-8", errors="replace").strip()):
         return False, "rule_coverage.md is missing or empty"
+    if require_assumptions:
+        error = _validate_assumptions(workspace / "assumptions.json")
+        if error:
+            return False, error
     sections = []
     passed = True
     for command in (
@@ -145,7 +177,8 @@ def run_implementation(stem: str, source: Path, protocol: str) -> Path:
         shutil.copy2(REPO_ROOT / "generation" / "agentic_self_check.py", self_check)
         self_check_hash = sha256(self_check)
         images = render_pdf(local_source, workspace) if local_source.suffix == ".pdf" else []
-        require_coverage = protocol == "agentic-v2.1"
+        require_coverage = protocol in {"agentic-v2.1", "agentic-v2.2"}
+        require_assumptions = protocol == "agentic-v2.2"
         prompt = implementation_prompt(local_source.name, protocol)
         (OUTPUTS / f"{stem}_generation_prompt.md").write_text(prompt, encoding="utf-8")
 
@@ -160,15 +193,19 @@ def run_implementation(stem: str, source: Path, protocol: str) -> Path:
             response_path = OUTPUTS / (f"{stem}.md" if attempt == 0 else f"{stem}_{label}.md")
             events_path = OUTPUTS / f"{stem}_{label}_events.jsonl"
             usage_path = OUTPUTS / f"{stem}_{label}_usage.json"
-            coverage_instruction = (
-                "Create or update `rule_coverage.md` by auditing every supplied rulebook section and named rule/card/combination against the code."
-                if require_coverage else ""
+            artifact_instruction = " ".join(
+                part for part in (
+                    "Create or update `rule_coverage.md` by auditing every supplied rulebook section and named rule/card/combination against the code."
+                    if require_coverage else "",
+                    "Create or update schema-valid `assumptions.json` with only material source assumptions."
+                    if require_assumptions else "",
+                ) if part
             )
             call_prompt = prompt if attempt == 0 else f"""Continue the same isolated implementation task. Inspect and repair `implementation.py` using only the supplied rulebook and interface contract. Do not use outside game knowledge. Do not change `agentic_self_check.py`.
 
 {INTERFACE_CONTRACT}
 
-{coverage_instruction}
+{artifact_instruction}
 
 The evaluator-neutral independent gate reported:
 
@@ -203,7 +240,11 @@ Return only assumptions, files changed, and exact validation outcomes.
                 gate_ok = False
                 gate_output = "agent modified agentic_self_check.py; original restored"
             else:
-                gate_ok, gate_output = _agentic_gate(workspace, require_coverage=require_coverage)
+                gate_ok, gate_output = _agentic_gate(
+                    workspace,
+                    require_coverage=require_coverage,
+                    require_assumptions=require_assumptions,
+                )
             ran_self_check = any("agentic_self_check.py" in command for command in all_commands)
             call_records.append(
                 {
@@ -226,6 +267,7 @@ Return only assumptions, files changed, and exact validation outcomes.
             "reasoning_effort": EFFORT,
             "implementation_file": "implementation.py",
             "rule_coverage_file": "rule_coverage.md" if require_coverage else None,
+            "assumptions_file": "assumptions.json" if require_assumptions else None,
             "self_check_sha256": self_check_hash,
             "repair_count": len(call_records) - 1,
             "agent_ran_self_check": any("agentic_self_check.py" in command for command in all_commands),
@@ -241,6 +283,8 @@ Return only assumptions, files changed, and exact validation outcomes.
         shutil.copy2(workspace / "implementation.py", code_path)
         if require_coverage:
             shutil.copy2(workspace / "rule_coverage.md", OUTPUTS / f"{stem}_rule_coverage.md")
+        if require_assumptions:
+            shutil.copy2(workspace / "assumptions.json", OUTPUTS / f"{stem}_assumptions.json")
         return code_path
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
@@ -367,7 +411,7 @@ def run_stem(stem: str, source: Path, protocol: str) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stem", choices=STEMS, required=True)
-    parser.add_argument("--protocol", choices=PROTOCOLS, default="agentic-v2.1")
+    parser.add_argument("--protocol", choices=PROTOCOLS, default="agentic-v2.2")
     args = parser.parse_args()
 
     WORKSPACES.mkdir(exist_ok=True)
