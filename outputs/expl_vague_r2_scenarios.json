@@ -5,29 +5,29 @@
   "suite_sha256": "8a297623f439c5916702f9d8c18c61c74dc09c8f628667bc448b81a70e8e58c7",
   "adapter": "checks/scenario_adapters/expl.py",
   "adapter_sha256": "51b040477cf752dfaa56c9972c8f1c3e7332f6926ec8c10b908465e879c47d69",
-  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_error_r2.py",
-  "code_sha256": "d28d24176cc7559b5e83ee2717ccd5e093303bd2ffc63bc99b9b6ed14713ed32",
+  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_vague_r2.py",
+  "code_sha256": "e51b6258fd6d4bdfa729dca55b048b880c573bb17b8fdf1f322577c420c26c5b",
   "counts": {
-    "PASS": 10,
-    "FAIL": 6,
+    "PASS": 2,
+    "FAIL": 0,
     "CRASH": 0,
     "UNREACHED": 0,
-    "UNTESTABLE": 1
+    "UNTESTABLE": 15
   },
-  "evaluated": 16,
+  "evaluated": 2,
   "total": 17,
-  "score": 0.625,
-  "coverage": 0.9411764705882353,
+  "score": 1.0,
+  "coverage": 0.11764705882352941,
   "basis_scores": {
     "clear": {
-      "passed": 7,
-      "evaluated": 9,
-      "score": 0.7777777777777778
+      "passed": 2,
+      "evaluated": 2,
+      "score": 1.0
     },
     "human_decision": {
-      "passed": 3,
-      "evaluated": 7,
-      "score": 0.42857142857142855
+      "passed": 0,
+      "evaluated": 0,
+      "score": null
     }
   },
   "results": [
@@ -51,8 +51,8 @@
     },
     {
       "id": "EXPL-R03-attack-gives-next-player-two-turns",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "ATK-01"
@@ -60,8 +60,8 @@
     },
     {
       "id": "EXPL-R04-two-skips-consume-two-owed-turns",
-      "status": "FAIL",
-      "message": "step 1: current_player: expected 0, got 1",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "SKIP-02"
@@ -69,8 +69,8 @@
     },
     {
       "id": "EXPL-R05-preview-keeps-current-turn",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -79,8 +79,8 @@
     },
     {
       "id": "EXPL-R06-shuffle-keeps-current-turn",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -89,8 +89,8 @@
     },
     {
       "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -99,8 +99,8 @@
     },
     {
       "id": "EXPL-R08-last-survivor-wins",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "TERM-01",
@@ -109,8 +109,8 @@
     },
     {
       "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "ATK-02"
@@ -118,8 +118,8 @@
     },
     {
       "id": "EXPL-R10-defuse-is-mandatory-when-held",
-      "status": "FAIL",
-      "message": "step 1: forbidden legal action names ['explode:voluntarily']",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-01"
@@ -127,8 +127,8 @@
     },
     {
       "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-04"
@@ -136,8 +136,8 @@
     },
     {
       "id": "EXPL-R12-five-card-combo-may-retrieve-component",
-      "status": "FAIL",
-      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['draw', 'play:Blick in die Zukunft', 'play:Hops!', 'play:Angriff', 'play:Mischen', 'play:Wunsch->player:1']",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "clear",
       "fact_ids": [
         "FIVE-01"
@@ -145,8 +145,8 @@
     },
     {
       "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
-      "status": "FAIL",
-      "message": "step 1: hand_count[0][kitten]: expected 1, got 0",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "FIVE-01",
@@ -155,8 +155,8 @@
     },
     {
       "id": "EXPL-R14-favor-cannot-target-empty-player",
-      "status": "FAIL",
-      "message": "forbidden semantic legal action names ['play:Wunsch->player:1']",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "FAV-01"
@@ -164,8 +164,8 @@
     },
     {
       "id": "EXPL-R15-pair-cannot-target-empty-player",
-      "status": "FAIL",
-      "message": "forbidden semantic legal action names ['pair:Hops!->player:1']",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "PAIR-01"
@@ -173,8 +173,8 @@
     },
     {
       "id": "EXPL-R16-triple-may-request-held-kitten",
-      "status": "PASS",
-      "message": "",
+      "status": "UNTESTABLE",
+      "message": "state has none of ('turns_left', 'turns_remaining', 'turn_debt')",
       "basis": "human_decision",
       "fact_ids": [
         "TRI-01",
