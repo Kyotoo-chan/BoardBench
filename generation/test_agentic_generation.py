@@ -6,7 +6,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from generation.run_expl_variants import _agentic_gate, _event_commands
+from generation.prepare_expl_variants import clarified_variant
+from generation.run_expl_variants import SOURCE_FOR_STEM, _agentic_gate, _event_commands
 
 
 VALID_IMPLEMENTATION = '''
@@ -33,6 +34,13 @@ class Game:
 
 
 class AgenticGenerationTests(unittest.TestCase):
+    def test_clarified_condition_is_explicit_and_routed(self):
+        clarified = clarified_variant("original")
+        self.assertIn("schuldet danach genau zwei", clarified)
+        self.assertIn("auch „Exploding Kitten“", clarified)
+        self.assertIn("fünf gerade ausgespielten Komponenten", clarified)
+        self.assertEqual(SOURCE_FOR_STEM["expl_clarified_r1"], "expl_clarified")
+
     def workspace(self, implementation: str):
         temporary = tempfile.TemporaryDirectory()
         path = Path(temporary.name)

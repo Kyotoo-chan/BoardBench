@@ -54,6 +54,8 @@ The exact transformations are recorded before inspecting generated implementatio
 
 A second paired series uses stems `<stem>_r2` and frozen generation protocol `agentic-v2` for all six conditions. The original six commits remain pilots; r2 artifacts are stored in experiments 07–12 without replacing them. Paired analysis uses one common post-hoc evaluator version and remains diagnostic because each protocol/condition cell still has only one implementation.
 
+A separate `expl_clarified_r1` condition uses the faithful TXT plus a visibly labelled normative appendix containing the already approved interpretations in natural rule language, without scenario IDs, fixtures, expected test traces, or repository checks. It uses `agentic-v2.1`, including `rule_coverage.md`. This tests whether remaining failures persist after source ambiguity is removed. It is an implementation-specification condition, not an original-rulebook condition, and must be compared primarily with faithful TXT under the same file format.
+
 ## Evaluation reference
 
 All six implementations are evaluated against the same frozen canonical rule facts and cited scenarios derived from the unchanged original PDF. This allows omissions, errors, and vague formulations to be detected as deviations from the canonical rules rather than accepted as their own ground truth.

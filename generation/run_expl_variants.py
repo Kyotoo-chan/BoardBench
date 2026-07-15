@@ -24,8 +24,9 @@ from generation.codex_native import run_codex
 MODEL = "gpt-5.6-sol"
 EFFORT = "medium"
 BASE_STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague")
-STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS)
+STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS) + ("expl_clarified_r1",)
 SOURCE_FOR_STEM = {stem: stem.removesuffix("_r2") for stem in STEMS}
+SOURCE_FOR_STEM["expl_clarified_r1"] = "expl_clarified"
 PROTOCOLS = ("agentic-v2", "agentic-v2.1")
 CANONICAL_HASH = "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
 OUTPUTS = REPO_ROOT / "outputs"

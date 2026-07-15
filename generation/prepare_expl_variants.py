@@ -130,6 +130,37 @@ def error_variant(text: str) -> str:
     return text
 
 
+def clarified_variant(text: str) -> str:
+    return text.rstrip() + """
+
+VERBINDLICHE PRÄZISIERUNGEN FÜR DIESE EXPERIMENTELLE FASSUNG
+
+Die folgenden Sätze lösen Mehrdeutigkeiten der vorstehenden Anleitung auf. Sie sind verbindliche Regeln dieser Fassung:
+
+1. Nach einer normalen Aktionskarte bleibt derselbe Spieler am Zug. Ein einzelner Zug endet nur durch Ziehen, Hops!, Angriff, Entschärfung nach einem gezogenen Exploding Kitten oder Eliminierung.
+2. Angriff beendet den aktuellen Zug ohne Ziehen. Der nächste lebende Spieler schuldet danach genau zwei einzelne Züge.
+3. Spielt ein angegriffener Spieler selbst Angriff, verfallen seine noch offenen Züge. Der darauffolgende lebende Spieler schuldet genau zwei Züge; offene Zugschulden werden nicht addiert.
+4. Hops! beendet genau einen einzelnen geschuldeten Zug ohne Ziehen. Bei zwei offenen Zügen bleibt nach einem Hops! derselbe Spieler mit einem offenen Zug am Zug. Zwei Hops! beenden beide Züge.
+5. Wird ein angegriffener Spieler eliminiert, verfallen seine übrigen offenen Züge.
+6. Wer ein Exploding Kitten vom Spielstapel zieht und eine Entschärfung besitzt, muss genau eine Entschärfung benutzen. Freiwilliges Explodieren ist dann nicht erlaubt.
+7. Die benutzte Entschärfung kommt auf den Ablagestapel. Das Exploding Kitten wird geheim an eine vom Spieler gewählte Position zurückgelegt; alle anderen Karten behalten ihre relative Reihenfolge.
+8. Entschärfen beendet genau den aktuellen einzelnen Zug. Weitere durch Angriff geschuldete Züge bleiben bestehen.
+9. Blick in die Zukunft zeigt dem aktiven Spieler privat die obersten drei Karten, ohne sie umzuordnen. Liegen weniger als drei Karten im Stapel, werden alle verbleibenden Karten gezeigt.
+10. Mischen verändert nur die Reihenfolge des Spielstapels und beendet den aktuellen Zug nicht.
+11. Wunsch darf nur einen lebenden Mitspieler mit mindestens einer Handkarte als Ziel haben. Dieser Zielspieler wählt selbst genau eine seiner Karten und gibt sie dem aktiven Spieler.
+12. Ein Pärchen besteht aus zwei Karten mit demselben Titel. Es darf nur einen lebenden Mitspieler mit mindestens einer Handkarte als Ziel haben und stiehlt genau eine zufällig ausgewählte Handkarte.
+13. Ein Drilling besteht aus drei Karten mit demselben Titel. Der aktive Spieler nennt einen beliebigen Kartentitel, ausdrücklich auch „Exploding Kitten“. Besitzt das Ziel mindestens eine Karte dieses Titels, muss es eine davon abgeben; andernfalls geschieht nichts.
+14. Ein Fünfling besteht aus genau fünf Karten mit fünf verschiedenen Titeln. Zuerst werden alle fünf Komponenten auf den Ablagestapel gelegt. Danach wählt der aktive Spieler eine beliebige Karte, die sich nun im Ablagestapel befindet. Deshalb darf er auch eine der fünf gerade ausgespielten Komponenten zurücknehmen.
+15. Ein Exploding Kitten darf mit dem Fünfling aus dem Ablagestapel genommen werden. Das ist kein Ziehen vom Spielstapel: Es löst keine Explosion aus und bleibt auf der Hand.
+16. Karten, die als Pärchen, Drilling oder Fünfling verwendet werden, führen ihre aufgedruckte Einzelwirkung nicht aus.
+17. NÖ! kann jede gerade angekündigte Karte oder Kombination außer Exploding Kitten und Entschärfung aufheben. Ein weiteres NÖ! hebt das vorherige NÖ! auf; jedes weitere NÖ! wechselt erneut zwischen aufgehoben und wirksam. Alle dabei ausgespielten Karten bleiben im Ablagestapel. Wird eine Aktion aufgehoben, bleibt ihr ursprünglicher Spieler am Zug.
+18. Für eine rundenbasierte Umsetzung erhalten lebende Spieler im Uhrzeigersinn Gelegenheit, auf eine angekündigte Aktion mit NÖ! zu reagieren oder zu passen. Nach einer vollständigen Runde aufeinanderfolgender Pässe wird der aktuelle NÖ!-Stand ausgewertet.
+19. Das Spiel endet sofort, sobald genau ein Spieler lebt. Dieser Spieler gewinnt; alle ausgeschiedenen Spieler verlieren.
+20. Beim Aufbau werden vier Exploding Kittens und sechs Entschärfungen zunächst beiseitegelegt. Jeder Spieler erhält sieben verdeckte Karten und zusätzlich genau eine Entschärfung. Danach werden genau Spielerzahl minus eins Exploding Kittens eingemischt. Bei zwei Spielern kommen genau zwei weitere Entschärfungen in den Stapel; bei drei bis fünf Spielern alle nach den Starthänden übrigen Entschärfungen.
+21. Handkarten sind nur ihrem Besitzer bekannt. Der Spielstapel ist verdeckt. Zufälliges Stehlen und Mischen müssen über einen reproduzierbar initialisierbaren Zufallszahlengenerator erfolgen; die Anleitung schreibt keine besondere Verteilung jenseits einer normalen zufälligen Auswahl beziehungsweise Mischung vor.
+"""
+
+
 def vague_variant(text: str) -> str:
     text = replace_once(
         text,
@@ -188,18 +219,23 @@ def main() -> int:
     shutil.copy2(SOURCE, canonical)
 
     faithful_path = VARIANT_DIR / "expl_txt.txt"
-    subprocess.run(
-        ["pdftotext", "-enc", "UTF-8", "-raw", str(SOURCE), str(faithful_path)],
-        check=True,
-    )
-    faithful = faithful_path.read_text(encoding="utf-8").replace("\r\n", "\n")
-    faithful_path.write_text(faithful, encoding="utf-8")
+    if not faithful_path.exists():
+        subprocess.run(
+            ["pdftotext", "-enc", "UTF-8", "-raw", str(SOURCE), str(faithful_path)],
+            check=True,
+        )
+        faithful_path.write_text(
+            faithful_path.read_text(encoding="utf-8").replace("\r\n", "\n"),
+            encoding="utf-8",
+        )
+    faithful = faithful_path.read_text(encoding="utf-8")
 
     variants = {
         "expl_anon": anonymize(faithful),
         "expl_omit": omission_variant(faithful),
         "expl_error": error_variant(faithful),
         "expl_vague": vague_variant(faithful),
+        "expl_clarified": clarified_variant(faithful),
     }
     for stem, content in variants.items():
         (VARIANT_DIR / f"{stem}.txt").write_text(content, encoding="utf-8")
@@ -210,7 +246,7 @@ def main() -> int:
         **{stem: VARIANT_DIR / f"{stem}.txt" for stem in variants},
     }
     manifest = {
-        "version": 1,
+        "version": 2,
         "canonical_sha256": sha256(canonical),
         "transformations_declared_before_generation": True,
         "variants": {
