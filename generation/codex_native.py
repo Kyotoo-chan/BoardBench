@@ -93,6 +93,10 @@ def fetch_codex_quota() -> dict[str, object] | None:
     return result or None
 
 
+def default_effort(mode: str) -> str:
+    return "low" if mode == "agentic" else "medium"
+
+
 def run_codex(
     *,
     prompt: str,
@@ -101,7 +105,7 @@ def run_codex(
     events_path: Path,
     usage_path: Path,
     model: str = "gpt-5.6-sol",
-    effort: str = "medium",
+    effort: str | None = None,
     mode: str = "agentic",
     timeout: int = 4000,
     image_paths: list[Path] | None = None,
@@ -111,6 +115,7 @@ def run_codex(
     events_path.parent.mkdir(parents=True, exist_ok=True)
     usage_path.parent.mkdir(parents=True, exist_ok=True)
 
+    effort = effort or default_effort(mode)
     command = build_llm_command(
         "codex",
         model,
@@ -181,7 +186,7 @@ def main() -> int:
     parser.add_argument("--events", type=Path, required=True)
     parser.add_argument("--usage", type=Path, required=True)
     parser.add_argument("--model", default="gpt-5.6-sol")
-    parser.add_argument("--effort", default="medium")
+    parser.add_argument("--effort", help="default: low for generation, medium for judging")
     parser.add_argument("--mode", choices=("agentic", "judge"), default="agentic")
     parser.add_argument("--timeout", type=int, default=4000)
     parser.add_argument("--image", type=Path, action="append", default=[])

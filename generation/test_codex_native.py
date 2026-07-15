@@ -1,9 +1,13 @@
 import unittest
 
-from generation.codex_native import parse_event_usage
+from generation.codex_native import default_effort, parse_event_usage
 
 
 class CodexNativeTest(unittest.TestCase):
+    def test_mode_defaults(self) -> None:
+        self.assertEqual(default_effort("agentic"), "low")
+        self.assertEqual(default_effort("judge"), "medium")
+
     def test_parse_event_usage_uses_final_cumulative_record(self) -> None:
         raw = "\n".join(
             [

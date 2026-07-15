@@ -81,6 +81,10 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         personas[label] = {"path": str(path), "sha256": sha256(path)}
 
     totals = usage.get("token_totals", {})
+    calls = usage.get("calls", [])
+    judge_calls = [call for call in calls if call.get("mode") == "judge"]
+    judge_models = sorted({str(call.get("model")) for call in judge_calls if call.get("model")})
+    judge_efforts = sorted({str(call.get("reasoning_effort")) for call in judge_calls if call.get("reasoning_effort")})
     return {
         "stem": str(item["stem"]),
         "protocol": item.get("protocol", evidence.get("protocol")),
@@ -102,6 +106,8 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
             "results": scenarios.get("results", []),
         },
         "neutral_judges": [parse_judge(path) for path in reviews if path],
+        "judge_model": item.get("judge_model", judge_models[0] if len(judge_models) == 1 else None),
+        "judge_thinking": item.get("judge_thinking", judge_efforts[0] if len(judge_efforts) == 1 else None),
         "personas": personas,
         "assumptions": assumptions,
         "resources": {
@@ -176,7 +182,11 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
             "coverage": summary(values(("scenario", "coverage"))),
         },
         "review_evidence": {
-            "neutral_judges": summary([score for run in runs for score in run["neutral_judges"]]),
+            "neutral_judges": {
+                **summary([score for run in runs for score in run["neutral_judges"]]),
+                "models": sorted({str(run["judge_model"]) for run in runs if run["judge_model"]}),
+                "thinking": sorted({str(run["judge_thinking"]) for run in runs if run["judge_thinking"]}),
+            },
             "personas": {run["stem"]: run["personas"] for run in runs},
         },
         "assumption_evidence": {
@@ -217,6 +227,8 @@ def markdown(result: dict[str, Any]) -> str:
         f"- Format: {identity.get('source_format', 'unknown')}",
         f"- SHA-256: `{identity.get('source_sha256', 'unknown')}`",
         f"- Runs: {result['reproducibility']['run_count']}",
+        f"- Generation: {', '.join(result['reproducibility']['models'])} · thinking {', '.join(sorted({str(run['thinking']) for run in result['runs']}))}",
+        f"- Neutral judges: {', '.join(review.get('models', [])) or 'unknown'} · thinking {', '.join(review.get('thinking', [])) or 'unknown'}",
         "",
         "## Evidence",
         "",

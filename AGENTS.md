@@ -68,7 +68,7 @@ Do not run a full evaluation unless the user asks for it.
 
 ## Repository and artifacts
 
-Keep the repository simple: `inputs/`, `prompts/`, `outputs/`, `checks/`, `generation/`, `docs/`, and `plots/`.
+Keep the repository simple: `inputs/`, `prompts/`, `outputs/`, `checks/`, `generation/`, `docs/`, and `results/`. Store score data under `results/scores/<game>/<run>/` and images only under `results/plots/<game>/<run>/`; plotting code belongs in `generation/`.
 
 New agentic run stem:
 

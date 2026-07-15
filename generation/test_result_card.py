@@ -6,6 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from generation.plot_result import plot
 from generation.result_card import aggregate, markdown
 
 
@@ -52,6 +53,10 @@ class ResultCardTests(unittest.TestCase):
             self.assertIsNone(result["monetary_cost"]["exact_total"])
             self.assertNotIn("overall_correctness_score", result)
             self.assertIn("Clear rules", markdown(result))
+
+    def test_plot_rejects_more_than_two_conditions(self):
+        with self.assertRaisesRegex(ValueError, "one or two"):
+            plot([{}, {}, {}], Path("unused.png"))
 
     def test_mismatched_evaluators_are_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:

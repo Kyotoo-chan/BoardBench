@@ -22,7 +22,8 @@ if str(REPO_ROOT) not in sys.path:
 from generation.codex_native import run_codex
 
 MODEL = "gpt-5.6-sol"
-EFFORT = "medium"
+GENERATION_EFFORT = "low"
+JUDGE_EFFORT = "medium"
 BASE_STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague")
 STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS) + ("expl_clarified_r1",)
 SOURCE_FOR_STEM = {stem: stem.removesuffix("_r2") for stem in STEMS}
@@ -229,7 +230,7 @@ Return only assumptions, files changed, and exact validation outcomes.
                 events_path=events_path,
                 usage_path=usage_path,
                 model=MODEL,
-                effort=EFFORT,
+                effort=GENERATION_EFFORT,
                 mode="agentic",
                 image_paths=images,
             )
@@ -264,7 +265,7 @@ Return only assumptions, files changed, and exact validation outcomes.
             "stem": stem,
             "protocol": protocol,
             "model": MODEL,
-            "reasoning_effort": EFFORT,
+            "reasoning_effort": GENERATION_EFFORT,
             "implementation_file": "implementation.py",
             "rule_coverage_file": "rule_coverage.md" if require_coverage else None,
             "assumptions_file": "assumptions.json" if require_assumptions else None,
@@ -341,7 +342,7 @@ def run_one_judge(stem: str, code_path: Path, index: int) -> None:
             events_path=events,
             usage_path=usage,
             model=MODEL,
-            effort=EFFORT,
+            effort=JUDGE_EFFORT,
             mode="judge",
             image_paths=images,
         )
@@ -367,7 +368,8 @@ def aggregate_usage(stem: str) -> None:
         "stem": stem,
         "protocol": protocol,
         "model": MODEL,
-        "reasoning_effort": EFFORT,
+        "generation_reasoning_effort": GENERATION_EFFORT,
+        "judge_reasoning_effort": JUDGE_EFFORT,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "call_count": len(calls),
         "token_totals": token_totals,

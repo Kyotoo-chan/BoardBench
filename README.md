@@ -4,6 +4,8 @@ BoardBench turns one board-game rulebook into a Python environment and evaluates
 
 ## Workflow
 
+Generated evidence is stored under `results/scores/<game>/<run>/`; `results/plots/<game>/<run>/` contains images only. Native Codex defaults are `gpt-5.6-sol:low` for implementation generation and `gpt-5.6-sol:medium` for judges.
+
 1. Put one rulebook at `inputs/game_rules.pdf` or `.txt`.
 2. `/bbedge game=<slug>` — extract cited facts, resolve ambiguities, approve scenarios.
 3. `/bbimpl game=<slug>` — generate one implementation in an isolated workspace.

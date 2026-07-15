@@ -222,7 +222,8 @@ Vorher müssen aber Invarianten und Regelszenarien existieren, gegen die ein gef
 - `prompts/`: reproduzierbare Rollen und Bedingungen,
 - `outputs/` plus Git-Historie: Rohartefakte und Experimentbelege,
 - `checks/`: kleine ausführbare Evaluationsschichten,
-- `plots/`: gepinnte, von `outputs/` entkoppelte Pilotdaten,
+- `results/scores/`: gepinnte, von `outputs/` entkoppelte Ergebnisdaten,
+- `results/plots/`: ausschließlich erzeugte Abbildungen,
 - `evaluation.ipynb`: transparenter agentischer Manual-Fallback,
 - Meeting- und Entscheidungsdokumente: Nachweis, wie Methodik entstanden ist.
 
@@ -260,7 +261,7 @@ Damit wird erstmals messbar, ob BoardBench die Fehler erkennt, die es zu erkenne
 
 Ausgeführt im Conda-Environment `boardbench`:
 
-- Python-Compilecheck für `checks/`, `generation/` und `plots/`,
+- Python-Compilecheck für `checks/` und `generation/`,
 - JSON- und Python-Syntaxvalidierung des verbleibenden agentischen Notebooks,
 - temporärer Dimensionsplot-Prototyp geprüft und anschließend zugunsten der Workflow-Priorität zurückgestellt,
 - Havannah-Szenarios gegen alle sechs historischen Implementierungen: jeweils `5/5`,

@@ -9,6 +9,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INPUTS_DIR = REPO_ROOT / "inputs"
 OUTPUTS_ROOT = REPO_ROOT / "outputs"
+RESULTS_ROOT = REPO_ROOT / "results"
+SCORES_ROOT = RESULTS_ROOT / "scores"
+PLOTS_ROOT = RESULTS_ROOT / "plots"
 GAMES_DIR = INPUTS_DIR / "games"
 WORKSPACES_DIR = REPO_ROOT / "generation_workspaces"
 

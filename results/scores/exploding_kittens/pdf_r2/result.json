@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "pdf_r2",
+    "source_path": "inputs/games/expl/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "4b97522eba355bf135f97f14a6bee94d6fe0f2133f5f55585d19695b2ae2daab",
+    "adapter_sha256": "47684c01d4805c748fb128e23c5c457c4465d5d4299d0e7209fbef130f44873e",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2"
+    ]
+  },
+  "source_diagnosis": {
+    "note": "Historical diagnostic; protocol/evaluator development is post-hoc."
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        0.8333333333333334
+      ],
+      "mean": 0.8333333333333334,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.8
+      ],
+      "mean": 0.8,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.76,
+        0.78,
+        0.74
+      ],
+      "mean": 0.76,
+      "sample_sd": 0.020000000000000018,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "expl_pdf_r2": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 0,
+    "interpretation_agreement": {},
+    "items": []
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        770.376
+      ],
+      "mean": 770.376,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        651429.0
+      ],
+      "mean": 651429.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        504832.0
+      ],
+      "mean": 504832.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        24531.0
+      ],
+      "mean": 24531.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        12649.0
+      ],
+      "mean": 12649.0,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        386.0
+      ],
+      "mean": 386.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "values": [
+      null
+    ],
+    "exact_total": null
+  },
+  "headline": "Original PDF r2: technically executable; 18/22 current scenarios pass, with four rule-sensitive gaps.",
+  "runs": [
+    {
+      "stem": "expl_pdf_r2",
+      "protocol": "agentic-v2",
+      "model": "gpt-5.6-sol",
+      "thinking": "medium",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "expl-v2.8",
+        "suite_sha256": "4b97522eba355bf135f97f14a6bee94d6fe0f2133f5f55585d19695b2ae2daab",
+        "adapter_sha256": "47684c01d4805c748fb128e23c5c457c4465d5d4299d0e7209fbef130f44873e",
+        "counts": {
+          "PASS": 18,
+          "FAIL": 4,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 10,
+          "evaluated": 12,
+          "score": 0.8333333333333334
+        },
+        "human_decision": {
+          "passed": 8,
+          "evaluated": 10,
+          "score": 0.8
+        },
+        "results": [
+          {
+            "id": "EXPL-R01-two-player-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03"
+            ]
+          },
+          {
+            "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-04"
+            ]
+          },
+          {
+            "id": "EXPL-R03-attack-gives-next-player-two-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ATK-01"
+            ]
+          },
+          {
+            "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SKIP-02"
+            ]
+          },
+          {
+            "id": "EXPL-R05-preview-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FUT-01"
+            ]
+          },
+          {
+            "id": "EXPL-R06-shuffle-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R08-last-survivor-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TERM-01",
+              "TERM-02"
+            ]
+          },
+          {
+            "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ATK-02"
+            ]
+          },
+          {
+            "id": "EXPL-R10-defuse-is-mandatory-when-held",
+            "status": "FAIL",
+            "message": "step 1: forbidden legal action names ['Exploding Kitten:explodieren']",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-04"
+            ]
+          },
+          {
+            "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['passen und ziehen', 'ziehen', 'spielen:Angriff', 'spielen:Hops!', 'spielen:Mischen', 'spielen:Blick in die Zukunft']",
+            "basis": "clear",
+            "fact_ids": [
+              "FIVE-01"
+            ]
+          },
+          {
+            "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R14-favor-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R15-pair-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R16-triple-may-request-held-kitten",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "TRI-01",
+              "TRI-02",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R17-cat-pair-action-is-executable",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R18-valid-setup-has-one-kitten-per-future-elimination",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-04",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+            "status": "FAIL",
+            "message": "step 1: forbidden legal action names ['Exploding Kitten:explodieren']",
+            "basis": "clear",
+            "fact_ids": [
+              "DEF-02",
+              "DEF-03",
+              "DEF-04",
+              "DEF-05",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R20-shuffle-invalidates-preview",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FUT-01",
+              "FUT-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R21-five-card-retrieval-announced-before-nope",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "NOPE-06"
+            ]
+          },
+          {
+            "id": "EXPL-R22-restored-action-with-empty-target-is-noop",
+            "status": "FAIL",
+            "message": "step 1: current_player: expected 0, got 1",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01",
+              "NOPE-02",
+              "NOPE-04",
+              "NOPE-07"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.76,
+        0.78,
+        0.74
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 770.376,
+        "input_tokens": 651429,
+        "cached_input_tokens": 504832,
+        "output_tokens": 24531,
+        "reasoning_tokens": 12649,
+        "money": null,
+        "code_lines": 386
+      },
+      "hashes": {
+        "agentic_evidence": "7e4d6dfe5c26b3f60a9cc7ead7d214d6b80e387de65d328996eb1dbe4dbb263b",
+        "checks": "9a9564893a2e334b8338cd069597b75e13640e1099601876e83c4fea01787b06",
+        "scenarios": "23cf235282f137d81b19b123142104f8dad6d1db7055c23603ea6a99a13fee6b",
+        "usage": "71f7e8b8433d4fa15828278b0af30e07bff8bc257e72b7140b73596adb5282da",
+        "code": "8ca6531a42da041a56005d05d33fa4ac72a8fe8c02a4114bf9ad5d88a1c23491"
+      }
+    }
+  ]
+}
