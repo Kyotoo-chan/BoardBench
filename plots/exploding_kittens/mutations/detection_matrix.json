@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rubric_version": "expl-v2.7",
+  "rubric_version": "expl-v2.8",
   "reference": "experiment 13 implementation from commit 17c7067",
   "synthetic_reinsertion_mutations": {
     "kitten-not-reinserted": {

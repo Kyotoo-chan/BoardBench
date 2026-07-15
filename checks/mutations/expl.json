@@ -1,7 +1,7 @@
 {
   "version": 1,
   "game": "expl",
-  "rubric_version": "expl-v2.7",
+  "rubric_version": "expl-v2.8",
   "mutations": [
     {"id": "attack-one-turn", "description": "Attack gives one instead of two turns", "scenarios": ["EXPL-R03-attack-gives-next-player-two-turns"], "expected_groups": ["scenarios"]},
     {"id": "attack-adds-debt", "description": "Chained Attack adds to remaining turns", "scenarios": ["EXPL-R09-chained-attack-replaces-debt-with-two"], "expected_groups": ["scenarios"]},

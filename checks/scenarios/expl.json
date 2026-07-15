@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "expl-v2.7",
+  "rubric_version": "expl-v2.8",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
@@ -573,11 +573,18 @@
       "steps": [
         {
           "action": {"contains_any": ["future", "blick in die zukunft", "vorschau", "preview"]},
-          "settle": [{
-            "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
-            "choose_contains_any": ["pass"],
-            "max_steps": 10
-          }]
+          "settle": [
+            {
+              "while_all_contains_any": ["pass", "nope", "noe", "nö", "doch"],
+              "choose_contains_any": ["pass"],
+              "max_steps": 10
+            },
+            {
+              "while_all_contains_any": ["continue", "weiter", "close", "zurück", "zuruck"],
+              "choose_contains_any": ["continue", "weiter", "close", "zurück", "zuruck"],
+              "max_steps": 1
+            }
+          ]
         },
         {
           "action": {"contains_any": ["shuffle", "mischen", "neuordnen", "reorder"]},
