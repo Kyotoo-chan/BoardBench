@@ -1,0 +1,45 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "mode": "judge",
+  "started_at": "2026-07-15T19:35:55.963505+00:00",
+  "ended_at": "2026-07-15T19:39:35.238514+00:00",
+  "elapsed_seconds": 219.274,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 522091,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 74,
+      "reset_at": 1784666246,
+      "reset_after_seconds": 521871,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 224538,
+    "reasoning_output_tokens": 3911,
+    "output_tokens": 6075,
+    "cached_input_tokens": 184064
+  },
+  "provider_usage_records": [
+    {
+      "line": 30,
+      "path": "$.usage",
+      "input_tokens": 224538,
+      "cached_input_tokens": 184064,
+      "output_tokens": 6075,
+      "reasoning_output_tokens": 3911
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/clarified/raw/expl_clarified_current_persona_executable_systems_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/exploding_kittens/clarified/raw/expl_clarified_current_persona_executable_systems.md",
+  "image_paths": [],
+  "stderr": "2026-07-15T19:36:40.661655Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode; rg --files -g \"AGENTS.md\" -g \"canonical_rulefacts.md\" -g \"implementation.py\" -g \"*.pdf\" -g \"*.png\" -g \"*.jpg\" -g \"*.jpeg\"'` rejected: blocked by policy\n2026-07-15T19:36:43.673728Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n2026-07-15T19:37:09.774234Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command '$i=0; Get-Content -LiteralPath canonical_rulefacts.md | ForEach-Object { $i++; '\"'{0,5}: {1}' -f \"'$i, $_ }'` rejected: blocked by policy\n2026-07-15T19:37:09.774642Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command '$i=0; Get-Content -LiteralPath implementation.py | ForEach-Object { $i++; '\"'{0,5}: {1}' -f \"'$i, $_ }'` rejected: blocked by policy\n2026-07-15T19:37:09.775204Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command '$i=0; Get-Content -LiteralPath canonical_rulebook.txt | ForEach-Object { $i++; '\"'{0,5}: {1}' -f \"'$i, $_ }'` rejected: blocked by policy\n"
+}

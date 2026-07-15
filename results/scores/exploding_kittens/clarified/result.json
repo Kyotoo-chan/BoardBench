@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "clarified",
+    "source_path": "inputs/games/expl/variants/expl_clarified.txt",
+    "source_format": "txt",
+    "source_sha256": "6bca9d100d4fb665d5989f41eefe682f8a03f0faab001e2f08ed29911fc92c5d"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "6e522ad826a460ccab1f862f3f2e5649cead27551a3b2a883e3722d17b2c29e2",
+    "adapter_sha256": "9d4d6991f8aaa7adf2ccb21e598d3d8047c25e0dfd3cdcc88854946afd4c9dd5",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ]
+  },
+  "source_diagnosis": {
+    "summary": "Publisher text plus the current visible clarification appendix."
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.98,
+        0.99,
+        0.89
+      ],
+      "mean": 0.9533333333333334,
+      "sample_sd": 0.055075705472861,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "expl_clarified_current": {
+        "rule_fidelity": {
+          "path": "raw/expl_clarified_current_persona_rule_fidelity.md",
+          "sha256": "bd558d503fbe7e2406dfc0354c358e9c9124024cb2f6b5feacedb01f5b86db58"
+        },
+        "ambiguity": {
+          "path": "raw/expl_clarified_current_persona_ambiguity.md",
+          "sha256": "c08c52e7a4311d1fe8eabad80d1be8b901f505f15605d1bffd9c902ebb63e829"
+        },
+        "executable_systems": {
+          "path": "raw/expl_clarified_current_persona_executable_systems.md",
+          "sha256": "62e91d2d96668b0c69df06ba2724b6e30ebd915dc91e3b4974c591df94ccae23"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 2,
+    "interpretation_agreement": {
+      "Kartenübersicht: ‚katzen-karten 4 jeder art‘": {
+        "Der Stapel enthält fünf Arten zu je vier Karten. Die zwei gelieferten Titel bleiben erhalten; die drei fehlenden Titel werden ausdrücklich als ‚Katzen-Karte (unbenannte Art 3/4/5)‘ geführt und haben nur die für Katzen-Karten angegebene Kombinationsfunktion.": 1
+      },
+      "Präzisierungen 9 und 22 (Blick in die Zukunft / Wissen nach Mischen)": {
+        "Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Kartenübersicht: ‚katzen-karten 4 jeder art‘",
+        "source_basis": "missing",
+        "alternatives": [
+          "Es gibt nur die zwei im gelieferten Text benannten Arten Zombiekatze und Augenmampfende, obwohl dann die angegebene Gesamtzahl 56 und ein Aufbau mit fünf Spielern unmöglich sind.",
+          "Aus Gesamtzahl und ‚4 jeder Art‘ folgen fünf Arten; drei Titel fehlen im gelieferten Text."
+        ],
+        "selected": "Der Stapel enthält fünf Arten zu je vier Karten. Die zwei gelieferten Titel bleiben erhalten; die drei fehlenden Titel werden ausdrücklich als ‚Katzen-Karte (unbenannte Art 3/4/5)‘ geführt und haben nur die für Katzen-Karten angegebene Kombinationsfunktion.",
+        "affected_mechanics": [
+          "state_transition",
+          "legal_actions",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Präzisierungen 9 und 22 (Blick in die Zukunft / Wissen nach Mischen)",
+        "source_basis": "missing",
+        "alternatives": [
+          "Die private Vorschau bleibt nach sonstigen Stapeländerungen als historisches Wissen gespeichert.",
+          "Die private Vorschau wird nach jeder Stapeländerung oder beim Ende des Einzelzugs gelöscht."
+        ],
+        "selected": "Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht.",
+        "affected_mechanics": [
+          "private_information",
+          "state_transition"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        728.675
+      ],
+      "mean": 728.675,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        535084.0
+      ],
+      "mean": 535084.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        377856.0
+      ],
+      "mean": 377856.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        23546.0
+      ],
+      "mean": 23546.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        12583.0
+      ],
+      "mean": 12583.0,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        320.0
+      ],
+      "mean": 320.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "values": [
+      null
+    ],
+    "exact_total": null
+  },
+  "headline": "Clarified source: technically sound; all 22 deterministic scenarios pass.",
+  "runs": [
+    {
+      "stem": "expl_clarified_current",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "expl-current",
+        "suite_sha256": "6e522ad826a460ccab1f862f3f2e5649cead27551a3b2a883e3722d17b2c29e2",
+        "adapter_sha256": "9d4d6991f8aaa7adf2ccb21e598d3d8047c25e0dfd3cdcc88854946afd4c9dd5",
+        "counts": {
+          "PASS": 22,
+          "FAIL": 0,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 12,
+          "evaluated": 12,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 10,
+          "evaluated": 10,
+          "score": 1.0
+        },
+        "results": [
+          {
+            "id": "EXPL-R01-two-player-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03"
+            ]
+          },
+          {
+            "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-04"
+            ]
+          },
+          {
+            "id": "EXPL-R03-attack-gives-next-player-two-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ATK-01"
+            ]
+          },
+          {
+            "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SKIP-02"
+            ]
+          },
+          {
+            "id": "EXPL-R05-preview-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FUT-01"
+            ]
+          },
+          {
+            "id": "EXPL-R06-shuffle-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TURN-03",
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R08-last-survivor-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TERM-01",
+              "TERM-02"
+            ]
+          },
+          {
+            "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ATK-02"
+            ]
+          },
+          {
+            "id": "EXPL-R10-defuse-is-mandatory-when-held",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "DEF-04"
+            ]
+          },
+          {
+            "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "FIVE-01"
+            ]
+          },
+          {
+            "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R14-favor-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01"
+            ]
+          },
+          {
+            "id": "EXPL-R15-pair-cannot-target-empty-player",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R16-triple-may-request-held-kitten",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "TRI-01",
+              "TRI-02",
+              "FIVE-02"
+            ]
+          },
+          {
+            "id": "EXPL-R17-cat-pair-action-is-executable",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PAIR-01"
+            ]
+          },
+          {
+            "id": "EXPL-R18-valid-setup-has-one-kitten-per-future-elimination",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-04",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "DEF-02",
+              "DEF-03",
+              "DEF-05",
+              "SET-10"
+            ]
+          },
+          {
+            "id": "EXPL-R20-shuffle-invalidates-preview",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FUT-01",
+              "FUT-03",
+              "SHUF-01"
+            ]
+          },
+          {
+            "id": "EXPL-R21-five-card-retrieval-announced-before-nope",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FIVE-01",
+              "NOPE-06"
+            ]
+          },
+          {
+            "id": "EXPL-R22-restored-action-with-empty-target-is-noop",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "FAV-01",
+              "NOPE-02",
+              "NOPE-04",
+              "NOPE-07"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.98,
+        0.99,
+        0.89
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "raw/expl_clarified_current_persona_rule_fidelity.md",
+          "sha256": "bd558d503fbe7e2406dfc0354c358e9c9124024cb2f6b5feacedb01f5b86db58"
+        },
+        "ambiguity": {
+          "path": "raw/expl_clarified_current_persona_ambiguity.md",
+          "sha256": "c08c52e7a4311d1fe8eabad80d1be8b901f505f15605d1bffd9c902ebb63e829"
+        },
+        "executable_systems": {
+          "path": "raw/expl_clarified_current_persona_executable_systems.md",
+          "sha256": "62e91d2d96668b0c69df06ba2724b6e30ebd915dc91e3b4974c591df94ccae23"
+        }
+      },
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Kartenübersicht: ‚katzen-karten 4 jeder art‘",
+          "source_basis": "missing",
+          "alternatives": [
+            "Es gibt nur die zwei im gelieferten Text benannten Arten Zombiekatze und Augenmampfende, obwohl dann die angegebene Gesamtzahl 56 und ein Aufbau mit fünf Spielern unmöglich sind.",
+            "Aus Gesamtzahl und ‚4 jeder Art‘ folgen fünf Arten; drei Titel fehlen im gelieferten Text."
+          ],
+          "selected": "Der Stapel enthält fünf Arten zu je vier Karten. Die zwei gelieferten Titel bleiben erhalten; die drei fehlenden Titel werden ausdrücklich als ‚Katzen-Karte (unbenannte Art 3/4/5)‘ geführt und haben nur die für Katzen-Karten angegebene Kombinationsfunktion.",
+          "affected_mechanics": [
+            "state_transition",
+            "legal_actions",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Präzisierungen 9 und 22 (Blick in die Zukunft / Wissen nach Mischen)",
+          "source_basis": "missing",
+          "alternatives": [
+            "Die private Vorschau bleibt nach sonstigen Stapeländerungen als historisches Wissen gespeichert.",
+            "Die private Vorschau wird nach jeder Stapeländerung oder beim Ende des Einzelzugs gelöscht."
+          ],
+          "selected": "Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht.",
+          "affected_mechanics": [
+            "private_information",
+            "state_transition"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 728.675,
+        "input_tokens": 535084,
+        "cached_input_tokens": 377856,
+        "output_tokens": 23546,
+        "reasoning_tokens": 12583,
+        "money": null,
+        "code_lines": 320
+      },
+      "hashes": {
+        "agentic_evidence": "2a6c558faaa7ca6d15039de956b6ca476df8e96ec624efe6ba7cda8652bd9815",
+        "checks": "331802f01945f654f88e6ff5bc9709ec9183901d7431bbc65cee49ba264c66e1",
+        "scenarios": "47b11d82909d8c4c5c081d9cfe5da87eedea1f223a255f01ae9b324a52d00a44",
+        "usage": "2a125c4aa692408db5d232c5cdf83ee9190ffd5dc0122f3b38777f09176217ef",
+        "code": "d3d6430313798d17aca486d238a4e1c91cfef4df3b44431173aab96c2423ebb0"
+      }
+    }
+  ]
+}

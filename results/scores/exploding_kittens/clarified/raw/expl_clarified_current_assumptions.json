@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Kartenübersicht: ‚katzen-karten 4 jeder art‘",
+      "source_basis": "missing",
+      "alternatives": [
+        "Es gibt nur die zwei im gelieferten Text benannten Arten Zombiekatze und Augenmampfende, obwohl dann die angegebene Gesamtzahl 56 und ein Aufbau mit fünf Spielern unmöglich sind.",
+        "Aus Gesamtzahl und ‚4 jeder Art‘ folgen fünf Arten; drei Titel fehlen im gelieferten Text."
+      ],
+      "selected": "Der Stapel enthält fünf Arten zu je vier Karten. Die zwei gelieferten Titel bleiben erhalten; die drei fehlenden Titel werden ausdrücklich als ‚Katzen-Karte (unbenannte Art 3/4/5)‘ geführt und haben nur die für Katzen-Karten angegebene Kombinationsfunktion.",
+      "affected_mechanics": ["state_transition", "legal_actions", "private_information"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Präzisierungen 9 und 22 (Blick in die Zukunft / Wissen nach Mischen)",
+      "source_basis": "missing",
+      "alternatives": [
+        "Die private Vorschau bleibt nach sonstigen Stapeländerungen als historisches Wissen gespeichert.",
+        "Die private Vorschau wird nach jeder Stapeländerung oder beim Ende des Einzelzugs gelöscht."
+      ],
+      "selected": "Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht.",
+      "affected_mechanics": ["private_information", "state_transition"]
+    }
+  ]
+}

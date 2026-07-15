@@ -1,0 +1,38 @@
+{
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "clarified",
+    "source_path": "inputs/games/expl/variants/expl_clarified.txt",
+    "source_format": "txt"
+  },
+  "source_diagnosis": {
+    "summary": "Publisher text plus the current visible clarification appendix."
+  },
+  "headline": "Clarified source: technically sound; all 22 deterministic scenarios pass.",
+  "runs": [
+    {
+      "stem": "expl_clarified_current",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "agentic_evidence": "raw/expl_clarified_current_agentic_evidence.json",
+      "checks": "raw/expl_clarified_current_checks.txt",
+      "scenarios": "raw/expl_clarified_current_scenarios.json",
+      "usage": "raw/expl_clarified_current_usage.json",
+      "code": "raw/expl_clarified_current.py",
+      "assumptions": "raw/expl_clarified_current_assumptions.json",
+      "neutral_reviews": [
+        "raw/expl_clarified_current_judge_1.md",
+        "raw/expl_clarified_current_judge_2.md",
+        "raw/expl_clarified_current_judge_3.md"
+      ],
+      "personas": {
+        "rule_fidelity": "raw/expl_clarified_current_persona_rule_fidelity.md",
+        "ambiguity": "raw/expl_clarified_current_persona_ambiguity.md",
+        "executable_systems": "raw/expl_clarified_current_persona_executable_systems.md"
+      }
+    }
+  ]
+}
