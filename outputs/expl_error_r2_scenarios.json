@@ -5,8 +5,8 @@
   "suite_sha256": "8a297623f439c5916702f9d8c18c61c74dc09c8f628667bc448b81a70e8e58c7",
   "adapter": "checks/scenario_adapters/expl.py",
   "adapter_sha256": "51b040477cf752dfaa56c9972c8f1c3e7332f6926ec8c10b908465e879c47d69",
-  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_omit_r2.py",
-  "code_sha256": "2fafda1d7a4538ac6a5ae5c116337a3139700498c336ce7968675d7461b801a2",
+  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/expl_error_r2.py",
+  "code_sha256": "d28d24176cc7559b5e83ee2717ccd5e093303bd2ffc63bc99b9b6ed14713ed32",
   "counts": {
     "PASS": 10,
     "FAIL": 6,
@@ -20,14 +20,14 @@
   "coverage": 0.9411764705882353,
   "basis_scores": {
     "clear": {
-      "passed": 8,
+      "passed": 7,
       "evaluated": 9,
-      "score": 0.8888888888888888
+      "score": 0.7777777777777778
     },
     "human_decision": {
-      "passed": 2,
+      "passed": 3,
       "evaluated": 7,
-      "score": 0.2857142857142857
+      "score": 0.42857142857142855
     }
   },
   "results": [
@@ -60,8 +60,8 @@
     },
     {
       "id": "EXPL-R04-two-skips-consume-two-owed-turns",
-      "status": "PASS",
-      "message": "",
+      "status": "FAIL",
+      "message": "step 1: current_player: expected 0, got 1",
       "basis": "clear",
       "fact_ids": [
         "SKIP-02"
@@ -119,7 +119,7 @@
     {
       "id": "EXPL-R10-defuse-is-mandatory-when-held",
       "status": "FAIL",
-      "message": "step 1: forbidden legal action names ['exploding:explode']",
+      "message": "step 1: forbidden legal action names ['explode:voluntarily']",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-01"
@@ -137,7 +137,7 @@
     {
       "id": "EXPL-R12-five-card-combo-may-retrieve-component",
       "status": "FAIL",
-      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['draw', 'play:Blick in die Zukunft', 'play:Mischen', 'play:Hops!', 'play:Angriff', 'play:Wunsch->player:1']",
+      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['draw', 'play:Blick in die Zukunft', 'play:Hops!', 'play:Angriff', 'play:Mischen', 'play:Wunsch->player:1']",
       "basis": "clear",
       "fact_ids": [
         "FIVE-01"
@@ -146,7 +146,7 @@
     {
       "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
       "status": "FAIL",
-      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5'], 'prefer_contains_all_groups': [['five', 'fünf', 'funf', '5'], ['exploding kitten', 'kitten', 'danger']]}; got ['draw', 'play:Blick in die Zukunft', 'play:Mischen', 'play:Hops!', 'play:Angriff', 'play:Wunsch->player:1']",
+      "message": "step 1: hand_count[0][kitten]: expected 1, got 0",
       "basis": "human_decision",
       "fact_ids": [
         "FIVE-01",
@@ -165,7 +165,7 @@
     {
       "id": "EXPL-R15-pair-cannot-target-empty-player",
       "status": "FAIL",
-      "message": "forbidden semantic legal action names ['Pärchen:Hops!->player:1']",
+      "message": "forbidden semantic legal action names ['pair:Hops!->player:1']",
       "basis": "human_decision",
       "fact_ids": [
         "PAIR-01"
@@ -173,8 +173,8 @@
     },
     {
       "id": "EXPL-R16-triple-may-request-held-kitten",
-      "status": "FAIL",
-      "message": "no legal action name matches all semantic groups [['triple', 'drilling', 'drei', '3'], ['exploding kitten', 'kitten', 'danger']]; got ['draw', 'play:Hops!', 'Pärchen:Hops!->player:1', 'Drilling:Hops!->player:1:request:Entschärfung', 'Drilling:Hops!->player:1:request:Angriff', 'Drilling:Hops!->player:1:request:Hops!', 'Drilling:Hops!->player:1:request:Wunsch', 'Drilling:Hops!->player:1:request:Mischen', 'Drilling:Hops!->player:1:request:Blick in die Zukunft', 'Drilling:Hops!->player:1:request:Nö!', 'Drilling:Hops!->player:1:request:Zombiekatze', 'Drilling:Hops!->player:1:request:Augenmampfende', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 1]', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 2]', 'Drilling:Hops!->player:1:request:[fehlender Katzenkarten-Titel 3]']",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "TRI-01",
