@@ -1,6 +1,9 @@
 Meeting 23.7.2026 – Fragen
 
-- Ist die Forschungsfrage so passend: Wie gut lässt sich eine Spielanleitung eindeutig in eine ausführbare Spielumgebung übersetzen?
+Forschungsfrage zur Rückmeldung:
+„Welche Probleme treten auf, wenn ein LLM eine Spielanleitung in eine ausführbare Spielumgebung übersetzt, und welche davon werden durch gezielte Klarstellungen vor einer erneuten Generierung reduziert?“
+
+- Ist diese Forschungsfrage inhaltlich und vom Umfang her passend?
 - Dürfen wir eine Anleitung durch ein Profil mit getrennten Werten bewerten, statt durch einen einzigen Gesamtscore?
 - Ist der Vergleich Originalanleitung gegen präzisierte Anleitung eine sinnvolle Hauptmethode?
 - Reicht eine von Menschen bestätigte Entscheidung als Ground Truth für unklare Regeln?

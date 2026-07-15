@@ -16,7 +16,8 @@
     ],
     "protocols": [
       "agentic-v2.2"
-    ]
+    ],
+    "verbosities": []
   },
   "source_diagnosis": {
     "summary": "Original publisher source; approved decisions remain separate from printed rules."
@@ -158,44 +159,51 @@
   "efficiency": {
     "calls": {
       "values": [
-        4.0
+        7.0
       ],
-      "mean": 4.0,
+      "mean": 7.0,
       "sample_sd": null
     },
     "provider_seconds": {
       "values": [
-        737.811
+        1598.681
       ],
-      "mean": 737.811,
+      "mean": 1598.681,
       "sample_sd": null
     },
     "input_tokens": {
       "values": [
-        512440.0
+        1035093.0
       ],
-      "mean": 512440.0,
+      "mean": 1035093.0,
       "sample_sd": null
     },
     "cached_input_tokens": {
       "values": [
-        406016.0
+        802304.0
       ],
-      "mean": 406016.0,
+      "mean": 802304.0,
       "sample_sd": null
     },
     "output_tokens": {
       "values": [
-        25796.0
+        48345.0
       ],
-      "mean": 25796.0,
+      "mean": 48345.0,
       "sample_sd": null
     },
     "reasoning_tokens": {
       "values": [
-        13236.0
+        26367.0
       ],
-      "mean": 13236.0,
+      "mean": 26367.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        3.015447
+      ],
+      "mean": 3.015447,
       "sample_sd": null
     },
     "code_lines": {
@@ -207,10 +215,16 @@
     }
   },
   "monetary_cost": {
-    "values": [
+    "actual_values": [
       null
     ],
-    "exact_total": null
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      3.015447
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
   },
   "headline": "Publisher PDF: technically sound; 11/12 clear-rule and 7/10 approved-decision scenarios pass.",
   "runs": [
@@ -219,6 +233,7 @@
       "protocol": "agentic-v2.2",
       "model": "gpt-5.6-sol",
       "thinking": "low",
+      "verbosity": null,
       "agentic_gate": true,
       "repairs": 0,
       "technical_gate": true,
@@ -534,13 +549,14 @@
         }
       ],
       "resources": {
-        "calls": 4,
-        "provider_seconds": 737.811,
-        "input_tokens": 512440,
-        "cached_input_tokens": 406016,
-        "output_tokens": 25796,
-        "reasoning_tokens": 13236,
+        "calls": 7,
+        "provider_seconds": 1598.681,
+        "input_tokens": 1035093,
+        "cached_input_tokens": 802304,
+        "output_tokens": 48345,
+        "reasoning_tokens": 26367,
         "money": null,
+        "api_equivalent_usd": 3.015447,
         "code_lines": 187
       },
       "hashes": {

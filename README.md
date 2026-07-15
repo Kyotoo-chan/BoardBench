@@ -1,10 +1,10 @@
 # BoardBench
 
-BoardBench turns one board-game rulebook into a Python environment and evaluates rule fidelity with cited evidence.
+BoardBench turns a board-game rulebook into a Python environment, detects translation problems with cited evidence, and tests whether explicit source clarifications reduce them in a fresh generation.
 
 ## Workflow
 
-Generated evidence is stored under `results/scores/<game>/<run>/`; `results/plots/<game>/<run>/` contains images only. Native Codex defaults are `gpt-5.6-sol:low` for implementation generation and `gpt-5.6-sol:medium` for judges.
+Generated evidence is stored under `results/scores/<game>/<run>/`; `results/plots/<game>/<run>/` contains images only. Native Codex defaults are `gpt-5.6-sol:low` for implementation generation and `gpt-5.6-sol:medium` for judges, with response verbosity explicitly set to `low`.
 
 1. Put one rulebook at `inputs/game_rules.pdf` or `.txt`.
 2. `/bbedge game=<slug>` — extract cited facts, resolve ambiguities, approve scenarios.

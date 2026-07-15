@@ -1,5 +1,11 @@
 # BoardBench current workflow
 
+## Research question
+
+Which problems appear when an LLM translates a board-game rulebook into an executable environment, and which of them are reduced when detected gaps are explicitly clarified before a fresh generation?
+
+The comparison is diagnostic: the canonical source exposes problems, the clarified condition tests whether explicit source changes reduce them, and the evaluator keeps remaining source, model, and evaluator failures separate. It does not require a perfect game implementation.
+
 The workflow is deliberately iterative: facts, scenarios, adapters, prompts, and reporting may improve whenever a defect is found. Git preserves earlier states. A SHA-256 recorded in a result identifies the exact bytes used for that run; it is not a lock and does not prevent later changes.
 
 ## Current comparison
@@ -12,7 +18,8 @@ Exploding Kittens uses two source conditions:
 Both use the same implementation protocol, evaluator, and reporting code. Native Codex defaults are:
 
 - implementation: `gpt-5.6-sol:low`;
-- neutral and persona judges: `gpt-5.6-sol:medium`.
+- neutral and persona judges: `gpt-5.6-sol:medium`;
+- response verbosity: explicit `low` for future native calls.
 
 ## Evidence
 

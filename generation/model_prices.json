@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "unit": "per_1m_tokens",
+  "retrieved_at": "2026-07-15",
+  "source": "https://platform.openai.com/docs/pricing",
+  "models": {
+    "gpt-5.6-sol": {
+      "rate_class": "short_context",
+      "input": 5.0,
+      "cached_input": 0.5,
+      "cache_write": 6.25,
+      "output": 30.0
+    }
+  },
+  "note": "API list prices support comparable estimates. Codex usage totals may span several requests, so a long-context tier cannot be inferred from their aggregate. Codex OAuth subscription calls do not expose the actual charged amount; unreported cache writes are excluded."
+}

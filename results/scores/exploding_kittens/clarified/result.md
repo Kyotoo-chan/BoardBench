@@ -30,11 +30,15 @@
 
 | Measure | Mean | Sample SD |
 |---|---:|---:|
-| calls | 4.000 | n/a |
-| provider_seconds | 728.675 | n/a |
-| input_tokens | 535084.000 | n/a |
-| output_tokens | 23546.000 | n/a |
-| reasoning_tokens | 12583.000 | n/a |
+| calls | 7.000 | n/a |
+| provider_seconds | 1605.015 | n/a |
+| input_tokens | 1523405.000 | n/a |
+| cached_input_tokens | 1251584.000 | n/a |
+| output_tokens | 44734.000 | n/a |
+| reasoning_tokens | 25972.000 | n/a |
+| api_equivalent_usd | 3.327 | n/a |
 | code_lines | 320.000 | n/a |
 
+Sample SD measures variation across repeated runs; `n/a` means only one run is available.
+The USD value is an API-equivalent estimate from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.
 Persona reviews and raw per-run evidence remain in `result.json`.

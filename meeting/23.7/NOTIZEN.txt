@@ -1,5 +1,8 @@
 Mentale Stützpunkte / Ideen
 
+Direkte Übersicht für das Gespräch:
+results/scores/exploding_kittens/README.md
+
 Ergebnis pro Anleitung:
 - Metadaten: Name, Format, Hash, Modell, Anzahl Läufe.
 - Technical Gate, Robustheit und Interface getrennt.

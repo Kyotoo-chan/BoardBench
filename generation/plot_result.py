@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 GROUPS = (
-    ("Robustness", "robustness"),
-    ("Interface", "interface"),
-    ("Clear rules", "clear_rules"),
-    ("Human decisions", "human_decisions"),
-    ("Coverage", "coverage"),
+    ("Klare Regeln (EV4)", "clear_rules"),
+    ("Klarstellungsabhängig (EV5)", "human_decisions"),
 )
+
+DISPLAY_NAMES = {"pdf": "Original-PDF", "clarified": "Präzisierte Fassung"}
+COLORS = ("#579889", "#8972B3")
 
 
 def load(path: Path) -> dict[str, object]:
@@ -26,20 +26,12 @@ def load(path: Path) -> dict[str, object]:
     return value
 
 
-def setting(result: dict[str, object]) -> str:
-    runs = result["runs"]
-    generation = sorted({f"{run['model']}:{run['thinking']}" for run in runs})
-    judges = result["review_evidence"]["neutral_judges"]
-    judge_models = judges.get("models", ["unknown"])
-    judge_thinking = judges.get("thinking", ["unknown"])
-    return f"generation {', '.join(generation)} · judges {','.join(judge_models)}:{','.join(judge_thinking)}"
-
-
 def plot(results: list[dict[str, object]], output: Path) -> None:
     if not 1 <= len(results) <= 2:
         raise ValueError("plots support one or two rulebook conditions")
-    labels = [str(result["identity"].get("condition", f"condition {index + 1}")) for index, result in enumerate(results)]
-    group_labels = [label for label, _ in GROUPS] + ["Neutral judges"]
+    conditions = [str(result["identity"].get("condition", f"condition {index + 1}")) for index, result in enumerate(results)]
+    labels = [DISPLAY_NAMES.get(condition, condition) for condition in conditions]
+    group_labels = [label for label, _ in GROUPS] + ["Neutrale Judges (EV7)"]
     values = []
     for result in results:
         evidence = result["implementation_evidence"]
@@ -47,27 +39,21 @@ def plot(results: list[dict[str, object]], output: Path) -> None:
 
     x = np.arange(len(group_labels))
     width = 0.64 / len(results)
-    fig, ax = plt.subplots(figsize=(10, 5.4))
+    fig, ax = plt.subplots(figsize=(8, 4.5))
     for index, (label, row) in enumerate(zip(labels, values)):
         offset = (index - (len(results) - 1) / 2) * width
-        bars = ax.bar(x + offset, row, width, label=label)
-        ax.bar_label(bars, fmt="%.2f", padding=2, fontsize=8)
+        bars = ax.bar(x + offset, row, width, label=label, color=COLORS[index])
+        ax.bar_label(bars, fmt="%.2f", padding=3, fontsize=9)
 
-    ax.set_ylim(0, 1.12)
-    ax.set_ylabel("Score within evidence group")
-    ax.set_xticks(x, group_labels, rotation=18, ha="right")
-    ax.set_title(str(results[0]["identity"].get("game", "BoardBench")))
+    ax.set_ylim(0, 1.15)
+    ax.set_ylabel("Wert")
+    ax.set_xticks(x, group_labels)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.grid(axis="y", color="#D9D9D9", linewidth=0.7, alpha=0.6)
+    ax.set_axisbelow(True)
     if len(results) > 1:
-        ax.legend(frameon=False)
-    details = []
-    for label, result in zip(labels, results):
-        evidence = result["implementation_evidence"]
-        details.append(
-            f"{label}: {setting(result)} · n={result['reproducibility']['run_count']} · "
-            f"technical={evidence['technical_gate_pass_rate']:.2f} · agentic={evidence['agentic_gate_pass_rate']:.2f}"
-        )
-    fig.text(0.5, 0.01, "\n".join(details), ha="center", va="bottom", fontsize=8)
-    fig.tight_layout(rect=(0, 0.1, 1, 1))
+        ax.legend(loc="upper center", ncol=2, frameon=False)
+    fig.tight_layout()
     output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output, dpi=180, bbox_inches="tight")
     plt.close(fig)

@@ -9,7 +9,7 @@ BoardBench is a bachelor-thesis workflow inspired by PaperBench:
 3. let an LLM agent implement a Python game environment,
 4. evaluate technical quality and rule fidelity as separate evidence groups.
 
-The thesis asks where executable translation exposes rulebook ambiguity and where failures instead come from the model or evaluator. A code failure alone is not proof that the rulebook is bad.
+The thesis asks which problems appear when an LLM translates a board-game rulebook into an executable environment and which problems are reduced when detected gaps are explicitly clarified before a fresh generation. This original-versus-clarified intervention helps distinguish source-specification effects from model and evaluator failures; a code failure alone is not proof that the rulebook is bad.
 
 ## Current direction
 

@@ -1,6 +1,6 @@
 # Current state
 
-BoardBench currently focuses on one clean Exploding Kittens comparison: publisher PDF versus a clarified text condition.
+BoardBench currently focuses on one clean Exploding Kittens comparison: detect executable-translation problems from the publisher PDF, clarify supported source gaps, and generate again to measure which problems are reduced. Remaining questions count as diagnostic evidence; the goal is not a perfect game implementation.
 
 ## Source of truth
 
@@ -16,6 +16,7 @@ BoardBench currently focuses on one clean Exploding Kittens comparison: publishe
 
 - implementation generation: `gpt-5.6-sol:low`;
 - neutral and persona judges: `gpt-5.6-sol:medium`;
+- native response verbosity: explicit `low` for future calls;
 - no OpenSpiel or one-shot comparison;
 - one canonical and at most one clarified source condition.
 

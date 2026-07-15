@@ -17,6 +17,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+DEFAULT_VERBOSITY = "low"
+
 TOKEN_KEYS = {
     "input_tokens",
     "cached_input_tokens",
@@ -105,6 +107,7 @@ def run_codex(
     usage_path: Path,
     model: str = "gpt-5.6-sol",
     effort: str | None = None,
+    verbosity: str = DEFAULT_VERBOSITY,
     mode: str = "agentic",
     timeout: int = 4000,
     image_paths: list[Path] | None = None,
@@ -129,6 +132,8 @@ def run_codex(
         model,
         "-c",
         f'model_reasoning_effort="{effort}"',
+        "-c",
+        f'model_verbosity="{verbosity}"',
         "-s",
         "danger-full-access" if mode == "agentic" else "read-only",
         "-C",
@@ -166,6 +171,7 @@ def run_codex(
     metadata: dict[str, object] = {
         "model": model,
         "reasoning_effort": effort,
+        "verbosity": verbosity,
         "mode": mode,
         "started_at": started_at.isoformat(),
         "ended_at": ended_at.isoformat(),
@@ -198,6 +204,7 @@ def main() -> int:
     parser.add_argument("--usage", type=Path, required=True)
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--effort", help="default: low for generation, medium for judging")
+    parser.add_argument("--verbosity", choices=("low", "medium", "high"), default=DEFAULT_VERBOSITY)
     parser.add_argument("--mode", choices=("agentic", "judge"), default="agentic")
     parser.add_argument("--timeout", type=int, default=4000)
     parser.add_argument("--image", type=Path, action="append", default=[])
@@ -210,6 +217,7 @@ def main() -> int:
         usage_path=args.usage,
         model=args.model,
         effort=args.effort,
+        verbosity=args.verbosity,
         mode=args.mode,
         timeout=args.timeout,
         image_paths=args.image,

@@ -17,7 +17,9 @@ Never combine these into one correctness score:
 9. separate persona findings;
 10. tokens, time, calls, repairs, exact cost when available, and code size.
 
-For comparable repeated runs report raw values, arithmetic mean, and sample SD. `UNREACHED` and `UNTESTABLE` affect coverage, not the fidelity denominator. Missing monetary cost is `null`, never estimated.
+For comparable repeated runs report raw values, arithmetic mean, and sample SD. Sample SD is unavailable for `n=1` because variation requires at least two runs. `UNREACHED` and `UNTESTABLE` affect coverage, not the fidelity denominator.
+
+Actual Codex OAuth subscription cost remains `null` when the provider does not expose it. A separate API-equivalent USD estimate may be calculated from measured tokens and the dated public rates in `generation/model_prices.json`; it must never be presented as the amount charged. Persona usage is included when matching persona usage artifacts are present.
 
 ## Input specification
 
@@ -65,7 +67,7 @@ Run:
 python generation/result_card.py --spec result_spec.json --output-dir results/scores/<game>/<run>
 ```
 
-The collector rejects source-hash mismatches and mixed scenario/adapter hashes. Persona reviews remain references with hashes and never enter the neutral Judge mean. Generation and judge model/thinking settings are recorded separately; defaults are `gpt-5.6-sol:low` for generation and `gpt-5.6-sol:medium` for judges.
+The collector rejects source-hash mismatches and mixed scenario/adapter hashes. Persona reviews remain references with hashes and never enter the neutral Judge mean. Generation and judge model/thinking settings are recorded separately; defaults are `gpt-5.6-sol:low` for generation and `gpt-5.6-sol:medium` for judges. Future native calls also record an explicit response verbosity of `low`.
 
 ## Material assumptions
 
@@ -81,4 +83,4 @@ The headline summarizes; it does not replace the evidence table.
 
 ## Plots
 
-Keep plots optional and compact. `generation/plot_result.py` accepts one or two result profiles and writes one PNG under `results/plots/<game>/<run>/`. It shows the separated evidence groups, run count, gate rates, and the actual generation/judge settings. Comparisons with more than two rulebook conditions are calibration-only and should use tables rather than a crowded main-study plot.
+Keep plots optional and compact. `generation/plot_result.py` accepts one or two result profiles and writes one PNG under `results/plots/<game>/<run>/`. It shows the outcome evidence relevant to source clarification; unchanged technical, robustness, interface, and coverage values appear below as controls. Comparisons with more than two rulebook conditions are calibration-only and should use tables rather than a crowded main-study plot.

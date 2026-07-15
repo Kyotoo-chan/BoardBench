@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from generation.plot_result import plot
-from generation.result_card import aggregate, markdown
+from generation.result_card import aggregate, estimate_call_cost, markdown
 
 
 class ResultCardTests(unittest.TestCase):
@@ -53,6 +53,13 @@ class ResultCardTests(unittest.TestCase):
             self.assertIsNone(result["monetary_cost"]["exact_total"])
             self.assertNotIn("overall_correctness_score", result)
             self.assertIn("Clear rules", markdown(result))
+
+    def test_public_price_estimate_separates_cached_tokens(self):
+        cost = estimate_call_cost({
+            "model": "gpt-5.6-sol",
+            "token_summary": {"input_tokens": 1_000_000, "cached_input_tokens": 800_000, "output_tokens": 10_000},
+        })
+        self.assertAlmostEqual(cost, 1.7)
 
     def test_plot_rejects_more_than_two_conditions(self):
         with self.assertRaisesRegex(ValueError, "one or two"):

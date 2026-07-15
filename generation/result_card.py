@@ -12,6 +12,9 @@ from pathlib import Path
 from typing import Any
 
 
+PRICES_PATH = Path(__file__).with_name("model_prices.json")
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -36,6 +39,21 @@ def summary(values: list[float]) -> dict[str, Any]:
         "mean": statistics.mean(values) if values else None,
         "sample_sd": statistics.stdev(values) if len(values) > 1 else None,
     }
+
+
+def estimate_call_cost(call: dict[str, Any]) -> float | None:
+    pricing = load_json(PRICES_PATH)
+    model = pricing.get("models", {}).get(call.get("model"))
+    if not model:
+        return None
+    tokens = call.get("token_summary", {})
+    input_tokens = int(tokens.get("input_tokens", 0))
+    cached_tokens = int(tokens.get("cached_input_tokens", 0))
+    return (
+        max(input_tokens - cached_tokens, 0) * model["input"]
+        + cached_tokens * model["cached_input"]
+        + int(tokens.get("output_tokens", 0)) * model["output"]
+    ) / 1_000_000
 
 
 def parse_score(text: str, pattern: str) -> float:
@@ -74,22 +92,36 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
             raise ValueError("assumptions must be a list")
 
     personas: dict[str, Any] = {}
+    persona_usage: list[dict[str, Any]] = []
     for label, value in item.get("personas", {}).items():
         path = resolve(base, value)
         if path is None or not path.is_file():
             raise FileNotFoundError(f"missing persona review: {label}")
         personas[label] = {"path": str(value), "sha256": sha256(path)}
+        usage_path = path.with_name(f"{path.stem}_usage.json")
+        if usage_path.is_file():
+            persona_usage.append(load_json(usage_path))
 
-    totals = usage.get("token_totals", {})
+    totals = dict(usage.get("token_totals", {}))
+    for persona in persona_usage:
+        for key, value in persona.get("token_summary", {}).items():
+            totals[key] = int(totals.get(key, 0)) + int(value)
     calls = usage.get("calls", [])
+    pricing_calls = list(calls) + persona_usage
+    if not calls:
+        pricing_calls.insert(0, {"model": item.get("model", evidence.get("model")), "token_summary": usage.get("token_totals", {})})
+    estimated_costs = [estimate_call_cost(call) for call in pricing_calls]
+    api_equivalent_cost = sum(estimated_costs) if estimated_costs and all(value is not None for value in estimated_costs) else None
     judge_calls = [call for call in calls if call.get("mode") == "judge"]
     judge_models = sorted({str(call.get("model")) for call in judge_calls if call.get("model")})
     judge_efforts = sorted({str(call.get("reasoning_effort")) for call in judge_calls if call.get("reasoning_effort")})
+    verbosities = sorted({str(call.get("verbosity")) for call in pricing_calls if call.get("verbosity")})
     return {
         "stem": str(item["stem"]),
         "protocol": item.get("protocol", evidence.get("protocol")),
         "model": item.get("model", evidence.get("model")),
         "thinking": item.get("thinking", evidence.get("reasoning_effort")),
+        "verbosity": item.get("verbosity", verbosities[0] if len(verbosities) == 1 else None),
         "agentic_gate": bool(evidence.get("independent_gate_passed") and evidence.get("agent_ran_self_check")),
         "repairs": int(evidence.get("repair_count", 0)),
         "technical_gate": bool(re.search(r"summary\s+4/4\s+score=1\.000", checks)),
@@ -111,13 +143,14 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         "personas": personas,
         "assumptions": assumptions,
         "resources": {
-            "calls": int(usage.get("call_count", 0)),
-            "provider_seconds": float(usage.get("elapsed_seconds_total", 0)),
+            "calls": int(usage.get("call_count", 0)) + len(persona_usage),
+            "provider_seconds": float(usage.get("elapsed_seconds_total", 0)) + sum(float(item.get("elapsed_seconds", 0)) for item in persona_usage),
             "input_tokens": int(totals.get("input_tokens", 0)),
             "cached_input_tokens": int(totals.get("cached_input_tokens", 0)),
             "output_tokens": int(totals.get("output_tokens", 0)),
             "reasoning_tokens": int(totals.get("reasoning_output_tokens", totals.get("reasoning_tokens", 0))),
             "money": usage.get("actual_subscription_cost"),
+            "api_equivalent_usd": api_equivalent_cost,
             "code_lines": len(paths["code"].read_text(encoding="utf-8").splitlines()),
         },
         "hashes": {key: sha256(path) for key, path in paths.items() if path},
@@ -163,6 +196,7 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
         alternatives.setdefault(key, {})[selected] = alternatives.setdefault(key, {}).get(selected, 0) + 1
 
     money = [run["resources"]["money"] for run in runs]
+    estimates = [run["resources"]["api_equivalent_usd"] for run in runs]
     result = {
         "schema_version": 1,
         "identity": identity,
@@ -172,6 +206,7 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
             "adapter_sha256": next(iter(adapter_hashes)),
             "models": sorted({str(run["model"]) for run in runs}),
             "protocols": sorted({str(run["protocol"]) for run in runs}),
+            "verbosities": sorted({str(run["verbosity"]) for run in runs if run["verbosity"]}),
         },
         "source_diagnosis": spec.get("source_diagnosis", {}),
         "implementation_evidence": {
@@ -198,9 +233,16 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
         },
         "efficiency": {
             key: summary(values(("resources", key)))
-            for key in ("calls", "provider_seconds", "input_tokens", "cached_input_tokens", "output_tokens", "reasoning_tokens", "code_lines")
+            for key in ("calls", "provider_seconds", "input_tokens", "cached_input_tokens", "output_tokens", "reasoning_tokens", "api_equivalent_usd", "code_lines")
         },
-        "monetary_cost": {"values": money, "exact_total": sum(money) if money and all(value is not None for value in money) else None},
+        "monetary_cost": {
+            "actual_values": money,
+            "exact_total": sum(money) if money and all(value is not None for value in money) else None,
+            "api_equivalent_estimates_usd": estimates,
+            "pricing_source": load_json(PRICES_PATH)["source"],
+            "pricing_retrieved_at": load_json(PRICES_PATH)["retrieved_at"],
+            "pricing_sha256": sha256(PRICES_PATH),
+        },
         "headline": str(spec.get("headline", "Evidence profile generated; interpret groups separately.")),
         "runs": runs,
     }
@@ -231,6 +273,7 @@ def markdown(result: dict[str, Any]) -> str:
         f"- Runs: {result['reproducibility']['run_count']}",
         f"- Generation: {', '.join(result['reproducibility']['models'])} · thinking {', '.join(sorted({str(run['thinking']) for run in result['runs']}))}",
         f"- Neutral judges: {', '.join(review.get('models', [])) or 'unknown'} · thinking {', '.join(review.get('thinking', [])) or 'unknown'}",
+        *([f"- Response verbosity: {', '.join(result['reproducibility']['verbosities'])}"] if result["reproducibility"]["verbosities"] else []),
         "",
         "## Evidence",
         "",
@@ -252,9 +295,15 @@ def markdown(result: dict[str, Any]) -> str:
         "| Measure | Mean | Sample SD |",
         "|---|---:|---:|",
     ]
-    for key in ("calls", "provider_seconds", "input_tokens", "output_tokens", "reasoning_tokens", "code_lines"):
+    for key in ("calls", "provider_seconds", "input_tokens", "cached_input_tokens", "output_tokens", "reasoning_tokens", "api_equivalent_usd", "code_lines"):
         lines.append(f"| {key} | {fmt(efficiency[key]['mean'])} | {fmt(efficiency[key]['sample_sd'])} |")
-    lines += ["", "Persona reviews and raw per-run evidence remain in `result.json`.", ""]
+    lines += [
+        "",
+        "Sample SD measures variation across repeated runs; `n/a` means only one run is available.",
+        "The USD value is an API-equivalent estimate from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.",
+        "Persona reviews and raw per-run evidence remain in `result.json`.",
+        "",
+    ]
     return "\n".join(lines)
 
 
