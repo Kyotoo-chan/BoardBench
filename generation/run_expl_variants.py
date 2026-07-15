@@ -308,6 +308,7 @@ def aggregate_usage(stem: str) -> None:
     paths = (
         [OUTPUTS / f"{stem}_generation_usage.json"]
         + sorted(OUTPUTS.glob(f"{stem}_repair_*_usage.json"))
+        + sorted(OUTPUTS.glob(f"{stem}_*_failed_*_usage.json"))
         + [OUTPUTS / f"{stem}_judge_{i}_usage.json" for i in range(1, 4)]
     )
     calls = [json.loads(path.read_text(encoding="utf-8")) for path in paths if path.exists()]
