@@ -2,7 +2,7 @@
 
 ## Ergebnis auf einen Blick
 
-Beide Spielumgebungen sind technisch stabil. Die Implementierung aus dem Original-PDF verfehlt vier getestete Regelinteraktionen. Nach Präzisierung der gefundenen Regelungslücken besteht eine frische Implementierung alle 22 Szenarien; der neutrale Judge-Mittelwert steigt von `0,467` auf `0,953`.
+Beide Spielumgebungen bestehen die technischen und gesampelten Stabilitätsprüfungen. Die Implementierung aus dem Original-PDF verfehlt vier getestete Regelinteraktionen. Nach Präzisierung der gefundenen Regelungslücken besteht eine frische Implementierung alle 22 Szenarien; der neutrale Judge-Mittelwert steigt von `0,467` auf `0,953`.
 
 **Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges und drei Personas mit `gpt-5.6-sol`, Thinking `medium`.
 
@@ -15,12 +15,12 @@ Beide Spielumgebungen sind technisch stabil. Die Implementierung aus dem Origina
 | Klarstellungsabhängige Regeln (**EV5**) | 7/10 | 10/10 |
 | Szenarioabdeckung (**EV6**) | 22/22 | 22/22 |
 | Neutraler Judge-Mittelwert (**EV7**) | 0,467 (SD 0,042) | 0,953 (SD 0,055) |
-| Persona-Reviews (**EV8**) | zusätzliche Regel- und Randfallbefunde | keine belegten kritischen/großen Defekte; 3 offene Fragen |
-| Materielle Annahmen (**EV9**) | 3 | 2 |
+| Persona-Reviews (**EV8**, kein Score) | zusätzliche Regel- und Randfallbefunde | keine belegten kritischen/großen Defekte; 3 offene Fragen |
+| Deklarierte materielle Annahmen (**EV9**, kein Score) | 3 Deklarationen | 2 Deklarationen |
 
 <img src="../../plots/exploding_kittens/pdf_vs_clarified/evidence_profile.png" alt="Original-PDF im Vergleich zur präzisierten Fassung" width="50%">
 
-*EV1–EV3 und EV6 sind erfolgreiche technische Kontrollen. EV4, EV5 und EV7 zeigen den für die Quellenänderung relevanten Unterschied.*
+*EV1–EV3 sind technische Kontrollen; EV6 bestätigt vollständige Szenarioabdeckung, nicht Korrektheit. EV4, EV5 und EV7 zeigen den für die Quellenänderung relevanten Unterschied.*
 
 ## Erkannte Abweichungen des Originals
 
@@ -31,7 +31,7 @@ Beide Spielumgebungen sind technisch stabil. Die Implementierung aus dem Origina
 
 Die präzisierte Implementierung besteht EV1–EV6 vollständig. Das stützt die Diagnose, dass die Quellspezifikation zu Problemen der ursprünglichen Übersetzung beigetragen hat. Mit einem Implementierungslauf pro Bedingung (`n=1`) ist dies noch kein Varianz- oder alleiniger Kausalitätsnachweis.
 
-## Offene Fragen nach der Präzisierung
+## Offene qualitative Fragen (EV8, nicht als Fail gewertet)
 
 - Darf eine Katzenkarte einzeln und ohne Effekt gespielt werden?
 - Darf ein Drilling einen Spieler ohne Handkarten als Ziel wählen?

@@ -25,7 +25,7 @@ Es gibt keinen vermischten Gesamtscore.
 | **05 – Random rollouts (EV2)** | 100 reproduzierbare Zufallsspiele ohne Absturz, ungültige Sackgasse oder inkonsistenten Terminalzustand. | PASS 100/100 | PASS 100/100 |
 | **06 – Action language (EV3)** | Jede beobachtete legale Aktion hat einen nicht leeren, eindeutigen Namen und besteht `action → name → action`. | PASS 20.204/20.204 | PASS 36.590/36.590 |
 
-Die unterschiedliche Zahl bei Check 06 entsteht durch unterschiedlich viele beobachtete Zustände und Aktionen; beide Bedingungen bestehen alle jeweils ausgeführten Prüfungen.
+Die unterschiedliche Zahl bei Check 06 entsteht durch unterschiedlich viele beobachtete Zustände und Aktionen; beide Bedingungen bestehen alle jeweils ausgeführten Prüfungen. EV2 und EV3 sind Stichproben mit festem Seed und keine Vollständigkeitsbeweise für alle erreichbaren Zustände.
 
 Rohlogs: [Original](pdf/raw/expl_pdf_current_checks.txt) · [Präzisiert](clarified/raw/expl_clarified_current_checks.txt)
 
@@ -77,7 +77,7 @@ Rohresultate: [Original](pdf/raw/expl_pdf_current_scenarios.json) · [Präzisier
 
 ## EV7: drei neutrale Judges
 
-Jeder Judge erhält die Regelquelle, bestätigte Regelfakten und genau eine Implementierung. Tests, andere Reviews und die Vergleichsimplementierung bleiben verborgen. Der Judge prüft Setup, Zugfolge, Aktionen, Zustandsübergänge, Zufall, private Information, Eliminierung und Spielende. Kritische oder große Befunde benötigen Zitat, Seite, Fact-ID, Codeort sowie Soll-/Ist-Verhalten.
+Für beide Bedingungen erhalten die neutralen Judges dieselbe Evaluationsreferenz: das kanonische Original-PDF, die bestätigten Regelfakten und genau eine Implementierung. Die präzisierte Textfassung selbst wird ihnen nicht zusätzlich gezeigt. Tests, andere Reviews und die Vergleichsimplementierung bleiben verborgen. So bewertet EV7 beide Implementierungen gegen dasselbe Ziel. Der Judge prüft Setup, Zugfolge, Aktionen, Zustandsübergänge, Zufall, private Information, Eliminierung und Spielende. Kritische oder große Befunde benötigen Zitat, Seite, Fact-ID, Codeort sowie Soll-/Ist-Verhalten.
 
 | Review | Original-PDF | Präzisierte Fassung |
 |---|---:|---:|
@@ -87,12 +87,14 @@ Jeder Judge erhält die Regelquelle, bestätigte Regelfakten und genau eine Impl
 | **Mittelwert** | **0,467** | **0,953** |
 | **Sample SD** | **0,042** | **0,055** |
 
+Die Sample SD beschreibt hier nur die Streuung zwischen den drei Judges derselben Implementierung. Sie ist keine Streuung zwischen Implementierungsläufen. Die Judge-Werte sind qualitative Signale, keine Wahrscheinlichkeit vollständiger Korrektheit.
+
 - Originalreviews: [1](pdf/raw/expl_pdf_current_judge_1.md) · [2](pdf/raw/expl_pdf_current_judge_2.md) · [3](pdf/raw/expl_pdf_current_judge_3.md)
 - Präzisierte Reviews: [1](clarified/raw/expl_clarified_current_judge_1.md) · [2](clarified/raw/expl_clarified_current_judge_2.md) · [3](clarified/raw/expl_clarified_current_judge_3.md)
 
 ## EV8: drei getrennte Personas
 
-Personas ergänzen EV7 um spezialisierte Fragestellungen. Sie werden weder miteinander noch mit dem neutralen Judge-Mittelwert verrechnet.
+Personas ergänzen EV7 um spezialisierte Fragestellungen. Anders als EV7 erhalten sie die jeweilige Quellenbedingung (Original-PDF oder präzisierte Fassung), die bestätigten Regelfakten und genau eine Implementierung. Tests, Szenarien und andere Reviews bleiben verborgen. Sie werden weder miteinander noch mit dem neutralen Judge-Mittelwert verrechnet; ihre Befunde sind qualitative Hinweise und werden nicht nachträglich als Szenario-Pass oder -Fail gezählt.
 
 | Persona | Auftrag | Original-PDF | Präzisierte Fassung |
 |---|---|---|---|
@@ -105,14 +107,23 @@ Personas ergänzen EV7 um spezialisierte Fragestellungen. Sie werden weder mitei
 
 ## EV9: materielle Annahmen
 
-- **Original-PDF: 3** — NÖ!-Reaktionszyklus, Angriff/Hops!-Zugschuld und fehlende Katzenkartentitel.
-- **Präzisierte Fassung: 2** — drei fehlende Katzenkartentitel und Lebensdauer der gespeicherten Vorschau.
+EV9 ist **kein Test und kein Score**. Es dokumentiert, welche materiellen Quellenentscheidungen der jeweilige Implementierer selbst angegeben hat. Die IDs beginnen in jedem Lauf neu; beispielsweise sind die beiden Einträge `A-01` nicht miteinander gleichzusetzen.
+
+| Bedingung | Lauf-ID | Quellenstelle | Deklarierte Entscheidung |
+|---|---|---|---|
+| Original-PDF | A-01 | NÖ!-Reaktionen | Jeder andere lebende Spieler erhält eine Pass-/NÖ!-Gelegenheit; ein NÖ! startet die Passrunde neu und wechselt den Auflösungszustand. |
+| Original-PDF | A-02 | Angriff und Hops! | Angriff beendet die aktuelle Verpflichtung und gibt dem nächsten Spieler genau zwei Züge; Hops! verbraucht einen geschuldeten Zug. |
+| Original-PDF | A-03 | Fehlende Katzenkartentitel | Fünf unterscheidbare Platzhalterarten zu je vier Karten erhalten die Kombinationsmechanik. |
+| Präzisierte Fassung | A-01 | Fehlende Katzenkartentitel | Fünf Arten zu je vier Karten; drei nicht gelieferte Titel werden sichtbar als unbenannte Arten geführt. |
+| Präzisierte Fassung | A-02 | Vorschauwissen | Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht. |
+
+Nur die fehlenden Katzenkartentitel erscheinen in beiden Läufen als direkt verwandtes Problem. Die anderen Deklarationen unterscheiden sich. Deshalb darf `3` gegenüber `2` nicht als Verbesserungsscore gelesen werden. Der Quellenvergleich stützt sich primär auf EV4, EV5 und EV7; EV9 ergänzt ihn als Auditspur.
 
 Vollständige strukturierte Einträge: [Original](pdf/raw/expl_pdf_current_assumptions.json) · [Präzisiert](clarified/raw/expl_clarified_current_assumptions.json)
 
 ## Offene Punkte
 
-Nach der Präzisierung bleiben drei Quellfragen sichtbar:
+Die Ambiguitäts-Persona (EV8) hält nach der Präzisierung drei qualitative Quellfragen fest. Sie sind nicht als Szenario-Fails gewertet:
 
 1. Darf eine Katzenkarte einzeln und ohne Effekt gespielt werden?
 2. Darf ein Drilling einen Spieler ohne Handkarten als Ziel wählen?
@@ -133,6 +144,8 @@ Zusätzlich gilt: Mit einem Implementierungslauf pro Bedingung (`n=1`) lässt si
 | Reasoning-Tokens | 26.367 | 25.972 |
 | Python-Codezeilen | 187 | 320 |
 | API-äquivalente Kostenschätzung | 3,02 USD | 3,33 USD |
+
+Die sieben LLM-Aufrufe bestehen jeweils aus einer Implementierung, drei neutralen Judges und drei Personas; beide Läufe benötigten keine Reparatur. Die Provider-Zeit ist die Summe der einzelnen Call-Dauern und wegen paralleler Reviews nicht die verstrichene Gesamtzeit des Experiments. Gecachte Tokens sind erneut verwendete identische Kontextpräfixe, keine übernommenen Antworten oder ein gemeinsames Gedächtnis zwischen den isolierten Läufen.
 
 Die Kostenschätzung nutzt die am 15.07.2026 dokumentierten öffentlichen `gpt-5.6-sol`-Preise aus `../../../generation/model_prices.json`; sie ist nicht die tatsächliche Codex-OAuth-Abrechnung.
 
