@@ -26,8 +26,8 @@ CARD_ALIASES = {
     "favor": ("Wunsch", "Auswahl", "choice"),
     "nope": ("Nö!", "Widerspruch", "contradiction"),
 }
-PLAYER_FIELDS = ("active_player", "turn_player", "player")
-DEBT_FIELDS = ("turns_left", "turns_remaining", "turn_debt", "turns_due")
+PLAYER_FIELDS = ("active_player", "turn_player", "player", "active")
+DEBT_FIELDS = ("turns_left", "turns_remaining", "turn_debt", "turns_due", "turns_owed")
 
 
 def _catalog(module: Any) -> list[Any]:

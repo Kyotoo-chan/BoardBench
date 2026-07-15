@@ -1,0 +1,195 @@
+{
+  "version": 3,
+  "rubric_version": "expl-v2.5",
+  "suite": "checks/scenarios/expl.json",
+  "suite_sha256": "9a512b3a59407dcac189a3182f19b3eb2351d63d057ce125f18485cc566eec4a",
+  "adapter": "checks/scenario_adapters/expl.py",
+  "adapter_sha256": "43dcc6e6e5ea8cf01c6d8cc121ab88f876b9466abf69024091c35432e2e14df9",
+  "code": "outputs/expl_clarified_r1.py",
+  "code_sha256": "f65270dcb0fc49e07c1f1ce5d87a25ec7964f46e0d30bdd34e6c0976ccb08406",
+  "counts": {
+    "PASS": 15,
+    "FAIL": 2,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 17,
+  "total": 17,
+  "score": 0.8823529411764706,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 10,
+      "evaluated": 10,
+      "score": 1.0
+    },
+    "human_decision": {
+      "passed": 5,
+      "evaluated": 7,
+      "score": 0.7142857142857143
+    }
+  },
+  "results": [
+    {
+      "id": "EXPL-R01-two-player-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-03"
+      ]
+    },
+    {
+      "id": "EXPL-R02-normal-turn-can-end-by-drawing",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-04"
+      ]
+    },
+    {
+      "id": "EXPL-R03-attack-gives-next-player-two-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ATK-01"
+      ]
+    },
+    {
+      "id": "EXPL-R04-two-skips-consume-two-owed-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SKIP-02"
+      ]
+    },
+    {
+      "id": "EXPL-R05-preview-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FUT-01"
+      ]
+    },
+    {
+      "id": "EXPL-R06-shuffle-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "SHUF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TURN-03",
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R08-last-survivor-wins",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TERM-01",
+        "TERM-02"
+      ]
+    },
+    {
+      "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ATK-02"
+      ]
+    },
+    {
+      "id": "EXPL-R10-defuse-is-mandatory-when-held",
+      "status": "FAIL",
+      "message": "step 1: no legal action name contains any of ['defuse', 'entschärfung', 'entschaerfung', 'protection']; got ['place:0']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-01"
+      ]
+    },
+    {
+      "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['defuse', 'entschärfung', 'entschaerfung', 'protection']}; got ['place:0']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "DEF-04"
+      ]
+    },
+    {
+      "id": "EXPL-R12-five-card-combo-may-retrieve-component",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "FIVE-01"
+      ]
+    },
+    {
+      "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FIVE-01",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R14-favor-cannot-target-empty-player",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "FAV-01"
+      ]
+    },
+    {
+      "id": "EXPL-R15-pair-cannot-target-empty-player",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    },
+    {
+      "id": "EXPL-R16-triple-may-request-held-kitten",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "TRI-01",
+        "TRI-02",
+        "FIVE-02"
+      ]
+    },
+    {
+      "id": "EXPL-R17-cat-pair-action-is-executable",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "PAIR-01"
+      ]
+    }
+  ]
+}

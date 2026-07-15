@@ -89,6 +89,16 @@ class ScenarioRunnerTests(unittest.TestCase):
         self.assertEqual(state.hands[0], ("Doppelzug",))
         self.assertEqual(state.deck, ("Neuordnen",))
 
+    def test_expl_adapter_supports_active_player_field(self):
+        module = SimpleNamespace(ATTACK="attack", SHUFFLE="shuffle")
+        state = SimpleNamespace(
+            hands=[[], []], deck=[], discard=[], alive=[True, True],
+            active=0, turns_owed=1, pending=None, winner=None,
+        )
+        game = SimpleNamespace(initial_state=lambda: state)
+        configured = expl.setup(module, game, {"active_player": 1, "deck": ["shuffle"]})
+        self.assertEqual(configured.active, 1)
+
     def test_expl_adapter_supports_immutable_tuple_states(self):
         module = SimpleNamespace(ATTACK="attack", SHUFFLE="shuffle")
         game = SimpleNamespace(initial_state=lambda: ImmutableState())
