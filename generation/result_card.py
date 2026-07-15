@@ -78,7 +78,7 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         path = resolve(base, value)
         if path is None or not path.is_file():
             raise FileNotFoundError(f"missing persona review: {label}")
-        personas[label] = {"path": str(path), "sha256": sha256(path)}
+        personas[label] = {"path": str(value), "sha256": sha256(path)}
 
     totals = usage.get("token_totals", {})
     calls = usage.get("calls", [])
@@ -127,6 +127,8 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
 def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
     identity = dict(spec.get("identity", {}))
     source_path = resolve(base, identity.get("source_path"))
+    if source_path and not source_path.is_file() and identity.get("source_path"):
+        source_path = (Path.cwd() / str(identity["source_path"])).resolve()
     if source_path:
         if not source_path.is_file():
             raise FileNotFoundError(source_path)

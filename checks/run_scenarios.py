@@ -141,7 +141,7 @@ def _resolve_action(game: Any, actions: list[Any], selector: dict[str, Any]) -> 
             if all(_matches_any(name, group) for group in preferred_groups)
         ]
         if preferred:
-            return preferred[0]
+            return preferred[int(selector.get("prefer_index", 0))]
     matching = [action for name, action in exact.items() if _selector_matches(name, selector)]
     if matching:
         return matching[0]
@@ -181,7 +181,7 @@ def _settle(game: Any, state: Any, configs: list[dict[str, Any]]) -> Any:
             ]
             if not matches:
                 break
-            state = apply_action(game, state, matches[0])
+            state = apply_action(game, state, matches[int(config.get("choose_index", 0))])
     return state
 
 

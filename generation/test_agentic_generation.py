@@ -6,8 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from generation.prepare_expl_variants import clarified_variant
-from generation.run_expl_variants import SOURCE_FOR_STEM, _agentic_gate, _event_commands, _validate_assumptions, implementation_prompt
+from generation.run_expl import PROTOCOL, SOURCES, _agentic_gate, _event_commands, _validate_assumptions, implementation_prompt
 
 
 VALID_IMPLEMENTATION = '''
@@ -34,13 +33,13 @@ class Game:
 
 
 class AgenticGenerationTests(unittest.TestCase):
-    def test_clarified_condition_is_explicit_and_routed(self):
-        clarified = clarified_variant("original")
+    def test_current_conditions_are_explicit(self):
+        clarified = SOURCES["clarified"].read_text(encoding="utf-8")
         self.assertIn("schuldet danach genau zwei", clarified)
-        self.assertIn("auch „Exploding Kitten“", clarified)
-        self.assertIn("fünf gerade ausgespielten Komponenten", clarified)
-        self.assertEqual(SOURCE_FOR_STEM["expl_clarified_r1"], "expl_clarified")
-        self.assertIn("assumptions.json", implementation_prompt("rulebook.txt", "agentic-v2.2"))
+        self.assertIn("frühere Vorschau", clarified)
+        self.assertIn("vollständige beabsichtigte Aktion", clarified)
+        self.assertTrue(SOURCES["pdf"].is_file())
+        self.assertIn("assumptions.json", implementation_prompt("rulebook.txt", PROTOCOL))
 
     def workspace(self, implementation: str):
         temporary = tempfile.TemporaryDirectory()

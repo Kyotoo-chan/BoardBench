@@ -19,7 +19,6 @@ from common import (
     format_check_line,
     format_summary_line,
     resolve_code_path,
-    resolve_optional_path,
     resolve_repo_root,
     weighted_score_from_checks,
 )
@@ -37,15 +36,12 @@ def load_check(path: Path):
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run BoardBench checks for a generated game result.")
-    parser.add_argument("--game", default="antichess", help="OpenSpiel/game name used for output lookup")
+    parser.add_argument("--game", required=True, help="Game slug used for output lookup")
     parser.add_argument("--code-path", default=None, help="Generated Python file to check")
-    parser.add_argument("--judge-path", default=None, help="Saved LLM-judge review markdown file")
     parser.add_argument("--rollouts", type=int, default=DEFAULT_ROLLOUTS, help="Random games to run in rollout checks")
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per random game")
     parser.add_argument("--seed", type=int, default=1, help="Random seed for reproducible checks")
     parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
-    parser.add_argument("--include-judge", action="store_true", help="Also check the saved LLM-judge review")
-    parser.add_argument("--include-final", action="store_true", help="Also run final/slow checks such as OpenSpiel comparison")
     parser.add_argument("--no-summary", action="store_true", help="Skip the final summary line (for notebook pipeline phases)")
     return parser.parse_args()
 
@@ -57,7 +53,7 @@ def check_key(name: str) -> str:
     return stem
 
 
-def selected_checks(check_dir: Path, requested: list[str], include_judge: bool, include_final: bool) -> list[Path]:
+def selected_checks(check_dir: Path, requested: list[str]) -> list[Path]:
     paths = sorted(check_dir.glob("[0-9][0-9]_*.py"))
     if requested:
         names = {check_key(name) for name in requested}
@@ -67,15 +63,7 @@ def selected_checks(check_dir: Path, requested: list[str], include_judge: bool, 
             raise RuntimeError("unknown checks: " + ", ".join(sorted(missing)))
         return selected
 
-    kept = []
-    for path in paths:
-        module = load_check(path)
-        if getattr(module, "JUDGE_CHECK", False) and not include_judge:
-            continue
-        if getattr(module, "FINAL_CHECK", False) and not include_final:
-            continue
-        kept.append(path)
-    return kept
+    return paths
 
 
 def normalize_result(value: Any) -> CheckResult:
@@ -94,7 +82,7 @@ def main() -> int:
         repo_root=repo_root,
         game=args.game,
         code_path=resolve_code_path(raw_code_path, repo_root),
-        judge_path=resolve_optional_path(args.judge_path, repo_root),
+        judge_path=None,
         rollouts=args.rollouts,
         max_steps=args.max_steps,
         seed=args.seed,
@@ -102,7 +90,7 @@ def main() -> int:
 
     check_dir = Path(__file__).resolve().parent
     try:
-        check_paths = selected_checks(check_dir, args.check, args.include_judge, args.include_final)
+        check_paths = selected_checks(check_dir, args.check)
     except Exception as exc:
         print(f"FAIL check selection: {exc}", flush=True)
         return 1

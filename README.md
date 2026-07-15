@@ -30,6 +30,6 @@ Results stay separate:
 - interface 06
 - cited rule scenarios
 - independent LLM review
-- optional OpenSpiel reference
+- separate blind judge and persona evidence
 
 Run Python through the `boardbench` Conda environment. See `AGENTS.md` and `docs/workflow_description.md` for details.

@@ -37,7 +37,7 @@ def run_persona(
         shutil.copy2(rulefacts, workspace / "canonical_rulefacts.md")
         shutil.copy2(code, workspace / "implementation.py")
         images = render_pdf_pages(local_rules, workspace / "pages", dpi=150) if local_rules.suffix == ".pdf" else []
-        persona_prompt = (REPO_ROOT / "prompts" / "judge_personas" / f"{persona}.md").read_text(encoding="utf-8")
+        persona_prompt = (REPO_ROOT / "inputs" / "prompts" / "judge_personas" / f"{persona}.md").read_text(encoding="utf-8")
         prompt = f"""You are a fresh blind BoardBench persona reviewer. Work only with the canonical rulebook, canonical_rulefacts.md, attached page images, and implementation.py in this isolated packet. Do not inspect checks, scenarios, other implementations, or other reviews. Do not use outside game knowledge.\n\n{persona_prompt}\n"""
         run_codex(
             prompt=prompt,

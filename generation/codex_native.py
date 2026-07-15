@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -15,8 +16,6 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
-
-from generation.llm_cli import build_llm_command
 
 TOKEN_KEYS = {
     "input_tokens",
@@ -116,13 +115,25 @@ def run_codex(
     usage_path.parent.mkdir(parents=True, exist_ok=True)
 
     effort = effort or default_effort(mode)
-    command = build_llm_command(
-        "codex",
+    npx = shutil.which("npx") or shutil.which("npx.cmd")
+    if not npx:
+        raise FileNotFoundError("npx is required to run native Codex")
+    command = [
+        npx,
+        "--yes",
+        "@openai/codex",
+        "exec",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "-m",
         model,
-        effort,
-        mode="agentic" if mode == "agentic" else "judge",
-    )
-    command += ["-C", cwd.as_posix()]
+        "-c",
+        f'model_reasoning_effort="{effort}"',
+        "-s",
+        "danger-full-access" if mode == "agentic" else "read-only",
+        "-C",
+        cwd.as_posix(),
+    ]
     for image_path in image_paths or []:
         command += ["--image", image_path.resolve().as_posix()]
     command += [

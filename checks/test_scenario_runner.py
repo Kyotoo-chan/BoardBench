@@ -36,7 +36,7 @@ class ImmutableState:
 
 
 class ScenarioRunnerTests(unittest.TestCase):
-    def test_expl_mutations_target_frozen_scenarios(self):
+    def test_expl_mutations_target_current_scenarios(self):
         root = Path(__file__).resolve().parents[1]
         suite = json.loads((root / "checks/scenarios/expl.json").read_text(encoding="utf-8"))
         manifest = json.loads((root / "checks/mutations/expl.json").read_text(encoding="utf-8"))

@@ -1,14 +1,18 @@
-# Rulebook inputs
+# Inputs
 
-BoardBench accepts exactly one active canonical source as `inputs/game_rules.pdf` or `inputs/game_rules.txt`.
+```text
+inputs/games/<slug>/             canonical rulebook and approved facts
+inputs/games/<slug>/variants/    optional current comparison source
+inputs/prompts/                  prompts sent to models
+```
 
-- Use PDF when the publisher supplies PDF. Archive and hash the original bytes before extraction.
-- Use TXT when text is the original source. Do not manufacture a PDF.
-- A faithful TXT extracted from PDF is a separate input-format condition, not a replacement for the PDF.
-- Clarified, omitted, vague, anonymized, or false-rule texts are separate experimental conditions.
+Use the publisher's native PDF or TXT as the canonical source. A clarified text is a separate condition and must visibly label its additions.
 
-Derived conditions must be created by a committed deterministic script, listed with paths and SHA-256 hashes in a manifest, and frozen before generation. Never overwrite the canonical source or an earlier experimental artifact. If extraction tooling changes bytes, retain the earlier extraction rather than silently regenerating it.
+## Why SHA-256 is retained
 
-For the Exploding Kittens study, `generation/prepare_expl_variants.py` creates the declared variants under `inputs/games/expl/variants/`. `expl_clarified.txt` is the faithful TXT plus a visibly labelled normative appendix of approved interpretations. It tests whether an explicit natural-language specification is translated correctly; it is not presented as the publisher's original rulebook.
+SHA-256 is a short fingerprint of file bytes. It lets a result prove which exact rulebook or evaluator file it used and catches accidental changes. It uses Python's standard library and adds no runtime cost worth measuring. It does **not** freeze a file: the workflow may change at any time, after which a new run records the new fingerprint while Git retains the previous state.
 
-The normal reusable workflow evaluates the incoming canonical rulebook first. A clarified appendix is optional follow-up evidence after material weaknesses are approved. Negative variants are calibration controls, not required for every game. Each condition keeps its own hash and per-rulebook result profile.
+The current Exploding Kittens comparison uses only:
+
+- `inputs/games/expl/game_rules.pdf`;
+- `inputs/games/expl/variants/expl_clarified.txt`.

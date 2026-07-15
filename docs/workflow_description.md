@@ -1,10 +1,6 @@
-# BoardBench agentic workflow
+# BoardBench workflow
 
-Project-local pi skills are the primary interface. One-shot and pair-comparison tooling has been removed from the working tree; its pilot history remains in Git.
-
-## Start
-
-Place one rulebook at `inputs/game_rules.pdf` or `.txt`, then run:
+## Interactive use
 
 ```text
 /bbedge game=<slug>
@@ -12,66 +8,20 @@ Place one rulebook at `inputs/game_rules.pdf` or `.txt`, then run:
 /bbeval game=<slug>
 ```
 
-Use `/bb game=<slug>` when the next phase is unclear.
-
-## Subagents
-
-BoardBench uses `npm:@tintinweb/pi-subagents` with project roles in `.pi/agents/`:
-
-- `ruleanalyst`
-- `edgereviewer`
-- `implementer`
-- `rulereviewer`
-
-Control them explicitly:
-
-```text
-subagents=on|off|auto
-submodel=<provider/model>
-subthinking=off|minimal|low|medium|high|xhigh
-```
-
-Example:
-
-```text
-/bbedge game=conect subagents=on submodel=openai-codex/gpt-5.6-sol subthinking=low
-```
-
-`model=` and `thinking=` remain accepted aliases.
-
-If child settings are omitted, the parent decides. It may inherit its own configuration or choose a demonstrably weaker one. It must never assign a stronger model or higher thinking than itself. If model strength is unclear, inherit. Explicit user settings override this cap.
+`/bb` reports the next phase. Pi skills orchestrate; executable behavior lives in Python and JSON under `checks/` and `generation/`.
 
 ## Phases
 
-### Edge cases
+1. **Source analysis:** archive the rulebook, cite facts, and resolve material ambiguities with the user.
+2. **Isolated implementation:** give one Codex agent only its assigned source, interface contract, and evaluator-neutral self-check. Require `implementation.py`, `rule_coverage.md`, and `assumptions.json`.
+3. **Mechanical evaluation:** run checks 01–06 and deterministic cited scenarios.
+4. **Blind review:** run three neutral judges and three separate personas without exposing checks or other implementations.
+5. **Reporting:** write JSON/Markdown under `results/scores/<game>/<run>/` and optional PNGs under `results/plots/<game>/<run>/`.
+6. **Iteration:** when a source, test, or evaluator defect is found, correct the current workflow and run again. Git and recorded hashes identify what earlier runs used.
 
-`bbedge` archives and hashes the rulebook. When enabled, two read-only agents independently extract cited facts and challenge edge cases. Material ambiguities are decided with the user before `rulefacts.md` is marked approved.
+## Current native defaults
 
-### Implementation
+- implementation: `gpt-5.6-sol:low`;
+- judges: `gpt-5.6-sol:medium`.
 
-`bbimpl` gives one writer agent an isolated workspace containing the rulebook, approved facts, and short prompt. Evaluator scenarios and repository checks are withheld. The raw response and module are saved under `outputs/<slug>_<backend>_ag.*`.
-
-### Evaluation
-
-`bbeval` keeps evidence separate:
-
-1. technical checks 01–04,
-2. runtime robustness 05,
-3. interface 06,
-4. cited rulebook scenarios,
-5. independent rule review,
-6. optional OpenSpiel reference when explicitly requested.
-
-OpenSpiel is secondary because the final method must work without a reference implementation.
-
-## Thinking
-
-The parent currently defaults to `openai-codex/gpt-5.6-sol:low`. Good prompts reduce procedural uncertainty, but not genuine rule ambiguity. Escalate only for a documented conflict or failed low-thinking attempt; treat the escalation as a separate experimental condition.
-
-## Manual fallback
-
-`evaluation.ipynb` is agentic-only and defaults to Pi/Sol Low. It remains a transparent manual fallback. The preferred workflow is skill-driven.
-
-## Git
-
-Use global `/skill:gc`. BoardBench is solo, so requested commits go directly to `main`, with large coherent commits, short lowercase messages, no co-author trailers, and no push unless requested.
+Evidence groups remain separate. Every failure is attributed rather than automatically blamed on the rulebook or implementation.

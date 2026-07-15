@@ -17,7 +17,6 @@ The thesis asks where executable translation exposes rulebook ambiguity and wher
 - Parent default: `openai-codex/gpt-5.6-sol`, thinking `low`.
 - Workflow commands accept `subagents=on|off|auto`, `submodel=...`, and `subthinking=...`.
 - Without an explicit child setting, the parent chooses equal or demonstrably weaker capability. A child must never receive a stronger model or higher thinking than its parent; if uncertain, inherit by omitting both fields.
-- OpenSpiel is an optional secondary reference, never the general oracle.
 - Optimize the workflow before redesigning plots or aggregate scores.
 
 Subagents are provided by `npm:@tintinweb/pi-subagents`. Project roles live in `.pi/agents/` and intentionally do not pin model or thinking.
@@ -45,7 +44,7 @@ Do not continue past material ambiguities without user approval.
 - Every hard scenario expectation needs rulebook edition/hash, page, and direct quote.
 - Keep ambiguous and untestable rules visible instead of scoring them as failures.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
-- Do not combine smoke checks, rollouts, action naming, judges, scenarios, and OpenSpiel into one claim of correctness.
+- Do not combine smoke checks, rollouts, action naming, judges, and scenarios into one claim of correctness.
 - Keep raw generations, raw reviews, code, logs, model/thinking settings, and timings.
 - Never silently rewrite old experimental results after methodology changes.
 
@@ -56,7 +55,6 @@ Do not continue past material ambiguities without user approval.
 3. **Interface:** check 06.
 4. **Rule fidelity:** cited scenarios.
 5. **Independent review:** LLM judges with uncertainty.
-6. **Optional reference:** OpenSpiel, clearly secondary.
 
 Run Python and checks through the `boardbench` Conda environment. In Git Bash use:
 
@@ -68,7 +66,7 @@ Do not run a full evaluation unless the user asks for it.
 
 ## Repository and artifacts
 
-Keep the repository simple: `inputs/`, `prompts/`, `outputs/`, `checks/`, `generation/`, `docs/`, and `results/`. Store score data under `results/scores/<game>/<run>/` and images only under `results/plots/<game>/<run>/`; plotting code belongs in `generation/`.
+Keep the repository simple: `inputs/`, `outputs/`, `checks/`, `generation/`, `docs/`, and `results/`. Model prompts live under `inputs/prompts/`. Store score data under `results/scores/<game>/<run>/` and images only under `results/plots/<game>/<run>/`; plotting code belongs in `generation/`.
 
 New agentic run stem:
 

@@ -10,7 +10,7 @@ This check is purely internal: it verifies that `action_to_name` round-trips
 through `name_to_action` and that every legal action in a state has a distinct
 raw name. It does NOT apply `normalize_action_name`. Normalization is only
 needed when an implementation is compared with an external reference, so the
-normalized-key uniqueness check lives in `99_openspiel_compare`, not in this
+normalized-key uniqueness is handled by the scenario runner, not in this
 single-implementation check.
 """
 

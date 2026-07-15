@@ -7,7 +7,7 @@ from dataclasses import is_dataclass, replace
 from typing import Any
 
 CARD_CONSTANTS = {
-    "kitten": ("EXPLODING_KITTEN", "EXPLODING", "GEFAHR"),
+    "kitten": ("EXPLODING_KITTEN", "EXPLODING", "GEFAHR", "EK"),
     "defuse": ("DEFUSE", "SCHUTZ"),
     "attack": ("ATTACK",),
     "skip": ("SKIP",),
@@ -94,6 +94,44 @@ def _get_first(state: Any, fields: tuple[str, ...]) -> Any:
     raise NotImplementedError(f"state has none of {fields!r}")
 
 
+def _with_changes(state: Any, changes: dict[str, Any]) -> Any:
+    if is_dataclass(state):
+        return replace(state, **changes)
+    state = __import__("copy").deepcopy(state)
+    for field, value in changes.items():
+        setattr(state, field, value)
+    return state
+
+
+def _top_at_end(module: Any, game: Any) -> bool:
+    if game is None:
+        return False
+    cached = getattr(game, "_boardbench_top_at_end", None)
+    if cached is not None:
+        return bool(cached)
+    try:
+        state = game.initial_state()
+        attack, skip = _card(module, "attack"), _card(module, "skip")
+    except (AttributeError, NotImplementedError):
+        return False
+    hands = [_cards_like(hand, []) for hand in state.hands]
+    changes = {"hands": type(state.hands)(hands), "deck": _cards_like(state.deck, [attack, skip])}
+    field = next(name for name in PLAYER_FIELDS if hasattr(state, name))
+    changes[field] = 0
+    if hasattr(state, "phase"):
+        changes["phase"] = "turn"
+    probe = _with_changes(state, changes)
+    actions = game.legal_actions(probe)
+    draw = next(action for action in actions if any(word in str(game.action_to_name(action)).casefold() for word in ("draw", "zieh")))
+    after = game.apply_action(probe, draw)
+    drawn = _cards(after.hands[0])
+    if len(drawn) != 1 or drawn[0] not in (attack, skip):
+        raise NotImplementedError("cannot determine draw-pile orientation")
+    result = drawn[0] == skip
+    setattr(game, "_boardbench_top_at_end", result)
+    return result
+
+
 def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
     state = game.initial_state()
     hands = getattr(state, "hands", None)
@@ -106,9 +144,12 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
         semantic_cards = requested_hands.get(str(player), requested_hands.get(player, []))
         new_hands.append(_cards_like(hand, [_card(module, name) for name in semantic_cards]))
 
+    deck = [_card(module, name) for name in fixture.get("deck", ["shuffle"])]
+    if _top_at_end(module, game):
+        deck.reverse()
     changes: dict[str, Any] = {
         "hands": tuple(new_hands) if isinstance(hands, tuple) else new_hands,
-        "deck": _cards_like(state.deck, [_card(module, name) for name in fixture.get("deck", ["shuffle"])]),
+        "deck": _cards_like(state.deck, deck),
         "discard": _cards_like(state.discard, [_card(module, name) for name in fixture.get("discard", [])]),
     }
     if hasattr(state, "alive"):
@@ -127,19 +168,30 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
     if hasattr(state, "pending"):
         changes["pending"] = () if isinstance(state.pending, tuple) else None
 
-    if is_dataclass(state):
-        return replace(state, **changes)
-    for field, value in changes.items():
-        setattr(state, field, value)
-    return state
+    return _with_changes(state, changes)
 
 
 def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
     if "deck" in expected:
         actual = _cards(state.deck)
+        if _top_at_end(module, game):
+            actual.reverse()
         wanted = [_card(module, name) for name in expected["deck"]]
         if actual != wanted:
             raise AssertionError(f"deck: expected {wanted!r}, got {actual!r}")
+    if "deck_relative_order" in expected:
+        actual = _cards(state.deck)
+        if _top_at_end(module, game):
+            actual.reverse()
+        wanted = [_card(module, name) for name in expected["deck_relative_order"]]
+        filtered = [card for card in actual if card in wanted]
+        if filtered != wanted:
+            raise AssertionError(f"deck_relative_order: expected {wanted!r}, got {filtered!r}")
+    if "deck_not_edge" in expected:
+        actual = _cards(state.deck)
+        card = _card(module, expected["deck_not_edge"])
+        if len(actual) < 3 or actual[0] == card or actual[-1] == card:
+            raise AssertionError(f"deck_not_edge: {card!r} was placed at an edge")
     if "deck_count" in expected:
         cards = _cards(state.deck)
         for semantic_name, wanted in expected["deck_count"].items():

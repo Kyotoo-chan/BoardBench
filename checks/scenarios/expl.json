@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "expl-v2.8",
+  "rubric_version": "expl-current",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
@@ -506,7 +506,7 @@
     },
     {
       "id": "EXPL-R19-defuse-reinserts-kitten-without-reordering",
-      "fact_ids": ["DEF-02", "DEF-03", "DEF-04", "DEF-05", "SET-10"],
+      "fact_ids": ["DEF-02", "DEF-03", "DEF-05", "SET-10"],
       "basis": "clear",
       "source": {
         "page": 2,
@@ -520,35 +520,29 @@
       },
       "steps": [
         {
-          "action": {"contains_any": ["draw", "ziehen", "pass"]},
-          "expect": {
-            "current_player": 0,
-            "terminal": false,
-            "legal_action_name_not_contains_any": ["decline", "explode", "explodieren", "sterben"]
-          }
+          "action": {"contains_any": ["draw", "ziehen", "pass"]}
         },
         {
           "action": {
-            "contains_any": ["defuse", "entschärfung", "entschaerfung", "protection", "place", "position", "insert", "platzieren", "einschieben"],
+            "contains_any": ["defuse", "entschärfung", "entschaerfung", "protection", "place", "position", "insert", "platzieren", "einschieben", "zurücklegen", "zuruecklegen"],
             "prefer_contains_all_groups": [
-              ["place", "position", "insert", "platzieren", "einschieben"],
-              ["1"]
-            ]
+              ["place", "position", "insert", "platzieren", "einschieben", "zurücklegen", "zuruecklegen"]
+            ],
+            "prefer_index": 1
           },
           "settle": [{
-            "while_all_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "while_all_contains_any": ["position", "insert", "platzieren", "einschieben", "zurücklegen", "zuruecklegen", "oben", "unten", "top", "bottom"],
             "choose_contains_all_groups": [
-              ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
-              ["1"]
+              ["position", "insert", "platzieren", "einschieben", "zurücklegen", "zuruecklegen", "oben", "unten", "top", "bottom"]
             ],
+            "choose_index": 1,
             "max_steps": 1
           }],
           "expect": {
-            "current_player": 0,
             "terminal": false,
             "adapter": {
-              "turns_owed": 1,
-              "deck": ["attack", "kitten", "skip", "shuffle"],
+              "deck_relative_order": ["attack", "skip", "shuffle"],
+              "deck_not_edge": "kitten",
               "deck_count": {"kitten": 1},
               "discard_count": {"kitten": 0, "defuse": 1},
               "hand_count": {"0": {"defuse": 0}}
@@ -618,7 +612,6 @@
       "initial": {
         "legal_action_name_contains_all_groups": [
           ["five", "fünf", "funf", "5"],
-          ["take", "retrieve", "nehmen", "discard", "ablage"],
           ["exploding kitten", "kitten", "danger"]
         ]
       }

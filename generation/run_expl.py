@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run isolated Exploding Kittens implementations through native Codex."""
+"""Generate and evaluate one current Exploding Kittens source condition."""
 
 from __future__ import annotations
 
@@ -24,15 +24,14 @@ from generation.codex_native import run_codex
 MODEL = "gpt-5.6-sol"
 GENERATION_EFFORT = "low"
 JUDGE_EFFORT = "medium"
-BASE_STEMS = ("expl_pdf", "expl_txt", "expl_anon", "expl_omit", "expl_error", "expl_vague")
-STEMS = BASE_STEMS + tuple(f"{stem}_r2" for stem in BASE_STEMS) + ("expl_clarified_r1",)
-SOURCE_FOR_STEM = {stem: stem.removesuffix("_r2") for stem in STEMS}
-SOURCE_FOR_STEM["expl_clarified_r1"] = "expl_clarified"
-PROTOCOLS = ("agentic-v2", "agentic-v2.1", "agentic-v2.2")
-CANONICAL_HASH = "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+PROTOCOL = "agentic-v2.2"
+SOURCES = {
+    "pdf": REPO_ROOT / "inputs" / "games" / "expl" / "game_rules.pdf",
+    "clarified": REPO_ROOT / "inputs" / "games" / "expl" / "variants" / "expl_clarified.txt",
+}
 OUTPUTS = REPO_ROOT / "outputs"
 WORKSPACES = REPO_ROOT / "generation_workspaces"
-MANIFEST_PATH = REPO_ROOT / "inputs" / "games" / "expl" / "variants" / "manifest.json"
+SCORES = REPO_ROOT / "results" / "scores" / "exploding_kittens"
 
 INTERFACE_CONTRACT = """# BoardBench public interface contract
 
@@ -52,20 +51,6 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def variant_paths() -> dict[str, Path]:
-    manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-    if manifest["canonical_sha256"] != CANONICAL_HASH:
-        raise RuntimeError("variant manifest canonical hash changed")
-    result: dict[str, Path] = {}
-    for source_stem in sorted(set(SOURCE_FOR_STEM.values())):
-        item = manifest["variants"][source_stem]
-        path = REPO_ROOT / item["path"]
-        if sha256(path) != item["sha256"]:
-            raise RuntimeError(f"variant hash mismatch: {source_stem}")
-        result[source_stem] = path
-    return result
-
-
 def render_pdf(pdf: Path, target_dir: Path) -> list[Path]:
     prefix = target_dir / "page"
     subprocess.run(
@@ -78,12 +63,9 @@ def render_pdf(pdf: Path, target_dir: Path) -> list[Path]:
 
 
 def implementation_prompt(source_name: str, protocol: str) -> str:
-    prompt_name = {
-        "agentic-v2": "rulebook_to_python_agentic_v2.txt",
-        "agentic-v2.1": "rulebook_to_python.txt",
-        "agentic-v2.2": "rulebook_to_python_agentic_v2_2.txt",
-    }[protocol]
-    task = (REPO_ROOT / "prompts" / prompt_name).read_text(encoding="utf-8")
+    if protocol != PROTOCOL:
+        raise ValueError(f"unsupported protocol: {protocol}")
+    task = (REPO_ROOT / "inputs" / "prompts" / "rulebook_to_python.txt").read_text(encoding="utf-8")
     return f"""You are the sole implementation agent in an isolated BoardBench workspace.
 
 Use only `{source_name}` and any attached rendered pages as game-rule evidence. Do not use remembered rules, web knowledge, repository files, evaluator tests, or assumptions from the game title. The interface contract below is not a rule source. If the supplied source is incomplete, contradictory, or vague, make the smallest explicit implementation assumption and list it in the response.
@@ -266,6 +248,8 @@ Return only assumptions, files changed, and exact validation outcomes.
             "protocol": protocol,
             "model": MODEL,
             "reasoning_effort": GENERATION_EFFORT,
+            "source_name": source.name,
+            "source_sha256": sha256(source),
             "implementation_file": "implementation.py",
             "rule_coverage_file": "rule_coverage.md" if require_coverage else None,
             "assumptions_file": "assumptions.json" if require_assumptions else None,
@@ -316,7 +300,7 @@ def run_checks(stem: str, code_path: Path) -> None:
 
 
 def judge_prompt() -> str:
-    review = (REPO_ROOT / "prompts" / "llm_judge_review.md").read_text(encoding="utf-8")
+    review = (REPO_ROOT / "inputs" / "prompts" / "llm_judge_review.md").read_text(encoding="utf-8")
     return f"""You are one of three fresh, mutually blind rule reviewers. Work only with canonical_rulebook.pdf, attached canonical page images, canonical_rulefacts.md, and implementation.py in this isolated packet. Do not use outside game knowledge. Do not inspect check logs, other reviews, other variants, repository files, or filenames as evidence. The canonical PDF and approved facts are the evaluation reference even if the implementation was generated from a degraded source variant.
 
 {review}
@@ -410,15 +394,28 @@ def run_stem(stem: str, source: Path, protocol: str) -> None:
     print(f"[{stem}] complete", flush=True)
 
 
+def archive(stem: str, condition: str) -> Path:
+    target = SCORES / condition / "raw"
+    if target.exists():
+        shutil.rmtree(target)
+    target.mkdir(parents=True)
+    for path in OUTPUTS.glob(f"{stem}*"):
+        shutil.copy2(path, target / path.name)
+    return target
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--stem", choices=STEMS, required=True)
-    parser.add_argument("--protocol", choices=PROTOCOLS, default="agentic-v2.2")
+    parser.add_argument("--condition", choices=SOURCES, required=True)
     args = parser.parse_args()
-
+    source = SOURCES[args.condition]
+    if not source.is_file():
+        parser.error(f"missing source: {source}")
     WORKSPACES.mkdir(exist_ok=True)
-    sources = variant_paths()
-    run_stem(args.stem, sources[SOURCE_FOR_STEM[args.stem]], args.protocol)
+    stem = f"expl_{args.condition}_current"
+    run_stem(stem, source, PROTOCOL)
+    target = archive(stem, args.condition)
+    print(f"archived to {target.relative_to(REPO_ROOT)}")
     return 0
 
 

@@ -59,4 +59,4 @@ def check(module, game, state, expected): ...
 
 It may translate a semantic fixture into implementation state and expose generic observations. It must not encode the expected game-rule result. Freeze its hash with the facts, suite, runner, and judge prompt before a main study.
 
-LLM- or search-proposed traces remain exploratory until replayed, human-approved, and added to a later frozen evaluator version.
+LLM- or search-proposed traces remain exploratory until replayed and human-approved. Approved corrections update the current evaluator; Git and result hashes retain provenance.
