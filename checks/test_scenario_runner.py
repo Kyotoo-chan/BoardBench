@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import unittest
+from dataclasses import dataclass
+from types import SimpleNamespace
 
 from checks.run_scenarios import _contains, _resolve_action, _settle
+from checks.scenario_adapters import expl
 
 
 class DummyGame:
@@ -16,6 +19,18 @@ class DummyGame:
         if action == "react:pass":
             state["actions"] = ["play:preview", "draw"]
         return state
+
+
+@dataclass(frozen=True)
+class ImmutableState:
+    hands: tuple[tuple[str, ...], ...] = ((), ())
+    deck: tuple[str, ...] = ()
+    discard: tuple[str, ...] = ()
+    alive: tuple[bool, ...] = (True, True)
+    player: int = 0
+    turns_left: int = 1
+    pending: tuple[str, ...] = ()
+    winner: int | None = None
 
 
 class ScenarioRunnerTests(unittest.TestCase):
@@ -50,6 +65,18 @@ class ScenarioRunnerTests(unittest.TestCase):
             }],
         )
         self.assertEqual(result["actions"], ["play:preview", "draw"])
+
+    def test_expl_adapter_supports_immutable_tuple_states(self):
+        module = SimpleNamespace(ATTACK="attack", SHUFFLE="shuffle")
+        game = SimpleNamespace(initial_state=lambda: ImmutableState())
+        state = expl.setup(
+            module,
+            game,
+            {"hands": {"0": ["attack"], "1": []}, "deck": ["shuffle"], "active_player": 1, "turns_owed": 2},
+        )
+        self.assertEqual(state.hands, (("attack",), ()))
+        self.assertEqual(state.deck, ("shuffle",))
+        self.assertEqual((state.player, state.turns_left), (1, 2))
 
 
 if __name__ == "__main__":

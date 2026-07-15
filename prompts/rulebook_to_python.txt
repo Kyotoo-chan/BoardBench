@@ -34,9 +34,11 @@ python agentic_self_check.py
 
 Do not modify `agentic_self_check.py`. It is an evaluator-neutral API/action-closure probe, not a source of game rules.
 
+Before finishing, create `rule_coverage.md`. Walk every supplied rulebook section and named rule/card/combination. For each, record the implementing code symbol, a source-only probe you performed or why it is not mechanically probed, and any assumption. This is a source-coverage audit, not evaluator access.
+
 Final response only:
 1. `Open questions / assumptions` (brief)
-2. files changed
+2. files changed, including `implementation.py` and `rule_coverage.md`
 3. exact validation commands and outcomes
 
 Do not repeat the complete module in the final response.

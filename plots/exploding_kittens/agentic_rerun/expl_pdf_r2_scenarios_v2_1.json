@@ -1,28 +1,33 @@
 {
   "version": 3,
-  "suite": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-fAQWmy/tmp5q23q0kg/suite.json",
+  "rubric_version": "expl-v2.1",
+  "suite": "checks/scenarios/expl.json",
+  "suite_sha256": "8a297623f439c5916702f9d8c18c61c74dc09c8f628667bc448b81a70e8e58c7",
+  "adapter": "checks/scenario_adapters/expl.py",
+  "adapter_sha256": "51b040477cf752dfaa56c9972c8f1c3e7332f6926ec8c10b908465e879c47d69",
   "code": "outputs/expl_pdf_r2.py",
+  "code_sha256": "e8ef483577dd6eb26f97345c406b3db16292c52626d88064c857d0713825b5f2",
   "counts": {
-    "PASS": 2,
-    "FAIL": 0,
+    "PASS": 15,
+    "FAIL": 2,
     "CRASH": 0,
     "UNREACHED": 0,
-    "UNTESTABLE": 15
+    "UNTESTABLE": 0
   },
-  "evaluated": 2,
+  "evaluated": 17,
   "total": 17,
-  "score": 1.0,
-  "coverage": 0.11764705882352941,
+  "score": 0.8823529411764706,
+  "coverage": 1.0,
   "basis_scores": {
     "clear": {
-      "passed": 2,
-      "evaluated": 2,
-      "score": 1.0
+      "passed": 9,
+      "evaluated": 10,
+      "score": 0.9
     },
     "human_decision": {
-      "passed": 0,
-      "evaluated": 0,
-      "score": null
+      "passed": 6,
+      "evaluated": 7,
+      "score": 0.8571428571428571
     }
   },
   "results": [
@@ -46,8 +51,8 @@
     },
     {
       "id": "EXPL-R03-attack-gives-next-player-two-turns",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "ATK-01"
@@ -55,8 +60,8 @@
     },
     {
       "id": "EXPL-R04-two-skips-consume-two-owed-turns",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "SKIP-02"
@@ -64,8 +69,8 @@
     },
     {
       "id": "EXPL-R05-preview-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -74,8 +79,8 @@
     },
     {
       "id": "EXPL-R06-shuffle-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -84,8 +89,8 @@
     },
     {
       "id": "EXPL-R07-favor-resolves-and-keeps-current-turn",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TURN-03",
@@ -94,8 +99,8 @@
     },
     {
       "id": "EXPL-R08-last-survivor-wins",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "TERM-01",
@@ -104,8 +109,8 @@
     },
     {
       "id": "EXPL-R09-chained-attack-replaces-debt-with-two",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "ATK-02"
@@ -113,8 +118,8 @@
     },
     {
       "id": "EXPL-R10-defuse-is-mandatory-when-held",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "FAIL",
+      "message": "step 1: forbidden legal action names ['Exploding Kitten:explodieren']",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-01"
@@ -122,8 +127,8 @@
     },
     {
       "id": "EXPL-R11-defuse-consumes-only-one-owed-turn",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "DEF-04"
@@ -131,8 +136,8 @@
     },
     {
       "id": "EXPL-R12-five-card-combo-may-retrieve-component",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "FAIL",
+      "message": "semantic action is not legal: {'contains_any': ['five', 'fünf', 'funf', '5']}; got ['passen und ziehen', 'ziehen', 'spielen:Angriff', 'spielen:Hops!', 'spielen:Mischen', 'spielen:Blick in die Zukunft']",
       "basis": "clear",
       "fact_ids": [
         "FIVE-01"
@@ -140,8 +145,8 @@
     },
     {
       "id": "EXPL-R13-discard-kitten-retrieval-is-safe",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "FIVE-01",
@@ -150,8 +155,8 @@
     },
     {
       "id": "EXPL-R14-favor-cannot-target-empty-player",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "FAV-01"
@@ -159,8 +164,8 @@
     },
     {
       "id": "EXPL-R15-pair-cannot-target-empty-player",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "PAIR-01"
@@ -168,8 +173,8 @@
     },
     {
       "id": "EXPL-R16-triple-may-request-held-kitten",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "TRI-01",
@@ -179,8 +184,8 @@
     },
     {
       "id": "EXPL-R17-cat-pair-action-is-executable",
-      "status": "UNTESTABLE",
-      "message": "state.hands is not a player list",
+      "status": "PASS",
+      "message": "",
       "basis": "clear",
       "fact_ids": [
         "PAIR-01"

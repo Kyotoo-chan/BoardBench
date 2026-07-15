@@ -22,9 +22,9 @@ Require archived rulebook, `inputs/games/<slug>/rulefacts.md` with `status: appr
 1. Read `prompts/rulebook_to_python.txt`.
 2. Create an isolated temporary workspace containing only the rulebook, approved facts, prompt, and `generation/agentic_self_check.py`. Do not expose repository checks or scenario expectations.
 3. If subagents are enabled, launch one `implementer` Agent as the only writer. Pass explicit child model/thinking exactly. Otherwise omit those fields so it inherits, or choose only a demonstrably weaker setting than the parent.
-4. Require the Agent to create `implementation.py` and run `python -m py_compile implementation.py` plus `python agentic_self_check.py` against that actual file. A model setting named `agentic` is not evidence by itself.
+4. Require the Agent to create `implementation.py`, audit every supplied rulebook section/named rule into `rule_coverage.md`, and run `python -m py_compile implementation.py` plus `python agentic_self_check.py` against the actual file. A model setting named `agentic` is not evidence by itself.
 5. Independently rerun the same self-check. If it fails, return only evaluator-neutral technical output to the same isolated implementation workflow for at most two repair rounds. Never reveal cited scenarios.
-6. Preserve every raw response/event/usage record and an agentic-evidence JSON file containing commands, repair count, and final gate status. Copy `implementation.py` to the requested output path.
+6. Preserve every raw response/event/usage record, `rule_coverage.md`, and an agentic-evidence JSON file containing commands, repair count, and final gate status. Copy `implementation.py` to the requested output path.
 7. Remove the workspace.
 
 ## Checks

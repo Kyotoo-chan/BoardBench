@@ -29,7 +29,7 @@ reasoning effort: medium
 
 Implementation calls run in isolated temporary workspaces. To keep the generation condition native and comparable, the implementer receives only its assigned rulebook variant, the minimal public API contract, and an evaluator-neutral self-check. Canonical and variant-specific evaluation facts remain hidden. It cannot access repository checks, canonical scenarios, other variants, previous implementations, or reviews.
 
-A provider mode named `agentic` is not sufficient evidence. The implementation agent must create `implementation.py`, run `python -m py_compile implementation.py` and `python agentic_self_check.py`, and pass the same independently repeated gate. Technical failures may trigger at most two blind repair calls in the same isolated workspace. Commands, repair calls, outputs, and final gate status are retained in `*_agentic_evidence.json`.
+A provider mode named `agentic` is not sufficient evidence. The implementation agent must create `implementation.py`, map every supplied section and named rule/card/combination to code and source-only probes in `rule_coverage.md`, run `python -m py_compile implementation.py` and `python agentic_self_check.py`, and pass the same independently repeated gate. Technical failures may trigger at most two blind repair calls in the same isolated workspace. Commands, repair calls, outputs, coverage audit, and final gate status are retained.
 
 The original six-variant pilot predates this evidence gate. Its calls used agentic-capable Codex infrastructure, but individual runs may have behaved like one-shot generation; they remain historical pilot evidence and are not silently relabelled or replaced.
 

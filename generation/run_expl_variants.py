@@ -115,6 +115,9 @@ def _agentic_gate(workspace: Path) -> tuple[bool, str]:
     implementation = workspace / "implementation.py"
     if not implementation.is_file() or not implementation.read_text(encoding="utf-8", errors="replace").strip():
         return False, "implementation.py is missing or empty"
+    coverage = workspace / "rule_coverage.md"
+    if not coverage.is_file() or not coverage.read_text(encoding="utf-8", errors="replace").strip():
+        return False, "rule_coverage.md is missing or empty"
     sections = []
     passed = True
     for command in (
@@ -155,6 +158,8 @@ def run_implementation(stem: str, source: Path) -> Path:
             call_prompt = prompt if attempt == 0 else f"""Continue the same isolated implementation task. Inspect and repair `implementation.py` using only the supplied rulebook and interface contract. Do not use outside game knowledge. Do not change `agentic_self_check.py`.
 
 {INTERFACE_CONTRACT}
+
+Create or update `rule_coverage.md` by auditing every supplied rulebook section and named rule/card/combination against the code.
 
 The evaluator-neutral independent gate reported:
 
@@ -210,6 +215,7 @@ Return only assumptions, files changed, and exact validation outcomes.
             "model": MODEL,
             "reasoning_effort": EFFORT,
             "implementation_file": "implementation.py",
+            "rule_coverage_file": "rule_coverage.md",
             "self_check_sha256": self_check_hash,
             "repair_count": len(call_records) - 1,
             "agent_ran_self_check": any("agentic_self_check.py" in command for command in all_commands),
@@ -223,6 +229,7 @@ Return only assumptions, files changed, and exact validation outcomes.
         )
         code_path = OUTPUTS / f"{stem}.py"
         shutil.copy2(workspace / "implementation.py", code_path)
+        shutil.copy2(workspace / "rule_coverage.md", OUTPUTS / f"{stem}_rule_coverage.md")
         return code_path
     finally:
         shutil.rmtree(workspace, ignore_errors=True)

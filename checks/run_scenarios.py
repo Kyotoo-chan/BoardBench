@@ -440,10 +440,17 @@ def run_suite(code_path: Path, suite_path: Path) -> dict[str, Any]:
             "evaluated": len(selected),
             "score": sum(result.status == "PASS" for result in selected) / len(selected) if selected else None,
         }
+    adapter_path = suite.get("adapter")
+    resolved_adapter = (repo_root / str(adapter_path)).resolve() if adapter_path else None
     return {
         "version": 3,
+        "rubric_version": suite.get("rubric_version"),
         "suite": suite_path.as_posix(),
+        "suite_sha256": _rulebook_hash(suite_path),
+        "adapter": str(adapter_path) if adapter_path else None,
+        "adapter_sha256": _rulebook_hash(resolved_adapter) if resolved_adapter else None,
         "code": code_path.as_posix(),
+        "code_sha256": _rulebook_hash(code_path),
         "counts": counts,
         "evaluated": evaluated,
         "total": total,

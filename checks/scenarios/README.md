@@ -1,6 +1,6 @@
 # BoardBench scenario schema v3
 
-A scored scenario must be traceable, deterministic where material, and explicit about human adjudication.
+A scored scenario must be traceable, deterministic where material, and explicit about human adjudication. Each suite declares a `rubric_version`; machine-readable results retain suite, adapter, and implementation hashes.
 
 ```json
 {

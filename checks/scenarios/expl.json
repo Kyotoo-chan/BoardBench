@@ -1,5 +1,6 @@
 {
   "version": 3,
+  "rubric_version": "expl-v2.1",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl.py",
   "rulebook": {
@@ -264,11 +265,16 @@
             "terminal": false,
             "current_player": 0,
             "legal_action_name_contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"],
-            "legal_action_name_not_contains_any": ["decline", "explode", "sterben"]
+            "legal_action_name_not_contains_any": ["decline", "explode", "explodieren", "sterben"]
           }
         },
         {
           "action": {"contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"]},
+          "settle": [{
+            "while_all_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "choose_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "max_steps": 1
+          }],
           "expect": {
             "current_player": 1,
             "terminal": false,
@@ -302,6 +308,11 @@
         },
         {
           "action": {"contains_any": ["defuse", "entschärfung", "entschaerfung", "protection"]},
+          "settle": [{
+            "while_all_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "choose_contains_any": ["position", "insert", "platzieren", "einschieben", "oben", "unten", "top", "bottom"],
+            "max_steps": 1
+          }],
           "expect": {
             "current_player": 0,
             "terminal": false,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import MutableMapping
+from dataclasses import is_dataclass, replace
 from typing import Any
 
 CARD_CONSTANTS = {
@@ -31,28 +32,25 @@ def _card(module: Any, semantic_name: str) -> Any:
     raise NotImplementedError(f"implementation has no card constant for {semantic_name!r}")
 
 
-def _replace_cards(container: Any, cards: list[Any]) -> None:
+def _cards_like(container: Any, cards: list[Any]) -> Any:
     if isinstance(container, MutableMapping):
-        for card in container:
-            container[card] = 0
+        result = container.copy()
+        for card in result:
+            result[card] = 0
         for card in cards:
-            container[card] = container.get(card, 0) + 1
-    else:
-        container[:] = cards
+            result[card] = result.get(card, 0) + 1
+        return result
+    if isinstance(container, tuple):
+        return tuple(cards)
+    if isinstance(container, list):
+        return list(cards)
+    raise NotImplementedError(f"unsupported card container {type(container).__name__}")
 
 
 def _cards(container: Any) -> list[Any]:
     if isinstance(container, MutableMapping):
         return [card for card, count in container.items() for _ in range(int(count))]
     return list(container)
-
-
-def _set_first(state: Any, fields: tuple[str, ...], value: Any) -> None:
-    for field in fields:
-        if hasattr(state, field):
-            setattr(state, field, value)
-            return
-    raise NotImplementedError(f"state has none of {fields!r}")
 
 
 def _get_first(state: Any, fields: tuple[str, ...]) -> Any:
@@ -65,26 +63,40 @@ def _get_first(state: Any, fields: tuple[str, ...]) -> Any:
 def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
     state = game.initial_state()
     hands = getattr(state, "hands", None)
-    if not isinstance(hands, list):
-        raise NotImplementedError("state.hands is not a player list")
+    if not isinstance(hands, (list, tuple)):
+        raise NotImplementedError("state.hands is not a player sequence")
 
     requested_hands = fixture.get("hands", {})
+    new_hands = []
     for player, hand in enumerate(hands):
         semantic_cards = requested_hands.get(str(player), requested_hands.get(player, []))
-        _replace_cards(hand, [_card(module, name) for name in semantic_cards])
+        new_hands.append(_cards_like(hand, [_card(module, name) for name in semantic_cards]))
 
-    _replace_cards(state.deck, [_card(module, name) for name in fixture.get("deck", ["shuffle"])])
-    _replace_cards(state.discard, [_card(module, name) for name in fixture.get("discard", [])])
-
+    changes: dict[str, Any] = {
+        "hands": tuple(new_hands) if isinstance(hands, tuple) else new_hands,
+        "deck": _cards_like(state.deck, [_card(module, name) for name in fixture.get("deck", ["shuffle"])]),
+        "discard": _cards_like(state.discard, [_card(module, name) for name in fixture.get("discard", [])]),
+    }
     if hasattr(state, "alive"):
-        state.alive[:] = list(fixture.get("alive", [True] * len(hands)))
-    _set_first(state, PLAYER_FIELDS, int(fixture.get("active_player", 0)))
-    _set_first(state, DEBT_FIELDS, int(fixture.get("turns_owed", 1)))
-
+        alive = list(fixture.get("alive", [True] * len(hands)))
+        changes["alive"] = tuple(alive) if isinstance(state.alive, tuple) else alive
+    for fields, value in (
+        (PLAYER_FIELDS, int(fixture.get("active_player", 0))),
+        (DEBT_FIELDS, int(fixture.get("turns_owed", 1))),
+    ):
+        field = next((name for name in fields if hasattr(state, name)), None)
+        if field is None:
+            raise NotImplementedError(f"state has none of {fields!r}")
+        changes[field] = value
     if hasattr(state, "winner"):
-        state.winner = None
+        changes["winner"] = None
     if hasattr(state, "pending"):
-        state.pending = None
+        changes["pending"] = () if isinstance(state.pending, tuple) else None
+
+    if is_dataclass(state):
+        return replace(state, **changes)
+    for field, value in changes.items():
+        setattr(state, field, value)
     return state
 
 

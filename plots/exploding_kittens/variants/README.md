@@ -1,6 +1,6 @@
 # Exploding Kittens: six input variants
 
-The six implementations remain exactly as committed in experiments 01–06. Evaluator v2 re-runs those frozen modules with corrected facts, deterministic fixtures, explicit outcome classes, and three fresh corrected judges.
+The six implementations remain exactly as committed in experiments 01–06. Evaluator v2 re-runs those frozen modules with corrected facts, deterministic fixtures, explicit outcome classes, and three fresh corrected judges. These runs are now treated as workflow/evaluator pilots: experiment 07 repeats the original PDF with enforced in-agent file validation and is reported separately in `../agentic_rerun/README.md`.
 
 This is a **post-hoc evaluator revision**, not preregistered evidence. The original checks and reviews remain in the numbered experiment commits; v2 artifacts live in `evaluation_v2/` with their own manifest and hashes.
 

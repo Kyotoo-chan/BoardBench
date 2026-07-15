@@ -37,6 +37,7 @@ class AgenticGenerationTests(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory()
         path = Path(temporary.name)
         (path / "implementation.py").write_text(implementation, encoding="utf-8")
+        (path / "rule_coverage.md").write_text("# Source coverage\n\nAll supplied sections mapped.\n", encoding="utf-8")
         shutil.copy2(Path(__file__).with_name("agentic_self_check.py"), path / "agentic_self_check.py")
         return temporary, path
 
@@ -46,6 +47,14 @@ class AgenticGenerationTests(unittest.TestCase):
             passed, output = _agentic_gate(path)
         self.assertTrue(passed, output)
         self.assertIn("agentic-self-check OK", output)
+
+    def test_independent_gate_requires_source_coverage_audit(self):
+        temporary, path = self.workspace(VALID_IMPLEMENTATION)
+        with temporary:
+            (path / "rule_coverage.md").unlink()
+            passed, output = _agentic_gate(path)
+        self.assertFalse(passed)
+        self.assertIn("rule_coverage.md", output)
 
     def test_independent_gate_rejects_legal_action_that_crashes(self):
         broken = VALID_IMPLEMENTATION.replace(
