@@ -1,5 +1,8 @@
 {
   "protocol": "agentic-v2.2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "verbosity": "low",
   "stem": "abalone_codex_ag",
   "source": "inputs/games/abalone/game_rules.pdf",
   "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",

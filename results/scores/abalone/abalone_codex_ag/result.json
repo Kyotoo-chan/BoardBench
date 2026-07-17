@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "abalone",
+    "condition": "canonical",
+    "source_path": "../../../../inputs/games/abalone/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "5a61083987d3df450daf063688bb20f5a30c3cb76f71a44147dfc1d93a5c0171",
+    "adapter_sha256": "0cb3c26aaf999e9faae796adc627f9aeb03da57e87580810d0bed2438ef531f9",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 35,
+    "human_decision": 2,
+    "ambiguous": 1,
+    "not_testable": 1
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.0
+      ],
+      "mean": 0.0,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.94,
+        0.92,
+        0.86
+      ],
+      "mean": 0.9066666666666666,
+      "sample_sd": 0.04163331998932265,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "abalone_codex_ag": {
+        "rule_fidelity": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_rule_fidelity.md",
+          "sha256": "0ca718275f50c14172eefaaed4c0ef08b8a4e412e03f666e3395d3e93da0b31e"
+        },
+        "ambiguity": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_ambiguity.md",
+          "sha256": "92e339b0fe68fe8acd7c8a340e331bef2e575eb152d5e604b09dbef15c7a3bf3"
+        },
+        "executable_systems": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_executable_systems.md",
+          "sha256": "69ec5b6969f65348a1d1c9603a716a1fff301270a43509a93417564545eabc57"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 0,
+    "interpretation_agreement": {},
+    "items": []
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        7.0
+      ],
+      "mean": 7.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        754.324
+      ],
+      "mean": 754.324,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        445880.0
+      ],
+      "mean": 445880.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        318464.0
+      ],
+      "mean": 318464.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        26241.0
+      ],
+      "mean": 26241.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        12621.0
+      ],
+      "mean": 12621.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        1.7132070000000001
+      ],
+      "mean": 1.7132070000000001,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        186.0
+      ],
+      "mean": 186.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      1.7132070000000001
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically executable; high clear-rule fidelity; one approved forced-pass deviation; full scenario coverage.",
+  "runs": [
+    {
+      "stem": "abalone_codex_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "abalone-2026-07-17",
+        "suite_sha256": "5a61083987d3df450daf063688bb20f5a30c3cb76f71a44147dfc1d93a5c0171",
+        "adapter_sha256": "0cb3c26aaf999e9faae796adc627f9aeb03da57e87580810d0bed2438ef531f9",
+        "counts": {
+          "PASS": 22,
+          "FAIL": 1,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 22,
+          "evaluated": 22,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 0,
+          "evaluated": 1,
+          "score": 0.0
+        },
+        "results": [
+          {
+            "id": "ABAL-R01-exact-initial-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-02",
+              "SET-03",
+              "SET-04",
+              "SET-05"
+            ]
+          },
+          {
+            "id": "ABAL-R02-single-marble-one-step-and-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-01",
+              "MOVE-02",
+              "MOVE-03",
+              "TURN-01"
+            ]
+          },
+          {
+            "id": "ABAL-R03-two-marble-inline",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-04",
+              "MOVE-05",
+              "MOVE-06",
+              "MOVE-07"
+            ]
+          },
+          {
+            "id": "ABAL-R04-three-marble-broadside",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-04",
+              "MOVE-05",
+              "MOVE-06",
+              "MOVE-08",
+              "MOVE-09"
+            ]
+          },
+          {
+            "id": "ABAL-R05-four-marble-move-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-04",
+              "MOVE-10"
+            ]
+          },
+          {
+            "id": "ABAL-R06-two-v-one-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-01",
+              "SUM-02",
+              "SUM-03",
+              "SUM-04",
+              "SUM-05"
+            ]
+          },
+          {
+            "id": "ABAL-R07-three-v-one-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-01",
+              "SUM-02"
+            ]
+          },
+          {
+            "id": "ABAL-R08-three-v-two-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-01",
+              "SUM-02"
+            ]
+          },
+          {
+            "id": "ABAL-R09-broadside-push-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-03",
+              "MOVE-08",
+              "MOVE-09"
+            ]
+          },
+          {
+            "id": "ABAL-R10-equal-strength-pushes-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PATT-01"
+            ]
+          },
+          {
+            "id": "ABAL-R11-four-v-three-still-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PATT-02",
+              "MOVE-10"
+            ]
+          },
+          {
+            "id": "ABAL-R12-blocked-sumito-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-05",
+              "SUM-06"
+            ]
+          },
+          {
+            "id": "ABAL-R13-gap-does-not-push",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-04",
+              "SUM-07"
+            ]
+          },
+          {
+            "id": "ABAL-R14-non-collinear-push-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-03",
+              "SUM-08"
+            ]
+          },
+          {
+            "id": "ABAL-R15-edge-ejection",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "OUT-01",
+              "OUT-02",
+              "SUM-01"
+            ]
+          },
+          {
+            "id": "ABAL-R16-sixth-ejection-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "OUT-01"
+            ]
+          },
+          {
+            "id": "ABAL-R17-sumito-is-optional",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SUM-09"
+            ]
+          },
+          {
+            "id": "ABAL-R18-patt-may-withdraw",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PATT-01",
+              "PATT-03"
+            ]
+          },
+          {
+            "id": "ABAL-R20-three-marble-inline",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-04",
+              "MOVE-06",
+              "MOVE-07"
+            ]
+          },
+          {
+            "id": "ABAL-R21-two-broadside-from-longer-row",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "MOVE-06",
+              "MOVE-08",
+              "MOVE-11"
+            ]
+          },
+          {
+            "id": "ABAL-R22-one-v-one-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PATT-01"
+            ]
+          },
+          {
+            "id": "ABAL-R23-two-v-two-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "PATT-01"
+            ]
+          },
+          {
+            "id": "ABAL-R19-forced-pass-only-with-no-move",
+            "status": "FAIL",
+            "message": "legal_action_count: expected 1, got 0",
+            "basis": "human_decision",
+            "fact_ids": [
+              "TURN-01"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.94,
+        0.92,
+        0.86
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_rule_fidelity.md",
+          "sha256": "0ca718275f50c14172eefaaed4c0ef08b8a4e412e03f666e3395d3e93da0b31e"
+        },
+        "ambiguity": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_ambiguity.md",
+          "sha256": "92e339b0fe68fe8acd7c8a340e331bef2e575eb152d5e604b09dbef15c7a3bf3"
+        },
+        "executable_systems": {
+          "path": "../../../../outputs/abalone_codex_ag_persona_executable_systems.md",
+          "sha256": "69ec5b6969f65348a1d1c9603a716a1fff301270a43509a93417564545eabc57"
+        }
+      },
+      "assumptions": [],
+      "resources": {
+        "calls": 7,
+        "provider_seconds": 754.324,
+        "input_tokens": 445880,
+        "cached_input_tokens": 318464,
+        "output_tokens": 26241,
+        "reasoning_tokens": 12621,
+        "money": null,
+        "api_equivalent_usd": 1.7132070000000001,
+        "code_lines": 186
+      },
+      "hashes": {
+        "agentic_evidence": "8de103b5b302444ba290c5551b9bcc875ac4e8f7d5f2bc0a090c966df1f843b8",
+        "checks": "87f014e39a64a8520cb219dd1acfb5511bca209292bd4813b4e049595fdc205f",
+        "scenarios": "cfee43d96ea1aca04d3bb0a4e91cef5b813924339a08f2b5e2e40d5bb4197351",
+        "usage": "64bd2078c7748ef35480790a1f18b9674a82dafc181bae9ee4809f0f8645436d",
+        "code": "81a951c9a7eec8dfab2bf2ef4da0134b696cf6b1b25e1d208813a65bec1c0175"
+      }
+    }
+  ]
+}

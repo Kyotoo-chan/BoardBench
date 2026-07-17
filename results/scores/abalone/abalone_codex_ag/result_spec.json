@@ -1,0 +1,37 @@
+{
+  "identity": {
+    "game": "abalone",
+    "condition": "canonical",
+    "source_path": "../../../../inputs/games/abalone/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+  },
+  "source_diagnosis": {
+    "clear": 35,
+    "human_decision": 2,
+    "ambiguous": 1,
+    "not_testable": 1
+  },
+  "headline": "Technically executable; high clear-rule fidelity; one approved forced-pass deviation; full scenario coverage.",
+  "runs": [
+    {
+      "stem": "abalone_codex_ag",
+      "agentic_evidence": "../../../../outputs/abalone_codex_ag_agentic_evidence.json",
+      "checks": "../../../../outputs/abalone_codex_ag_checks.txt",
+      "scenarios": "../../../../outputs/abalone_codex_ag_scenarios.json",
+      "usage": "../../../../outputs/abalone_codex_ag_usage.json",
+      "code": "../../../../outputs/abalone_codex_ag.py",
+      "assumptions": "../../../../outputs/abalone_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/abalone_codex_ag_judge_1.md",
+        "../../../../outputs/abalone_codex_ag_judge_2.md",
+        "../../../../outputs/abalone_codex_ag_judge_3.md"
+      ],
+      "personas": {
+        "rule_fidelity": "../../../../outputs/abalone_codex_ag_persona_rule_fidelity.md",
+        "ambiguity": "../../../../outputs/abalone_codex_ag_persona_ambiguity.md",
+        "executable_systems": "../../../../outputs/abalone_codex_ag_persona_executable_systems.md"
+      }
+    }
+  ]
+}

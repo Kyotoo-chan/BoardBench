@@ -1,18 +1,76 @@
 {
-  "model": "openai-codex/gpt-5.6-sol",
-  "thinking": "low",
-  "subagent": "boardbench-isolated-implementer",
-  "run_id": "dcea42f9-c28b-4da1-90ed-c094518a798f",
-  "turns": 8,
-  "tokens": {
-    "input": 25779,
-    "output": 5955,
-    "reasoning": 1367,
-    "cache_read": 51712,
-    "cache_write": 0,
-    "last_total_context": 13640
+  "stem": "abalone_codex_ag",
+  "protocol": "agentic-v2.2",
+  "model": "gpt-5.6-sol",
+  "generation_reasoning_effort": "low",
+  "judge_reasoning_effort": "medium",
+  "call_count": 4,
+  "token_totals": {
+    "input_tokens": 171671,
+    "output_tokens": 14916,
+    "cached_input_tokens": 112128,
+    "reasoning_output_tokens": 6319
   },
-  "reported_cost": 0.333401,
-  "raw_events": "outputs/abalone_codex_ag_events.jsonl",
-  "raw_session": "outputs/abalone_codex_ag_session.jsonl"
+  "elapsed_seconds_total": 415.924,
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "mode": "agentic",
+      "elapsed_seconds": 151.509,
+      "token_summary": {
+        "input_tokens": 25779,
+        "output_tokens": 5955,
+        "cached_input_tokens": 51712,
+        "reasoning_output_tokens": 1367
+      },
+      "raw_events": "outputs/abalone_codex_ag_events.jsonl",
+      "raw_session": "outputs/abalone_codex_ag_session.jsonl"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "elapsed_seconds": 84.675,
+      "token_summary": {
+        "input_tokens": 54232,
+        "output_tokens": 3029,
+        "cached_input_tokens": 15104,
+        "reasoning_output_tokens": 1775
+      },
+      "raw_usage": "outputs/abalone_codex_ag_judge_1_usage.json"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "elapsed_seconds": 93.368,
+      "token_summary": {
+        "input_tokens": 54285,
+        "output_tokens": 3202,
+        "cached_input_tokens": 30208,
+        "reasoning_output_tokens": 1576
+      },
+      "raw_usage": "outputs/abalone_codex_ag_judge_2_usage.json"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "elapsed_seconds": 86.372,
+      "token_summary": {
+        "input_tokens": 37375,
+        "output_tokens": 2730,
+        "cached_input_tokens": 15104,
+        "reasoning_output_tokens": 1601
+      },
+      "raw_usage": "outputs/abalone_codex_ag_judge_3_usage.json"
+    }
+  ],
+  "actual_subscription_cost": null,
+  "cost_note": "Codex subscription calls expose tokens and quota but no trustworthy per-call amount charged."
 }

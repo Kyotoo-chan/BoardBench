@@ -1,0 +1,51 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "started_at": "2026-07-17T19:45:03.367949+00:00",
+  "ended_at": "2026-07-17T19:46:29.740470+00:00",
+  "elapsed_seconds": 86.372,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 24,
+      "reset_at": 1784911385,
+      "reset_after_seconds": 593884,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 24,
+      "reset_at": 1784911385,
+      "reset_after_seconds": 593797,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 37375,
+    "output_tokens": 2730,
+    "cached_input_tokens": 15104,
+    "reasoning_output_tokens": 1601
+  },
+  "provider_usage_records": [
+    {
+      "line": 7,
+      "path": "$.usage",
+      "input_tokens": 37375,
+      "cached_input_tokens": 15104,
+      "output_tokens": 2730,
+      "reasoning_output_tokens": 1601
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/abalone_codex_ag_judge_3_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/abalone_codex_ag_judge_3.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_abalone_codex_ag_judge3_ru0r6bn5/canonical-page-1.jpg",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_abalone_codex_ag_judge3_ru0r6bn5/canonical-page-2.jpg",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_abalone_codex_ag_judge3_ru0r6bn5/canonical-page-3.jpg",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_abalone_codex_ag_judge3_ru0r6bn5/canonical-page-4.jpg"
+  ],
+  "stderr": ""
+}
