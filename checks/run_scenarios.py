@@ -121,7 +121,23 @@ def _selector_matches(name: str, selector: dict[str, Any]) -> bool:
     return any(key in selector for key in ("contains_any", "contains_all", "contains_all_groups"))
 
 
-def _resolve_action(game: Any, actions: list[Any], selector: dict[str, Any]) -> Any:
+def _resolve_action(
+    game: Any,
+    actions: list[Any],
+    selector: dict[str, Any],
+    *,
+    module: Any | None = None,
+    state: Any | None = None,
+    adapter: Any | None = None,
+) -> Any:
+    if "adapter" in selector:
+        if adapter is None or not hasattr(adapter, "resolve_action"):
+            raise ScenarioUntestable("adapter action selector needs resolve_action")
+        try:
+            return adapter.resolve_action(module, game, state, actions, selector["adapter"])
+        except NotImplementedError as exc:
+            raise ScenarioUntestable(str(exc)) from exc
+
     exact, normalized = _action_map(game, actions)
     if "name" in selector:
         name = str(selector["name"])
@@ -340,7 +356,14 @@ def run_scenario(game: Any, scenario: dict[str, Any], module: Any, adapter: Any 
     for step_number, step in enumerate(scenario.get("steps", []), start=1):
         actions = legal_actions(game, state)
         previous_legal_action_count = len(actions)
-        previous_action = _resolve_action(game, actions, step.get("action", {}))
+        previous_action = _resolve_action(
+            game,
+            actions,
+            step.get("action", {}),
+            module=module,
+            state=state,
+            adapter=adapter,
+        )
         state = apply_action(game, state, previous_action)
         state = _settle(game, state, list(step.get("settle", [])))
         try:

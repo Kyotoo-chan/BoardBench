@@ -1,0 +1,253 @@
+{
+  "version": 3,
+  "rubric_version": "abalone-2026-07-17",
+  "game": "abalone",
+  "adapter": "checks/scenario_adapters/abalone.py",
+  "rulebook": {
+    "path": "inputs/games/abalone/game_rules.pdf",
+    "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+    "edition": "Schmidt Spiele German rules, 4 PDF pages"
+  },
+  "scenarios": [
+    {
+      "id": "ABAL-R01-exact-initial-setup",
+      "fact_ids": ["SET-02", "SET-03", "SET-04", "SET-05"],
+      "basis": "clear",
+      "source": {"page": 1, "quote": "Setzen Sie die Kugeln wie in Abb. 1 gezeigt in ihre Startpositionen."},
+      "initial": {
+        "current_player": 0,
+        "terminal": false,
+        "returns": [0, 0],
+        "legal_action_count_min": 1,
+        "adapter": {
+          "marble_counts": {"black": 14, "white": 14},
+          "positions": {
+            "black": ["0,-4", "1,-4", "2,-4", "3,-4", "4,-4", "-1,-3", "0,-3", "1,-3", "2,-3", "3,-3", "4,-3", "0,-2", "1,-2", "2,-2"],
+            "white": ["-2,2", "-1,2", "0,2", "-4,3", "-3,3", "-2,3", "-1,3", "0,3", "1,3", "-4,4", "-3,4", "-2,4", "-1,4", "0,4"]
+          },
+          "occupancy": {
+            "0,-4": "black", "4,-4": "black", "-1,-3": "black", "4,-3": "black",
+            "0,-2": "black", "2,-2": "black", "0,0": "empty",
+            "-2,2": "white", "0,2": "white", "-4,3": "white", "1,3": "white",
+            "-4,4": "white", "0,4": "white"
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R02-single-marble-one-step-and-turn",
+      "fact_ids": ["MOVE-01", "MOVE-02", "MOVE-03", "TURN-01"],
+      "basis": "clear",
+      "source": {"page": 1, "quote": "Eine Bewegung beinhaltet die Entfernung bis zur nächsten Mulde – nicht mehr."},
+      "fixture": {"black": ["0,0"], "white": ["4,0"], "active": "black"},
+      "steps": [{
+        "action": {"adapter": {"group": ["0,0"], "direction": "E"}},
+        "expect": {"current_player": 1, "terminal": false, "adapter": {"occupancy": {"0,0": "empty", "1,0": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R03-two-marble-inline",
+      "fact_ids": ["MOVE-04", "MOVE-05", "MOVE-06", "MOVE-07"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Eine Bewegung in gerader Linie: Die Kugeln werden geradeaus in die nächste Mulde geschoben."},
+      "fixture": {"black": ["-1,0", "0,0"], "white": ["4,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"-1,0": "empty", "0,0": "black", "1,0": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R04-three-marble-broadside",
+      "fact_ids": ["MOVE-04", "MOVE-05", "MOVE-06", "MOVE-08", "MOVE-09"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Eine Bewegung zur Seite: Die Kugeln werden seitlich in die nächsten Mulden geschoben."},
+      "fixture": {"black": ["-1,0", "0,0", "1,0"], "white": ["4,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-1,0", "0,0", "1,0"], "direction": "SE"}},
+        "expect": {"adapter": {"occupancy": {"-1,0": "empty", "0,0": "empty", "1,0": "empty", "-1,1": "black", "0,1": "black", "1,1": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R05-four-marble-move-illegal",
+      "fact_ids": ["MOVE-04", "MOVE-10"],
+      "basis": "clear",
+      "source": {"page": 1, "quote": "In einem Zug dürfen nicht mehr als drei Kugeln einer Farbe bewegt werden."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0", "1,0"], "white": ["4,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-2,0", "-1,0", "0,0", "1,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R06-two-v-one-sumito",
+      "fact_ids": ["SUM-01", "SUM-02", "SUM-03", "SUM-04", "SUM-05"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Ein ‚Sumito‘ ist eine Angriffs-Position, in der die Anzahl Ihrer Kugeln höher ist als die Ihres Gegners."},
+      "fixture": {"black": ["-1,0", "0,0"], "white": ["1,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"-1,0": "empty", "0,0": "black", "1,0": "black", "2,0": "white"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R07-three-v-one-sumito",
+      "fact_ids": ["SUM-01", "SUM-02"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Es gibt drei Sumito-Arten, die in den folgenden Beispielen zu sehen sind."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0"], "white": ["1,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-2,0", "-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"-2,0": "empty", "-1,0": "black", "0,0": "black", "1,0": "black", "2,0": "white"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R08-three-v-two-sumito",
+      "fact_ids": ["SUM-01", "SUM-02"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Es gibt drei Sumito-Arten, die in den folgenden Beispielen zu sehen sind."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0"], "white": ["1,0", "2,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-2,0", "-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"-2,0": "empty", "-1,0": "black", "0,0": "black", "1,0": "black", "2,0": "white", "3,0": "white"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R09-broadside-push-illegal",
+      "fact_ids": ["SUM-03", "MOVE-08", "MOVE-09"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Durch eine Bewegung in gerader Linie."},
+      "fixture": {"black": ["-1,0", "0,0"], "white": ["0,1"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-1,0", "0,0"], "direction": "SE", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R10-equal-strength-pushes-illegal",
+      "fact_ids": ["PATT-01"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0"], "white": ["1,0", "2,0", "3,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-2,0", "-1,0", "0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R11-four-v-three-still-patt",
+      "fact_ids": ["PATT-02", "MOVE-10"],
+      "basis": "clear",
+      "source": {"page": 4, "quote": "Ein 4 - zu - 3 zum Beispiel entspricht also einem 3- zu - 3 Patt."},
+      "fixture": {"black": ["-3,0", "-2,0", "-1,0", "0,0"], "white": ["1,0", "2,0", "3,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-2,0", "-1,0", "0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R12-blocked-sumito-illegal",
+      "fact_ids": ["SUM-05", "SUM-06"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "hier hinter der weißen Gruppe keine freie Mulde ist."},
+      "fixture": {"black": ["-1,0", "0,0", "2,0"], "white": ["1,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-1,0", "0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R13-gap-does-not-push",
+      "fact_ids": ["SUM-04", "SUM-07"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "hier eine leere Mulde zwischen Schwarz und Weiß ist."},
+      "fixture": {"black": ["-1,0", "0,0"], "white": ["2,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"0,0": "black", "1,0": "black", "2,0": "white"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R14-non-collinear-push-illegal",
+      "fact_ids": ["SUM-03", "SUM-08"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "hier die Kugeln nicht in einer geraden Linie liegen."},
+      "fixture": {"black": ["-1,1", "0,0"], "white": ["1,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-1,1", "0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R15-edge-ejection",
+      "fact_ids": ["OUT-01", "OUT-02", "SUM-01"],
+      "basis": "clear",
+      "source": {"page": 4, "quote": "Eine Kugel ist aus dem Spiel, wenn sie aus dem Spielfeld hinaus auf den Rand geschoben wird."},
+      "fixture": {"black": ["2,0", "3,0"], "white": ["4,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["2,0", "3,0"], "direction": "E"}},
+        "expect": {"terminal": false, "returns": [0, 0], "adapter": {"marble_counts": {"black": 2, "white": 0}, "occupancy": {"3,0": "black", "4,0": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R16-sixth-ejection-wins",
+      "fact_ids": ["END-01", "OUT-01"],
+      "basis": "clear",
+      "source": {"page": 4, "quote": "Der Spieler, der zuerst sechs Kugeln des Gegners hinaus geschoben hat, gewinnt das Spiel!"},
+      "fixture": {"black": ["2,0", "3,0"], "white": ["4,0"], "captures": [5, 0]},
+      "initial": {"terminal": false, "adapter": {"captures": [5, 0]}},
+      "steps": [{
+        "action": {"adapter": {"group": ["2,0", "3,0"], "direction": "E"}},
+        "expect": {"terminal": true, "returns": [1, -1]}
+      }]
+    },
+    {
+      "id": "ABAL-R17-sumito-is-optional",
+      "fact_ids": ["SUM-09"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "Auch wenn ein Sumito-Angriff möglich ist, muss er nicht ausgeführt werden."},
+      "fixture": {"black": ["-1,0", "0,0", "0,-1"], "white": ["1,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["0,-1"], "direction": "NW", "expected": true}}}
+    },
+    {
+      "id": "ABAL-R18-patt-may-withdraw",
+      "fact_ids": ["PATT-01", "PATT-03"],
+      "basis": "clear",
+      "source": {"page": 4, "quote": "so dass sie sich nicht gegenseitig wegschieben dürfen."},
+      "fixture": {"black": ["0,0"], "white": ["1,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["0,0"], "direction": "W", "expected": true}}}
+    },
+    {
+      "id": "ABAL-R20-three-marble-inline",
+      "fact_ids": ["MOVE-04", "MOVE-06", "MOVE-07"],
+      "basis": "clear",
+      "source": {"page": 2, "quote": "Die Kugeln werden geradeaus in die nächste Mulde geschoben."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0"], "white": ["4,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-2,0", "-1,0", "0,0"], "direction": "E"}},
+        "expect": {"adapter": {"occupancy": {"-2,0": "empty", "-1,0": "black", "0,0": "black", "1,0": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R21-two-broadside-from-longer-row",
+      "fact_ids": ["MOVE-06", "MOVE-08", "MOVE-11"],
+      "basis": "clear",
+      "source": {"page": 1, "quote": "Sie dürfen eine vorhandene, längere Kugelreihe trennen, indem Sie eine, zwei oder drei Kugeln einer Farbe bewegen."},
+      "fixture": {"black": ["-2,0", "-1,0", "0,0", "1,0"], "white": ["4,0"]},
+      "steps": [{
+        "action": {"adapter": {"group": ["-1,0", "0,0"], "direction": "SE"}},
+        "expect": {"adapter": {"occupancy": {"-2,0": "black", "-1,0": "empty", "0,0": "empty", "1,0": "black", "-1,1": "black", "0,1": "black"}}}
+      }]
+    },
+    {
+      "id": "ABAL-R22-one-v-one-patt",
+      "fact_ids": ["PATT-01"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich."},
+      "fixture": {"black": ["0,0"], "white": ["1,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R23-two-v-two-patt",
+      "fact_ids": ["PATT-01"],
+      "basis": "clear",
+      "source": {"page": 3, "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich."},
+      "fixture": {"black": ["-1,0", "0,0"], "white": ["1,0", "2,0"]},
+      "initial": {"adapter": {"move_legal": {"group": ["-1,0", "0,0"], "direction": "E", "expected": false}}}
+    },
+    {
+      "id": "ABAL-R19-forced-pass-only-with-no-move",
+      "fact_ids": ["TURN-01"],
+      "basis": "human_decision",
+      "source": {"page": 1, "quote": "Die Spieler sind abwechselnd an der Reihe. Schwarz fängt immer an."},
+      "fixture": {
+        "black": ["0,0"],
+        "white": ["1,0", "-1,0", "0,1", "0,-1", "1,-1", "-1,1"],
+        "active": "black"
+      },
+      "initial": {"terminal": false, "legal_action_count": 1, "legal_action_name_contains_any": ["pass", "passen", "skip"]},
+      "steps": [{"action": {"select": "first"}, "expect": {"current_player": 1, "terminal": false}}]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ Rules:
 - Mark ambiguous rules as questions instead of silently choosing an interpretation.
 - Prefer observable assertions through the public BoardBench API: current player, terminal state, returns, absolute/relative legal-action count (`legal_action_count` / `legal_action_delta`), exact action name, or normalized action name.
 - Start with setup, ordinary turn flow, occupied/illegal targets, and terminal conditions.
+- For every card game, include cited inventory facts and a scenario that checks the exact total and per-card-type counts after setup; mark only genuinely unobservable portions `not_testable`.
 - Do not inspect or mutate private fields of a generated state.
 - A human or independent second model must validate quotes and expected values before the scenario becomes benchmark evidence.
 

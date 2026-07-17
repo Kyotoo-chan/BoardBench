@@ -22,7 +22,7 @@ Require exactly one active `inputs/game_rules.pdf` or `.txt`. Ask for a short sl
 1. Hash and archive the rulebook at `inputs/games/<slug>/game_rules.<ext>`. If an existing file has another hash, ask for an edition label instead of overwriting it.
 2. Read `inputs/prompts/rulebook_to_scenarios.md` and `checks/scenarios/README.md`.
 3. When subagents are enabled, launch `ruleanalyst` and `edgereviewer` in parallel background calls in one turn. Their prompts must be self-contained and read-only.
-4. Build a cited rule/assumption register in `rulefacts.md`. Classify every item as `clear`, `human_decision`, `ambiguous`, or `not_testable`.
+4. Build a cited rule/assumption register in `rulefacts.md`. Classify every item as `clear`, `human_decision`, `ambiguous`, or `not_testable`. For every card game, record the cited total and per-type card inventory and require a setup scenario that checks those exact counts wherever observable.
 5. Ask the user only about **material** assumptions: choices that alter legal actions, state transitions, private information, elimination, terminal results, or scoring. For each question show the quote, alternatives, recommended interpretation, and affected scenarios. Never silently choose.
 6. Stop at an approval gate. Do not write a hard expected result for an unresolved material assumption.
 7. After agreement, write `inputs/games/<slug>/rulefacts.md` with `status: approved`, stable fact IDs, rulebook hash, dated decisions, corrections, and unresolved questions.
