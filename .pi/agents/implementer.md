@@ -1,4 +1,5 @@
 ---
+name: implementer
 description: Implement one BoardBench environment
 tools: read, write, edit, bash, grep, find, ls
 skills: false

@@ -1,4 +1,5 @@
 ---
+name: rulereviewer
 description: Review code against cited rules
 tools: read, grep, find, ls
 skills: false

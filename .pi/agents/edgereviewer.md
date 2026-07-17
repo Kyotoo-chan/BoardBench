@@ -1,4 +1,5 @@
 ---
+name: edgereviewer
 description: Find rulebook edge cases and gaps
 tools: read, grep, find, ls
 skills: false

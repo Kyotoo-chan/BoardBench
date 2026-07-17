@@ -1,4 +1,5 @@
 ---
+name: ruleanalyst
 description: Extract cited atomic rule facts
 tools: read, grep, find, ls
 skills: false
