@@ -1,0 +1,18 @@
+{
+  "model": "openai-codex/gpt-5.6-sol",
+  "thinking": "low",
+  "subagent": "boardbench-isolated-implementer",
+  "run_id": "dcea42f9-c28b-4da1-90ed-c094518a798f",
+  "turns": 8,
+  "tokens": {
+    "input": 25779,
+    "output": 5955,
+    "reasoning": 1367,
+    "cache_read": 51712,
+    "cache_write": 0,
+    "last_total_context": 13640
+  },
+  "reported_cost": 0.333401,
+  "raw_events": "outputs/abalone_codex_ag_events.jsonl",
+  "raw_session": "outputs/abalone_codex_ag_session.jsonl"
+}

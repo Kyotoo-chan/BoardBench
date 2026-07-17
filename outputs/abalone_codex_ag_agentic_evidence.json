@@ -1,0 +1,39 @@
+{
+  "protocol": "agentic-v2.2",
+  "stem": "abalone_codex_ag",
+  "source": "inputs/games/abalone/game_rules.pdf",
+  "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+  "prompt_sha256": "625f5ad9307cc9e29219e8ab8d43f3f1bfac8d501bbfe2a313eefc251694c27a",
+  "self_check_sha256": "159defdb510d006f7652bebb928ed22bce2a001909d292dfa507a2b8222b70e2",
+  "implementation": "outputs/abalone_codex_ag.py",
+  "implementation_sha256": "81a951c9a7eec8dfab2bf2ef4da0134b696cf6b1b25e1d208813a65bec1c0175",
+  "rule_coverage": "outputs/abalone_codex_ag_rule_coverage.md",
+  "assumptions": "outputs/abalone_codex_ag_assumptions.json",
+  "raw_response": "outputs/abalone_codex_ag.md",
+  "raw_events": "outputs/abalone_codex_ag_events.jsonl",
+  "raw_session": "outputs/abalone_codex_ag_session.jsonl",
+  "usage": "outputs/abalone_codex_ag_usage.json",
+  "parent_model": "openai-codex/gpt-5.6-sol",
+  "parent_thinking": "low",
+  "child_model": "openai-codex/gpt-5.6-sol",
+  "child_thinking": "low",
+  "repair_count": 0,
+  "commands": [
+    {
+      "command": "python -m py_compile implementation.py",
+      "environment": "boardbench",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "python agentic_self_check.py",
+      "environment": "boardbench",
+      "exit_code": 0,
+      "output": "agentic-self-check OK states=300 actions=20209"
+    }
+  ],
+  "agent_ran_self_check": true,
+  "independent_gate_passed": true,
+  "wrapper_status": "failed_only_because_outer_attested_acceptance_parser_rejected_the_present_structured_report",
+  "final_gate_status": "passed"
+}

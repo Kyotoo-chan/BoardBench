@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import unittest
 from dataclasses import dataclass
@@ -113,6 +114,21 @@ class ScenarioRunnerTests(unittest.TestCase):
         state = abalone.setup(None, game, {"black": ["0,0"], "white": ["4,0"]})
         abalone.check(None, game, state, {"marble_counts": {"black": 1, "white": 1}, "occupancy": {"0,0": "black"}})
 
+    def test_abalone_adapter_supports_sparse_axial_triples(self):
+        initial = SimpleNamespace(
+            board=((0, -4, 0), (-4, 4, 1)),
+            current_player=0,
+            winner=None,
+        )
+        game = SimpleNamespace(initial_state=lambda: initial)
+        state = abalone.setup(None, game, {"black": ["0,0"], "white": ["4,0"]})
+        abalone.check(
+            None,
+            game,
+            state,
+            {"marble_counts": {"black": 1, "white": 1}, "occupancy": {"0,0": "black", "4,0": "white"}},
+        )
+
     def test_abalone_adapter_resolves_move_by_transition(self):
         cells = {
             (q, r): None
@@ -155,6 +171,38 @@ class ScenarioRunnerTests(unittest.TestCase):
         actions = [((0, 0), (-1, 0)), ((0, 0), (1, 0))]
         selected = abalone.resolve_action(None, game, state, actions, {"group": ["0,0"], "direction": "E"})
         self.assertEqual(selected, actions[1])
+
+    def test_abalone_adapter_infers_loss_index_for_capture_fixture(self):
+        initial = SimpleNamespace(
+            board=((0, -4, 0), (-4, 4, 1)),
+            current_player=0,
+            ejected=(0, 0),
+            winner=None,
+        )
+        action = ("inline", ((2, 0), (3, 0)), 0)
+
+        def apply_action(state, selected):
+            result = copy.deepcopy(state)
+            cells = {(q, r): value for q, r, value in result.board}
+            cells.pop((2, 0))
+            cells[(3, 0)] = 0
+            cells[(4, 0)] = 0
+            result.board = tuple((q, r, value) for (q, r), value in sorted(cells.items()))
+            result.ejected = (0, result.ejected[1] + 1)
+            return result
+
+        game = SimpleNamespace(
+            initial_state=lambda: initial,
+            legal_actions=lambda state: [action],
+            apply_action=apply_action,
+        )
+        state = abalone.setup(
+            None,
+            game,
+            {"black": ["2,0", "3,0"], "white": ["4,0"], "captures": [5, 0]},
+        )
+        self.assertEqual(state.ejected, (0, 5))
+        abalone.check(None, game, state, {"captures": [5, 0]})
 
     def test_abalone_adapter_marks_sparse_fixture_rejection_untestable(self):
         cells = {
