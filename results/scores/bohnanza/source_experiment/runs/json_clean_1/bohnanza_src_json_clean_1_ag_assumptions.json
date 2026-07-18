@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page 3, Spielvorbereitung / page 9, Spielende",
+      "source_basis": "missing",
+      "alternatives": ["choose the starting player by an unspecified external method", "use a fixed starting player"],
+      "selected": "player 0 is the starting player; final-score ties therefore favor the greatest tied player index",
+      "affected_mechanics": ["state_transition", "terminal results"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "pages 5-7, Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": ["model unrestricted multi-card negotiated bundles", "model consensual atomic one-for-one trades and one-card gifts"],
+      "selected": "legal negotiation primitives are one-card-for-one-card trades and one-card gifts; repeated actions construct larger gifts but not unequal bundled swaps",
+      "affected_mechanics": ["legal_actions", "state_transition", "private information"]
+    }
+  ]
+}
