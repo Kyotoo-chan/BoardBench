@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "pages 5-7, Regeln für den Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": ["free-form simultaneous negotiation", "sequential offers with explicit consent"],
+      "selected": "sequential propose, then accept or reject actions",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "page 9, Spielende",
+      "source_basis": "ambiguous",
+      "alternatives": ["nearest player clockwise after start player wins ties", "last player clockwise before start player wins ties"],
+      "selected": "highest player index wins a score tie because player 0 is the start player",
+      "affected_mechanics": ["terminal results"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "page 10, Variante 2: die Ackerbohnen",
+      "source_basis": "missing",
+      "alternatives": ["shuffle is nondeterministic", "shuffle is reproducible"],
+      "selected": "a fixed seeded shuffle models the unknown card order reproducibly",
+      "affected_mechanics": ["private_information", "state_transition"]
+    }
+  ]
+}
