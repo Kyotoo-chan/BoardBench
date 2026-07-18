@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page 10, Variante 2: Spielmaterial & Spielvorbereitung",
+      "source_basis": "ambiguous",
+      "alternatives": ["'alle Bohnensorten aus dem Grundspiel' means all eight base-game varieties", "the duplicated/garbled line names an unstated subset"],
+      "selected": "use all eight base-game varieties, plus Ackerbohne and Weinbrandbohne",
+      "affected_mechanics": ["initial_state", "chance"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "page 10, reference to Variante 1: Drei neue Bohnensorten",
+      "source_basis": "missing",
+      "alternatives": ["use only the visible Variant-1 draw/end changes", "additional Variant-1 rules existed outside the supplied visible text"],
+      "selected": "inherit the visible one-card-per-player clockwise draw rule and normal third-empty ending for 4-5 players",
+      "affected_mechanics": ["legal_actions", "state_transition", "terminal"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "page 9, Spielende",
+      "source_basis": "missing",
+      "alternatives": ["returns are win/loss utilities", "returns are final coin totals"],
+      "selected": "returns are +1 for the source-determined winner and -1 for every other player",
+      "affected_mechanics": ["scoring", "returns"]
+    }
+  ]
+}
