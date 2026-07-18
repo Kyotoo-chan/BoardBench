@@ -1,0 +1,59 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "read-only",
+  "started_at": "2026-07-18T14:58:22.590421+00:00",
+  "ended_at": "2026-07-18T15:01:41.173466+00:00",
+  "elapsed_seconds": 198.583,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 38,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 582034,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 38,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 581835,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "reasoning_output_tokens": 4264,
+    "output_tokens": 6906,
+    "cached_input_tokens": 50432,
+    "input_tokens": 72762
+  },
+  "provider_usage_records": [
+    {
+      "line": 10,
+      "path": "$.usage",
+      "input_tokens": 72762,
+      "cached_input_tokens": 50432,
+      "output_tokens": 6906,
+      "reasoning_output_tokens": 4264
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_mutated_1_ag_judge_2_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_mutated_1_ag_judge_2.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-01.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-02.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-03.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-04.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-05.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-06.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-07.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-08.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-09.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-10.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_y6olljuo/game_rules_pages/page-11.png"
+  ],
+  "stderr": "2026-07-18T14:59:48.619579Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"if (Test-Path -LiteralPath 'game_components.json') { Get-Content -Raw -LiteralPath 'game_components.json' } elseif (Test-Path -LiteralPath 'inputs/games/bohnanza/game_components.json') { Get-Content -Raw -LiteralPath 'inputs/games/bohnanza/game_components.json' } else { Write-Output 'canonical component JSON not present at manifest paths' }\"` rejected: blocked by policy\n"
+}

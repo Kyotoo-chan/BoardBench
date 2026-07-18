@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page 11, Variante 2 setup; game_components.json hinweise",
+      "source_basis": "contradictory",
+      "alternatives": ["use the 129 base, Weinbrandbohne, and Ackerbohne cards named by the publisher", "use all 157 component-observation cards"],
+      "selected": "use the 129 cards named by the publisher rulebook",
+      "affected_mechanics": ["initial_state", "chance"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "page 3 setup and page 4 start-player text",
+      "source_basis": "missing",
+      "alternatives": ["choose a start player externally", "use seat zero as start player"],
+      "selected": "seat zero is start player",
+      "affected_mechanics": ["initial_state", "state_transition"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "page 8 Die Bohnenschutzregel; page 7 Die Bohnenernte",
+      "source_basis": "ambiguous",
+      "alternatives": ["allow an inactive player to interrupt any decision to harvest", "allow harvesting whenever that player controls the current decision"],
+      "selected": "a player may harvest whenever that player controls the current decision; no out-of-turn interrupt protocol is invented",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-04",
+      "material": true,
+      "source_location": "page 9 Spielende tie rule",
+      "source_basis": "ambiguous",
+      "alternatives": ["clockwise-furthest means highest numbered seat", "clockwise-furthest means another ordering after complete rounds"],
+      "selected": "among tied players, the highest numbered seat wins",
+      "affected_mechanics": ["terminal results", "scoring"]
+    }
+  ]
+}
