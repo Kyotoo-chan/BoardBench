@@ -1,0 +1,65 @@
+=== TECHNICAL 01-04 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_src_json_mutated_3_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\outputs\bohnanza_src_json_mutated_3_ag.py --check 01_result_file --check 02_python_syntax --check 03_startable_game --check 04_required_api
+exit_code=0
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    8/8 score=1.000    0.01s
+---- summary                            4/4 score=1.000    0.02s
+
+
+=== ROBUSTNESS 05 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_src_json_mutated_3_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\outputs\bohnanza_src_json_mutated_3_ag.py --rollouts 100 --max-steps 1000 --seed 1 --check 05_random_rollouts
+exit_code=0
+OK   05_random_rollouts             100/100 score=1.000    6.70s
+---- summary                            1/1 score=1.000    6.70s
+
+
+=== INTERFACE 06 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_src_json_mutated_3_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\outputs\bohnanza_src_json_mutated_3_ag.py --check 06_action_language
+exit_code=0
+OK   06_action_language       561830/561830 score=1.000    5.38s
+---- summary                            1/1 score=1.000    5.38s
+
+
+=== RULE FIDELITY SCENARIOS ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\outputs\bohnanza_src_json_mutated_3_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\outputs\bohnanza_src_json_mutated_3_ag_scenarios.json
+exit_code=1
+FAIL BOHN-R01-exact-acker-inventory: total_cards: expected 129, got 104
+CRASH BOHN-R02-front-card-mandatory: ValueError: unknown phase
+CRASH BOHN-R03-second-plant-optional-no-third: ValueError: unknown phase
+CRASH BOHN-R04-empty-hand-skips-phase-one: ValueError: unknown phase
+CRASH BOHN-R05-one-type-per-field: ValueError: unknown phase
+UNTESTABLE BOHN-R06-trading-authority: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R07-received-cards-bypass-hand: state has no pending-received container
+UNTESTABLE BOHN-R08-rejected-gift-no-transfer: implementation has no pending trade representation
+CRASH BOHN-R09-variant-draw-one-each-clockwise: ValueError: unknown phase
+CRASH BOHN-R10-singleton-protection: ValueError: unknown phase
+CRASH BOHN-R11-singleton-allowed-when-all-single: ValueError: unknown phase
+CRASH BOHN-R12-normal-harvest-clears-field: ValueError: unknown phase
+UNTESTABLE BOHN-R13-one-acker-zero-harvest: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R14-two-acker-unlocks-third-field: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R15-two-acker-existing-third-field: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R16-three-acker-three-coins-no-field: implementation has no identifiable 'acker' card
+CRASH BOHN-R17-third-empty-during-reveal-finishes-phase-three: ValueError: unknown phase
+CRASH BOHN-R18-third-empty-during-phase-four-stops-immediately: ValueError: unknown phase
+CRASH BOHN-R19-final-score-ignores-hand: NotImplementedError: state has no winner
+CRASH BOHN-R20-clockwise-tiebreak: NotImplementedError: state has no winner
+CRASH BOHN-R21-nonterminal-empty-refills-and-continues-reveal: ValueError: unknown phase
+UNTESTABLE BOHN-R22-harvest-between-mandatory-plantings: state has no pending-received container
+CRASH BOHN-R23-nonactive-player-can-harvest: ValueError: unknown phase
+CRASH BOHN-R24-opponent-hands-remain-private: ValueError: unknown phase
+FAIL BOHN-R25-five-player-setup: five_player.total_cards: expected 129, got 104
+CRASH BOHN-R26-unequal-trade-from-arbitrary-hand-positions: ValueError: unknown phase
+CRASH BOHN-R27-forced-harvest-before-mandatory-plant: ValueError: unknown phase
+CRASH BOHN-R28-blau-coin-curve: ValueError: unknown phase
+CRASH BOHN-R29-feuer-coin-curve: ValueError: unknown phase
+CRASH BOHN-R30-sau-coin-curve: ValueError: unknown phase
+CRASH BOHN-R31-brech-coin-curve: ValueError: unknown phase
+CRASH BOHN-R32-soja-coin-curve: ValueError: unknown phase
+CRASH BOHN-R33-augen-coin-curve: ValueError: unknown phase
+CRASH BOHN-R34-rot-coin-curve: ValueError: unknown phase
+CRASH BOHN-R35-garten-coin-curve: ValueError: unknown phase
+CRASH BOHN-R36-weinbrand-coin-curve: NotImplementedError: implementation has no identifiable 'weinbrand' card
+CRASH BOHN-R37-hand-sorting-is-forbidden: ValueError: unknown phase
+SCENARIOS PASS=0 FAIL=2 CRASH=27 UNREACHED=0 UNTESTABLE=8 evaluated=29/37 score=0.000 coverage=0.784

@@ -1,0 +1,59 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "read-only",
+  "started_at": "2026-07-18T16:31:23.217449+00:00",
+  "ended_at": "2026-07-18T16:34:35.242204+00:00",
+  "elapsed_seconds": 192.025,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 38,
+      "reset_at": 1784968736,
+      "reset_after_seconds": 576454,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 38,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 576261,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "reasoning_output_tokens": 3701,
+    "output_tokens": 6544,
+    "cached_input_tokens": 78848,
+    "input_tokens": 118003
+  },
+  "provider_usage_records": [
+    {
+      "line": 13,
+      "path": "$.usage",
+      "input_tokens": 118003,
+      "cached_input_tokens": 78848,
+      "output_tokens": 6544,
+      "reasoning_output_tokens": 3701
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_mutated_3_ag_judge_2_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_mutated_3_ag_judge_2.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-01.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-02.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-03.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-04.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-05.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-06.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-07.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-08.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-09.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-10.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_iaco80q4/game_rules_pages/page-11.png"
+  ],
+  "stderr": "2026-07-18T16:31:32.403065Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n"
+}
