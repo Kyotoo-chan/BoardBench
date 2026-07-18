@@ -1,14 +1,14 @@
 # BoardBench rule review
 
-Review one generated module against the supplied rulebook. Do not edit code, run generic checks, or use outside game knowledge.
+Review one generated module against the complete supplied source condition and its provenance labels. Do not edit code, run generic checks, or use outside game knowledge.
 
 ## Evidence rule
 
 For every `critical` or `major` finding include:
 
 - canonical fact ID;
-- evidence type: `rule_quote` or `human_decision`;
-- exact rulebook quote and page/section;
+- evidence type: `rule_quote`, `user_observation`, or `human_decision`;
+- source ID plus exact quote and page/section;
 - conflicting code symbol or transition;
 - expected versus implemented behaviour.
 

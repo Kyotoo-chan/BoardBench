@@ -78,6 +78,15 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 | HARV-01 | RULES | 7 | “jederzeit … auch wenn du nicht der aktive Spieler bist” | Owner may harvest between individual game steps, including during another turn, but not inside an already executing atomic draw/transfer. | human_decision |
 | HARV-02 | RULES | 8 | “Drehe so viele Karten … Bohnentaler … restlichen … Ablagestapel … Feld immer leer.” | Normal harvest flips earned cards to coins, discards the rest, and empties the field. | clear |
 | HARV-03 | RULES | 8 | “keine einzelne Bohnenkarte ernten, wenn … einem deiner Felder mehr als eine” | A singleton cannot be harvested if any own field has 2+ cards; otherwise it may be. | clear |
+| GOLD-01 | COMPONENTS | 2 | “Blaue Bohne … 4 / 6 / 8 / 10” | Blue yields 0 below 4, then 1/2/3/4 coins at 4/6/8/10+. | user_observation |
+| GOLD-02 | COMPONENTS | 2 | “Feuerbohne … 3 / 6 / 8 / 9” | Fire yields 0 below 3, then 1/2/3/4 at 3/6/8/9+. | user_observation |
+| GOLD-03 | RULES | 8 | “3 oder 4 Saubohnen … einen … 5 oder 6 … zwei … 7 … drei … 8 oder mehr … vier” | Sau yields 0 below 3, then 1/2/3/4 at 3/5/7/8+. | clear |
+| GOLD-04 | COMPONENTS | 2 | “Brechbohne … 3 / 5 / 6 / 7” | Brech yields 0 below 3, then 1/2/3/4 at 3/5/6/7+. | user_observation |
+| GOLD-05 | COMPONENTS | 2 | “Sojabohne … 2 / 4 / 6 / 7” | Soy yields 0 below 2, then 1/2/3/4 at 2/4/6/7+. | user_observation |
+| GOLD-06 | COMPONENTS | 2 | “Augenbohne … 2 / 4 / 5 / 6” | Eye yields 0 below 2, then 1/2/3/4 at 2/4/5/6+. | user_observation |
+| GOLD-07 | COMPONENTS | 2 | “Rote Bohne … 2 / 3 / 4 / 5” | Red yields 0 below 2, then 1/2/3/4 at 2/3/4/5+. | user_observation |
+| GOLD-08 | COMPONENTS | 2 | “Gartenbohne … 2 Bohnen … 3 Bohnen” | Garden yields 0 at 1, 2 coins at 2, and 3 coins at 3+. | user_observation |
+| GOLD-09 | COMPONENTS | 2 | “Weinbrandbohne … 4 / 7 / 9 / 11” | Brandy yields 0 below 4, then 1/2/3/4 at 4/7/9/11+. | user_observation |
 | ACKER-01 | RULES | 11 | “Feld mit zwei Ackerbohnen, erhältst du ein drittes Bohnenfeld.” | Exactly two unlock field 3 if absent; both harvested cards are discarded, old fields 1–2 persist. | clear |
 | ACKER-02 | RULES | 11 | “bereits ein drittes Bohnenfeld … erhältst du … nichts” | If field 3 already exists, two yield no reward but are normally discarded and the field empties. | human_decision |
 | ACKER-03 | RULES | 11 | “drei Ackerbohnen … drei Bohnentaler” | Exactly three become three coins and do not unlock field 3. | human_decision |

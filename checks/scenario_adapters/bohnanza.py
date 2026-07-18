@@ -375,9 +375,9 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
     actions = list(game.legal_actions(state))
     names = _named_actions(game, state)
     for item in expected.get("harvest_legal", []):
-        field = int(item["field"])
-        found = any(isinstance(action, tuple) and len(action) >= 3 and "ernt" in str(action[0]).casefold() and int(action[2]) == field for action in actions)
-        _assert_equal(f"harvest_legal[{field}]", found, bool(item["expected"]))
+        player, field = int(item.get("player", 0)), int(item["field"])
+        found = any(isinstance(action, tuple) and len(action) >= 3 and "ernt" in str(action[0]).casefold() and int(action[1]) == player and int(action[2]) == field for action in actions)
+        _assert_equal(f"harvest_legal[{player},{field}]", found, bool(item["expected"]))
     for item in expected.get("plant_legal", []):
         field = int(item["field"])
         found = any(isinstance(action, tuple) and len(action) >= 2 and "anbau" in str(action[0]).casefold() and int(action[-1]) == field for action in actions)
@@ -408,3 +408,54 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
         for player, wanted in expected["pending_received"].items():
             actual = values[int(player)] if not isinstance(values, Mapping) else values.get(int(player), values.get(str(player), []))
             _assert_equal(f"pending_received[{player}]", _cards(actual), [_card(module, game, card) for card in wanted])
+
+    if "private_hand_visibility" in expected:
+        spec = expected["private_hand_visibility"]
+        rendered = str(game.render(state))
+        for semantic in spec["own"]:
+            card = str(_card(module, game, semantic))
+            if card not in rendered:
+                raise AssertionError(f"owner-visible card {card!r} missing from render")
+        for player, hidden in spec["hidden"].items():
+            for semantic in hidden:
+                card = str(_card(module, game, semantic))
+                if card in rendered:
+                    raise AssertionError(f"opponent card {card!r} leaked in render")
+
+    if "five_player_setup" in expected:
+        spec = expected["five_player_setup"]
+        try:
+            probe_game = module.Game(players=int(spec["players"]), seed=1)
+        except TypeError:
+            probe_game = module.Game(int(spec["players"]))
+        probe = probe_game.initial_state()
+        _assert_equal("five_player.players", len(probe.hands), int(spec["players"]))
+        for player, fields in enumerate(probe.fields):
+            _assert_equal(f"five_player.fields[{player}]", len(fields), int(spec["fields_each"]))
+        for player, hand in enumerate(probe.hands):
+            _assert_equal(f"five_player.hand[{player}]", len(_cards(hand)), int(spec["hand_size"]))
+        _assert_equal("five_player.total_cards", len(_all_cards(probe)), int(spec["total_cards"]))
+
+    if "harvest_curve" in expected:
+        spec = expected["harvest_curve"]
+        for case in spec["cases"]:
+            probe = setup(module, game, {
+                "fields": {"0": [[spec["bean"]] * int(case["size"]), []]},
+                "coins": {"0": 0},
+                "discard": [],
+                "phase": "trade",
+                "active_player": 0,
+            })
+            action = next((action for action in game.legal_actions(probe)
+                           if isinstance(action, tuple) and len(action) >= 3
+                           and "ernt" in str(action[0]).casefold()
+                           and int(action[1]) == 0 and int(action[2]) == 0), None)
+            if action is None:
+                raise AssertionError(f"no legal harvest for {spec['bean']} size {case['size']}")
+            after = game.apply_action(probe, action)
+            coin_name = _field(after, COIN_FIELDS)
+            if coin_name is None:
+                raise NotImplementedError("state has no coin/score field")
+            coins = getattr(after, coin_name)
+            actual = coins[0] if not isinstance(coins, Mapping) else coins.get(0, coins.get("0"))
+            _assert_equal(f"harvest_curve[{spec['bean']}][{case['size']}]", int(actual), int(case["coins"]))
