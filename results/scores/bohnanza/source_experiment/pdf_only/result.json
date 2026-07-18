@@ -1,0 +1,1764 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "bohnanza",
+    "condition": "pdf_only",
+    "source_path": "../../../../../inputs/games/bohnanza/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+    "sources": [
+      {
+        "id": "RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../../inputs/games/bohnanza/game_rules.pdf",
+        "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+      }
+    ]
+  },
+  "reproducibility": {
+    "run_count": 3,
+    "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+    "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {},
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": 0.0
+    },
+    "interface": {
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": 0.0
+    },
+    "clear_rules": {
+      "values": [
+        0.5652173913043478,
+        0.15384615384615385,
+        0.08695652173913043
+      ],
+      "mean": 0.2686733556298774,
+      "sample_sd": 0.25898326112208375
+    },
+    "human_decisions": {
+      "values": [
+        0.8,
+        0.2857142857142857,
+        0.0
+      ],
+      "mean": 0.3619047619047619,
+      "sample_sd": 0.4054056505484336
+    },
+    "coverage": {
+      "values": [
+        0.7567567567567568,
+        0.8918918918918919,
+        0.7027027027027027
+      ],
+      "mean": 0.7837837837837838,
+      "sample_sd": 0.09744733176929699
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.16,
+        0.24,
+        0.2,
+        0.2,
+        0.18,
+        0.22,
+        0.22,
+        0.24,
+        0.27
+      ],
+      "mean": 0.21444444444444444,
+      "sample_sd": 0.033582402799349806,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "bohnanza_src_pdf_only_1_ag": {},
+      "bohnanza_src_pdf_only_2_ag": {},
+      "bohnanza_src_pdf_only_3_ag": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 7,
+    "interpretation_agreement": {
+      "pages 6–7, Regeln für den Bohnenhandel": {
+        "mutually accepted one-card gifts, one-for-one trades, and the explicitly illustrated two-for-one trade are atomic legal actions": 1
+      },
+      "page 10, Ein leerer Nachziehstapel": {
+        "the draw yields no card; the phase continues with as many cards as are available": 1
+      },
+      "page 10, Ein leerer Nachziehstapel / Spielende": {
+        "stop the draw when no card remains; after a phase-2 exhaustion finish phases 2 and 3, while a phase-4 exhaustion ends immediately": 1
+      },
+      "page 8, Die Bohnenernte: jederzeit im Spiel": {
+        "every otherwise nonterminal decision state also exposes each player's currently legal harvest action": 1
+      },
+      "pages 10–11, Variante 1 and Variante 2": {
+        "variant names are recognized but initialization raises ValueError; the complete assigned base 4–5-player condition remains playable": 1
+      },
+      "pages 6-7, Regeln für den Bohnenhandel": {
+        "atomic one-card-for-zero-or-one-card offers with recipient acceptance; repeated offers express unequal multi-card trades": 1
+      },
+      "page 4, Spielmaterial & Spielvorbereitung": {
+        "seeded reproducible shuffle, configurable on Game": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "pages 6–7, Regeln für den Bohnenhandel",
+        "source_basis": "missing",
+        "alternatives": [
+          "model negotiation as a multi-step proposal and consent protocol",
+          "model each mutually accepted exchange or gift as one atomic action"
+        ],
+        "selected": "mutually accepted one-card gifts, one-for-one trades, and the explicitly illustrated two-for-one trade are atomic legal actions",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "page 10, Ein leerer Nachziehstapel",
+        "source_basis": "missing",
+        "alternatives": [
+          "a required draw with both draw and discard piles empty draws no card",
+          "the game cannot proceed until discard cards exist"
+        ],
+        "selected": "the draw yields no card; the phase continues with as many cards as are available",
+        "affected_mechanics": [
+          "state_transition",
+          "terminal_results"
+        ]
+      },
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "page 10, Ein leerer Nachziehstapel / Spielende",
+        "source_basis": "missing",
+        "alternatives": [
+          "on the third exhaustion, stop the current multi-card draw immediately",
+          "somehow complete the current multi-card draw before ending"
+        ],
+        "selected": "stop the draw when no card remains; after a phase-2 exhaustion finish phases 2 and 3, while a phase-4 exhaustion ends immediately",
+        "affected_mechanics": [
+          "state_transition",
+          "terminal_results"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "page 8, Die Bohnenernte: jederzeit im Spiel",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "an off-turn harvest may interrupt any decision before its action",
+          "off-turn harvests require a separate priority/consent window"
+        ],
+        "selected": "every otherwise nonterminal decision state also exposes each player's currently legal harvest action",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "pages 10–11, Variante 1 and Variante 2",
+        "source_basis": "missing",
+        "alternatives": [
+          "invent omitted counts and Bohnometers for variant beans",
+          "reject variant initialization until the missing component data is supplied"
+        ],
+        "selected": "variant names are recognized but initialization raises ValueError; the complete assigned base 4–5-player condition remains playable",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "scoring"
+        ]
+      },
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "pages 6-7, Regeln für den Bohnenhandel",
+        "source_basis": "missing",
+        "alternatives": [
+          "free-form simultaneous negotiation",
+          "atomic one-card-for-zero-or-one-card offers with recipient acceptance"
+        ],
+        "selected": "atomic one-card-for-zero-or-one-card offers with recipient acceptance; repeated offers express unequal multi-card trades",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "page 4, Spielmaterial & Spielvorbereitung",
+        "source_basis": "missing",
+        "alternatives": [
+          "nondeterministic shuffle",
+          "seeded reproducible shuffle"
+        ],
+        "selected": "seeded reproducible shuffle, configurable on Game",
+        "affected_mechanics": [
+          "state_transition",
+          "private_information"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": 0.0
+    },
+    "provider_seconds": {
+      "values": [
+        842.806,
+        926.408,
+        811.668
+      ],
+      "mean": 860.294,
+      "sample_sd": 59.335398439717245
+    },
+    "input_tokens": {
+      "values": [
+        480569.0,
+        565420.0,
+        676010.0
+      ],
+      "mean": 573999.6666666666,
+      "sample_sd": 98002.57205978491
+    },
+    "cached_input_tokens": {
+      "values": [
+        380928.0,
+        412416.0,
+        538624.0
+      ],
+      "mean": 443989.3333333333,
+      "sample_sd": 83454.56031478048
+    },
+    "output_tokens": {
+      "values": [
+        25845.0,
+        27690.0,
+        27159.0
+      ],
+      "mean": 26898.0,
+      "sample_sd": 949.787871053321
+    },
+    "reasoning_tokens": {
+      "values": [
+        12050.0,
+        12328.0,
+        12114.0
+      ],
+      "mean": 12164.0,
+      "sample_sd": 145.58846108122717
+    },
+    "api_equivalent_usd": {
+      "values": [
+        1.464019,
+        1.801928,
+        1.771012
+      ],
+      "mean": 1.6789863333333332,
+      "sample_sd": 0.1868078305755231
+    },
+    "code_lines": {
+      "values": [
+        230.0,
+        319.0,
+        177.0
+      ],
+      "mean": 242.0,
+      "sample_sd": 71.75653280364095
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null,
+      null,
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      1.464019,
+      1.801928,
+      1.771012
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Three frozen runs; evidence groups remain separate and are compared cross-condition.",
+  "runs": [
+    {
+      "stem": "bohnanza_src_pdf_only_1_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "bohnanza-source-experiment-2026-07-18",
+        "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+        "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+        "counts": {
+          "PASS": 17,
+          "FAIL": 9,
+          "CRASH": 2,
+          "UNREACHED": 0,
+          "UNTESTABLE": 9
+        },
+        "coverage": 0.7567567567567568,
+        "clear": {
+          "passed": 13,
+          "evaluated": 23,
+          "score": 0.5652173913043478
+        },
+        "human_decision": {
+          "passed": 4,
+          "evaluated": 5,
+          "score": 0.8
+        },
+        "results": [
+          {
+            "id": "BOHN-R01-exact-acker-inventory",
+            "status": "FAIL",
+            "message": "total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "INV-01",
+              "INV-02",
+              "INV-03",
+              "INV-04",
+              "INV-05"
+            ]
+          },
+          {
+            "id": "BOHN-R02-front-card-mandatory",
+            "status": "FAIL",
+            "message": "no legal planting action for 'blau'",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02",
+              "HAND-03",
+              "P1-01",
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R03-second-plant-optional-no-third",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['anbauen', 'nicht anbauen']; got ['[\"Ernten\",0,0]', '[\"Drei Bohnenkarten nachziehen\"]']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R04-empty-hand-skips-phase-one",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got ['[\"Drei Bohnenkarten nachziehen\"]']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-04",
+              "P2-01"
+            ]
+          },
+          {
+            "id": "BOHN-R05-one-type-per-field",
+            "status": "FAIL",
+            "message": "plant_legal[1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "FIELD-01"
+            ]
+          },
+          {
+            "id": "BOHN-R06-trading-authority",
+            "status": "UNTESTABLE",
+            "message": "state has no revealed container",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-05"
+            ]
+          },
+          {
+            "id": "BOHN-R07-received-cards-bypass-hand",
+            "status": "UNTESTABLE",
+            "message": "state has no pending-received container",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-05",
+              "TRADE-06",
+              "P3-01"
+            ]
+          },
+          {
+            "id": "BOHN-R08-rejected-gift-no-transfer",
+            "status": "UNTESTABLE",
+            "message": "implementation has no pending trade representation",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-07"
+            ]
+          },
+          {
+            "id": "BOHN-R09-variant-draw-one-each-clockwise",
+            "status": "FAIL",
+            "message": "step 1: hand_size[0]: expected 1, got 3",
+            "basis": "clear",
+            "fact_ids": [
+              "P4-01",
+              "HAND-02"
+            ]
+          },
+          {
+            "id": "BOHN-R10-singleton-protection",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R11-singleton-allowed-when-all-single",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R12-normal-harvest-clears-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R13-one-acker-zero-harvest",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-04",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R14-two-acker-unlocks-third-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "clear",
+            "fact_ids": [
+              "ACKER-01"
+            ]
+          },
+          {
+            "id": "BOHN-R15-two-acker-existing-third-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-02"
+            ]
+          },
+          {
+            "id": "BOHN-R16-three-acker-three-coins-no-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-03"
+            ]
+          },
+          {
+            "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+            "status": "FAIL",
+            "message": "step 1: terminal: expected False, got True",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "END-02",
+              "END-03"
+            ]
+          },
+          {
+            "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-01",
+              "END-05"
+            ]
+          },
+          {
+            "id": "BOHN-R19-final-score-ignores-hand",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-03",
+              "END-06"
+            ]
+          },
+          {
+            "id": "BOHN-R20-clockwise-tiebreak",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03",
+              "TURN-01",
+              "END-04"
+            ]
+          },
+          {
+            "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+            "status": "CRASH",
+            "message": "NotImplementedError: state has no revealed-card container",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P2-01",
+              "DECK-01"
+            ]
+          },
+          {
+            "id": "BOHN-R22-harvest-between-mandatory-plantings",
+            "status": "UNTESTABLE",
+            "message": "state has no pending-received container",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P3-01",
+              "P3-02",
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R23-nonactive-player-can-harvest",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R24-opponent-hands-remain-private",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HAND-03"
+            ]
+          },
+          {
+            "id": "BOHN-R25-five-player-setup",
+            "status": "FAIL",
+            "message": "five_player.total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-01",
+              "SET-02",
+              "HAND-01",
+              "INV-04"
+            ]
+          },
+          {
+            "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+            "status": "UNTESTABLE",
+            "message": "state has no revealed container",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-02",
+              "TRADE-04",
+              "TRADE-05",
+              "TRADE-06"
+            ]
+          },
+          {
+            "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['anbauen', 'plant']}; got ['[\"Ernten\",0,1]', '[\"Drei Bohnenkarten nachziehen\"]']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-01",
+              "P1-03",
+              "HARV-02",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R28-blau-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-01",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R29-feuer-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-02",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R30-sau-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-03",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R31-brech-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-04",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R32-soja-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-05",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R33-augen-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-06",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R34-rot-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-07",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R35-garten-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-08",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R36-weinbrand-coin-curve",
+            "status": "CRASH",
+            "message": "NotImplementedError: implementation has no identifiable 'weinbrand' card",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-09",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R37-hand-sorting-is-forbidden",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.16,
+        0.24,
+        0.2
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "pages 6–7, Regeln für den Bohnenhandel",
+          "source_basis": "missing",
+          "alternatives": [
+            "model negotiation as a multi-step proposal and consent protocol",
+            "model each mutually accepted exchange or gift as one atomic action"
+          ],
+          "selected": "mutually accepted one-card gifts, one-for-one trades, and the explicitly illustrated two-for-one trade are atomic legal actions",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "page 10, Ein leerer Nachziehstapel",
+          "source_basis": "missing",
+          "alternatives": [
+            "a required draw with both draw and discard piles empty draws no card",
+            "the game cannot proceed until discard cards exist"
+          ],
+          "selected": "the draw yields no card; the phase continues with as many cards as are available",
+          "affected_mechanics": [
+            "state_transition",
+            "terminal_results"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 842.806,
+        "input_tokens": 480569,
+        "cached_input_tokens": 380928,
+        "output_tokens": 25845,
+        "reasoning_tokens": 12050,
+        "money": null,
+        "api_equivalent_usd": 1.464019,
+        "code_lines": 230
+      },
+      "hashes": {
+        "agentic_evidence": "2eb942cb39528853c905c6547a95876ae5d4bf3706b33ddbc5c5f91d05128bdb",
+        "checks": "feaa194dd2270dc8d13b20774245e59bcf6ef098fc9710d4f26fc5468fa4a606",
+        "scenarios": "e5064516abbb3969c24bf2449ac6ed117657c164deb9dee18859714cf9e7e087",
+        "usage": "3923f9e76bfd8a67bcdea1bca5f5eeea78a876f2c482ce34b7674e0cb3ad3034",
+        "code": "f732624e4fe99d7901bafc107fe05d5690aef11d041466f077c62490b3772822"
+      }
+    },
+    {
+      "stem": "bohnanza_src_pdf_only_2_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "bohnanza-source-experiment-2026-07-18",
+        "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+        "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+        "counts": {
+          "PASS": 6,
+          "FAIL": 21,
+          "CRASH": 6,
+          "UNREACHED": 0,
+          "UNTESTABLE": 4
+        },
+        "coverage": 0.8918918918918919,
+        "clear": {
+          "passed": 4,
+          "evaluated": 26,
+          "score": 0.15384615384615385
+        },
+        "human_decision": {
+          "passed": 2,
+          "evaluated": 7,
+          "score": 0.2857142857142857
+        },
+        "results": [
+          {
+            "id": "BOHN-R01-exact-acker-inventory",
+            "status": "FAIL",
+            "message": "total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "INV-01",
+              "INV-02",
+              "INV-03",
+              "INV-04",
+              "INV-05"
+            ]
+          },
+          {
+            "id": "BOHN-R02-front-card-mandatory",
+            "status": "FAIL",
+            "message": "no legal planting action for 'blau'",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02",
+              "HAND-03",
+              "P1-01",
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R03-second-plant-optional-no-third",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['anbauen', 'nicht anbauen']; got ['Bohnenernte :: [\"harvest\",0,0]']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R04-empty-hand-skips-phase-one",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-04",
+              "P2-01"
+            ]
+          },
+          {
+            "id": "BOHN-R05-one-type-per-field",
+            "status": "FAIL",
+            "message": "plant_legal[1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "FIELD-01"
+            ]
+          },
+          {
+            "id": "BOHN-R06-trading-authority",
+            "status": "FAIL",
+            "message": "trade_allowed[0,1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-05"
+            ]
+          },
+          {
+            "id": "BOHN-R07-received-cards-bypass-hand",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-05",
+              "TRADE-06",
+              "P3-01"
+            ]
+          },
+          {
+            "id": "BOHN-R08-rejected-gift-no-transfer",
+            "status": "UNTESTABLE",
+            "message": "implementation has no pending trade representation",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-07"
+            ]
+          },
+          {
+            "id": "BOHN-R09-variant-draw-one-each-clockwise",
+            "status": "FAIL",
+            "message": "step 1: hand_size[0]: expected 1, got 3",
+            "basis": "clear",
+            "fact_ids": [
+              "P4-01",
+              "HAND-02"
+            ]
+          },
+          {
+            "id": "BOHN-R10-singleton-protection",
+            "status": "FAIL",
+            "message": "harvest_legal[0,1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R11-singleton-allowed-when-all-single",
+            "status": "FAIL",
+            "message": "harvest_legal[0,0]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R12-normal-harvest-clears-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R13-one-acker-zero-harvest",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'dict'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-04",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R14-two-acker-unlocks-third-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'dict'",
+            "basis": "clear",
+            "fact_ids": [
+              "ACKER-01"
+            ]
+          },
+          {
+            "id": "BOHN-R15-two-acker-existing-third-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'dict'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-02"
+            ]
+          },
+          {
+            "id": "BOHN-R16-three-acker-three-coins-no-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'dict'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-03"
+            ]
+          },
+          {
+            "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "END-02",
+              "END-03"
+            ]
+          },
+          {
+            "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-01",
+              "END-05"
+            ]
+          },
+          {
+            "id": "BOHN-R19-final-score-ignores-hand",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-03",
+              "END-06"
+            ]
+          },
+          {
+            "id": "BOHN-R20-clockwise-tiebreak",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03",
+              "TURN-01",
+              "END-04"
+            ]
+          },
+          {
+            "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P2-01",
+              "DECK-01"
+            ]
+          },
+          {
+            "id": "BOHN-R22-harvest-between-mandatory-plantings",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P3-01",
+              "P3-02",
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R23-nonactive-player-can-harvest",
+            "status": "FAIL",
+            "message": "harvest_legal[1,0]: expected True, got False",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R24-opponent-hands-remain-private",
+            "status": "FAIL",
+            "message": "opponent card 'Sojabohne' leaked in render",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HAND-03"
+            ]
+          },
+          {
+            "id": "BOHN-R25-five-player-setup",
+            "status": "FAIL",
+            "message": "five_player.total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-01",
+              "SET-02",
+              "HAND-01",
+              "INV-04"
+            ]
+          },
+          {
+            "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+            "status": "FAIL",
+            "message": "action name is not legal: '[\"Handel beginnen\",1]'; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-02",
+              "TRADE-04",
+              "TRADE-05",
+              "TRADE-06"
+            ]
+          },
+          {
+            "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['anbauen', 'plant']}; got ['Bohnenernte :: [\"harvest\",0,1]']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-01",
+              "P1-03",
+              "HARV-02",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R28-blau-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for blau size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-01",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R29-feuer-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for feuer size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-02",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R30-sau-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for sau size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-03",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R31-brech-coin-curve",
+            "status": "CRASH",
+            "message": "NotImplementedError: implementation has no identifiable 'brech' card",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-04",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R32-soja-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for soja size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-05",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R33-augen-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for augen size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-06",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R34-rot-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for rot size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-07",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R35-garten-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for garten size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-08",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R36-weinbrand-coin-curve",
+            "status": "CRASH",
+            "message": "NotImplementedError: implementation has no identifiable 'weinbrand' card",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-09",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R37-hand-sorting-is-forbidden",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.2,
+        0.18,
+        0.22
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "page 10, Ein leerer Nachziehstapel / Spielende",
+          "source_basis": "missing",
+          "alternatives": [
+            "on the third exhaustion, stop the current multi-card draw immediately",
+            "somehow complete the current multi-card draw before ending"
+          ],
+          "selected": "stop the draw when no card remains; after a phase-2 exhaustion finish phases 2 and 3, while a phase-4 exhaustion ends immediately",
+          "affected_mechanics": [
+            "state_transition",
+            "terminal_results"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "page 8, Die Bohnenernte: jederzeit im Spiel",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "an off-turn harvest may interrupt any decision before its action",
+            "off-turn harvests require a separate priority/consent window"
+          ],
+          "selected": "every otherwise nonterminal decision state also exposes each player's currently legal harvest action",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "pages 10–11, Variante 1 and Variante 2",
+          "source_basis": "missing",
+          "alternatives": [
+            "invent omitted counts and Bohnometers for variant beans",
+            "reject variant initialization until the missing component data is supplied"
+          ],
+          "selected": "variant names are recognized but initialization raises ValueError; the complete assigned base 4–5-player condition remains playable",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "scoring"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 926.408,
+        "input_tokens": 565420,
+        "cached_input_tokens": 412416,
+        "output_tokens": 27690,
+        "reasoning_tokens": 12328,
+        "money": null,
+        "api_equivalent_usd": 1.801928,
+        "code_lines": 319
+      },
+      "hashes": {
+        "agentic_evidence": "18c356454ce1b56c10861c80fc24a93a59c917c81d7c6352707e2e477c502b03",
+        "checks": "b6a368869c96e2a1c1b1eb8f1efabe6fb1eca2e1fa68b85754ddfb0e7d8dc0e4",
+        "scenarios": "ffa24cdcc5fe5d9bc2a4ce4670f65f78f229d5234dcd1e7fa137d9c9840cb216",
+        "usage": "47c6f9f7ff6d1e593a425c7791fef51b20460e32f75febbad976b6abfb0d57a3",
+        "code": "326b1187d8c5962eb1a9a9d9f30365aad1542b342e84c263cdbf3542343d9bcb"
+      }
+    },
+    {
+      "stem": "bohnanza_src_pdf_only_3_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "bohnanza-source-experiment-2026-07-18",
+        "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+        "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+        "counts": {
+          "PASS": 2,
+          "FAIL": 21,
+          "CRASH": 3,
+          "UNREACHED": 0,
+          "UNTESTABLE": 11
+        },
+        "coverage": 0.7027027027027027,
+        "clear": {
+          "passed": 2,
+          "evaluated": 23,
+          "score": 0.08695652173913043
+        },
+        "human_decision": {
+          "passed": 0,
+          "evaluated": 3,
+          "score": 0.0
+        },
+        "results": [
+          {
+            "id": "BOHN-R01-exact-acker-inventory",
+            "status": "FAIL",
+            "message": "total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "INV-01",
+              "INV-02",
+              "INV-03",
+              "INV-04",
+              "INV-05"
+            ]
+          },
+          {
+            "id": "BOHN-R02-front-card-mandatory",
+            "status": "FAIL",
+            "message": "no legal planting action for 'blau'",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02",
+              "HAND-03",
+              "P1-01",
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R03-second-plant-optional-no-third",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['anbauen', 'nicht anbauen']; got ['harvest|0|0']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R04-empty-hand-skips-phase-one",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-04",
+              "P2-01"
+            ]
+          },
+          {
+            "id": "BOHN-R05-one-type-per-field",
+            "status": "FAIL",
+            "message": "plant_legal[1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "FIELD-01"
+            ]
+          },
+          {
+            "id": "BOHN-R06-trading-authority",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-05"
+            ]
+          },
+          {
+            "id": "BOHN-R07-received-cards-bypass-hand",
+            "status": "UNTESTABLE",
+            "message": "state has no pending-received container",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-05",
+              "TRADE-06",
+              "P3-01"
+            ]
+          },
+          {
+            "id": "BOHN-R08-rejected-gift-no-transfer",
+            "status": "UNTESTABLE",
+            "message": "implementation has no pending trade representation",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-07"
+            ]
+          },
+          {
+            "id": "BOHN-R09-variant-draw-one-each-clockwise",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['ziehen', 'draw']}; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "P4-01",
+              "HAND-02"
+            ]
+          },
+          {
+            "id": "BOHN-R10-singleton-protection",
+            "status": "FAIL",
+            "message": "harvest_legal[0,1]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R11-singleton-allowed-when-all-single",
+            "status": "FAIL",
+            "message": "harvest_legal[0,0]: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R12-normal-harvest-clears-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R13-one-acker-zero-harvest",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-04",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R14-two-acker-unlocks-third-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "clear",
+            "fact_ids": [
+              "ACKER-01"
+            ]
+          },
+          {
+            "id": "BOHN-R15-two-acker-existing-third-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-02"
+            ]
+          },
+          {
+            "id": "BOHN-R16-three-acker-three-coins-no-field",
+            "status": "UNTESTABLE",
+            "message": "implementation has no identifiable 'acker' card",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-03"
+            ]
+          },
+          {
+            "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "END-02",
+              "END-03"
+            ]
+          },
+          {
+            "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-01",
+              "END-05"
+            ]
+          },
+          {
+            "id": "BOHN-R19-final-score-ignores-hand",
+            "status": "CRASH",
+            "message": "NotImplementedError: state has no winner",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-03",
+              "END-06"
+            ]
+          },
+          {
+            "id": "BOHN-R20-clockwise-tiebreak",
+            "status": "CRASH",
+            "message": "NotImplementedError: state has no winner",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03",
+              "TURN-01",
+              "END-04"
+            ]
+          },
+          {
+            "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+            "status": "UNTESTABLE",
+            "message": "state has no field for depletions",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P2-01",
+              "DECK-01"
+            ]
+          },
+          {
+            "id": "BOHN-R22-harvest-between-mandatory-plantings",
+            "status": "UNTESTABLE",
+            "message": "state has no pending-received container",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P3-01",
+              "P3-02",
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R23-nonactive-player-can-harvest",
+            "status": "FAIL",
+            "message": "harvest_legal[1,0]: expected True, got False",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R24-opponent-hands-remain-private",
+            "status": "FAIL",
+            "message": "opponent card 'Sojabohne' leaked in render",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HAND-03"
+            ]
+          },
+          {
+            "id": "BOHN-R25-five-player-setup",
+            "status": "FAIL",
+            "message": "five_player.total_cards: expected 129, got 104",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-01",
+              "SET-02",
+              "HAND-01",
+              "INV-04"
+            ]
+          },
+          {
+            "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+            "status": "FAIL",
+            "message": "action name is not legal: '[\"Handel beginnen\",1]'; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-02",
+              "TRADE-04",
+              "TRADE-05",
+              "TRADE-06"
+            ]
+          },
+          {
+            "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+            "status": "FAIL",
+            "message": "semantic action is not legal: {'contains_any': ['anbauen', 'plant']}; got ['harvest|0|1']",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-01",
+              "P1-03",
+              "HARV-02",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R28-blau-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for blau size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-01",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R29-feuer-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for feuer size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-02",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R30-sau-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for sau size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-03",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R31-brech-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for brech size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-04",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R32-soja-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for soja size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-05",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R33-augen-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for augen size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-06",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R34-rot-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for rot size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-07",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R35-garten-coin-curve",
+            "status": "FAIL",
+            "message": "no legal harvest for garten size 1",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-08",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R36-weinbrand-coin-curve",
+            "status": "CRASH",
+            "message": "NotImplementedError: implementation has no identifiable 'weinbrand' card",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-09",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R37-hand-sorting-is-forbidden",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.22,
+        0.24,
+        0.27
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "pages 6-7, Regeln für den Bohnenhandel",
+          "source_basis": "missing",
+          "alternatives": [
+            "free-form simultaneous negotiation",
+            "atomic one-card-for-zero-or-one-card offers with recipient acceptance"
+          ],
+          "selected": "atomic one-card-for-zero-or-one-card offers with recipient acceptance; repeated offers express unequal multi-card trades",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "page 4, Spielmaterial & Spielvorbereitung",
+          "source_basis": "missing",
+          "alternatives": [
+            "nondeterministic shuffle",
+            "seeded reproducible shuffle"
+          ],
+          "selected": "seeded reproducible shuffle, configurable on Game",
+          "affected_mechanics": [
+            "state_transition",
+            "private_information"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 811.668,
+        "input_tokens": 676010,
+        "cached_input_tokens": 538624,
+        "output_tokens": 27159,
+        "reasoning_tokens": 12114,
+        "money": null,
+        "api_equivalent_usd": 1.771012,
+        "code_lines": 177
+      },
+      "hashes": {
+        "agentic_evidence": "5aa3489ebd681d3170656b00ebbaecd20a9bd9d84c2d18f412bb14b39d5a4fe0",
+        "checks": "675dab4782cd4c2cae22d7f42b31023187320c1c34885dd34be290ccdfc2d304",
+        "scenarios": "eca39cb77cfda61c0a6a0b35fe5499648bb597ebb27a5526895effce4290f45d",
+        "usage": "aab2bfa47679da514cdd37f8aa1e3445569771608889f8c92b1a19c035d3c859",
+        "code": "a149f8ebc166bedf74be3720fcc63923f67f84653a7e3916b362a8198b31afb9"
+      }
+    }
+  ]
+}

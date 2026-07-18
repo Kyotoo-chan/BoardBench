@@ -1,0 +1,69 @@
+{
+  "identity": {
+    "game": "bohnanza",
+    "condition": "pdf_mutated",
+    "source_path": "../../../../../inputs/games/bohnanza/variants/game_rules_mutated.pdf",
+    "source_format": "pdf+json",
+    "source_sha256": "224d2bdd529f6bc712e2ef9e8edfc42a9f53900f7974f535d4c7ca59c4f31b8c",
+    "sources": [
+      {
+        "id": "RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../../inputs/games/bohnanza/variants/game_rules_mutated.pdf",
+        "sha256": "224d2bdd529f6bc712e2ef9e8edfc42a9f53900f7974f535d4c7ca59c4f31b8c"
+      },
+      {
+        "id": "COMPONENTS",
+        "role": "user_observation",
+        "path": "../../../../../inputs/games/bohnanza/game_components.json",
+        "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46"
+      }
+    ]
+  },
+  "source_diagnosis": {},
+  "headline": "Three frozen runs; evidence groups remain separate and are compared cross-condition.",
+  "runs": [
+    {
+      "stem": "bohnanza_src_pdf_mutated_1_ag",
+      "agentic_evidence": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_agentic_evidence.json",
+      "checks": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_checks.txt",
+      "scenarios": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_scenarios.json",
+      "usage": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_usage.json",
+      "code": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag.py",
+      "assumptions": "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_assumptions.json",
+      "neutral_reviews": [
+        "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_judge_1.md",
+        "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_judge_2.md",
+        "../runs/pdf_mutated_1/bohnanza_src_pdf_mutated_1_ag_judge_3.md"
+      ]
+    },
+    {
+      "stem": "bohnanza_src_pdf_mutated_2_ag",
+      "agentic_evidence": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_agentic_evidence.json",
+      "checks": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_checks.txt",
+      "scenarios": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_scenarios.json",
+      "usage": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_usage.json",
+      "code": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag.py",
+      "assumptions": "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_assumptions.json",
+      "neutral_reviews": [
+        "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_judge_1.md",
+        "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_judge_2.md",
+        "../runs/pdf_mutated_2/bohnanza_src_pdf_mutated_2_ag_judge_3.md"
+      ]
+    },
+    {
+      "stem": "bohnanza_src_pdf_mutated_3_ag",
+      "agentic_evidence": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_agentic_evidence.json",
+      "checks": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_checks.txt",
+      "scenarios": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_scenarios.json",
+      "usage": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_usage.json",
+      "code": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag.py",
+      "assumptions": "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_assumptions.json",
+      "neutral_reviews": [
+        "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_judge_1.md",
+        "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_judge_2.md",
+        "../runs/pdf_mutated_3/bohnanza_src_pdf_mutated_3_ag_judge_3.md"
+      ]
+    }
+  ]
+}
