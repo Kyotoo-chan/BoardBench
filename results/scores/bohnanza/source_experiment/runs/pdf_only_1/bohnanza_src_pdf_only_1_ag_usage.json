@@ -1,0 +1,249 @@
+{
+  "call_count": 4,
+  "elapsed_seconds_total": 842.806,
+  "token_totals": {
+    "reasoning_output_tokens": 12050,
+    "input_tokens": 480569,
+    "cached_input_tokens": 380928,
+    "output_tokens": 25845
+  },
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "mode": "agentic",
+      "sandbox": "danger-full-access",
+      "started_at": "2026-07-18T13:41:47.597931+00:00",
+      "ended_at": "2026-07-18T13:45:07.461274+00:00",
+      "elapsed_seconds": 199.862,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 37,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 586629,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 37,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 586429,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 967,
+        "input_tokens": 209816,
+        "cached_input_tokens": 177152,
+        "output_tokens": 7051
+      },
+      "provider_usage_records": [
+        {
+          "line": 21,
+          "path": "$.usage",
+          "input_tokens": 209816,
+          "cached_input_tokens": 177152,
+          "output_tokens": 7051,
+          "reasoning_output_tokens": 967
+        }
+      ],
+      "events_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/events.jsonl",
+      "response_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/raw_response.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-01.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-02.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-03.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-04.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-05.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-06.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-07.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-08.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-09.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-10.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AN3uxQ/boardbench_source_packet__rjqju51/game_rules_pages/page-11.png"
+      ],
+      "stderr": "2026-07-18T13:44:49.310838Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 2.2 seconds\nOutput:\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AN3uxQ\\boardbench_source_packet__rjqju51\\agentic_self_check.py\", line 74, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AN3uxQ\\boardbench_source_packet__rjqju51\\agentic_self_check.py\", line 27, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AN3uxQ\\boardbench_source_packet__rjqju51\\agentic_self_check.py\", line 22, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AN3uxQ\\boardbench_source_packet__rjqju51\\implementation.py\", line 27, in <module>\r\n    @dataclass\r\n     ^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 1275, in dataclass\r\n    return wrap(cls)\r\n           ^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 1265, in wrap\r\n    return _process_class(cls, init, repr, eq, order, unsafe_hash,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 983, in _process_class\r\n    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\ProgramData\\miniconda3\\Lib\\dataclasses.py\", line 749, in _is_type\r\n    ns = sys.modules.get(cls.__module__).__dict__\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?\r\n\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "read-only",
+      "started_at": "2026-07-18T14:29:56.792164+00:00",
+      "ended_at": "2026-07-18T14:34:10.620175+00:00",
+      "elapsed_seconds": 253.829,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 37,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583740,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 38,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583486,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 4122,
+        "output_tokens": 7036,
+        "cached_input_tokens": 100096,
+        "input_tokens": 125192
+      },
+      "provider_usage_records": [
+        {
+          "line": 14,
+          "path": "$.usage",
+          "input_tokens": 125192,
+          "cached_input_tokens": 100096,
+          "output_tokens": 7036,
+          "reasoning_output_tokens": 4122
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_1_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_1.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-01.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-02.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-03.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-04.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-05.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-06.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-07.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-08.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-09.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-10.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_rp098o_9/game_rules_pages/page-11.png"
+      ],
+      "stderr": "2026-07-18T14:30:38.244600Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Raw game_components.json; Get-ChildItem -Force | Select-Object Name,Length'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "read-only",
+      "started_at": "2026-07-18T14:34:15.036438+00:00",
+      "ended_at": "2026-07-18T14:37:56.287185+00:00",
+      "elapsed_seconds": 221.25,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 38,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583482,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 38,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583260,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 4179,
+        "output_tokens": 6529,
+        "cached_input_tokens": 43264,
+        "input_tokens": 62513
+      },
+      "provider_usage_records": [
+        {
+          "line": 14,
+          "path": "$.usage",
+          "input_tokens": 62513,
+          "cached_input_tokens": 43264,
+          "output_tokens": 6529,
+          "reasoning_output_tokens": 4179
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_2_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_2.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-01.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-02.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-03.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-04.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-05.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-06.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-07.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-08.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-09.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-10.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_p4656spo/game_rules_pages/page-11.png"
+      ],
+      "stderr": "2026-07-18T14:34:27.371867Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "read-only",
+      "started_at": "2026-07-18T14:38:00.696590+00:00",
+      "ended_at": "2026-07-18T14:40:48.561567+00:00",
+      "elapsed_seconds": 167.865,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 38,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583256,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 38,
+          "reset_at": 1784968735,
+          "reset_after_seconds": 583088,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "reasoning_output_tokens": 2782,
+        "output_tokens": 5229,
+        "cached_input_tokens": 60416,
+        "input_tokens": 83048
+      },
+      "provider_usage_records": [
+        {
+          "line": 16,
+          "path": "$.usage",
+          "input_tokens": 83048,
+          "cached_input_tokens": 60416,
+          "output_tokens": 5229,
+          "reasoning_output_tokens": 2782
+        }
+      ],
+      "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_3_events.jsonl",
+      "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_pdf_only_1_ag_judge_3.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-01.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-02.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-03.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-04.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-05.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-06.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-07.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-08.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-09.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-10.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-e049j4/boardbench_judge_packet_pr726dmx/game_rules_pages/page-11.png"
+      ],
+      "stderr": "2026-07-18T14:38:15.912369Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n"
+    }
+  ],
+  "actual_subscription_cost": null
+}
