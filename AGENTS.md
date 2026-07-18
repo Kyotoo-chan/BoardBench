@@ -4,7 +4,7 @@
 
 BoardBench is a bachelor-thesis workflow inspired by PaperBench:
 
-1. start from one board-game rulebook,
+1. start from one board-game rulebook, optionally with a clearly attributed component appendix,
 2. turn its rules and edge cases into explicit, cited expectations,
 3. let an LLM agent implement a Python game environment,
 4. evaluate technical quality and rule fidelity as separate evidence groups.
@@ -30,8 +30,8 @@ Project-local workflow skills:
 
 ## Minimal workflow
 
-1. User places exactly one active rulebook at `inputs/game_rules.pdf` or `.txt`.
-2. `bbedge` archives and hashes it, then rule facts and edge cases are discussed with the user.
+1. User places one active rulebook at `inputs/game_rules.pdf` or `.txt` and may add one `inputs/game_components.pdf` or `.txt`.
+2. `bbedge` archives and hashes each source separately, records its provenance and role, then rule facts, conflicts, and edge cases are discussed with the user.
 3. Approved facts live at `inputs/games/<slug>/rulefacts.md`; executable cases live at `checks/scenarios/<slug>.json`.
 4. `bbimpl` generates one agentic implementation in an isolated workspace that cannot see evaluator scenarios.
 5. `bbeval` reports technical, robustness, interface, scenario, and judge evidence separately.
@@ -40,8 +40,10 @@ Do not continue past material ambiguities without user approval.
 
 ## Scientific rules
 
-- Use only the supplied rulebook for game rules; no remembered or web rules unless an experiment explicitly tests extra context.
-- Every hard scenario expectation needs rulebook edition/hash, page, and direct quote.
+- Use only the supplied source condition for game rules; no remembered or web rules unless an experiment explicitly tests extra context.
+- A user-authored component appendix is an augmented source, not part of the publisher rulebook. By default it is `user_observation`: it may support hard component inventory/setup expectations, but may not silently override gameplay rules.
+- Hash and cite every source separately. Every hard scenario expectation needs source ID, edition/hash, page, and direct quote.
+- Surface every cross-source conflict with both citations, alternatives, affected behavior, and a user-approved decision; never apply automatic precedence.
 - Keep ambiguous and untestable rules visible instead of scoring them as failures.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
 - Do not combine smoke checks, rollouts, action naming, judges, and scenarios into one claim of correctness.
