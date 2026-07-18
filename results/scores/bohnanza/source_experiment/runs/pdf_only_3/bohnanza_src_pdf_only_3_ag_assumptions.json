@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "pages 6-7, Regeln für den Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": ["free-form simultaneous negotiation", "atomic one-card-for-zero-or-one-card offers with recipient acceptance"],
+      "selected": "atomic one-card-for-zero-or-one-card offers with recipient acceptance; repeated offers express unequal multi-card trades",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "page 4, Spielmaterial & Spielvorbereitung",
+      "source_basis": "missing",
+      "alternatives": ["nondeterministic shuffle", "seeded reproducible shuffle"],
+      "selected": "seeded reproducible shuffle, configurable on Game",
+      "affected_mechanics": ["state_transition", "private_information"]
+    }
+  ]
+}
