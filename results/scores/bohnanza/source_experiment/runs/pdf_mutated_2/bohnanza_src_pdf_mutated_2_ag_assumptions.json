@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page 10, Variante 2: Die Ackerbohnen — Spielmaterial & Spielvorbereitung",
+      "source_basis": "missing",
+      "alternatives": [
+        "Variante 1 contains additional gameplay changes not present in the supplied pages",
+        "Only the visible Variante 1 changes on page 10 (active player draws three; normal four-plus-player ending) apply"
+      ],
+      "selected": "Apply the complete supplied Grundspiel rules plus the visible page-10 changes and the Ackerbohne rules; do not invent absent Variante-1 mechanics",
+      "affected_mechanics": ["legal_actions", "state_transition", "terminal_results"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "pages 6–7, Regeln für den Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": [
+        "Model bargaining as multi-step proposals with arbitrary unequal bundles",
+        "Model each mutually accepted card transfer/exchange as an atomic trade or gift"
+      ],
+      "selected": "Expose consensual one-card exchanges and one-card gifts as atomic actions; repeated actions cover multi-card unequal trades before trading ends",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+    }
+  ]
+}
