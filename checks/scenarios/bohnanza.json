@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "rubric_version": "bohnanza-2026-07-18-expanded",
+  "rubric_version": "bohnanza-source-experiment-2026-07-18",
   "game": "bohnanza",
   "adapter": "checks/scenario_adapters/bohnanza.py",
   "source_condition": "augmented_user_observation",
@@ -13,8 +13,8 @@
     },
     {
       "id": "COMPONENTS",
-      "path": "inputs/games/bohnanza/game_components.pdf",
-      "sha256": "83b5db35b65975723190bb03b113751f43a48895e0a7f0cd546649f98df01ea4",
+      "path": "inputs/games/bohnanza/game_components.json",
+      "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46",
       "role": "user_observation"
     }
   ],
@@ -31,8 +31,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 1,
-        "quote": "Verwendet genau 129 Bohnenkarten: 104 aus dem Grundspiel, 22 Weinbrandbohnen und 3 Ackerbohnen."
+        "json_pointer": "/bohnen/9/anzahl_karten",
+        "quote": "Weinbrandbohne count 22; /bohnen/11/anzahl_karten is 3"
       },
       "initial": {
         "current_player": 0,
@@ -621,9 +621,9 @@
       ],
       "basis": "human_decision",
       "source": {
-        "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "1 Ackerbohne — 0 Taler — Normale Null-Ernte; die Bohnenschutzregel kann die Ernte verbieten."
+        "source_id": "RULES",
+        "page": 11,
+        "quote": "Erntest du ein Feld mit zwei Ackerbohnen ... Erntest du ein Feld mit drei Ackerbohnen ..."
       },
       "fixture": {
         "fields": {
@@ -1407,8 +1407,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Blaue Bohne: 4 / 6 / 8 / 10"
+        "json_pointer": "/bohnen/0/ernte",
+        "quote": "thresholds 4→1, 6→2, 8→3, 10→4"
       },
       "initial": {
         "adapter": {
@@ -1449,8 +1449,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Feuerbohne: 3 / 6 / 8 / 9"
+        "json_pointer": "/bohnen/1/ernte",
+        "quote": "thresholds 3→1, 6→2, 8→3, 9→4"
       },
       "initial": {
         "adapter": {
@@ -1533,8 +1533,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Brechbohne: 3 / 5 / 6 / 7"
+        "json_pointer": "/bohnen/3/ernte",
+        "quote": "thresholds 3→1, 5→2, 6→3, 7→4"
       },
       "initial": {
         "adapter": {
@@ -1575,8 +1575,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Sojabohne: 2 / 4 / 6 / 7"
+        "json_pointer": "/bohnen/4/ernte",
+        "quote": "thresholds 2→1, 4→2, 6→3, 7→4"
       },
       "initial": {
         "adapter": {
@@ -1617,8 +1617,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Augenbohne: 2 / 4 / 5 / 6"
+        "json_pointer": "/bohnen/5/ernte",
+        "quote": "thresholds 2→1, 4→2, 5→3, 6→4"
       },
       "initial": {
         "adapter": {
@@ -1659,8 +1659,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Rote Bohne: 2 / 3 / 4 / 5"
+        "json_pointer": "/bohnen/6/ernte",
+        "quote": "thresholds 2→1, 3→2, 4→3, 5→4"
       },
       "initial": {
         "adapter": {
@@ -1701,8 +1701,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Gartenbohne: 1: 0 | 2: 2 Taler | 3+: 3 Taler"
+        "json_pointer": "/bohnen/7/ernte",
+        "quote": "thresholds 2→2 coins; 3→3 coins"
       },
       "initial": {
         "adapter": {
@@ -1739,8 +1739,8 @@
       "basis": "clear",
       "source": {
         "source_id": "COMPONENTS",
-        "page": 2,
-        "quote": "Weinbrandbohne: 4 / 7 / 9 / 11"
+        "json_pointer": "/bohnen/9/ernte",
+        "quote": "thresholds 4→1, 7→2, 9→3, 11→4"
       },
       "initial": {
         "adapter": {
@@ -1768,6 +1768,48 @@
                 "coins": 4
               }
             ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R37-hand-sorting-is-forbidden",
+      "fact_ids": [
+        "HAND-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 3,
+        "quote": "Die Reihenfolge der Karten auf deiner Hand darfst du während des gesamten Spiels nicht ändern. Du darfst die Karten nicht sortieren."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer",
+            "soja"
+          ]
+        },
+        "fields": {
+          "0": [
+            [],
+            []
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "legal_action_name_not_contains_any": [
+          "sortieren",
+          "umsortieren",
+          "reorder",
+          "swap"
+        ],
+        "adapter": {
+          "no_hand_reorder_action": {
+            "player": 0
           }
         }
       }

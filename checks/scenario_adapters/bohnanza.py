@@ -436,6 +436,15 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
             _assert_equal(f"five_player.hand[{player}]", len(_cards(hand)), int(spec["hand_size"]))
         _assert_equal("five_player.total_cards", len(_all_cards(probe)), int(spec["total_cards"]))
 
+    if "no_hand_reorder_action" in expected:
+        player = int(expected["no_hand_reorder_action"].get("player", 0))
+        before = _cards(state.hands[player])
+        for action in game.legal_actions(state):
+            after_state = game.apply_action(state, action)
+            after = _cards(after_state.hands[player])
+            if len(after) == len(before) and Counter(after) == Counter(before) and after != before:
+                raise AssertionError(f"legal action {game.action_to_name(action)!r} reorders hand {before!r} to {after!r}")
+
     if "harvest_curve" in expected:
         spec = expected["harvest_curve"]
         for case in spec["cases"]:

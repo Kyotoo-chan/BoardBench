@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "experiment": "bohnanza-source-sensitivity",
+  "generation_protocol": "agentic-v2.2",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "verbosity": "low",
+  "runs_per_condition": 3,
+  "conditions": {
+    "pdf_only": {
+      "sources": [
+        {
+          "packet_name": "game_rules.pdf",
+          "path": "game_rules.pdf",
+          "role": "publisher_rulebook",
+          "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+        }
+      ]
+    },
+    "json_clean": {
+      "sources": [
+        {
+          "packet_name": "game_rules.pdf",
+          "path": "game_rules.pdf",
+          "role": "publisher_rulebook",
+          "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+        },
+        {
+          "packet_name": "game_components.json",
+          "path": "game_components.json",
+          "role": "user_observation",
+          "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46"
+        }
+      ]
+    },
+    "json_mutated": {
+      "sources": [
+        {
+          "packet_name": "game_rules.pdf",
+          "path": "game_rules.pdf",
+          "role": "publisher_rulebook",
+          "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+        },
+        {
+          "packet_name": "game_components.json",
+          "path": "variants/components_mutated.json",
+          "role": "user_observation",
+          "sha256": "1d1c5614c689a39a4019057673c1cad77c8ad2dc564dc2c5b4f7bb08c8ae721a"
+        }
+      ]
+    },
+    "pdf_mutated": {
+      "sources": [
+        {
+          "packet_name": "game_rules.pdf",
+          "path": "variants/game_rules_mutated.pdf",
+          "role": "publisher_rulebook",
+          "sha256": "224d2bdd529f6bc712e2ef9e8edfc42a9f53900f7974f535d4c7ca59c4f31b8c"
+        },
+        {
+          "packet_name": "game_components.json",
+          "path": "game_components.json",
+          "role": "user_observation",
+          "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46"
+        }
+      ]
+    }
+  },
+  "sequential_order": [
+    "pdf_only_1",
+    "json_clean_1",
+    "json_mutated_1",
+    "pdf_mutated_1",
+    "pdf_only_2",
+    "json_clean_2",
+    "json_mutated_2",
+    "pdf_mutated_2",
+    "pdf_only_3",
+    "json_clean_3",
+    "json_mutated_3",
+    "pdf_mutated_3"
+  ],
+  "notes": [
+    "Runs are strictly sequential; each completed run is copied to durable outputs before the next starts.",
+    "Round-robin ordering preserves at least one run per condition if a weekly limit interrupts the experiment.",
+    "Condition labels and mutation metadata are not copied into implementation workspaces."
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "experiment": "bohnanza-source-sensitivity",
+  "canonical_suite": "checks/scenarios/bohnanza.json",
+  "mutations": [
+    {
+      "id": "J1-acker-two-coins",
+      "condition": "json_mutated",
+      "source": "game_components.json",
+      "pointer": "/bohnen/11/ernte/0",
+      "canonical": {
+        "bohnen": 2,
+        "belohnung": "drittes_bohnenfeld",
+        "gold": 0,
+        "hinweis": "Ist das dritte Bohnenfeld bereits vorhanden, gibt es keine Belohnung."
+      },
+      "mutated": {
+        "bohnen": 2,
+        "belohnung": "bohnentaler",
+        "gold": 2,
+        "hinweis": "Zwei Ackerbohnen geben zwei Bohnentaler."
+      },
+      "affected_mechanics": [
+        "harvest_reward",
+        "field_capacity",
+        "scoring"
+      ],
+      "scenarios": [
+        "BOHN-R14-two-acker-unlocks-third-field",
+        "BOHN-R15-two-acker-existing-third-field"
+      ]
+    },
+    {
+      "id": "J2-weinbrand-lucrative",
+      "condition": "json_mutated",
+      "source": "game_components.json",
+      "pointer": "/bohnen/9/ernte",
+      "canonical": [
+        {
+          "ab_bohnen": 4,
+          "gold": 1
+        },
+        {
+          "ab_bohnen": 7,
+          "gold": 2
+        },
+        {
+          "ab_bohnen": 9,
+          "gold": 3
+        },
+        {
+          "ab_bohnen": 11,
+          "gold": 4
+        }
+      ],
+      "mutated": [
+        {
+          "ab_bohnen": 2,
+          "gold": 1
+        },
+        {
+          "ab_bohnen": 4,
+          "gold": 2
+        },
+        {
+          "ab_bohnen": 6,
+          "gold": 3
+        },
+        {
+          "ab_bohnen": 8,
+          "gold": 4
+        }
+      ],
+      "affected_mechanics": [
+        "harvest_reward",
+        "scoring"
+      ],
+      "scenarios": [
+        "BOHN-R36-weinbrand-coin-curve"
+      ]
+    },
+    {
+      "id": "J3-all-157-active",
+      "condition": "json_mutated",
+      "source": "game_components.json",
+      "canonical": "Je nach offizieller Variante und Spielerzahl werden nicht immer alle Sorten gleichzeitig verwendet.",
+      "mutated": "In der Ackerbohnen-Variante werden alle 157 aufgelisteten Bohnenkarten gleichzeitig verwendet.",
+      "affected_mechanics": [
+        "component_inventory",
+        "setup",
+        "draw_probabilities"
+      ],
+      "scenarios": [
+        "BOHN-R01-exact-acker-inventory"
+      ],
+      "pointer": "/hinweise/4"
+    },
+    {
+      "id": "P1-active-only-harvest",
+      "condition": "pdf_mutated",
+      "source": "game_rules.pdf",
+      "page": 7,
+      "canonical_quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht der aktive Spieler bist.",
+      "mutated_quote": "Du darfst nur als aktiver Spieler deine Bohnenfelder abernten.",
+      "affected_mechanics": [
+        "legal_actions",
+        "turn_interrupt"
+      ],
+      "scenarios": [
+        "BOHN-R23-nonactive-player-can-harvest"
+      ]
+    },
+    {
+      "id": "P2-active-draws-three",
+      "condition": "pdf_mutated",
+      "source": "game_rules.pdf",
+      "page": 10,
+      "canonical_quote": "Anders als im Grundspiel zieht jeder von euch eine Karte vom Nachziehstapel.",
+      "mutated_quote": "Anders als im Grundspiel zieht nur der aktive Spieler drei Karten vom Nachziehstapel.",
+      "affected_mechanics": [
+        "draw_count",
+        "hand_order",
+        "turn_transition"
+      ],
+      "scenarios": [
+        "BOHN-R09-variant-draw-one-each-clockwise"
+      ]
+    },
+    {
+      "id": "P3-hand-sorting-allowed",
+      "condition": "pdf_mutated",
+      "source": "game_rules.pdf",
+      "page": 3,
+      "canonical_quote": "Die Reihenfolge der Karten auf deiner Hand darfst du während des gesamten Spiels nicht ändern. Du darfst die Karten nicht sortieren.",
+      "mutated_quote": "Die Reihenfolge der Karten auf deiner Hand darfst du während des gesamten Spiels ändern. Du darfst die Karten jederzeit sortieren.",
+      "affected_mechanics": [
+        "legal_actions",
+        "hand_order",
+        "mandatory_planting"
+      ],
+      "scenarios": [
+        "BOHN-R37-hand-sorting-is-forbidden"
+      ]
+    }
+  ],
+  "outcomes": {
+    "uptake_detected": "mutation appears in implementation and evaluator catches it",
+    "uptake_missed": "mutation appears in implementation but evaluator misses it",
+    "rejected_reported": "implementation rejects the mutation and records the source conflict",
+    "ignored_unreported": "implementation follows canonical behavior without reporting the conflict; possible prior-knowledge/default effect"
+  },
+  "freeze": {
+    "rubric_version": "bohnanza-source-experiment-2026-07-18",
+    "scenario_count": 37,
+    "hashes": {
+      "suite": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+      "adapter": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+      "rulefacts": "c4b21c21db901ed93f95f4d8f4ce0812f34f0604483d81308e75fa7b866e8f2e",
+      "judge_prompt": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2",
+      "implementation_prompt": "625f5ad9307cc9e29219e8ab8d43f3f1bfac8d501bbfe2a313eefc251694c27a",
+      "canonical_rules": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+      "canonical_components": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46",
+      "mutated_rules": "224d2bdd529f6bc712e2ef9e8edfc42a9f53900f7974f535d4c7ca59c4f31b8c",
+      "mutated_components": "1d1c5614c689a39a4019057673c1cad77c8ad2dc564dc2c5b4f7bb08c8ae721a"
+    }
+  }
+}

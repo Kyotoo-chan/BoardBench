@@ -12,18 +12,18 @@ sources:
     edition: "Bohnanza Grundspiel und Ackerbohne, German excerpt, 11 PDF pages"
   - id: COMPONENTS
     role: user_observation
-    path: inputs/games/bohnanza/game_components.pdf
-    sha256: 83b5db35b65975723190bb03b113751f43a48895e0a7f0cd546649f98df01ea4
-    edition: "User-authored Kartenübersicht Grundspiel + Ackerbohne, 3 PDF pages"
+    path: inputs/games/bohnanza/game_components.json
+    sha256: 52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46
+    edition: "User-authored Bohnanza Bohnen und Erntewerte JSON, unchanged supplied file"
 ---
 
 # Approved Bohnanza rule facts
 
-This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS` may establish observed component identities and counts, but does not silently override gameplay rules. All pages below are PDF pages.
+This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS` may establish observed component identities, counts, and printed Bohnometer values, but does not silently override gameplay rules. Numeric locators are RULES PDF pages; `/...` locators are RFC 6901 pointers into COMPONENTS.
 
 ## Setup and inventory
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | SET-01 | RULES | 2 | “GRUNDSPIEL (3–5 SPIELER)” | Base game supports 3–5 players. The selected Ackerbohne condition supports 4–5. | clear |
 | SET-02 | RULES | 2 | “Spielt ihr zu dritt … drei Bohnenfeldern … zu viert oder zu fünft … zwei Bohnenfeldern” | Three players start with three fields; four or five with two. | clear |
@@ -31,15 +31,15 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 | INV-01 | RULES | 2 | “Es gibt 104 Karten mit acht verschiedenen Bohnensorten.” | Base inventory is exactly 104 cards across eight types. | clear |
 | INV-02 | RULES | 2 | Card-face large numbers: 6, 8, 10, 12, 14, 16, 18, 20 | Garten 6, Rote 8, Augen 10, Soja 12, Brech 14, Sau 16, Feuer 18, Blaue 20. | clear, diagram |
 | INV-03 | RULES | 10 | “alle Bohnensorten aus dem Grundspiel sowie die Ackerbohnen und die Weinbrandbohnen” | Ackerbohne variant includes all eight base types plus Ackerbohne and Weinbrandbohne. | clear |
-| INV-04 | COMPONENTS | 1 | “Verwendet genau 129 Bohnenkarten: 104 aus dem Grundspiel, 22 Weinbrandbohnen und 3 Ackerbohnen.” | Selected 4–5-player deck has exactly 129 cards: base 104 + Weinbrand 22 + Acker 3. | user_observation |
-| INV-05 | COMPONENTS | 3 | “Nicht in diesen Kartensatz legen” | Coffee, cocoa, order cards, Elsterbohnen, separate AMIGO coins, and other editions are excluded. | user_observation |
+| INV-04 | COMPONENTS | `/bohnen/9/anzahl_karten`, `/bohnen/11/anzahl_karten` | Weinbrandbohne: `22`; Ackerbohne: `3` | With RULES INV-01/INV-03, the selected deck has exactly 129 cards: base 104 + Weinbrand 22 + Acker 3. The JSON's 157 is the full cross-variant catalog, not one active deck. | user_observation + clear composition |
+| INV-05 | RULES | 2, 10 | “Acker- … werden nur in den Varianten verwendet”; “alle Bohnensorten aus dem Grundspiel sowie die Ackerbohnen und die Weinbrandbohnen” | Coffee, cocoa, order cards, Elsterbohnen, separate AMIGO coins, and other editions are excluded from the selected Acker condition. | clear by explicit inclusion |
 | HAND-01 | RULES | 3 | “verteilt an jeden Spieler einzeln fünf Handkarten” | Deal five ordered cards to each player. | clear |
 | HAND-02 | RULES | 3 | “Die Reihenfolge … darfst du … nicht ändern … Du darfst die Karten nicht sortieren.” | Hand order is immutable; draws append at the back. | clear |
 | HAND-03 | RULES | 3 | “Die erste verteilte Karte … ist die vorderste Karte.” | Front card is the next mandatory hand card. Owner sees the whole hand; opponents see only its count unless players voluntarily communicate. | human_decision |
 
 ## Turn and planting
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | TURN-01 | RULES | 4 | “Danach geht es im Uhrzeigersinn weiter.” | Turns proceed clockwise; start-player marker does not move. | clear |
 | TURN-02 | RULES | 4 | “führst du nacheinander vier Phasen durch” | Hand planting; reveal/trade; mandatory planting; drawing, in that order. | clear |
@@ -51,7 +51,7 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 
 ## Reveal and trade
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | P2-01 | RULES | 5 | “Ziehe die obersten zwei Karten … für alle sichtbar” | Reveal two public cards for the active player. | clear |
 | TRADE-01 | RULES | 5 | “Nur du als aktiver Spieler darfst mit anderen Spielern handeln.” | Every trade includes the active player; inactive players cannot trade together. | clear |
@@ -64,7 +64,7 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 
 ## Mandatory planting and draw
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | P3-01 | RULES | 7 | “müssen diese nun anbauen … jede aufgedeckte Karte … nicht gehandelt” | All received cards and all retained reveals must be planted. | clear |
 | P3-02 | RULES | 7 | “selbst entscheiden, in welcher Reihenfolge” | Each recipient chooses planting order and any necessary legal harvest between cards. | clear |
@@ -73,28 +73,28 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 
 ## Harvesting and Ackerbohne
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | HARV-01 | RULES | 7 | “jederzeit … auch wenn du nicht der aktive Spieler bist” | Owner may harvest between individual game steps, including during another turn, but not inside an already executing atomic draw/transfer. | human_decision |
 | HARV-02 | RULES | 8 | “Drehe so viele Karten … Bohnentaler … restlichen … Ablagestapel … Feld immer leer.” | Normal harvest flips earned cards to coins, discards the rest, and empties the field. | clear |
 | HARV-03 | RULES | 8 | “keine einzelne Bohnenkarte ernten, wenn … einem deiner Felder mehr als eine” | A singleton cannot be harvested if any own field has 2+ cards; otherwise it may be. | clear |
-| GOLD-01 | COMPONENTS | 2 | “Blaue Bohne … 4 / 6 / 8 / 10” | Blue yields 0 below 4, then 1/2/3/4 coins at 4/6/8/10+. | user_observation |
-| GOLD-02 | COMPONENTS | 2 | “Feuerbohne … 3 / 6 / 8 / 9” | Fire yields 0 below 3, then 1/2/3/4 at 3/6/8/9+. | user_observation |
+| GOLD-01 | COMPONENTS | `/bohnen/0/ernte` | thresholds `4→1, 6→2, 8→3, 10→4` | Blue yields 0 below 4, then 1/2/3/4 coins at 4/6/8/10+. | user_observation |
+| GOLD-02 | COMPONENTS | `/bohnen/1/ernte` | thresholds `3→1, 6→2, 8→3, 9→4` | Fire yields 0 below 3, then 1/2/3/4 at 3/6/8/9+. | user_observation |
 | GOLD-03 | RULES | 8 | “3 oder 4 Saubohnen … einen … 5 oder 6 … zwei … 7 … drei … 8 oder mehr … vier” | Sau yields 0 below 3, then 1/2/3/4 at 3/5/7/8+. | clear |
-| GOLD-04 | COMPONENTS | 2 | “Brechbohne … 3 / 5 / 6 / 7” | Brech yields 0 below 3, then 1/2/3/4 at 3/5/6/7+. | user_observation |
-| GOLD-05 | COMPONENTS | 2 | “Sojabohne … 2 / 4 / 6 / 7” | Soy yields 0 below 2, then 1/2/3/4 at 2/4/6/7+. | user_observation |
-| GOLD-06 | COMPONENTS | 2 | “Augenbohne … 2 / 4 / 5 / 6” | Eye yields 0 below 2, then 1/2/3/4 at 2/4/5/6+. | user_observation |
-| GOLD-07 | COMPONENTS | 2 | “Rote Bohne … 2 / 3 / 4 / 5” | Red yields 0 below 2, then 1/2/3/4 at 2/3/4/5+. | user_observation |
-| GOLD-08 | COMPONENTS | 2 | “Gartenbohne … 2 Bohnen … 3 Bohnen” | Garden yields 0 at 1, 2 coins at 2, and 3 coins at 3+. | user_observation |
-| GOLD-09 | COMPONENTS | 2 | “Weinbrandbohne … 4 / 7 / 9 / 11” | Brandy yields 0 below 4, then 1/2/3/4 at 4/7/9/11+. | user_observation |
+| GOLD-04 | COMPONENTS | `/bohnen/3/ernte` | thresholds `3→1, 5→2, 6→3, 7→4` | Brech yields 0 below 3, then 1/2/3/4 at 3/5/6/7+. | user_observation |
+| GOLD-05 | COMPONENTS | `/bohnen/4/ernte` | thresholds `2→1, 4→2, 6→3, 7→4` | Soy yields 0 below 2, then 1/2/3/4 at 2/4/6/7+. | user_observation |
+| GOLD-06 | COMPONENTS | `/bohnen/5/ernte` | thresholds `2→1, 4→2, 5→3, 6→4` | Eye yields 0 below 2, then 1/2/3/4 at 2/4/5/6+. | user_observation |
+| GOLD-07 | COMPONENTS | `/bohnen/6/ernte` | thresholds `2→1, 3→2, 4→3, 5→4` | Red yields 0 below 2, then 1/2/3/4 at 2/3/4/5+. | user_observation |
+| GOLD-08 | COMPONENTS | `/bohnen/7/ernte` | thresholds `2→2, 3→3` | Garden yields 0 at 1, 2 coins at 2, and 3 coins at 3+. | user_observation |
+| GOLD-09 | COMPONENTS | `/bohnen/9/ernte` | thresholds `4→1, 7→2, 9→3, 11→4` | Brandy yields 0 below 4, then 1/2/3/4 at 4/7/9/11+. | user_observation |
 | ACKER-01 | RULES | 11 | “Feld mit zwei Ackerbohnen, erhältst du ein drittes Bohnenfeld.” | Exactly two unlock field 3 if absent; both harvested cards are discarded, old fields 1–2 persist. | clear |
 | ACKER-02 | RULES | 11 | “bereits ein drittes Bohnenfeld … erhältst du … nichts” | If field 3 already exists, two yield no reward but are normally discarded and the field empties. | human_decision |
 | ACKER-03 | RULES | 11 | “drei Ackerbohnen … drei Bohnentaler” | Exactly three become three coins and do not unlock field 3. | human_decision |
-| ACKER-04 | COMPONENTS | 2 | “1 Ackerbohne — 0 Taler — Normale Null-Ernte” | One Ackerbohne is a legal zero harvest when protection permits; discard it and do not unlock a field. | human_decision based on user observation |
+| ACKER-04 | RULES | 11 | Source specifies rewards for exactly two and three Ackerbohnen but no one-card reward. | One Ackerbohne is a legal zero harvest when protection permits; discard it and do not unlock a field. | human_decision |
 
 ## End and result
 
-| ID | Source | Page | Direct quote | Approved expectation | Basis |
+| ID | Source | Locator | Direct source evidence | Approved expectation | Basis |
 |---|---|---:|---|---|---|
 | END-01 | RULES | 9 | “endet, sobald der Nachziehstapel zum dritten Mal leer wird” | At four/five players, the third depletion triggers the end. | clear |
 | END-02 | RULES | 9 | “beim Aufdecken … spielt ihr die 2. und die 3. Phase noch zu Ende” | If third depletion occurs while revealing, finish phases 2 and 3, then score; phase 4 is skipped. | clear |
@@ -105,8 +105,8 @@ This is an **augmented source condition**. `RULES` governs gameplay. `COMPONENTS
 
 ## Approved corrections and conflict decisions — 2026-07-18
 
-- `COMPONENTS` p.3 phrase “2 Karten = 2 [Taler]” is a transcription error. Two Ackerbohnen unlock field 3; they never award two coins.
-- Conflicting Saubohne prose in `COMPONENTS` is a transcription error. `RULES` p.8 controls: 3–4 → 1, 5–6 → 2, 7 → 3, 8+ → 4 coins.
+- The prior COMPONENTS PDF phrase “2 Karten = 2 [Taler]” was a transcription error. The canonical JSON records field 3; two Ackerbohnen never award two coins.
+- Conflicting Saubohne prose in the prior COMPONENTS PDF was a transcription error. The canonical JSON and `RULES` p.8 use 3–4 → 1, 5–6 → 2, 7 → 3, 8+ → 4 coins.
 - The Ackerbohne condition is the 4–5-player 129-card augmented condition, not the 104-card base setup.
 
 ## Explicit executable conventions

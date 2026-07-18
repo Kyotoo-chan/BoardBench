@@ -111,6 +111,7 @@ def run_codex(
     mode: str = "agentic",
     timeout: int = 4000,
     image_paths: list[Path] | None = None,
+    sandbox: str | None = None,
 ) -> dict[str, object]:
     cwd = cwd.resolve()
     response_path.parent.mkdir(parents=True, exist_ok=True)
@@ -135,7 +136,7 @@ def run_codex(
         "-c",
         f'model_verbosity="{verbosity}"',
         "-s",
-        "danger-full-access" if mode == "agentic" else "read-only",
+        sandbox or ("danger-full-access" if mode == "agentic" else "read-only"),
         "-C",
         cwd.as_posix(),
     ]
@@ -173,6 +174,7 @@ def run_codex(
         "reasoning_effort": effort,
         "verbosity": verbosity,
         "mode": mode,
+        "sandbox": sandbox or ("danger-full-access" if mode == "agentic" else "read-only"),
         "started_at": started_at.isoformat(),
         "ended_at": ended_at.isoformat(),
         "elapsed_seconds": round(elapsed, 3),
@@ -206,6 +208,7 @@ def main() -> int:
     parser.add_argument("--effort", help="default: low for generation, medium for judging")
     parser.add_argument("--verbosity", choices=("low", "medium", "high"), default=DEFAULT_VERBOSITY)
     parser.add_argument("--mode", choices=("agentic", "judge"), default="agentic")
+    parser.add_argument("--sandbox", choices=("read-only", "workspace-write", "danger-full-access"))
     parser.add_argument("--timeout", type=int, default=4000)
     parser.add_argument("--image", type=Path, action="append", default=[])
     args = parser.parse_args()
@@ -221,6 +224,7 @@ def main() -> int:
         mode=args.mode,
         timeout=args.timeout,
         image_paths=args.image,
+        sandbox=args.sandbox,
     )
     return 0
 
