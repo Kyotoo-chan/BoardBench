@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Variante: Die Ackerbohnen / Spielablauf; reference to Variante: Drei neue Bohnensorten",
+      "source_basis": "missing",
+      "alternatives": [
+        "the referenced variant adds further gameplay changes not present in the supplied pages",
+        "the supplied augmented draw and ending text contains all changes needed for 4-5 players"
+      ],
+      "selected": "use the explicit supplied augmented draw rule and third-depletion ending; otherwise use Grundspiel",
+      "affected_mechanics": ["legal_actions", "state_transition", "terminal_results"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Die Bohnenernte: jederzeit; turn-based API has one current_player",
+      "source_basis": "missing",
+      "alternatives": [
+        "interrupt every decision with harvest opportunities for every player",
+        "offer harvest only whenever that player already owns the current decision"
+      ],
+      "selected": "a player may harvest at every decision point they control, including consent and phase-3 planting decisions",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "Ein leerer Nachziehstapel / Spielende",
+      "source_basis": "ambiguous",
+      "alternatives": [
+        "an empty discard pile can be reshuffled into an empty draw pile and drawing continues",
+        "a requested draw with no cards available draws nothing"
+      ],
+      "selected": "a requested draw with no available card draws nothing; depletion is counted when the last actual card is drawn",
+      "affected_mechanics": ["state_transition", "terminal_results"]
+    }
+  ]
+}

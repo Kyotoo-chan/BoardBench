@@ -1,0 +1,255 @@
+{
+  "version": 3,
+  "rubric_version": "bohnanza-2026-07-18",
+  "suite": "checks/scenarios/bohnanza.json",
+  "suite_sha256": "2e59ee3dc09cf206aecc940a9c67d47bd0387782158884e6d6014a1e12add6e8",
+  "adapter": "checks/scenario_adapters/bohnanza.py",
+  "adapter_sha256": "10feb808656eda11e23dc73e4bbe8df3ee6e2eca28afdd2e1ba9f3844e0dd057",
+  "code": "outputs/bohnanza_codex_ag.py",
+  "code_sha256": "5c8fecb39a4f6fd2273890b4d2687c4c7edb396690674501e8ab53c3308a359b",
+  "counts": {
+    "PASS": 22,
+    "FAIL": 0,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 22,
+  "total": 22,
+  "score": 1.0,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 15,
+      "evaluated": 15,
+      "score": 1.0
+    },
+    "human_decision": {
+      "passed": 7,
+      "evaluated": 7,
+      "score": 1.0
+    }
+  },
+  "results": [
+    {
+      "id": "BOHN-R01-exact-acker-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "INV-01",
+        "INV-02",
+        "INV-03",
+        "INV-04",
+        "INV-05"
+      ]
+    },
+    {
+      "id": "BOHN-R02-front-card-mandatory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "HAND-02",
+        "HAND-03",
+        "P1-01",
+        "P1-02"
+      ]
+    },
+    {
+      "id": "BOHN-R03-second-plant-optional-no-third",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-02"
+      ]
+    },
+    {
+      "id": "BOHN-R04-empty-hand-skips-phase-one",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-04",
+        "P2-01"
+      ]
+    },
+    {
+      "id": "BOHN-R05-one-type-per-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "FIELD-01"
+      ]
+    },
+    {
+      "id": "BOHN-R06-trading-authority",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-05"
+      ]
+    },
+    {
+      "id": "BOHN-R07-received-cards-bypass-hand",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-05",
+        "TRADE-06",
+        "P3-01"
+      ]
+    },
+    {
+      "id": "BOHN-R08-rejected-gift-no-transfer",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-07"
+      ]
+    },
+    {
+      "id": "BOHN-R09-variant-draw-one-each-clockwise",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "P4-01",
+        "HAND-02"
+      ]
+    },
+    {
+      "id": "BOHN-R10-singleton-protection",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R11-singleton-allowed-when-all-single",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R12-normal-harvest-clears-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R13-one-acker-zero-harvest",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-04",
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R14-two-acker-unlocks-third-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ACKER-01"
+      ]
+    },
+    {
+      "id": "BOHN-R15-two-acker-existing-third-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-02"
+      ]
+    },
+    {
+      "id": "BOHN-R16-three-acker-three-coins-no-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-03"
+      ]
+    },
+    {
+      "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "END-01",
+        "END-02",
+        "END-03"
+      ]
+    },
+    {
+      "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "END-01",
+        "END-05"
+      ]
+    },
+    {
+      "id": "BOHN-R19-final-score-ignores-hand",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "END-03",
+        "END-06"
+      ]
+    },
+    {
+      "id": "BOHN-R20-clockwise-tiebreak",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-03",
+        "TURN-01",
+        "END-04"
+      ]
+    },
+    {
+      "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "P2-01",
+        "DECK-01"
+      ]
+    },
+    {
+      "id": "BOHN-R22-harvest-between-mandatory-plantings",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "P3-01",
+        "P3-02",
+        "HARV-01"
+      ]
+    }
+  ]
+}

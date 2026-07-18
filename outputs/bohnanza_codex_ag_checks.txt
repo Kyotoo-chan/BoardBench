@@ -1,0 +1,131 @@
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_checks.py --game bohnanza_codex_ag --code-path outputs/bohnanza_codex_ag.py --rollouts 100 --max-steps 1000 --seed 1
+exit_code=0
+OK   01_result_file                     1/1 score=1.000    0.01s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.02s
+OK   04_required_api                    8/8 score=1.000    0.01s
+OK   05_random_rollouts             100/100 score=1.000   19.89s
+OK   06_action_language       598975/598975 score=1.000   12.05s
+---- summary                            6/6 score=1.000   31.99s
+
+
+
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json
+exit_code=1
+FAIL scenario suite: rulebook.path and full rulebook.sha256 are required
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json` failed. (See above for error)
+
+
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json
+exit_code=1
+CRASH BOHN-R01-exact-acker-inventory: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R02-front-card-mandatory: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R03-second-plant-optional-no-third: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R04-empty-hand-skips-phase-one: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R05-one-type-per-field: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R06-trading-authority: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R07-received-cards-bypass-hand: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R08-rejected-gift-no-transfer: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R09-variant-draw-one-each-clockwise: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R10-singleton-protection: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R11-singleton-allowed-when-all-single: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R12-normal-harvest-clears-field: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R13-one-acker-zero-harvest: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R14-two-acker-unlocks-third-field: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R15-two-acker-existing-third-field: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R16-three-acker-three-coins-no-field: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R17-third-empty-during-reveal-finishes-phase-three: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R18-third-empty-during-phase-four-stops-immediately: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R19-final-score-ignores-hand: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R20-clockwise-tiebreak: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R21-nonterminal-empty-refills-and-continues-reveal: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+CRASH BOHN-R22-harvest-between-mandatory-plantings: TypeError: _validate_source() missing 1 required positional argument: 'repo_root'
+SCENARIOS PASS=0 FAIL=0 CRASH=22 UNREACHED=0 UNTESTABLE=0 evaluated=22/22 score=0.000 coverage=1.000
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json` failed. (See above for error)
+
+
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json
+exit_code=1
+PASS BOHN-R01-exact-acker-inventory
+CRASH BOHN-R02-front-card-mandatory: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R03-second-plant-optional-no-third: RuntimeError: unknown phase plant_hand_second
+CRASH BOHN-R04-empty-hand-skips-phase-one: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R05-one-type-per-field: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R06-trading-authority: RuntimeError: unknown phase trade
+CRASH BOHN-R07-received-cards-bypass-hand: RuntimeError: unknown phase plant_traded
+CRASH BOHN-R08-rejected-gift-no-transfer: RuntimeError: unknown phase trade
+CRASH BOHN-R09-variant-draw-one-each-clockwise: RuntimeError: unknown phase draw
+CRASH BOHN-R10-singleton-protection: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R11-singleton-allowed-when-all-single: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R12-normal-harvest-clears-field: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R13-one-acker-zero-harvest: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R14-two-acker-unlocks-third-field: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R15-two-acker-existing-third-field: RuntimeError: unknown phase plant_hand
+CRASH BOHN-R16-three-acker-three-coins-no-field: RuntimeError: unknown phase plant_hand
+UNTESTABLE BOHN-R17-third-empty-during-reveal-finishes-phase-three: state has no field for depletions
+UNTESTABLE BOHN-R18-third-empty-during-phase-four-stops-immediately: state has no field for depletions
+CRASH BOHN-R19-final-score-ignores-hand: NotImplementedError: state has no winner
+UNTESTABLE BOHN-R20-clockwise-tiebreak: state has no field for start_player
+UNTESTABLE BOHN-R21-nonterminal-empty-refills-and-continues-reveal: state has no field for depletions
+CRASH BOHN-R22-harvest-between-mandatory-plantings: RuntimeError: unknown phase plant_traded
+SCENARIOS PASS=1 FAIL=0 CRASH=17 UNREACHED=0 UNTESTABLE=4 evaluated=18/22 score=0.056 coverage=0.818
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json` failed. (See above for error)
+
+
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json
+exit_code=1
+PASS BOHN-R01-exact-acker-inventory
+PASS BOHN-R02-front-card-mandatory
+PASS BOHN-R03-second-plant-optional-no-third
+PASS BOHN-R04-empty-hand-skips-phase-one
+PASS BOHN-R05-one-type-per-field
+PASS BOHN-R06-trading-authority
+PASS BOHN-R07-received-cards-bypass-hand
+PASS BOHN-R08-rejected-gift-no-transfer
+CRASH BOHN-R09-variant-draw-one-each-clockwise: IndexError: pop from empty list
+FAIL BOHN-R10-singleton-protection: harvest_legal[1]: expected True, got False
+PASS BOHN-R11-singleton-allowed-when-all-single
+FAIL BOHN-R12-normal-harvest-clears-field: semantic action is not legal: {'contains_any': ['harvest', 'ernten']}; got ['["Handkarte anbauen",0]', '["Handkarte anbauen",1]']
+FAIL BOHN-R13-one-acker-zero-harvest: semantic action is not legal: {'contains_any': ['acker', 'ernten', 'harvest']}; got ['["Handkarte anbauen",1]']
+PASS BOHN-R14-two-acker-unlocks-third-field
+FAIL BOHN-R15-two-acker-existing-third-field: semantic action is not legal: {'contains_any': ['acker', 'ernten', 'harvest']}; got ['["Handkarte anbauen",1]', '["Handkarte anbauen",2]']
+FAIL BOHN-R16-three-acker-three-coins-no-field: semantic action is not legal: {'contains_any': ['acker', 'ernten', 'harvest']}; got ['["Handkarte anbauen",1]']
+PASS BOHN-R17-third-empty-during-reveal-finishes-phase-three
+CRASH BOHN-R18-third-empty-during-phase-four-stops-immediately: IndexError: pop from empty list
+PASS BOHN-R19-final-score-ignores-hand
+PASS BOHN-R20-clockwise-tiebreak
+PASS BOHN-R21-nonterminal-empty-refills-and-continues-reveal
+PASS BOHN-R22-harvest-between-mandatory-plantings
+SCENARIOS PASS=15 FAIL=5 CRASH=2 UNREACHED=0 UNTESTABLE=0 evaluated=22/22 score=0.682 coverage=1.000
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json` failed. (See above for error)
+
+
+$ C:/ProgramData/miniconda3/Scripts/conda.exe run -n boardbench python checks/run_scenarios.py --code-path outputs/bohnanza_codex_ag.py --scenarios checks/scenarios/bohnanza.json --json-output outputs/bohnanza_codex_ag_scenarios.json
+exit_code=0
+PASS BOHN-R01-exact-acker-inventory
+PASS BOHN-R02-front-card-mandatory
+PASS BOHN-R03-second-plant-optional-no-third
+PASS BOHN-R04-empty-hand-skips-phase-one
+PASS BOHN-R05-one-type-per-field
+PASS BOHN-R06-trading-authority
+PASS BOHN-R07-received-cards-bypass-hand
+PASS BOHN-R08-rejected-gift-no-transfer
+PASS BOHN-R09-variant-draw-one-each-clockwise
+PASS BOHN-R10-singleton-protection
+PASS BOHN-R11-singleton-allowed-when-all-single
+PASS BOHN-R12-normal-harvest-clears-field
+PASS BOHN-R13-one-acker-zero-harvest
+PASS BOHN-R14-two-acker-unlocks-third-field
+PASS BOHN-R15-two-acker-existing-third-field
+PASS BOHN-R16-three-acker-three-coins-no-field
+PASS BOHN-R17-third-empty-during-reveal-finishes-phase-three
+PASS BOHN-R18-third-empty-during-phase-four-stops-immediately
+PASS BOHN-R19-final-score-ignores-hand
+PASS BOHN-R20-clockwise-tiebreak
+PASS BOHN-R21-nonterminal-empty-refills-and-continues-reveal
+PASS BOHN-R22-harvest-between-mandatory-plantings
+SCENARIOS PASS=22 FAIL=0 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=22/22 score=1.000 coverage=1.000

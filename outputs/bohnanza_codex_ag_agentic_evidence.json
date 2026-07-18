@@ -1,0 +1,40 @@
+{
+  "protocol": "agentic-v2.2",
+  "source_condition": "augmented_user_observation",
+  "sources": [
+    {
+      "id": "RULES",
+      "path": "inputs/games/bohnanza/game_rules.pdf",
+      "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+      "role": "publisher_rulebook"
+    },
+    {
+      "id": "COMPONENTS",
+      "path": "inputs/games/bohnanza/game_components.pdf",
+      "sha256": "83b5db35b65975723190bb03b113751f43a48895e0a7f0cd546649f98df01ea4",
+      "role": "user_observation"
+    }
+  ],
+  "model": "gpt-5.6-sol",
+  "thinking": "low",
+  "verbosity": "low",
+  "subagents": "off-native-codex",
+  "self_check_sha256": "159defdb510d006f7652bebb928ed22bce2a001909d292dfa507a2b8222b70e2",
+  "repair_count": 0,
+  "agent_ran_self_check": true,
+  "independent_gate_passed": true,
+  "commands": [
+    "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-ChildItem -Force | Select-Object Name,Length,Mode; Write-Output '--- SOURCE_MANIFEST.md ---'; Get-Content -Raw SOURCE_MANIFEST.md; Write-Output '--- IMPLEMENTATION_TASK.txt ---'; Get-Content -Raw IMPLEMENTATION_TASK.txt\"",
+    "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -Raw agentic_self_check.py; Write-Output '--- PDF TOOLS ---'; Get-Command pdftotext -ErrorAction SilentlyContinue | Select-Object Source; Write-Output '--- RENDER FILES ---'; rg --files rendered\"",
+    "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"pdftotext -layout game_rules.pdf -; Write-Output '--- COMPONENTS PDF ---'; pdftotext -layout game_components.pdf -\"",
+    "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile implementation.py'",
+    "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python agentic_self_check.py'"
+  ],
+  "elapsed_seconds": 284.372,
+  "token_summary": {
+    "reasoning_output_tokens": 1032,
+    "input_tokens": 407662,
+    "output_tokens": 9161,
+    "cached_input_tokens": 321024
+  }
+}
