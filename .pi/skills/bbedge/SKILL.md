@@ -15,7 +15,7 @@ Use the argument and subagent policy from `/bb`. If child model/thinking is not 
 
 ## Input
 
-Require exactly one primary `inputs/game_rules.pdf` or `.txt`. Optionally accept one user-authored `inputs/game_components.pdf` or `.txt` that only identifies and inventories physical components. Ask for a short slug if `game=` is missing. Use only these supplied sources and fresh rendered pages.
+Require exactly one primary `inputs/game_rules.pdf` or `.txt`. Optionally accept one user-authored `inputs/game_components.pdf`, `.txt`, or `.json` that only identifies and inventories physical components. Ask for a short slug if `game=` is missing. Use only these supplied sources; render PDF pages freshly and preserve stable JSON Pointers for JSON evidence.
 
 Treat the pair as one visibly augmented source condition, never as a publisher-only condition. Record the primary as `publisher_rulebook` and the appendix as `user_observation`. The appendix may support hard component inventory/setup expectations, but it may not silently define or override gameplay rules.
 
@@ -29,7 +29,7 @@ Treat the pair as one visibly augmented source condition, never as a publisher-o
 6. Ask the user through `ask_user_question` only about **material** assumptions: choices that alter component inventory, legal actions, state transitions, private information, elimination, terminal results, or scoring. For each question show the evidence, alternatives, recommended interpretation, and affected scenarios. Never silently choose.
 7. Stop at an approval gate. Do not write a hard expected result for an unresolved material assumption.
 8. After agreement, write `inputs/games/<slug>/rulefacts.md` with `status: approved`, stable fact IDs, the source register and hashes, dated decisions with rationale, corrections, conflicts, and unresolved questions.
-9. Write version-3 cases to `checks/scenarios/<slug>.json`. Every scored case needs fact IDs, source ID, page, direct quote, basis (`clear` or `human_decision`), exact starting state or public trace, selected action, expected observable transition, and whether it is deterministic or exploratory.
+9. Write version-3 cases to `checks/scenarios/<slug>.json`. Every scored case needs fact IDs, source ID, a positive PDF `page` or RFC 6901 `json_pointer`, direct source evidence in `quote`, basis (`clear` or `human_decision`), exact starting state or public trace, selected action, expected observable transition, and whether it is deterministic or exploratory.
 10. Add an evaluator-only `checks/scenario_adapters/<slug>.py` when rare states cannot be reached reliably through the public API. The adapter may construct and observe state but must not contain the expected rule result.
 11. Review temporal boundaries explicitly: pending reactions, intermediate choice phases, chance resolution, and the point at which an expectation is checked. `UNREACHED` and `UNTESTABLE` are never hard failures.
 12. Show the complete assumption and scenario matrix to the user before scoring. Record hashes for run provenance; later corrections update the current workflow while Git preserves prior results.

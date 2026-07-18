@@ -8,7 +8,7 @@ For every `critical` or `major` finding include:
 
 - canonical fact ID;
 - evidence type: `rule_quote`, `user_observation`, or `human_decision`;
-- source ID plus exact quote and page/section;
+- source ID, stable locator (PDF page or JSON Pointer), and exact source evidence;
 - conflicting code symbol or transition;
 - expected versus implemented behaviour.
 

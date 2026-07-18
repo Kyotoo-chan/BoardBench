@@ -2,13 +2,13 @@
 
 ```text
 inputs/game_rules.pdf|txt        active primary rulebook
-inputs/game_components.pdf|txt   optional user-authored component inventory
+inputs/game_components.pdf|txt|json  optional user-authored component inventory
 inputs/games/<slug>/             archived source condition and approved facts
 inputs/games/<slug>/variants/    optional current comparison source
 inputs/prompts/                  prompts sent to models
 ```
 
-Use the publisher's native PDF or TXT as the canonical rules source. An optional user-authored component inventory makes the input an augmented source condition: hash and cite it separately as `user_observation`, and never let it silently override gameplay rules. A clarified text is a separate condition and must visibly label its additions.
+Use the publisher's native PDF or TXT as the canonical rules source. An optional user-authored PDF, TXT, or JSON component inventory makes the input an augmented source condition: hash and cite it separately as `user_observation`, use stable JSON Pointers for JSON facts, and never let it silently override gameplay rules. A clarified text is a separate condition and must visibly label its additions.
 
 ## Why SHA-256 is retained
 

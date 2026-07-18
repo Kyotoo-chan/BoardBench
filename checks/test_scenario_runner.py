@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from types import SimpleNamespace
 
-from checks.run_scenarios import _contains, _resolve_action, _settle, load_suite
+from checks.run_scenarios import _contains, _resolve_action, _settle, _validate_source, load_suite
 from checks.scenario_adapters import abalone, expl
 
 
@@ -39,6 +39,12 @@ class ImmutableState:
 
 
 class ScenarioRunnerTests(unittest.TestCase):
+    def test_source_evidence_accepts_pdf_page_or_json_pointer(self):
+        _validate_source({"source": {"page": 1, "quote": "A sufficiently long PDF quote"}})
+        _validate_source({"source": {"json_pointer": "/beans/acker/count", "quote": "{\"count\": 3}"}})
+        with self.assertRaises(AssertionError):
+            _validate_source({"source": {"page": 1, "json_pointer": "/beans", "quote": "ambiguous locator"}})
+
     def test_load_suite_accepts_multiple_hashed_sources(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

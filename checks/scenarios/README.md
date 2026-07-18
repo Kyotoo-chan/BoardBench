@@ -7,7 +7,7 @@ A scored scenario must be traceable, deterministic where material, and explicit 
   "id": "GAME-R01-stable-name",
   "fact_ids": ["TURN-01"],
   "basis": "clear",
-  "source": {"page": 1, "quote": "Direct rulebook quote ..."},
+  "source": {"source_id": "RULES", "page": 1, "quote": "Direct rulebook quote ..."},
   "fixture": {},
   "initial": {},
   "steps": [
@@ -20,7 +20,7 @@ A scored scenario must be traceable, deterministic where material, and explicit 
 }
 ```
 
-`basis` is `clear` or `human_decision`. Unresolved assumptions do not become scored scenarios.
+`basis` is `clear` or `human_decision`. Unresolved assumptions do not become scored scenarios. Source evidence uses either a positive PDF `page` or an RFC 6901 `json_pointer`; `quote` contains the cited text or compact JSON fragment.
 
 ## Outcomes
 

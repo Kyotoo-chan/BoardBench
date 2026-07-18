@@ -263,8 +263,12 @@ def _validate_source(scenario: dict[str, Any]) -> None:
     source = scenario.get("source")
     if not isinstance(source, dict):
         raise AssertionError("missing source object")
-    if not isinstance(source.get("page"), int) or source["page"] < 1:
-        raise AssertionError("source.page must be a positive page number")
+    page = source.get("page")
+    pointer = source.get("json_pointer")
+    valid_page = isinstance(page, int) and page >= 1
+    valid_pointer = isinstance(pointer, str) and pointer.startswith("/")
+    if valid_page == valid_pointer:
+        raise AssertionError("source needs exactly one positive page or RFC 6901 json_pointer")
     quote = source.get("quote")
     if not isinstance(quote, str) or len(quote.strip()) < 10:
         raise AssertionError("source.quote must contain a direct rulebook quote")

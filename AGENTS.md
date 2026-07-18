@@ -30,7 +30,7 @@ Project-local workflow skills:
 
 ## Minimal workflow
 
-1. User places one active rulebook at `inputs/game_rules.pdf` or `.txt` and may add one `inputs/game_components.pdf` or `.txt`.
+1. User places one active rulebook at `inputs/game_rules.pdf` or `.txt` and may add one user-authored component inventory at `inputs/game_components.pdf`, `.txt`, or `.json`.
 2. `bbedge` archives and hashes each source separately, records its provenance and role, then rule facts, conflicts, and edge cases are discussed with the user.
 3. Approved facts live at `inputs/games/<slug>/rulefacts.md`; executable cases live at `checks/scenarios/<slug>.json`.
 4. `bbimpl` generates one agentic implementation in an isolated workspace that cannot see evaluator scenarios.
@@ -42,7 +42,7 @@ Do not continue past material ambiguities without user approval.
 
 - Use only the supplied source condition for game rules; no remembered or web rules unless an experiment explicitly tests extra context.
 - A user-authored component appendix is an augmented source, not part of the publisher rulebook. By default it is `user_observation`: it may support hard component inventory/setup expectations, but may not silently override gameplay rules.
-- Hash and cite every source separately. Every hard scenario expectation needs source ID, edition/hash, page, and direct quote.
+- Hash and cite every source separately. Every hard scenario expectation needs source ID, edition/hash, a stable locator (PDF page or JSON Pointer), and direct source evidence.
 - Surface every cross-source conflict with both citations, alternatives, affected behavior, and a user-approved decision; never apply automatic precedence.
 - Keep ambiguous and untestable rules visible instead of scoring them as failures.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
