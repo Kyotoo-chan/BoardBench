@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
+import tempfile
 import unittest
 from dataclasses import dataclass
 from pathlib import Path
 from types import SimpleNamespace
 
-from checks.run_scenarios import _contains, _resolve_action, _settle
+from checks.run_scenarios import _contains, _resolve_action, _settle, load_suite
 from checks.scenario_adapters import abalone, expl
 
 
@@ -37,6 +39,22 @@ class ImmutableState:
 
 
 class ScenarioRunnerTests(unittest.TestCase):
+    def test_load_suite_accepts_multiple_hashed_sources(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            sources = []
+            for index, content in enumerate((b"rules", b"components")):
+                source = root / f"source-{index}.pdf"
+                source.write_bytes(content)
+                sources.append({"path": source.name, "sha256": hashlib.sha256(content).hexdigest()})
+            suite = root / "suite.json"
+            suite.write_text(json.dumps({
+                "version": 3,
+                "sources": sources,
+                "scenarios": [{"id": "x", "fact_ids": ["F-1"], "basis": "clear"}],
+            }), encoding="utf-8")
+            self.assertEqual(load_suite(suite, root)["sources"], sources)
+
     def test_expl_mutations_target_current_scenarios(self):
         root = Path(__file__).resolve().parents[1]
         suite = json.loads((root / "checks/scenarios/expl.json").read_text(encoding="utf-8"))

@@ -393,21 +393,30 @@ def _load_adapter(suite: dict[str, Any], repo_root: Path) -> Any | None:
     return module
 
 
+def _validate_hashed_source(source: dict[str, Any], repo_root: Path) -> None:
+    raw_path = source.get("path")
+    expected_hash = str(source.get("sha256", "")).lower()
+    if not raw_path or len(expected_hash) != 64:
+        raise ValueError("each source needs path and full sha256")
+    source_path = (repo_root / raw_path).resolve()
+    if not source_path.exists():
+        raise FileNotFoundError(f"source not found: {source_path}")
+    actual_hash = _rulebook_hash(source_path)
+    if actual_hash != expected_hash:
+        raise ValueError(f"source hash mismatch: expected {expected_hash[:12]}, got {actual_hash[:12]}")
+
+
 def load_suite(path: Path, repo_root: Path) -> dict[str, Any]:
     suite = json.loads(path.read_text(encoding="utf-8"))
     if suite.get("version") not in {1, 2, 3}:
         raise ValueError("scenario suite version must be 1, 2, or 3")
-    rulebook = suite.get("rulebook", {})
-    raw_path = rulebook.get("path")
-    expected_hash = str(rulebook.get("sha256", "")).lower()
-    if not raw_path or len(expected_hash) != 64:
-        raise ValueError("rulebook.path and full rulebook.sha256 are required")
-    rulebook_path = (repo_root / raw_path).resolve()
-    if not rulebook_path.exists():
-        raise FileNotFoundError(f"rulebook not found: {rulebook_path}")
-    actual_hash = _rulebook_hash(rulebook_path)
-    if actual_hash != expected_hash:
-        raise ValueError(f"rulebook hash mismatch: expected {expected_hash[:12]}, got {actual_hash[:12]}")
+    sources = suite.get("sources") or [suite.get("rulebook", {})]
+    if not isinstance(sources, list) or not sources:
+        raise ValueError("scenario suite needs rulebook or sources")
+    for source in sources:
+        if not isinstance(source, dict):
+            raise ValueError("each source must be an object")
+        _validate_hashed_source(source, repo_root)
     scenarios = suite.get("scenarios")
     if not isinstance(scenarios, list) or not scenarios:
         raise ValueError("scenario suite needs at least one scenario")
