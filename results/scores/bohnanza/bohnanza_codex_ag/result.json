@@ -1,0 +1,740 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "bohnanza",
+    "condition": "augmented_user_observation",
+    "source_path": "../../../../inputs/games/bohnanza/game_rules.pdf",
+    "source_format": "pdf+pdf",
+    "source_sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+    "sources": [
+      {
+        "id": "RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/bohnanza/game_rules.pdf",
+        "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+      },
+      {
+        "id": "COMPONENTS",
+        "role": "user_observation",
+        "path": "../../../../inputs/games/bohnanza/game_components.pdf",
+        "sha256": "83b5db35b65975723190bb03b113751f43a48895e0a7f0cd546649f98df01ea4"
+      }
+    ]
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "4a8dd9e856b40d1727e6c08b6ef652dac905260bc52f194981bb2e68ac38add0",
+    "adapter_sha256": "3e1eab42e39751add440976f527ad4663e432fdf1a60aed8e3728b34416d6149",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 44,
+    "human_decision": 8,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.8888888888888888
+      ],
+      "mean": 0.8888888888888888,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.76,
+        0.76,
+        0.78
+      ],
+      "mean": 0.7666666666666667,
+      "sample_sd": 0.011547005383792526,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "bohnanza_codex_ag": {
+        "rule_fidelity": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_rule_fidelity.md",
+          "sha256": "68f94340c48225b9a89a093871cc31ae0368a30c2c6cf7ed974972f50fa63523"
+        },
+        "ambiguity": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_ambiguity.md",
+          "sha256": "af17201438f5f468948bbe3be43f1aa0f189c000733417969ec1caeb2bca0aa6"
+        },
+        "executable_systems": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_executable_systems.md",
+          "sha256": "1003c269b77a70ff9326b4256b0eb46292f39b681d58e1a438d4be2a3842310f"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 3,
+    "interpretation_agreement": {
+      "Variante: Die Ackerbohnen / Spielablauf; reference to Variante: Drei neue Bohnensorten": {
+        "use the explicit supplied augmented draw rule and third-depletion ending; otherwise use Grundspiel": 1
+      },
+      "Die Bohnenernte: jederzeit; turn-based API has one current_player": {
+        "a player may harvest at every decision point they control, including consent and phase-3 planting decisions": 1
+      },
+      "Ein leerer Nachziehstapel / Spielende": {
+        "a requested draw with no available card draws nothing; depletion is counted when the last actual card is drawn": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Variante: Die Ackerbohnen / Spielablauf; reference to Variante: Drei neue Bohnensorten",
+        "source_basis": "missing",
+        "alternatives": [
+          "the referenced variant adds further gameplay changes not present in the supplied pages",
+          "the supplied augmented draw and ending text contains all changes needed for 4-5 players"
+        ],
+        "selected": "use the explicit supplied augmented draw rule and third-depletion ending; otherwise use Grundspiel",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "terminal_results"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Die Bohnenernte: jederzeit; turn-based API has one current_player",
+        "source_basis": "missing",
+        "alternatives": [
+          "interrupt every decision with harvest opportunities for every player",
+          "offer harvest only whenever that player already owns the current decision"
+        ],
+        "selected": "a player may harvest at every decision point they control, including consent and phase-3 planting decisions",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Ein leerer Nachziehstapel / Spielende",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "an empty discard pile can be reshuffled into an empty draw pile and drawing continues",
+          "a requested draw with no cards available draws nothing"
+        ],
+        "selected": "a requested draw with no available card draws nothing; depletion is counted when the last actual card is drawn",
+        "affected_mechanics": [
+          "state_transition",
+          "terminal_results"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        7.0
+      ],
+      "mean": 7.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        1728.209
+      ],
+      "mean": 1728.209,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        1280756.0
+      ],
+      "mean": 1280756.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        922624.0
+      ],
+      "mean": 922624.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        47184.0
+      ],
+      "mean": 47184.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        26842.0
+      ],
+      "mean": 26842.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        3.667492
+      ],
+      "mean": 3.667492,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        290.0
+      ],
+      "mean": 290.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      3.667492
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically robust; 35 of 36 cited scenarios pass; one approved out-of-turn harvest deviation; neutral judges identify two major issues.",
+  "runs": [
+    {
+      "stem": "bohnanza_codex_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "bohnanza-2026-07-18-expanded",
+        "suite_sha256": "4a8dd9e856b40d1727e6c08b6ef652dac905260bc52f194981bb2e68ac38add0",
+        "adapter_sha256": "3e1eab42e39751add440976f527ad4663e432fdf1a60aed8e3728b34416d6149",
+        "counts": {
+          "PASS": 35,
+          "FAIL": 1,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 27,
+          "evaluated": 27,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 8,
+          "evaluated": 9,
+          "score": 0.8888888888888888
+        },
+        "results": [
+          {
+            "id": "BOHN-R01-exact-acker-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "INV-01",
+              "INV-02",
+              "INV-03",
+              "INV-04",
+              "INV-05"
+            ]
+          },
+          {
+            "id": "BOHN-R02-front-card-mandatory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02",
+              "HAND-03",
+              "P1-01",
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R03-second-plant-optional-no-third",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R04-empty-hand-skips-phase-one",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-04",
+              "P2-01"
+            ]
+          },
+          {
+            "id": "BOHN-R05-one-type-per-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "FIELD-01"
+            ]
+          },
+          {
+            "id": "BOHN-R06-trading-authority",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-05"
+            ]
+          },
+          {
+            "id": "BOHN-R07-received-cards-bypass-hand",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-05",
+              "TRADE-06",
+              "P3-01"
+            ]
+          },
+          {
+            "id": "BOHN-R08-rejected-gift-no-transfer",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-07"
+            ]
+          },
+          {
+            "id": "BOHN-R09-variant-draw-one-each-clockwise",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "P4-01",
+              "HAND-02"
+            ]
+          },
+          {
+            "id": "BOHN-R10-singleton-protection",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R11-singleton-allowed-when-all-single",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R12-normal-harvest-clears-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R13-one-acker-zero-harvest",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-04",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R14-two-acker-unlocks-third-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ACKER-01"
+            ]
+          },
+          {
+            "id": "BOHN-R15-two-acker-existing-third-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-02"
+            ]
+          },
+          {
+            "id": "BOHN-R16-three-acker-three-coins-no-field",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-03"
+            ]
+          },
+          {
+            "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "END-02",
+              "END-03"
+            ]
+          },
+          {
+            "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-01",
+              "END-05"
+            ]
+          },
+          {
+            "id": "BOHN-R19-final-score-ignores-hand",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-03",
+              "END-06"
+            ]
+          },
+          {
+            "id": "BOHN-R20-clockwise-tiebreak",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03",
+              "TURN-01",
+              "END-04"
+            ]
+          },
+          {
+            "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P2-01",
+              "DECK-01"
+            ]
+          },
+          {
+            "id": "BOHN-R22-harvest-between-mandatory-plantings",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P3-01",
+              "P3-02",
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R23-nonactive-player-can-harvest",
+            "status": "FAIL",
+            "message": "harvest_legal[1,0]: expected True, got False",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R24-opponent-hands-remain-private",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HAND-03"
+            ]
+          },
+          {
+            "id": "BOHN-R25-five-player-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-01",
+              "SET-02",
+              "HAND-01",
+              "INV-04"
+            ]
+          },
+          {
+            "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-02",
+              "TRADE-04",
+              "TRADE-05",
+              "TRADE-06"
+            ]
+          },
+          {
+            "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-01",
+              "P1-03",
+              "HARV-02",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R28-blau-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-01",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R29-feuer-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-02",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R30-sau-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-03",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R31-brech-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-04",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R32-soja-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-05",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R33-augen-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-06",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R34-rot-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-07",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R35-garten-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-08",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R36-weinbrand-coin-curve",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-09",
+              "HARV-02"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.76,
+        0.76,
+        0.78
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_rule_fidelity.md",
+          "sha256": "68f94340c48225b9a89a093871cc31ae0368a30c2c6cf7ed974972f50fa63523"
+        },
+        "ambiguity": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_ambiguity.md",
+          "sha256": "af17201438f5f468948bbe3be43f1aa0f189c000733417969ec1caeb2bca0aa6"
+        },
+        "executable_systems": {
+          "path": "../../../../outputs/bohnanza_codex_ag_persona_executable_systems.md",
+          "sha256": "1003c269b77a70ff9326b4256b0eb46292f39b681d58e1a438d4be2a3842310f"
+        }
+      },
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Variante: Die Ackerbohnen / Spielablauf; reference to Variante: Drei neue Bohnensorten",
+          "source_basis": "missing",
+          "alternatives": [
+            "the referenced variant adds further gameplay changes not present in the supplied pages",
+            "the supplied augmented draw and ending text contains all changes needed for 4-5 players"
+          ],
+          "selected": "use the explicit supplied augmented draw rule and third-depletion ending; otherwise use Grundspiel",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "terminal_results"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Die Bohnenernte: jederzeit; turn-based API has one current_player",
+          "source_basis": "missing",
+          "alternatives": [
+            "interrupt every decision with harvest opportunities for every player",
+            "offer harvest only whenever that player already owns the current decision"
+          ],
+          "selected": "a player may harvest at every decision point they control, including consent and phase-3 planting decisions",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Ein leerer Nachziehstapel / Spielende",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "an empty discard pile can be reshuffled into an empty draw pile and drawing continues",
+            "a requested draw with no cards available draws nothing"
+          ],
+          "selected": "a requested draw with no available card draws nothing; depletion is counted when the last actual card is drawn",
+          "affected_mechanics": [
+            "state_transition",
+            "terminal_results"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 7,
+        "provider_seconds": 1728.209,
+        "input_tokens": 1280756,
+        "cached_input_tokens": 922624,
+        "output_tokens": 47184,
+        "reasoning_tokens": 26842,
+        "money": null,
+        "api_equivalent_usd": 3.667492,
+        "code_lines": 290
+      },
+      "hashes": {
+        "agentic_evidence": "2c7a45ddf8295672852d64b9ae64c99b0cf8e85eb0311675eb4f151c2e9ef021",
+        "checks": "ab25a5f51dec897079eea4051a54aca91e79625560200d9b0c3d1cd907e3a0e0",
+        "scenarios": "b42f3d1dded97dd548e34388e1b25783c7d1fcb4edf22c6a622737a30563cac1",
+        "usage": "37a8ef4e1747603d91680ecb5f9e2c6b74ff5250836d030ad5940b806a134fed",
+        "code": "2b24a584e9d60703d46ad219313fb2a9b5cb21682d5ba0d2d206b950c3bd850f"
+      }
+    }
+  ]
+}

@@ -176,6 +176,21 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
         if expected and expected != actual:
             raise ValueError(f"source hash mismatch: expected {expected}, got {actual}")
         identity["source_sha256"] = actual
+    sources = []
+    for source in identity.get("sources", []):
+        item = dict(source)
+        path = resolve(base, item.get("path"))
+        if path and not path.is_file() and item.get("path"):
+            path = (Path.cwd() / str(item["path"])).resolve()
+        if not path or not path.is_file():
+            raise FileNotFoundError(path or item.get("path"))
+        actual = sha256(path)
+        if item.get("sha256") and item["sha256"] != actual:
+            raise ValueError(f"source hash mismatch: expected {item['sha256']}, got {actual}")
+        item["sha256"] = actual
+        sources.append(item)
+    if sources:
+        identity["sources"] = sources
     runs = [parse_run(base, item) for item in spec.get("runs", [])]
     if not runs:
         raise ValueError("result spec needs at least one run")
@@ -276,6 +291,7 @@ def markdown(result: dict[str, Any]) -> str:
         f"- Condition: {identity.get('condition', 'canonical')}",
         f"- Format: {identity.get('source_format', 'unknown')}",
         f"- SHA-256: `{identity.get('source_sha256', 'unknown')}`",
+        *[f"- Source {source.get('id', '?')} ({source.get('role', 'unspecified')}): `{source.get('sha256', 'unknown')}`" for source in identity.get("sources", [])],
         f"- Runs: {result['reproducibility']['run_count']}",
         f"- Generation: {', '.join(result['reproducibility']['models'])} · thinking {', '.join(sorted({str(run['thinking']) for run in result['runs']}))}",
         f"- Neutral judges: {', '.join(review.get('models', [])) or 'unknown'} · thinking {', '.join(review.get('thinking', [])) or 'unknown'}",

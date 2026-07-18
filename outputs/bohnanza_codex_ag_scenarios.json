@@ -1,33 +1,33 @@
 {
   "version": 3,
-  "rubric_version": "bohnanza-2026-07-18",
+  "rubric_version": "bohnanza-2026-07-18-expanded",
   "suite": "checks/scenarios/bohnanza.json",
-  "suite_sha256": "2e59ee3dc09cf206aecc940a9c67d47bd0387782158884e6d6014a1e12add6e8",
+  "suite_sha256": "4a8dd9e856b40d1727e6c08b6ef652dac905260bc52f194981bb2e68ac38add0",
   "adapter": "checks/scenario_adapters/bohnanza.py",
-  "adapter_sha256": "10feb808656eda11e23dc73e4bbe8df3ee6e2eca28afdd2e1ba9f3844e0dd057",
+  "adapter_sha256": "3e1eab42e39751add440976f527ad4663e432fdf1a60aed8e3728b34416d6149",
   "code": "outputs/bohnanza_codex_ag.py",
-  "code_sha256": "5c8fecb39a4f6fd2273890b4d2687c4c7edb396690674501e8ab53c3308a359b",
+  "code_sha256": "2b24a584e9d60703d46ad219313fb2a9b5cb21682d5ba0d2d206b950c3bd850f",
   "counts": {
-    "PASS": 22,
-    "FAIL": 0,
+    "PASS": 35,
+    "FAIL": 1,
     "CRASH": 0,
     "UNREACHED": 0,
     "UNTESTABLE": 0
   },
-  "evaluated": 22,
-  "total": 22,
-  "score": 1.0,
+  "evaluated": 36,
+  "total": 36,
+  "score": 0.9722222222222222,
   "coverage": 1.0,
   "basis_scores": {
     "clear": {
-      "passed": 15,
-      "evaluated": 15,
+      "passed": 27,
+      "evaluated": 27,
       "score": 1.0
     },
     "human_decision": {
-      "passed": 7,
-      "evaluated": 7,
-      "score": 1.0
+      "passed": 8,
+      "evaluated": 9,
+      "score": 0.8888888888888888
     }
   },
   "results": [
@@ -249,6 +249,151 @@
         "P3-01",
         "P3-02",
         "HARV-01"
+      ]
+    },
+    {
+      "id": "BOHN-R23-nonactive-player-can-harvest",
+      "status": "FAIL",
+      "message": "harvest_legal[1,0]: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "HARV-01"
+      ]
+    },
+    {
+      "id": "BOHN-R24-opponent-hands-remain-private",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "HAND-03"
+      ]
+    },
+    {
+      "id": "BOHN-R25-five-player-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-01",
+        "SET-02",
+        "HAND-01",
+        "INV-04"
+      ]
+    },
+    {
+      "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-02",
+        "TRADE-04",
+        "TRADE-05",
+        "TRADE-06"
+      ]
+    },
+    {
+      "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-01",
+        "P1-03",
+        "HARV-02",
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R28-blau-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-01",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R29-feuer-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-02",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R30-sau-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-03",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R31-brech-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-04",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R32-soja-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-05",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R33-augen-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-06",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R34-rot-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-07",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R35-garten-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-08",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R36-weinbrand-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-09",
+        "HARV-02"
       ]
     }
   ]

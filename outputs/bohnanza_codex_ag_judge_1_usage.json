@@ -1,0 +1,61 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "started_at": "2026-07-18T10:11:59.499027+00:00",
+  "ended_at": "2026-07-18T10:14:36.711202+00:00",
+  "elapsed_seconds": 157.212,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 12,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 599217,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 12,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 599059,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "cached_input_tokens": 23296,
+    "input_tokens": 60115,
+    "output_tokens": 4569,
+    "reasoning_output_tokens": 3106
+  },
+  "provider_usage_records": [
+    {
+      "line": 7,
+      "path": "$.usage",
+      "input_tokens": 60115,
+      "cached_input_tokens": 23296,
+      "output_tokens": 4569,
+      "reasoning_output_tokens": 3106
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_codex_ag_judge_1_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_codex_ag_judge_1.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-01.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-02.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-03.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-04.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-05.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-06.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-07.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-08.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-09.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-10.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/rules_pages/page-11.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/components_pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/components_pages/page-2.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_bohnanza_codex_ag_judge_1_g0nwe9fy/components_pages/page-3.png"
+  ],
+  "stderr": ""
+}

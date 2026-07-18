@@ -40,8 +40,18 @@ class ResultCardTests(unittest.TestCase):
             root = Path(temporary)
             source = root / "rules.txt"
             source.write_text("rules", encoding="utf-8")
+            components = root / "components.txt"
+            components.write_text("components", encoding="utf-8")
             spec = {
-                "identity": {"game": "demo", "source_path": source.name, "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest()},
+                "identity": {
+                    "game": "demo",
+                    "source_path": source.name,
+                    "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                    "sources": [
+                        {"id": "RULES", "role": "publisher_rulebook", "path": source.name, "sha256": hashlib.sha256(source.read_bytes()).hexdigest()},
+                        {"id": "COMPONENTS", "role": "user_observation", "path": components.name, "sha256": hashlib.sha256(components.read_bytes()).hexdigest()},
+                    ],
+                },
                 "runs": [self.make_run(root, 1, 0.5), self.make_run(root, 2, 0.75), self.make_run(root, 3, 1.0)],
                 "headline": "Separated evidence.",
             }
@@ -52,7 +62,9 @@ class ResultCardTests(unittest.TestCase):
             self.assertEqual(result["review_evidence"]["neutral_judges"]["mean"], 0.75)
             self.assertIsNone(result["monetary_cost"]["exact_total"])
             self.assertNotIn("overall_correctness_score", result)
-            self.assertIn("Clear rules", markdown(result))
+            rendered = markdown(result)
+            self.assertIn("Clear rules", rendered)
+            self.assertIn("Source COMPONENTS (user_observation)", rendered)
 
     def test_public_price_estimate_separates_cached_tokens(self):
         cost = estimate_call_cost({
