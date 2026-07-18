@@ -4,6 +4,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -60,6 +61,15 @@ class BohnanzaSourceExperimentTests(unittest.TestCase):
             for source in condition["sources"]:
                 path = GAME_DIR / source["path"]
                 self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), source["sha256"])
+
+    def test_isolation_audit_rejects_repository_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            events = Path(directory) / "events.jsonl"
+            events.write_text('{"command":"python local_check.py"}\n', encoding="utf-8")
+            experiment.audit_isolation(events)
+            events.write_text(json.dumps({"command": str(ROOT / "checks/run_scenarios.py")}) + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "isolation audit"):
+                experiment.audit_isolation(events)
 
     def test_generation_and_judges_are_strictly_sequential_and_resumable(self):
         manifest = load_manifest()

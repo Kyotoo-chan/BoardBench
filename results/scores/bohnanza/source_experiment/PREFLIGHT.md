@@ -1,8 +1,8 @@
 # Bohnanza source-sensitivity preflight
 
-Status: **not cleared for generation — awaiting isolation decision and final user Go**
+Status: **cleared for audited logical isolation by user Go on 2026-07-18**
 
-No experimental implementation run has started.
+At freeze time, no experimental implementation run had started.
 
 ## Frozen design
 
@@ -70,11 +70,10 @@ READ:BOARD_BENCH_CANARY_7d94c1e2
 
 The raw response, events, and usage are preserved under `preflight/canary_*`. Therefore `workspace-write` restricts writes but does **not** provide hard read isolation on this Windows host. The prior logical controls still apply (`--ephemeral`, ignored user/project rules, opaque temp packet, no evaluator files in the packet, fresh session, audited event log), but a model could technically read repository tests if it deliberately discovered their absolute paths.
 
-## Decision required before final Go
+## Isolation decision
 
-Choose one:
+The user selected audited logical isolation and gave the final Go. Each run uses an opaque temporary packet, receives no repository path, and is stopped as invalid if its event log contains the repository's absolute path. The remaining technical possibility of an undiscovered external read is reported as a methodology limitation.
 
-1. **Hard isolation:** run Codex inside a container/OS boundary where only the source packet is mounted. Docker is installed but its daemon was not running during preflight. This needs setup and a second canary.
-2. **Audited logical isolation:** proceed with the temp packet and `workspace-write`, explicitly report that repository reads were technically possible, and audit every event log for external paths.
+### Post-Go protocol correction
 
-The launcher remains in dry-run state until this decision and the user's final Go.
+The first launcher invocation exposed a Windows Codex behavior: `workspace-write` was reported in metadata but rejected every attempted write as read-only. All 12 calls therefore produced no implementation. This was a condition-independent instrumentation failure, not an implementation outcome. Their 80 raw/error artifacts and original progress file are preserved under `aborted_workspace_write/`; none is counted as one of the three valid repetitions. Before any valid implementation existed, the launcher was corrected to the same `danger-full-access` mode used by the successful historical pilot, retaining opaque temp packets and mandatory event-log path audits. Valid run identifiers and their frozen source/evaluator inputs remain unchanged.

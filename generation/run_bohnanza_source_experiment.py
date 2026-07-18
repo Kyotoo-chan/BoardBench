@@ -147,6 +147,31 @@ def preserve_generation(run_id: str, workspace: Path, usage: dict[str, Any], gat
     )
 
 
+def preserve_generation_failure(run_id: str, workspace: Path | None, error: Exception) -> None:
+    output_stem = stem(run_id)
+    if workspace:
+        for source, suffix in (
+            ("implementation.py", ".py"),
+            ("rule_coverage.md", "_rule_coverage.md"),
+            ("assumptions.json", "_assumptions.json"),
+            ("raw_response.md", ".md"),
+            ("events.jsonl", "_events.jsonl"),
+            ("generation_usage.json", "_generation_usage.json"),
+            ("TASK.txt", "_generation_prompt.md"),
+        ):
+            path = workspace / source
+            if path.is_file():
+                shutil.copy2(path, OUTPUTS / f"{output_stem}{suffix}")
+    code = OUTPUTS / f"{output_stem}.py"
+    if not code.exists():
+        code.write_bytes(b"")
+    (OUTPUTS / f"{output_stem}_generation_failure.json").write_text(
+        json.dumps({"run": run_id, "error": str(error), "empty_implementation": code.stat().st_size == 0}, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    run_local_evaluation(run_id)
+
+
 def run_local_evaluation(run_id: str) -> None:
     output_stem = stem(run_id)
     code = OUTPUTS / f"{output_stem}.py"
@@ -168,6 +193,14 @@ def quota_error(error: Exception) -> bool:
     return any(fragment in text for fragment in ("usage limit", "weekly limit", "rate limit", "quota", "too many requests"))
 
 
+def audit_isolation(events_path: Path) -> None:
+    repository = str(ROOT.resolve()).replace("\\", "/").casefold()
+    for line_number, line in enumerate(events_path.read_text(encoding="utf-8").splitlines(), 1):
+        normalized = line.replace("\\\\", "/").replace("\\", "/").casefold()
+        if repository in normalized:
+            raise RuntimeError(f"isolation audit found repository path in {events_path.name}:{line_number}")
+
+
 def generate_one(run_id: str, condition: dict[str, Any]) -> None:
     workspace, images = make_workspace(condition)
     try:
@@ -183,13 +216,17 @@ def generate_one(run_id: str, condition: dict[str, Any]) -> None:
             mode="agentic",
             timeout=1200,
             image_paths=images,
-            sandbox="workspace-write",
+            sandbox="danger-full-access",
         )
+        audit_isolation(workspace / "events.jsonl")
         passed, gate_output = _agentic_gate(workspace, require_coverage=True, require_assumptions=True)
         if not passed:
             raise RuntimeError(f"independent gate failed:\n{gate_output}")
         preserve_generation(run_id, workspace, usage, gate_output)
         run_local_evaluation(run_id)
+    except Exception as error:
+        preserve_generation_failure(run_id, workspace, error)
+        raise
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
 
@@ -210,11 +247,12 @@ def judge_one(run_id: str, index: int) -> None:
         ]), encoding="utf-8")
         images = render_pdf_pages(rules, workspace / "game_rules_pages", dpi=150)
         review = (ROOT / "inputs/prompts/llm_judge_review.md").read_text(encoding="utf-8")
+        judge_events = OUTPUTS / f"{output_stem}_judge_{index}_events.jsonl"
         run_codex(
             prompt=JUDGE_PREFIX + review,
             cwd=workspace,
             response_path=OUTPUTS / f"{output_stem}_judge_{index}.md",
-            events_path=OUTPUTS / f"{output_stem}_judge_{index}_events.jsonl",
+            events_path=judge_events,
             usage_path=OUTPUTS / f"{output_stem}_judge_{index}_usage.json",
             model=MODEL,
             effort=JUDGE_EFFORT,
@@ -224,6 +262,7 @@ def judge_one(run_id: str, index: int) -> None:
             image_paths=images,
             sandbox="read-only",
         )
+        audit_isolation(judge_events)
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
 
@@ -271,9 +310,11 @@ def generate(manifest: dict[str, Any], maximum: int | None) -> int:
             generate_one(run_id, manifest["conditions"][condition_name])
         except Exception as error:
             state["failed"].append({"run": run_id, "error": str(error), "quota_like": quota_error(error)})
-            save_progress(state)
-            print(f"STOPPED {run_id}: {error}", file=sys.stderr)
-            return 75 if quota_error(error) else 1
+            if quota_error(error):
+                save_progress(state)
+                print(f"STOPPED {run_id}: {error}", file=sys.stderr)
+                return 75
+            print(f"FAILED {run_id}: {error}", file=sys.stderr)
         state["completed"].append(run_id)
         save_progress(state)
         completed.add(run_id)

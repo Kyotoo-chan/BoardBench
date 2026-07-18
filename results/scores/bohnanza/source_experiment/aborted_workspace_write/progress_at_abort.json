@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "completed": [
+    "pdf_only_1",
+    "json_clean_1",
+    "json_mutated_1",
+    "pdf_mutated_1",
+    "pdf_only_2",
+    "json_clean_2",
+    "json_mutated_2",
+    "pdf_mutated_2",
+    "pdf_only_3",
+    "json_clean_3",
+    "json_mutated_3",
+    "pdf_mutated_3"
+  ],
+  "judged": [],
+  "failed": [
+    {
+      "run": "pdf_only_1",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_clean_1",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_mutated_1",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "pdf_mutated_1",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "pdf_only_2",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_clean_2",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_mutated_2",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "pdf_mutated_2",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "pdf_only_3",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_clean_3",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "json_mutated_3",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    },
+    {
+      "run": "pdf_mutated_3",
+      "error": "independent gate failed:\nimplementation.py is missing or empty",
+      "quota_like": false
+    }
+  ],
+  "updated_at": "2026-07-18T13:40:21.403892+00:00"
+}
