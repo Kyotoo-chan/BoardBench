@@ -4,6 +4,8 @@ Why: later comparisons need stable rendering, returns, legal actions, and action
 
 from __future__ import annotations
 
+import copy
+import json
 from numbers import Number
 
 from common import CheckContext, CheckResult, REQUIRED_GAME_METHODS, legal_actions, make_game, suppress_generated_output
@@ -11,7 +13,7 @@ from common import CheckContext, CheckResult, REQUIRED_GAME_METHODS, legal_actio
 
 def run(ctx: CheckContext) -> CheckResult | str | None:
     passed = 0
-    total = 8
+    total = 9
 
     def fail(message: str) -> CheckResult:
         return CheckResult(passed, total, message)
@@ -60,6 +62,26 @@ def run(ctx: CheckContext) -> CheckResult | str | None:
             return fail(f"action name roundtrip failed: {exc}")
         if roundtrip != action:
             return fail("name_to_action(action_to_name(action)) did not round-trip")
+    passed += 1
+
+    try:
+        with suppress_generated_output():
+            state_data = game.state_to_data(state)
+            json.dumps(state_data, allow_nan=False)
+            if not isinstance(state_data, dict) or set(state_data) != {"schema", "data"} or not str(state_data["schema"]).endswith("/state/1"):
+                return fail("state_to_data must return the canonical state envelope")
+            rebuilt_state = game.state_from_data(copy.deepcopy(state_data))
+            if game.state_to_data(rebuilt_state) != state_data:
+                return fail("canonical state did not round-trip")
+            if actions:
+                action_data = game.action_to_data(actions[0])
+                json.dumps(action_data, allow_nan=False)
+                if not isinstance(action_data, dict) or set(action_data) != {"schema", "data"} or not str(action_data["schema"]).endswith("/action/1"):
+                    return fail("action_to_data must return the canonical action envelope")
+                if game.action_to_data(game.action_from_data(copy.deepcopy(action_data))) != action_data:
+                    return fail("canonical action did not round-trip")
+    except Exception as exc:
+        return fail(f"canonical data contract failed: {exc}")
     passed += 1
 
     try:

@@ -6,6 +6,7 @@ Source rules:
 - Do not invent missing rules. Keep unresolved gaps explicit.
 
 Implementation rules:
+- Read `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` completely. They define evaluator representation only and are not additional rule sources.
 - Standard library only; no files, network, subprocesses, API keys, or input prompts at runtime.
 - Keep the code small and readable.
 - Model setup, phases, legal actions, transitions, chance/private information, terminal conditions, and returns explicitly when required.
@@ -21,8 +22,12 @@ Provide `GameState` and `Game` with:
 - `render(state)`
 - `action_to_name(action)`
 - `name_to_action(name)`
+- `state_to_data(state)`
+- `state_from_data(payload)`
+- `action_to_data(action)`
+- `action_from_data(payload)`
 
-Every legal action must be accepted by `apply_action`. Action names must be unique, stable, human-readable, reversible, and preserve source labels.
+Canonical state/action payloads must follow `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` exactly. Every legal action must be accepted by `apply_action`. Action names must be unique, stable, human-readable, reversible, and preserve source labels.
 
 Work on the actual `implementation.py`. Before finishing, run:
 

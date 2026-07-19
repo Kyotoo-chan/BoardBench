@@ -1,0 +1,96 @@
+{
+  "profile_version": 1,
+  "state_schema": "boardbench/bohnanza/state/1",
+  "action_schema": "boardbench/bohnanza/action/1",
+  "note": "Evaluator infrastructure shared across source conditions; this profile defines representation, not legal behavior.",
+  "bean_ids": [
+    "blaue_bohne",
+    "feuerbohne",
+    "saubohne",
+    "brechbohne",
+    "sojabohne",
+    "augenbohne",
+    "rote_bohne",
+    "gartenbohne",
+    "kaffeebohne",
+    "weinbrandbohne",
+    "kakaobohne",
+    "ackerbohne"
+  ],
+  "phase_ids": [
+    "plant_first",
+    "plant_second",
+    "reveal",
+    "trade",
+    "trade_response",
+    "plant_received",
+    "draw",
+    "terminal"
+  ],
+  "state_data": {
+    "required": [
+      "configuration",
+      "current_player",
+      "active_player",
+      "start_player",
+      "phase",
+      "terminal",
+      "players",
+      "zones",
+      "depletions",
+      "pending",
+      "chance"
+    ],
+    "configuration": {
+      "players": "int",
+      "seed": "int|null"
+    },
+    "current_player": "int",
+    "active_player": "int",
+    "start_player": "int",
+    "phase": "phase_id",
+    "terminal": "bool",
+    "players": [
+      {
+        "id": "int",
+        "hand": ["bean_id"],
+        "fields": [["bean_id"]],
+        "coins": "int",
+        "third_field": "bool",
+        "alive": "bool"
+      }
+    ],
+    "zones": {
+      "deck": ["bean_id"],
+      "discard": ["bean_id"],
+      "revealed": ["bean_id"],
+      "pending_received": [["bean_id"]]
+    },
+    "depletions": "int",
+    "pending": "object|null",
+    "chance": {
+      "seed": "int|null",
+      "draw_index": "int"
+    }
+  },
+  "action_data": {
+    "required": ["type", "actor", "args"],
+    "type_ids": [
+      "plant",
+      "harvest",
+      "reveal",
+      "trade_propose",
+      "trade_accept",
+      "trade_reject",
+      "gift_propose",
+      "gift_accept",
+      "gift_reject",
+      "end_trade",
+      "draw",
+      "pass",
+      "reorder_hand"
+    ],
+    "actor": "int",
+    "args": "object"
+  }
+}

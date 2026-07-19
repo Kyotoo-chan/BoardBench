@@ -42,6 +42,10 @@ Use source-visible labels and list known variant labels. Do not rely on translat
 
 An expectation is checked after the configured `settle` steps. Use these only for mechanical intermediate phases such as all-player reaction passes or a required donation. The scenario must say exactly when the rule expectation becomes observable.
 
+## Contract-v2 boundary
+
+New generations expose BoardBench-owned JSON-safe state/action data through `state_to_data`, `state_from_data`, `action_to_data`, and `action_from_data`, using the frozen per-game `environment_profile.json`. New scenario adapters may use only those methods plus the original public `Game` API; generated attributes, tuple positions, module constants, private helpers, and guessed aliases are nonconforming evaluator access. Historical adapters remain `legacy-introspective`, and post-hoc compatibility replays must use a new rubric/adapter hash without overwriting frozen results.
+
 ## Deterministic adapters
 
 A suite may declare:

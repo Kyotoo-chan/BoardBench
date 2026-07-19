@@ -29,6 +29,16 @@ class Game:
     def render(self, state): return str(state)
     def action_to_name(self, action): return action
     def name_to_action(self, name): return name
+    def state_to_data(self, state):
+        return {"schema": "boardbench/test/state/1", "data": {"terminal": state.terminal}}
+    def state_from_data(self, payload):
+        if set(payload) != {"schema", "data"} or payload["schema"] != "boardbench/test/state/1": raise ValueError(payload)
+        return GameState(bool(payload["data"]["terminal"]))
+    def action_to_data(self, action):
+        return {"schema": "boardbench/test/action/1", "data": {"type": action}}
+    def action_from_data(self, payload):
+        if set(payload) != {"schema", "data"} or payload["schema"] != "boardbench/test/action/1": raise ValueError(payload)
+        return payload["data"]["type"]
 '''
 
 
@@ -39,7 +49,9 @@ class AgenticGenerationTests(unittest.TestCase):
         self.assertIn("frühere Vorschau", clarified)
         self.assertIn("vollständige beabsichtigte Aktion", clarified)
         self.assertTrue(SOURCES["pdf"].is_file())
-        self.assertIn("assumptions.json", implementation_prompt("rulebook.txt", PROTOCOL))
+        prompt = implementation_prompt("rulebook.txt", PROTOCOL)
+        self.assertIn("assumptions.json", prompt)
+        self.assertIn("state_to_data", prompt)
 
     def workspace(self, implementation: str):
         temporary = tempfile.TemporaryDirectory()

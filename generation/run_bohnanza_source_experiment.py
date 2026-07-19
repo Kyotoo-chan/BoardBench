@@ -28,6 +28,8 @@ OUTPUTS = ROOT / "outputs"
 PROGRESS_PATH = ROOT / "results" / "scores" / "bohnanza" / "source_experiment" / "progress.json"
 SELF_CHECK = ROOT / "generation" / "agentic_self_check.py"
 TASK_SOURCE = ROOT / "inputs" / "prompts" / "rulebook_to_python.txt"
+CONTRACT_SOURCE = ROOT / "inputs" / "prompts" / "environment_contract.md"
+PROFILE_SOURCE = GAME_DIR / "environment_profile.json"
 SCENARIOS = ROOT / "checks" / "scenarios" / "bohnanza.json"
 MODEL = "gpt-5.6-sol"
 GENERATION_EFFORT = "low"
@@ -111,6 +113,8 @@ def make_workspace(condition: dict[str, Any]) -> tuple[Path, list[Path]]:
             images += render_pdf_pages(destination, workspace / f"{destination.stem}_pages", dpi=150)
     shutil.copy2(SELF_CHECK, workspace / "agentic_self_check.py")
     shutil.copy2(TASK_SOURCE, workspace / "IMPLEMENTATION_TASK.txt")
+    shutil.copy2(CONTRACT_SOURCE, workspace / "ENVIRONMENT_CONTRACT.md")
+    shutil.copy2(PROFILE_SOURCE, workspace / "GAME_PROFILE.json")
     (workspace / "SOURCE_MANIFEST.md").write_text(source_manifest(sources), encoding="utf-8")
     (workspace / "TASK.txt").write_text(GENERATION_PROMPT, encoding="utf-8")
     return workspace, images
@@ -126,6 +130,8 @@ def preserve_generation(run_id: str, workspace: Path, usage: dict[str, Any], gat
         "events.jsonl": f"{output_stem}_events.jsonl",
         "generation_usage.json": f"{output_stem}_generation_usage.json",
         "TASK.txt": f"{output_stem}_generation_prompt.md",
+        "ENVIRONMENT_CONTRACT.md": f"{output_stem}_environment_contract.md",
+        "GAME_PROFILE.json": f"{output_stem}_environment_profile.json",
     }
     for source, destination in copies.items():
         shutil.copy2(workspace / source, OUTPUTS / destination)
@@ -139,6 +145,9 @@ def preserve_generation(run_id: str, workspace: Path, usage: dict[str, Any], gat
         "agent_ran_self_check": any("agentic_self_check.py" in command for command in _event_commands(workspace / "events.jsonl")),
         "independent_gate_passed": True,
         "self_check_sha256": sha256(SELF_CHECK),
+        "environment_contract_sha256": sha256(CONTRACT_SOURCE),
+        "environment_profile_sha256": sha256(PROFILE_SOURCE),
+        "implementation_prompt_sha256": sha256(TASK_SOURCE),
         "implementation_sha256": sha256(workspace / "implementation.py"),
         "gate_output": gate_output,
     }
@@ -158,6 +167,8 @@ def preserve_generation_failure(run_id: str, workspace: Path | None, error: Exce
             ("events.jsonl", "_events.jsonl"),
             ("generation_usage.json", "_generation_usage.json"),
             ("TASK.txt", "_generation_prompt.md"),
+            ("ENVIRONMENT_CONTRACT.md", "_environment_contract.md"),
+            ("GAME_PROFILE.json", "_environment_profile.json"),
         ):
             path = workspace / source
             if path.is_file():

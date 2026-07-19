@@ -52,6 +52,10 @@ REQUIRED_GAME_METHODS = [
     "render",
     "action_to_name",
     "name_to_action",
+    "state_to_data",
+    "state_from_data",
+    "action_to_data",
+    "action_from_data",
 ]
 
 

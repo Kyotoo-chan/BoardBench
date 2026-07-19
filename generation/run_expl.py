@@ -40,7 +40,8 @@ This is evaluator-neutral infrastructure, not an additional source of game rules
 - Implement one self-contained standard-library Python module.
 - `Game()` defaults to two players and player 0 starts; optional `num_players` and seed parameters are welcome.
 - Nonterminal returns are zero for every player. Terminal returns are +1 for the winner and -1 for each loser.
-- Provide `GameState` and `Game` with initial_state, current_player, legal_actions, apply_action, is_terminal, returns, render, action_to_name, and name_to_action.
+- Provide `GameState` and `Game` with initial_state, current_player, legal_actions, apply_action, is_terminal, returns, render, action_to_name, name_to_action, state_to_data, state_from_data, action_to_data, and action_from_data.
+- Canonical data uses exact envelopes `{"schema":"boardbench/<game-slug>/state/1","data":{...}}` and `{"schema":"boardbench/<game-slug>/action/1","data":{"type":"stable_action_type",...}}`; values must be detached and JSON-safe, and both state and action data must round-trip exactly.
 - Terminal states have no legal actions.
 - Every legal action must round-trip through a unique, stable, human-readable name. Preserve the supplied source's card/effect labels in action names instead of inventing or translating synonyms.
 - Choices required by the source (targets, donated/requested cards, positions, reactions) must be explicit states/actions rather than silently chosen.

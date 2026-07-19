@@ -45,6 +45,7 @@ Do not continue past material ambiguities without user approval.
 - Hash and cite every source separately. Every hard scenario expectation needs source ID, edition/hash, a stable locator (PDF page or JSON Pointer), and direct source evidence.
 - Surface every cross-source conflict with both citations, alternatives, affected behavior, and a user-approved decision; never apply automatic precedence.
 - Keep ambiguous and untestable rules visible instead of scoring them as failures.
+- New contract-v2 generations must implement the frozen canonical state/action data profile. Scenario evaluators use only that public data contract, never generated attributes, tuple positions, module constants, or guessed aliases. Legacy introspective replays remain separately labelled.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
 - Do not combine smoke checks, rollouts, action naming, judges, and scenarios into one claim of correctness.
 - Keep raw generations, raw reviews, code, logs, model/thinking settings, and timings.
