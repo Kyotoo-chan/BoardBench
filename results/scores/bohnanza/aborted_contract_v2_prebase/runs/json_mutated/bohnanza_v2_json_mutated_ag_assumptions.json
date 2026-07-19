@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page 10, Variante 2: Die Ackerbohnen / reference to Variante 1",
+      "source_basis": "missing",
+      "alternatives": [
+        "Variant 2 uses the visible Variant-1 rules: every player draws one card and the deck ends on its third depletion for 4-5 players",
+        "Variant 1 contains additional rules on omitted pages that also alter Variant 2"
+      ],
+      "selected": "Apply the Variant-1 rules visible on page 10 and otherwise the base-game flow",
+      "affected_mechanics": ["legal_actions", "state_transition", "terminal_results"]
+    }
+  ]
+}

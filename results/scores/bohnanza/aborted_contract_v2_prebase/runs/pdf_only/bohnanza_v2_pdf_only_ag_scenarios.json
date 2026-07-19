@@ -1,0 +1,410 @@
+{
+  "version": 3,
+  "rubric_version": "bohnanza-contract-v2-mini-2026-07-19",
+  "suite": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/checks/scenarios/bohnanza_contract_v2.json",
+  "suite_sha256": "4ce64799d33f70229ae927d58b60d53d801a17d344c5e6140d52d410ebe1d05b",
+  "adapter": "checks/scenario_adapters/bohnanza_contract_v2.py",
+  "adapter_sha256": "81206eacbd874415346bb89b2fa2ed4f19407f3b717ed363c8c8fde06c8ede20",
+  "runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
+  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza/contract_v2_mini/runs/pdf_only/bohnanza_v2_pdf_only_ag.py",
+  "code_sha256": "f6369ee466833d98c2a8a117d65223bb4f8bd4821e1f3ab44d1ee3d0566646cf",
+  "counts": {
+    "PASS": 5,
+    "FAIL": 17,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 15
+  },
+  "evaluated": 22,
+  "total": 37,
+  "score": 0.22727272727272727,
+  "coverage": 0.5945945945945946,
+  "basis_scores": {
+    "clear": {
+      "passed": 3,
+      "evaluated": 18,
+      "score": 0.16666666666666666
+    },
+    "human_decision": {
+      "passed": 2,
+      "evaluated": 4,
+      "score": 0.5
+    }
+  },
+  "results": [
+    {
+      "id": "BOHN-R01-exact-acker-inventory",
+      "status": "FAIL",
+      "message": "total_cards: expected 129, got 104",
+      "basis": "clear",
+      "fact_ids": [
+        "INV-01",
+        "INV-02",
+        "INV-03",
+        "INV-04",
+        "INV-05"
+      ]
+    },
+    {
+      "id": "BOHN-R02-front-card-mandatory",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "HAND-02",
+        "HAND-03",
+        "P1-01",
+        "P1-02"
+      ]
+    },
+    {
+      "id": "BOHN-R03-second-plant-optional-no-third",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-02"
+      ]
+    },
+    {
+      "id": "BOHN-R04-empty-hand-skips-phase-one",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-04",
+        "P2-01"
+      ]
+    },
+    {
+      "id": "BOHN-R05-one-type-per-field",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "FIELD-01"
+      ]
+    },
+    {
+      "id": "BOHN-R06-trading-authority",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-05"
+      ]
+    },
+    {
+      "id": "BOHN-R07-received-cards-bypass-hand",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-05",
+        "TRADE-06",
+        "P3-01"
+      ]
+    },
+    {
+      "id": "BOHN-R08-rejected-gift-no-transfer",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-07"
+      ]
+    },
+    {
+      "id": "BOHN-R09-variant-draw-one-each-clockwise",
+      "status": "FAIL",
+      "message": "step 1: hand_size[0]: expected 1, got 3",
+      "basis": "clear",
+      "fact_ids": [
+        "P4-01",
+        "HAND-02"
+      ]
+    },
+    {
+      "id": "BOHN-R10-singleton-protection",
+      "status": "FAIL",
+      "message": "harvest_legal[0,1]: expected True, got False",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R11-singleton-allowed-when-all-single",
+      "status": "FAIL",
+      "message": "harvest_legal[0,0]: expected True, got False",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R12-normal-harvest-clears-field",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R13-one-acker-zero-harvest",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-04",
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R14-two-acker-unlocks-third-field",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "ACKER-01"
+      ]
+    },
+    {
+      "id": "BOHN-R15-two-acker-existing-third-field",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-02"
+      ]
+    },
+    {
+      "id": "BOHN-R16-three-acker-three-coins-no-field",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ACKER-03"
+      ]
+    },
+    {
+      "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "END-01",
+        "END-02",
+        "END-03"
+      ]
+    },
+    {
+      "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+      "status": "FAIL",
+      "message": "step 1: depletions: expected 3, got 4",
+      "basis": "human_decision",
+      "fact_ids": [
+        "END-01",
+        "END-05"
+      ]
+    },
+    {
+      "id": "BOHN-R19-final-score-ignores-hand",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "END-03",
+        "END-06"
+      ]
+    },
+    {
+      "id": "BOHN-R20-clockwise-tiebreak",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-03",
+        "TURN-01",
+        "END-04"
+      ]
+    },
+    {
+      "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "P2-01",
+        "DECK-01"
+      ]
+    },
+    {
+      "id": "BOHN-R22-harvest-between-mandatory-plantings",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "human_decision",
+      "fact_ids": [
+        "P3-01",
+        "P3-02",
+        "HARV-01"
+      ]
+    },
+    {
+      "id": "BOHN-R23-nonactive-player-can-harvest",
+      "status": "FAIL",
+      "message": "harvest_legal[1,0]: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "HARV-01"
+      ]
+    },
+    {
+      "id": "BOHN-R24-opponent-hands-remain-private",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "human_decision",
+      "fact_ids": [
+        "HAND-03"
+      ]
+    },
+    {
+      "id": "BOHN-R25-five-player-setup",
+      "status": "FAIL",
+      "message": "five_player.fields[0]: expected 2, got 3",
+      "basis": "clear",
+      "fact_ids": [
+        "SET-01",
+        "SET-02",
+        "HAND-01",
+        "INV-04"
+      ]
+    },
+    {
+      "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'trade_add_request_card', 'args': {'zone': 'hand', 'index': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-02",
+        "TRADE-04",
+        "TRADE-05",
+        "TRADE-06"
+      ]
+    },
+    {
+      "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "P1-01",
+        "P1-03",
+        "HARV-02",
+        "HARV-03"
+      ]
+    },
+    {
+      "id": "BOHN-R28-blau-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-01",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R29-feuer-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-02",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R30-sau-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-03",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R31-brech-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-04",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R32-soja-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-05",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R33-augen-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-06",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R34-rot-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-07",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R35-garten-coin-curve",
+      "status": "FAIL",
+      "message": "canonical action is not legal: {'type': 'harvest', 'args': {'player': 0, 'field': 0}}",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-08",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R36-weinbrand-coin-curve",
+      "status": "UNTESTABLE",
+      "message": "fixture exceeds canonical component inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "GOLD-09",
+        "HARV-02"
+      ]
+    },
+    {
+      "id": "BOHN-R37-hand-sorting-is-forbidden",
+      "status": "UNTESTABLE",
+      "message": "state_from_data rejected canonical fixture: invalid state",
+      "basis": "clear",
+      "fact_ids": [
+        "HAND-02"
+      ]
+    }
+  ]
+}

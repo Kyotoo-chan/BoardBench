@@ -26,8 +26,9 @@ Provide `GameState` and `Game` with:
 - `state_from_data(payload)`
 - `action_to_data(action)`
 - `action_from_data(payload)`
+- `observation_to_data(state, player)`
 
-Canonical state/action payloads must follow `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` exactly. Every legal action must be accepted by `apply_action`. Action names must be unique, stable, human-readable, reversible, and preserve source labels.
+`Game` must accept optional `num_players` and `seed` keyword arguments; a supplied seed controls every chance operation. Canonical state/action/observation payloads must follow `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` exactly. Every legal action must be accepted by `apply_action`. Action names must be unique, stable, human-readable, reversible, and preserve source labels.
 
 Work on the actual `implementation.py`. Before finishing, run:
 

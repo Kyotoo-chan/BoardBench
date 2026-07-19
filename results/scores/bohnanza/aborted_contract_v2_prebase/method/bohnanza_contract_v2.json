@@ -1,0 +1,1866 @@
+{
+  "version": 3,
+  "rubric_version": "bohnanza-contract-v2-mini-2026-07-19",
+  "game": "bohnanza",
+  "adapter": "checks/scenario_adapters/bohnanza_contract_v2.py",
+  "source_condition": "augmented_user_observation",
+  "sources": [
+    {
+      "id": "RULES",
+      "path": "inputs/games/bohnanza/game_rules.pdf",
+      "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+      "role": "publisher_rulebook"
+    },
+    {
+      "id": "COMPONENTS",
+      "path": "inputs/games/bohnanza/game_components.json",
+      "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46",
+      "role": "user_observation"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "BOHN-R01-exact-acker-inventory",
+      "fact_ids": [
+        "INV-01",
+        "INV-02",
+        "INV-03",
+        "INV-04",
+        "INV-05"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/9/anzahl_karten",
+        "quote": "Weinbrandbohne count 22; /bohnen/11/anzahl_karten is 3"
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false,
+        "legal_action_count_min": 1,
+        "adapter": {
+          "total_cards": 129,
+          "card_counts": {
+            "weinbrand": 22,
+            "blau": 20,
+            "feuer": 18,
+            "sau": 16,
+            "brech": 14,
+            "soja": 12,
+            "augen": 10,
+            "rot": 8,
+            "garten": 6,
+            "acker": 3
+          },
+          "player_count_any": [
+            4,
+            5
+          ],
+          "field_count": 2,
+          "hand_size_all": 5
+        }
+      }
+    },
+    {
+      "id": "BOHN-R02-front-card-mandatory",
+      "fact_ids": [
+        "HAND-02",
+        "HAND-03",
+        "P1-01",
+        "P1-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 4,
+        "quote": "Du musst die vorderste Bohnenkarte ... anbauen. Danach darfst du eine weitere ... Eine dritte Bohne darfst du nicht anbauen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer",
+            "soja"
+          ]
+        },
+        "fields": {
+          "0": [
+            [],
+            []
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "legal_plant_types": [
+            "blau"
+          ],
+          "hand_order": {
+            "0": [
+              "blau",
+              "feuer",
+              "soja"
+            ]
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "plant",
+              "args": {
+                "field": 0
+              },
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_order": {
+                "0": [
+                  "feuer",
+                  "soja"
+                ]
+              },
+              "field_counts": {
+                "0": {
+                  "blau": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R03-second-plant-optional-no-third",
+      "fact_ids": [
+        "P1-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 4,
+        "quote": "Danach darfst du eine weitere ... Eine dritte Bohne darfst du nicht anbauen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer"
+          ]
+        },
+        "fields": {
+          "0": [
+            [
+              "blau"
+            ],
+            []
+          ]
+        },
+        "phase": "plant_hand_second",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_any": [
+            "plant",
+            "pass"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R04-empty-hand-skips-phase-one",
+      "fact_ids": [
+        "P1-04",
+        "P2-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 5,
+        "quote": "Hast du zu Beginn der 1. Phase keine Karten auf der Hand, gehst du gleich zur 2. Phase über."
+      },
+      "fixture": {
+        "hands": {
+          "0": []
+        },
+        "fields": {
+          "0": [
+            [],
+            []
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_any": [
+            "reveal"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R05-one-type-per-field",
+      "fact_ids": [
+        "FIELD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 4,
+        "quote": "Auf einem Feld darfst du nur Bohnen der gleichen Sorte anbauen. Es ist dir aber erlaubt, dieselbe Sorte auf mehreren Feldern ... anzubauen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "feuer"
+          ]
+        },
+        "fields": {
+          "0": [
+            [
+              "blau"
+            ],
+            []
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "plant_legal": [
+            {
+              "player": 0,
+              "card": "feuer",
+              "field": 0,
+              "expected": false
+            },
+            {
+              "player": 0,
+              "card": "feuer",
+              "field": 1,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R06-trading-authority",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-05"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 5,
+        "quote": "Nur du als aktiver Spieler darfst mit anderen Spielern handeln. Deine Mitspieler dürfen untereinander nicht handeln."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau"
+          ],
+          "1": [
+            "feuer"
+          ],
+          "2": [
+            "soja"
+          ],
+          "3": [
+            "rot"
+          ]
+        },
+        "revealed": [
+          "garten",
+          "acker"
+        ],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "trade_allowed": [
+            {
+              "a": 0,
+              "b": 1,
+              "expected": true
+            },
+            {
+              "a": 0,
+              "b": 2,
+              "expected": true
+            },
+            {
+              "a": 1,
+              "b": 2,
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R07-received-cards-bypass-hand",
+      "fact_ids": [
+        "TRADE-05",
+        "TRADE-06",
+        "P3-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 6,
+        "quote": "Bohnenkarten, die du nach einem Handel erhältst, legst du zunächst quer neben deinen Feldern ab. Auf die Hand nehmen darfst du sie nicht."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau"
+          ],
+          "1": [
+            "feuer"
+          ]
+        },
+        "pending_received": {
+          "1": [
+            "soja"
+          ]
+        },
+        "phase": "plant_traded",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "hand_order": {
+            "1": [
+              "feuer"
+            ]
+          },
+          "pending_received": {
+            "1": [
+              "soja"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R08-rejected-gift-no-transfer",
+      "fact_ids": [
+        "TRADE-07"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 6,
+        "quote": "Der beschenkte Mitspieler muss dem Geschenk aber zustimmen. Lehnt er ab, kommt der Handel nicht zustande."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau"
+          ],
+          "1": [
+            "feuer"
+          ]
+        },
+        "phase": "trade",
+        "active_player": 0,
+        "pending_gift": {
+          "from": 0,
+          "to": 1,
+          "cards": [
+            "blau"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type_any": [
+                "gift_reject",
+                "trade_reject"
+              ],
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "adapter": {
+              "hand_order": {
+                "0": [
+                  "blau"
+                ],
+                "1": [
+                  "feuer"
+                ]
+              },
+              "pending_received": {
+                "1": []
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R09-variant-draw-one-each-clockwise",
+      "fact_ids": [
+        "P4-01",
+        "HAND-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 10,
+        "quote": "zieht jeder von euch eine Karte ... Hierbei beginnt der aktive Spieler, die Mitspieler folgen im Uhrzeigersinn."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": [],
+          "3": []
+        },
+        "deck": [
+          "blau",
+          "feuer",
+          "soja",
+          "rot",
+          "garten"
+        ],
+        "phase": "draw",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "choose_first": true
+            }
+          },
+          "settle": [
+            {
+              "while_all_contains_any": [
+                "ziehen",
+                "draw"
+              ],
+              "choose_contains_any": [
+                "ziehen",
+                "draw"
+              ],
+              "max_steps": 4
+            }
+          ],
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "hand_size": {
+                "0": 1,
+                "1": 1,
+                "2": 1,
+                "3": 1
+              },
+              "deck_size": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R10-singleton-protection",
+      "fact_ids": [
+        "HARV-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 8,
+        "quote": "Du darfst auf einem Feld keine einzelne Bohnenkarte ernten, wenn auf mindestens einem deiner Felder mehr als eine Bohnenkarte liegt."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "blau"
+            ],
+            [
+              "feuer",
+              "feuer"
+            ]
+          ]
+        },
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "harvest_legal": [
+            {
+              "player": 0,
+              "field": 0,
+              "expected": false
+            },
+            {
+              "player": 0,
+              "field": 1,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R11-singleton-allowed-when-all-single",
+      "fact_ids": [
+        "HARV-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 8,
+        "quote": "... wenn auf mindestens einem deiner Felder mehr als eine Bohnenkarte liegt."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "blau"
+            ],
+            [
+              "feuer"
+            ]
+          ]
+        },
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "harvest_legal": [
+            {
+              "player": 0,
+              "field": 0,
+              "expected": true
+            },
+            {
+              "player": 0,
+              "field": 1,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R12-normal-harvest-clears-field",
+      "fact_ids": [
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 8,
+        "quote": "Die restlichen Karten des abgeernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das abgeerntete Feld immer leer."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "sau",
+              "sau",
+              "sau"
+            ],
+            []
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  0
+                ]
+              },
+              "coins": {
+                "0": 1
+              },
+              "discard_count": {
+                "sau": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R13-one-acker-zero-harvest",
+      "fact_ids": [
+        "ACKER-04",
+        "HARV-03"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 11,
+        "quote": "Erntest du ein Feld mit zwei Ackerbohnen ... Erntest du ein Feld mit drei Ackerbohnen ..."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "acker"
+            ],
+            []
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  0
+                ]
+              },
+              "coins": {
+                "0": 0
+              },
+              "discard_count": {
+                "acker": 1
+              },
+              "field_count": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R14-two-acker-unlocks-third-field",
+      "fact_ids": [
+        "ACKER-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 11,
+        "quote": "Erntest du ein Feld mit zwei Ackerbohnen, erhältst du ein drittes Bohnenfeld."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "acker",
+              "acker"
+            ],
+            [
+              "blau",
+              "blau"
+            ]
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_count": 3,
+              "field_counts": {
+                "0": {
+                  "blau": 2
+                }
+              },
+              "coins": {
+                "0": 0
+              },
+              "discard_count": {
+                "acker": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R15-two-acker-existing-third-field",
+      "fact_ids": [
+        "ACKER-02"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 11,
+        "quote": "Hast du bereits ein drittes Bohnenfeld, erhältst du für das Ernten von zwei Ackerbohnen nichts."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "acker",
+              "acker"
+            ],
+            [],
+            []
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "third_field": {
+          "0": true
+        },
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "field_count": 3,
+              "coins": {
+                "0": 0
+              },
+              "discard_count": {
+                "acker": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R16-three-acker-three-coins-no-field",
+      "fact_ids": [
+        "ACKER-03"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 11,
+        "quote": "Erntest du ein Feld mit drei Ackerbohnen, erhältst du wie gewohnt drei Bohnentaler."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "acker",
+              "acker",
+              "acker"
+            ],
+            []
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  0
+                ]
+              },
+              "field_count": 2,
+              "coins": {
+                "0": 3
+              },
+              "discard_count": {
+                "acker": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+      "fact_ids": [
+        "END-01",
+        "END-02",
+        "END-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 9,
+        "quote": "Sollte dies beim Aufdecken ... passieren ... spielt ihr die 2. und die 3. Phase noch zu Ende."
+      },
+      "fixture": {
+        "deck": [
+          "blau"
+        ],
+        "discard": [],
+        "depletions": 2,
+        "phase": "reveal",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "reveal",
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "adapter": {
+              "phase_contains_any": [
+                "trade",
+                "handel",
+                "plant",
+                "anbau"
+              ],
+              "depletions": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+      "fact_ids": [
+        "END-01",
+        "END-05"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 9,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": [],
+          "3": []
+        },
+        "deck": [
+          "blau"
+        ],
+        "discard": [],
+        "depletions": 2,
+        "phase": "draw",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "hand_size": {
+                "0": 1,
+                "1": 0,
+                "2": 0,
+                "3": 0
+              },
+              "depletions": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R19-final-score-ignores-hand",
+      "fact_ids": [
+        "END-03",
+        "END-06"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 9,
+        "quote": "Die Karten auf der Hand zählen nicht mehr. Jeder zählt die Karten in seinem Talerstapel. Jede Karte ist einen Taler wert."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "blau",
+            "blau"
+          ],
+          "1": []
+        },
+        "fields": {
+          "0": [
+            [],
+            []
+          ],
+          "1": [
+            [],
+            []
+          ]
+        },
+        "coins": {
+          "0": 1,
+          "1": 2
+        },
+        "terminal": true,
+        "winner": 1
+      },
+      "initial": {
+        "terminal": true,
+        "adapter": {
+          "coins": {
+            "0": 1,
+            "1": 2
+          },
+          "winner": 1,
+          "alive_all": true
+        }
+      }
+    },
+    {
+      "id": "BOHN-R20-clockwise-tiebreak",
+      "fact_ids": [
+        "SET-03",
+        "TURN-01",
+        "END-04"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 9,
+        "quote": "Bei einem Gleichstand gewinnt der Spieler, der im Uhrzeigersinn am weitesten weg vom Startspieler sitzt."
+      },
+      "fixture": {
+        "player_count": 4,
+        "start_player": 0,
+        "coins": {
+          "0": 1,
+          "1": 3,
+          "2": 2,
+          "3": 3
+        },
+        "terminal": true
+      },
+      "initial": {
+        "terminal": true,
+        "adapter": {
+          "winner": 3
+        }
+      }
+    },
+    {
+      "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+      "fact_ids": [
+        "P2-01",
+        "DECK-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 9,
+        "quote": "Ziehst du die letzte Karte vom Nachziehstapel, dann mische die Karten des Ablagestapels. Lege sie als neuen Nachziehstapel wieder verdeckt in die Tischmitte."
+      },
+      "fixture": {
+        "deck": [
+          "blau"
+        ],
+        "discard": [
+          "feuer",
+          "soja"
+        ],
+        "depletions": 0,
+        "phase": "reveal",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "reveal",
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "adapter": {
+              "revealed_size": 2,
+              "discard_size": 0,
+              "deck_size": 1,
+              "depletions": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R22-harvest-between-mandatory-plantings",
+      "fact_ids": [
+        "P3-01",
+        "P3-02",
+        "HARV-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 7,
+        "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht der aktive Spieler bist."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [
+              "blau",
+              "blau"
+            ],
+            [
+              "feuer",
+              "feuer"
+            ]
+          ]
+        },
+        "pending_received": {
+          "0": [
+            "soja",
+            "rot"
+          ]
+        },
+        "phase": "plant_traded",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_any": [
+            "harvest"
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R23-nonactive-player-can-harvest",
+      "fact_ids": [
+        "HARV-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 7,
+        "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht der aktive Spieler bist."
+      },
+      "fixture": {
+        "fields": {
+          "0": [
+            [],
+            []
+          ],
+          "1": [
+            [
+              "blau"
+            ],
+            []
+          ]
+        },
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "harvest_legal": [
+            {
+              "player": 1,
+              "field": 0,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BOHN-R24-opponent-hands-remain-private",
+      "fact_ids": [
+        "HAND-03"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "RULES",
+        "page": 3,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckst du dahinter."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer"
+          ],
+          "1": [
+            "soja",
+            "rot"
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "private_hand_visibility": {
+            "viewer": 0,
+            "own": [
+              "blau",
+              "feuer"
+            ],
+            "hidden": {
+              "1": [
+                "soja",
+                "rot"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R25-five-player-setup",
+      "fact_ids": [
+        "SET-01",
+        "SET-02",
+        "HAND-01",
+        "INV-04"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 10,
+        "quote": "Die Ackerbohnen könnt ihr im Spiel mit vier oder fünf Spielern einsetzen."
+      },
+      "initial": {
+        "adapter": {
+          "five_player_setup": {
+            "players": 5,
+            "fields_each": 2,
+            "hand_size": 5,
+            "total_cards": 129
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+      "fact_ids": [
+        "TRADE-01",
+        "TRADE-02",
+        "TRADE-04",
+        "TRADE-05",
+        "TRADE-06"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 5,
+        "quote": "Ihr dürft alle mit euren Handkarten handeln. Dabei spielt es keine Rolle, wo sich die Karten auf der Hand befinden. Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer",
+            "rot"
+          ],
+          "1": [
+            "soja"
+          ]
+        },
+        "revealed": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_start",
+              "args": {
+                "partner": 1
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_add_offer_card",
+              "args": {
+                "zone": "hand",
+                "index": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_add_offer_card",
+              "args": {
+                "zone": "hand",
+                "index": 2
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_add_request_card",
+              "args": {
+                "zone": "hand",
+                "index": 0
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_submit"
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "trade_accept"
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_order": {
+                "0": [
+                  "feuer"
+                ],
+                "1": []
+              },
+              "pending_received": {
+                "0": [
+                  "soja"
+                ],
+                "1": [
+                  "blau",
+                  "rot"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+      "fact_ids": [
+        "P1-01",
+        "P1-03",
+        "HARV-02",
+        "HARV-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 5,
+        "quote": "Musst du eine Bohnensorte anbauen, hast aber kein Feld dafür zur Verfügung, musst du zuerst ein Feld abernten."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "soja"
+          ]
+        },
+        "fields": {
+          "0": [
+            [
+              "blau",
+              "blau"
+            ],
+            [
+              "feuer",
+              "feuer"
+            ]
+          ]
+        },
+        "coins": {
+          "0": 0
+        },
+        "discard": [],
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_any": [
+            "harvest"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "harvest",
+              "args": {
+                "player": 0,
+                "field": 0
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  2
+                ]
+              },
+              "coins": {
+                "0": 0
+              },
+              "discard_count": {
+                "blau": 2
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "plant",
+              "args": {
+                "field": 0
+              },
+              "choose_first": true
+            }
+          },
+          "expect": {
+            "adapter": {
+              "hand_order": {
+                "0": []
+              },
+              "field_counts": {
+                "0": {
+                  "soja": 1,
+                  "feuer": 2
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BOHN-R28-blau-coin-curve",
+      "fact_ids": [
+        "GOLD-01",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/0/ernte",
+        "quote": "thresholds 4→1, 6→2, 8→3, 10→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "blau",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 4,
+                "coins": 1
+              },
+              {
+                "size": 6,
+                "coins": 2
+              },
+              {
+                "size": 8,
+                "coins": 3
+              },
+              {
+                "size": 10,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R29-feuer-coin-curve",
+      "fact_ids": [
+        "GOLD-02",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/1/ernte",
+        "quote": "thresholds 3→1, 6→2, 8→3, 9→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "feuer",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 3,
+                "coins": 1
+              },
+              {
+                "size": 6,
+                "coins": 2
+              },
+              {
+                "size": 8,
+                "coins": 3
+              },
+              {
+                "size": 9,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R30-sau-coin-curve",
+      "fact_ids": [
+        "GOLD-03",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 8,
+        "quote": "Für 3 oder 4 Saubohnen erhältst du einen Taler ... für 8 oder mehr vier Bohnentaler."
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "sau",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 3,
+                "coins": 1
+              },
+              {
+                "size": 5,
+                "coins": 2
+              },
+              {
+                "size": 7,
+                "coins": 3
+              },
+              {
+                "size": 8,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R31-brech-coin-curve",
+      "fact_ids": [
+        "GOLD-04",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/3/ernte",
+        "quote": "thresholds 3→1, 5→2, 6→3, 7→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "brech",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 3,
+                "coins": 1
+              },
+              {
+                "size": 5,
+                "coins": 2
+              },
+              {
+                "size": 6,
+                "coins": 3
+              },
+              {
+                "size": 7,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R32-soja-coin-curve",
+      "fact_ids": [
+        "GOLD-05",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/4/ernte",
+        "quote": "thresholds 2→1, 4→2, 6→3, 7→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "soja",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 2,
+                "coins": 1
+              },
+              {
+                "size": 4,
+                "coins": 2
+              },
+              {
+                "size": 6,
+                "coins": 3
+              },
+              {
+                "size": 7,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R33-augen-coin-curve",
+      "fact_ids": [
+        "GOLD-06",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/5/ernte",
+        "quote": "thresholds 2→1, 4→2, 5→3, 6→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "augen",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 2,
+                "coins": 1
+              },
+              {
+                "size": 4,
+                "coins": 2
+              },
+              {
+                "size": 5,
+                "coins": 3
+              },
+              {
+                "size": 6,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R34-rot-coin-curve",
+      "fact_ids": [
+        "GOLD-07",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/6/ernte",
+        "quote": "thresholds 2→1, 3→2, 4→3, 5→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "rot",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 2,
+                "coins": 1
+              },
+              {
+                "size": 3,
+                "coins": 2
+              },
+              {
+                "size": 4,
+                "coins": 3
+              },
+              {
+                "size": 5,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R35-garten-coin-curve",
+      "fact_ids": [
+        "GOLD-08",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/7/ernte",
+        "quote": "thresholds 2→2 coins; 3→3 coins"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "garten",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 2,
+                "coins": 2
+              },
+              {
+                "size": 3,
+                "coins": 3
+              },
+              {
+                "size": 6,
+                "coins": 3
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R36-weinbrand-coin-curve",
+      "fact_ids": [
+        "GOLD-09",
+        "HARV-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "COMPONENTS",
+        "json_pointer": "/bohnen/9/ernte",
+        "quote": "thresholds 4→1, 7→2, 9→3, 11→4"
+      },
+      "initial": {
+        "adapter": {
+          "harvest_curve": {
+            "bean": "weinbrand",
+            "cases": [
+              {
+                "size": 1,
+                "coins": 0
+              },
+              {
+                "size": 4,
+                "coins": 1
+              },
+              {
+                "size": 7,
+                "coins": 2
+              },
+              {
+                "size": 9,
+                "coins": 3
+              },
+              {
+                "size": 11,
+                "coins": 4
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "BOHN-R37-hand-sorting-is-forbidden",
+      "fact_ids": [
+        "HAND-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "RULES",
+        "page": 3,
+        "quote": "Die Reihenfolge der Karten auf deiner Hand darfst du während des gesamten Spiels nicht ändern. Du darfst die Karten nicht sortieren."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "feuer",
+            "soja"
+          ]
+        },
+        "fields": {
+          "0": [
+            [],
+            []
+          ]
+        },
+        "phase": "plant_hand",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "no_hand_reorder_action": {
+            "player": 0
+          },
+          "legal_action_type_not": [
+            "reorder_hand"
+          ]
+        }
+      }
+    }
+  ],
+  "contract": "inputs/prompts/environment_contract.md",
+  "environment_profile": "inputs/games/bohnanza/environment_profile.json"
+}

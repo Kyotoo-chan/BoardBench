@@ -39,6 +39,8 @@ class Game:
     def action_from_data(self, payload):
         if set(payload) != {"schema", "data"} or payload["schema"] != "boardbench/test/action/1": raise ValueError(payload)
         return payload["data"]["type"]
+    def observation_to_data(self, state, player):
+        return {"schema": "boardbench/test/observation/1", "data": {"player": player, "terminal": state.terminal}}
 '''
 
 

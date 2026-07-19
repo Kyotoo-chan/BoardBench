@@ -57,6 +57,7 @@ REQUIRED_GAME_METHODS = [
     "state_from_data",
     "action_to_data",
     "action_from_data",
+    "observation_to_data",
 ]
 
 

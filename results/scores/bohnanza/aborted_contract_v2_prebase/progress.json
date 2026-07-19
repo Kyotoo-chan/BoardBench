@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "completed": [
+    "pdf_only",
+    "json_clean",
+    "json_mutated",
+    "pdf_mutated"
+  ],
+  "judged": [],
+  "failed": [],
+  "updated_at": "2026-07-19T11:22:14.504732+00:00"
+}

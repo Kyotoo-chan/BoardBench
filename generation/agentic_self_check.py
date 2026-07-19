@@ -14,7 +14,7 @@ PROFILE_PATH = Path(__file__).with_name("GAME_PROFILE.json")
 MAX_ROLLOUTS = 40
 MAX_STEPS = 300
 MAX_STATES = 300
-CANONICAL_METHODS = ("state_to_data", "state_from_data", "action_to_data", "action_from_data")
+CANONICAL_METHODS = ("state_to_data", "state_from_data", "action_to_data", "action_from_data", "observation_to_data")
 
 
 def canonical_json(value):
@@ -34,6 +34,11 @@ def validate_state_contract(game, state, profile):
     if profile:
         assert payload["schema"] == profile["state_schema"]
         assert set(payload["data"]) == set(profile["state_data"]["required"]), "canonical state fields differ from GAME_PROFILE.json"
+        for player in range(len(payload["data"].get("players", []))):
+            observation = game.observation_to_data(state, player)
+            validate_envelope(observation, "observation")
+            assert observation["schema"] == profile["observation_schema"]
+            assert set(observation["data"]) == set(profile["observation_data"]["required"]), "canonical observation fields differ from GAME_PROFILE.json"
     rebuilt = game.state_from_data(copy.deepcopy(payload))
     assert game.state_to_data(rebuilt) == payload, "canonical state does not round-trip"
     assert game.current_player(rebuilt) == game.current_player(state)

@@ -73,6 +73,10 @@ def run(ctx: CheckContext) -> CheckResult | str | None:
             rebuilt_state = game.state_from_data(copy.deepcopy(state_data))
             if game.state_to_data(rebuilt_state) != state_data:
                 return fail("canonical state did not round-trip")
+            observation_data = game.observation_to_data(state, int(game.current_player(state)))
+            json.dumps(observation_data, allow_nan=False)
+            if not isinstance(observation_data, dict) or set(observation_data) != {"schema", "data"} or not str(observation_data["schema"]).endswith("/observation/1"):
+                return fail("observation_to_data must return the canonical observation envelope")
             if actions:
                 action_data = game.action_to_data(actions[0])
                 json.dumps(action_data, allow_nan=False)
