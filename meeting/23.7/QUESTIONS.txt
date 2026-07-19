@@ -11,6 +11,9 @@ Meinung uzr Forschungsfrage:
 - Judge-Personas: als getrennte qualitative Sichtweisen oder als gemeinsamer Score?
 - Ist eine Ergebnis-Karte pro Anleitung mit Regeln, Fehlerarten, Kosten und Laufzeit ausreichend?
 
+- Viele Games erklären zwar was zu tun ist mit ihren Karten aber erklären nicht ihre zusätzliches Spielzubehör
+- Daher gebe ich für diese eine extra Liste mit dem Zubehör hinen (bisher Bohnanza)
+
 LLM:
 - Neue Tests waren Mit GPT-5.6-Sol
 - Klappt gut. Eignes Abo??
