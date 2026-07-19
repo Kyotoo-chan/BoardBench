@@ -14,6 +14,8 @@ PROFILE = ROOT / "inputs/games/bohnanza_base_2023/environment_profile.json"
 SUITE = ROOT / "checks/scenarios/bohnanza_base_2023.json"
 ADAPTER = ROOT / "checks/scenario_adapters/bohnanza_base_2023.py"
 PROBE = ROOT / "checks/fixtures/bohnanza_base_2023_contract_probe.py"
+POSTHOC_SUITE = ROOT / "checks/scenarios/bohnanza_base_2023_posthoc_v2.json"
+POSTHOC_ADAPTER = ROOT / "checks/scenario_adapters/bohnanza_base_2023_posthoc_v2.py"
 
 
 class BohnanzaBase2023Tests(unittest.TestCase):
@@ -41,9 +43,15 @@ class BohnanzaBase2023Tests(unittest.TestCase):
             self.assertNotIn(forbidden, source)
 
     def test_every_scenario_is_representable(self):
-        result = run_suite(PROBE, SUITE)
-        self.assertEqual(result["counts"]["CRASH"], 0)
-        self.assertEqual(result["counts"]["UNTESTABLE"], 0)
+        for suite in (SUITE, POSTHOC_SUITE):
+            result = run_suite(PROBE, suite)
+            self.assertEqual(result["counts"]["CRASH"], 0)
+            self.assertEqual(result["counts"]["UNTESTABLE"], 0)
+
+    def test_posthoc_corrections_are_separately_labelled(self):
+        suite = json.loads(POSTHOC_SUITE.read_text(encoding="utf-8"))
+        self.assertIn("posthoc-v2", suite["rubric_version"])
+        self.assertEqual(Path(suite["adapter"]).resolve(), POSTHOC_ADAPTER.resolve())
 
 
 if __name__ == "__main__":

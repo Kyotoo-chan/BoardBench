@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Spielablauf / Ende des Spiels",
+      "source_basis": "missing",
+      "alternatives": ["choose or randomize the first active person", "use player 0 as the first active person"],
+      "selected": "player 0 starts",
+      "affected_mechanics": ["state_transition", "private_information"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Regeln für den Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": ["enumerate arbitrary-size card bundles", "enumerate concrete one- and two-card offers with zero- or one-card requests"],
+      "selected": "one- and two-card offers, gifts, and one-card requests; this includes the explicit unequal-trade example",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "Ende des Spiels",
+      "source_basis": "missing",
+      "alternatives": ["winner gets 1 and all others 0", "zero-sum ranking utilities"],
+      "selected": "the rulebook winner (including its clockwise tie-break) returns 1; all others return 0",
+      "affected_mechanics": ["terminal results", "scoring"]
+    }
+  ]
+}
