@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "bohnanza-base-2023-contract-v2",
-  "status": "frozen-before-generation",
+  "status": "refrozen-after-rejected-gate-gap-attempt",
   "runs": [
     "base_pdf"
   ],
@@ -53,7 +53,7 @@
     },
     "reachable_self_check": {
       "path": "generation/agentic_self_check.py",
-      "sha256": "32a72a9aa2ec7d11a9598b183c512426c1eb71619ad154ee636ca8f2b1026255"
+      "sha256": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1"
     },
     "fixture_self_check": {
       "path": "generation/profile_fixture_self_check.py",

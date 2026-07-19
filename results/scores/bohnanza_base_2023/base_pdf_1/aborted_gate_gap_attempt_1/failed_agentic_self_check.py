@@ -14,11 +14,7 @@ PROFILE_PATH = Path(__file__).with_name("GAME_PROFILE.json")
 MAX_ROLLOUTS = 40
 MAX_STEPS = 300
 MAX_STATES = 300
-REQUIRED_METHODS = (
-    "initial_state", "current_player", "legal_actions", "apply_action", "is_terminal",
-    "returns", "render", "action_to_name", "name_to_action", "state_to_data",
-    "state_from_data", "action_to_data", "action_from_data", "observation_to_data",
-)
+CANONICAL_METHODS = ("state_to_data", "state_from_data", "action_to_data", "action_from_data", "observation_to_data")
 
 
 def canonical_json(value):
@@ -78,10 +74,8 @@ def main() -> None:
     module = load_module()
     game = module.Game()
     profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8")) if PROFILE_PATH.is_file() else None
-    missing = [name for name in REQUIRED_METHODS if not callable(getattr(game, name, None))]
-    assert not missing, f"missing required methods: {', '.join(missing)}"
-    initial = game.initial_state()
-    assert isinstance(game.render(initial), str), "render must return str"
+    missing = [name for name in CANONICAL_METHODS if not callable(getattr(game, name, None))]
+    assert not missing, f"missing canonical methods: {', '.join(missing)}"
     rng = random.Random(1)
     checked_states = 0
     checked_actions = 0

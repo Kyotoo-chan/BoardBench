@@ -1,0 +1,28 @@
+{
+  "protocol": "agentic-v3.1",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "verbosity": "low",
+  "sandbox": "danger-full-access",
+  "repair_count": 2,
+  "agent_ran_self_check": true,
+  "agent_ran_fixture_self_check": true,
+  "independent_gate_passed": true,
+  "gate_output": "command=C:\\ProgramData\\miniconda3\\python.exe -m py_compile C:\\Users\\benti\\AppData\\Local\\Temp\\tmpba44u2u3\\implementation.py\nexit_code=0 elapsed_seconds=0.075\n\n\ncommand=C:\\ProgramData\\miniconda3\\python.exe C:\\Users\\benti\\AppData\\Local\\Temp\\tmpba44u2u3\\agentic_self_check.py\nexit_code=0 elapsed_seconds=10.976\nagentic-self-check OK states=300 actions=5387\nprofile-fixture-self-check OK\n",
+  "implementation_sha256": "2e886f46ab5151da52c6c44007ff3b9fe7a045962c2dc3fda065b8b45376511f",
+  "frozen_hashes": {
+    "implementation_prompt": "0efa321c6feb49f3779629bd458640873e4fb97e0412ce42affe62f27c22941f",
+    "environment_contract": "eba8a3aa67b2770d46a3da5a008e32314dd80d8b35b56c7c50dcb3a9ff280570",
+    "environment_profile": "6b153234d9a1d4106cbcfd4ff57dfe4425ba21aa5bf23514af307654fd96ec46",
+    "reachable_self_check": "32a72a9aa2ec7d11a9598b183c512426c1eb71619ad154ee636ca8f2b1026255",
+    "fixture_self_check": "5abcdf738a08cb4ea5c4edd2e9574b8dedb445f4de69eb7f313e125c9bbc1302",
+    "rulefacts": "69a62878bbe51e8bbb25701dda3b091ac90989330117906f574fec443c42ffc2",
+    "scenario_suite": "3b87eaa56d41b90004129c794b6c458a5e488dd3d08adfb9aef72ebe64209da0",
+    "scenario_adapter": "9569414320e4d6205f7d9eec2737a6a3842d53fecbae9783b308b7b85d481ae3",
+    "scenario_runner": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
+    "required_api_check": "ff7324f12ca63f91a9f94f894e271da77cac58ed5ddd6cde4ad2daddf0be9bd3",
+    "judge_prompt": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2",
+    "study_runner": "a3fd372770d8f903099b0133c4fc416df7aba7c157757e99fcb9cb721ec4669f",
+    "contract_probe": "9bc3bc6fc25700ab86c9ee48a2b2049db95c411e0bb4f47d469294d2744e242f"
+  }
+}

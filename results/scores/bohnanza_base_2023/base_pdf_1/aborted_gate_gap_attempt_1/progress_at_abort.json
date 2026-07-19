@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "completed": [],
+  "judged": [],
+  "failed": [
+    {
+      "condition": "base_pdf",
+      "phase": "generate",
+      "error": "canonical gate failed after three attempts:\nassumptions[0] has invalid material/source_basis"
+    }
+  ],
+  "updated_at": "2026-07-19T13:13:20.792856+00:00"
+}

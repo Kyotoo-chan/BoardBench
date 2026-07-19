@@ -1,6 +1,6 @@
 # Bohnanza Base 2023 preflight
 
-Status: **PASSED — one model generation may start**
+Status: **SUPERSEDED after rejected attempt 1**
 
 No model call or scored run for this edition existed when this report was written.
 
@@ -22,7 +22,11 @@ Approved human decisions are recorded in `rulefacts.md`: immediate third depleti
 
 - Frozen manifest and packet construction pass.
 - The generation packet contains only the assigned PDF and representation-only contract/profile/self-check files; no rulefacts, scenarios, adapter, previous implementation, component JSON, or reviews.
-- Reachable-state probe: `300` states and `5400` actions pass canonical JSON/roundtrip checks.
+- Reachable-state probe: `300` states and `5400` actions passed canonical JSON/roundtrip checks.
+
+## Discovered gate gap
+
+The first generation omitted the required public `render` method because this preflight checked only canonical methods. Technical Check 04 rejected that implementation before judging. The attempt is preserved under `aborted_gate_gap_attempt_1/`. `agentic_self_check.py` now checks the full public API; a new preflight is recorded separately.
 - Complete-fixture probe passes every profile phase, pending consent, zone distribution, and 3/4/5-player construction.
 - All 31 evaluator scenarios execute through canonical state/action data with `0 CRASH` and `0 UNTESTABLE` using the infrastructure probe.
 - 33 focused regression tests pass.

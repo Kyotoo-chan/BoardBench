@@ -94,6 +94,14 @@ class AgenticGenerationTests(unittest.TestCase):
             (path / "assumptions.json").write_text('{"version": 1, "assumptions": [{}]}', encoding="utf-8")
             self.assertIn("missing required fields", _validate_assumptions(path / "assumptions.json") or "")
 
+    def test_independent_gate_rejects_missing_public_method(self):
+        broken = VALID_IMPLEMENTATION.replace("    def render(self, state): return str(state)\n", "")
+        temporary, path = self.workspace(broken)
+        with temporary:
+            passed, output = _agentic_gate(path, require_coverage=True)
+        self.assertFalse(passed)
+        self.assertIn("render", output)
+
     def test_independent_gate_rejects_legal_action_that_crashes(self):
         broken = VALID_IMPLEMENTATION.replace(
             'if action != "finish": raise ValueError(action)',

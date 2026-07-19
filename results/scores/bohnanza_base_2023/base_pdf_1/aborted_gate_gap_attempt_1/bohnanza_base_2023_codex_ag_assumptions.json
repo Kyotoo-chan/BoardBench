@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "gift-direction",
+      "material": true,
+      "source_location": "Regeln für den Bohnenhandel; gift paragraph",
+      "source_basis": "ambiguous",
+      "alternatives": [
+        "allow a gift only from the active player to a partner",
+        "allow a gift in either direction between the active player and a partner"
+      ],
+      "selected": "during the active player's trading phase, a consensual one-way gift may move cards either from the active player to the partner or from the partner to the active player",
+      "affected_mechanics": [
+        "legal_actions",
+        "state_transition"
+      ]
+    },
+    {
+      "id": "finite-trade-action-boundary",
+      "material": true,
+      "source_location": "Regeln für den Bohnenhandel; unequal-quantity two-for-one example",
+      "source_basis": "missing",
+      "alternatives": [
+        "enumerate proposals with at most two cards from either side and at most three cards total",
+        "enumerate every nonempty subset of every eligible hand and revealed zone"
+      ],
+      "selected": "a newly proposed trade or gift contains at most two cards from either side and at most three cards total; canonical pending fixtures with larger lists remain reconstructable and resolvable",
+      "affected_mechanics": [
+        "legal_actions"
+      ]
+    }
+  ]
+}
