@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "bohnanza-base-2023-contract-v2",
-  "status": "refrozen-after-rejected-gate-gap-attempt",
+  "status": "refrozen-after-rejected-prompt-packet-attempt",
   "runs": [
     "base_pdf"
   ],
@@ -85,7 +85,7 @@
     },
     "study_runner": {
       "path": "generation/run_bohnanza_base_2023.py",
-      "sha256": "a3fd372770d8f903099b0133c4fc416df7aba7c157757e99fcb9cb721ec4669f"
+      "sha256": "04e0809d1ea466a8335cacc38d51b60d6ced04273f89258ccbde55908bc9c429"
     },
     "contract_probe": {
       "path": "checks/fixtures/bohnanza_base_2023_contract_probe.py",

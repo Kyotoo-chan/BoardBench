@@ -29,7 +29,7 @@ PROGRESS_PATH = RESULTS / "progress.json"
 MODEL = "gpt-5.6-sol"
 GENERATION_EFFORT = "low"
 JUDGE_EFFORT = "medium"
-GENERATION_PROMPT = legacy.GENERATION_PROMPT + """
+GENERATION_PROMPT = (ROOT / "inputs/prompts/rulebook_to_python.txt").read_text(encoding="utf-8") + """
 
 This packet also contains `profile_fixture_self_check.py`. Run it after `agentic_self_check.py`; it checks representation-only complete fixtures and contains no rule expectations.
 """

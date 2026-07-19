@@ -24,6 +24,10 @@ class BohnanzaBase2023StudyTests(unittest.TestCase):
             for hidden in ("rulefacts.md", "approved_rulefacts.md", "bohnanza_base_2023.json", "bohnanza_base_2023.py"):
                 self.assertNotIn(hidden, names)
             self.assertNotIn("game_components.json", names)
+            task = (workspace / "TASK.txt").read_text(encoding="utf-8")
+            self.assertIn('"material": true', task)
+            self.assertIn("profile_fixture_self_check.py", task)
+            self.assertNotIn("IMPLEMENTATION_TASK.txt", task)
         finally:
             shutil.rmtree(workspace, ignore_errors=True)
 

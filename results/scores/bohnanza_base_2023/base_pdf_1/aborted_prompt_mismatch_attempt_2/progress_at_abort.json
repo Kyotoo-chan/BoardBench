@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "completed": [],
+  "judged": [],
+  "failed": [
+    {
+      "condition": "base_pdf",
+      "phase": "generate",
+      "error": "canonical gate failed after three attempts:\nassumptions[0] is missing required fields"
+    }
+  ],
+  "updated_at": "2026-07-19T13:27:14.345969+00:00"
+}

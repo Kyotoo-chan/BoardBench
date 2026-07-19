@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "task_filename",
+      "category": "source_interpretation",
+      "description": "TASK.txt is treated as the requested IMPLEMENTATION_TASK.txt because no file with the latter name is supplied.",
+      "rationale": "Workspace inventory and SOURCE_MANIFEST.md.",
+      "impact": "The supplied task instructions are used without changing game behavior.",
+      "statement": "TASK.txt is treated as the requested IMPLEMENTATION_TASK.txt because no file with the latter name is supplied.",
+      "basis": "Workspace inventory and SOURCE_MANIFEST.md."
+    },
+    {
+      "id": "received_planting_schedule",
+      "category": "rule_interpretation",
+      "description": "For deterministic sequential modeling, mandatory phase-3 planting is scheduled active player first and then clockwise, while each player chooses their own card order.",
+      "rationale": "The rulebook requires all such cards to be planted and explicitly gives each person control of their order, but does not specify an order among people.",
+      "impact": "This fixes the evaluator-visible order of otherwise mandatory planting decisions without changing which cards must be planted.",
+      "statement": "For deterministic sequential modeling, mandatory phase-3 planting is scheduled active player first and then clockwise, while each player chooses their own card order.",
+      "basis": "The rulebook requires all such cards to be planted and explicitly gives each person control of their order, but does not specify an order among people."
+    },
+    {
+      "id": "trade_enumeration",
+      "category": "action_enumeration",
+      "description": "The ordinary legal-action list enumerates single-card gifts and one-for-one trades; the transition validator accepts all rulebook-legal unequal multi-card bundles supplied as canonical trade_propose actions.",
+      "rationale": "The source permits unequal quantities but gives no interface rule for enumerating exponentially many simultaneous proposals.",
+      "impact": "Canonical multi-card proposals remain accepted, while the routinely enumerated legal-action set stays finite and tractable.",
+      "statement": "The ordinary legal-action list enumerates single-card gifts and one-for-one trades; the transition validator accepts all rulebook-legal unequal multi-card bundles supplied as canonical trade_propose actions.",
+      "basis": "The source permits unequal quantities but gives no interface rule for enumerating exponentially many simultaneous proposals."
+    }
+  ],
+  "conflicts": []
+}
