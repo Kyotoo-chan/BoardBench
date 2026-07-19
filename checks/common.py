@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import contextlib
 import importlib.util
+import inspect
 import io
 import random
 import re
@@ -146,7 +147,8 @@ def make_game(ctx: CheckContext) -> tuple[ModuleType, Any, Any]:
     module = import_generated_module(ctx)
     game_cls = getattr(module, "Game")
     with suppress_generated_output():
-        game = game_cls()
+        parameters = inspect.signature(game_cls).parameters
+        game = game_cls(seed=ctx.seed) if "seed" in parameters else game_cls()
         state = game.initial_state()
     return module, game, state
 

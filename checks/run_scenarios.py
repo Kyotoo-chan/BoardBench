@@ -463,7 +463,10 @@ def run_suite(code_path: Path, suite_path: Path) -> dict[str, Any]:
         except AssertionError as exc:
             results.append(ScenarioResult(scenario_id, "FAIL", str(exc), **metadata))
         except Exception as exc:
-            results.append(ScenarioResult(scenario_id, "CRASH", f"{exc.__class__.__name__}: {exc}", **metadata))
+            if adapter is not None and hasattr(adapter, "is_untestable") and adapter.is_untestable(exc):
+                results.append(ScenarioResult(scenario_id, "UNTESTABLE", str(exc), **metadata))
+            else:
+                results.append(ScenarioResult(scenario_id, "CRASH", f"{exc.__class__.__name__}: {exc}", **metadata))
         else:
             results.append(ScenarioResult(scenario_id, "PASS", **metadata))
 
@@ -487,6 +490,7 @@ def run_suite(code_path: Path, suite_path: Path) -> dict[str, Any]:
         "suite_sha256": _rulebook_hash(suite_path),
         "adapter": str(adapter_path) if adapter_path else None,
         "adapter_sha256": _rulebook_hash(resolved_adapter) if resolved_adapter else None,
+        "runner_sha256": _rulebook_hash(Path(__file__).resolve()),
         "code": code_path.as_posix(),
         "code_sha256": _rulebook_hash(code_path),
         "counts": counts,

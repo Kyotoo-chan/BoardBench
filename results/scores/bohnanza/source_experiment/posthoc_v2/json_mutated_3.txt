@@ -1,0 +1,38 @@
+FAIL BOHN-R01-exact-acker-inventory: total_cards: expected 129, got 104
+PASS BOHN-R02-front-card-mandatory
+PASS BOHN-R03-second-plant-optional-no-third
+FAIL BOHN-R04-empty-hand-skips-phase-one: no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got ['advance | plant_first']
+FAIL BOHN-R05-one-type-per-field: plant_legal[0]: expected False, got True
+UNTESTABLE BOHN-R06-trading-authority: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R07-received-cards-bypass-hand: state has no pending-received container
+UNTESTABLE BOHN-R08-rejected-gift-no-transfer: implementation has no pending trade representation
+FAIL BOHN-R09-variant-draw-one-each-clockwise: step 1: hand_size[0]: expected 1, got 3
+PASS BOHN-R10-singleton-protection
+PASS BOHN-R11-singleton-allowed-when-all-single
+PASS BOHN-R12-normal-harvest-clears-field
+UNTESTABLE BOHN-R13-one-acker-zero-harvest: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R14-two-acker-unlocks-third-field: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R15-two-acker-existing-third-field: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R16-three-acker-three-coins-no-field: implementation has no identifiable 'acker' card
+UNTESTABLE BOHN-R17-third-empty-during-reveal-finishes-phase-three: implementation has no canonical phase for 'reveal'
+PASS BOHN-R18-third-empty-during-phase-four-stops-immediately
+PASS BOHN-R19-final-score-ignores-hand
+PASS BOHN-R20-clockwise-tiebreak
+UNTESTABLE BOHN-R21-nonterminal-empty-refills-and-continues-reveal: implementation has no canonical phase for 'reveal'
+UNTESTABLE BOHN-R22-harvest-between-mandatory-plantings: state has no pending-received container
+FAIL BOHN-R23-nonactive-player-can-harvest: harvest_legal[1,0]: expected True, got False
+PASS BOHN-R24-opponent-hands-remain-private
+FAIL BOHN-R25-five-player-setup: five_player.total_cards: expected 129, got 104
+FAIL BOHN-R26-unequal-trade-from-arbitrary-hand-positions: action name is not legal: '["Handel beginnen",1]'; got ['end_trade | 0', 'propose_gift | 0 | 1 | Blaue Bohne', 'propose_trade | 0 | 1 | Blaue Bohne | Sojabohne', 'propose_gift | 0 | 1 | Feuerbohne', 'propose_trade | 0 | 1 | Feuerbohne | Sojabohne', 'propose_gift | 0 | 1 | Rote Bohne', 'propose_trade | 0 | 1 | Rote Bohne | Sojabohne', 'propose_gift | 0 | 2 | Blaue Bohne', 'propose_trade | 0 | 2 | Blaue Bohne | Rote Bohne', 'propose_trade | 0 | 2 | Blaue Bohne | Brechbohne', 'propose_trade | 0 | 2 | Blaue Bohne | Saubohne', 'propose_trade | 0 | 2 | Blaue Bohne | Blaue Bohne', 'propose_gift | 0 | 2 | Feuerbohne', 'propose_trade | 0 | 2 | Feuerbohne | Rote Bohne', 'propose_trade | 0 | 2 | Feuerbohne | Brechbohne', 'propose_trade | 0 | 2 | Feuerbohne | Saubohne', 'propose_trade | 0 | 2 | Feuerbohne | Blaue Bohne', 'propose_gift | 0 | 2 | Rote Bohne', 'propose_trade | 0 | 2 | Rote Bohne | Rote Bohne', 'propose_trade | 0 | 2 | Rote Bohne | Brechbohne', 'propose_trade | 0 | 2 | Rote Bohne | Saubohne', 'propose_trade | 0 | 2 | Rote Bohne | Blaue Bohne', 'propose_gift | 0 | 3 | Blaue Bohne', 'propose_trade | 0 | 3 | Blaue Bohne | Blaue Bohne', 'propose_trade | 0 | 3 | Blaue Bohne | Brechbohne', 'propose_trade | 0 | 3 | Blaue Bohne | Feuerbohne', 'propose_trade | 0 | 3 | Blaue Bohne | Saubohne', 'propose_trade | 0 | 3 | Blaue Bohne | Rote Bohne', 'propose_gift | 0 | 3 | Feuerbohne', 'propose_trade | 0 | 3 | Feuerbohne | Blaue Bohne', 'propose_trade | 0 | 3 | Feuerbohne | Brechbohne', 'propose_trade | 0 | 3 | Feuerbohne | Feuerbohne', 'propose_trade | 0 | 3 | Feuerbohne | Saubohne', 'propose_trade | 0 | 3 | Feuerbohne | Rote Bohne', 'propose_gift | 0 | 3 | Rote Bohne', 'propose_trade | 0 | 3 | Rote Bohne | Blaue Bohne', 'propose_trade | 0 | 3 | Rote Bohne | Brechbohne', 'propose_trade | 0 | 3 | Rote Bohne | Feuerbohne', 'propose_trade | 0 | 3 | Rote Bohne | Saubohne', 'propose_trade | 0 | 3 | Rote Bohne | Rote Bohne']
+PASS BOHN-R27-forced-harvest-before-mandatory-plant
+PASS BOHN-R28-blau-coin-curve
+PASS BOHN-R29-feuer-coin-curve
+PASS BOHN-R30-sau-coin-curve
+PASS BOHN-R31-brech-coin-curve
+PASS BOHN-R32-soja-coin-curve
+PASS BOHN-R33-augen-coin-curve
+PASS BOHN-R34-rot-coin-curve
+PASS BOHN-R35-garten-coin-curve
+UNTESTABLE BOHN-R36-weinbrand-coin-curve: implementation has no identifiable 'weinbrand' card
+PASS BOHN-R37-hand-sorting-is-forbidden
+SCENARIOS PASS=19 FAIL=7 CRASH=0 UNREACHED=0 UNTESTABLE=11 evaluated=26/37 score=0.731 coverage=0.703

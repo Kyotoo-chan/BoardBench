@@ -1,0 +1,38 @@
+PASS BOHN-R01-exact-acker-inventory
+PASS BOHN-R02-front-card-mandatory
+PASS BOHN-R03-second-plant-optional-no-third
+FAIL BOHN-R04-empty-hand-skips-phase-one: no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got ['skip_empty_hand']
+FAIL BOHN-R05-one-type-per-field: plant_legal[0]: expected False, got True
+PASS BOHN-R06-trading-authority
+PASS BOHN-R07-received-cards-bypass-hand
+UNTESTABLE BOHN-R08-rejected-gift-no-transfer: implementation has no pending trade representation
+FAIL BOHN-R09-variant-draw-one-each-clockwise: step 1: hand_size[0]: expected 1, got 2
+PASS BOHN-R10-singleton-protection
+PASS BOHN-R11-singleton-allowed-when-all-single
+PASS BOHN-R12-normal-harvest-clears-field
+PASS BOHN-R13-one-acker-zero-harvest
+PASS BOHN-R14-two-acker-unlocks-third-field
+PASS BOHN-R15-two-acker-existing-third-field
+PASS BOHN-R16-three-acker-three-coins-no-field
+PASS BOHN-R17-third-empty-during-reveal-finishes-phase-three
+FAIL BOHN-R18-third-empty-during-phase-four-stops-immediately: step 1: terminal: expected True, got False
+PASS BOHN-R19-final-score-ignores-hand
+PASS BOHN-R20-clockwise-tiebreak
+PASS BOHN-R21-nonterminal-empty-refills-and-continues-reveal
+PASS BOHN-R22-harvest-between-mandatory-plantings
+PASS BOHN-R23-nonactive-player-can-harvest
+FAIL BOHN-R24-opponent-hands-remain-private: owner-visible card 'Blaue Bohne' missing from render
+FAIL BOHN-R25-five-player-setup: five-player setup is unsupported
+FAIL BOHN-R26-unequal-trade-from-arbitrary-hand-positions: action name is not legal: '["Handel beginnen",1]'; got ['trade_hands | 0 | 1 | 0', 'trade_hands | 0 | 2 | 0', 'trade_hands | 0 | 2 | 1', 'trade_hands | 0 | 2 | 2', 'trade_hands | 0 | 2 | 3', 'trade_hands | 0 | 2 | 4', 'trade_hands | 0 | 3 | 0', 'trade_hands | 0 | 3 | 1', 'trade_hands | 0 | 3 | 2', 'trade_hands | 0 | 3 | 3', 'trade_hands | 0 | 3 | 4', 'trade_hands | 1 | 1 | 0', 'trade_hands | 1 | 2 | 0', 'trade_hands | 1 | 2 | 1', 'trade_hands | 1 | 2 | 2', 'trade_hands | 1 | 2 | 3', 'trade_hands | 1 | 2 | 4', 'trade_hands | 1 | 3 | 0', 'trade_hands | 1 | 3 | 1', 'trade_hands | 1 | 3 | 2', 'trade_hands | 1 | 3 | 3', 'trade_hands | 1 | 3 | 4', 'trade_hands | 2 | 1 | 0', 'trade_hands | 2 | 2 | 0', 'trade_hands | 2 | 2 | 1', 'trade_hands | 2 | 2 | 2', 'trade_hands | 2 | 2 | 3', 'trade_hands | 2 | 2 | 4', 'trade_hands | 2 | 3 | 0', 'trade_hands | 2 | 3 | 1', 'trade_hands | 2 | 3 | 2', 'trade_hands | 2 | 3 | 3', 'trade_hands | 2 | 3 | 4', 'end_trade']
+PASS BOHN-R27-forced-harvest-before-mandatory-plant
+PASS BOHN-R28-blau-coin-curve
+PASS BOHN-R29-feuer-coin-curve
+PASS BOHN-R30-sau-coin-curve
+PASS BOHN-R31-brech-coin-curve
+PASS BOHN-R32-soja-coin-curve
+PASS BOHN-R33-augen-coin-curve
+PASS BOHN-R34-rot-coin-curve
+PASS BOHN-R35-garten-coin-curve
+PASS BOHN-R36-weinbrand-coin-curve
+PASS BOHN-R37-hand-sorting-is-forbidden
+SCENARIOS PASS=29 FAIL=7 CRASH=0 UNREACHED=0 UNTESTABLE=1 evaluated=36/37 score=0.806 coverage=0.973

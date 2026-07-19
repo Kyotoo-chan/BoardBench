@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "label": "post-hoc representation-safety replay; frozen originals unchanged",
+  "runs": [
+    {
+      "run": "json_clean_1",
+      "condition": "json_clean",
+      "original": {
+        "PASS": 0,
+        "FAIL": 4,
+        "CRASH": 27,
+        "UNREACHED": 0,
+        "UNTESTABLE": 6
+      },
+      "posthoc_v2": {
+        "PASS": 22,
+        "FAIL": 9,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 6
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 0.7096774193548387,
+      "original_coverage": 0.8378378378378378,
+      "posthoc_v2_coverage": 0.8378378378378378,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_clean_2",
+      "condition": "json_clean",
+      "original": {
+        "PASS": 8,
+        "FAIL": 24,
+        "CRASH": 2,
+        "UNREACHED": 0,
+        "UNTESTABLE": 3
+      },
+      "posthoc_v2": {
+        "PASS": 25,
+        "FAIL": 5,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 7
+      },
+      "original_pass_fraction": 0.23529411764705882,
+      "posthoc_v2_pass_fraction": 0.8333333333333334,
+      "original_coverage": 0.918918918918919,
+      "posthoc_v2_coverage": 0.8108108108108109,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_clean_3",
+      "condition": "json_clean",
+      "original": {
+        "PASS": 8,
+        "FAIL": 24,
+        "CRASH": 4,
+        "UNREACHED": 0,
+        "UNTESTABLE": 1
+      },
+      "posthoc_v2": {
+        "PASS": 14,
+        "FAIL": 19,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 4
+      },
+      "original_pass_fraction": 0.2222222222222222,
+      "posthoc_v2_pass_fraction": 0.42424242424242425,
+      "original_coverage": 0.972972972972973,
+      "posthoc_v2_coverage": 0.8918918918918919,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_mutated_1",
+      "condition": "json_mutated",
+      "original": {
+        "PASS": 0,
+        "FAIL": 1,
+        "CRASH": 12,
+        "UNREACHED": 0,
+        "UNTESTABLE": 24
+      },
+      "posthoc_v2": {
+        "PASS": 3,
+        "FAIL": 0,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 34
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 1.0,
+      "original_coverage": 0.35135135135135137,
+      "posthoc_v2_coverage": 0.08108108108108109,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_mutated_2",
+      "condition": "json_mutated",
+      "original": {
+        "PASS": 2,
+        "FAIL": 0,
+        "CRASH": 11,
+        "UNREACHED": 0,
+        "UNTESTABLE": 24
+      },
+      "posthoc_v2": {
+        "PASS": 4,
+        "FAIL": 0,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 33
+      },
+      "original_pass_fraction": 0.15384615384615385,
+      "posthoc_v2_pass_fraction": 1.0,
+      "original_coverage": 0.35135135135135137,
+      "posthoc_v2_coverage": 0.10810810810810811,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_mutated_3",
+      "condition": "json_mutated",
+      "original": {
+        "PASS": 0,
+        "FAIL": 2,
+        "CRASH": 27,
+        "UNREACHED": 0,
+        "UNTESTABLE": 8
+      },
+      "posthoc_v2": {
+        "PASS": 19,
+        "FAIL": 7,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 11
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 0.7307692307692307,
+      "original_coverage": 0.7837837837837838,
+      "posthoc_v2_coverage": 0.7027027027027027,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_mutated_1",
+      "condition": "pdf_mutated",
+      "original": {
+        "PASS": 3,
+        "FAIL": 29,
+        "CRASH": 2,
+        "UNREACHED": 0,
+        "UNTESTABLE": 3
+      },
+      "posthoc_v2": {
+        "PASS": 11,
+        "FAIL": 23,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 3
+      },
+      "original_pass_fraction": 0.08823529411764706,
+      "posthoc_v2_pass_fraction": 0.3235294117647059,
+      "original_coverage": 0.918918918918919,
+      "posthoc_v2_coverage": 0.918918918918919,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_mutated_2",
+      "condition": "pdf_mutated",
+      "original": {
+        "PASS": 0,
+        "FAIL": 1,
+        "CRASH": 10,
+        "UNREACHED": 0,
+        "UNTESTABLE": 26
+      },
+      "posthoc_v2": {
+        "PASS": 1,
+        "FAIL": 0,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 36
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 1.0,
+      "original_coverage": 0.2972972972972973,
+      "posthoc_v2_coverage": 0.02702702702702703,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_mutated_3",
+      "condition": "pdf_mutated",
+      "original": {
+        "PASS": 3,
+        "FAIL": 28,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 6
+      },
+      "posthoc_v2": {
+        "PASS": 8,
+        "FAIL": 22,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 7
+      },
+      "original_pass_fraction": 0.0967741935483871,
+      "posthoc_v2_pass_fraction": 0.26666666666666666,
+      "original_coverage": 0.8378378378378378,
+      "posthoc_v2_coverage": 0.8108108108108109,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_only_1",
+      "condition": "pdf_only",
+      "original": {
+        "PASS": 17,
+        "FAIL": 9,
+        "CRASH": 2,
+        "UNREACHED": 0,
+        "UNTESTABLE": 9
+      },
+      "posthoc_v2": {
+        "PASS": 2,
+        "FAIL": 2,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 33
+      },
+      "original_pass_fraction": 0.6071428571428571,
+      "posthoc_v2_pass_fraction": 0.5,
+      "original_coverage": 0.7567567567567568,
+      "posthoc_v2_coverage": 0.10810810810810811,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_only_2",
+      "condition": "pdf_only",
+      "original": {
+        "PASS": 6,
+        "FAIL": 21,
+        "CRASH": 6,
+        "UNREACHED": 0,
+        "UNTESTABLE": 4
+      },
+      "posthoc_v2": {
+        "PASS": 24,
+        "FAIL": 7,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 6
+      },
+      "original_pass_fraction": 0.18181818181818182,
+      "posthoc_v2_pass_fraction": 0.7741935483870968,
+      "original_coverage": 0.8918918918918919,
+      "posthoc_v2_coverage": 0.8378378378378378,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "pdf_only_3",
+      "condition": "pdf_only",
+      "original": {
+        "PASS": 2,
+        "FAIL": 21,
+        "CRASH": 3,
+        "UNREACHED": 0,
+        "UNTESTABLE": 11
+      },
+      "posthoc_v2": {
+        "PASS": 16,
+        "FAIL": 8,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 13
+      },
+      "original_pass_fraction": 0.07692307692307693,
+      "posthoc_v2_pass_fraction": 0.6666666666666666,
+      "original_coverage": 0.7027027027027027,
+      "posthoc_v2_coverage": 0.6486486486486487,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    {
+      "run": "json_clean_diagnostic_1",
+      "condition": "diagnostic",
+      "original": {
+        "PASS": 0,
+        "FAIL": 2,
+        "CRASH": 35,
+        "UNREACHED": 0,
+        "UNTESTABLE": 0
+      },
+      "posthoc_v2": {
+        "PASS": 29,
+        "FAIL": 7,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 1
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 0.8055555555555556,
+      "original_coverage": 1.0,
+      "posthoc_v2_coverage": 0.972972972972973,
+      "posthoc_suite_sha256": "a77e05c55efd58e02b2e317df5cf053fc2b2fd6d78101d536b02a883caff91ef",
+      "posthoc_adapter_sha256": "7a5caa943010f87e589aca84371d59885f67c00773858c7baaf00eb3e33a975d",
+      "posthoc_runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    }
+  ],
+  "conditions": {
+    "json_clean": {
+      "runs": 3,
+      "original": {
+        "PASS": 16,
+        "FAIL": 52,
+        "CRASH": 33,
+        "UNREACHED": 0,
+        "UNTESTABLE": 10
+      },
+      "posthoc_v2": {
+        "PASS": 61,
+        "FAIL": 33,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 17
+      },
+      "original_pass_fraction": 0.15841584158415842,
+      "posthoc_v2_pass_fraction": 0.648936170212766,
+      "original_coverage": 0.9099099099099099,
+      "posthoc_v2_coverage": 0.8468468468468469
+    },
+    "json_mutated": {
+      "runs": 3,
+      "original": {
+        "PASS": 2,
+        "FAIL": 3,
+        "CRASH": 50,
+        "UNREACHED": 0,
+        "UNTESTABLE": 56
+      },
+      "posthoc_v2": {
+        "PASS": 26,
+        "FAIL": 7,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 78
+      },
+      "original_pass_fraction": 0.03636363636363636,
+      "posthoc_v2_pass_fraction": 0.7878787878787878,
+      "original_coverage": 0.4954954954954955,
+      "posthoc_v2_coverage": 0.2972972972972973
+    },
+    "pdf_mutated": {
+      "runs": 3,
+      "original": {
+        "PASS": 6,
+        "FAIL": 58,
+        "CRASH": 12,
+        "UNREACHED": 0,
+        "UNTESTABLE": 35
+      },
+      "posthoc_v2": {
+        "PASS": 20,
+        "FAIL": 45,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 46
+      },
+      "original_pass_fraction": 0.07894736842105263,
+      "posthoc_v2_pass_fraction": 0.3076923076923077,
+      "original_coverage": 0.6846846846846847,
+      "posthoc_v2_coverage": 0.5855855855855856
+    },
+    "pdf_only": {
+      "runs": 3,
+      "original": {
+        "PASS": 25,
+        "FAIL": 51,
+        "CRASH": 11,
+        "UNREACHED": 0,
+        "UNTESTABLE": 24
+      },
+      "posthoc_v2": {
+        "PASS": 42,
+        "FAIL": 17,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 52
+      },
+      "original_pass_fraction": 0.28735632183908044,
+      "posthoc_v2_pass_fraction": 0.711864406779661,
+      "original_coverage": 0.7837837837837838,
+      "posthoc_v2_coverage": 0.5315315315315315
+    },
+    "diagnostic": {
+      "runs": 1,
+      "original": {
+        "PASS": 0,
+        "FAIL": 2,
+        "CRASH": 35,
+        "UNREACHED": 0,
+        "UNTESTABLE": 0
+      },
+      "posthoc_v2": {
+        "PASS": 29,
+        "FAIL": 7,
+        "CRASH": 0,
+        "UNREACHED": 0,
+        "UNTESTABLE": 1
+      },
+      "original_pass_fraction": 0.0,
+      "posthoc_v2_pass_fraction": 0.8055555555555556,
+      "original_coverage": 1.0,
+      "posthoc_v2_coverage": 0.972972972972973
+    }
+  },
+  "status_transitions": [
+    {
+      "original": "CRASH",
+      "posthoc_v2": "FAIL",
+      "count": 21
+    },
+    {
+      "original": "CRASH",
+      "posthoc_v2": "PASS",
+      "count": 84
+    },
+    {
+      "original": "CRASH",
+      "posthoc_v2": "UNTESTABLE",
+      "count": 36
+    },
+    {
+      "original": "FAIL",
+      "posthoc_v2": "FAIL",
+      "count": 88
+    },
+    {
+      "original": "FAIL",
+      "posthoc_v2": "PASS",
+      "count": 60
+    },
+    {
+      "original": "FAIL",
+      "posthoc_v2": "UNTESTABLE",
+      "count": 18
+    },
+    {
+      "original": "PASS",
+      "posthoc_v2": "PASS",
+      "count": 34
+    },
+    {
+      "original": "PASS",
+      "posthoc_v2": "UNTESTABLE",
+      "count": 15
+    },
+    {
+      "original": "UNTESTABLE",
+      "posthoc_v2": "UNTESTABLE",
+      "count": 125
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+PASS BOHN-R01-exact-acker-inventory
+FAIL BOHN-R02-front-card-mandatory: no legal planting action for 'blau'
+UNTESTABLE BOHN-R03-second-plant-optional-no-third: implementation has no canonical phase for 'plant_hand_second'
+FAIL BOHN-R04-empty-hand-skips-phase-one: no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got ['["finish_hand_planting",[]]']
+FAIL BOHN-R05-one-type-per-field: plant_legal[1]: expected True, got False
+FAIL BOHN-R06-trading-authority: trade_allowed[0,1]: expected True, got False
+PASS BOHN-R07-received-cards-bypass-hand
+UNTESTABLE BOHN-R08-rejected-gift-no-transfer: implementation has no pending trade representation
+FAIL BOHN-R09-variant-draw-one-each-clockwise: step 1: hand_size[0]: expected 1, got 2
+FAIL BOHN-R10-singleton-protection: harvest_legal[0,1]: expected True, got False
+FAIL BOHN-R11-singleton-allowed-when-all-single: harvest_legal[0,0]: expected True, got False
+PASS BOHN-R12-normal-harvest-clears-field
+PASS BOHN-R13-one-acker-zero-harvest
+PASS BOHN-R14-two-acker-unlocks-third-field
+PASS BOHN-R15-two-acker-existing-third-field
+PASS BOHN-R16-three-acker-three-coins-no-field
+UNTESTABLE BOHN-R17-third-empty-during-reveal-finishes-phase-three: implementation has no canonical phase for 'reveal'
+PASS BOHN-R18-third-empty-during-phase-four-stops-immediately
+PASS BOHN-R19-final-score-ignores-hand
+PASS BOHN-R20-clockwise-tiebreak
+UNTESTABLE BOHN-R21-nonterminal-empty-refills-and-continues-reveal: implementation has no canonical phase for 'reveal'
+PASS BOHN-R22-harvest-between-mandatory-plantings
+FAIL BOHN-R23-nonactive-player-can-harvest: harvest_legal[1,0]: expected True, got False
+FAIL BOHN-R24-opponent-hands-remain-private: opponent card 'Sojabohne' leaked in render
+PASS BOHN-R25-five-player-setup
+FAIL BOHN-R26-unequal-trade-from-arbitrary-hand-positions: action name is not legal: '["Handel beginnen",1]'; got ['["finish_trading",[]]', '["begin_offer",[1]]', '["begin_offer",[2]]', '["begin_offer",[3]]']
+PASS BOHN-R27-forced-harvest-before-mandatory-plant
+FAIL BOHN-R28-blau-coin-curve: no legal harvest for blau size 1
+FAIL BOHN-R29-feuer-coin-curve: no legal harvest for feuer size 1
+FAIL BOHN-R30-sau-coin-curve: no legal harvest for sau size 1
+FAIL BOHN-R31-brech-coin-curve: no legal harvest for brech size 1
+FAIL BOHN-R32-soja-coin-curve: no legal harvest for soja size 1
+FAIL BOHN-R33-augen-coin-curve: no legal harvest for augen size 1
+FAIL BOHN-R34-rot-coin-curve: no legal harvest for rot size 1
+FAIL BOHN-R35-garten-coin-curve: no legal harvest for garten size 1
+FAIL BOHN-R36-weinbrand-coin-curve: no legal harvest for weinbrand size 1
+PASS BOHN-R37-hand-sorting-is-forbidden
+SCENARIOS PASS=14 FAIL=19 CRASH=0 UNREACHED=0 UNTESTABLE=4 evaluated=33/37 score=0.424 coverage=0.892
