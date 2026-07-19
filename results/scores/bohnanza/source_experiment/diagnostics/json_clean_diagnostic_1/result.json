@@ -1,0 +1,755 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "bohnanza",
+    "condition": "posthoc_json_clean_diagnostic",
+    "source_path": "../../../../../../inputs/games/bohnanza/game_rules.pdf",
+    "source_format": "pdf+json",
+    "source_sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d",
+    "sources": [
+      {
+        "id": "RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../../../inputs/games/bohnanza/game_rules.pdf",
+        "sha256": "11150c4cdc6aec22655f89a317ad4aa235f751a4e64baad967ce16995723731d"
+      },
+      {
+        "id": "COMPONENTS",
+        "role": "user_observation",
+        "path": "../../../../../../inputs/games/bohnanza/game_components.json",
+        "sha256": "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46"
+      }
+    ]
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+    "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v2.2"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {},
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        0.0
+      ],
+      "mean": 0.0,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.0
+      ],
+      "mean": 0.0,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.42,
+        0.49,
+        0.42
+      ],
+      "mean": 0.4433333333333333,
+      "sample_sd": 0.04041451884327381,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "bohnanza_src_json_clean_diagnostic_1_ag": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 4,
+    "interpretation_agreement": {
+      "Variant 2: Die Ackerbohnen (für 4–5 Spieler)": {
+        "Game.initial_state instantiates four players because the required API has no player-count argument": 1
+      },
+      "Variant 2 reference to Variant 1; Variant 1 text is not supplied": {
+        "inherit the visible rule: five-card hands and one clockwise draw per player; otherwise use the supplied Grundspiel rules": 1
+      },
+      "Regeln für den Bohnenhandel / examples 2–4": {
+        "trade actions represent completed consensual exchanges or gifts atomically": 1
+      },
+      "Ein leerer Nachziehstapel / Spielende / page 10 variant end rule": {
+        "finish the variant's clockwise draw round, then end and harvest fields": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Variant 2: Die Ackerbohnen (für 4–5 Spieler)",
+        "source_basis": "missing",
+        "alternatives": [
+          "instantiate four players",
+          "instantiate five players"
+        ],
+        "selected": "Game.initial_state instantiates four players because the required API has no player-count argument",
+        "affected_mechanics": [
+          "initial_state",
+          "terminal_results"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Variant 2 reference to Variant 1; Variant 1 text is not supplied",
+        "source_basis": "missing",
+        "alternatives": [
+          "inherit only the visible page-10 draw/end rules",
+          "inherit additional unavailable Variant-1 rules"
+        ],
+        "selected": "inherit the visible rule: five-card hands and one clockwise draw per player; otherwise use the supplied Grundspiel rules",
+        "affected_mechanics": [
+          "initial_state",
+          "legal_actions",
+          "state_transition",
+          "terminal_results"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Regeln für den Bohnenhandel / examples 2–4",
+        "source_basis": "missing",
+        "alternatives": [
+          "explicit proposal and consent subturns",
+          "represent only completed mutually agreed trades"
+        ],
+        "selected": "trade actions represent completed consensual exchanges or gifts atomically",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-04",
+        "material": true,
+        "source_location": "Ein leerer Nachziehstapel / Spielende / page 10 variant end rule",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "end immediately on the third emptying",
+          "finish the current phase/turn before ending"
+        ],
+        "selected": "finish the variant's clockwise draw round, then end and harvest fields",
+        "affected_mechanics": [
+          "state_transition",
+          "terminal_results"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        838.5160000000001
+      ],
+      "mean": 838.5160000000001,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        447890.0
+      ],
+      "mean": 447890.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        320512.0
+      ],
+      "mean": 320512.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        26745.0
+      ],
+      "mean": 26745.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        12721.0
+      ],
+      "mean": 12721.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        1.599496
+      ],
+      "mean": 1.599496,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        198.0
+      ],
+      "mean": 198.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      1.599496
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Post-hoc canonical diagnostic; not part of the preregistered four-arm aggregate.",
+  "runs": [
+    {
+      "stem": "bohnanza_src_json_clean_diagnostic_1_ag",
+      "protocol": "agentic-v2.2",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "bohnanza-source-experiment-2026-07-18",
+        "suite_sha256": "b4379824582b08eba24b3262ab593d01fdb078dbd6a483963ac36bdf2e1f7265",
+        "adapter_sha256": "e480e6ffa83602745c860ab7f821ddf1996c82af0dc7397ec32d3c36bdcc66bb",
+        "counts": {
+          "PASS": 0,
+          "FAIL": 2,
+          "CRASH": 35,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 0,
+          "evaluated": 28,
+          "score": 0.0
+        },
+        "human_decision": {
+          "passed": 0,
+          "evaluated": 9,
+          "score": 0.0
+        },
+        "results": [
+          {
+            "id": "BOHN-R01-exact-acker-inventory",
+            "status": "FAIL",
+            "message": "total_cards: expected 129, got 133",
+            "basis": "clear",
+            "fact_ids": [
+              "INV-01",
+              "INV-02",
+              "INV-03",
+              "INV-04",
+              "INV-05"
+            ]
+          },
+          {
+            "id": "BOHN-R02-front-card-mandatory",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02",
+              "HAND-03",
+              "P1-01",
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R03-second-plant-optional-no-third",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-02"
+            ]
+          },
+          {
+            "id": "BOHN-R04-empty-hand-skips-phase-one",
+            "status": "FAIL",
+            "message": "no legal action name contains any of ['aufdecken', 'reveal', 'phase 2']; got []",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-04",
+              "P2-01"
+            ]
+          },
+          {
+            "id": "BOHN-R05-one-type-per-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "FIELD-01"
+            ]
+          },
+          {
+            "id": "BOHN-R06-trading-authority",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-05"
+            ]
+          },
+          {
+            "id": "BOHN-R07-received-cards-bypass-hand",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-05",
+              "TRADE-06",
+              "P3-01"
+            ]
+          },
+          {
+            "id": "BOHN-R08-rejected-gift-no-transfer",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-07"
+            ]
+          },
+          {
+            "id": "BOHN-R09-variant-draw-one-each-clockwise",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "P4-01",
+              "HAND-02"
+            ]
+          },
+          {
+            "id": "BOHN-R10-singleton-protection",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R11-singleton-allowed-when-all-single",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R12-normal-harvest-clears-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R13-one-acker-zero-harvest",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-04",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R14-two-acker-unlocks-third-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "ACKER-01"
+            ]
+          },
+          {
+            "id": "BOHN-R15-two-acker-existing-third-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-02"
+            ]
+          },
+          {
+            "id": "BOHN-R16-three-acker-three-coins-no-field",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ACKER-03"
+            ]
+          },
+          {
+            "id": "BOHN-R17-third-empty-during-reveal-finishes-phase-three",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "END-01",
+              "END-02",
+              "END-03"
+            ]
+          },
+          {
+            "id": "BOHN-R18-third-empty-during-phase-four-stops-immediately",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-01",
+              "END-05"
+            ]
+          },
+          {
+            "id": "BOHN-R19-final-score-ignores-hand",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "END-03",
+              "END-06"
+            ]
+          },
+          {
+            "id": "BOHN-R20-clockwise-tiebreak",
+            "status": "CRASH",
+            "message": "NotImplementedError: state has no winner",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-03",
+              "TURN-01",
+              "END-04"
+            ]
+          },
+          {
+            "id": "BOHN-R21-nonterminal-empty-refills-and-continues-reveal",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P2-01",
+              "DECK-01"
+            ]
+          },
+          {
+            "id": "BOHN-R22-harvest-between-mandatory-plantings",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "P3-01",
+              "P3-02",
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R23-nonactive-player-can-harvest",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HARV-01"
+            ]
+          },
+          {
+            "id": "BOHN-R24-opponent-hands-remain-private",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "HAND-03"
+            ]
+          },
+          {
+            "id": "BOHN-R25-five-player-setup",
+            "status": "CRASH",
+            "message": "TypeError: Game() takes no arguments",
+            "basis": "clear",
+            "fact_ids": [
+              "SET-01",
+              "SET-02",
+              "HAND-01",
+              "INV-04"
+            ]
+          },
+          {
+            "id": "BOHN-R26-unequal-trade-from-arbitrary-hand-positions",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "TRADE-01",
+              "TRADE-02",
+              "TRADE-04",
+              "TRADE-05",
+              "TRADE-06"
+            ]
+          },
+          {
+            "id": "BOHN-R27-forced-harvest-before-mandatory-plant",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "P1-01",
+              "P1-03",
+              "HARV-02",
+              "HARV-03"
+            ]
+          },
+          {
+            "id": "BOHN-R28-blau-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-01",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R29-feuer-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-02",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R30-sau-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-03",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R31-brech-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-04",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R32-soja-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-05",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R33-augen-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-06",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R34-rot-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-07",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R35-garten-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-08",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R36-weinbrand-coin-curve",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "GOLD-09",
+              "HARV-02"
+            ]
+          },
+          {
+            "id": "BOHN-R37-hand-sorting-is-forbidden",
+            "status": "CRASH",
+            "message": "TypeError: unhashable type: 'list'",
+            "basis": "clear",
+            "fact_ids": [
+              "HAND-02"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.42,
+        0.49,
+        0.42
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Variant 2: Die Ackerbohnen (für 4–5 Spieler)",
+          "source_basis": "missing",
+          "alternatives": [
+            "instantiate four players",
+            "instantiate five players"
+          ],
+          "selected": "Game.initial_state instantiates four players because the required API has no player-count argument",
+          "affected_mechanics": [
+            "initial_state",
+            "terminal_results"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Variant 2 reference to Variant 1; Variant 1 text is not supplied",
+          "source_basis": "missing",
+          "alternatives": [
+            "inherit only the visible page-10 draw/end rules",
+            "inherit additional unavailable Variant-1 rules"
+          ],
+          "selected": "inherit the visible rule: five-card hands and one clockwise draw per player; otherwise use the supplied Grundspiel rules",
+          "affected_mechanics": [
+            "initial_state",
+            "legal_actions",
+            "state_transition",
+            "terminal_results"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Regeln für den Bohnenhandel / examples 2–4",
+          "source_basis": "missing",
+          "alternatives": [
+            "explicit proposal and consent subturns",
+            "represent only completed mutually agreed trades"
+          ],
+          "selected": "trade actions represent completed consensual exchanges or gifts atomically",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-04",
+          "material": true,
+          "source_location": "Ein leerer Nachziehstapel / Spielende / page 10 variant end rule",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "end immediately on the third emptying",
+            "finish the current phase/turn before ending"
+          ],
+          "selected": "finish the variant's clockwise draw round, then end and harvest fields",
+          "affected_mechanics": [
+            "state_transition",
+            "terminal_results"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 838.5160000000001,
+        "input_tokens": 447890,
+        "cached_input_tokens": 320512,
+        "output_tokens": 26745,
+        "reasoning_tokens": 12721,
+        "money": null,
+        "api_equivalent_usd": 1.599496,
+        "code_lines": 198
+      },
+      "hashes": {
+        "agentic_evidence": "6c6ef2d991efb32d616edfa81c48d09227dd2111a57d15a511de2578ee8031e4",
+        "checks": "d0e4212bd3edc00488485116f46d69f53014b3e24beb1f738ef325dc15bac5f8",
+        "scenarios": "a434ec8925576770dfcb0c70e7e2de862b982f7559e8fd863313c90dfebd87c0",
+        "usage": "f7ec8457b1a573f0b01fc16e5c27d41a0230d5238365774d8a947125d8813038",
+        "code": "2c01256efe55f525290be12b9f35e56ab9b9c10f7b0c5e22310031baa8b63540"
+      }
+    }
+  ]
+}

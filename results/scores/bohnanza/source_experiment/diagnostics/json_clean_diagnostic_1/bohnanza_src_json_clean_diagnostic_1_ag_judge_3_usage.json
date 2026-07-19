@@ -1,0 +1,59 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "read-only",
+  "started_at": "2026-07-19T08:14:43.867634+00:00",
+  "ended_at": "2026-07-19T08:18:27.322569+00:00",
+  "elapsed_seconds": 223.455,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 46,
+      "reset_at": 1784968736,
+      "reset_after_seconds": 519853,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 46,
+      "reset_at": 1784968735,
+      "reset_after_seconds": 519628,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 63985,
+    "output_tokens": 6542,
+    "reasoning_output_tokens": 4131,
+    "cached_input_tokens": 34304
+  },
+  "provider_usage_records": [
+    {
+      "line": 13,
+      "path": "$.usage",
+      "input_tokens": 63985,
+      "cached_input_tokens": 34304,
+      "output_tokens": 6542,
+      "reasoning_output_tokens": 4131
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_clean_diagnostic_1_ag_judge_3_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/outputs/bohnanza_src_json_clean_diagnostic_1_ag_judge_3.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-01.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-02.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-03.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-04.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-05.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-06.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-07.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-08.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-09.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-10.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-GN7Jsa/boardbench_judge_packet__wfx9aa3/game_rules_pages/page-11.png"
+  ],
+  "stderr": ""
+}
