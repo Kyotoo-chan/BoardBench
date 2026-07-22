@@ -1,36 +1,22 @@
-# Bohnanza Base 2023 preflight
+# Bohnanza Base 2023 final preflight
 
-Status: **SUPERSEDED after rejected attempt 1**
+Status: **PASSED**
 
-No model call or scored run for this edition existed when this report was written.
-
-## Frozen source and scope
+## Frozen condition
 
 - Publisher PDF only: `inputs/games/bohnanza_base_2023/game_rules.pdf`
 - SHA-256: `e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655`
-- Exactly 104 cards and eight bean types; no Acker-, Weinbrand-, Kaffee-, or Kakaobohnen and no component appendix.
-- One generation (`gpt-5.6-sol`, low thinking), then one neutral Judge (`gpt-5.6-sol`, medium thinking).
-- All method hashes and settings are frozen in `inputs/games/bohnanza_base_2023/experiment_manifest.json`.
+- 104 cards, eight bean types, no component appendix
+- One accepted generation (`gpt-5.6-sol`, low) and one Judge (`gpt-5.6-sol`, medium)
 
-## Approved test scope
+## Verified before the accepted run
 
-The 31 cited scenarios cover inventory/setup, immutable hand order, all four phases, field compatibility, forced harvesting, active-only trade, arbitrary hand positions, unequal exchange, consent/gifts, received-card staging, harvesting/protection, all eight printed payout curves, recycling, third depletion, final harvest, ignored hands, scoring, and tie-breaking.
+- The packet contained the exact frozen implementation prompt, PDF, representation contract/profile, and two evaluator-neutral self-checks.
+- It contained no rulefacts, scenarios, adapter, component JSON, previous implementation, or review.
+- The full 14-method public/canonical API gate passed the infrastructure probe.
+- The complete rare-state fixture gate passed for every phase and 3/4/5-player construction.
+- All 31 scenario fixtures were representable through the canonical contract with zero crash/untestable outcomes in the infrastructure probe.
+- The manifest and every infrastructure/source hash matched.
+- `outputs/` remained clean; artifacts were written under this result directory.
 
-Approved human decisions are recorded in `rulefacts.md`: immediate third depletion outside phase two, hidden opponent hand identities in player observations, and off-turn harvests at stable decision boundaries.
-
-## Zero-token validation
-
-- Frozen manifest and packet construction pass.
-- The generation packet contains only the assigned PDF and representation-only contract/profile/self-check files; no rulefacts, scenarios, adapter, previous implementation, component JSON, or reviews.
-- Reachable-state probe: `300` states and `5400` actions passed canonical JSON/roundtrip checks.
-
-## Discovered gate gap
-
-The first generation omitted the required public `render` method because this preflight checked only canonical methods. Technical Check 04 rejected that implementation before judging. The attempt is preserved under `aborted_gate_gap_attempt_1/`. `agentic_self_check.py` now checks the full public API; a new preflight is recorded separately.
-- Complete-fixture probe passes every profile phase, pending consent, zone distribution, and 3/4/5-player construction.
-- All 31 evaluator scenarios execute through canonical state/action data with `0 CRASH` and `0 UNTESTABLE` using the infrastructure probe.
-- 33 focused regression tests pass.
-- Results write directly under `results/scores/bohnanza_base_2023/base_pdf_1/`; `outputs/` remains clean.
-- A neutral gate failure receives at most two repairs; persistent failure stops before judging.
-
-The earlier four contract-v2 generations are separately retained as diagnostic-only evidence under `results/scores/bohnanza/aborted_contract_v2_prebase/`. They will not be combined with this run.
+Rejected setup attempts and the obsolete pre-base mini-study are intentionally absent from the current tree. Their historical commits remain in Git but they are not study results.

@@ -2,7 +2,7 @@
 
 ## Status
 
-One accepted publisher-PDF-only generation and one neutral Judge completed. Two earlier generations were rejected before judging because preflight infrastructure was incomplete; they remain separately labelled and are not scored.
+One accepted publisher-PDF-only generation and one neutral Judge completed. Two earlier setup attempts were rejected before judging because preflight infrastructure was incomplete; they are not study runs and are retained only in Git history.
 
 Accepted implementation: `runs/base_pdf/bohnanza_base_2023_codex_ag.py`
 
@@ -64,9 +64,7 @@ The Judge therefore identifies serious defects that the corrected 31-scenario su
 
 1. The simpler complete rulebook removed the old source-inventory confusion: the accepted implementation and evaluator agree on 104 cards, eight bean types, and 3/4/5-player field counts.
 2. Canonical Contract-v2 removed implementation-representation crashes once the evaluator's player-count assumption was corrected.
-3. Preflight itself failed twice before the accepted run:
-   - attempt 1 exposed that the neutral gate omitted `render`;
-   - attempt 2 exposed that the runner supplied the wrong task prompt.
+3. Historical preflight setup failed twice before the accepted run: the neutral gate initially omitted `render`, then the runner supplied the wrong task prompt. Both were workflow failures, not scored model results.
 4. The preregistered adapter still contained six evaluator assumptions/errors, despite its infrastructure probe reporting all fixtures representable.
 5. The independent Judge found temporal and action-space gaps absent from the scenario suite. Uniform representation solves test access, not scenario completeness.
 
