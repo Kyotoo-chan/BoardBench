@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "study": "bohnanza-base-2023-original-vs-clarified",
+  "status": "frozen-before-clarified-generation",
+  "runs": [
+    "clarified"
+  ],
+  "comparison": {
+    "original_run": "results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py",
+    "rubric": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
+    "original_frozen_baseline": {
+      "PASS": 31,
+      "FAIL": 6,
+      "CRASH": 0,
+      "UNREACHED": 0,
+      "UNTESTABLE": 0
+    }
+  },
+  "generation": {
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "protocol": "agentic-v3.1",
+    "runs": 1,
+    "sequential": true,
+    "max_neutral_repairs": 2
+  },
+  "judging": {
+    "model": "gpt-5.6-sol",
+    "thinking": "medium",
+    "judges_per_run": 1,
+    "sequential": true
+  },
+  "evaluation": {
+    "seed": 1,
+    "suite": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
+    "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+    "apply_identically_to_original_and_clarified": true
+  },
+  "conditions": {
+    "clarified": {
+      "sources": [
+        {
+          "path": "game_rules.pdf",
+          "packet_name": "game_rules.pdf",
+          "role": "publisher_rulebook",
+          "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+        },
+        {
+          "path": "clarifications.json",
+          "packet_name": "clarifications.json",
+          "role": "experimenter_clarification",
+          "sha256": "fc6b50c3bc639ecbde7685ff40aee6b8399f2e04ceaca2352bfc57063bc94ad7"
+        }
+      ]
+    }
+  },
+  "infrastructure": {
+    "implementation_prompt": {
+      "path": "inputs/prompts/rulebook_to_python.txt",
+      "sha256": "0efa321c6feb49f3779629bd458640873e4fb97e0412ce42affe62f27c22941f"
+    },
+    "environment_contract": {
+      "path": "inputs/prompts/environment_contract.md",
+      "sha256": "eba8a3aa67b2770d46a3da5a008e32314dd80d8b35b56c7c50dcb3a9ff280570"
+    },
+    "environment_profile": {
+      "path": "inputs/games/bohnanza_base_2023_clarified/environment_profile.json",
+      "sha256": "6b153234d9a1d4106cbcfd4ff57dfe4425ba21aa5bf23514af307654fd96ec46"
+    },
+    "reachable_self_check": {
+      "path": "generation/agentic_self_check.py",
+      "sha256": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1"
+    },
+    "fixture_self_check": {
+      "path": "generation/profile_fixture_self_check.py",
+      "sha256": "5abcdf738a08cb4ea5c4edd2e9574b8dedb445f4de69eb7f313e125c9bbc1302"
+    },
+    "rulefacts": {
+      "path": "inputs/games/bohnanza_base_2023_clarified/rulefacts.md",
+      "sha256": "236dddbd6abe36e4e7fd7a4a3cf18d7f6d1eea4077632668858426a721be64d1"
+    },
+    "comparison_suite": {
+      "path": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
+      "sha256": "0b10c61c68fb24a54ad765efc060e11ba8b3b5eec82fa05425fe27b7e07bcaa4"
+    },
+    "comparison_adapter": {
+      "path": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+      "sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios.py",
+      "sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    "required_api_check": {
+      "path": "checks/04_required_api.py",
+      "sha256": "ff7324f12ca63f91a9f94f894e271da77cac58ed5ddd6cde4ad2daddf0be9bd3"
+    },
+    "judge_prompt": {
+      "path": "inputs/prompts/llm_judge_review.md",
+      "sha256": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2"
+    },
+    "study_runner": {
+      "path": "generation/run_bohnanza_base_2023_clarified.py",
+      "sha256": "f95d2a8bffa13ae76ff46d621bbd5e199d9dc9f90e3a6e512bc6089395bb9fb4"
+    },
+    "contract_probe": {
+      "path": "checks/fixtures/bohnanza_base_2023_contract_probe.py",
+      "sha256": "9bc3bc6fc25700ab86c9ee48a2b2049db95c411e0bb4f47d469294d2744e242f"
+    }
+  }
+}

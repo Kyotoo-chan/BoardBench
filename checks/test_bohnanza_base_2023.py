@@ -16,6 +16,8 @@ ADAPTER = ROOT / "checks/scenario_adapters/bohnanza_base_2023.py"
 PROBE = ROOT / "checks/fixtures/bohnanza_base_2023_contract_probe.py"
 POSTHOC_SUITE = ROOT / "checks/scenarios/bohnanza_base_2023_posthoc_v2.json"
 POSTHOC_ADAPTER = ROOT / "checks/scenario_adapters/bohnanza_base_2023_posthoc_v2.py"
+COMPARISON_SUITE = ROOT / "checks/scenarios/bohnanza_base_2023_comparison_v3.json"
+ORIGINAL_IMPLEMENTATION = ROOT / "results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py"
 
 
 class BohnanzaBase2023Tests(unittest.TestCase):
@@ -43,10 +45,17 @@ class BohnanzaBase2023Tests(unittest.TestCase):
             self.assertNotIn(forbidden, source)
 
     def test_every_scenario_is_representable(self):
-        for suite in (SUITE, POSTHOC_SUITE):
+        for suite in (SUITE, POSTHOC_SUITE, COMPARISON_SUITE):
             result = run_suite(PROBE, suite)
             self.assertEqual(result["counts"]["CRASH"], 0)
             self.assertEqual(result["counts"]["UNTESTABLE"], 0)
+
+    def test_expanded_comparison_baseline_is_frozen(self):
+        suite = json.loads(COMPARISON_SUITE.read_text(encoding="utf-8"))
+        self.assertEqual(len(suite["scenarios"]), 37)
+        self.assertIn("comparison-v3", suite["rubric_version"])
+        result = run_suite(ORIGINAL_IMPLEMENTATION, COMPARISON_SUITE)
+        self.assertEqual(result["counts"], {"PASS": 31, "FAIL": 6, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0})
 
     def test_posthoc_corrections_are_separately_labelled(self):
         suite = json.loads(POSTHOC_SUITE.read_text(encoding="utf-8"))

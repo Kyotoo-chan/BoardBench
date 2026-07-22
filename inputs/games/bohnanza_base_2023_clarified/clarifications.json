@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "condition": "bohnanza-base-2023-clarified",
+  "role": "experimenter_clarification",
+  "authorship": "User-approved clarification intervention; not publisher text",
+  "approved_at": "2026-07-19",
+  "clarifications": [
+    {
+      "id": "CLAR-END-01",
+      "title": "Timing of the third draw-pile depletion",
+      "source_basis": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird."
+      },
+      "text": "Die Leerung tritt in dem Moment ein, in dem die letzte vorhandene Karte gezogen wird – nicht erst beim nächsten Zugversuch. Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte. Nur in Phase 2 werden Phase 2 und 3 wie gedruckt beendet; Phase 4 beginnt danach nicht."
+    },
+    {
+      "id": "CLAR-PHASE3-01",
+      "title": "Phase 3 applies to every affected player",
+      "source_basis": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 2,
+        "quote": "Alle, die Karten quer neben ihren Feldern liegen haben, müssen diese nun anbauen. ... Jede Person darf selbst entscheiden, in welcher Reihenfolge sie die neuen Bohnenkarten anbaut."
+      },
+      "text": "Jede Person mit erhaltenen Karten muss in Phase 3 eine eigene Pflanzgelegenheit erhalten, auch wenn sie nicht die aktive Person ist. Die betroffene Person darf bei jeder Entscheidung irgendeine ihrer noch nicht gepflanzten neuen Karten als nächste wählen. Die aktive Person pflanzt zusätzlich alle nicht gehandelten aufgedeckten Karten. Phase 3 endet erst, wenn alle betroffenen Personen sämtliche dieser Karten gepflanzt haben."
+    },
+    {
+      "id": "CLAR-TRADE-01",
+      "title": "Trade quantities have no 2-for-1 cap",
+      "source_basis": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 2,
+        "quote": "Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln, z. B. zwei blaue Bohnen gegen eine Gartenbohne."
+      },
+      "text": "Das gedruckte 2-gegen-1-Beispiel ist keine Obergrenze. Jede endliche Anzahl zulässiger eigener Hand- oder Aufdeckkarten darf gegen jede endliche Anzahl zulässiger Handkarten der anderen beteiligten Person angeboten werden, begrenzt nur durch vorhandene Karten und beiderseitige Zustimmung. Damit müssen zum Beispiel 1-gegen-2 und 3-gegen-1 darstellbar sein. Erhaltene und bereits angebaute Karten bleiben wie gedruckt vom Handel ausgeschlossen."
+    },
+    {
+      "id": "CLAR-PAY-01",
+      "title": "Beanometers transcribed as text",
+      "source_basis": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 1,
+        "quote": "Jede Bohnensorte hat ein eigenes Bohnometer."
+      },
+      "text": "Mindestgrößen für 1, 2, 3 und 4 Taler: Gartenbohne – / 2 / 3 / –; Rote Bohne 2 / 3 / 4 / 5; Augenbohne 2 / 4 / 5 / 6; Sojabohne 2 / 4 / 6 / 7; Brechbohne 3 / 5 / 6 / 7; Saubohne 3 / 5 / 7 / 8; Feuerbohne 3 / 6 / 8 / 9; Blaue Bohne 4 / 6 / 8 / 10. Ein Strich bedeutet, dass diese Auszahlungsstufe nicht existiert. Folglich zahlen zwei Gartenbohnen zwei Taler und drei oder mehr Gartenbohnen drei Taler.",
+      "thresholds": {
+        "gartenbohne": {"1": null, "2": 2, "3": 3, "4": null},
+        "rote_bohne": {"1": 2, "2": 3, "3": 4, "4": 5},
+        "augenbohne": {"1": 2, "2": 4, "3": 5, "4": 6},
+        "sojabohne": {"1": 2, "2": 4, "3": 6, "4": 7},
+        "brechbohne": {"1": 3, "2": 5, "3": 6, "4": 7},
+        "saubohne": {"1": 3, "2": 5, "3": 7, "4": 8},
+        "feuerbohne": {"1": 3, "2": 6, "3": 8, "4": 9},
+        "blaue_bohne": {"1": 4, "2": 6, "3": 8, "4": 10}
+      }
+    }
+  ]
+}
