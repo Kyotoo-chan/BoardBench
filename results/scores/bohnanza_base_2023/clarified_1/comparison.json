@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "study": "bohnanza-base-2023-original-vs-clarified",
+  "rubric_version": "bohnanza-base-2023-comparison-v3-2026-07-19",
+  "conditions": {
+    "original_pdf_only": {
+      "technical": {"passed": 4, "total": 4},
+      "rollouts": {"passed": 100, "total": 100, "seconds": 37.43},
+      "action_language": {"passed": true, "roundtrips": 666338, "seconds": 34.73},
+      "scenarios": {"PASS": 31, "FAIL": 6, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
+      "judge": {"n": 1, "score": 0.52, "confidence": "high", "critical": 1, "major": 3, "minor": 0}
+    },
+    "pdf_plus_clarification": {
+      "technical": {"passed": 4, "total": 4},
+      "rollouts": {"passed": 100, "total": 100, "seconds": 94.07},
+      "action_language": {"passed": true, "roundtrips": 2045295, "seconds": 89.74},
+      "scenarios": {"PASS": 37, "FAIL": 0, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
+      "judge": {"n": 1, "score": 0.40, "confidence": "high", "critical": 2, "major": 1, "minor": 0}
+    }
+  },
+  "targeted_expectations": {
+    "count": 6,
+    "original_passed": 0,
+    "clarified_passed": 6
+  },
+  "interpretation_limits": [
+    "Evidence groups are not combined into a correctness score.",
+    "One Judge per condition is insufficient for a stable Judge comparison.",
+    "Both implementations omit mandatory final-field harvest scoring, a shared defect absent from the frozen rubric.",
+    "The clarified atomic trade representation passes fixed checks but has exponential scalability risk."
+  ]
+}

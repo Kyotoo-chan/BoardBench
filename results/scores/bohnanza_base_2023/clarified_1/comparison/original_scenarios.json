@@ -1,0 +1,438 @@
+{
+  "version": 3,
+  "rubric_version": "bohnanza-base-2023-comparison-v3-2026-07-19",
+  "suite": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
+  "suite_sha256": "0b10c61c68fb24a54ad765efc060e11ba8b3b5eec82fa05425fe27b7e07bcaa4",
+  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+  "adapter_sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd",
+  "runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
+  "code": "results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py",
+  "code_sha256": "5f7b4379caa4b3aeac10d13bcf51d54e4f4559a7f416a8a26e25dd2f1572ef5d",
+  "counts": {
+    "PASS": 31,
+    "FAIL": 6,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 37,
+  "total": 37,
+  "score": 0.8378378378378378,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 25,
+      "evaluated": 25,
+      "score": 1.0
+    },
+    "human_decision": {
+      "passed": 6,
+      "evaluated": 12,
+      "score": 0.5
+    }
+  },
+  "results": [
+    {
+      "id": "BASE-R01-exact-base-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-INV-01",
+        "BASE-SETUP-01",
+        "BASE-SETUP-03"
+      ]
+    },
+    {
+      "id": "BASE-R02-front-card-mandatory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PLANT-02"
+      ]
+    },
+    {
+      "id": "BASE-R03-second-plant-optional-no-third",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PLANT-02"
+      ]
+    },
+    {
+      "id": "BASE-R04-empty-hand-skips-phase-one",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PLANT-02"
+      ]
+    },
+    {
+      "id": "BASE-R05-one-type-per-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PLANT-01"
+      ]
+    },
+    {
+      "id": "BASE-R06-trading-authority",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-TRADE-02",
+        "BASE-TRADE-03",
+        "BASE-TRADE-05",
+        "BASE-TRADE-06",
+        "BASE-TRADE-07"
+      ]
+    },
+    {
+      "id": "BASE-R07-received-cards-bypass-hand",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-TRADE-02",
+        "BASE-TRADE-03",
+        "BASE-TRADE-05",
+        "BASE-TRADE-06",
+        "BASE-TRADE-07"
+      ]
+    },
+    {
+      "id": "BASE-R08-rejected-gift-no-transfer",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-TRADE-02",
+        "BASE-TRADE-03",
+        "BASE-TRADE-05",
+        "BASE-TRADE-06",
+        "BASE-TRADE-07"
+      ]
+    },
+    {
+      "id": "BASE-R10-singleton-protection",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-HARVEST-01",
+        "BASE-HARVEST-02",
+        "BASE-HARVEST-03"
+      ]
+    },
+    {
+      "id": "BASE-R11-singleton-allowed-when-all-single",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-HARVEST-01",
+        "BASE-HARVEST-02",
+        "BASE-HARVEST-03"
+      ]
+    },
+    {
+      "id": "BASE-R12-normal-harvest-clears-field",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-HARVEST-01",
+        "BASE-HARVEST-02",
+        "BASE-HARVEST-03"
+      ]
+    },
+    {
+      "id": "BASE-R17-third-empty-during-reveal-finishes-phase-three",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-END-02",
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "BASE-R18-third-empty-during-phase-four-stops-immediately",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-END-02",
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02",
+        "D-BASE-END"
+      ]
+    },
+    {
+      "id": "BASE-R19-final-score-ignores-hand",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-END-02",
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "BASE-R20-clockwise-tiebreak",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-END-02",
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "BASE-R21-nonterminal-empty-refills-and-continues-reveal",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-END-02",
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "BASE-R22-harvest-between-mandatory-plantings",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-HARVEST-01",
+        "BASE-HARVEST-02",
+        "BASE-HARVEST-03"
+      ]
+    },
+    {
+      "id": "BASE-R23-nonactive-player-can-harvest",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-HARVEST-01",
+        "BASE-HARVEST-02",
+        "BASE-HARVEST-03"
+      ]
+    },
+    {
+      "id": "BASE-R25-five-player-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-INV-01",
+        "BASE-SETUP-01",
+        "BASE-SETUP-03"
+      ]
+    },
+    {
+      "id": "BASE-R26-unequal-trade-from-arbitrary-hand-positions",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-TRADE-02",
+        "BASE-TRADE-03",
+        "BASE-TRADE-05",
+        "BASE-TRADE-06",
+        "BASE-TRADE-07"
+      ]
+    },
+    {
+      "id": "BASE-R27-forced-harvest-before-mandatory-plant",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PLANT-02"
+      ]
+    },
+    {
+      "id": "BASE-R28-blau-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R29-feuer-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R30-sau-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R31-brech-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R32-soja-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R33-augen-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R34-rot-coin-curve",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02"
+      ]
+    },
+    {
+      "id": "BASE-R35-garten-coin-curve",
+      "status": "FAIL",
+      "message": "harvest_curve[garten][2]: expected 2, got 1",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-PAY-01",
+        "BASE-HARVEST-02",
+        "CLAR-PAY-01"
+      ]
+    },
+    {
+      "id": "BASE-R37-hand-sorting-is-forbidden",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-HAND-01"
+      ]
+    },
+    {
+      "id": "BASE-R38-three-player-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-INV-01",
+        "BASE-SETUP-01",
+        "BASE-SETUP-03"
+      ]
+    },
+    {
+      "id": "CLAR-R39-third-empty-on-exact-third-phase4-card",
+      "status": "FAIL",
+      "message": "step 1: terminal: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-02",
+        "D-BASE-END",
+        "CLAR-END-01"
+      ]
+    },
+    {
+      "id": "CLAR-R40-third-empty-on-exact-two-card-reveal",
+      "status": "FAIL",
+      "message": "step 1: depletions: expected 3, got 2",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-03",
+        "CLAR-END-01"
+      ]
+    },
+    {
+      "id": "CLAR-R41-first-empty-recycles-on-last-card",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "CLAR-END-01"
+      ]
+    },
+    {
+      "id": "CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice",
+      "status": "FAIL",
+      "message": "step 1: current_player: expected 1, got 0",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-PHASE3-01",
+        "CLAR-PHASE3-01"
+      ]
+    },
+    {
+      "id": "CLAR-R43-one-for-two-trade-is-legal",
+      "status": "FAIL",
+      "message": "trade_bundle_legal: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-TRADE-03",
+        "CLAR-TRADE-01"
+      ]
+    },
+    {
+      "id": "CLAR-R44-three-for-one-trade-is-legal",
+      "status": "FAIL",
+      "message": "trade_bundle_legal: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-TRADE-03",
+        "CLAR-TRADE-01"
+      ]
+    }
+  ]
+}

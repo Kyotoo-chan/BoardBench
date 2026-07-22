@@ -1,0 +1,65 @@
+=== TECHNICAL 01-04 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_clarified_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --check 01_result_file --check 02_python_syntax --check 03_startable_game --check 04_required_api
+exit_code=0
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api                    9/9 score=1.000    0.01s
+---- summary                            4/4 score=1.000    0.03s
+
+
+=== ROBUSTNESS 05 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_clarified_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --rollouts 100 --max-steps 1000 --seed 1 --check 05_random_rollouts
+exit_code=0
+OK   05_random_rollouts             100/100 score=1.000   94.07s
+---- summary                            1/1 score=1.000   94.07s
+
+
+=== INTERFACE 06 ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_clarified_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --check 06_action_language
+exit_code=0
+OK   06_action_language     2045295/2045295 score=1.000   89.74s
+---- summary                            1/1 score=1.000   89.74s
+
+
+=== BASE CONTRACT-V2 SCENARIOS ===
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza_base_2023_comparison_v3.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag_scenarios.json
+exit_code=0
+PASS BASE-R01-exact-base-inventory
+PASS BASE-R02-front-card-mandatory
+PASS BASE-R03-second-plant-optional-no-third
+PASS BASE-R04-empty-hand-skips-phase-one
+PASS BASE-R05-one-type-per-field
+PASS BASE-R06-trading-authority
+PASS BASE-R07-received-cards-bypass-hand
+PASS BASE-R08-rejected-gift-no-transfer
+PASS BASE-R10-singleton-protection
+PASS BASE-R11-singleton-allowed-when-all-single
+PASS BASE-R12-normal-harvest-clears-field
+PASS BASE-R17-third-empty-during-reveal-finishes-phase-three
+PASS BASE-R18-third-empty-during-phase-four-stops-immediately
+PASS BASE-R19-final-score-ignores-hand
+PASS BASE-R20-clockwise-tiebreak
+PASS BASE-R21-nonterminal-empty-refills-and-continues-reveal
+PASS BASE-R22-harvest-between-mandatory-plantings
+PASS BASE-R23-nonactive-player-can-harvest
+PASS BASE-R25-five-player-setup
+PASS BASE-R26-unequal-trade-from-arbitrary-hand-positions
+PASS BASE-R27-forced-harvest-before-mandatory-plant
+PASS BASE-R28-blau-coin-curve
+PASS BASE-R29-feuer-coin-curve
+PASS BASE-R30-sau-coin-curve
+PASS BASE-R31-brech-coin-curve
+PASS BASE-R32-soja-coin-curve
+PASS BASE-R33-augen-coin-curve
+PASS BASE-R34-rot-coin-curve
+PASS BASE-R35-garten-coin-curve
+PASS BASE-R37-hand-sorting-is-forbidden
+PASS BASE-R38-three-player-setup
+PASS CLAR-R39-third-empty-on-exact-third-phase4-card
+PASS CLAR-R40-third-empty-on-exact-two-card-reveal
+PASS CLAR-R41-first-empty-recycles-on-last-card
+PASS CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice
+PASS CLAR-R43-one-for-two-trade-is-legal
+PASS CLAR-R44-three-for-one-trade-is-legal
+SCENARIOS PASS=37 FAIL=0 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=37/37 score=1.000 coverage=1.000
