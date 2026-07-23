@@ -1,0 +1,28 @@
+Catan agentic implementation checks
+
+Implementation gate (independent; boardbench Conda environment)
+PASS python -m py_compile implementation.py
+PASS python agentic_self_check.py
+     agentic-self-check OK states=300 actions=2959
+PASS python profile_fixture_self_check.py
+     catan-profile-fixture-self-check OK
+PASS assumptions.json schema (version 1; 2 material source gaps)
+PASS rule_coverage.md present and non-empty
+PASS isolation audit (no repository/evaluator paths in generation events)
+
+Technical gate (checks 01-04)
+OK   01_result_file                     1/1 score=1.000    0.01s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api                    9/9 score=1.000    0.02s
+---- summary                            4/4 score=1.000    0.05s
+
+Runtime robustness (check 05; 20 rollouts, max 500 steps, seed 1)
+OK   05_random_rollouts               20/20 score=1.000    7.45s
+---- summary                            1/1 score=1.000    7.45s
+
+Interface (check 06)
+OK   06_action_language       506842/506842 score=1.000   35.25s
+---- summary                            1/1 score=1.000   35.25s
+
+Rule-fidelity scenarios and independent judges were not run in this implementation phase.
