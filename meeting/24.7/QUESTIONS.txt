@@ -14,6 +14,13 @@ Meinung uzr Forschungsfrage:
 - Viele Games erklären zwar was zu tun ist mit ihren Karten aber erklären nicht ihre zusätzliches Spielzubehör
 - Daher gebe ich für diese eine extra Liste mit dem Zubehör hinen (bisher Bohnanza)
 
+Weiteres Vorgehen:
+- Wie stellen Sie sich den weiteren Verlauf vor: weitere Spiele und Läufe oder Schwerpunkt auf Auswertung und Schreiben?
+- Soll CATAN als Stressfall bleiben oder ebenfalls als Original-/Präzisierungsvergleich untersucht werden?
+- Erwarten Sie statistisch belastbare Aussagen oder reicht eine nachvollziehbare Fallstudie mit wenigen Spielen?
+- Welches Ergebnis wäre für Sie wissenschaftlich überzeugend? Wäre auch ein gemischter oder negativer Klärungseffekt ein gutes Ergebnis?
+
 LLM:
 - Neue Tests waren Mit GPT-5.6-Sol
 - Klappt gut. Eignes Abo??
+- Wie kann ich Qwen Modell per Uni Vpn ansprechen?
