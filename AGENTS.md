@@ -4,7 +4,7 @@
 
 BoardBench is a bachelor-thesis workflow inspired by PaperBench:
 
-1. start from one board-game rulebook, optionally with a clearly attributed component appendix,
+1. start from one publisher rule packet (one primary rulebook and, only when that rulebook explicitly requires it, one matching official companion such as an almanac), optionally with a clearly attributed component appendix,
 2. turn its rules and edge cases into explicit, cited expectations,
 3. let an LLM agent implement a Python game environment,
 4. evaluate technical quality and rule fidelity as separate evidence groups.
@@ -30,8 +30,8 @@ Project-local workflow skills:
 
 ## Minimal workflow
 
-1. User places one active rulebook at `inputs/game_rules.pdf` or `.txt` and may add one user-authored component inventory at `inputs/game_components.pdf`, `.txt`, or `.json`.
-2. `bbedge` archives and hashes each source separately, records its provenance and role, then rule facts, conflicts, and edge cases are discussed with the user.
+1. User places one active rulebook at `inputs/game_rules.pdf` or `.txt`; when that source explicitly delegates rules to a matching official companion, the user may add it as `inputs/game_almanac.pdf` or `.txt`; the user may also add one user-authored component inventory at `inputs/game_components.pdf`, `.txt`, or `.json`.
+2. `bbedge` archives and hashes each assigned source separately, verifies the companion’s edition match instead of mixing editions, records provenance and role, then rule facts, conflicts, and edge cases are discussed with the user.
 3. Approved facts live at `inputs/games/<slug>/rulefacts.md`; executable cases live at `checks/scenarios/<slug>.json`.
 4. `bbimpl` generates one agentic implementation in an isolated workspace that cannot see evaluator scenarios.
 5. `bbeval` reports technical, robustness, interface, scenario, and judge evidence separately.

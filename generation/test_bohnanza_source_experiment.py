@@ -21,7 +21,7 @@ class BohnanzaSourceExperimentTests(unittest.TestCase):
 
     def test_clean_component_json_is_internally_consistent(self):
         data = self.load(GAME_DIR / "game_components.json")
-        self.assertEqual((GAME_DIR / "game_components.json").read_bytes(), (ROOT / "bohnanza_bohnenwerte.json").read_bytes())
+        self.assertEqual(hashlib.sha256((GAME_DIR / "game_components.json").read_bytes()).hexdigest(), "52ff2e99097389173165badc8176b64c35b11c83b8c9d4f0ee854d61e6ee0f46")
         self.assertEqual(data["titel"], "Bohnanza – Bohnen und Erntewerte")
         self.assertEqual(sum(bean["anzahl_karten"] for bean in data["bohnen"]), 157)
         self.assertEqual(data["gesamtzahl_aufgelisteter_bohnenkarten"], 157)

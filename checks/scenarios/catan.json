@@ -1,0 +1,4166 @@
+{
+  "version": 3,
+  "rubric_version": "catan-2022-fixed4-v1-2026-07-23",
+  "game": "catan",
+  "adapter": "checks/scenario_adapters/catan.py",
+  "source_condition": "matching_2022_manual_almanac_fixed4_strict",
+  "sources": [
+    {
+      "source_id": "CATAN22-RULES",
+      "path": "inputs/games/catan/game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+    },
+    {
+      "source_id": "CATAN22-ALMANAC",
+      "path": "inputs/games/catan/game_almanac.pdf",
+      "role": "publisher_companion",
+      "sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc"
+    }
+  ],
+  "contract": "inputs/prompts/environment_contract.md",
+  "environment_profile": "inputs/games/catan/environment_profile.json",
+  "unscored_gaps": [
+    "CAT-GAP-SHORTAGE",
+    "CAT-GAP-RANDOM"
+  ],
+  "scenarios": [
+    {
+      "id": "CAT-R01-component-inventory",
+      "fact_ids": [
+        "CAT-INV-01",
+        "CAT-INV-02",
+        "CAT-INV-03",
+        "CAT-INV-04"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "19 Landfelder ... 6 Rahmenteile mit 9 Häfen ... 95 Rohstoffkarten (je 19) ... 25 Entwicklungskarten: Ritter (14), Fortschritt (6), Siegpunkte (5)."
+      },
+      "initial": {
+        "adapter": {
+          "inventory": {
+            "resources": {
+              "wood": 19,
+              "brick": 19,
+              "wool": 19,
+              "grain": 19,
+              "ore": 19
+            },
+            "development": {
+              "knight": 14,
+              "road_building": 2,
+              "year_of_plenty": 2,
+              "monopoly": 2,
+              "library": 1,
+              "marketplace": 1,
+              "city_hall": 1,
+              "chapel": 1,
+              "university": 1
+            },
+            "hex_count": 19,
+            "harbor_count": 9
+          },
+          "development_deck_size": 25
+        }
+      }
+    },
+    {
+      "id": "CAT-R02-fixed-beginner-board",
+      "fact_ids": [
+        "CAT-SETUP-01",
+        "CAT-SETUP-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 1,
+        "quote": "Startaufstellung für Einsteiger"
+      },
+      "initial": {
+        "adapter": {
+          "hex_layout": [
+            {
+              "id": "h00",
+              "terrain": "ore",
+              "number": 10
+            },
+            {
+              "id": "h01",
+              "terrain": "wool",
+              "number": 2
+            },
+            {
+              "id": "h02",
+              "terrain": "wood",
+              "number": 9
+            },
+            {
+              "id": "h03",
+              "terrain": "grain",
+              "number": 12
+            },
+            {
+              "id": "h04",
+              "terrain": "brick",
+              "number": 6
+            },
+            {
+              "id": "h05",
+              "terrain": "wool",
+              "number": 4
+            },
+            {
+              "id": "h06",
+              "terrain": "brick",
+              "number": 10
+            },
+            {
+              "id": "h07",
+              "terrain": "grain",
+              "number": 9
+            },
+            {
+              "id": "h08",
+              "terrain": "wood",
+              "number": 11
+            },
+            {
+              "id": "h09",
+              "terrain": "desert",
+              "number": null
+            },
+            {
+              "id": "h10",
+              "terrain": "wood",
+              "number": 3
+            },
+            {
+              "id": "h11",
+              "terrain": "ore",
+              "number": 8
+            },
+            {
+              "id": "h12",
+              "terrain": "wood",
+              "number": 8
+            },
+            {
+              "id": "h13",
+              "terrain": "ore",
+              "number": 3
+            },
+            {
+              "id": "h14",
+              "terrain": "grain",
+              "number": 4
+            },
+            {
+              "id": "h15",
+              "terrain": "wool",
+              "number": 5
+            },
+            {
+              "id": "h16",
+              "terrain": "brick",
+              "number": 5
+            },
+            {
+              "id": "h17",
+              "terrain": "grain",
+              "number": 6
+            },
+            {
+              "id": "h18",
+              "terrain": "wool",
+              "number": 11
+            }
+          ],
+          "harbor_sequence": [
+            {
+              "ratio": 2,
+              "resource": "grain"
+            },
+            {
+              "ratio": 2,
+              "resource": "wood"
+            },
+            {
+              "ratio": 3,
+              "resource": null
+            },
+            {
+              "ratio": 2,
+              "resource": "wool"
+            },
+            {
+              "ratio": 3,
+              "resource": null
+            },
+            {
+              "ratio": 3,
+              "resource": null
+            },
+            {
+              "ratio": 2,
+              "resource": "brick"
+            },
+            {
+              "ratio": 2,
+              "resource": "ore"
+            },
+            {
+              "ratio": 3,
+              "resource": null
+            }
+          ],
+          "robber_hex": "h09",
+          "buildings": {
+            "v08": {
+              "owner": 0,
+              "type": "settlement"
+            },
+            "v28": {
+              "owner": 0,
+              "type": "settlement"
+            },
+            "v39": {
+              "owner": 1,
+              "type": "settlement"
+            },
+            "v41": {
+              "owner": 1,
+              "type": "settlement"
+            },
+            "v14": {
+              "owner": 2,
+              "type": "settlement"
+            },
+            "v40": {
+              "owner": 2,
+              "type": "settlement"
+            },
+            "v17": {
+              "owner": 3,
+              "type": "settlement"
+            },
+            "v31": {
+              "owner": 3,
+              "type": "settlement"
+            }
+          },
+          "roads": {
+            "e_v08_v13": 0,
+            "e_v28_v34": 0,
+            "e_v39_v44": 1,
+            "e_v36_v41": 1,
+            "e_v09_v14": 2,
+            "e_v40_v45": 2,
+            "e_v17_v22": 3,
+            "e_v25_v31": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "CAT-R03-starting-resources-and-stock",
+      "fact_ids": [
+        "CAT-SETUP-03",
+        "CAT-INV-02",
+        "CAT-INV-04"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Zuletzt erhält jeder Spieler für die mit einem Buchstaben markierte Siedlung ... Für jedes Landfeld, das an diese Siedlung angrenzt, nimmt er sich eine entsprechende Rohstoffkarte."
+      },
+      "initial": {
+        "current_player": 0,
+        "adapter": {
+          "resources": {
+            "0": {
+              "wood": 2,
+              "brick": 0,
+              "wool": 0,
+              "grain": 1,
+              "ore": 0
+            },
+            "1": {
+              "wood": 1,
+              "brick": 1,
+              "wool": 0,
+              "grain": 0,
+              "ore": 1
+            },
+            "2": {
+              "wood": 0,
+              "brick": 0,
+              "wool": 0,
+              "grain": 2,
+              "ore": 1
+            },
+            "3": {
+              "wood": 1,
+              "brick": 0,
+              "wool": 1,
+              "grain": 0,
+              "ore": 1
+            }
+          },
+          "bank_resources": {
+            "wood": 15,
+            "brick": 18,
+            "wool": 18,
+            "grain": 16,
+            "ore": 16
+          },
+          "pieces": {
+            "0": {
+              "roads": 13,
+              "settlements": 3,
+              "cities": 4
+            },
+            "1": {
+              "roads": 13,
+              "settlements": 3,
+              "cities": 4
+            },
+            "2": {
+              "roads": 13,
+              "settlements": 3,
+              "cities": 4
+            },
+            "3": {
+              "roads": 13,
+              "settlements": 3,
+              "cities": 4
+            }
+          }
+        }
+      },
+      "supporting_sources": [
+        {
+          "source_id": "CATAN22-RULES",
+          "page": 1,
+          "quote": "Startaufstellung für Einsteiger"
+        },
+        {
+          "source_id": "CATAN22-ALMANAC",
+          "page": 23,
+          "quote": "95 Rohstoffkarten (je 19) ... Spielfiguren (in vier Farben): 16 Städte, 20 Siedlungen, 60 Straßen."
+        }
+      ]
+    },
+    {
+      "id": "CAT-R04-strict-pre-roll-phase",
+      "fact_ids": [
+        "CAT-TURN-01",
+        "CAT-TURN-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "1. Er muss ... auswürfeln. 2. Er kann handeln. 3. Er kann bauen."
+      },
+      "initial": {
+        "adapter": {
+          "phase": "roll",
+          "legal_action_type_any": [
+            "roll_dice"
+          ],
+          "legal_action_type_not": [
+            "end_turn",
+            "begin_domestic_trade",
+            "maritime_trade",
+            "build_road",
+            "build_settlement",
+            "build_city"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R05-development-before-roll",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Zu einem beliebigen Zeitpunkt seines Zuges (auch vor dem Würfeln) eine seiner Entwicklungskarten ausspielen."
+      },
+      "fixture": {
+        "phase": "roll",
+        "development_hands": {
+          "0": [
+            "knight"
+          ]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "play_knight",
+                "actor": 0
+              },
+              "expected": true
+            },
+            {
+              "selector": {
+                "type": "roll_dice",
+                "actor": 0
+              },
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R06-settlement-production",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Für die Siedlung 1 Rohstoffkarte dieses Feldes; für die Stadt 2 Rohstoffkarten."
+      },
+      "fixture": {
+        "phase": "roll",
+        "buildings": {
+          "v24": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "scripted_rolls": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "roll_dice",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "bank_resources": {
+                "wood": 18,
+                "brick": 19,
+                "wool": 19,
+                "grain": 19,
+                "ore": 19
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R07-city-double-production",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Für die Siedlung 1 Rohstoffkarte dieses Feldes; für die Stadt 2 Rohstoffkarten."
+      },
+      "fixture": {
+        "phase": "roll",
+        "buildings": {
+          "v24": {
+            "owner": 0,
+            "type": "city"
+          }
+        },
+        "scripted_rolls": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "roll_dice",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 2,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R08-multiple-production-adds",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Für die Siedlung 1 Rohstoffkarte dieses Feldes; für die Stadt 2 Rohstoffkarten."
+      },
+      "fixture": {
+        "phase": "roll",
+        "buildings": {
+          "v24": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v35": {
+            "owner": 0,
+            "type": "city"
+          }
+        },
+        "scripted_rolls": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "roll_dice",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 2
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R09-robber-blocks-only-occupied-hex",
+      "fact_ids": [
+        "CAT-PROD-01",
+        "CAT-PROD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Solange der Räuber auf einem Landfeld steht, erhalten die Besitzer angrenzender Siedlungen und Städte KEINE Rohstofferträge."
+      },
+      "fixture": {
+        "phase": "roll",
+        "robber_hex": "h10",
+        "buildings": {
+          "v24": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v35": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "scripted_rolls": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "roll_dice",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R10-seven-discard-thresholds",
+      "fact_ids": [
+        "CAT-ROBBER-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler, die mehr als 7 Rohstoffkarten besitzen, wählen die Hälfte ... Dann muss der Spieler den Räuber auf ein anderes Landfeld versetzen."
+      },
+      "fixture": {
+        "phase": "roll",
+        "resources": {
+          "0": {
+            "wood": 7,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "1": {
+            "wood": 8,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 9,
+            "ore": 0
+          },
+          "3": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 11
+          }
+        },
+        "scripted_rolls": [
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "roll_dice",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "discard",
+              "pending_type": "discard",
+              "resource_total": {
+                "0": 7,
+                "1": 8,
+                "2": 9,
+                "3": 11
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D01-seven-discards-commit-together",
+      "fact_ids": [
+        "CAT-D-DISCARD",
+        "CAT-ROBBER-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler, die mehr als 7 Rohstoffkarten besitzen, wählen die Hälfte ... Dann muss der Spieler den Räuber auf ein anderes Landfeld versetzen."
+      },
+      "fixture": {
+        "phase": "discard",
+        "current_player": 1,
+        "resources": {
+          "1": {
+            "wood": 4,
+            "brick": 4,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 9,
+            "ore": 0
+          }
+        },
+        "pending": {
+          "type": "discard",
+          "required": {
+            "1": 4,
+            "2": 4
+          },
+          "submitted": {
+            "1": {
+              "wood": 0,
+              "brick": 0,
+              "wool": 0,
+              "grain": 0,
+              "ore": 0
+            },
+            "2": {
+              "wood": 0,
+              "brick": 0,
+              "wool": 0,
+              "grain": 0,
+              "ore": 0
+            }
+          },
+          "resume": "robber_move"
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 1,
+              "args": {
+                "resource": "wood"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resource_total": {
+                "1": 8,
+                "2": 9
+              },
+              "pending_type": "discard",
+              "bank_resources": {
+                "wood": 15,
+                "brick": 15,
+                "wool": 19,
+                "grain": 10,
+                "ore": 19
+              },
+              "observation": {
+                "player": 0,
+                "pending": {
+                  "type": "discard",
+                  "required": {
+                    "1": 4,
+                    "2": 4
+                  },
+                  "submitted_players": []
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 1,
+              "args": {
+                "resource": "wood"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resource_total": {
+                "1": 8,
+                "2": 9
+              },
+              "pending_type": "discard"
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 1,
+              "args": {
+                "resource": "wood"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resource_total": {
+                "1": 8,
+                "2": 9
+              },
+              "pending_type": "discard"
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 1,
+              "args": {
+                "resource": "wood"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resource_total": {
+                "1": 8,
+                "2": 9
+              },
+              "pending_type": "discard",
+              "bank_resources": {
+                "wood": 15,
+                "brick": 15,
+                "wool": 19,
+                "grain": 10,
+                "ore": 19
+              },
+              "observation": {
+                "player": 0,
+                "pending": {
+                  "type": "discard",
+                  "required": {
+                    "1": 4,
+                    "2": 4
+                  },
+                  "submitted_players": [
+                    1
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 2,
+              "args": {
+                "resource": "grain"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "pending_type": "discard",
+              "bank_resources": {
+                "wood": 15,
+                "brick": 15,
+                "wool": 19,
+                "grain": 10,
+                "ore": 19
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 2,
+              "args": {
+                "resource": "grain"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "pending_type": "discard",
+              "bank_resources": {
+                "wood": 15,
+                "brick": 15,
+                "wool": 19,
+                "grain": 10,
+                "ore": 19
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 2,
+              "args": {
+                "resource": "grain"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "pending_type": "discard",
+              "bank_resources": {
+                "wood": 15,
+                "brick": 15,
+                "wool": 19,
+                "grain": 10,
+                "ore": 19
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "discard_resource",
+              "actor": 2,
+              "args": {
+                "resource": "grain"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "robber_move",
+              "resources": {
+                "1": {
+                  "wood": 0,
+                  "brick": 4,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "2": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 5,
+                  "ore": 0
+                }
+              },
+              "bank_resources": {
+                "wood": 19,
+                "brick": 15,
+                "wool": 19,
+                "grain": 14,
+                "ore": 19
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R11-robber-must-move",
+      "fact_ids": [
+        "CAT-ROBBER-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler, die mehr als 7 Rohstoffkarten besitzen, wählen die Hälfte ... Dann muss der Spieler den Räuber auf ein anderes Landfeld versetzen."
+      },
+      "fixture": {
+        "phase": "robber_move",
+        "robber_hex": "h09",
+        "pending": {
+          "type": "robber_move",
+          "resume_phase": "trade",
+          "source": "seven"
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "move_robber",
+                "actor": 0,
+                "args": {
+                  "hex": "h09"
+                }
+              },
+              "expected": false
+            },
+            {
+              "selector": {
+                "type": "move_robber",
+                "actor": 0,
+                "args": {
+                  "hex": "h10"
+                }
+              },
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-D02-empty-robber-victim-ineligible",
+      "fact_ids": [
+        "CAT-D-ROBBER",
+        "CAT-ROBBER-03"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Gibt es dort zwei oder mehr Spieler, die eine Siedlung oder Stadt besitzen, darf er sich aussuchen, wen er berauben will."
+      },
+      "fixture": {
+        "phase": "robber_move",
+        "pending": {
+          "type": "robber_move",
+          "resume_phase": "trade",
+          "source": "seven"
+        },
+        "resources": {
+          "1": {
+            "wood": 2,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "buildings": {
+          "v24": {
+            "owner": 1,
+            "type": "settlement"
+          },
+          "v30": {
+            "owner": 2,
+            "type": "settlement"
+          }
+        },
+        "scripted_steals": [
+          "wood"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "move_robber",
+              "actor": 0,
+              "args": {
+                "hex": "h10"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "robber_steal",
+              "pending_type": "robber_steal",
+              "action_legal": [
+                {
+                  "selector": {
+                    "type": "steal_resource",
+                    "actor": 0,
+                    "args": {
+                      "victim": 1
+                    }
+                  },
+                  "expected": true
+                },
+                {
+                  "selector": {
+                    "type": "steal_resource",
+                    "actor": 0,
+                    "args": {
+                      "victim": 2
+                    }
+                  },
+                  "expected": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "steal_resource",
+              "actor": 0,
+              "args": {
+                "victim": 1
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "2": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D03-no-eligible-victim-no-theft",
+      "fact_ids": [
+        "CAT-D-ROBBER",
+        "CAT-ROBBER-02"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler, die mehr als 7 Rohstoffkarten besitzen, wählen die Hälfte ... Dann muss der Spieler den Räuber auf ein anderes Landfeld versetzen."
+      },
+      "fixture": {
+        "phase": "robber_move",
+        "pending": {
+          "type": "robber_move",
+          "resume_phase": "trade",
+          "source": "seven"
+        },
+        "buildings": {
+          "v24": {
+            "owner": 1,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "move_robber",
+              "actor": 0,
+              "args": {
+                "hex": "h10"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "legal_action_type_not": [
+                "steal_resource"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R12-knight-does-not-discard",
+      "fact_ids": [
+        "CAT-TURN-03",
+        "CAT-ROBBER-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Wenn eine Ritterkarte ausgespielt wird, wird nicht geprüft, ob ein Spieler mehr als 7 Karten auf der Hand hält."
+      },
+      "fixture": {
+        "phase": "roll",
+        "resources": {
+          "0": {
+            "wood": 12,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "development_hands": {
+          "0": [
+            "knight"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_knight",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "robber_move",
+              "resource_total": {
+                "0": 12
+              },
+              "played_knights": {
+                "0": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R13-road-cost-and-stock",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Straße darf nur an eine Kreuzung angelegt werden, an die eine eigene Straße, Siedlung oder Stadt grenzt."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "buildings": {
+          "v23": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v23_v29"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "roads": {
+                "e_v23_v29": 0
+              },
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "pieces": {
+                "0": {
+                  "roads": 14,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R14-road-occupied-edge-illegal",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Auf jedem Weg darf nur 1 Straße gebaut werden."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "buildings": {
+          "v23": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "roads": {
+          "e_v23_v29": 1
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "build_road",
+                "actor": 0,
+                "args": {
+                  "edge": "e_v23_v29"
+                }
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R15-opponent-building-blocks-road",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Straße darf nur an eine Kreuzung angelegt werden, an die eine eigene Straße, Siedlung oder Stadt grenzt."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v23_v29": 0
+        },
+        "buildings": {
+          "v29": {
+            "owner": 1,
+            "type": "settlement"
+          }
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "build_road",
+                "actor": 0,
+                "args": {
+                  "edge": "e_v29_v34"
+                }
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R16-settlement-cost-and-distance",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Siedlung darf nur dann auf einer Kreuzung gebaut werden, wenn die drei angrenzenden Kreuzungen NICHT besetzt sind."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v23_v29": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_settlement",
+              "actor": 0,
+              "args": {
+                "vertex": "v29"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "buildings": {
+                "v29": {
+                  "owner": 0,
+                  "type": "settlement"
+                }
+              },
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "pieces": {
+                "0": {
+                  "roads": 14,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R17-distance-rule-rejects-neighbor",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Die drei angrenzenden Kreuzungen [dürfen] NICHT von Siedlungen oder Städten besetzt sein – egal wem sie gehören."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v23_v29": 0
+        },
+        "buildings": {
+          "v23": {
+            "owner": 1,
+            "type": "settlement"
+          }
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "build_settlement",
+                "actor": 0,
+                "args": {
+                  "vertex": "v29"
+                }
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R18-city-upgrade",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02",
+        "CAT-BUILD-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Er legt ... die Siedlung zu seinem Vorrat zurück und ersetzt diese durch eine Stadt."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 2,
+            "ore": 3
+          }
+        },
+        "buildings": {
+          "v23": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_city",
+              "actor": 0,
+              "args": {
+                "vertex": "v23"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "buildings": {
+                "v23": {
+                  "owner": 0,
+                  "type": "city"
+                }
+              },
+              "pieces": {
+                "0": {
+                  "roads": 15,
+                  "settlements": 5,
+                  "cities": 3
+                }
+              },
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R19-returned-settlement-reusable",
+      "fact_ids": [
+        "CAT-BUILD-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Frei gewordene Siedlungen (durch Städtebau) können erneut zur Errichtung einer Siedlung eingesetzt werden."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 2,
+            "ore": 3
+          }
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v27": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "settlement"
+          },
+          "v51": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_city",
+              "actor": 0,
+              "args": {
+                "vertex": "v00"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "pieces": {
+                "0": {
+                  "roads": 15,
+                  "settlements": 1,
+                  "cities": 3
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R20-buy-development-card",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-TURN-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Wer eine Entwicklungskarte kauft, zieht die oberste Entwicklungskarte vom Stapel."
+      },
+      "fixture": {
+        "phase": "build",
+        "turn_number": 3,
+        "resources": {
+          "0": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 1,
+            "grain": 1,
+            "ore": 1
+          }
+        },
+        "development_deck": [
+          "knight"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "buy_development",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "development_hand": {
+                "0": [
+                  "knight"
+                ]
+              },
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "development_deck_size": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R21-road-stock-exhaustion",
+      "fact_ids": [
+        "CAT-BUILD-03",
+        "CAT-INV-04"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Der Spieler kann ... bauen, so lange der Vorrat an ... Bauwerken reicht."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 5,
+            "brick": 5,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v00_v03": 0,
+          "e_v00_v04": 0,
+          "e_v01_v04": 0,
+          "e_v01_v05": 0,
+          "e_v02_v05": 0,
+          "e_v02_v06": 0,
+          "e_v03_v07": 0,
+          "e_v04_v08": 0,
+          "e_v05_v09": 0,
+          "e_v06_v10": 0,
+          "e_v07_v12": 0,
+          "e_v08_v12": 0,
+          "e_v08_v13": 0,
+          "e_v09_v13": 0,
+          "e_v09_v14": 0
+        }
+      },
+      "initial": {
+        "adapter": {
+          "pieces": {
+            "0": {
+              "roads": 0,
+              "settlements": 5,
+              "cities": 4
+            }
+          },
+          "legal_action_type_not": [
+            "build_road"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R22-trade-before-build-only",
+      "fact_ids": [
+        "CAT-TURN-01",
+        "CAT-TURN-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "1. Er muss ... auswürfeln. 2. Er kann handeln. 3. Er kann bauen."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "1": {
+            "wood": 0,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        }
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_any": [
+            "begin_domestic_trade",
+            "end_trade"
+          ],
+          "legal_action_type_not": [
+            "build_road",
+            "build_settlement",
+            "build_city"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-D04a-trade-staging-and-cancel",
+      "fact_ids": [
+        "CAT-D-TRADE",
+        "CAT-TRADE-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Die Tauschbedingungen ... sind dem Verhandlungsgeschick der Spieler überlassen. Das Verschenken von Karten ist nicht erlaubt."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "1": {
+            "wood": 0,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "begin_domestic_trade",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade_offer",
+              "pending_type": "domestic_trade",
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 0,
+                  "brick": 1,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "add_trade_item",
+              "actor": 0,
+              "args": {
+                "partner": 1,
+                "direction": "give",
+                "resource": "wood"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 0,
+                  "brick": 1,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "pending": {
+                "type": "domestic_trade",
+                "legs": [
+                  {
+                    "partner": 1,
+                    "give": {
+                      "wood": 1,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "take": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  }
+                ],
+                "resume_phase": "trade"
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "add_trade_item",
+              "actor": 0,
+              "args": {
+                "partner": 1,
+                "direction": "take",
+                "resource": "brick"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 0,
+                  "brick": 1,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              },
+              "pending": {
+                "type": "domestic_trade",
+                "legs": [
+                  {
+                    "partner": 1,
+                    "give": {
+                      "wood": 1,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "take": {
+                      "wood": 0,
+                      "brick": 1,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  }
+                ],
+                "resume_phase": "trade"
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "cancel_domestic_trade",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "pending": null,
+              "resources": {
+                "0": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 0,
+                  "brick": 1,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R23-positive-bilateral-trade",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Die Tauschbedingungen ... sind dem Verhandlungsgeschick der Spieler überlassen. Das Verschenken von Karten ist nicht erlaubt."
+      },
+      "fixture": {
+        "phase": "trade_offer",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "1": {
+            "wood": 0,
+            "brick": 2,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "pending": {
+          "type": "domestic_trade",
+          "legs": [
+            {
+              "partner": 1,
+              "give": {
+                "wood": 1,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              },
+              "take": {
+                "wood": 0,
+                "brick": 2,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            }
+          ],
+          "resume_phase": "trade"
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "commit_domestic_trade",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "pending": null,
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 2,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R24-gift-is-illegal",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Die Tauschbedingungen ... sind dem Verhandlungsgeschick der Spieler überlassen. Das Verschenken von Karten ist nicht erlaubt."
+      },
+      "fixture": {
+        "phase": "trade_offer",
+        "resources": {
+          "1": {
+            "wood": 0,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "pending": {
+          "type": "domestic_trade",
+          "legs": [
+            {
+              "partner": 1,
+              "give": {
+                "wood": 0,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              },
+              "take": {
+                "wood": 0,
+                "brick": 1,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            }
+          ],
+          "resume_phase": "trade"
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "commit_domestic_trade",
+                "actor": 0
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-D04-multilateral-atomic-trade",
+      "fact_ids": [
+        "CAT-D-TRADE",
+        "CAT-TRADE-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Die Tauschbedingungen ... sind dem Verhandlungsgeschick der Spieler überlassen. Das Verschenken von Karten ist nicht erlaubt."
+      },
+      "fixture": {
+        "phase": "trade_offer",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 1,
+            "ore": 0
+          },
+          "1": {
+            "wood": 0,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 1
+          }
+        },
+        "pending": {
+          "type": "domestic_trade",
+          "legs": [
+            {
+              "partner": 1,
+              "give": {
+                "wood": 1,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              },
+              "take": {
+                "wood": 0,
+                "brick": 1,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            },
+            {
+              "partner": 2,
+              "give": {
+                "wood": 0,
+                "brick": 0,
+                "wool": 0,
+                "grain": 1,
+                "ore": 0
+              },
+              "take": {
+                "wood": 0,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 1
+              }
+            }
+          ],
+          "resume_phase": "trade"
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "commit_domestic_trade",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "trade",
+              "pending": null,
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 1,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 1
+                },
+                "1": {
+                  "wood": 1,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "2": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 1,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R25-nonactive-cannot-control-trade",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf immer nur mit dem Spieler getauscht werden, der an der Reihe ist. Die anderen Spieler dürfen untereinander nicht tauschen."
+      },
+      "fixture": {
+        "phase": "trade_offer",
+        "resources": {
+          "1": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "pending": {
+          "type": "domestic_trade",
+          "legs": [],
+          "resume_phase": "trade"
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "add_trade_item",
+                "actor": 1
+              },
+              "expected": false
+            },
+            {
+              "selector": {
+                "type": "commit_domestic_trade",
+                "actor": 1
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R26-maritime-4-to-1",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Er kann immer 4:1 tauschen, indem er 4 gleiche Rohstoffkarten ... zurücklegt und sich dafür 1 Rohstoffkarte seiner Wahl nimmt."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 4,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "maritime_trade",
+              "actor": 0,
+              "args": {
+                "give": "wood",
+                "receive": "ore"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R27-generic-harbor-3-to-1",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "An einem 3:1-Hafen tauscht man 3 gleiche Rohstoffkarten in 1 Rohstoffkarte nach Wahl."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 3,
+            "ore": 0
+          }
+        },
+        "harbor_buildings": [
+          {
+            "owner": 0,
+            "ratio": 3,
+            "resource": null
+          }
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "maritime_trade",
+              "actor": 0,
+              "args": {
+                "give": "grain",
+                "receive": "wool"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 1,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R28-special-harbor-2-to-1",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "An einem Spezialhafen tauscht man 2 Rohstoffkarten des angegebenen Rohstoffs in 1 Rohstoffkarte nach Wahl."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 2,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "harbor_buildings": [
+          {
+            "owner": 0,
+            "ratio": 2,
+            "resource": "wood"
+          }
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "maritime_trade",
+              "actor": 0,
+              "args": {
+                "give": "wood",
+                "receive": "ore"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R29-wrong-port-resource-and-same-return",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "2 Karten Holz ... und sich dafür 1 beliebige, andere Rohstoffkarte nehmen."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 2,
+            "brick": 2,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "harbor_buildings": [
+          {
+            "owner": 0,
+            "ratio": 2,
+            "resource": "wood"
+          }
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "maritime_trade",
+                "actor": 0,
+                "args": {
+                  "give": "brick",
+                  "receive": "ore"
+                }
+              },
+              "expected": false
+            },
+            {
+              "selector": {
+                "type": "maritime_trade",
+                "actor": 0,
+                "args": {
+                  "give": "wood",
+                  "receive": "wood"
+                }
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R30-new-harbor-not-usable-after-trade",
+      "fact_ids": [
+        "CAT-TRADE-03",
+        "CAT-TURN-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 7,
+        "quote": "Ein soeben errichteter Hafen kann erst in der nächsten Runde ... benutzt werden – in der nächsten Tauschphase."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 3,
+            "brick": 3,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v06_v10": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_settlement",
+              "actor": 0,
+              "args": {
+                "vertex": "v10"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "build",
+              "legal_action_type_not": [
+                "begin_domestic_trade",
+                "add_trade_item",
+                "commit_domestic_trade",
+                "maritime_trade"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D05-city-retains-harbor",
+      "fact_ids": [
+        "CAT-D-PORT-CITY",
+        "CAT-TRADE-04"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Bessere Tauschmöglichkeiten hat ein Spieler, wenn er seine Siedlung (oder Stadt) an einem Hafenstandort errichtet hat."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 2,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "harbor_buildings": [
+          {
+            "owner": 0,
+            "ratio": 2,
+            "resource": "wood",
+            "type": "city"
+          }
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "maritime_trade",
+                "actor": 0,
+                "args": {
+                  "give": "wood",
+                  "receive": "ore"
+                }
+              },
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R31-bought-card-cannot-be-played",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "In seinem Zug darf ein Spieler nur eine Entwicklungskarte ausspielen ... es darf aber keine Karte ausgespielt werden, die erst in diesem Zug gekauft wurde."
+      },
+      "fixture": {
+        "phase": "build",
+        "turn_number": 5,
+        "development_hands": {
+          "0": [
+            {
+              "id": "knight",
+              "bought_turn": 5
+            }
+          ]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_legal": [
+            {
+              "selector": {
+                "type": "play_knight",
+                "actor": 0
+              },
+              "expected": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-R32-only-one-knight-or-progress",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "In seinem Zug darf ein Spieler nur eine Entwicklungskarte ausspielen ... es darf aber keine Karte ausgespielt werden, die erst in diesem Zug gekauft wurde."
+      },
+      "fixture": {
+        "phase": "trade",
+        "development_played": true,
+        "development_hands": {
+          "0": [
+            "monopoly"
+          ]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_type_not": [
+            "play_knight",
+            "play_road_building",
+            "play_year_of_plenty",
+            "play_monopoly"
+          ]
+        }
+      }
+    },
+    {
+      "id": "CAT-D06-road-building-two-sequential",
+      "fact_ids": [
+        "CAT-D-ROAD-CARD",
+        "CAT-DEV-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Straßenbau: ... ohne Rohstoff-Kosten 2 neue Straßen ... Hierbei müssen die üblichen Regeln ... beachtet werden."
+      },
+      "fixture": {
+        "phase": "roll",
+        "development_hands": {
+          "0": [
+            "road_building"
+          ]
+        },
+        "buildings": {
+          "v23": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_road_building",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "road_building",
+              "pending_type": "road_building",
+              "development_hand": {
+                "0": []
+              },
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "road_building"
+                }
+              ],
+              "development_played": true,
+              "pieces": {
+                "0": {
+                  "roads": 15,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "place_free_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v23_v29"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "road_building",
+              "roads": {
+                "e_v23_v29": 0
+              },
+              "pieces": {
+                "0": {
+                  "roads": 14,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "place_free_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v29_v34"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "roll",
+              "roads": {
+                "e_v23_v29": 0,
+                "e_v29_v34": 0
+              },
+              "pieces": {
+                "0": {
+                  "roads": 13,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              },
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D07-road-building-max-feasible-one",
+      "fact_ids": [
+        "CAT-D-ROAD-CARD",
+        "CAT-DEV-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Wer diese Karte ausspielt, darf ohne Rohstoff-Kosten 2 neue Straßen ... legen."
+      },
+      "fixture": {
+        "phase": "roll",
+        "development_hands": {
+          "0": [
+            "road_building"
+          ]
+        },
+        "roads": {
+          "e_v00_v03": 0,
+          "e_v00_v04": 0,
+          "e_v01_v04": 0,
+          "e_v01_v05": 0,
+          "e_v02_v05": 0,
+          "e_v02_v06": 0,
+          "e_v03_v07": 0,
+          "e_v04_v08": 0,
+          "e_v05_v09": 0,
+          "e_v06_v10": 0,
+          "e_v07_v12": 0,
+          "e_v08_v12": 0,
+          "e_v08_v13": 0,
+          "e_v09_v13": 0
+        },
+        "buildings": {
+          "v14": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_road_building",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "road_building",
+              "development_hand": {
+                "0": []
+              },
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "road_building"
+                }
+              ],
+              "development_played": true,
+              "pieces": {
+                "0": {
+                  "roads": 1,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "place_free_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v10_v14"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "roll",
+              "pieces": {
+                "0": {
+                  "roads": 0,
+                  "settlements": 4,
+                  "cities": 4
+                }
+              },
+              "roads": {
+                "e_v10_v14": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D08-victory-after-first-free-road",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-D-ROAD-CARD",
+        "CAT-ROAD-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Ist ein Spieler an der Reihe und hat er 10 Siegpunkte erreicht ... so beendet er sofort das Spiel und gewinnt."
+      },
+      "fixture": {
+        "phase": "build",
+        "development_hands": {
+          "0": [
+            "road_building"
+          ]
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_road_building",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": false
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "place_free_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v39_v44"
+              }
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0,
+              "special_cards": {
+                "longest_road_owner": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R33-year-of-plenty-same-resource",
+      "fact_ids": [
+        "CAT-DEV-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Erfindung: ... darf sich 2 beliebige Rohstoffkarten von den Vorratsstapeln nehmen."
+      },
+      "fixture": {
+        "phase": "trade",
+        "development_hands": {
+          "0": [
+            "year_of_plenty"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_year_of_plenty",
+              "actor": 0,
+              "args": {
+                "card": "year_of_plenty",
+                "resources": [
+                  "ore",
+                  "ore"
+                ]
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 2
+                }
+              },
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "year_of_plenty"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R34-monopoly-all-opponents",
+      "fact_ids": [
+        "CAT-DEV-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Alle Mitspieler müssen ihm alle Rohstoffkarten geben, die sie von dieser Sorte auf der Hand halten."
+      },
+      "fixture": {
+        "phase": "trade",
+        "development_hands": {
+          "0": [
+            "monopoly"
+          ]
+        },
+        "resources": {
+          "1": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 2,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 4,
+            "grain": 0,
+            "ore": 0
+          },
+          "3": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 0,
+            "grain": 1,
+            "ore": 0
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_monopoly",
+              "actor": 0,
+              "args": {
+                "card": "monopoly",
+                "resource": "wool"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "resources": {
+                "0": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 6,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "1": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "2": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 0,
+                  "ore": 0
+                },
+                "3": {
+                  "wood": 0,
+                  "brick": 0,
+                  "wool": 0,
+                  "grain": 1,
+                  "ore": 0
+                }
+              },
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "monopoly"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R35-longest-road-awarded-at-five",
+      "fact_ids": [
+        "CAT-ROAD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Sobald ein Spieler einen durchgehenden Straßenzug ... aus mindestens 5 Einzelstraßen besitzt, erhält er ... Längste Handelsstraße."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v39_v44"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "special_cards": {
+                "longest_road_owner": 0,
+                "longest_road_length": 5
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R36-longest-road-tie-holder-keeps",
+      "fact_ids": [
+        "CAT-ROAD-01",
+        "CAT-ROAD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Eigene Siedlungen/Städte unterbrechen die Handelsstraße nicht ... bei Gleichstand behält der Besitzer die Sonderkarte."
+      },
+      "fixture": {
+        "phase": "build",
+        "active_player": 1,
+        "resources": {
+          "1": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0,
+          "e_v39_v44": 0,
+          "e_v02_v06": 1,
+          "e_v06_v10": 1,
+          "e_v10_v15": 1,
+          "e_v15_v20": 1
+        },
+        "special_cards": {
+          "longest_road_owner": 0,
+          "longest_road_length": 5
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_road",
+              "actor": 1,
+              "args": {
+                "edge": "e_v20_v26"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "special_cards": {
+                "longest_road_owner": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R37-longer-road-transfers",
+      "fact_ids": [
+        "CAT-ROAD-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Gelingt es einem anderen Spieler, eine längere Straße als der aktuelle Besitzer zu bauen, erhält dieser sofort die Sonderkarte."
+      },
+      "fixture": {
+        "phase": "build",
+        "active_player": 1,
+        "resources": {
+          "1": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0,
+          "e_v39_v44": 0,
+          "e_v02_v06": 1,
+          "e_v06_v10": 1,
+          "e_v10_v15": 1,
+          "e_v15_v20": 1,
+          "e_v20_v26": 1
+        },
+        "special_cards": {
+          "longest_road_owner": 0,
+          "longest_road_length": 5
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_road",
+              "actor": 1,
+              "args": {
+                "edge": "e_v26_v32"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "special_cards": {
+                "longest_road_owner": 1,
+                "longest_road_length": 6
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R38-opponent-settlement-splits-road",
+      "fact_ids": [
+        "CAT-ROAD-02",
+        "CAT-BUILD-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Eine Handelsstraße kann unterbrochen werden, wenn ein anderer Spieler eine Siedlung auf einer freien Kreuzung der Handelsstraße errichtet."
+      },
+      "fixture": {
+        "phase": "build",
+        "active_player": 1,
+        "resources": {
+          "1": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0,
+          "e_v39_v44": 0,
+          "e_v29_v35": 1
+        },
+        "special_cards": {
+          "longest_road_owner": 0,
+          "longest_road_length": 5
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_settlement",
+              "actor": 1,
+              "args": {
+                "vertex": "v29"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "special_cards": {
+                "longest_road_owner": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D09-longest-road-cycle-revisits-vertex",
+      "fact_ids": [
+        "CAT-D-LONGEST",
+        "CAT-ROAD-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Durchgehender Straßenzug (Abzweigungen zählen nicht) aus mindestens 5 Einzelstraßen."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "roads": {
+          "e_v17_v23": 0,
+          "e_v23_v29": 0,
+          "e_v29_v34": 0,
+          "e_v34_v39": 0,
+          "e_v39_v44": 0,
+          "e_v40_v44": 0,
+          "e_v35_v40": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_road",
+              "actor": 0,
+              "args": {
+                "edge": "e_v29_v35"
+              }
+            }
+          },
+          "expect": {
+            "adapter": {
+              "special_cards": {
+                "longest_road_owner": 0,
+                "longest_road_length": 8
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R39-largest-army-at-three",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Wer zuerst 3 Ritterkarten offen vor sich liegen hat, erhält die Sonderkarte Größte Rittermacht."
+      },
+      "fixture": {
+        "phase": "roll",
+        "played_knights": {
+          "0": 2
+        },
+        "development_hands": {
+          "0": [
+            "knight"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_knight",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "played_knights": {
+                "0": 3
+              },
+              "special_cards": {
+                "largest_army_owner": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R40-largest-army-tie-no-transfer",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Sobald ein anderer Spieler mehr Ritterkarten offen ... hat, erhält er sofort die Sonderkarte."
+      },
+      "fixture": {
+        "phase": "roll",
+        "active_player": 1,
+        "played_knights": {
+          "0": 3,
+          "1": 2
+        },
+        "development_hands": {
+          "1": [
+            "knight"
+          ]
+        },
+        "special_cards": {
+          "largest_army_owner": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_knight",
+              "actor": 1
+            }
+          },
+          "expect": {
+            "adapter": {
+              "played_knights": {
+                "1": 3
+              },
+              "special_cards": {
+                "largest_army_owner": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R41-largest-army-strictly-more-transfers",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Sobald ein anderer Spieler mehr Ritterkarten offen ... hat, erhält er sofort die Sonderkarte."
+      },
+      "fixture": {
+        "phase": "roll",
+        "active_player": 1,
+        "played_knights": {
+          "0": 3,
+          "1": 3
+        },
+        "development_hands": {
+          "1": [
+            "knight"
+          ]
+        },
+        "special_cards": {
+          "largest_army_owner": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_knight",
+              "actor": 1
+            }
+          },
+          "expect": {
+            "adapter": {
+              "played_knights": {
+                "1": 4
+              },
+              "special_cards": {
+                "largest_army_owner": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D14-knight-army-win-before-robber",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-ARMY-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Ist ein Spieler an der Reihe und hat er 10 Siegpunkte erreicht ... so beendet er sofort das Spiel und gewinnt."
+      },
+      "fixture": {
+        "phase": "roll",
+        "played_knights": {
+          "0": 2
+        },
+        "development_hands": {
+          "0": [
+            "knight"
+          ]
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_knight",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0,
+              "phase": "terminal",
+              "special_cards": {
+                "largest_army_owner": 0
+              },
+              "legal_action_type_not": [
+                "move_robber",
+                "steal_resource"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D10-build-to-ten-ends-immediately",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-WIN-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Ist ein Spieler an der Reihe und hat er 10 Siegpunkte erreicht ... so beendet er sofort das Spiel und gewinnt."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v51": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "roads": {
+          "e_v29_v35": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_settlement",
+              "actor": 0,
+              "args": {
+                "vertex": "v29"
+              }
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0,
+              "legal_action_type_not": [
+                "build_road",
+                "end_turn"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D11-ten-at-own-turn-start-wins",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-WIN-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Ist ein Spieler an der Reihe und hat er 10 Siegpunkte erreicht ... so beendet er sofort das Spiel und gewinnt."
+      },
+      "fixture": {
+        "phase": "build",
+        "active_player": 3,
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          }
+        },
+        "special_cards": {
+          "largest_army_owner": 0
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "end_turn",
+              "actor": 3
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-R42-inactive-player-at-ten-does-not-win",
+      "fact_ids": [
+        "CAT-WIN-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Um zu gewinnen, muss ein Spieler an der Reihe sein und in seinem Zug mindestens 10 Siegpunkte erreichen/besitzen."
+      },
+      "fixture": {
+        "phase": "build",
+        "active_player": 1,
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          }
+        },
+        "special_cards": {
+          "largest_army_owner": 0
+        }
+      },
+      "initial": {
+        "terminal": false,
+        "adapter": {
+          "winner": null
+        }
+      }
+    },
+    {
+      "id": "CAT-R43-newly-bought-vp-card-can-win",
+      "fact_ids": [
+        "CAT-TURN-03",
+        "CAT-WIN-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Kauft ein Spieler ... eine Siegpunktkarte, mit der er seinen 10. Siegpunkt erreicht, so darf er diese Karte sofort aufdecken und hat das Spiel gewonnen."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 1,
+            "grain": 1,
+            "ore": 1
+          }
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v47": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v51": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "development_deck": [
+          "library"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "buy_development",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0,
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "library"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D12-reveal-minimum-victory-cards",
+      "fact_ids": [
+        "CAT-D-VP-REVEAL",
+        "CAT-WIN-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Wer ... zusammen mit seinen Siegpunktkarten 10 Punkte erreicht hat, deckt die Karte auf (auch mehrere) und hat damit gewonnen."
+      },
+      "fixture": {
+        "phase": "build",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 1,
+            "wool": 1,
+            "grain": 1,
+            "ore": 0
+          }
+        },
+        "buildings": {
+          "v00": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v15": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v42": {
+            "owner": 0,
+            "type": "city"
+          },
+          "v51": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "roads": {
+          "e_v29_v35": 0
+        },
+        "development_hands": {
+          "0": [
+            "library",
+            "marketplace",
+            "chapel"
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "build_settlement",
+              "actor": 0,
+              "args": {
+                "vertex": "v29"
+              }
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "winner": 0,
+              "development_hand": {
+                "0": [
+                  "chapel"
+                ]
+              },
+              "played_development": [
+                {
+                  "owner": 0,
+                  "id": "library"
+                },
+                {
+                  "owner": 0,
+                  "id": "marketplace"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CAT-D13-observation-counts-with-private-identities",
+      "fact_ids": [
+        "CAT-D-OBS",
+        "CAT-INFO-01",
+        "CAT-INFO-02"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Seine Rohstoffkarten hält jeder Spieler verdeckt in der Hand."
+      },
+      "fixture": {
+        "phase": "trade",
+        "resources": {
+          "0": {
+            "wood": 1,
+            "brick": 0,
+            "wool": 0,
+            "grain": 0,
+            "ore": 2
+          },
+          "1": {
+            "wood": 0,
+            "brick": 2,
+            "wool": 0,
+            "grain": 0,
+            "ore": 0
+          },
+          "2": {
+            "wood": 0,
+            "brick": 0,
+            "wool": 1,
+            "grain": 0,
+            "ore": 0
+          }
+        },
+        "development_hands": {
+          "0": [
+            "knight"
+          ],
+          "1": [
+            "library",
+            "monopoly"
+          ]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "observation": {
+            "player": 0,
+            "own_resources": {
+              "wood": 1,
+              "brick": 0,
+              "wool": 0,
+              "grain": 0,
+              "ore": 2
+            },
+            "opponent_counts": {
+              "1": [
+                2,
+                2
+              ],
+              "2": [
+                1,
+                0
+              ],
+              "3": [
+                0,
+                0
+              ]
+            },
+            "no_opponent_identities": true
+          }
+        }
+      }
+    },
+    {
+      "id": "CAT-R44-hidden-vp-excluded-from-public-score",
+      "fact_ids": [
+        "CAT-INFO-01",
+        "CAT-SCORE-01"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Karten mit Siegpunkten werden grundsätzlich geheim gehalten. Sie werden erst aufgedeckt, wenn ein Spieler insgesamt 10 Siegpunkte erreicht hat."
+      },
+      "fixture": {
+        "phase": "trade",
+        "buildings": {
+          "v23": {
+            "owner": 0,
+            "type": "settlement"
+          }
+        },
+        "development_hands": {
+          "0": [
+            "library"
+          ]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "public_scores": [
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

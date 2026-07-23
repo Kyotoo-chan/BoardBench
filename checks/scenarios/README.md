@@ -20,7 +20,7 @@ A scored scenario must be traceable, deterministic where material, and explicit 
 }
 ```
 
-`basis` is `clear` or `human_decision`. Unresolved assumptions do not become scored scenarios. Source evidence uses either a positive PDF `page` or an RFC 6901 `json_pointer`; `quote` contains the cited text or compact JSON fragment.
+`basis` is `clear` or `human_decision`. Unresolved assumptions do not become scored scenarios. Source evidence uses either a positive PDF `page` or an RFC 6901 `json_pointer`; `quote` contains the cited text or compact JSON fragment. When one expectation genuinely combines multiple pages or assigned sources, add `supporting_sources` as a list of additional source objects with the same locator/quote shape; do not compress multi-page evidence into a false single-page citation.
 
 ## Outcomes
 

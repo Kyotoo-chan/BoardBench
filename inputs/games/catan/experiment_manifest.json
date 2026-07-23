@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "study": "catan-2022-fixed4-contract-v2",
+  "status": "frozen-pre-implementation-v1",
+  "frozen_on": "2026-07-23",
+  "planned_runs": [
+    "base_pdf_packet"
+  ],
+  "generation": {
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "protocol": "agentic-v3.1",
+    "runs": 1,
+    "sequential": true,
+    "max_neutral_repairs": 2
+  },
+  "judging": {
+    "model": "gpt-5.6-sol",
+    "thinking": "medium",
+    "judges_per_run": 3,
+    "sequential": true
+  },
+  "evaluation": {
+    "seed": 1,
+    "suite": "checks/scenarios/catan.json",
+    "adapter": "checks/scenario_adapters/catan.py",
+    "evidence_groups": [
+      "technical_gate",
+      "runtime_robustness",
+      "interface",
+      "rule_fidelity",
+      "independent_review"
+    ],
+    "resource_shortage_states": "unscored"
+  },
+  "condition": {
+    "label": "matching_2022_manual_almanac_fixed4_strict",
+    "scope": {
+      "players": 4,
+      "setup": "fixed_beginner",
+      "phases": "strict_roll_trade_build"
+    },
+    "sources": [
+      {
+        "source_id": "CATAN22-RULES",
+        "path": "inputs/games/catan/game_rules.pdf",
+        "packet_name": "game_rules.pdf",
+        "role": "publisher_rulebook",
+        "sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+      },
+      {
+        "source_id": "CATAN22-ALMANAC",
+        "path": "inputs/games/catan/game_almanac.pdf",
+        "packet_name": "game_almanac.pdf",
+        "role": "publisher_companion",
+        "sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc",
+        "match_evidence": "same 2022 copyright, article 68 26 82, and 682682_Cat_Basis34_*_211202 InDesign stem as the primary"
+      }
+    ],
+    "excluded_candidates": [
+      {
+        "path": "inputs/games/catan/game_almanac_base_2015.pdf",
+        "sha256": "9d8d0607326f82ea7bfda11aafa5be65aaffe41f043ae996f6d72f30e92c049f",
+        "reason": "Regelstand Januar 2015"
+      },
+      {
+        "path": "inputs/games/catan/game_almanac_bigbox_2016.pdf",
+        "sha256": "0dd37693be9d898752136f6a032f224580782d7c3e79dda37fed1e0b321577a2",
+        "reason": "Big Box 2016 edition"
+      }
+    ]
+  },
+  "infrastructure": {
+    "implementation_prompt": {
+      "path": "inputs/prompts/rulebook_to_python.txt",
+      "sha256": "0efa321c6feb49f3779629bd458640873e4fb97e0412ce42affe62f27c22941f"
+    },
+    "scenario_prompt": {
+      "path": "inputs/prompts/rulebook_to_scenarios.md",
+      "sha256": "148f0084c1ebf16b0bf565c68dd3a0a361cc945f0df47e7aa329e934d1981138"
+    },
+    "environment_contract": {
+      "path": "inputs/prompts/environment_contract.md",
+      "sha256": "eba8a3aa67b2770d46a3da5a008e32314dd80d8b35b56c7c50dcb3a9ff280570"
+    },
+    "environment_profile": {
+      "path": "inputs/games/catan/environment_profile.json",
+      "sha256": "24333cabf21f9e65e2c23bcb50cb8d850ff06c88257045431b7ae9f5b29bc15c"
+    },
+    "rulefacts": {
+      "path": "inputs/games/catan/rulefacts.md",
+      "sha256": "57c2157175e1851b1ca562a11c02c6429ffd999694602975a213a46e39f34b22"
+    },
+    "scenario_suite": {
+      "path": "checks/scenarios/catan.json",
+      "sha256": "b7a4f653376d18d3d1ad1dd12aff596b0308946ee69602cf613c409848d26cfe"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/catan.py",
+      "sha256": "fce085d7dd545793603260f85dd8157d63674ac4fe8c4a70e0f400253de83454"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios.py",
+      "sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762"
+    },
+    "agentic_self_check": {
+      "path": "generation/agentic_self_check.py",
+      "sha256": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1"
+    },
+    "profile_fixture_self_check": {
+      "path": "inputs/games/catan/profile_fixture_self_check.py",
+      "sha256": "176357bc8110ecf922b08ab4ba0071d438416690ddb83ee8d56101f97314b9ef"
+    },
+    "packet_test": {
+      "path": "generation/test_catan_packet.py",
+      "sha256": "da595d79560f7c2bd9a5e522ae9cc290585cc9d3994944395682c5021e69b367"
+    },
+    "required_api_check": {
+      "path": "checks/04_required_api.py",
+      "sha256": "ff7324f12ca63f91a9f94f894e271da77cac58ed5ddd6cde4ad2daddf0be9bd3"
+    },
+    "judge_prompt": {
+      "path": "inputs/prompts/llm_judge_review.md",
+      "sha256": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2"
+    }
+  }
+}

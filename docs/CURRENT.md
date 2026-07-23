@@ -1,23 +1,23 @@
 # Current state
 
-BoardBench currently focuses on one clean Exploding Kittens comparison: detect executable-translation problems from the publisher PDF, clarify supported source gaps, and generate again to measure which problems are reduced. Remaining questions count as diagnostic evidence; the goal is not a perfect game implementation.
+BoardBench is preparing the first fixed four-player CATAN 2022 stress case. The assigned publisher packet is the matching German Spielanleitung plus the explicitly referenced 2022 Almanach; older candidate almanacs are archived but excluded. Rules, approved material decisions, a canonical data profile, and cited scenarios are prepared before implementation generation.
+
+Bohnanza Base Game 2023 remains workflow-calibration evidence: the current replacement comparison scored 34/41 for the publisher-PDF run and 39/41 for the clarified run. It is no longer in the active shared input slots.
 
 ## Source of truth
 
-- `inputs/games/expl/` — rule sources and approved cited facts.
-- `inputs/prompts/` — text sent to implementation and judge models.
-- `checks/` — executable checks and scenario expectations. A skill cannot make a scenario pass or fail.
-- `generation/` — isolated Codex execution, result collection, and plotting.
-- `.pi/skills/` — user-facing orchestration instructions; they call the workflow but contain no hidden scoring logic.
-- `results/scores/exploding_kittens/<condition>/` — current evidence and raw artifacts.
-- `results/plots/exploding_kittens/<comparison>/` — presentation images only.
+- `inputs/game_rules.pdf` and `inputs/game_almanac.pdf` — active CATAN sources.
+- `inputs/games/catan/` — archived assigned sources, approved facts, profile, and local fixture self-check.
+- `checks/scenarios/catan.json` and `checks/scenario_adapters/catan.py` — current cited evaluator packet.
+- `inputs/games/bohnanza_base_2023*/` and `results/scores/bohnanza_base_2023/` — retained calibration evidence.
+- `inputs/prompts/`, `generation/`, and `.pi/skills/` — implementation/judge prompts and isolated workflow tooling.
 
 ## Current settings
 
-- implementation generation: `gpt-5.6-sol:low`;
-- neutral and persona judges: `gpt-5.6-sol:medium`;
-- native response verbosity: explicit `low` for future calls;
-- no OpenSpiel or one-shot comparison;
-- one canonical and at most one clarified source condition.
+- new generations are agentic; one-shot runs are historical pilots;
+- implementation default: `gpt-5.6-sol:low`;
+- judges: `gpt-5.6-sol:medium`, three independent reviews per run;
+- CATAN condition: fixed beginner board, four players, strict roll → trade → build;
+- no CATAN implementation or evaluation run has started.
 
-SHA-256 values identify the exact source/evaluator bytes used in a run. They are lightweight provenance, not workflow locks.
+Every run records exact source, prompt, profile, suite, adapter, runner, model/thinking, and artifact hashes locally. Git preserves superseded evidence.

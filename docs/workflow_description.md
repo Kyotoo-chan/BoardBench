@@ -14,7 +14,7 @@ The workflow detects problems in an executable translation of the original ruleb
 
 ## Phases
 
-1. **Source analysis:** archive the rulebook, cite facts, and record material ambiguities plus approved evaluator interpretations without adding them to the canonical implementer input.
+1. **Source analysis:** archive and hash every document in the assigned source condition (including an explicitly required, edition-matched publisher companion when applicable), cite facts, and record material ambiguities plus approved evaluator interpretations without adding them to the canonical implementer input.
 2. **Isolated implementation:** give one Codex agent only its assigned source, interface contract, and evaluator-neutral self-check. Require `implementation.py`, `rule_coverage.md`, and `assumptions.json`.
 3. **Mechanical evaluation:** run checks 01–06 and deterministic cited scenarios.
 4. **Blind review:** run three neutral judges and three separate personas without exposing checks or other implementations.
