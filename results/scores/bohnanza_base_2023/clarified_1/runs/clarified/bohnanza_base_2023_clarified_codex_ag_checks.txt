@@ -4,27 +4,27 @@ exit_code=0
 OK   01_result_file                     1/1 score=1.000    0.00s
 OK   02_python_syntax                   1/1 score=1.000    0.01s
 OK   03_startable_game                  1/1 score=1.000    0.01s
-OK   04_required_api                    9/9 score=1.000    0.01s
----- summary                            4/4 score=1.000    0.03s
+OK   04_required_api                    9/9 score=1.000    0.00s
+---- summary                            4/4 score=1.000    0.02s
 
 
 === ROBUSTNESS 05 ===
 $ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_clarified_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --rollouts 100 --max-steps 1000 --seed 1 --check 05_random_rollouts
 exit_code=0
-OK   05_random_rollouts             100/100 score=1.000   94.07s
----- summary                            1/1 score=1.000   94.07s
+OK   05_random_rollouts             100/100 score=1.000   56.16s
+---- summary                            1/1 score=1.000   56.16s
 
 
 === INTERFACE 06 ===
 $ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_clarified_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --check 06_action_language
 exit_code=0
-OK   06_action_language     2045295/2045295 score=1.000   89.74s
----- summary                            1/1 score=1.000   89.74s
+OK   06_action_language     1373753/1373753 score=1.000   56.14s
+---- summary                            1/1 score=1.000   56.14s
 
 
 === BASE CONTRACT-V2 SCENARIOS ===
-$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza_base_2023_comparison_v3.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag_scenarios.json
-exit_code=0
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza_base_2023_comparison_v4.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\clarified_1\runs\clarified\bohnanza_base_2023_clarified_codex_ag_scenarios.json
+exit_code=1
 PASS BASE-R01-exact-base-inventory
 PASS BASE-R02-front-card-mandatory
 PASS BASE-R03-second-plant-optional-no-third
@@ -62,4 +62,8 @@ PASS CLAR-R41-first-empty-recycles-on-last-card
 PASS CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice
 PASS CLAR-R43-one-for-two-trade-is-legal
 PASS CLAR-R44-three-for-one-trade-is-legal
-SCENARIOS PASS=37 FAIL=0 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=37/37 score=1.000 coverage=1.000
+FAIL BASE-R45-final-harvest-after-phase4-depletion: step 1: field_sizes[0]: expected [0, 0, 0], got [4, 2, 1]
+FAIL BASE-R46-final-harvest-after-phase2-continuation: step 1: field_sizes[0]: expected [0, 0, 0], got [3, 0, 0]
+PASS CLAR-R47-second-empty-during-phase4-finishes-turn
+PASS CLAR-R48-third-empty-on-exact-second-phase4-card
+SCENARIOS PASS=39 FAIL=2 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=41/41 score=0.951 coverage=1.000

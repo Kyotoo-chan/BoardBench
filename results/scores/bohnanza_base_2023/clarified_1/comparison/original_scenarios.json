@@ -1,34 +1,34 @@
 {
   "version": 3,
-  "rubric_version": "bohnanza-base-2023-comparison-v3-2026-07-19",
-  "suite": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
-  "suite_sha256": "0b10c61c68fb24a54ad765efc060e11ba8b3b5eec82fa05425fe27b7e07bcaa4",
-  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+  "rubric_version": "bohnanza-base-2023-comparison-v4-2026-07-23",
+  "suite": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+  "suite_sha256": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e",
+  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
   "adapter_sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd",
   "runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
-  "code": "results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py",
-  "code_sha256": "5f7b4379caa4b3aeac10d13bcf51d54e4f4559a7f416a8a26e25dd2f1572ef5d",
+  "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py",
+  "code_sha256": "f5b8cf96e66e14d25f0aa1ebd94f3b5486060ad17e4919b9d3dd9c3939f34991",
   "counts": {
-    "PASS": 31,
-    "FAIL": 6,
+    "PASS": 34,
+    "FAIL": 7,
     "CRASH": 0,
     "UNREACHED": 0,
     "UNTESTABLE": 0
   },
-  "evaluated": 37,
-  "total": 37,
-  "score": 0.8378378378378378,
+  "evaluated": 41,
+  "total": 41,
+  "score": 0.8292682926829268,
   "coverage": 1.0,
   "basis_scores": {
     "clear": {
       "passed": 25,
-      "evaluated": 25,
-      "score": 1.0
+      "evaluated": 26,
+      "score": 0.9615384615384616
     },
     "human_decision": {
-      "passed": 6,
-      "evaluated": 12,
-      "score": 0.5
+      "passed": 9,
+      "evaluated": 15,
+      "score": 0.6
     }
   },
   "results": [
@@ -166,8 +166,8 @@
     },
     {
       "id": "BASE-R18-third-empty-during-phase-four-stops-immediately",
-      "status": "PASS",
-      "message": "",
+      "status": "FAIL",
+      "message": "step 1: hand_size[0]: expected 1, got 0",
       "basis": "human_decision",
       "fact_ids": [
         "BASE-END-01",
@@ -376,7 +376,7 @@
     {
       "id": "CLAR-R39-third-empty-on-exact-third-phase4-card",
       "status": "FAIL",
-      "message": "step 1: terminal: expected True, got False",
+      "message": "step 1: hand_size[0]: expected 3, got 0",
       "basis": "human_decision",
       "fact_ids": [
         "BASE-END-02",
@@ -386,8 +386,8 @@
     },
     {
       "id": "CLAR-R40-third-empty-on-exact-two-card-reveal",
-      "status": "FAIL",
-      "message": "step 1: depletions: expected 3, got 2",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "BASE-END-03",
@@ -416,8 +416,8 @@
     },
     {
       "id": "CLAR-R43-one-for-two-trade-is-legal",
-      "status": "FAIL",
-      "message": "trade_bundle_legal: expected True, got False",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "BASE-TRADE-03",
@@ -426,12 +426,57 @@
     },
     {
       "id": "CLAR-R44-three-for-one-trade-is-legal",
-      "status": "FAIL",
-      "message": "trade_bundle_legal: expected True, got False",
+      "status": "PASS",
+      "message": "",
       "basis": "human_decision",
       "fact_ids": [
         "BASE-TRADE-03",
         "CLAR-TRADE-01"
+      ]
+    },
+    {
+      "id": "BASE-R45-final-harvest-after-phase4-depletion",
+      "status": "FAIL",
+      "message": "step 1: hand_size[0]: expected 3, got 0",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-02",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02",
+        "D-BASE-END"
+      ]
+    },
+    {
+      "id": "BASE-R46-final-harvest-after-phase2-continuation",
+      "status": "FAIL",
+      "message": "step 1: coins[0]: expected 1, got 2",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "CLAR-R47-second-empty-during-phase4-finishes-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-DRAW-01",
+        "CLAR-END-01"
+      ]
+    },
+    {
+      "id": "CLAR-R48-third-empty-on-exact-second-phase4-card",
+      "status": "FAIL",
+      "message": "step 1: hand_size[0]: expected 2, got 0",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-02",
+        "D-BASE-END",
+        "CLAR-END-01"
       ]
     }
   ]

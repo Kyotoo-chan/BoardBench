@@ -73,6 +73,10 @@
 2. **D-BASE-OBS (`human_decision`, interface only):** Canonical player observations expose own hand identities/order and opponents' hand sizes, fields, coins, revealed cards, and other public state, but not opponents' hand identities/order. Privacy is not scored for rule fidelity. **Rationale:** avoid adding public access to unspecified opponent card identities.
 3. **D-BASE-INTERRUPT (`human_decision`):** Represent “jederzeit” harvesting at every stable player decision boundary, including off-turn, but not as an interrupt inside one atomic draw, shuffle, transfer, or planting transition. **Rationale:** preserve off-turn harvesting without inventing sub-action interruption semantics.
 
+## Explicit non-rule decision (2026-07-23)
+
+- A proposed trade-fairness heuristic based on printed bean frequencies is **not** a gameplay rule and does not restrict legal trades or scored expectations. If a future example agent policy uses it, compare the sums of the printed frequencies on both sides and allow a maximum difference of six; this optional policy must remain outside the environment's legality rules.
+
 ## Proposed scenario changes
 
 ### Keep and recite for the base source

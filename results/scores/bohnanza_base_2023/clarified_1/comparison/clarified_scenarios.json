@@ -1,34 +1,34 @@
 {
   "version": 3,
-  "rubric_version": "bohnanza-base-2023-comparison-v3-2026-07-19",
-  "suite": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/checks/scenarios/bohnanza_base_2023_comparison_v3.json",
-  "suite_sha256": "0b10c61c68fb24a54ad765efc060e11ba8b3b5eec82fa05425fe27b7e07bcaa4",
-  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+  "rubric_version": "bohnanza-base-2023-comparison-v4-2026-07-23",
+  "suite": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+  "suite_sha256": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e",
+  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
   "adapter_sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd",
   "runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
   "code": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/clarified_1/runs/clarified/bohnanza_base_2023_clarified_codex_ag.py",
-  "code_sha256": "28059673c33df8665bba3b39d38cc3795e54044a09fdf6571db938c9aaef3c87",
+  "code_sha256": "86a535586c1f7fd8d4f992437711aa85f5a2cb4d0954f55cdc2e8ac1a1ed7f2d",
   "counts": {
-    "PASS": 37,
-    "FAIL": 0,
+    "PASS": 39,
+    "FAIL": 2,
     "CRASH": 0,
     "UNREACHED": 0,
     "UNTESTABLE": 0
   },
-  "evaluated": 37,
-  "total": 37,
-  "score": 1.0,
+  "evaluated": 41,
+  "total": 41,
+  "score": 0.9512195121951219,
   "coverage": 1.0,
   "basis_scores": {
     "clear": {
       "passed": 25,
-      "evaluated": 25,
-      "score": 1.0
+      "evaluated": 26,
+      "score": 0.9615384615384616
     },
     "human_decision": {
-      "passed": 12,
-      "evaluated": 12,
-      "score": 1.0
+      "passed": 14,
+      "evaluated": 15,
+      "score": 0.9333333333333333
     }
   },
   "results": [
@@ -432,6 +432,51 @@
       "fact_ids": [
         "BASE-TRADE-03",
         "CLAR-TRADE-01"
+      ]
+    },
+    {
+      "id": "BASE-R45-final-harvest-after-phase4-depletion",
+      "status": "FAIL",
+      "message": "step 1: field_sizes[0]: expected [0, 0, 0], got [4, 2, 1]",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-02",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02",
+        "D-BASE-END"
+      ]
+    },
+    {
+      "id": "BASE-R46-final-harvest-after-phase2-continuation",
+      "status": "FAIL",
+      "message": "step 1: field_sizes[0]: expected [0, 0, 0], got [3, 0, 0]",
+      "basis": "clear",
+      "fact_ids": [
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ]
+    },
+    {
+      "id": "CLAR-R47-second-empty-during-phase4-finishes-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-DRAW-01",
+        "CLAR-END-01"
+      ]
+    },
+    {
+      "id": "CLAR-R48-third-empty-on-exact-second-phase4-card",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "BASE-END-02",
+        "D-BASE-END",
+        "CLAR-END-01"
       ]
     }
   ]

@@ -213,7 +213,7 @@ def generate_one(condition: str, specification: dict, manifest: dict) -> None:
         shutil.rmtree(workspace, ignore_errors=True)
 
 
-def judge_one(condition: str) -> None:
+def judge_one(condition: str, index: int) -> None:
     target, output_stem = run_dir(condition), stem(condition)
     workspace = Path(tempfile.mkdtemp(prefix="boardbench_v2_judge_"))
     try:
@@ -226,13 +226,13 @@ def judge_one(condition: str) -> None:
         ]), encoding="utf-8")
         images = render_pdf_pages(rules, workspace / "game_rules_pages", dpi=150)
         review = (ROOT / "inputs/prompts/llm_judge_review.md").read_text(encoding="utf-8")
-        events = target / f"{output_stem}_judge_1_events.jsonl"
+        events = target / f"{output_stem}_judge_{index}_events.jsonl"
         run_codex(
             prompt=legacy.JUDGE_PREFIX + review,
             cwd=workspace,
-            response_path=target / f"{output_stem}_judge_1.md",
+            response_path=target / f"{output_stem}_judge_{index}.md",
             events_path=events,
-            usage_path=target / f"{output_stem}_judge_1_usage.json",
+            usage_path=target / f"{output_stem}_judge_{index}_usage.json",
             model=MODEL,
             effort=JUDGE_EFFORT,
             verbosity="low",
@@ -249,26 +249,32 @@ def judge_one(condition: str) -> None:
 def run_phase(phase: str, maximum: int | None) -> int:
     manifest, progress = load_manifest(), state()
     launched = 0
-    key = "completed" if phase == "generate" else "judged"
     for condition in manifest["runs"]:
-        if condition in progress[key] or (phase == "judge" and condition not in progress["completed"]):
-            continue
-        if maximum is not None and launched >= maximum:
-            break
-        try:
-            if phase == "generate":
-                generate_one(condition, manifest["conditions"][condition], manifest)
-            else:
-                judge_one(condition)
-        except Exception as error:
-            progress["failed"].append({"condition": condition, "phase": phase, "error": str(error)})
+        if phase == "generate":
+            if condition in progress["completed"]:
+                continue
+            jobs = [(condition, lambda: generate_one(condition, manifest["conditions"][condition], manifest))]
+        else:
+            if condition not in progress["completed"]:
+                continue
+            jobs = [(f"{condition}_judge_{index}", lambda index=index: judge_one(condition, index)) for index in range(1, manifest["judging"]["judges_per_run"] + 1)]
+        for key, job in jobs:
+            progress_key = "completed" if phase == "generate" else "judged"
+            if key in progress[progress_key]:
+                continue
+            if maximum is not None and launched >= maximum:
+                return 0
+            try:
+                job()
+            except Exception as error:
+                progress["failed"].append({"condition": condition, "phase": phase, "job": key, "error": str(error)})
+                save(progress)
+                print(f"STOPPED {key} {phase}: {error}", file=sys.stderr)
+                return 1
+            progress[progress_key].append(key)
             save(progress)
-            print(f"STOPPED {condition} {phase}: {error}", file=sys.stderr)
-            return 1
-        progress[key].append(condition)
-        save(progress)
-        launched += 1
-        print(f"COMPLETED {condition} {phase}", flush=True)
+            launched += 1
+            print(f"COMPLETED {key} {phase}", flush=True)
     return 0
 
 

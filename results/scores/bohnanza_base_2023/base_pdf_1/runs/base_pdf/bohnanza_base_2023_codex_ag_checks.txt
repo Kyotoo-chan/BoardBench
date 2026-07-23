@@ -11,40 +11,40 @@ OK   04_required_api                    9/9 score=1.000    0.01s
 === ROBUSTNESS 05 ===
 $ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag.py --rollouts 100 --max-steps 1000 --seed 1 --check 05_random_rollouts
 exit_code=0
-OK   05_random_rollouts             100/100 score=1.000   37.43s
----- summary                            1/1 score=1.000   37.43s
+OK   05_random_rollouts             100/100 score=1.000   34.67s
+---- summary                            1/1 score=1.000   34.67s
 
 
 === INTERFACE 06 ===
 $ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_checks.py --game bohnanza_base_2023_codex_ag --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag.py --check 06_action_language
 exit_code=0
-OK   06_action_language       666338/666338 score=1.000   34.73s
----- summary                            1/1 score=1.000   34.73s
+OK   06_action_language     1473350/1473350 score=1.000   33.66s
+---- summary                            1/1 score=1.000   33.66s
 
 
 === BASE CONTRACT-V2 SCENARIOS ===
-$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza_base_2023.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag_scenarios.json
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\run_scenarios.py --code-path D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag.py --scenarios D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\scenarios\bohnanza_base_2023_comparison_v4.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\base_pdf_1\runs\base_pdf\bohnanza_base_2023_codex_ag_scenarios.json
 exit_code=1
 PASS BASE-R01-exact-base-inventory
-FAIL BASE-R02-front-card-mandatory: no legal planting action for 'blau'
+PASS BASE-R02-front-card-mandatory
 PASS BASE-R03-second-plant-optional-no-third
-FAIL BASE-R04-empty-hand-skips-phase-one: no canonical legal action type in ['reveal']
+PASS BASE-R04-empty-hand-skips-phase-one
 PASS BASE-R05-one-type-per-field
-CRASH BASE-R06-trading-authority: IndexError: list index out of range
+PASS BASE-R06-trading-authority
 PASS BASE-R07-received-cards-bypass-hand
-FAIL BASE-R08-rejected-gift-no-transfer: canonical action is not legal: {'type': 'trade_reject'}
+PASS BASE-R08-rejected-gift-no-transfer
 PASS BASE-R10-singleton-protection
 PASS BASE-R11-singleton-allowed-when-all-single
 PASS BASE-R12-normal-harvest-clears-field
 PASS BASE-R17-third-empty-during-reveal-finishes-phase-three
-CRASH BASE-R18-third-empty-during-phase-four-stops-immediately: IndexError: list index out of range
+FAIL BASE-R18-third-empty-during-phase-four-stops-immediately: step 1: hand_size[0]: expected 1, got 0
 PASS BASE-R19-final-score-ignores-hand
-CRASH BASE-R20-clockwise-tiebreak: IndexError: list index out of range
+PASS BASE-R20-clockwise-tiebreak
 PASS BASE-R21-nonterminal-empty-refills-and-continues-reveal
 PASS BASE-R22-harvest-between-mandatory-plantings
 PASS BASE-R23-nonactive-player-can-harvest
 PASS BASE-R25-five-player-setup
-FAIL BASE-R26-unequal-trade-from-arbitrary-hand-positions: step 2: pending_received[1]: expected ['blaue_bohne', 'rote_bohne'], got ['rote_bohne', 'blaue_bohne']
+PASS BASE-R26-unequal-trade-from-arbitrary-hand-positions
 PASS BASE-R27-forced-harvest-before-mandatory-plant
 PASS BASE-R28-blau-coin-curve
 PASS BASE-R29-feuer-coin-curve
@@ -56,4 +56,14 @@ PASS BASE-R34-rot-coin-curve
 FAIL BASE-R35-garten-coin-curve: harvest_curve[garten][2]: expected 2, got 1
 PASS BASE-R37-hand-sorting-is-forbidden
 PASS BASE-R38-three-player-setup
-SCENARIOS PASS=23 FAIL=5 CRASH=3 UNREACHED=0 UNTESTABLE=0 evaluated=31/31 score=0.742 coverage=1.000
+FAIL CLAR-R39-third-empty-on-exact-third-phase4-card: step 1: hand_size[0]: expected 3, got 0
+PASS CLAR-R40-third-empty-on-exact-two-card-reveal
+PASS CLAR-R41-first-empty-recycles-on-last-card
+FAIL CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice: step 1: current_player: expected 1, got 0
+PASS CLAR-R43-one-for-two-trade-is-legal
+PASS CLAR-R44-three-for-one-trade-is-legal
+FAIL BASE-R45-final-harvest-after-phase4-depletion: step 1: hand_size[0]: expected 3, got 0
+FAIL BASE-R46-final-harvest-after-phase2-continuation: step 1: coins[0]: expected 1, got 2
+PASS CLAR-R47-second-empty-during-phase4-finishes-turn
+FAIL CLAR-R48-third-empty-on-exact-second-phase4-card: step 1: hand_size[0]: expected 2, got 0
+SCENARIOS PASS=34 FAIL=7 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=41/41 score=0.829 coverage=1.000

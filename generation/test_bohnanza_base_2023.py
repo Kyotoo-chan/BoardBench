@@ -12,7 +12,7 @@ class BohnanzaBase2023StudyTests(unittest.TestCase):
         manifest = study.load_manifest()
         self.assertEqual(manifest["runs"], ["base_pdf"])
         self.assertEqual(manifest["generation"]["runs"], 1)
-        self.assertEqual(manifest["judging"]["judges_per_run"], 1)
+        self.assertEqual(manifest["judging"]["judges_per_run"], 3)
 
     def test_generation_packet_has_only_source_and_neutral_contract_files(self):
         manifest = study.load_manifest()
@@ -42,6 +42,18 @@ class BohnanzaBase2023StudyTests(unittest.TestCase):
         with patch.object(study, "load_manifest", return_value=manifest), patch.object(study, "state", return_value=progress), patch.object(study, "save"), patch.object(study, "generate_one") as generate:
             self.assertEqual(study.run_phase("generate", None), 0)
             generate.assert_not_called()
+
+    def test_three_judges_are_sequential_and_resumable(self):
+        manifest = study.load_manifest()
+        progress = {"schema_version": 1, "completed": ["base_pdf"], "judged": [], "failed": [], "updated_at": None}
+        judged = []
+        with patch.object(study, "load_manifest", return_value=manifest), patch.object(study, "state", return_value=progress), patch.object(study, "save"), patch.object(study, "judge_one", side_effect=lambda condition, index: judged.append((condition, index))):
+            self.assertEqual(study.run_phase("judge", None), 0)
+        self.assertEqual(judged, [("base_pdf", 1), ("base_pdf", 2), ("base_pdf", 3)])
+        self.assertEqual(progress["judged"], ["base_pdf_judge_1", "base_pdf_judge_2", "base_pdf_judge_3"])
+        with patch.object(study, "load_manifest", return_value=manifest), patch.object(study, "state", return_value=progress), patch.object(study, "save"), patch.object(study, "judge_one") as judge:
+            self.assertEqual(study.run_phase("judge", None), 0)
+            judge.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,50 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "read-only",
+  "started_at": "2026-07-23T08:10:01.272426+00:00",
+  "ended_at": "2026-07-23T08:13:13.376200+00:00",
+  "elapsed_seconds": 192.103,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 13,
+      "reset_at": 1785316458,
+      "reset_after_seconds": 522258,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 13,
+      "reset_at": 1785316458,
+      "reset_after_seconds": 522065,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "output_tokens": 7187,
+    "reasoning_output_tokens": 4796,
+    "input_tokens": 173365,
+    "cached_input_tokens": 124672
+  },
+  "provider_usage_records": [
+    {
+      "line": 16,
+      "path": "$.usage",
+      "input_tokens": 173365,
+      "cached_input_tokens": 124672,
+      "output_tokens": 7187,
+      "reasoning_output_tokens": 4796
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag_judge_2_events.jsonl",
+  "response_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag_judge_2.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_v2_judge_a48jdn1q/game_rules_pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_v2_judge_a48jdn1q/game_rules_pages/page-2.png"
+  ],
+  "stderr": "2026-07-23T08:10:11.787537Z ERROR codex_core::tools::router: error=`\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force | Select-Object Name,Length,Mode'` rejected: blocked by policy\n"
+}

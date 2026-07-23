@@ -1,8 +1,8 @@
 {
   "version": 3,
-  "rubric_version": "bohnanza-base-2023-posthoc-v2-2026-07-19",
+  "rubric_version": "bohnanza-base-2023-comparison-v4-2026-07-23",
   "game": "bohnanza_base_2023",
-  "adapter": "checks/scenario_adapters/bohnanza_base_2023_posthoc_v2.py",
+  "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
   "source_condition": "publisher_pdf_only",
   "sources": [
     {
@@ -10,6 +10,12 @@
       "role": "publisher_rulebook",
       "path": "inputs/games/bohnanza_base_2023/game_rules.pdf",
       "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    },
+    {
+      "source_id": "BOHN-BASE-CLARIFY",
+      "role": "experimenter_clarification",
+      "path": "inputs/games/bohnanza_base_2023_clarified/clarifications.json",
+      "sha256": "fc6b50c3bc639ecbde7685ff40aee6b8399f2e04ceaca2352bfc57063bc94ad7"
     }
   ],
   "contract": "inputs/prompts/environment_contract.md",
@@ -1381,13 +1387,14 @@
       "id": "BASE-R35-garten-coin-curve",
       "fact_ids": [
         "BASE-PAY-01",
-        "BASE-HARVEST-02"
+        "BASE-HARVEST-02",
+        "CLAR-PAY-01"
       ],
-      "basis": "clear",
+      "basis": "human_decision",
       "source": {
-        "source_id": "BOHN-BASE-RULES",
-        "page": 2,
-        "quote": "Jede Bohnensorte hat ein eigenes Bohnometer. Es zeigt dir, wie viele Taler du für eine bestimmte Anzahl angebauter Karten dieser Sorte bei einer Ernte erhältst."
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/3/text",
+        "quote": "Mindestgrößen für 1, 2, 3 und 4 Taler: Gartenbohne – / 2 / 3 / –; Rote Bohne 2 / 3 / 4 / 5; Augenbohne 2 / 4 / 5 / 6; Sojabohne 2 / 4 / 6 / 7; Brechbohne 3 / 5 / 6 / 7; Saubohne 3 / 5 / 7 / 8; Feuerbohne 3 / 6 / 8 / 9; Blaue Bohne 4 / 6 / 8 / 10. Ein Strich bedeutet, dass diese Auszahlungsstufe nicht existiert. Folglich zahlen zwei Gartenbohnen zwei Taler und drei oder mehr Gartenbohnen drei Taler."
       },
       "initial": {
         "adapter": {
@@ -1476,6 +1483,659 @@
           }
         }
       }
+    },
+    {
+      "id": "CLAR-R39-third-empty-on-exact-third-phase4-card",
+      "fact_ids": [
+        "BASE-END-02",
+        "D-BASE-END",
+        "CLAR-END-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/0/text",
+        "quote": "Die Leerung tritt in dem Moment ein, in dem die letzte vorhandene Karte gezogen wird – nicht erst beim nächsten Zugversuch. Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte. Nur in Phase 2 werden Phase 2 und 3 wie gedruckt beendet; Phase 4 beginnt danach nicht."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": [],
+          "3": []
+        },
+        "deck": [
+          "blau",
+          "feuer",
+          "soja"
+        ],
+        "discard": [
+          "rot"
+        ],
+        "depletions": 2,
+        "phase": "draw",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw"
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "hand_size": {
+                "0": 3
+              },
+              "depletions": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R40-third-empty-on-exact-two-card-reveal",
+      "fact_ids": [
+        "BASE-END-03",
+        "CLAR-END-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/0/text",
+        "quote": "Die Leerung tritt in dem Moment ein, in dem die letzte vorhandene Karte gezogen wird – nicht erst beim nächsten Zugversuch. Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte. Nur in Phase 2 werden Phase 2 und 3 wie gedruckt beendet; Phase 4 beginnt danach nicht."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "blau",
+          "feuer"
+        ],
+        "discard": [
+          "rot"
+        ],
+        "depletions": 2,
+        "phase": "reveal",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "reveal"
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "adapter": {
+              "depletions": 3,
+              "revealed_size": 2,
+              "phase_contains_any": [
+                "trade"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R41-first-empty-recycles-on-last-card",
+      "fact_ids": [
+        "BASE-END-01",
+        "CLAR-END-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/0/text",
+        "quote": "Die Leerung tritt in dem Moment ein, in dem die letzte vorhandene Karte gezogen wird – nicht erst beim nächsten Zugversuch. Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte. Nur in Phase 2 werden Phase 2 und 3 wie gedruckt beendet; Phase 4 beginnt danach nicht."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "blau"
+        ],
+        "discard": [
+          "feuer",
+          "soja"
+        ],
+        "depletions": 0,
+        "phase": "reveal",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "reveal"
+            }
+          },
+          "expect": {
+            "adapter": {
+              "depletions": 1,
+              "revealed_size": 2,
+              "discard_size": 0,
+              "deck_size": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice",
+      "fact_ids": [
+        "BASE-PHASE3-01",
+        "CLAR-PHASE3-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/1/text",
+        "quote": "Jede Person mit erhaltenen Karten muss in Phase 3 eine eigene Pflanzgelegenheit erhalten, auch wenn sie nicht die aktive Person ist. Die betroffene Person darf bei jeder Entscheidung irgendeine ihrer noch nicht gepflanzten neuen Karten als nächste wählen. Die aktive Person pflanzt zusätzlich alle nicht gehandelten aufgedeckten Karten. Phase 3 endet erst, wenn alle betroffenen Personen sämtliche dieser Karten gepflanzt haben."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "pending_received": {
+          "1": [
+            "soja",
+            "feuer"
+          ]
+        },
+        "revealed": [],
+        "phase": "plant_received",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "plant_received_choices": [
+                {
+                  "actor": 1,
+                  "beans": [
+                    "soja",
+                    "feuer"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R43-one-for-two-trade-is-legal",
+      "fact_ids": [
+        "BASE-TRADE-03",
+        "CLAR-TRADE-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/2/text",
+        "quote": "Das gedruckte 2-gegen-1-Beispiel ist keine Obergrenze. Jede endliche Anzahl zulässiger eigener Hand- oder Aufdeckkarten darf gegen jede endliche Anzahl zulässiger Handkarten der anderen beteiligten Person angeboten werden, begrenzt nur durch vorhandene Karten und beiderseitige Zustimmung. Damit müssen zum Beispiel 1-gegen-2 und 3-gegen-1 darstellbar sein. Erhaltene und bereits angebaute Karten bleiben wie gedruckt vom Handel ausgeschlossen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau"
+          ],
+          "1": [
+            "soja",
+            "feuer"
+          ],
+          "2": []
+        },
+        "revealed": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "trade_bundle_legal": [
+            {
+              "actor": 0,
+              "partner": 1,
+              "offered": [
+                {
+                  "owner": 0,
+                  "zone": "hand",
+                  "index": 0,
+                  "bean": "blau"
+                }
+              ],
+              "requested": [
+                {
+                  "owner": 1,
+                  "zone": "hand",
+                  "index": 0,
+                  "bean": "soja"
+                },
+                {
+                  "owner": 1,
+                  "zone": "hand",
+                  "index": 1,
+                  "bean": "feuer"
+                }
+              ],
+              "gift": false,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CLAR-R44-three-for-one-trade-is-legal",
+      "fact_ids": [
+        "BASE-TRADE-03",
+        "CLAR-TRADE-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/2/text",
+        "quote": "Das gedruckte 2-gegen-1-Beispiel ist keine Obergrenze. Jede endliche Anzahl zulässiger eigener Hand- oder Aufdeckkarten darf gegen jede endliche Anzahl zulässiger Handkarten der anderen beteiligten Person angeboten werden, begrenzt nur durch vorhandene Karten und beiderseitige Zustimmung. Damit müssen zum Beispiel 1-gegen-2 und 3-gegen-1 darstellbar sein. Erhaltene und bereits angebaute Karten bleiben wie gedruckt vom Handel ausgeschlossen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "blau",
+            "rot",
+            "feuer"
+          ],
+          "1": [
+            "soja"
+          ],
+          "2": []
+        },
+        "revealed": [],
+        "phase": "trade",
+        "active_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "trade_bundle_legal": [
+            {
+              "actor": 0,
+              "partner": 1,
+              "offered": [
+                {
+                  "owner": 0,
+                  "zone": "hand",
+                  "index": 0,
+                  "bean": "blau"
+                },
+                {
+                  "owner": 0,
+                  "zone": "hand",
+                  "index": 1,
+                  "bean": "rot"
+                },
+                {
+                  "owner": 0,
+                  "zone": "hand",
+                  "index": 2,
+                  "bean": "feuer"
+                }
+              ],
+              "requested": [
+                {
+                  "owner": 1,
+                  "zone": "hand",
+                  "index": 0,
+                  "bean": "soja"
+                }
+              ],
+              "gift": false,
+              "expected": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BASE-R45-final-harvest-after-phase4-depletion",
+      "fact_ids": [
+        "BASE-END-02",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02",
+        "D-BASE-END"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird. Am Spielende erntet ihr alle eure Bohnenfelder ab. Die Karten auf der Hand zählen nicht mehr."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "garten",
+            "garten"
+          ],
+          "1": [
+            "blau",
+            "blau",
+            "blau"
+          ],
+          "2": []
+        },
+        "fields": {
+          "0": [
+            [
+              "blau",
+              "blau",
+              "blau",
+              "blau"
+            ],
+            [
+              "rot",
+              "rot"
+            ],
+            [
+              "garten"
+            ]
+          ],
+          "1": [
+            [
+              "soja",
+              "soja"
+            ],
+            [],
+            []
+          ],
+          "2": [
+            [],
+            [],
+            []
+          ]
+        },
+        "coins": {
+          "0": 2,
+          "1": 2,
+          "2": 0
+        },
+        "deck": [
+          "feuer"
+        ],
+        "discard": [],
+        "depletions": 2,
+        "phase": "draw",
+        "active_player": 0,
+        "start_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw"
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "depletions": 3,
+              "hand_size": {
+                "0": 3,
+                "1": 3,
+                "2": 0
+              },
+              "field_sizes": {
+                "0": [
+                  0,
+                  0,
+                  0
+                ],
+                "1": [
+                  0,
+                  0,
+                  0
+                ],
+                "2": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "coins": {
+                "0": 4,
+                "1": 3,
+                "2": 0
+              },
+              "discard_size": 6,
+              "winner": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "BASE-R46-final-harvest-after-phase2-continuation",
+      "fact_ids": [
+        "BASE-END-03",
+        "BASE-SCORE-01",
+        "BASE-SCORE-02"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "BOHN-BASE-RULES",
+        "page": 2,
+        "quote": "Sollte dies beim Aufdecken der beiden Bohnenkarten in der 2. Phase passieren, werden die 2. und die 3. Phase noch zu Ende gespielt. Am Spielende erntet ihr alle eure Bohnenfelder ab."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "garten"
+          ],
+          "1": [],
+          "2": []
+        },
+        "fields": {
+          "0": [
+            [
+              "feuer",
+              "feuer",
+              "feuer"
+            ],
+            [],
+            []
+          ],
+          "1": [
+            [
+              "blau",
+              "blau",
+              "blau",
+              "blau"
+            ],
+            [],
+            []
+          ],
+          "2": [
+            [],
+            [],
+            []
+          ]
+        },
+        "coins": {
+          "0": 0,
+          "1": 2,
+          "2": 0
+        },
+        "deck": [],
+        "discard": [],
+        "depletions": 3,
+        "phase": "plant_received",
+        "active_player": 0,
+        "start_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "field_sizes": {
+                "0": [
+                  0,
+                  0,
+                  0
+                ],
+                "1": [
+                  0,
+                  0,
+                  0
+                ],
+                "2": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "coins": {
+                "0": 1,
+                "1": 3,
+                "2": 0
+              },
+              "discard_size": 5,
+              "winner": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R47-second-empty-during-phase4-finishes-turn",
+      "fact_ids": [
+        "BASE-END-01",
+        "BASE-DRAW-01",
+        "CLAR-END-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/0/text",
+        "quote": "Die Leerung tritt in dem Moment ein, in dem die letzte vorhandene Karte gezogen wird – nicht erst beim nächsten Zugversuch. Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "blau"
+        ],
+        "discard": [
+          "feuer",
+          "soja",
+          "rot"
+        ],
+        "depletions": 1,
+        "phase": "draw",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw"
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "current_player": 1,
+            "adapter": {
+              "depletions": 2,
+              "hand_size": {
+                "0": 3
+              },
+              "discard_size": 0,
+              "deck_size": 1,
+              "phase_contains_any": [
+                "plant"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "CLAR-R48-third-empty-on-exact-second-phase4-card",
+      "fact_ids": [
+        "BASE-END-02",
+        "D-BASE-END",
+        "CLAR-END-01"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "BOHN-BASE-CLARIFY",
+        "json_pointer": "/clarifications/0/text",
+        "quote": "Bei der dritten Leerung endet das Spiel außerhalb Phase 2 sofort: kein Recycling und keine restlichen Ziehschritte."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "blau",
+          "feuer"
+        ],
+        "discard": [
+          "rot"
+        ],
+        "depletions": 2,
+        "phase": "draw",
+        "active_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw"
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "depletions": 3,
+              "hand_size": {
+                "0": 2
+              },
+              "discard_size": 1,
+              "deck_size": 0
+            }
+          }
+        }
+      ]
     }
   ]
 }

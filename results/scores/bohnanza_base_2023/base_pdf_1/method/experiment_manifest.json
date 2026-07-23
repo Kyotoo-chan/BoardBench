@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "bohnanza-base-2023-contract-v2",
-  "status": "refrozen-after-rejected-prompt-packet-attempt",
+  "status": "frozen-before-replacement-rerun-v4",
   "runs": [
     "base_pdf"
   ],
@@ -17,14 +17,14 @@
   "judging": {
     "model": "gpt-5.6-sol",
     "thinking": "medium",
-    "judges_per_run": 1,
+    "judges_per_run": 3,
     "sequential": true
   },
   "evaluation": {
     "seed": 1,
-    "suite": "checks/scenarios/bohnanza_base_2023.json",
-    "adapter": "checks/scenario_adapters/bohnanza_base_2023.py",
-    "original_results_unchanged": true
+    "suite": "checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+    "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
+    "apply_identically_to_original_and_clarified": true
   },
   "conditions": {
     "base_pdf": {
@@ -61,15 +61,15 @@
     },
     "rulefacts": {
       "path": "inputs/games/bohnanza_base_2023/rulefacts.md",
-      "sha256": "69a62878bbe51e8bbb25701dda3b091ac90989330117906f574fec443c42ffc2"
+      "sha256": "7220c21182b7460368c29b627aafbb090bc14fb7a07154b3f40b27907f6fabb1"
     },
     "scenario_suite": {
-      "path": "checks/scenarios/bohnanza_base_2023.json",
-      "sha256": "3b87eaa56d41b90004129c794b6c458a5e488dd3d08adfb9aef72ebe64209da0"
+      "path": "checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+      "sha256": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e"
     },
     "scenario_adapter": {
-      "path": "checks/scenario_adapters/bohnanza_base_2023.py",
-      "sha256": "9569414320e4d6205f7d9eec2737a6a3842d53fecbae9783b308b7b85d481ae3"
+      "path": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
+      "sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd"
     },
     "scenario_runner": {
       "path": "checks/run_scenarios.py",
@@ -85,7 +85,7 @@
     },
     "study_runner": {
       "path": "generation/run_bohnanza_base_2023.py",
-      "sha256": "04e0809d1ea466a8335cacc38d51b60d6ced04273f89258ccbde55908bc9c429"
+      "sha256": "f5a85573e2b39bb6469f96b1fad4a4661a8060a944a07f2a75c924f004aff476"
     },
     "contract_probe": {
       "path": "checks/fixtures/bohnanza_base_2023_contract_probe.py",

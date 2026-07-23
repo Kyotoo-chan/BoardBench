@@ -1,20 +1,13 @@
 {
   "schema_version": 1,
   "study": "bohnanza-base-2023-original-vs-clarified",
-  "status": "frozen-before-clarified-generation",
+  "status": "frozen-before-replacement-rerun-v4",
   "runs": [
     "clarified"
   ],
   "comparison": {
     "original_run": "results/scores/bohnanza_base_2023/base_pdf_1/runs/base_pdf/bohnanza_base_2023_codex_ag.py",
-    "rubric": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
-    "original_frozen_baseline": {
-      "PASS": 31,
-      "FAIL": 6,
-      "CRASH": 0,
-      "UNREACHED": 0,
-      "UNTESTABLE": 0
-    }
+    "rubric": "checks/scenarios/bohnanza_base_2023_comparison_v4.json"
   },
   "generation": {
     "model": "gpt-5.6-sol",
@@ -28,13 +21,13 @@
   "judging": {
     "model": "gpt-5.6-sol",
     "thinking": "medium",
-    "judges_per_run": 1,
+    "judges_per_run": 3,
     "sequential": true
   },
   "evaluation": {
     "seed": 1,
-    "suite": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
-    "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+    "suite": "checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+    "adapter": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
     "apply_identically_to_original_and_clarified": true
   },
   "conditions": {
@@ -78,14 +71,14 @@
     },
     "rulefacts": {
       "path": "inputs/games/bohnanza_base_2023_clarified/rulefacts.md",
-      "sha256": "236dddbd6abe36e4e7fd7a4a3cf18d7f6d1eea4077632668858426a721be64d1"
+      "sha256": "579e3850bbd95965d8a35b7707213a283fda7144006e06c5843fc4269e03d768"
     },
     "comparison_suite": {
-      "path": "checks/scenarios/bohnanza_base_2023_comparison_v3.json",
-      "sha256": "0b10c61c68fb24a54ad765efc060e11ba8b3b5eec82fa05425fe27b7e07bcaa4"
+      "path": "checks/scenarios/bohnanza_base_2023_comparison_v4.json",
+      "sha256": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e"
     },
     "comparison_adapter": {
-      "path": "checks/scenario_adapters/bohnanza_base_2023_comparison_v3.py",
+      "path": "checks/scenario_adapters/bohnanza_base_2023_comparison_v4.py",
       "sha256": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd"
     },
     "scenario_runner": {
@@ -102,7 +95,7 @@
     },
     "study_runner": {
       "path": "generation/run_bohnanza_base_2023_clarified.py",
-      "sha256": "f95d2a8bffa13ae76ff46d621bbd5e199d9dc9f90e3a6e512bc6089395bb9fb4"
+      "sha256": "98e591bd1ee69ba58b1a27ec6e6017c9f8370e7961f88a9c9c0e54e3cbee8392"
     },
     "contract_probe": {
       "path": "checks/fixtures/bohnanza_base_2023_contract_probe.py",

@@ -1,8 +1,4 @@
-Open questions/material assumptions:
-
-- Player 0 is the starting player because the rulebook does not specify selection.
-- Trade proposals support one- or two-card offers and zero- or one-card requests.
-- Terminal returns use winner-takes-1 utility, including the rulebook’s clockwise tie-break.
+Open questions/material assumptions: deterministic player 0 starts; deck depletion is counted when its last card is drawn; third depletion during phase 4 ends immediately. Details are recorded in `assumptions.json`.
 
 Files changed:
 
@@ -13,5 +9,5 @@ Files changed:
 Validation:
 
 - `python -m py_compile implementation.py` — passed
-- `python agentic_self_check.py` — passed: `agentic-self-check OK states=300 actions=2107`
+- `python agentic_self_check.py` — passed: `states=300 actions=8980`
 - `python profile_fixture_self_check.py` — passed: `profile-fixture-self-check OK`

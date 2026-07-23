@@ -8,21 +8,21 @@
   "agent_ran_self_check": true,
   "agent_ran_fixture_self_check": true,
   "independent_gate_passed": true,
-  "gate_output": "command=C:\\Users\\benti\\.conda\\envs\\boardbench\\python.exe -m py_compile C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-FCq1Ql\\boardbench_bohnanza_base_2023_lgz4p0hr\\implementation.py\nexit_code=0 elapsed_seconds=0.077\n\n\ncommand=C:\\Users\\benti\\.conda\\envs\\boardbench\\python.exe C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-FCq1Ql\\boardbench_bohnanza_base_2023_lgz4p0hr\\agentic_self_check.py\nexit_code=0 elapsed_seconds=2.720\nagentic-self-check OK states=300 actions=2058\nprofile-fixture-self-check OK\n",
-  "implementation_sha256": "5f7b4379caa4b3aeac10d13bcf51d54e4f4559a7f416a8a26e25dd2f1572ef5d",
+  "gate_output": "command=C:\\Users\\benti\\.conda\\envs\\boardbench\\python.exe -m py_compile C:\\Users\\benti\\AppData\\Local\\Temp\\boardbench_bohnanza_base_2023_5lcrf0ih\\implementation.py\nexit_code=0 elapsed_seconds=0.068\n\n\ncommand=C:\\Users\\benti\\.conda\\envs\\boardbench\\python.exe C:\\Users\\benti\\AppData\\Local\\Temp\\boardbench_bohnanza_base_2023_5lcrf0ih\\agentic_self_check.py\nexit_code=0 elapsed_seconds=2.666\nagentic-self-check OK states=300 actions=8755\nprofile-fixture-self-check OK\n",
+  "implementation_sha256": "f5b8cf96e66e14d25f0aa1ebd94f3b5486060ad17e4919b9d3dd9c3939f34991",
   "frozen_hashes": {
     "implementation_prompt": "0efa321c6feb49f3779629bd458640873e4fb97e0412ce42affe62f27c22941f",
     "environment_contract": "eba8a3aa67b2770d46a3da5a008e32314dd80d8b35b56c7c50dcb3a9ff280570",
     "environment_profile": "6b153234d9a1d4106cbcfd4ff57dfe4425ba21aa5bf23514af307654fd96ec46",
     "reachable_self_check": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
     "fixture_self_check": "5abcdf738a08cb4ea5c4edd2e9574b8dedb445f4de69eb7f313e125c9bbc1302",
-    "rulefacts": "69a62878bbe51e8bbb25701dda3b091ac90989330117906f574fec443c42ffc2",
-    "scenario_suite": "3b87eaa56d41b90004129c794b6c458a5e488dd3d08adfb9aef72ebe64209da0",
-    "scenario_adapter": "9569414320e4d6205f7d9eec2737a6a3842d53fecbae9783b308b7b85d481ae3",
+    "rulefacts": "7220c21182b7460368c29b627aafbb090bc14fb7a07154b3f40b27907f6fabb1",
+    "scenario_suite": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e",
+    "scenario_adapter": "88c414de969421de6df1feb6f509d94c977b3d0c2f58ace38327f675da2f5cfd",
     "scenario_runner": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
     "required_api_check": "ff7324f12ca63f91a9f94f894e271da77cac58ed5ddd6cde4ad2daddf0be9bd3",
     "judge_prompt": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2",
-    "study_runner": "04e0809d1ea466a8335cacc38d51b60d6ced04273f89258ccbde55908bc9c429",
+    "study_runner": "f5a85573e2b39bb6469f96b1fad4a4661a8060a944a07f2a75c924f004aff476",
     "contract_probe": "9bc3bc6fc25700ab86c9ee48a2b2049db95c411e0bb4f47d469294d2744e242f"
   }
 }

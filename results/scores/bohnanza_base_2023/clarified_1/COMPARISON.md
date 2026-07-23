@@ -1,8 +1,10 @@
-# Bohnanza Base 2023 — original versus clarified
+# Bohnanza Base 2023 — replacement comparison v4
 
 ## Design
 
-One fresh generation received the byte-identical publisher PDF plus the four user-approved items in `clarifications.json`. The original generation received only the PDF. Model, thinking, prompt, Contract-v2 profile, gates, technical checks, scenario runner, and one-Judge setting were held constant. The 37-scenario comparison rubric was frozen before the clarified generation and replayed identically on both implementations.
+Both prior current-condition runs were replaced by fresh isolated generations. Git retains the earlier experiment. The original condition received only the publisher PDF; the clarified condition received the byte-identical PDF plus the unchanged four-item `clarifications.json`. Model, thinking, prompt, Contract-v2 profile, technical checks, 41-scenario v4 rubric, and three-neutral-Judge protocol were held constant.
+
+The proposed rarity-based trade-fairness heuristic was **not** enforced and was not supplied to either implementation. It is strategy, not a publisher gameplay rule.
 
 ## Evidence groups
 
@@ -10,64 +12,52 @@ One fresh generation received the byte-identical publisher PDF plus the four use
 |---|---:|---:|
 | Technical checks 01–04 | 4/4 | 4/4 |
 | Random rollouts | 100/100 | 100/100 |
-| Action-language check | pass | pass |
-| Comparison scenarios | 31 PASS / 6 FAIL | 37 PASS / 0 FAIL |
-| Scenario coverage | 37/37 | 37/37 |
+| Action-language check | 1,473,350/1,473,350 | 1,373,753/1,373,753 |
+| Comparison scenarios | 34 PASS / 7 FAIL | 39 PASS / 2 FAIL |
+| Scenario coverage | 41/41 | 41/41 |
 | Generation repairs | 0 | 0 |
-| Neutral Judge (n=1) | 0.52 | 0.40 |
+| Neutral Judges | 0.32 mean, SD 0.069, n=3 | 0.60 mean, SD 0.035, n=3 |
 
 Do not combine these groups into one score.
 
-## Effect on the four clarified gaps
+## Differences under the identical rubric
 
-All six deterministic expectations derived from the four clarification areas changed from failure to pass:
+Five expectations changed from failure to pass:
 
-1. Garden-bean payout: fail → pass.
-2. Third depletion on exactly the third phase-four draw: fail → pass.
-3. Third depletion on exactly the second phase-two reveal: fail → pass.
-4. Phase three advances to a non-active recipient and exposes their card-order choices: fail → pass.
-5. One-for-two trade: fail → pass.
-6. Three-for-one trade: fail → pass.
+1. immediate termination when the third depletion occurs on the first phase-four draw;
+2. the Garden-bean payout curve;
+3. immediate termination when the third depletion occurs on the third phase-four draw;
+4. phase three advancing to a non-active recipient with their own planting choice;
+5. immediate termination when the third depletion occurs on the second phase-four draw.
 
-For these preregistered targets, the clarification intervention had the intended effect.
+Both implementations passed the first/second-depletion continuation case and the 1-for-2 and 3-for-1 trade-representability cases. This fresh pair therefore does not show an intervention effect for trade bundle legality, although the clarification still removes the possible 2-for-1-cap interpretation.
 
-## Runtime cost of the trade clarification
+## Mandatory final harvest: shared scenario failures
 
-The clarified implementation represents arbitrary finite trade bundles by eagerly enumerating card subsets. This passed the fixed robustness checks but substantially increased work:
+Both new final-harvest cases fail in both conditions:
 
-| Runtime evidence | Original | Clarified |
-|---|---:|---:|
-| 100 rollouts | 37.43 s | 94.07 s |
-| Action roundtrips checked | 666,338 | 2,045,295 |
-| Action-language check | 34.73 s | 89.74 s |
+- `BASE-R45-final-harvest-after-phase4-depletion`
+- `BASE-R46-final-harvest-after-phase2-continuation`
 
-The clarified source removed the illegal quantity cap, but the fixed atomic `trade_propose` profile encouraged an exponential implementation. This is a source/contract interaction, not evidence that arbitrary trades are wrong.
+The defects differ:
+
+- **Original:** it clears/harvests fields but also converts remaining hand cards into coins and clears the hand. This violates “Die Karten auf der Hand zählen nicht mehr” and can change the winner.
+- **Clarified:** it marks the state terminal without harvesting or clearing fields. `returns()` computes hypothetical field values dynamically, so the winner can look correct while the required final harvest never occurs observably.
+
+This is exactly why final harvesting must be tested as a state transition, not inferred only from terminal return values.
 
 ## Independent Judge evidence
 
-### Original Judge: 0.52, high confidence
+### Original: mean 0.32, sample SD 0.069, n=3
 
-Found delayed third depletion, incomplete all-player phase three, capped trade bundles, and the Garden payout error.
+Scores: 0.28, 0.28, 0.40; all high confidence. Repeated findings include illegal hand-card scoring, exponential trade enumeration, incomplete non-active phase-three planting, unchecked direct actions, and missing harvest opportunities at approved stable boundaries.
 
-### Clarified Judge: 0.40, high confidence
+### Clarified: mean 0.60, sample SD 0.035, n=3
 
-Confirmed that the clarified implementation now covers depletion timing, all-player phase three, trade quantities, and payouts, but identified:
-
-- mandatory final harvesting is omitted from terminal scoring;
-- exhaustive trade enumeration may become impractical as hands grow;
-- `apply_action` accepts syntactically valid actions without checking current-phase legality.
-
-The lower clarified Judge score does **not** show that clarification made the implementation less faithful. Each condition has only one Judge, and the clarified Judge found important issues that the original Judge did not inspect. In particular, both implementations' `returns` methods score only existing coins and omit mandatory final field harvests; this shared defect was missed by the original Judge and by the frozen comparison rubric.
-
-The `apply_action` finding is partly a contract question: the packet requires legal action generation but does not explicitly state whether every externally constructed action outside `legal_actions` must be rejected. It should be reported separately from confirmed publisher-rule contradictions.
+Scores: 0.56, 0.62, 0.62; all high confidence. All three Judges identify exponential trade enumeration as critical and missing partner-to-active gifts as major. However, all three describe final scoring as correct and miss that fields are never actually harvested. The deterministic transition cases therefore provide evidence the Judges did not.
 
 ## Interpretation
 
-The experiment provides positive evidence for the clarification intervention on the targeted gaps: the expanded deterministic rubric improved from 31/37 to 37/37 with no testability failures. It does not establish complete correctness. Clarification shifted the dominant problems:
+The clarified condition improves from 34/41 to 39/41 and has the higher three-Judge mean. It fixes all observed temporal-boundary, Garden-payout, and non-active phase-three differences in this fresh pair. It does **not** solve mandatory final harvesting, and both conditions retain serious action-space or legality concerns.
 
-- **Reduced:** temporal-boundary errors, multi-player phase-three control errors, graphical payout transcription errors, and illegal trade caps.
-- **Remaining/shared:** final-harvest scoring was missed by both generations and by the pre-generation scenario set.
-- **Introduced/exposed:** arbitrary atomic trade enumeration created a severe scalability risk.
-- **Evaluator limitation:** one Judge per condition and incomplete deterministic coverage make Judge scores and 37/37 scenario success insufficient as global fidelity measures.
-
-The defensible conclusion is: explicit clarification improved the mechanics it targeted, while overall implementation quality remained constrained by uncovered rules and the chosen action contract.
+The defensible conclusion is: clarification again reduces targeted executable-translation errors, while the expanded evaluator exposes a shared terminal-transition gap and an important blind spot in otherwise consistent LLM reviews.

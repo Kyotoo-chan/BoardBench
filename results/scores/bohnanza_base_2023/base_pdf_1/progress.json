@@ -4,8 +4,10 @@
     "base_pdf"
   ],
   "judged": [
-    "base_pdf"
+    "base_pdf_judge_1",
+    "base_pdf_judge_2",
+    "base_pdf_judge_3"
   ],
   "failed": [],
-  "updated_at": "2026-07-19T13:39:03.507566+00:00"
+  "updated_at": "2026-07-23T08:16:17.520051+00:00"
 }

@@ -1,32 +1,44 @@
 {
   "schema_version": 1,
-  "study": "bohnanza-base-2023-original-vs-clarified",
-  "rubric_version": "bohnanza-base-2023-comparison-v3-2026-07-19",
+  "study": "bohnanza-base-2023-original-vs-clarified-replacement",
+  "rubric_version": "bohnanza-base-2023-comparison-v4-2026-07-23",
+  "scenario_suite_sha256": "afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e",
   "conditions": {
     "original_pdf_only": {
+      "implementation_sha256": "f5b8cf96e66e14d25f0aa1ebd94f3b5486060ad17e4919b9d3dd9c3939f34991",
       "technical": {"passed": 4, "total": 4},
-      "rollouts": {"passed": 100, "total": 100, "seconds": 37.43},
-      "action_language": {"passed": true, "roundtrips": 666338, "seconds": 34.73},
-      "scenarios": {"PASS": 31, "FAIL": 6, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
-      "judge": {"n": 1, "score": 0.52, "confidence": "high", "critical": 1, "major": 3, "minor": 0}
+      "rollouts": {"passed": 100, "total": 100, "seconds": 34.67},
+      "action_language": {"passed": true, "roundtrips": 1473350, "seconds": 33.66},
+      "scenarios": {"PASS": 34, "FAIL": 7, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
+      "judge": {"n": 3, "scores": [0.28, 0.28, 0.40], "mean": 0.32, "sample_sd": 0.0693, "confidence": ["high", "high", "high"]},
+      "generation": {"model": "gpt-5.6-sol", "thinking": "low", "repairs": 0, "seconds": 201.671}
     },
     "pdf_plus_clarification": {
+      "implementation_sha256": "86a535586c1f7fd8d4f992437711aa85f5a2cb4d0954f55cdc2e8ac1a1ed7f2d",
       "technical": {"passed": 4, "total": 4},
-      "rollouts": {"passed": 100, "total": 100, "seconds": 94.07},
-      "action_language": {"passed": true, "roundtrips": 2045295, "seconds": 89.74},
-      "scenarios": {"PASS": 37, "FAIL": 0, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
-      "judge": {"n": 1, "score": 0.40, "confidence": "high", "critical": 2, "major": 1, "minor": 0}
+      "rollouts": {"passed": 100, "total": 100, "seconds": 56.16},
+      "action_language": {"passed": true, "roundtrips": 1373753, "seconds": 56.14},
+      "scenarios": {"PASS": 39, "FAIL": 2, "CRASH": 0, "UNREACHED": 0, "UNTESTABLE": 0},
+      "judge": {"n": 3, "scores": [0.56, 0.62, 0.62], "mean": 0.60, "sample_sd": 0.0346, "confidence": ["high", "high", "high"]},
+      "generation": {"model": "gpt-5.6-sol", "thinking": "low", "repairs": 0, "seconds": 450.319}
     }
   },
-  "targeted_expectations": {
-    "count": 6,
-    "original_passed": 0,
-    "clarified_passed": 6
-  },
+  "changed_expectations": [
+    "BASE-R18-third-empty-during-phase-four-stops-immediately",
+    "BASE-R35-garten-coin-curve",
+    "CLAR-R39-third-empty-on-exact-third-phase4-card",
+    "CLAR-R42-phase3-advances-to-nonactive-recipient-with-order-choice",
+    "CLAR-R48-third-empty-on-exact-second-phase4-card"
+  ],
+  "shared_failures": [
+    "BASE-R45-final-harvest-after-phase4-depletion",
+    "BASE-R46-final-harvest-after-phase2-continuation"
+  ],
   "interpretation_limits": [
-    "Evidence groups are not combined into a correctness score.",
-    "One Judge per condition is insufficient for a stable Judge comparison.",
-    "Both implementations omit mandatory final-field harvest scoring, a shared defect absent from the frozen rubric.",
-    "The clarified atomic trade representation passes fixed checks but has exponential scalability risk."
+    "Evidence groups are not combined into one correctness score.",
+    "The trade-fairness heuristic is not a gameplay rule and was not enforced or supplied to either implementation.",
+    "Both fresh implementations fail the new observable mandatory-final-harvest cases, but for different reasons.",
+    "All three clarified Judges judged terminal scoring correct and missed the observable final-harvest defect detected by deterministic scenarios.",
+    "Both conditions still show exponential trade-action generation risk in independent review."
   ]
 }

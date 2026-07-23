@@ -1,19 +1,21 @@
-"""Small, self-contained implementation of the supplied German Bohnanza rules."""
+"""Self-contained Bohnanza environment, based only on the supplied German rules."""
 from dataclasses import dataclass
 import copy
-import itertools
 import json
 import random
 
 BEANS = ("gartenbohne", "rote_bohne", "augenbohne", "sojabohne",
          "brechbohne", "saubohne", "feuerbohne", "blaue_bohne")
 COUNTS = dict(zip(BEANS, (6, 8, 10, 12, 14, 16, 18, 20)))
-# minimum field size paying respectively 1, 2, 3, 4 coins (read from the cards)
-METERS = {
-    "gartenbohne": (2, 3), "rote_bohne": (2, 3, 4, 5),
-    "augenbohne": (2, 4, 5, 6), "sojabohne": (2, 4, 6, 7),
-    "brechbohne": (3, 5, 6, 7), "saubohne": (3, 5, 7, 8),
-    "feuerbohne": (3, 6, 8, 9), "blaue_bohne": (4, 6, 8, 10),
+PAY = {
+    "gartenbohne": ((2, 1), (3, 2)),
+    "rote_bohne": ((2, 1), (3, 2), (4, 3), (5, 4)),
+    "augenbohne": ((2, 1), (4, 2), (5, 3), (6, 4)),
+    "sojabohne": ((2, 1), (4, 2), (6, 3), (7, 4)),
+    "brechbohne": ((3, 1), (5, 2), (6, 3), (7, 4)),
+    "saubohne": ((3, 1), (5, 2), (7, 3), (8, 4)),
+    "feuerbohne": ((3, 1), (6, 2), (8, 3), (9, 4)),
+    "blaue_bohne": ((4, 1), (6, 2), (8, 3), (10, 4)),
 }
 PHASES = ("plant_first", "plant_second", "reveal", "trade", "trade_response",
           "plant_received", "draw", "terminal")
@@ -23,25 +25,24 @@ OBS_SCHEMA = "boardbench/bohnanza-base-2023/observation/1"
 
 
 @dataclass(eq=True)
+class GameState:
+    data: dict
+
+
+@dataclass(frozen=True)
 class Action:
     type: str
     actor: int
-    args: dict
+    args_json: str = "{}"
+
+    @property
+    def args(self):
+        return json.loads(self.args_json)
 
 
-@dataclass(eq=True)
-class GameState:
-    configuration: dict
-    current_player: int
-    active_player: int
-    start_player: int
-    phase: str
-    terminal: bool
-    players: list
-    zones: dict
-    depletions: int
-    pending: dict | None
-    chance: dict
+def _action(kind, actor, args=None):
+    return Action(kind, actor, json.dumps(args or {}, ensure_ascii=False,
+                                           sort_keys=True, separators=(",", ":")))
 
 
 class Game:
@@ -56,227 +57,326 @@ class Game:
     def initial_state(self):
         deck = [b for b in BEANS for _ in range(COUNTS[b])]
         random.Random(self.seed).shuffle(deck)
+        players = []
         fields = 3 if self.num_players == 3 else 2
-        players = [{"id": p, "hand": [], "fields": [[] for _ in range(fields)], "coins": 0}
-                   for p in range(self.num_players)]
-        # Deal one at a time, preserving the order received; index zero is the front.
-        for _ in range(5):
-            for p in players:
-                p["hand"].append(deck.pop())
-        return GameState({"players": self.num_players, "seed": self.seed}, 0, 0, 0,
-                         "plant_first", False, players,
-                         {"deck": deck, "discard": [], "revealed": [],
-                          "pending_received": [[] for _ in players], "reserve": []},
-                         0, None, {"seed": self.seed, "draw_index": 0})
+        for p in range(self.num_players):
+            hand = [deck.pop() for _ in range(5)]
+            players.append({"id": p, "hand": hand,
+                            "fields": [[] for _ in range(fields)], "coins": 0})
+        d = {
+            "configuration": {"players": self.num_players, "seed": self.seed},
+            "current_player": 0, "active_player": 0, "start_player": 0,
+            "phase": "plant_first", "terminal": False, "players": players,
+            "zones": {"deck": deck, "discard": [], "revealed": [],
+                      "pending_received": [[] for _ in players], "reserve": []},
+            "depletions": 0, "pending": None,
+            "chance": {"seed": self.seed, "draw_index": 5 * self.num_players},
+        }
+        return GameState(d)
 
-    def current_player(self, state): return state.current_player
-    def is_terminal(self, state): return state.terminal
+    def current_player(self, state):
+        return state.data["current_player"]
+
+    def is_terminal(self, state):
+        return bool(state.data["terminal"])
 
     def returns(self, state):
-        if not state.terminal:
-            return [0] * len(state.players)
-        scores = [p["coins"] for p in state.players]
-        m = max(scores)
-        tied = [i for i, x in enumerate(scores) if x == m]
-        winner = max(tied, key=lambda i: (i - state.start_player) % len(scores))
-        return [1 if i == winner else 0 for i in range(len(scores))]
+        n = len(state.data["players"])
+        if not self.is_terminal(state):
+            return [0] * n
+        scores = [p["coins"] for p in state.data["players"]]
+        best = max(scores)
+        winners = [i for i, x in enumerate(scores) if x == best]
+        if len(winners) > 1:
+            start = state.data["start_player"]
+            winners = [max(winners, key=lambda i: (i - start) % n)]
+        return [1 if i == winners[0] else 0 for i in range(n)]
 
-    def _ref(self, owner, zone, index, bean):
-        return {"owner": owner, "zone": zone, "index": index, "bean": bean}
+    def _can_harvest(self, d, p, f):
+        field = d["players"][p]["fields"][f]
+        if not field:
+            return False
+        if len(field) > 1:
+            return True
+        return not any(len(x) > 1 for x in d["players"][p]["fields"])
 
-    def _harvest_actions(self, s):
+    def _harvest_actions(self, d):
+        return [_action("harvest", p["id"], {"player": p["id"], "field": f})
+                for p in d["players"] for f in range(len(p["fields"]))
+                if self._can_harvest(d, p["id"], f)]
+
+    def _plant_actions(self, d, source, actor, required=True):
+        if source == "hand":
+            cards = d["players"][actor]["hand"][:1]
+        elif source == "revealed":
+            cards = d["zones"]["revealed"]
+        else:
+            cards = d["zones"]["pending_received"][actor]
         out = []
-        for p in s.players:
-            has_multi = any(len(f) > 1 for f in p["fields"])
-            for i, f in enumerate(p["fields"]):
-                if f and (len(f) > 1 or not has_multi):
-                    out.append(Action("harvest", p["id"], {"player": p["id"], "field": i}))
+        for i, bean in enumerate(cards):
+            for f, field in enumerate(d["players"][actor]["fields"]):
+                if not field or field[0] == bean:
+                    out.append(_action("plant", actor, {"field": f, "source": source,
+                                                       "index": i, "bean": bean}))
         return out
 
-    def _plant_actions(self, s, source, owner):
-        if source == "hand":
-            cards = s.players[owner]["hand"][:1]
-        elif source == "revealed": cards = s.zones["revealed"]
-        else: cards = s.zones["pending_received"][owner]
-        if not cards: return []
-        bean = cards[0]
-        return [Action("plant", owner, {"field": i, "source": source, "index": 0, "bean": bean})
-                for i, f in enumerate(s.players[owner]["fields"]) if not f or f[0] == bean]
+    def legal_actions(self, state):
+        d = state.data
+        if d["terminal"]:
+            return []
+        phase, a, cp = d["phase"], d["active_player"], d["current_player"]
+        harvests = self._harvest_actions(d)
+        if phase == "plant_first":
+            plants = self._plant_actions(d, "hand", a)
+            return harvests + plants if d["players"][a]["hand"] else [_action("pass", a)]
+        if phase == "plant_second":
+            return harvests + self._plant_actions(d, "hand", a) + [_action("pass", a)]
+        if phase == "reveal":
+            return harvests + [_action("reveal", a)]
+        if phase == "trade_response":
+            return [_action("trade_accept", cp), _action("trade_reject", cp)]
+        if phase == "trade":
+            out = harvests + [_action("end_trade", a)]
+            own = ([{"owner": a, "zone": "hand", "index": i, "bean": b}
+                    for i, b in enumerate(d["players"][a]["hand"])] +
+                   [{"owner": a, "zone": "revealed", "index": i, "bean": b}
+                    for i, b in enumerate(d["zones"]["revealed"])])
+            # Any unequal card count is allowed. Enumerating all nonempty subsets
+            # faithfully represents arbitrary offers while hands remain small.
+            for partner in range(len(d["players"])):
+                if partner == a:
+                    continue
+                theirs = [{"owner": partner, "zone": "hand", "index": i, "bean": b}
+                          for i, b in enumerate(d["players"][partner]["hand"])]
+                for omask in range(1, 1 << len(own)):
+                    offered = [x for i, x in enumerate(own) if omask >> i & 1]
+                    out.append(_action("trade_propose", a, {
+                        "partner": partner, "offered": offered, "requested": [], "gift": True}))
+                    for rmask in range(1, 1 << len(theirs)):
+                        requested = [x for i, x in enumerate(theirs) if rmask >> i & 1]
+                        out.append(_action("trade_propose", a, {
+                            "partner": partner, "offered": offered,
+                            "requested": requested, "gift": False}))
+            return out
+        if phase == "plant_received":
+            received = d["zones"]["pending_received"][a]
+            revealed = d["zones"]["revealed"]
+            plants = (self._plant_actions(d, "received", a) +
+                      self._plant_actions(d, "revealed", a))
+            return harvests + plants if received or revealed else [_action("pass", a)]
+        if phase == "draw":
+            return [_action("draw", a)]
+        return []
 
-    def legal_actions(self, s):
-        if s.terminal: return []
-        a = self._harvest_actions(s)
-        p = s.active_player
-        if s.phase == "plant_first":
-            if s.players[p]["hand"]: a += self._plant_actions(s, "hand", p)
-            else: a.append(Action("pass", p, {}))
-        elif s.phase == "plant_second":
-            a += self._plant_actions(s, "hand", p) + [Action("pass", p, {})]
-        elif s.phase == "reveal": a.append(Action("reveal", p, {}))
-        elif s.phase == "trade":
-            a.append(Action("end_trade", p, {}))
-            sources = [self._ref(p, "hand", i, b) for i, b in enumerate(s.players[p]["hand"])]
-            sources += [self._ref(p, "revealed", i, b) for i, b in enumerate(s.zones["revealed"])]
-            # Concrete one/two-card offers and requests cover the explicitly illustrated
-            # unequal trades without making legal-action enumeration unboundedly large.
-            offers = [list(x) for n in (1, 2) for x in itertools.combinations(sources, n)]
-            for q in range(len(s.players)):
-                if q == p: continue
-                reqs = [self._ref(q, "hand", i, b) for i, b in enumerate(s.players[q]["hand"])]
-                for offered in offers:
-                    a.append(Action("trade_propose", p, {"partner": q, "offered": offered, "requested": [], "gift": True}))
-                    for requested in reqs:
-                        a.append(Action("trade_propose", p, {"partner": q, "offered": offered,
-                                                               "requested": [requested], "gift": False}))
-        elif s.phase == "trade_response":
-            a += [Action("trade_accept", s.current_player, {}), Action("trade_reject", s.current_player, {})]
-        elif s.phase == "plant_received":
-            a += self._plant_actions(s, "received", p) + self._plant_actions(s, "revealed", p)
-            if not s.zones["pending_received"][p] and not s.zones["revealed"]:
-                a.append(Action("pass", p, {}))
-        elif s.phase == "draw": a.append(Action("draw", p, {}))
-        return a
+    def _draw_one(self, d):
+        if not d["zones"]["deck"]:
+            return None
+        card = d["zones"]["deck"].pop()
+        d["chance"]["draw_index"] += 1
+        if not d["zones"]["deck"]:
+            d["depletions"] += 1
+            if d["depletions"] < 3:
+                pile = d["zones"]["discard"]
+                rng = random.Random(f"{d['chance']['seed']}:{d['chance']['draw_index']}")
+                rng.shuffle(pile)
+                d["zones"]["deck"] = pile
+                d["zones"]["discard"] = []
+        return card
 
-    def _draw_one(self, s):
-        if not s.zones["deck"]:
-            s.depletions += 1
-            if s.depletions >= 3:
-                if s.phase != "reveal": self._finish(s)
-                return None
-            s.zones["deck"] = s.zones["discard"]
-            s.zones["discard"] = []
-            seed = s.chance["seed"]
-            random.Random((0 if seed is None else seed) + s.chance["draw_index"] + 1).shuffle(s.zones["deck"])
-            s.chance["draw_index"] += 1
-            if not s.zones["deck"]: return None
-        return s.zones["deck"].pop()
+    def _finish(self, d):
+        d["terminal"] = True
+        d["phase"] = "terminal"
+        d["current_player"] = d["active_player"]
+        for p in d["players"]:
+            for f in range(len(p["fields"])):
+                self._do_harvest(d, p["id"], f, final=True)
+            p["coins"] += len(p["hand"])
+            p["hand"] = []
 
-    def _finish(self, s):
-        # At game end everybody harvests every field; hand cards have no value.
-        for p in s.players:
-            for f in p["fields"]:
-                if f:
-                    coins = sum(len(f) >= threshold for threshold in METERS[f[0]])
-                    p["coins"] += coins
-                    s.zones["discard"].extend(f[:len(f)-coins])
-                    f.clear()
-        s.terminal = True; s.phase = "terminal"
-
-    def _get_ref(self, s, ref):
-        return s.players[ref["owner"]]["hand"] if ref["zone"] == "hand" else s.zones["revealed"]
+    def _do_harvest(self, d, p, f, final=False):
+        field = d["players"][p]["fields"][f]
+        if not field:
+            return
+        count, bean = len(field), field[0]
+        coins = max((c for needed, c in PAY[bean] if count >= needed), default=0)
+        d["players"][p]["coins"] += coins
+        d["zones"]["discard"].extend(field[:max(0, count - coins)])
+        d["players"][p]["fields"][f] = []
 
     def apply_action(self, state, action):
-        s = copy.deepcopy(state)
-        canon = self.action_to_data(action)
-        legal = {json.dumps(self.action_to_data(x), sort_keys=True): x for x in self.legal_actions(s)}
-        if json.dumps(canon, sort_keys=True) not in legal: raise ValueError("illegal action")
-        t, p, x = action.type, action.actor, action.args
-        if t == "harvest":
-            f = s.players[x["player"]]["fields"][x["field"]]; n = len(f); bean = f[0]
-            coins = sum(n >= threshold for threshold in METERS[bean])
-            s.players[x["player"]]["coins"] += coins
-            s.zones["discard"].extend(f[:n-coins]); s.players[x["player"]]["fields"][x["field"]] = []
+        if state.data["terminal"] or not isinstance(action, Action):
+            raise ValueError("illegal action")
+        s, d, x = copy.deepcopy(state), None, action.args
+        d = s.data
+        a = action.actor
+        if action.type == "harvest":
+            self._do_harvest(d, x["player"], x["field"])
             return s
-        if t == "plant":
-            if x["source"] == "hand": zone = s.players[p]["hand"]
-            elif x["source"] == "revealed": zone = s.zones["revealed"]
-            else: zone = s.zones["pending_received"][p]
-            bean = zone.pop(x["index"]); s.players[p]["fields"][x["field"]].append(bean)
-            if s.phase == "plant_first": s.phase = "plant_second"
+        if action.type == "pass":
+            if d["phase"] == "plant_first": d["phase"] = "plant_second"
+            elif d["phase"] == "plant_second": d["phase"] = "reveal"
+            elif d["phase"] == "plant_received":
+                if d["depletions"] >= 3:
+                    self._finish(d)
+                else:
+                    d["phase"] = "draw"
             return s
-        if t == "pass":
-            if s.phase in ("plant_first", "plant_second"): s.phase = "reveal"
-            elif s.phase == "plant_received":
-                if s.depletions >= 3: self._finish(s)
-                else: s.phase = "draw"
+        if action.type == "plant":
+            src = x["source"]
+            if src == "hand": cards = d["players"][a]["hand"]
+            elif src == "revealed": cards = d["zones"]["revealed"]
+            else: cards = d["zones"]["pending_received"][a]
+            bean = cards.pop(x["index"])
+            d["players"][a]["fields"][x["field"]].append(bean)
+            if d["phase"] == "plant_first": d["phase"] = "plant_second"
+            elif d["phase"] == "plant_second": d["phase"] = "reveal"
+            elif d["phase"] == "plant_received":
+                if not d["zones"]["pending_received"][a] and not d["zones"]["revealed"]:
+                    if d["depletions"] >= 3:
+                        self._finish(d)
             return s
-        if t == "reveal":
+        if action.type == "reveal":
             for _ in range(2):
-                card = self._draw_one(s)
-                if card is None: break
-                s.zones["revealed"].append(card)
-            if not s.terminal: s.phase = "trade"
+                card = self._draw_one(d)
+                if card is not None: d["zones"]["revealed"].append(card)
+            d["phase"] = "trade"
             return s
-        if t == "trade_propose":
-            s.pending = {"type": "gift" if x["gift"] else "trade", "actor": p, "partner": x["partner"],
-                         "offered": copy.deepcopy(x["offered"]), "requested": copy.deepcopy(x["requested"]),
-                         "awaiting_player": x["partner"]}
-            s.phase = "trade_response"; s.current_player = x["partner"]; return s
-        if t == "trade_reject":
-            s.pending = None; s.phase = "trade"; s.current_player = s.active_player; return s
-        if t == "trade_accept":
-            pend = s.pending
-            # Remove descending indices within each zone, then deliver to the other party.
-            transfers = [(r, pend["partner"]) for r in pend["offered"]] + [(r, pend["actor"]) for r in pend["requested"]]
-            for ref, recipient in sorted(transfers, key=lambda z: (z[0]["owner"], z[0]["zone"], -z[0]["index"])):
-                bean = self._get_ref(s, ref).pop(ref["index"])
-                s.zones["pending_received"][recipient].append(bean)
-            s.pending = None; s.phase = "trade"; s.current_player = s.active_player; return s
-        if t == "end_trade": s.phase = "plant_received"; return s
-        if t == "draw":
+        if action.type == "trade_propose":
+            d["pending"] = {"type": "gift" if x["gift"] else "trade", "actor": a,
+                            "partner": x["partner"], "offered": x["offered"],
+                            "requested": x["requested"], "awaiting_player": x["partner"]}
+            d["phase"], d["current_player"] = "trade_response", x["partner"]
+            return s
+        if action.type == "trade_reject":
+            d["pending"] = None
+            d["phase"], d["current_player"] = "trade", d["active_player"]
+            return s
+        if action.type == "trade_accept":
+            p = d["pending"]
+            transfers = ((p["offered"], p["partner"]), (p["requested"], p["actor"]))
+            for refs, recipient in transfers:
+                for ref in sorted(refs, key=lambda r: r["index"], reverse=True):
+                    cards = (d["players"][ref["owner"]]["hand"] if ref["zone"] == "hand"
+                             else d["zones"]["revealed"])
+                    bean = cards.pop(ref["index"])
+                    d["zones"]["pending_received"][recipient].append(bean)
+            d["pending"] = None
+            d["phase"], d["current_player"] = "trade", d["active_player"]
+            return s
+        if action.type == "end_trade":
+            d["phase"] = "plant_received"
+            return s
+        if action.type == "draw":
             for _ in range(3):
-                card = self._draw_one(s)
+                card = self._draw_one(d)
                 if card is None: break
-                s.players[p]["hand"].append(card)
-            if not s.terminal:
-                s.active_player = (p + 1) % len(s.players); s.current_player = s.active_player; s.phase = "plant_first"
+                d["players"][a]["hand"].append(card)
+                if d["depletions"] >= 3:
+                    self._finish(d)
+                    return s
+            nxt = (a + 1) % len(d["players"])
+            d["active_player"] = d["current_player"] = nxt
+            d["phase"] = "plant_first"
             return s
         raise ValueError("unknown action")
 
+    def action_to_data(self, action):
+        return {"schema": ACTION_SCHEMA, "data": {"type": action.type,
+                "actor": action.actor, "args": copy.deepcopy(action.args)}}
+
+    def action_from_data(self, payload):
+        if not isinstance(payload, dict) or set(payload) != {"schema", "data"} or payload["schema"] != ACTION_SCHEMA:
+            raise ValueError("invalid action envelope")
+        d = payload["data"]
+        if not isinstance(d, dict) or set(d) != {"type", "actor", "args"}:
+            raise ValueError("invalid action fields")
+        if d["type"] not in ("plant", "harvest", "reveal", "trade_propose",
+                             "trade_accept", "trade_reject", "end_trade", "draw", "pass"):
+            raise ValueError("invalid action type")
+        if type(d["actor"]) is not int or not isinstance(d["args"], dict):
+            raise ValueError("invalid action value")
+        return _action(d["type"], d["actor"], d["args"])
+
     def action_to_name(self, action):
-        return action.type + ":" + json.dumps({"actor": action.actor, "args": action.args}, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        return action.type.replace("_", " ") + " | " + str(action.actor) + " | " + action.args_json
 
     def name_to_action(self, name):
         try:
-            t, raw = name.split(":", 1); d = json.loads(raw)
-            return self.action_from_data({"schema": ACTION_SCHEMA, "data": {"type": t, "actor": d["actor"], "args": d["args"]}})
-        except Exception as e: raise ValueError("invalid action name") from e
+            label, actor, args = name.split(" | ", 2)
+            return _action(label.replace(" ", "_"), int(actor), json.loads(args))
+        except Exception as e:
+            raise ValueError("invalid action name") from e
 
-    def action_to_data(self, action):
-        if not isinstance(action, Action): raise TypeError("action must be Action")
-        return {"schema": ACTION_SCHEMA, "data": {"type": action.type, "actor": action.actor, "args": copy.deepcopy(action.args)}}
-
-    def action_from_data(self, payload):
-        self._envelope(payload, ACTION_SCHEMA)
-        d = payload["data"]
-        if set(d) != {"type", "actor", "args"} or d["type"] not in ("plant", "harvest", "reveal", "trade_propose", "trade_accept", "trade_reject", "end_trade", "draw", "pass"):
-            raise ValueError("invalid action fields")
-        if type(d["actor"]) is not int or not isinstance(d["args"], dict): raise TypeError("invalid action types")
-        expected = {"plant": {"field","source","index","bean"}, "harvest": {"player","field"}, "reveal": set(),
-                    "trade_propose": {"partner","offered","requested","gift"}, "trade_accept": set(),
-                    "trade_reject": set(), "end_trade": set(), "draw": set(), "pass": set()}[d["type"]]
-        if set(d["args"]) != expected: raise ValueError("invalid action args")
-        return Action(d["type"], d["actor"], copy.deepcopy(d["args"]))
-
-    def state_to_data(self, s):
-        return {"schema": STATE_SCHEMA, "data": copy.deepcopy(s.__dict__)}
+    def state_to_data(self, state):
+        return {"schema": STATE_SCHEMA, "data": copy.deepcopy(state.data)}
 
     def state_from_data(self, payload):
-        self._envelope(payload, STATE_SCHEMA); d = copy.deepcopy(payload["data"])
-        required = {"configuration","current_player","active_player","start_player","phase","terminal","players","zones","depletions","pending","chance"}
-        if set(d) != required: raise ValueError("invalid state fields")
-        if d["phase"] not in PHASES or type(d["terminal"]) is not bool: raise ValueError("invalid state phase")
-        if not isinstance(d["players"], list) or not isinstance(d["zones"], dict): raise TypeError("invalid state types")
-        return GameState(**d)
+        if not isinstance(payload, dict) or set(payload) != {"schema", "data"} or payload["schema"] != STATE_SCHEMA:
+            raise ValueError("invalid state envelope")
+        d = payload["data"]
+        required = {"configuration", "current_player", "active_player", "start_player",
+                    "phase", "terminal", "players", "zones", "depletions", "pending", "chance"}
+        if not isinstance(d, dict) or set(d) != required:
+            raise ValueError("invalid state fields")
+        self._validate_state(d)
+        return GameState(copy.deepcopy(d))
 
-    def observation_to_data(self, s, player):
-        if type(player) is not int or not 0 <= player < len(s.players): raise ValueError("invalid player")
-        opponents = [{"id": p["id"], "hand_size": len(p["hand"])} for p in s.players if p["id"] != player]
-        pending = copy.deepcopy(s.pending)
-        # A concrete proposal is known to its participants; hide referenced bean identities from others.
-        if pending and player not in (pending["actor"], pending["partner"]): pending = None
-        data = {"player": player, "current_player": s.current_player, "active_player": s.active_player,
-                "phase": s.phase, "terminal": s.terminal, "own_hand": copy.deepcopy(s.players[player]["hand"]),
-                "opponents": opponents, "fields": copy.deepcopy([p["fields"] for p in s.players]),
-                "coins": [p["coins"] for p in s.players], "revealed": copy.deepcopy(s.zones["revealed"]),
-                "deck_size": len(s.zones["deck"]), "discard_size": len(s.zones["discard"]), "pending": pending}
-        return {"schema": OBS_SCHEMA, "data": data}
+    def _validate_state(self, d):
+        if d["phase"] not in PHASES or type(d["terminal"]) is not bool:
+            raise ValueError("invalid phase")
+        ps = d["players"]
+        if not isinstance(ps, list) or not 3 <= len(ps) <= 5:
+            raise ValueError("invalid players")
+        ints = ("current_player", "active_player", "start_player", "depletions")
+        if any(type(d[k]) is not int for k in ints):
+            raise ValueError("invalid integer")
+        for p in ps:
+            if set(p) != {"id", "hand", "fields", "coins"} or type(p["id"]) is not int or type(p["coins"]) is not int:
+                raise ValueError("invalid player")
+            self._beans(p["hand"])
+            if not isinstance(p["fields"], list): raise ValueError("invalid fields")
+            for f in p["fields"]: self._beans(f)
+        z = d["zones"]
+        if set(z) != {"deck", "discard", "revealed", "pending_received", "reserve"}:
+            raise ValueError("invalid zones")
+        for k in ("deck", "discard", "revealed", "reserve"): self._beans(z[k])
+        if not isinstance(z["pending_received"], list): raise ValueError("invalid received")
+        for group in z["pending_received"]: self._beans(group)
+        if set(d["configuration"]) != {"players", "seed"} or set(d["chance"]) != {"seed", "draw_index"}:
+            raise ValueError("invalid configuration")
+        json.dumps(d, allow_nan=False)
 
-    def _envelope(self, p, schema):
-        if not isinstance(p, dict) or set(p) != {"schema","data"} or p["schema"] != schema or not isinstance(p["data"], dict):
-            raise ValueError("invalid canonical envelope")
+    @staticmethod
+    def _beans(xs):
+        if not isinstance(xs, list) or any(x not in BEANS for x in xs):
+            raise ValueError("invalid bean list")
 
-    def render(self, s):
-        lines = [f"phase={s.phase} active={s.active_player} deck={len(s.zones['deck'])} discard={len(s.zones['discard'])}"]
-        for p in s.players: lines.append(f"P{p['id']} coins={p['coins']} hand={p['hand']} fields={p['fields']}")
+    def observation_to_data(self, state, player):
+        d = state.data
+        if type(player) is not int or not 0 <= player < len(d["players"]):
+            raise ValueError("invalid observer")
+        obs = {"player": player, "current_player": d["current_player"],
+               "active_player": d["active_player"], "phase": d["phase"],
+               "terminal": d["terminal"], "own_hand": copy.deepcopy(d["players"][player]["hand"]),
+               "opponents": [{"id": p["id"], "hand_size": len(p["hand"])}
+                             for p in d["players"] if p["id"] != player],
+               "fields": copy.deepcopy([p["fields"] for p in d["players"]]),
+               "coins": [p["coins"] for p in d["players"]],
+               "revealed": copy.deepcopy(d["zones"]["revealed"]),
+               "deck_size": len(d["zones"]["deck"]),
+               "discard_size": len(d["zones"]["discard"]),
+               "pending": copy.deepcopy(d["pending"])}
+        if obs["pending"]:
+            for key in ("offered", "requested"):
+                obs["pending"][key] = [
+                    ({**r} if r["owner"] == player or r["zone"] == "revealed"
+                     else {"owner": r["owner"], "zone": r["zone"], "index": r["index"],
+                           "bean": None}) for r in obs["pending"][key]]
+        return {"schema": OBS_SCHEMA, "data": obs}
+
+    def render(self, state):
+        d = state.data
+        lines = [f"Bohnanza | phase={d['phase']} active={d['active_player']} deck={len(d['zones']['deck'])}"]
+        for p in d["players"]:
+            lines.append(f"P{p['id']} coins={p['coins']} hand={p['hand']} fields={p['fields']}")
         return "\n".join(lines)

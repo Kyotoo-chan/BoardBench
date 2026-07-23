@@ -4,29 +4,66 @@
     {
       "id": "A-01",
       "material": true,
-      "source_location": "Spielvorbereitung / Spielablauf",
+      "source_location": "page 1 / Spielablauf: \"Wer das Spiel beginnt\"",
       "source_basis": "missing",
-      "alternatives": ["determine the starting player outside the model", "choose a starting player by an unspecified chance procedure"],
-      "selected": "player 0 receives the start card and is the starting active player",
-      "affected_mechanics": ["state_transition"]
+      "alternatives": [
+        "determine the starting person by an external choice",
+        "determine the starting person randomly",
+        "use the first indexed person"
+      ],
+      "selected": "player 0 receives the Start-Karte and begins",
+      "affected_mechanics": [
+        "state_transition",
+        "terminal_results"
+      ]
     },
     {
       "id": "A-02",
       "material": true,
-      "source_location": "Spielvorbereitung: mischt alle Karten und teilt ... aus",
+      "source_location": "page 1 / Spielmaterial & Spielvorbereitung",
       "source_basis": "ambiguous",
-      "alternatives": ["deal five-card packets", "deal one card per player in rounds"],
-      "selected": "deal one card per player in clockwise rounds, preserving receipt order",
-      "affected_mechanics": ["private_information", "state_transition"]
+      "alternatives": [
+        "deal five consecutive cards to each person",
+        "deal one card to each person repeatedly for five rounds"
+      ],
+      "selected": "deal one card to each person repeatedly in player-index order; each person's first received card is the front card",
+      "affected_mechanics": [
+        "private_information",
+        "state_transition"
+      ]
     },
     {
       "id": "A-03",
       "material": true,
-      "source_location": "Ende des Spiels: Gleichstand",
+      "source_location": "page 2 / Regeln für den Bohnenhandel and gift note",
       "source_basis": "ambiguous",
-      "alternatives": ["clockwise distance includes the start-card holder first", "clockwise distance begins after the start-card holder"],
-      "selected": "among tied players, choose the last player encountered before the start-card holder when moving clockwise",
-      "affected_mechanics": ["terminal_results"]
+      "alternatives": [
+        "model free-form simultaneous bargaining before mutual consent",
+        "let any involved person originate a concrete proposal",
+        "let the active person originate each concrete proposal"
+      ],
+      "selected": "the active person proposes a finite nonempty offer to one partner; a trade requests a nonempty set and a gift requests none; the partner then accepts or rejects",
+      "affected_mechanics": [
+        "legal_actions",
+        "state_transition",
+        "private_information"
+      ]
+    },
+    {
+      "id": "A-04",
+      "material": true,
+      "source_location": "clarification CLAR-END-01 and page 2 / Ende des Spiels",
+      "source_basis": "ambiguous",
+      "alternatives": [
+        "if the third depletion occurs on the first reveal, attempt the second reveal",
+        "stop revealing because no pile is recycled"
+      ],
+      "selected": "stop the reveal operation immediately after the card that causes the third depletion; continue phases 2 and 3 using the cards actually revealed",
+      "affected_mechanics": [
+        "legal_actions",
+        "state_transition",
+        "terminal_results"
+      ]
     }
   ]
 }

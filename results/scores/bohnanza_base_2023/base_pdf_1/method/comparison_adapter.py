@@ -71,11 +71,23 @@ def _all_cards(data: dict[str, Any]) -> list[str]:
 
 
 def _matches(data: dict[str, Any], selector: dict[str, Any]) -> bool:
+    if "actor" in selector and data["actor"] != selector["actor"]:
+        return False
     if "type" in selector and data["type"] != selector["type"]:
         return False
     if "type_any" in selector and data["type"] not in selector["type_any"]:
         return False
     return all(data["args"].get(key) == value for key, value in selector.get("args", {}).items())
+
+
+def make_game(module: Any, fixture: dict[str, Any]) -> Any:
+    count = int(fixture.get("player_count", 3))
+    for key in ("hands", "fields", "pending_received", "coins"):
+        if fixture.get(key):
+            count = max(count, max(int(player) for player in fixture[key]) + 1)
+    if fixture.get("pending_gift"):
+        count = max(count, int(fixture["pending_gift"]["from"]) + 1, int(fixture["pending_gift"]["to"]) + 1)
+    return module.Game(num_players=count, seed=1)
 
 
 def resolve_action(module: Any, game: Any, state: Any, actions: list[Any], selector: dict[str, Any]) -> Any:
@@ -105,7 +117,8 @@ def _blank(data: dict[str, Any]) -> Counter[str]:
 
 
 def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
-    payload = deepcopy(game.state_to_data(game.initial_state()))
+    fixture_game = make_game(module, fixture)
+    payload = deepcopy(fixture_game.state_to_data(fixture_game.initial_state()))
     data = _envelope(payload, STATE_SCHEMA)
     inventory = _blank(data)
 
@@ -140,6 +153,7 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
         gift = fixture["pending_gift"]
         sender, recipient = int(gift["from"]), int(gift["to"])
         offered = [_bean(card) for card in gift["cards"]]
+        data["phase"] = "trade_response"
         data["pending"] = {
             "type": "gift",
             "actor": sender,
@@ -156,10 +170,10 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
         raise AdapterUntestable("fixture exceeds canonical component inventory")
     data["zones"]["reserve"] = sorted(remaining.elements())
     try:
-        state = game.state_from_data(payload)
+        state = fixture_game.state_from_data(payload)
     except (TypeError, ValueError, AssertionError) as error:
         raise AdapterUntestable(f"state_from_data rejected canonical fixture: {error}") from error
-    if game.state_to_data(state) != payload:
+    if fixture_game.state_to_data(state) != payload:
         raise AdapterUntestable("canonical fixture does not round-trip")
     return state
 
@@ -238,15 +252,37 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
         front = data["players"][data["current_player"]]["hand"][:1]
         for semantic in expected["legal_plant_types"]:
             bean = _bean(semantic)
-            if bean not in front or not any(action["type"] == "plant" and action["args"].get("card") == bean for action in actions):
+            if bean not in front or not any(action["type"] == "plant" and action["args"].get("bean") == bean for action in actions):
                 raise AssertionError(f"no legal planting action for {semantic!r}")
     for item in expected.get("trade_allowed", []):
-        partner = int(item["b"])
-        found = any(action["type"].startswith(("trade_", "gift_")) and action["args"].get("partner") == partner for action in actions)
-        _assert_equal(f"trade_allowed[{item['a']},{partner}]", found, bool(item["expected"]))
+        actor, partner = int(item["a"]), int(item["b"])
+        found = any(action["type"].startswith(("trade_", "gift_")) and action["actor"] == actor and action["args"].get("partner") == partner for action in actions)
+        _assert_equal(f"trade_allowed[{actor},{partner}]", found, bool(item["expected"]))
+
+    for item in expected.get("trade_bundle_legal", []):
+        wanted_offered = Counter((int(ref["owner"]), ref["zone"], int(ref["index"]), _bean(ref["bean"])) for ref in item["offered"])
+        wanted_requested = Counter((int(ref["owner"]), ref["zone"], int(ref["index"]), _bean(ref["bean"])) for ref in item["requested"])
+        found = False
+        for action in actions:
+            args = action["args"]
+            if action["type"] != "trade_propose" or action["actor"] != int(item["actor"]) or args.get("partner") != int(item["partner"]):
+                continue
+            offered = Counter((int(ref["owner"]), ref["zone"], int(ref["index"]), ref["bean"]) for ref in args.get("offered", []))
+            requested = Counter((int(ref["owner"]), ref["zone"], int(ref["index"]), ref["bean"]) for ref in args.get("requested", []))
+            if offered == wanted_offered and requested == wanted_requested and bool(args.get("gift")) is bool(item.get("gift", False)):
+                found = True
+                break
+        _assert_equal("trade_bundle_legal", found, bool(item.get("expected", True)))
+
+    for item in expected.get("plant_received_choices", []):
+        actor = int(item["actor"])
+        wanted = {_bean(bean) for bean in item["beans"]}
+        found = {action["args"].get("bean") for action in actions if action["type"] == "plant" and action["actor"] == actor and action["args"].get("source") == "received"}
+        if not wanted <= found:
+            raise AssertionError(f"player {actor} received-card choices: expected {sorted(wanted)!r}, got {sorted(found)!r}")
 
     for player, wanted in expected.get("pending_received", {}).items():
-        _assert_equal(f"pending_received[{player}]", data["zones"]["pending_received"][int(player)], [_bean(card) for card in wanted])
+        _assert_equal(f"pending_received[{player}]", Counter(data["zones"]["pending_received"][int(player)]), Counter(_bean(card) for card in wanted))
 
     if "private_hand_visibility" in expected:
         spec = expected["private_hand_visibility"]

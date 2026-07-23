@@ -1,73 +1,36 @@
-# Bohnanza Base 2023 — run report
+# Bohnanza Base 2023 — fresh original-PDF run v4
 
 ## Status
 
-One accepted publisher-PDF-only generation and one neutral Judge completed. Two earlier setup attempts were rejected before judging because preflight infrastructure was incomplete; they are not study runs and are retained only in Git history.
-
-Accepted implementation: `runs/base_pdf/bohnanza_base_2023_codex_ag.py`
+One fresh isolated publisher-PDF-only generation completed with no repair calls. It was evaluated against the same 41-case comparison-v4 rubric as the clarified condition and reviewed by three neutral Judges.
 
 ## Evidence groups
 
-### Technical gate
+- Technical checks 01–04: **4/4 pass**
+- Random rollouts: **100/100 pass** in 34.67 s
+- Action-language roundtrips: **1,473,350/1,473,350 pass** in 33.66 s
+- Scenarios: **34 PASS, 7 FAIL, 0 CRASH, 0 UNREACHED, 0 UNTESTABLE**
+- Evaluated coverage: **41/41**
+- Judge scores: **0.28, 0.28, 0.40**
+- Judge mean: **0.32**, sample SD **0.069**, n=3
 
-- Checks 01–04: **4/4 pass**
-- Required API: **9/9 pass**
-- Canonical reachable-state and rare-fixture gates: pass
-- Generation repairs: **0**
+These groups are not combined into one correctness score.
 
-### Runtime robustness
+## Deterministic failures
 
-- Random rollouts: **100/100 pass**
-- Action-language roundtrips: **666338/666338 pass**
+- Third depletion does not terminate correctly on phase-four draw positions one, two, or three.
+- Two Garden beans use the wrong payout.
+- Phase three does not advance to a non-active recipient for their planting choices.
+- Both mandatory-final-harvest cases fail: fields are harvested, but remaining hand cards are incorrectly converted into coins and removed.
 
-### Preregistered rule scenarios
+## Repeated Judge findings
 
-- PASS: 23
-- FAIL: 5
-- CRASH: 3
-- UNTESTABLE: 0
-- Evaluated coverage: 31/31
-- Raw pass fraction: 0.742
+The neutral reviews repeatedly identify illegal terminal hand scoring, exponential trade-action enumeration, incomplete non-active phase-three planting, unchecked externally constructed actions, and missing harvesting opportunities at approved stable boundaries.
 
-This preregistered result is retained unchanged, but it is representation-distorted. The adapter assumed a four-player default although `Game()` validly chose three players, checked the obsolete action argument `card` instead of profile field `bean`, treated a legal `pass` transition as invalid for an empty phase-one hand, failed to put a pending gift fixture into `trade_response`, imposed an unsupported received-card order, and ignored the action actor in one trade-authority check.
+## Provenance
 
-### Corrected post-hoc scenario replay
-
-Rubric: `bohnanza-base-2023-posthoc-v2-2026-07-19`
-
-- PASS: 30
-- FAIL: 1
-- CRASH: 0
-- UNTESTABLE: 0
-- Pass fraction: 0.968
-- Coverage: 1.000
-
-The remaining deterministic failure is real: two Gartenbohnen should pay two coins, but the implementation pays one.
-
-### Independent Judge
-
-- Score: **0.52**
-- Confidence: high
-- Critical: 1
-- Major: 3
-
-Judge findings:
-
-1. **Critical:** third depletion is detected one draw too late, allowing an extra phase/turn and potentially changing the winner.
-2. **Major:** phase three handles only the active player's received cards and does not permit each affected player to choose the full planting order.
-3. **Major:** generated legal trade bundles are artificially capped, excluding valid unequal multi-card trades.
-4. **Major:** Gartenbohne payouts are shifted downward.
-
-The Judge therefore identifies serious defects that the corrected 31-scenario suite does not cover. The 30/31 post-hoc pass result must not be interpreted as 97% rule fidelity.
-
-## Method findings
-
-1. The simpler complete rulebook removed the old source-inventory confusion: the accepted implementation and evaluator agree on 104 cards, eight bean types, and 3/4/5-player field counts.
-2. Canonical Contract-v2 removed implementation-representation crashes once the evaluator's player-count assumption was corrected.
-3. Historical preflight setup failed twice before the accepted run: the neutral gate initially omitted `render`, then the runner supplied the wrong task prompt. Both were workflow failures, not scored model results.
-4. The preregistered adapter still contained six evaluator assumptions/errors, despite its infrastructure probe reporting all fixtures representable.
-5. The independent Judge found temporal and action-space gaps absent from the scenario suite. Uniform representation solves test access, not scenario completeness.
-
-## Interpretation
-
-For this run, the clean complete base rulebook substantially reduces source ambiguity, but it does not eliminate implementation failures. The dominant remaining issues are model translation errors (depletion timing, multi-player phase-three control, payout encoding), action-space truncation, missing deterministic scenarios, and evaluator workflow defects. This supports keeping source quality, implementation quality, evaluator validity, and coverage as separate evidence groups.
+- Generation: `gpt-5.6-sol`, thinking `low`, repairs 0
+- Judges: `gpt-5.6-sol`, thinking `medium`, n=3
+- Implementation SHA-256: `f5b8cf96e66e14d25f0aa1ebd94f3b5486060ad17e4919b9d3dd9c3939f34991`
+- Rubric: `bohnanza-base-2023-comparison-v4-2026-07-23`
+- Rubric SHA-256: `afd123f6f5c4143169a38621206ac8bdab56427f666b6f56198233f005763d9e`
