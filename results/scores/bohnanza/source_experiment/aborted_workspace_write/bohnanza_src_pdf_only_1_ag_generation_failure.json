@@ -1,5 +1,0 @@
-{
-  "run": "pdf_only_1",
-  "error": "independent gate failed: implementation.py is missing or empty",
-  "empty_implementation": true
-}

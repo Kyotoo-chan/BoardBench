@@ -1,5 +1,0 @@
-{
-  "run": "json_clean_2",
-  "error": "independent gate failed:\nimplementation.py is missing or empty",
-  "empty_implementation": true
-}
