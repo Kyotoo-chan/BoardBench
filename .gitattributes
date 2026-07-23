@@ -1,11 +1,12 @@
 .gitattributes text eol=lf
 # Preserve byte-stable hashes for the Catan packet and generated run artifacts.
-inputs/games/catan/*.json text eol=lf
-inputs/games/catan/*.md text eol=lf
-inputs/games/catan/*.py text eol=lf
-checks/scenarios/catan.json text eol=lf
-checks/scenario_adapters/catan.py text eol=lf
-generation/test_catan_packet.py text eol=lf
-inputs/prompts/rulebook_to_scenarios.md text eol=lf
-outputs/catan_codex_ag* text eol=lf
-results/scores/catan/** text eol=lf
+inputs/games/catan/*.json -text whitespace=cr-at-eol
+inputs/games/catan/*.md -text whitespace=cr-at-eol
+inputs/games/catan/*.py -text whitespace=cr-at-eol
+checks/scenarios/catan.json -text whitespace=cr-at-eol
+checks/scenario_adapters/catan.py -text whitespace=cr-at-eol
+generation/test_catan_packet.py -text whitespace=cr-at-eol
+inputs/prompts/rulebook_to_scenarios.md -text whitespace=cr-at-eol
+outputs/catan_codex_ag* -text whitespace=cr-at-eol
+results/scores/catan/** -text whitespace=cr-at-eol
+results/scores/catan/**/catan_codex_ag_judge*.md -text -whitespace

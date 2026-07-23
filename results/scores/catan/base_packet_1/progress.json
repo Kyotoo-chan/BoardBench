@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "run": "base_packet",
+  "status": "evaluation_complete",
+  "completed": [
+    "preflight_frozen",
+    "checks_01_06",
+    "scenarios_59",
+    "judge_v1_contaminated_1_preserved",
+    "judge_v1_contaminated_2_preserved",
+    "judge_v1_contaminated_3_preserved",
+    "judge_1_v2",
+    "judge_2_v2",
+    "judge_3_v2",
+    "result_profile",
+    "report"
+  ],
+  "failed": [],
+  "excluded_from_main_evidence": [
+    "judge_v1_contaminated_1",
+    "judge_v1_contaminated_2",
+    "judge_v1_contaminated_3"
+  ],
+  "scenario_counts": {
+    "PASS": 54,
+    "FAIL": 4,
+    "CRASH": 1,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "judge_scores_v2": [0.58, 0.66, 0.63],
+  "judge_mean_v2": 0.6233333333333333,
+  "judge_sample_sd_v2": 0.040414518843273836,
+  "updated_at": "2026-07-23T14:19:36Z"
+}

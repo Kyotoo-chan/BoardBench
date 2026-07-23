@@ -1,0 +1,65 @@
+CATAN cited scenario evaluation
+Command: conda run -n boardbench python checks/run_scenarios.py --code-path outputs/catan_codex_ag.py --scenarios checks/scenarios/catan.json --json-output results/scores/catan/base_packet_1/runs/base_packet/catan_codex_ag_scenarios.json
+Exit: 1 (expected when confirmed FAIL/CRASH exists)
+
+PASS CAT-R01-component-inventory
+PASS CAT-R02-fixed-beginner-board
+PASS CAT-R03-starting-resources-and-stock
+PASS CAT-R04-strict-pre-roll-phase
+PASS CAT-R05-development-before-roll
+PASS CAT-R06-settlement-production
+PASS CAT-R07-city-double-production
+PASS CAT-R08-multiple-production-adds
+PASS CAT-R09-robber-blocks-only-occupied-hex
+PASS CAT-R10-seven-discard-thresholds
+PASS CAT-D01-seven-discards-commit-together
+PASS CAT-R11-robber-must-move
+PASS CAT-D02-empty-robber-victim-ineligible
+PASS CAT-D03-no-eligible-victim-no-theft
+PASS CAT-R12-knight-does-not-discard
+PASS CAT-R13-road-cost-and-stock
+PASS CAT-R14-road-occupied-edge-illegal
+PASS CAT-R15-opponent-building-blocks-road
+PASS CAT-R16-settlement-cost-and-distance
+PASS CAT-R17-distance-rule-rejects-neighbor
+PASS CAT-R18-city-upgrade
+PASS CAT-R19-returned-settlement-reusable
+PASS CAT-R20-buy-development-card
+PASS CAT-R21-road-stock-exhaustion
+PASS CAT-R22-trade-before-build-only
+PASS CAT-D04a-trade-staging-and-cancel
+PASS CAT-R23-positive-bilateral-trade
+PASS CAT-R24-gift-is-illegal
+PASS CAT-D04-multilateral-atomic-trade
+PASS CAT-R25-nonactive-cannot-control-trade
+PASS CAT-R26-maritime-4-to-1
+PASS CAT-R27-generic-harbor-3-to-1
+PASS CAT-R28-special-harbor-2-to-1
+PASS CAT-R29-wrong-port-resource-and-same-return
+PASS CAT-R30-new-harbor-not-usable-after-trade
+PASS CAT-D05-city-retains-harbor
+PASS CAT-R31-bought-card-cannot-be-played
+PASS CAT-R32-only-one-knight-or-progress
+PASS CAT-D06-road-building-two-sequential
+FAIL CAT-D07-road-building-max-feasible-one: step 2: phase: expected 'roll', got 'road_building'
+CRASH CAT-D08-victory-after-first-free-road: TypeError: 'NoneType' object is not subscriptable
+PASS CAT-R33-year-of-plenty-same-resource
+PASS CAT-R34-monopoly-all-opponents
+PASS CAT-R35-longest-road-awarded-at-five
+PASS CAT-R36-longest-road-tie-holder-keeps
+PASS CAT-R37-longer-road-transfers
+PASS CAT-R38-opponent-settlement-splits-road
+PASS CAT-D09-longest-road-cycle-revisits-vertex
+PASS CAT-R39-largest-army-at-three
+PASS CAT-R40-largest-army-tie-no-transfer
+PASS CAT-R41-largest-army-strictly-more-transfers
+PASS CAT-D14-knight-army-win-before-robber
+PASS CAT-D10-build-to-ten-ends-immediately
+FAIL CAT-D11-ten-at-own-turn-start-wins: step 1: terminal: expected True, got False
+PASS CAT-R42-inactive-player-at-ten-does-not-win
+FAIL CAT-R43-newly-bought-vp-card-can-win: step 1: played_development: expected [{'owner': 0, 'id': 'library'}], got []
+FAIL CAT-D12-reveal-minimum-victory-cards: step 1: development_hand[0]: expected ['chapel'], got ['library', 'marketplace', 'chapel']
+PASS CAT-D13-observation-counts-with-private-identities
+PASS CAT-R44-hidden-vp-excluded-from-public-score
+
+SCENARIOS PASS=54 FAIL=4 CRASH=1 UNREACHED=0 UNTESTABLE=0 evaluated=59/59 score=0.915 coverage=1.000

@@ -1,0 +1,19 @@
+CATAN base packet 1 — grouped machine checks
+Command: conda run -n boardbench python checks/run_checks.py --game catan_codex_ag --code-path outputs/catan_codex_ag.py --rollouts 100 --max-steps 1000 --seed 1
+Exit: 0
+
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api                    9/9 score=1.000    0.01s
+---- summary                            4/4 score=1.000    0.03s
+
+OK   05_random_rollouts             100/100 score=1.000   76.53s
+OK   06_action_language       999952/999952 score=1.000   73.81s
+---- summary                            6/6 score=1.000  150.38s
+
+Evidence groups:
+- technical gate: checks 01–04
+- runtime robustness: check 05
+- interface: check 06
+No rule-fidelity claim is inferred from this log.

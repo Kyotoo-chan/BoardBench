@@ -1,0 +1,48 @@
+{
+  "identity": {
+    "game": "CATAN – Das Spiel",
+    "condition": "matching_2022_manual_almanac_fixed4_strict",
+    "source_path": "../../../../inputs/games/catan/game_rules.pdf",
+    "source_format": "pdf+publisher_companion_pdf",
+    "source_sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3",
+    "sources": [
+      {
+        "source_id": "CATAN22-RULES",
+        "label": "CATAN22-RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/catan/game_rules.pdf",
+        "sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+      },
+      {
+        "source_id": "CATAN22-ALMANAC",
+        "label": "CATAN22-ALMANAC",
+        "role": "publisher_companion",
+        "path": "../../../../inputs/games/catan/game_almanac.pdf",
+        "sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc"
+      }
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 32,
+    "human_decision": 12,
+    "ambiguous": 0,
+    "not_testable": 2
+  },
+  "headline": "Technically robust; high clear-rule fidelity; four decision-sensitive failures and one crash; full evaluated coverage.",
+  "runs": [
+    {
+      "stem": "catan_codex_ag",
+      "agentic_evidence": "runs/base_packet/catan_codex_ag_agentic_collector.json",
+      "checks": "runs/base_packet/catan_codex_ag_checks.txt",
+      "scenarios": "runs/base_packet/catan_codex_ag_scenarios.json",
+      "usage": "runs/base_packet/catan_codex_ag_usage.json",
+      "code": "runs/base_packet/catan_codex_ag.py",
+      "assumptions": "runs/base_packet/catan_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "runs/base_packet/catan_codex_ag_judge_1.md",
+        "runs/base_packet/catan_codex_ag_judge_2.md",
+        "runs/base_packet/catan_codex_ag_judge_3.md"
+      ]
+    }
+  ]
+}

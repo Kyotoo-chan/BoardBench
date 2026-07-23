@@ -1,0 +1,605 @@
+{
+  "version": 3,
+  "rubric_version": "catan-2022-fixed4-v1-2026-07-23",
+  "suite": "checks/scenarios/catan.json",
+  "suite_sha256": "b7a4f653376d18d3d1ad1dd12aff596b0308946ee69602cf613c409848d26cfe",
+  "adapter": "checks/scenario_adapters/catan.py",
+  "adapter_sha256": "fce085d7dd545793603260f85dd8157d63674ac4fe8c4a70e0f400253de83454",
+  "runner_sha256": "d852145a60ab361412c7e3847ec3a2e49297ddba9a2bf64ef4b7ba7d87e6f762",
+  "code": "outputs/catan_codex_ag.py",
+  "code_sha256": "bcd19e4a0a9b9f384370572351a37b72f39e31354a9cc70e0aeaba9cde765122",
+  "counts": {
+    "PASS": 54,
+    "FAIL": 4,
+    "CRASH": 1,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 59,
+  "total": 59,
+  "score": 0.9152542372881356,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 43,
+      "evaluated": 44,
+      "score": 0.9772727272727273
+    },
+    "human_decision": {
+      "passed": 11,
+      "evaluated": 15,
+      "score": 0.7333333333333333
+    }
+  },
+  "results": [
+    {
+      "id": "CAT-R01-component-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-INV-01",
+        "CAT-INV-02",
+        "CAT-INV-03",
+        "CAT-INV-04"
+      ]
+    },
+    {
+      "id": "CAT-R02-fixed-beginner-board",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-SETUP-01",
+        "CAT-SETUP-02"
+      ]
+    },
+    {
+      "id": "CAT-R03-starting-resources-and-stock",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-SETUP-03",
+        "CAT-INV-02",
+        "CAT-INV-04"
+      ]
+    },
+    {
+      "id": "CAT-R04-strict-pre-roll-phase",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-01",
+        "CAT-TURN-02"
+      ]
+    },
+    {
+      "id": "CAT-R05-development-before-roll",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ]
+    },
+    {
+      "id": "CAT-R06-settlement-production",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ]
+    },
+    {
+      "id": "CAT-R07-city-double-production",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ]
+    },
+    {
+      "id": "CAT-R08-multiple-production-adds",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-PROD-01"
+      ]
+    },
+    {
+      "id": "CAT-R09-robber-blocks-only-occupied-hex",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-PROD-01",
+        "CAT-PROD-02"
+      ]
+    },
+    {
+      "id": "CAT-R10-seven-discard-thresholds",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROBBER-01"
+      ]
+    },
+    {
+      "id": "CAT-D01-seven-discards-commit-together",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-DISCARD",
+        "CAT-ROBBER-01"
+      ]
+    },
+    {
+      "id": "CAT-R11-robber-must-move",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROBBER-02"
+      ]
+    },
+    {
+      "id": "CAT-D02-empty-robber-victim-ineligible",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-ROBBER",
+        "CAT-ROBBER-03"
+      ]
+    },
+    {
+      "id": "CAT-D03-no-eligible-victim-no-theft",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-ROBBER",
+        "CAT-ROBBER-02"
+      ]
+    },
+    {
+      "id": "CAT-R12-knight-does-not-discard",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-03",
+        "CAT-ROBBER-03"
+      ]
+    },
+    {
+      "id": "CAT-R13-road-cost-and-stock",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-R14-road-occupied-edge-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-R15-opponent-building-blocks-road",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-R16-settlement-cost-and-distance",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-R17-distance-rule-rejects-neighbor",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-R18-city-upgrade",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-BUILD-02",
+        "CAT-BUILD-03"
+      ]
+    },
+    {
+      "id": "CAT-R19-returned-settlement-reusable",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-03"
+      ]
+    },
+    {
+      "id": "CAT-R20-buy-development-card",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-01",
+        "CAT-TURN-03"
+      ]
+    },
+    {
+      "id": "CAT-R21-road-stock-exhaustion",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-BUILD-03",
+        "CAT-INV-04"
+      ]
+    },
+    {
+      "id": "CAT-R22-trade-before-build-only",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-01",
+        "CAT-TURN-02"
+      ]
+    },
+    {
+      "id": "CAT-D04a-trade-staging-and-cancel",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-TRADE",
+        "CAT-TRADE-01"
+      ]
+    },
+    {
+      "id": "CAT-R23-positive-bilateral-trade",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ]
+    },
+    {
+      "id": "CAT-R24-gift-is-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ]
+    },
+    {
+      "id": "CAT-D04-multilateral-atomic-trade",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-TRADE",
+        "CAT-TRADE-01"
+      ]
+    },
+    {
+      "id": "CAT-R25-nonactive-cannot-control-trade",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-01"
+      ]
+    },
+    {
+      "id": "CAT-R26-maritime-4-to-1",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ]
+    },
+    {
+      "id": "CAT-R27-generic-harbor-3-to-1",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ]
+    },
+    {
+      "id": "CAT-R28-special-harbor-2-to-1",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ]
+    },
+    {
+      "id": "CAT-R29-wrong-port-resource-and-same-return",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-02"
+      ]
+    },
+    {
+      "id": "CAT-R30-new-harbor-not-usable-after-trade",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TRADE-03",
+        "CAT-TURN-02"
+      ]
+    },
+    {
+      "id": "CAT-D05-city-retains-harbor",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-PORT-CITY",
+        "CAT-TRADE-04"
+      ]
+    },
+    {
+      "id": "CAT-R31-bought-card-cannot-be-played",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ]
+    },
+    {
+      "id": "CAT-R32-only-one-knight-or-progress",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-03"
+      ]
+    },
+    {
+      "id": "CAT-D06-road-building-two-sequential",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-ROAD-CARD",
+        "CAT-DEV-01"
+      ]
+    },
+    {
+      "id": "CAT-D07-road-building-max-feasible-one",
+      "status": "FAIL",
+      "message": "step 2: phase: expected 'roll', got 'road_building'",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-ROAD-CARD",
+        "CAT-DEV-01"
+      ]
+    },
+    {
+      "id": "CAT-D08-victory-after-first-free-road",
+      "status": "CRASH",
+      "message": "TypeError: 'NoneType' object is not subscriptable",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-D-ROAD-CARD",
+        "CAT-ROAD-01"
+      ]
+    },
+    {
+      "id": "CAT-R33-year-of-plenty-same-resource",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-DEV-01"
+      ]
+    },
+    {
+      "id": "CAT-R34-monopoly-all-opponents",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-DEV-01"
+      ]
+    },
+    {
+      "id": "CAT-R35-longest-road-awarded-at-five",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROAD-01"
+      ]
+    },
+    {
+      "id": "CAT-R36-longest-road-tie-holder-keeps",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROAD-01",
+        "CAT-ROAD-02"
+      ]
+    },
+    {
+      "id": "CAT-R37-longer-road-transfers",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROAD-01"
+      ]
+    },
+    {
+      "id": "CAT-R38-opponent-settlement-splits-road",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ROAD-02",
+        "CAT-BUILD-02"
+      ]
+    },
+    {
+      "id": "CAT-D09-longest-road-cycle-revisits-vertex",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-LONGEST",
+        "CAT-ROAD-01"
+      ]
+    },
+    {
+      "id": "CAT-R39-largest-army-at-three",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ]
+    },
+    {
+      "id": "CAT-R40-largest-army-tie-no-transfer",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ]
+    },
+    {
+      "id": "CAT-R41-largest-army-strictly-more-transfers",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-ARMY-01"
+      ]
+    },
+    {
+      "id": "CAT-D14-knight-army-win-before-robber",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-ARMY-01"
+      ]
+    },
+    {
+      "id": "CAT-D10-build-to-ten-ends-immediately",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-WIN-01"
+      ]
+    },
+    {
+      "id": "CAT-D11-ten-at-own-turn-start-wins",
+      "status": "FAIL",
+      "message": "step 1: terminal: expected True, got False",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-WIN",
+        "CAT-WIN-01"
+      ]
+    },
+    {
+      "id": "CAT-R42-inactive-player-at-ten-does-not-win",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-WIN-01"
+      ]
+    },
+    {
+      "id": "CAT-R43-newly-bought-vp-card-can-win",
+      "status": "FAIL",
+      "message": "step 1: played_development: expected [{'owner': 0, 'id': 'library'}], got []",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-TURN-03",
+        "CAT-WIN-01"
+      ]
+    },
+    {
+      "id": "CAT-D12-reveal-minimum-victory-cards",
+      "status": "FAIL",
+      "message": "step 1: development_hand[0]: expected ['chapel'], got ['library', 'marketplace', 'chapel']",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-VP-REVEAL",
+        "CAT-WIN-01"
+      ]
+    },
+    {
+      "id": "CAT-D13-observation-counts-with-private-identities",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-D-OBS",
+        "CAT-INFO-01",
+        "CAT-INFO-02"
+      ]
+    },
+    {
+      "id": "CAT-R44-hidden-vp-excluded-from-public-score",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-INFO-01",
+        "CAT-SCORE-01"
+      ]
+    }
+  ]
+}
