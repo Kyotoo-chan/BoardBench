@@ -1,0 +1,554 @@
+{
+  "version": 3,
+  "rubric_version": "wizard-base-contract-v2-2026-07-25",
+  "game": "wizard",
+  "num_players": 4,
+  "adapter": "checks/scenario_adapters/wizard.py",
+  "source_condition": "publisher_pdf_base_game_only",
+  "sources": [
+    {
+      "source_id": "WIZARD-RULES",
+      "role": "publisher_rulebook",
+      "path": "inputs/games/wizard/game_rules.pdf",
+      "sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+    }
+  ],
+  "contract": "inputs/prompts/environment_contract.md",
+  "environment_profile": "inputs/games/wizard/environment_profile.json",
+  "scenarios": [
+    {
+      "id": "WIZ-R01-cited-card-totals",
+      "fact_ids": ["WIZ-INV-01", "WIZ-INV-02", "WIZ-INV-03"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Inhalt: 60 Charakterkarten ... Es gibt vier verschiedene Farben ... Die vier Magierkarten ... Die vier Narrenkarten."
+      },
+      "initial": {
+        "adapter": {
+          "total_cards": 60,
+          "ordinary_count": 52,
+          "special_counts": {"zauberer": 4, "narr": 4}
+        }
+      }
+    },
+    {
+      "id": "WIZ-R02-exact-suit-rank-inventory",
+      "fact_ids": ["WIZ-DEC-INV"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Es gibt vier verschiedene Farben ... Die jeweils stärkste Karte ist die ‚13‘, die schwächste Karte ist die ‚1‘."
+      },
+      "initial": {"adapter": {"exact_suit_ranks": true}}
+    },
+    {
+      "id": "WIZ-R03-round-count-by-player-count",
+      "fact_ids": ["WIZ-END-01"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Bei 6 Teilnehmern ist das die 10. Stichrunde, bei 5 Teilnehmern die 12. Stichrunde, bei 4 Teilnehmern die 15. und bei 3 Teilnehmern die 20. Stichrunde."
+      },
+      "initial": {
+        "adapter": {
+          "player_count_max_rounds": {"3": 20, "4": 15, "5": 12, "6": 10}
+        }
+      }
+    },
+    {
+      "id": "WIZ-R04-first-round-deal-and-start",
+      "fact_ids": ["WIZ-DEAL-01", "WIZ-DEAL-02", "WIZ-DEC-FLOW"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "In der ersten Runde wird nur eine Karte an jeden Spieler ausgeteilt. ... Karten, die nicht an die Spieler verteilt werden, kommen als verdeckter Stapel in die Tischmitte."
+      },
+      "initial": {
+        "adapter": {
+          "round_number": 1,
+          "max_round": 15,
+          "dealer": 0,
+          "hand_sizes": {"0": 1, "1": 1, "2": 1, "3": 1},
+          "deck_size": 55,
+          "total_cards": 60
+        }
+      }
+    },
+    {
+      "id": "WIZ-R05-revealed-wizard-requires-color",
+      "fact_ids": ["WIZ-TRUMP-02", "WIZ-DEC-TRUMP"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Ist die aufgedeckte Karte ein Zauberer, dann darf der Lehrling, der die Karten ausgeteilt hat, eine Trumpffarbe bestimmen."
+      },
+      "fixture": {
+        "phase": "choose_trump",
+        "dealer": 0,
+        "current_player": 0,
+        "pending": {"type": "trump_choice", "player": 0},
+        "revealed_trump": "zauberer",
+        "hands": {
+          "0": ["menschen_blau:1"], "1": ["elfen_gruen:1"],
+          "2": ["zwerge_rot:1"], "3": ["riesen_gelb:1"]
+        }
+      },
+      "initial": {
+        "adapter": {
+          "legal_action_types": ["choose_trump"],
+          "legal_trump_suits": ["menschen_blau", "elfen_gruen", "zwerge_rot", "riesen_gelb"]
+        }
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "choose_trump", "actor": 0, "args": {"suit": "zwerge_rot"}}},
+          "expect": {
+            "current_player": 1,
+            "adapter": {"phase": "predict", "trump_suit": "zwerge_rot"}
+          }
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R06-prediction-domain",
+      "fact_ids": ["WIZ-BID-01", "WIZ-DEC-BID"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Nachdem sich jeder Lehrling seine Karten angeschaut hat, muss er vorhersagen, wie viele Stiche er in dieser Runde wohl machen wird."
+      },
+      "fixture": {
+        "round_number": 2,
+        "phase": "predict",
+        "dealer": 0,
+        "leader": 1,
+        "current_player": 1,
+        "hands": {
+          "0": ["menschen_blau:1", "menschen_blau:2"],
+          "1": ["elfen_gruen:1", "elfen_gruen:2"],
+          "2": ["zwerge_rot:1", "zwerge_rot:2"],
+          "3": ["riesen_gelb:1", "riesen_gelb:2"]
+        }
+      },
+      "initial": {"adapter": {"legal_predictions": [0, 1, 2]}},
+      "steps": [
+        {
+          "action": {"adapter": {"type": "predict", "actor": 1, "args": {"tricks": 0}}},
+          "expect": {"current_player": 2, "adapter": {"prediction": {"1": 0}}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R07-base-bids-may-equal-trick-count",
+      "fact_ids": ["WIZ-DEC-SCOPE", "WIZ-DEC-BID"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Varianten — Plus/minus Eins: ... Die Anzahl der gewollten Stiche aller Lehrlinge darf aber nicht mit der Zahl der möglichen Stiche übereinstimmen."
+      },
+      "fixture": {
+        "round_number": 2,
+        "phase": "predict",
+        "dealer": 0,
+        "leader": 1,
+        "current_player": 0,
+        "hands": {
+          "0": ["menschen_blau:1", "menschen_blau:2"],
+          "1": ["elfen_gruen:1", "elfen_gruen:2"],
+          "2": ["zwerge_rot:1", "zwerge_rot:2"],
+          "3": ["riesen_gelb:1", "riesen_gelb:2"]
+        },
+        "prediction": {"1": 1, "2": 0, "3": 0}
+      },
+      "initial": {"adapter": {"legal_predictions": [0, 1, 2]}},
+      "steps": [
+        {
+          "action": {"adapter": {"type": "predict", "actor": 0, "args": {"tricks": 1}}},
+          "expect": {
+            "current_player": 1,
+            "adapter": {"phase": "play", "prediction": {"0": 1}}
+          }
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R08-follow-suit-with-special-exceptions",
+      "fact_ids": ["WIZ-PLAY-02", "WIZ-PLAY-03"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Eine angespielte Farbe muss bedient werden. ... Zauberer- und Narrenkarten dürfen immer gespielt werden, auch wenn man bedienen könnte."
+      },
+      "fixture": {
+        "phase": "play", "leader": 1, "current_player": 2, "led_suit": "zwerge_rot",
+        "trick": [{"player": 1, "card": "zwerge_rot:5"}],
+        "hands": {"2": ["zwerge_rot:7", "menschen_blau:13", "zauberer", "narr"]}
+      },
+      "initial": {
+        "adapter": {
+          "legal_play_cards": ["zwerge_rot:7", "zauberer", "narr"],
+          "legal_play_excludes": ["menschen_blau:13"]
+        }
+      }
+    },
+    {
+      "id": "WIZ-R09-void-player-may-discard-or-trump",
+      "fact_ids": ["WIZ-PLAY-02", "WIZ-PLAY-03"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Ist das nicht möglich, kann der Lehrling eine Farbe abwerfen oder Trumpf spielen."
+      },
+      "fixture": {
+        "phase": "play", "leader": 1, "current_player": 2,
+        "trump_suit": "menschen_blau", "led_suit": "zwerge_rot",
+        "trick": [{"player": 1, "card": "zwerge_rot:5"}],
+        "hands": {"2": ["menschen_blau:13", "elfen_gruen:2", "zauberer", "narr"]}
+      },
+      "initial": {
+        "adapter": {
+          "legal_play_cards": ["menschen_blau:13", "elfen_gruen:2", "zauberer", "narr"]
+        }
+      }
+    },
+    {
+      "id": "WIZ-R10-first-wizard-wins-midgame",
+      "fact_ids": ["WIZ-WIN-01", "WIZ-WIN-02"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Es gewinnt den Stich: Die erste Zaubererkarte in einem Stich. ... Der Stich geht in jedem Fall an den ersten Zauberer."
+      },
+      "fixture": {
+        "round_number": 5, "phase": "play", "leader": 1, "current_player": 0,
+        "trick": [
+          {"player": 1, "card": "zauberer"},
+          {"player": 2, "card": "zauberer"},
+          {"player": 3, "card": "zwerge_rot:13"}
+        ],
+        "hands": {
+          "0": ["menschen_blau:13", "zwerge_rot:1"],
+          "1": ["menschen_blau:1"], "2": ["elfen_gruen:1"], "3": ["riesen_gelb:1"]
+        }
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "menschen_blau:13"}}},
+          "expect": {
+            "current_player": 1,
+            "adapter": {"last_trick_winner": 1, "tricks_won": {"1": 1}}
+          }
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R11-first-wizard-also-wins-final-round",
+      "fact_ids": ["WIZ-WIN-01", "WIZ-WIN-02"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Die erste Zaubererkarte in einem Stich ... Der Stich geht in jedem Fall an den ersten Zauberer."
+      },
+      "fixture": {
+        "round_number": 15, "max_round": 15, "phase": "play", "leader": 1, "current_player": 0,
+        "trick": [
+          {"player": 1, "card": "zauberer"},
+          {"player": 2, "card": "zauberer"},
+          {"player": 3, "card": "riesen_gelb:13"}
+        ],
+        "hands": {
+          "0": ["menschen_blau:13", "zwerge_rot:1"],
+          "1": ["menschen_blau:1"], "2": ["elfen_gruen:1"], "3": ["riesen_gelb:1"]
+        }
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "menschen_blau:13"}}},
+          "expect": {"current_player": 1, "adapter": {"last_trick_winner": 1}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R12-jester-then-ordinary-establishes-suit",
+      "fact_ids": ["WIZ-WIN-03"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Wird ein Stich mit einer Narrenkarte eröffnet ... Erst die zweite Karte bestimmt die Farbe, die bedient werden muss."
+      },
+      "fixture": {
+        "phase": "play", "leader": 1, "current_player": 2,
+        "trick": [{"player": 1, "card": "narr"}],
+        "hands": {
+          "0": ["menschen_blau:1", "menschen_blau:2"], "1": ["elfen_gruen:1"],
+          "2": ["zwerge_rot:7", "zwerge_rot:1"], "3": ["riesen_gelb:1", "riesen_gelb:2"]
+        }
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 2, "args": {"card": "zwerge_rot:7"}}},
+          "expect": {"current_player": 3, "adapter": {"led_suit": "zwerge_rot"}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R13-leading-jesters-wait-for-first-color",
+      "fact_ids": ["WIZ-DEC-JESTER"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Wird ein Stich mit einer Narrenkarte eröffnet ... Erst die zweite Karte bestimmt die Farbe, die bedient werden muss. ... Werden in einem Stich nur Narren gespielt, dann gewinnt die erste Narrenkarte."
+      },
+      "fixture": {
+        "phase": "play", "leader": 1, "current_player": 3,
+        "trick": [{"player": 1, "card": "narr"}, {"player": 2, "card": "narr"}],
+        "hands": {
+          "0": ["menschen_blau:1", "menschen_blau:2"], "1": ["elfen_gruen:1"],
+          "2": ["zwerge_rot:1"], "3": ["zwerge_rot:7", "riesen_gelb:1"]
+        }
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 3, "args": {"card": "zwerge_rot:7"}}},
+          "expect": {"current_player": 0, "adapter": {"led_suit": "zwerge_rot"}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R14-jester-wizard-keeps-trick-colorless",
+      "fact_ids": ["WIZ-WIN-01", "WIZ-DEC-JESTER"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Die erste Zaubererkarte in einem Stich ... Wird ein Stich mit einer Narrenkarte eröffnet ... Erst die zweite Karte bestimmt die Farbe, die bedient werden muss."
+      },
+      "fixture": {
+        "phase": "play", "leader": 1, "current_player": 3,
+        "trick": [{"player": 1, "card": "narr"}, {"player": 2, "card": "zauberer"}],
+        "hands": {
+          "0": ["elfen_gruen:2", "riesen_gelb:2"], "1": ["menschen_blau:1"],
+          "2": ["elfen_gruen:1"], "3": ["zwerge_rot:7", "menschen_blau:13"]
+        }
+      },
+      "initial": {"adapter": {"legal_play_cards": ["zwerge_rot:7", "menschen_blau:13"]}},
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 3, "args": {"card": "zwerge_rot:7"}}},
+          "expect": {"current_player": 0, "adapter": {"led_suit": null}}
+        },
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "elfen_gruen:2"}}},
+          "expect": {"current_player": 2, "adapter": {"last_trick_winner": 2}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R15-all-jesters-first-wins",
+      "fact_ids": ["WIZ-WIN-04"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Werden in einem Stich nur Narren gespielt, dann gewinnt die erste Narrenkarte den Stich."
+      },
+      "fixture": {
+        "round_number": 4, "phase": "play", "leader": 1, "current_player": 0,
+        "trick": [
+          {"player": 1, "card": "narr"}, {"player": 2, "card": "narr"}, {"player": 3, "card": "narr"}
+        ],
+        "hands": {"0": ["narr", "menschen_blau:1"], "1": ["elfen_gruen:1"], "2": ["zwerge_rot:1"], "3": ["riesen_gelb:1"]}
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "narr"}}},
+          "expect": {"current_player": 1, "adapter": {"last_trick_winner": 1}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R16-highest-trump-wins-without-wizard",
+      "fact_ids": ["WIZ-WIN-01"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Es gewinnt den Stich ... die höchste Karte in der Trumpffarbe."
+      },
+      "fixture": {
+        "round_number": 4, "phase": "play", "leader": 1, "current_player": 0,
+        "trump_suit": "menschen_blau", "led_suit": "zwerge_rot",
+        "trick": [
+          {"player": 1, "card": "zwerge_rot:13"},
+          {"player": 2, "card": "menschen_blau:1"},
+          {"player": 3, "card": "menschen_blau:12"}
+        ],
+        "hands": {"0": ["narr", "riesen_gelb:1"], "1": ["elfen_gruen:1"], "2": ["zwerge_rot:1"], "3": ["riesen_gelb:2"]}
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "narr"}}},
+          "expect": {"current_player": 3, "adapter": {"last_trick_winner": 3}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R17-highest-led-color-wins-without-trump",
+      "fact_ids": ["WIZ-WIN-01"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Es gewinnt den Stich ... die höchste Karte in der zuerst ausgespielten Farbe, wenn weder Trumpf noch Zauberer im Stich sind."
+      },
+      "fixture": {
+        "round_number": 4, "phase": "play", "leader": 1, "current_player": 0,
+        "trump_suit": null, "led_suit": "zwerge_rot",
+        "trick": [
+          {"player": 1, "card": "zwerge_rot:7"},
+          {"player": 2, "card": "zwerge_rot:13"},
+          {"player": 3, "card": "menschen_blau:13"}
+        ],
+        "hands": {"0": ["narr", "riesen_gelb:1"], "1": ["elfen_gruen:1"], "2": ["zwerge_rot:1"], "3": ["riesen_gelb:2"]}
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "narr"}}},
+          "expect": {"current_player": 2, "adapter": {"last_trick_winner": 2}}
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R18-final-round-scoring-and-winner",
+      "fact_ids": ["WIZ-SCORE-01", "WIZ-SCORE-02", "WIZ-END-01", "WIZ-END-02"],
+      "basis": "clear",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Der Lehrling, der die Anzahl seiner gewonnenen Stiche genau vorhersagen konnte, erhält 20 Erfahrungspunkte plus 10 Punkte pro gewonnenen Stich. Wer daneben getippt hat, verliert jeweils 10 Erfahrungspunkte für jeden Stich, den er über oder unter seiner Vorhersage liegt. ... Die letzte Stichrunde wird noch abgerechnet."
+      },
+      "fixture": {
+        "round_number": 15, "max_round": 15, "phase": "play", "leader": 1, "current_player": 0,
+        "trump_suit": null, "led_suit": "zwerge_rot",
+        "trick": [
+          {"player": 1, "card": "zwerge_rot:1"},
+          {"player": 2, "card": "zwerge_rot:2"},
+          {"player": 3, "card": "zwerge_rot:3"}
+        ],
+        "hands": {"0": ["zwerge_rot:13"]},
+        "prediction": {"0": 3, "1": 1, "2": 2, "3": 10},
+        "tricks_won": {"0": 2, "1": 1, "2": 0, "3": 11},
+        "score": {"0": 0, "1": 0, "2": 0, "3": 0}
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "zwerge_rot:13"}}},
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "phase": "terminal",
+              "score": {"0": 50, "1": 30, "2": -20, "3": -10},
+              "winner_players": [0]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "WIZ-R19-joint-winners-on-equal-high-score",
+      "fact_ids": ["WIZ-END-02", "WIZ-DEC-TIE"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 2,
+        "quote": "Gewonnen hat der Zauberlehrling mit der höchsten Erfahrungspunktzahl."
+      },
+      "fixture": {
+        "round_number": 15, "max_round": 15, "terminal": true,
+        "score": {"0": 100, "1": 100, "2": 70, "3": 0}
+      },
+      "initial": {
+        "legal_action_count": 0,
+        "adapter": {"winner_players": [0, 1]}
+      }
+    },
+    {
+      "id": "WIZ-R20-private-hands-in-base-game",
+      "fact_ids": ["WIZ-BID-01", "WIZ-DEC-SCOPE", "WIZ-DEC-PRIVACY"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "Nachdem sich jeder Lehrling seine Karten angeschaut hat, muss er vorhersagen ..."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "WIZARD-RULES",
+          "page": 2,
+          "quote": "Hellsehen: ... so dass alle Lehrlinge außer ihm selbst die Karte sehen können."
+        }
+      ],
+      "fixture": {
+        "round_number": 2, "phase": "predict", "current_player": 1,
+        "hands": {
+          "0": ["menschen_blau:1", "menschen_blau:2"],
+          "1": ["elfen_gruen:1", "elfen_gruen:2"],
+          "2": ["zwerge_rot:1", "zwerge_rot:2"],
+          "3": ["riesen_gelb:1", "riesen_gelb:2"]
+        }
+      },
+      "initial": {"adapter": {"private_observation": 1}}
+    },
+    {
+      "id": "WIZ-R21-round-reset-deal-and-dealer-rotation",
+      "fact_ids": ["WIZ-DEAL-01", "WIZ-DEAL-03", "WIZ-SCORE-01", "WIZ-DEC-FLOW"],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "WIZARD-RULES",
+        "page": 1,
+        "quote": "In der zweiten Stichrunde werden an jeden zwei Karten ausgeteilt. ... Nach jeder Stichrunde wechselt ... die Charakterkarten zu verteilen, im Uhrzeigersinn."
+      },
+      "fixture": {
+        "round_number": 1, "phase": "play", "dealer": 0, "leader": 1, "current_player": 0,
+        "trump_suit": null, "led_suit": "menschen_blau",
+        "trick": [
+          {"player": 1, "card": "menschen_blau:1"},
+          {"player": 2, "card": "menschen_blau:2"},
+          {"player": 3, "card": "menschen_blau:3"}
+        ],
+        "hands": {"0": ["menschen_blau:13"]},
+        "prediction": {"0": 1, "1": 0, "2": 0, "3": 0},
+        "remaining_to_deck": true
+      },
+      "steps": [
+        {
+          "action": {"adapter": {"type": "play_card", "actor": 0, "args": {"card": "menschen_blau:13"}}},
+          "expect": {
+            "terminal": false,
+            "adapter": {
+              "round_number": 2,
+              "dealer": 1,
+              "hand_sizes": {"0": 2, "1": 2, "2": 2, "3": 2},
+              "score": {"0": 30, "1": 20, "2": 20, "3": 20},
+              "total_cards": 60
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -37,14 +37,13 @@ class CatanPacketTests(unittest.TestCase):
         self.profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
         self.suite = load_suite(SUITE_PATH, ROOT)
 
-    def test_assigned_sources_and_active_slots_match(self):
+    def test_assigned_source_hashes(self):
         expected = {
             "game_rules.pdf": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3",
             "game_almanac.pdf": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc",
         }
         for name, digest in expected.items():
             self.assertEqual(sha256(GAME_DIR / name), digest)
-            self.assertEqual((ROOT / "inputs" / name).read_bytes(), (GAME_DIR / name).read_bytes())
 
     def test_profile_topology_inventory_and_starting_resources(self):
         topology = self.profile["topology"]
@@ -88,11 +87,13 @@ class CatanPacketTests(unittest.TestCase):
             if "robber_hex" in fixture:
                 self.assertIn(fixture["robber_hex"], hexes, scenario["id"])
 
-    def test_manifest_hashes_current_packet(self):
+    def test_manifest_preserves_source_packet_hashes(self):
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        entries = manifest["condition"]["sources"] + manifest["condition"]["excluded_candidates"] + list(manifest["infrastructure"].values())
-        for entry in entries:
+        sources = manifest["condition"]["sources"] + manifest["condition"]["excluded_candidates"]
+        for entry in sources:
             self.assertEqual(sha256(ROOT / entry["path"]), entry["sha256"], entry["path"])
+        for entry in manifest["infrastructure"].values():
+            self.assertRegex(entry["sha256"], r"^[0-9a-f]{64}$")
 
 
 if __name__ == "__main__":

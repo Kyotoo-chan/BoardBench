@@ -41,6 +41,7 @@ Do not continue past material ambiguities without user approval.
 ## Scientific rules
 
 - Use only the supplied source condition for game rules; no remembered or web rules unless an experiment explicitly tests extra context.
+- Original PDFs remain the canonical source artifacts. Every model-facing packet that uses a PDF includes that PDF plus freshly rendered images of every page at 150 DPI from `generation/pdf_pages.py`; extracted text is only a derived search aid and never replaces the PDF. Record the PDF hash, renderer/version, DPI, and rendered-page hashes. Never crop a PDF to hide excluded variants; declare the approved scope in the source manifest and model prompt. A clarified condition keeps the same PDF packet and adds a separate attributed, user-approved clarification artifact instead of rewriting the source into normalized text.
 - A user-authored component appendix is an augmented source, not part of the publisher rulebook. By default it is `user_observation`: it may support hard component inventory/setup expectations, but may not silently override gameplay rules.
 - Hash and cite every source separately. Every hard scenario expectation needs source ID, edition/hash, a stable locator (PDF page or JSON Pointer), and direct source evidence.
 - Surface every cross-source conflict with both citations, alternatives, affected behavior, and a user-approved decision; never apply automatic precedence.
@@ -49,6 +50,7 @@ Do not continue past material ambiguities without user approval.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
 - Do not combine smoke checks, rollouts, action naming, judges, and scenarios into one claim of correctness.
 - Keep raw generations, raw reviews, code, logs, model/thinking settings, and timings.
+- Each source-condition run produces one final scored implementation. Pre-evaluation crashes, technical/API/self-check failures, or objectively source-required omissions may be repaired or reimplemented only inside the same blind isolated workflow; record every attempt, reason, and repair count, retain its raw evidence, and score only the final gate-passing implementation. Repair attempts are not separate generations. If the bounded repair loop does not pass, record a failed run; never repair after evaluation under the same run ID.
 - Never silently rewrite old experimental results after methodology changes.
 
 ## Evaluation groups

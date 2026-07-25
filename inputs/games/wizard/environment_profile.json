@@ -1,0 +1,176 @@
+{
+  "profile_version": 1,
+  "default_num_players": 4,
+  "state_schema": "boardbench/wizard/state/1",
+  "action_schema": "boardbench/wizard/action/1",
+  "observation_schema": "boardbench/wizard/observation/1",
+  "note": "Representation-only profile for the Wizard Version 1.0 base game; behavior comes from the supplied source. Ordinary card IDs use <suit_id>:<rank>; special IDs are zauberer and narr and may occur repeatedly.",
+  "suit_ids": [
+    "menschen_blau",
+    "elfen_gruen",
+    "zwerge_rot",
+    "riesen_gelb"
+  ],
+  "rank_ids": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+  "special_ids": [
+    "zauberer",
+    "narr"
+  ],
+  "phase_ids": [
+    "choose_trump",
+    "predict",
+    "play",
+    "terminal"
+  ],
+  "state_data": {
+    "required": [
+      "configuration",
+      "round_number",
+      "max_round",
+      "dealer",
+      "leader",
+      "current_player",
+      "phase",
+      "terminal",
+      "trump_suit",
+      "led_suit",
+      "players",
+      "zones",
+      "pending",
+      "chance"
+    ],
+    "configuration": {
+      "players": "int",
+      "seed": "int|null",
+      "variant": "base"
+    },
+    "round_number": "int",
+    "max_round": "int",
+    "dealer": "int",
+    "leader": "int",
+    "current_player": "int",
+    "phase": "phase_id",
+    "terminal": "bool",
+    "trump_suit": "suit_id|null",
+    "led_suit": "suit_id|null",
+    "players": [
+      {
+        "id": "int",
+        "hand": [
+          "card_id"
+        ],
+        "prediction": "int|null",
+        "tricks_won": "int",
+        "score": "int"
+      }
+    ],
+    "zones": {
+      "deck": [
+        "card_id"
+      ],
+      "revealed_trump": "card_id|null",
+      "trick": [
+        {
+          "player": "int",
+          "card": "card_id"
+        }
+      ],
+      "completed_tricks": [
+        {
+          "winner": "int",
+          "cards": [
+            "card_id"
+          ]
+        }
+      ],
+      "reserve": [
+        "card_id"
+      ]
+    },
+    "pending": {
+      "nullable": true,
+      "fields": {
+        "type": "trump_choice",
+        "player": "int"
+      }
+    },
+    "chance": {
+      "seed": "int|null",
+      "shuffle_index": "int"
+    }
+  },
+  "action_data": {
+    "required": [
+      "type",
+      "actor",
+      "args"
+    ],
+    "types": {
+      "choose_trump": {
+        "suit": "suit_id"
+      },
+      "predict": {
+        "tricks": "int"
+      },
+      "play_card": {
+        "card": "card_id"
+      }
+    },
+    "type_ids": [
+      "choose_trump",
+      "predict",
+      "play_card"
+    ]
+  },
+  "observation_data": {
+    "required": [
+      "player",
+      "round_number",
+      "max_round",
+      "dealer",
+      "leader",
+      "current_player",
+      "phase",
+      "terminal",
+      "trump_suit",
+      "led_suit",
+      "own_hand",
+      "players",
+      "revealed_trump",
+      "trick",
+      "completed_trick_count",
+      "deck_size"
+    ],
+    "player": "int",
+    "round_number": "int",
+    "max_round": "int",
+    "dealer": "int",
+    "leader": "int",
+    "current_player": "int",
+    "phase": "phase_id",
+    "terminal": "bool",
+    "trump_suit": "suit_id|null",
+    "led_suit": "suit_id|null",
+    "own_hand": [
+      "card_id"
+    ],
+    "players": [
+      {
+        "id": "int",
+        "hand_size": "int",
+        "prediction": "int|null",
+        "tricks_won": "int",
+        "score": "int"
+      }
+    ],
+    "revealed_trump": "card_id|null",
+    "trick": [
+      {
+        "player": "int",
+        "card": "card_id"
+      }
+    ],
+    "completed_trick_count": "int",
+    "deck_size": "int"
+  }
+}
