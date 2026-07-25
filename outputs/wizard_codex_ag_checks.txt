@@ -1,0 +1,32 @@
+BoardBench Wizard implementation pre-evaluation gate
+
+Generation run: a45206c3-dfb9-463c-850a-2e7a2497e21d
+Model: openai-codex/gpt-5.6-sol
+Thinking: low (inherited from parent)
+Scope: Wizard Version 1.0 publisher PDF, base game only
+Implementation repairs: 0
+Evaluator-neutral infrastructure corrections: 1
+
+Initial implementer checks
+PASS python -m py_compile implementation.py
+PASS python agentic_self_check.py
+  agentic-self-check OK states=300 actions=1070
+BLOCKED python profile_fixture_self_check.py
+  Supplied checker shadowed its get-player helper with a loop variable. The implementation agent did not modify the checker.
+
+Parent correction
+- Renamed the evaluator-neutral helper from player() to get_player() in inputs/games/wizard/profile_fixture_self_check.py.
+- No rule expectation, evaluator scenario, or implementation code was disclosed or changed.
+
+Independent final gate
+PASS python -m py_compile implementation.py
+PASS python agentic_self_check.py
+  agentic-self-check OK states=300 actions=1042
+PASS python profile_fixture_self_check.py
+  profile-fixture-self-check OK
+PASS assumptions.json schema validation
+PASS rule_coverage.md presence validation
+
+Final gate status: PASS
+Rule-fidelity scenarios run: no
+Full evaluation run: no

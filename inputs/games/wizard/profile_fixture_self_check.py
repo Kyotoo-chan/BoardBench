@@ -36,7 +36,7 @@ def cards(data):
     return result
 
 
-def player(data, player_id):
+def get_player(data, player_id):
     matches = [entry for entry in data["players"] if entry["id"] == player_id]
     assert len(matches) == 1, f"expected one player with id {player_id}"
     return matches[0]
@@ -121,7 +121,7 @@ def main():
 
     payload = copy.deepcopy(template)
     data = payload["data"]
-    move(data, player(data, 0)["hand"])
+    move(data, get_player(data, 0)["hand"])
     move(data, data["zones"]["deck"])
     reveal = []
     move(data, reveal)
@@ -132,7 +132,7 @@ def main():
     won = []
     move(data, won)
     data["zones"]["completed_tricks"] = [{"winner": 2, "cards": won}]
-    player(data, 2)["tricks_won"] = 1
+    get_player(data, 2)["tricks_won"] = 1
     roundtrip(game, payload, "all zones")
 
     for count in (3, 5, 6):

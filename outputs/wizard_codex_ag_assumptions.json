@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Die Vorbereitung / Das Verteilen der Karten",
+      "source_basis": "missing",
+      "alternatives": ["player 0 deals first and cards are dealt clockwise one at a time beginning to the dealer's left", "choose the first dealer and dealing procedure by another method"],
+      "selected": "player 0 deals first; cards are dealt clockwise one at a time beginning to the dealer's left",
+      "affected_mechanics": ["chance", "private_information", "state_transition"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Die Aufgabe / Das Ende",
+      "source_basis": "missing",
+      "alternatives": ["returns exposes cumulative experience-point scores", "returns exposes winner-normalized utilities"],
+      "selected": "returns exposes each player's cumulative experience-point score in player order",
+      "affected_mechanics": ["terminal_results"]
+    }
+  ]
+}

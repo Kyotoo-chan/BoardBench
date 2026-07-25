@@ -1,3 +1,7 @@
+Assigned source condition: Wizard Version 1.0 publisher PDF, BASE GAME ONLY.
+
+The original PDF intentionally remains complete. The separately headed page-2 section "Varianten" (Plus/minus Eins, Verdeckter Tipp, Geheime Vorhersage, Hellsehen, Einfarbig) is outside this run: acknowledge it in rule_coverage.md but do not implement it. Do not use remembered rules, web rules, house rules, evaluator facts, or benchmark scenarios. Read the original PDF and every image in game_rules_pages/.
+
 Implement the provided rulebook as one self-contained Python module.
 
 Source rules:
@@ -69,4 +73,4 @@ Final response only:
 
 Do not repeat the complete module in the final response.
 
-This assigned publisher source condition has two authoritative documents: `game_rules.pdf` and its explicitly required, edition-matched `game_almanac.pdf`. Read both completely. Neither has automatic precedence if their wording conflicts. The packet also contains `profile_fixture_self_check.py`; run it after `agentic_self_check.py`. Work only inside this workspace and do not inspect parent or repository paths.
+Also run `python profile_fixture_self_check.py`. The required default is `Game(num_players=4, seed=None)` when num_players is omitted, while explicit 3 through 6 must work.

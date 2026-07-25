@@ -79,14 +79,19 @@ New agentic run stem:
 <game>_<backend>_ag
 ```
 
-Standard artifacts:
+Canonical generation artifacts:
 
-- `<stem>.md` — raw generation
-- `<stem>.py` — generated module
+- `<stem>.md` — raw generation response
+- `<stem>.py` — final generated module
+- `<stem>_events.jsonl` — raw generation events
+- `<stem>_agentic.json` — consolidated model/usage, source/render manifest, repair, gate, and artifact evidence
+- `<stem>_assumptions.json` — material source assumptions
+- `<stem>_rule_coverage.md` — source audit
+- `<stem>_task.txt` — exact generation task
 - `<stem>_checks.txt` — grouped check log
-- `<stem>_judge_<label>.md` — raw judge review
+- `<stem>_judge_<label>.md` — raw judge review added during evaluation
 
-`outputs/` is flat. Do not gitignore generated thesis artifacts. Temporary workspaces and judge packets are not committed.
+`outputs/` is a flat **single-active-run workspace**: never mix games or run stems. Before every new generation, the current output artifacts must already be committed, then `python generation/clean_outputs.py` removes them and `python generation/clean_outputs.py --check-empty` verifies the clean start. The next run commit includes those tracked deletions plus its new artifacts, so Git history retains every prior run. Do not create duplicate response/meta/status/manifest files when their content is already preserved by the canonical artifacts above. Do not gitignore generated thesis artifacts. Temporary workspaces and judge packets are not committed.
 
 Do not delete or rewrite `QUESTIONS.txt`; it is user-maintained. Preserve meeting notes and historical pilot artifacts.
 
