@@ -1,26 +1,24 @@
-Stand für das Gespräch am 24.7.2026
+Gedankenstütze 24.7.2026
 
-Ergebnisse:
-- Bohnanza: Verlags-PDF 34/41 Szenarien, präzisierte Fassung 39/41.
-- Judge-Mittel Bohnanza: 0,320 gegenüber 0,600.
-- CATAN 2022: Technical 4/4, Robustheit 100/100, Interface vollständig bestanden.
-- CATAN-Szenarien: 54/59; klare Regeln 43/44, bestätigte Entscheidungen 11/15, ein Crash.
-- Judge-Mittel CATAN: 0,623 bei drei unabhängigen Reviews.
-- Hauptfehler: Straßenbaukarte, Sieg am Zugbeginn und Aufdecken von Siegpunktkarten.
+Bis 10.7.
+- Pilot: Exploding Kittens (+ Havannah/Abalone) → Workflow getestet
+- Noch ein Gesamtscore (Checks+Judge vermischt); CATAN wirkte „zu gut“
+- Feedback: spielspezifische Logikfehler besser finden; Scores nur grober Richtwert
 
-Direkt öffnen:
-- Bohnanza-Vergleich:
-  results/scores/bohnanza_base_2023/clarified_1/COMPARISON.md
-- CATAN-Bericht:
-  results/scores/catan/base_packet_1/REPORT.md
+Seitdem
+- Evidenz getrennt: Tech / Robustheit / Interface / Szenarien / Judges (kein Gesamtscore)
+- Exploding Kittens Original vs. Klarstellung: 18/22 → 22/22; Judge ~0,47 → ~0,95
+- Bohnanza Kalibrierung Original vs. Klarstellung: 34/41 → 39/41; Judge ~0,32 → ~0,60
+  (Klarstellung hilft gezielt; finale Ernte und Action-Space bleiben problematisch)
+- CATAN 2022 Stressfall (Anleitung + Almanach, 4 Spieler): Tech ok, 54/59 Szenarien, Judge ~0,62
+- CATAN-Fehler: Straßenbaukarte, Sieg am Zugbeginn, VP-Karten aufdecken
+- Judges sind fehlbar (einmal Bohnanza-Satz im Prompt → neu gelaufen)
 
-Methodischer Stand:
-- Agentische Generierung: gpt-5.6-sol, thinking low.
-- Drei neutrale Judges: gpt-5.6-sol, thinking medium.
-- CATAN erhielt bereits das feste Profil und bestätigte Entscheidungen; der Lauf ist kein source-only Original.
-- Drei verunreinigte CATAN-Judges wurden archiviert, ausgeschlossen und neutral ersetzt.
-- Technische, Szenario- und Judge-Evidenz bleiben getrennt; kein Gesamtscore.
+Modell: gpt-5.6-sol (impl. low / judges medium), agentisch
 
-Offen:
-- CATAN als Stressfall abschließen oder zwei neue Original-/Präzisierungsbedingungen erzeugen.
-- Vor neuen Tests Sichtbarkeit von render(), Handelsaktionen und Zustandsfreiheit von legal_actions() festlegen.
+Offen
+- CATAN nur Stressfall oder auch Original/Klarstellung?
+- Mehr Spiele/Läufe oder Auswertung + Schreiben?
+- Menschliche Decisions als Ground Truth ok?
+- Wie viele Wiederholungen? (Vorschlag ≥3); Weil sonst kann es ein one off fluke sein
+- Noch kein Modell der AiCenter-Infrastruktur genutzt. Sollen wir das noch? Wie mache ich das?

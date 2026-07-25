@@ -1,13 +1,7 @@
 Meeting 23.7.2026 – Live-Notizen
 
-Entscheidungen:
--
+Aussichten:
+- Extra KArten, brauchn Inputs und sind für aktuelle Idee nicht umsetzbar
+- LLM as an Rulesteacher, helps you lern new games taht you never played before
 
-Feedback zur Methode und Ergebnisdarstellung:
--
-
-Offene Punkte:
--
-
-Nächste Schritte:
--
+- Beispiel Setup um Spiel zu erklären, quasi Beispielrunde
