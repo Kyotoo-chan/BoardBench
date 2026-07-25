@@ -1,0 +1,7 @@
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.04s
+OK   03_startable_game                  1/1 score=1.000    0.04s
+OK   04_required_api                    9/9 score=1.000    0.03s
+OK   05_random_rollouts             100/100 score=1.000    5.49s
+OK   06_action_language       223904/223904 score=1.000    5.40s
+---- summary                            6/6 score=1.000   11.00s

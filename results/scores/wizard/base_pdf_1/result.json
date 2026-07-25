@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "game": "Wizard",
+    "condition": "publisher PDF, base game only",
+    "source_path": "../../../../inputs/games/wizard/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79",
+    "sources": [
+      {
+        "id": "WIZARD-RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/wizard/game_rules.pdf",
+        "sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+      }
+    ]
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "5155ee327a7cf03b4446d8a5b85b9f8bcaec7d78b74c50dc23de8cef9a413dc7",
+    "adapter_sha256": "2ab1d5cd4f88ce40e21b57a6ecad00deabbaeffd38907b52a3eac7c42530d639",
+    "models": [
+      "openai-codex/gpt-5.6-sol"
+    ],
+    "protocols": [
+      "agentic-v3.1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 24,
+    "human_decision": 8,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_rules": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decisions": {
+      "values": [
+        0.9
+      ],
+      "mean": 0.9,
+      "sample_sd": null
+    },
+    "coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "mean": 0.86,
+      "sample_sd": 0.0,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "wizard_codex_ag": {
+        "rule_fidelity": {
+          "path": "raw/persona_rule_fidelity.md",
+          "sha256": "5c37995de23744a2a3adf5e7820275a0d67b2b8662ce0988389ee6032b5e7880"
+        },
+        "ambiguity": {
+          "path": "raw/persona_ambiguity.md",
+          "sha256": "45bebb533137fafa3951bd6588c6b47398e73bf50fdbd540e802d30ec61132f3"
+        },
+        "executable_systems": {
+          "path": "raw/persona_executable_systems.md",
+          "sha256": "745598ac46d7567a04a791de2381a8ecdf8d08a5417a228e61a745a1398b3bf3"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 2,
+    "interpretation_agreement": {
+      "Die Vorbereitung / Das Verteilen der Karten": {
+        "player 0 deals first; cards are dealt clockwise one at a time beginning to the dealer's left": 1
+      },
+      "Die Aufgabe / Das Ende": {
+        "returns exposes each player's cumulative experience-point score in player order": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Die Vorbereitung / Das Verteilen der Karten",
+        "source_basis": "missing",
+        "alternatives": [
+          "player 0 deals first and cards are dealt clockwise one at a time beginning to the dealer's left",
+          "choose the first dealer and dealing procedure by another method"
+        ],
+        "selected": "player 0 deals first; cards are dealt clockwise one at a time beginning to the dealer's left",
+        "affected_mechanics": [
+          "chance",
+          "private_information",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Die Aufgabe / Das Ende",
+        "source_basis": "missing",
+        "alternatives": [
+          "returns exposes cumulative experience-point scores",
+          "returns exposes winner-normalized utilities"
+        ],
+        "selected": "returns exposes each player's cumulative experience-point score in player order",
+        "affected_mechanics": [
+          "terminal_results"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        7.0
+      ],
+      "mean": 7.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        1453.078
+      ],
+      "mean": 1453.078,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        1017020.0
+      ],
+      "mean": 1017020.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        899072.0
+      ],
+      "mean": 899072.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        41508.0
+      ],
+      "mean": 41508.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        18182.0
+      ],
+      "mean": 18182.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        2.800031
+      ],
+      "mean": 2.800031,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        262.0
+      ],
+      "mean": 262.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      2.800031
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically robust; 20/21 cited scenarios pass; one Wizard-led color-obligation defect confirmed.",
+  "runs": [
+    {
+      "stem": "wizard_codex_ag",
+      "protocol": "agentic-v3.1",
+      "model": "openai-codex/gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "wizard-base-contract-v2-2026-07-25",
+        "suite_sha256": "5155ee327a7cf03b4446d8a5b85b9f8bcaec7d78b74c50dc23de8cef9a413dc7",
+        "adapter_sha256": "2ab1d5cd4f88ce40e21b57a6ecad00deabbaeffd38907b52a3eac7c42530d639",
+        "counts": {
+          "PASS": 20,
+          "FAIL": 1,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 11,
+          "evaluated": 11,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 9,
+          "evaluated": 10,
+          "score": 0.9
+        },
+        "results": [
+          {
+            "id": "WIZ-R01-cited-card-totals",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-INV-01",
+              "WIZ-INV-02",
+              "WIZ-INV-03"
+            ]
+          },
+          {
+            "id": "WIZ-R02-exact-suit-rank-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-DEC-INV"
+            ]
+          },
+          {
+            "id": "WIZ-R03-round-count-by-player-count",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-END-01"
+            ]
+          },
+          {
+            "id": "WIZ-R04-first-round-deal-and-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-DEAL-01",
+              "WIZ-DEAL-02",
+              "WIZ-DEC-FLOW"
+            ]
+          },
+          {
+            "id": "WIZ-R05-revealed-wizard-requires-color",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-TRUMP-02",
+              "WIZ-DEC-TRUMP"
+            ]
+          },
+          {
+            "id": "WIZ-R06-prediction-domain",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-BID-01",
+              "WIZ-DEC-BID"
+            ]
+          },
+          {
+            "id": "WIZ-R07-base-bids-may-equal-trick-count",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-DEC-SCOPE",
+              "WIZ-DEC-BID"
+            ]
+          },
+          {
+            "id": "WIZ-R08-follow-suit-with-special-exceptions",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-PLAY-02",
+              "WIZ-PLAY-03"
+            ]
+          },
+          {
+            "id": "WIZ-R09-void-player-may-discard-or-trump",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-PLAY-02",
+              "WIZ-PLAY-03"
+            ]
+          },
+          {
+            "id": "WIZ-R10-first-wizard-wins-midgame",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-01",
+              "WIZ-WIN-02"
+            ]
+          },
+          {
+            "id": "WIZ-R11-first-wizard-also-wins-final-round",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-01",
+              "WIZ-WIN-02"
+            ]
+          },
+          {
+            "id": "WIZ-R12-jester-then-ordinary-establishes-suit",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-03"
+            ]
+          },
+          {
+            "id": "WIZ-R13-leading-jesters-wait-for-first-color",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-DEC-JESTER"
+            ]
+          },
+          {
+            "id": "WIZ-R14-jester-wizard-keeps-trick-colorless",
+            "status": "FAIL",
+            "message": "step 1: led_suit: expected None, got 'zwerge_rot'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-WIN-01",
+              "WIZ-DEC-JESTER"
+            ]
+          },
+          {
+            "id": "WIZ-R15-all-jesters-first-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-04"
+            ]
+          },
+          {
+            "id": "WIZ-R16-highest-trump-wins-without-wizard",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-01"
+            ]
+          },
+          {
+            "id": "WIZ-R17-highest-led-color-wins-without-trump",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-WIN-01"
+            ]
+          },
+          {
+            "id": "WIZ-R18-final-round-scoring-and-winner",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-SCORE-01",
+              "WIZ-SCORE-02",
+              "WIZ-END-01",
+              "WIZ-END-02"
+            ]
+          },
+          {
+            "id": "WIZ-R19-joint-winners-on-equal-high-score",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-END-02",
+              "WIZ-DEC-TIE"
+            ]
+          },
+          {
+            "id": "WIZ-R20-private-hands-in-base-game",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-BID-01",
+              "WIZ-DEC-SCOPE",
+              "WIZ-DEC-PRIVACY"
+            ]
+          },
+          {
+            "id": "WIZ-R21-round-reset-deal-and-dealer-rotation",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-DEAL-01",
+              "WIZ-DEAL-03",
+              "WIZ-SCORE-01",
+              "WIZ-DEC-FLOW"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.86,
+        0.86,
+        0.86
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "raw/persona_rule_fidelity.md",
+          "sha256": "5c37995de23744a2a3adf5e7820275a0d67b2b8662ce0988389ee6032b5e7880"
+        },
+        "ambiguity": {
+          "path": "raw/persona_ambiguity.md",
+          "sha256": "45bebb533137fafa3951bd6588c6b47398e73bf50fdbd540e802d30ec61132f3"
+        },
+        "executable_systems": {
+          "path": "raw/persona_executable_systems.md",
+          "sha256": "745598ac46d7567a04a791de2381a8ecdf8d08a5417a228e61a745a1398b3bf3"
+        }
+      },
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Die Vorbereitung / Das Verteilen der Karten",
+          "source_basis": "missing",
+          "alternatives": [
+            "player 0 deals first and cards are dealt clockwise one at a time beginning to the dealer's left",
+            "choose the first dealer and dealing procedure by another method"
+          ],
+          "selected": "player 0 deals first; cards are dealt clockwise one at a time beginning to the dealer's left",
+          "affected_mechanics": [
+            "chance",
+            "private_information",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Die Aufgabe / Das Ende",
+          "source_basis": "missing",
+          "alternatives": [
+            "returns exposes cumulative experience-point scores",
+            "returns exposes winner-normalized utilities"
+          ],
+          "selected": "returns exposes each player's cumulative experience-point score in player order",
+          "affected_mechanics": [
+            "terminal_results"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 7,
+        "provider_seconds": 1453.078,
+        "input_tokens": 1017020,
+        "cached_input_tokens": 899072,
+        "output_tokens": 41508,
+        "reasoning_tokens": 18182,
+        "money": null,
+        "api_equivalent_usd": 2.800031,
+        "code_lines": 262
+      },
+      "hashes": {
+        "agentic_evidence": "4c40c7f6d739fc3f62c7d1f3a8b51c6bb2ce6bbce9ffa75fdffaf7087de61631",
+        "checks": "697175cc45f6bec2bac2c8999278c8e21237006b1094f96d22c6573f1d188ae7",
+        "scenarios": "093fac73bd1702f704fda75514c8aec4adb221644b9dbe392b098801c80ed7bb",
+        "usage": "e52210aaa34c31d318b1a2ae9fa6d5ef516aa2045965d683b4004193201612d0",
+        "code": "82be87d8432a59b8484ff76e406ba0c69c39f68e6c4b30f6c71d83e45cd05087"
+      }
+    }
+  ]
+}

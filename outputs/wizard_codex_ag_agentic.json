@@ -2,6 +2,12 @@
   "schema_version": 1,
   "run": "wizard_codex_ag",
   "protocol": "agentic-v3.1",
+  "model": "openai-codex/gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "verbosity": "low",
+  "independent_gate_passed": true,
+  "agent_ran_self_check": true,
+  "repair_count": 0,
   "source_condition": "publisher_pdf_base_game_only",
   "generation": {
     "backend": "Pi subagent",

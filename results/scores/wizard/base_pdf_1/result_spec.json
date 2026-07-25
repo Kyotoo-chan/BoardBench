@@ -1,0 +1,45 @@
+{
+  "identity": {
+    "game": "Wizard",
+    "condition": "publisher PDF, base game only",
+    "source_path": "../../../../inputs/games/wizard/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79",
+    "sources": [
+      {
+        "id": "WIZARD-RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/wizard/game_rules.pdf",
+        "sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+      }
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 24,
+    "human_decision": 8,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "headline": "Technically robust; 20/21 cited scenarios pass; one Wizard-led color-obligation defect confirmed.",
+  "runs": [
+    {
+      "stem": "wizard_codex_ag",
+      "agentic_evidence": "../../../../outputs/wizard_codex_ag_agentic.json",
+      "checks": "../../../../outputs/wizard_codex_ag_checks.txt",
+      "scenarios": "raw/scenarios.json",
+      "usage": "raw/usage.json",
+      "code": "../../../../outputs/wizard_codex_ag.py",
+      "assumptions": "../../../../outputs/wizard_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/wizard_codex_ag_judge_1.md",
+        "../../../../outputs/wizard_codex_ag_judge_2.md",
+        "../../../../outputs/wizard_codex_ag_judge_3.md"
+      ],
+      "personas": {
+        "rule_fidelity": "raw/persona_rule_fidelity.md",
+        "ambiguity": "raw/persona_ambiguity.md",
+        "executable_systems": "raw/persona_executable_systems.md"
+      }
+    }
+  ]
+}

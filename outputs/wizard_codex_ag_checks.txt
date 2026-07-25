@@ -28,5 +28,34 @@ PASS assumptions.json schema validation
 PASS rule_coverage.md presence validation
 
 Final gate status: PASS
-Rule-fidelity scenarios run: no
-Full evaluation run: no
+At generation gate, rule-fidelity scenarios and full evaluation had not run.
+
+Full evaluation (2026-07-25)
+
+Technical gate 01–04
+OK   01_result_file                     1/1 score=1.000
+OK   02_python_syntax                   1/1 score=1.000
+OK   03_startable_game                  1/1 score=1.000
+OK   04_required_api                    9/9 score=1.000
+---- technical summary                  4/4 score=1.000
+
+Runtime robustness 05
+OK   05_random_rollouts             100/100 score=1.000
+
+Interface 06
+OK   06_action_language       223904/223904 score=1.000
+
+Cited scenarios
+PASS=20 FAIL=1 CRASH=0 UNREACHED=0 UNTESTABLE=0
+evaluated=21/21 score=0.9523809524 coverage=1.000
+clear: 11/11 passed
+human_decision: 9/10 passed
+FAIL WIZ-R14-jester-wizard-keeps-trick-colorless: after Narr → Zauberer → ordinary card, led_suit became zwerge_rot instead of remaining null.
+
+Neutral judges
+scores: 0.86, 0.86, 0.86
+mean: 0.86
+sample SD: 0.00
+all three: confidence high; 0 critical; 1 shared major finding
+
+Full evaluation run: yes
