@@ -1,0 +1,963 @@
+{
+  "version": 1,
+  "game": "expl",
+  "source_register": "inputs/games/expl/source_register_v2.md",
+  "claims": [
+    {
+      "id": "EXPL-C-INV-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELMATERIAL: 56 KARTEN"
+      },
+      "expectation": "The complete physical inventory contains 56 cards."
+    },
+    {
+      "id": "EXPL-C-INV-KITTEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "EXPLODING KITTEN 4 KARTEN"
+      },
+      "expectation": "The inventory contains 4 Exploding Kitten cards."
+    },
+    {
+      "id": "EXPL-C-INV-DEFUSE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "ENTSCHÄRFUNG 6 KARTEN"
+      },
+      "expectation": "The inventory contains 6 Defuse cards."
+    },
+    {
+      "id": "EXPL-C-INV-ATTACK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "ANGRIFF 4 KARTEN"
+      },
+      "expectation": "The inventory contains 4 Attack cards."
+    },
+    {
+      "id": "EXPL-C-INV-NOPE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "NÖ! 5 KARTEN"
+      },
+      "expectation": "The inventory contains 5 Nope cards."
+    },
+    {
+      "id": "EXPL-C-INV-SKIP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "HOPS! 4 KARTEN"
+      },
+      "expectation": "The inventory contains 4 Skip cards."
+    },
+    {
+      "id": "EXPL-C-INV-FAVOR",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "WUNSCH 4 KARTEN"
+      },
+      "expectation": "The inventory contains 4 Favor cards."
+    },
+    {
+      "id": "EXPL-C-INV-SHUFFLE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "MISCHEN 4 KARTEN"
+      },
+      "expectation": "The inventory contains 4 Shuffle cards."
+    },
+    {
+      "id": "EXPL-C-INV-FUTURE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "BLICK IN DIE ZUKUNFT 5 KARTEN"
+      },
+      "expectation": "The inventory contains 5 See the Future cards."
+    },
+    {
+      "id": "EXPL-C-INV-CATS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "KATZEN-KARTEN 4 JEDER ART"
+      },
+      "expectation": "The inventory contains five cat-card titles with 4 copies each, 20 cat cards total."
+    },
+    {
+      "id": "EXPL-C-PLAYERS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELER: 2–5"
+      },
+      "expectation": "Exactly 2, 3, 4, and 5 players are supported; counts outside this range are rejected."
+    },
+    {
+      "id": "EXPL-C-SET-ASIDE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Legt alle 4 Exploding Kittens und alle 6 Karten „Entschärfung“ beiseite."
+      },
+      "expectation": "Remove all Kittens and Defuses before dealing."
+    },
+    {
+      "id": "EXPL-C-DEAL-SEVEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Teilt danach an jeden Spieler verdeckt 7 Karten aus."
+      },
+      "expectation": "Deal seven hidden non-Kitten/non-Defuse cards to every player."
+    },
+    {
+      "id": "EXPL-C-START-DEFUSE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“."
+      },
+      "expectation": "Give each player one Defuse."
+    },
+    {
+      "id": "EXPL-C-START-EIGHT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "So starten alle mit 8 Karten auf der Hand."
+      },
+      "expectation": "Every player starts with eight cards."
+    },
+    {
+      "id": "EXPL-C-HANDS-HIDDEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Halte dein Blatt stets verdeckt."
+      },
+      "expectation": "Each hand is visible to its owner and hidden from other players."
+    },
+    {
+      "id": "EXPL-C-SETUP-KITTENS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+      },
+      "expectation": "Put exactly players minus one Kittens in the draw pile."
+    },
+    {
+      "id": "EXPL-C-BOX-KITTENS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Legt die übrigen Exploding Kittens in die Schachtel zurück."
+      },
+      "expectation": "Unused Kittens are out of play."
+    },
+    {
+      "id": "EXPL-C-DEFUSE-3-5",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Mischt zuletzt alle übrigen Karten „Entschärfung“ in den Spielstapel."
+      },
+      "expectation": "For 3–5 players, put every Defuse remaining after starting hands into the draw pile."
+    },
+    {
+      "id": "EXPL-C-DEFUSE-2",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Mischt nur 2 Karten „Entschärfung“ in den Spielstapel und legt die übrigen in die Schachtel zurück."
+      },
+      "expectation": "For 2 players, put exactly two additional Defuses in the draw pile and box the other two."
+    },
+    {
+      "id": "EXPL-C-PILE-HIDDEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+      },
+      "expectation": "The common draw pile is shuffled and hidden."
+    },
+    {
+      "id": "EXPL-C-START-PLAYER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Bestimmt einen Startspieler."
+      },
+      "expectation": "A start player is designated before play."
+    },
+    {
+      "id": "EXPL-C-PASS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "PASSEN – Spiele keine Karte aus."
+      },
+      "expectation": "Playing no card before the mandatory draw is legal."
+    },
+    {
+      "id": "EXPL-C-PLAY-CARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Wähle eine deiner Handkarten aus, lege sie OFFEN auf den Ablagestapel und befolge ihre Anweisung."
+      },
+      "expectation": "A normally played card leaves hand, is public in discard, and resolves its instruction."
+    },
+    {
+      "id": "EXPL-C-MULTI-PLAY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
+      },
+      "expectation": "The same player may play zero or more additional cards while the turn remains active."
+    },
+    {
+      "id": "EXPL-C-DRAW-END",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
+      },
+      "expectation": "A normal turn ends by drawing exactly the top draw-pile card."
+    },
+    {
+      "id": "EXPL-C-CLOCKWISE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Die Partie geht im Uhrzeigersinn weiter."
+      },
+      "expectation": "After a completed turn, play advances clockwise through living players."
+    },
+    {
+      "id": "EXPL-C-PILE-COUNT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Du darfst die Anzahl der übrigen Karten im Spielstapel jederzeit nachzählen."
+      },
+      "expectation": "Draw-pile size is public."
+    },
+    {
+      "id": "EXPL-C-NO-HAND-LIMIT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Es gibt keine minimale oder maximale Handkartenzahl."
+      },
+      "expectation": "Hands may contain any nonnegative number of cards."
+    },
+    {
+      "id": "EXPL-C-EMPTY-HAND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Falls du keine Karten mehr auf der Hand hast – keine Panik. Spiele einfach weiter. Am Ende deines nächsten Zuges ziehst du wieder eine!"
+      },
+      "expectation": "An empty-handed living player remains active and can end the turn by drawing."
+    },
+    {
+      "id": "EXPL-C-KITTEN-REVEAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Diese Karte musst du sofort offen zeigen."
+      },
+      "expectation": "A drawn Exploding Kitten is immediately public."
+    },
+    {
+      "id": "EXPL-C-KITTEN-ELIMINATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Solltest du keine „Entschärfung“ mehr besitzen, war’s das."
+      },
+      "expectation": "A player drawing a Kitten without Defuse is eliminated."
+    },
+    {
+      "id": "EXPL-C-ELIMINATE-DISCARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Alle deine restlichen Karten und das Exploding Kitten wandern auf den Ablagestapel."
+      },
+      "expectation": "On explosion, the Kitten and every remaining hand card enter discard."
+    },
+    {
+      "id": "EXPL-C-DEFUSE-SAVES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du ein Exploding Kitten ziehst, kannst du eine „Entschärfung“ ausspielen, statt zu sterben."
+      },
+      "expectation": "Using Defuse after drawing a Kitten prevents elimination."
+    },
+    {
+      "id": "EXPL-C-DEFUSE-DISCARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Spiele sie einfach aus und lege sie auf den Ablagestapel."
+      },
+      "expectation": "A used Defuse enters discard."
+    },
+    {
+      "id": "EXPL-C-KITTEN-REINSERT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl"
+      },
+      "expectation": "The surviving player chooses any reinsertion position, including top and bottom, hidden from opponents."
+    },
+    {
+      "id": "EXPL-C-REINSERT-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "ohne die anderen Karten anzusehen oder umzusortieren."
+      },
+      "expectation": "Reinsertion preserves the relative order of every unrelated draw-pile card."
+    },
+    {
+      "id": "EXPL-C-DEFUSE-END",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Dann ist dein Spielzug beendet."
+      },
+      "expectation": "Defuse completes the current individual turn."
+    },
+    {
+      "id": "EXPL-C-ATTACK-END",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du beendest deinen eigenen Zug, ohne eine Karte zu ziehen"
+      },
+      "expectation": "Attack ends its player’s current turn without drawing."
+    },
+    {
+      "id": "EXPL-C-ATTACK-TWO",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+      },
+      "expectation": "The next living player owes exactly two consecutive turns."
+    },
+    {
+      "id": "EXPL-C-ATTACK-CHAIN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Spielt dein Opfer dabei selbst eine Karte „Angriff“ aus, ist er nicht mehr an der Reihe und der nächste Spieler muss zwei Spielzüge ausführen."
+      },
+      "expectation": "An attacked player’s Attack ends that player’s obligation and makes the following living player owe exactly two turns."
+    },
+    {
+      "id": "EXPL-C-SKIP-END",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Beende sofort deinen Zug, ohne eine Karte zu ziehen."
+      },
+      "expectation": "Skip ends one current individual turn without drawing."
+    },
+    {
+      "id": "EXPL-C-SKIP-ATTACK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Falls du „Hops!“ ausspielst, um einen Angriff abzuwehren, überspringst du nur einen der zwei Züge. Du müsstest schon zweimal „Hops!“ ausspielen, um beide Züge zu beenden."
+      },
+      "expectation": "Under Attack, each Skip consumes exactly one owed turn."
+    },
+    {
+      "id": "EXPL-C-NOPE-CANCEL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft"
+      },
+      "expectation": "Nope cancels an eligible pending card or combination and its effect."
+    },
+    {
+      "id": "EXPL-C-NOPE-EXCEPT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "ausgenommen Exploding Kittens und Entschärfung."
+      },
+      "expectation": "Kitten and Defuse resolution cannot be Noped."
+    },
+    {
+      "id": "EXPL-C-NOPE-PARITY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auf ein anderes NÖ! legen, um es aufzuheben und daraus ein DOCH! zu machen."
+      },
+      "expectation": "Each further Nope toggles whether the underlying action resolves."
+    },
+    {
+      "id": "EXPL-C-NOPE-OFFTURN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auch spielen, wenn du nicht an der Reihe bist."
+      },
+      "expectation": "A living player may play Nope outside that player’s turn."
+    },
+    {
+      "id": "EXPL-C-NOPE-DISCARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel."
+      },
+      "expectation": "The proposed card/combination and all played Nopes remain discarded."
+    },
+    {
+      "id": "EXPL-C-NOPED-CONTINUE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "setzt deinen Angriff außer Kraft. Du bist weiter am Zug."
+      },
+      "expectation": "After a proposed action is canceled, its actor remains on the current turn."
+    },
+    {
+      "id": "EXPL-C-FAVOR-GIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben."
+      },
+      "expectation": "Favor transfers exactly one card from a chosen opponent to the actor."
+    },
+    {
+      "id": "EXPL-C-FAVOR-CHOICE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Dieser Spieler entscheidet, welche Karte du bekommst."
+      },
+      "expectation": "The target, not the actor, chooses the transferred card."
+    },
+    {
+      "id": "EXPL-C-SHUFFLE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Misch den Spielstapel sorgfältig neu."
+      },
+      "expectation": "Shuffle acts only on draw-pile order and preserves its size and card multiset; no exact permutation is source-defined."
+    },
+    {
+      "id": "EXPL-C-FUTURE-THREE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Schau dir die obersten drei Karten des Spielstapels an"
+      },
+      "expectation": "With at least three cards, See the Future privately reveals exactly the top three to its actor."
+    },
+    {
+      "id": "EXPL-C-FUTURE-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "und lege sie zurück, ohne deren Reihenfolge zu verändern."
+      },
+      "expectation": "See the Future does not reorder the draw pile."
+    },
+    {
+      "id": "EXPL-C-FUTURE-PRIVATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Zeige diese Karten bloß nicht deinen Mitspielern."
+      },
+      "expectation": "See the Future information is hidden from other players."
+    },
+    {
+      "id": "EXPL-C-CAT-SINGLE",
+      "classification": "clear",
+      "material": true,
+      "testable": false,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Einzeln sind diese Karten machtlos"
+      },
+      "expectation": "A single cat card has no standalone effect, but standalone play legality is not separately asserted.",
+      "coverage_exception": "No transition is hard-scored because doing so would additionally assume standalone play legality."
+    },
+    {
+      "id": "EXPL-C-PAIR-ANY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Jetzt können ALLE gleichen Karten als Pärchen gespielt werden"
+      },
+      "expectation": "Any two cards with the same title form a valid pair."
+    },
+    {
+      "id": "EXPL-C-PAIR-STEAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "um einem Mitspieler eine zufällige Karte zu stehlen."
+      },
+      "expectation": "A pair transfers one randomly selected card from its target."
+    },
+    {
+      "id": "EXPL-C-TRIPLE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wie ein Pärchen, außer dass du dir eine Karte von dem Mitspieler wünschen darfst."
+      },
+      "expectation": "A triple uses three same-title cards and names a requested card title from a chosen opponent."
+    },
+    {
+      "id": "EXPL-C-TRIPLE-HAS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Besitzt er solch eine Karte, muss er sie dir geben."
+      },
+      "expectation": "If the triple target has the requested title, one such card transfers."
+    },
+    {
+      "id": "EXPL-C-TRIPLE-LACKS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Hat er keine solche Karte, hast du Pech gehabt."
+      },
+      "expectation": "If the triple target lacks the requested title, no card transfers."
+    },
+    {
+      "id": "EXPL-C-FIVE-DISTINCT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst"
+      },
+      "expectation": "A five-card combination requires five different titles."
+    },
+    {
+      "id": "EXPL-C-FIVE-RETRIEVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen."
+      },
+      "expectation": "A valid five-card combination retrieves one chosen eligible discard card."
+    },
+    {
+      "id": "EXPL-C-COMBO-SUPPRESS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du eine Kombination spielst, gelten die Anweisungen auf den Karten nicht."
+      },
+      "expectation": "Cards used in a combination do not execute their printed individual effects."
+    },
+    {
+      "id": "EXPL-C-TERMINAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Eine Runde endet, wenn nur noch ein Spieler am Leben ist: der Gewinner."
+      },
+      "expectation": "The game becomes terminal immediately when exactly one player remains alive."
+    },
+    {
+      "id": "EXPL-C-WINNER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Der Spieler, der nicht explodiert und als Letzter übrig ist, gewinnt."
+      },
+      "expectation": "The sole survivor is the winner."
+    },
+    {
+      "id": "EXPL-A-DEFUSE-OPTIONAL",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "kannst du eine „Entschärfung“ ausspielen, statt zu sterben."
+      },
+      "expectation": "Whether a player with Defuse may choose voluntary elimination remains unscored."
+    },
+    {
+      "id": "EXPL-A-DEFUSE-TRIGGER",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du ein Exploding Kitten ziehst, kannst du eine „Entschärfung“ ausspielen"
+      },
+      "expectation": "Evaluator decision: Defuse is legal only after drawing a Kitten."
+    },
+    {
+      "id": "EXPL-M-NOPE-PRIORITY",
+      "classification": "missing",
+      "material": true,
+      "testable": false,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auch spielen, wenn du nicht an der Reihe bist."
+      },
+      "expectation": "The source supplies no deterministic multi-player response priority; no priority protocol is hard-scored."
+    },
+    {
+      "id": "EXPL-M-NOPE-ANNOUNCEMENT",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft"
+      },
+      "expectation": "The source does not state whether a complete parameterized action must be announced before the Nope window; this remains unscored."
+    },
+    {
+      "id": "EXPL-M-NOPE-EMPTY-RESTORE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auf ein anderes NÖ! legen, um es aufzuheben"
+      },
+      "expectation": "The source does not define resolution when a restored targeted action finds that its target spent the last card during the reaction chain; this remains unscored."
+    },
+    {
+      "id": "EXPL-X-EMPTY-TARGET",
+      "classification": "conflicting",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Es gibt keine minimale oder maximale Handkartenzahl."
+      },
+      "expectation": "Evaluator decision: empty-handed players are illegal Favor and Pair targets.",
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "um einem Mitspieler eine zufällige Karte zu stehlen."
+        }
+      ]
+    },
+    {
+      "id": "EXPL-M-SHORT-FUTURE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Schau dir die obersten drei Karten des Spielstapels an"
+      },
+      "expectation": "Evaluator decision: with fewer than three cards, reveal all remaining cards privately without reordering."
+    },
+    {
+      "id": "EXPL-A-FIVE-SELF-RETRIEVE",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen."
+      },
+      "expectation": "Whether one of the just-played five components may be immediately retrieved remains unresolved and unscored."
+    },
+    {
+      "id": "EXPL-A-FIVE-KITTEN-SAFE",
+      "classification": "ambiguous",
+      "material": false,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "eine beliebige Karte aus dem Ablagestapel nehmen."
+      },
+      "expectation": "Retrieval and hand behavior of a discarded Kitten is nonmaterial and unscored."
+    },
+    {
+      "id": "EXPL-M-ATTACK-DEATH-DEBT",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+      },
+      "expectation": "Evaluator decision: after elimination, that player’s remaining owed turns expire.",
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Er ist tot und scheidet aus dem Spiel aus."
+        }
+      ]
+    },
+    {
+      "id": "EXPL-U-RANDOM-UNIFORM",
+      "classification": "untestable",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "eine zufällige Karte"
+      },
+      "expectation": "No source-defined random procedure or probability distribution can be hard-scored."
+    },
+    {
+      "id": "EXPL-U-START-METHOD",
+      "classification": "untestable",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Bestimmt einen Startspieler."
+      },
+      "expectation": "The source gives only social example criteria; player 0 is the representation-only deterministic default."
+    }
+  ]
+}

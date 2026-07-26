@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "source_file": "game_rules.pdf",
+  "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853",
+  "dpi": 150,
+  "renderer": "pdftoppm",
+  "renderer_version": "pdftoppm version 24.04.0",
+  "pages": [
+    {
+      "page": 1,
+      "file": "page-1.png",
+      "sha256": "9ba1026ff166677d3c0e354837966d1bd25594fc7af03067deaf1ee856cf78fb"
+    },
+    {
+      "page": 2,
+      "file": "page-2.png",
+      "sha256": "be12dbff635adee26efc3d89b36ce790e55e4b15af226f240dde0d45bda1dfea"
+    }
+  ]
+}

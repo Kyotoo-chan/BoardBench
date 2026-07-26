@@ -1,0 +1,2805 @@
+{
+  "version": 4,
+  "rubric_version": "exploding-kittens-v2-atomic-2026-07-26",
+  "game": "expl",
+  "adapter": "checks/scenario_adapters/expl_v2.py",
+  "rulebook": {
+    "path": "inputs/games/expl/game_rules.pdf",
+    "sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853",
+    "edition": "German NSFW Edition 2018, 2 PDF pages, 2–5 players, 56 cards"
+  },
+  "scenarios": [
+    {
+      "id": "EXPL-R01-setup-two",
+      "fact_ids": [
+        "EXPL-C-INV-TOTAL",
+        "EXPL-C-INV-KITTEN",
+        "EXPL-C-INV-DEFUSE",
+        "EXPL-C-INV-ATTACK",
+        "EXPL-C-INV-NOPE",
+        "EXPL-C-INV-SKIP",
+        "EXPL-C-INV-FAVOR",
+        "EXPL-C-INV-SHUFFLE",
+        "EXPL-C-INV-FUTURE",
+        "EXPL-C-INV-CATS",
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-2",
+        "EXPL-C-START-PLAYER"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELMATERIAL: 56 KARTEN"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "EXPLODING KITTEN 4 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "ENTSCHÄRFUNG 6 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "ANGRIFF 4 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "NÖ! 5 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "HOPS! 4 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "WUNSCH 4 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "MISCHEN 4 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "BLICK IN DIE ZUKUNFT 5 KARTEN"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "KATZEN-KARTEN 4 JEDER ART"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "SPIELER: 2–5"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt alle 4 Exploding Kittens und alle 6 Karten „Entschärfung“ beiseite."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Teilt danach an jeden Spieler verdeckt 7 Karten aus."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "So starten alle mit 8 Karten auf der Hand."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Halte dein Blatt stets verdeckt."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt die übrigen Exploding Kittens in die Schachtel zurück."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt nur 2 Karten „Entschärfung“ in den Spielstapel und legt die übrigen in die Schachtel zurück."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Bestimmt einen Startspieler."
+        }
+      ],
+      "initial": {
+        "adapter": {
+          "setup_probe": {
+            "players": 2,
+            "seed": 11,
+            "deck_size": 35,
+            "deck_counts": {
+              "exploding_kitten": 1,
+              "defuse": 2
+            },
+            "box_size": 5,
+            "box_counts": {
+              "exploding_kitten": 3,
+              "defuse": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R02-setup-three",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELER: 2–5"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt alle 4 Exploding Kittens und alle 6 Karten „Entschärfung“ beiseite."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Teilt danach an jeden Spieler verdeckt 7 Karten aus."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "So starten alle mit 8 Karten auf der Hand."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Halte dein Blatt stets verdeckt."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt die übrigen Exploding Kittens in die Schachtel zurück."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt zuletzt alle übrigen Karten „Entschärfung“ in den Spielstapel."
+        }
+      ],
+      "initial": {
+        "adapter": {
+          "setup_probe": {
+            "players": 3,
+            "seed": 11,
+            "deck_size": 30,
+            "deck_counts": {
+              "exploding_kitten": 2,
+              "defuse": 3
+            },
+            "box_size": 2,
+            "box_counts": {
+              "exploding_kitten": 2,
+              "defuse": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R03-setup-four",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELER: 2–5"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt alle 4 Exploding Kittens und alle 6 Karten „Entschärfung“ beiseite."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Teilt danach an jeden Spieler verdeckt 7 Karten aus."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "So starten alle mit 8 Karten auf der Hand."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Halte dein Blatt stets verdeckt."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt die übrigen Exploding Kittens in die Schachtel zurück."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt zuletzt alle übrigen Karten „Entschärfung“ in den Spielstapel."
+        }
+      ],
+      "initial": {
+        "adapter": {
+          "setup_probe": {
+            "players": 4,
+            "seed": 11,
+            "deck_size": 23,
+            "deck_counts": {
+              "exploding_kitten": 3,
+              "defuse": 2
+            },
+            "box_size": 1,
+            "box_counts": {
+              "exploding_kitten": 1,
+              "defuse": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R04-setup-five",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELER: 2–5"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt alle 4 Exploding Kittens und alle 6 Karten „Entschärfung“ beiseite."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Teilt danach an jeden Spieler verdeckt 7 Karten aus."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Zusätzlich erhält jeder Spieler eine Karte „Entschärfung“."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "So starten alle mit 8 Karten auf der Hand."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Halte dein Blatt stets verdeckt."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nehmt jetzt von den zur Seite gelegten Exploding Kittens eine Karte weniger als Spieler teilnehmen und mischt sie in den Spielstapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Legt die übrigen Exploding Kittens in die Schachtel zurück."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt zuletzt alle übrigen Karten „Entschärfung“ in den Spielstapel."
+        }
+      ],
+      "initial": {
+        "adapter": {
+          "setup_probe": {
+            "players": 5,
+            "seed": 11,
+            "deck_size": 16,
+            "deck_counts": {
+              "exploding_kitten": 4,
+              "defuse": 1
+            },
+            "box_size": 0,
+            "box_counts": {
+              "exploding_kitten": 0,
+              "defuse": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R05-player-range",
+      "fact_ids": [
+        "EXPL-C-PLAYERS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "SPIELER: 2–5"
+      },
+      "initial": {
+        "adapter": {
+          "player_count_probe": {
+            "supported": [
+              2,
+              3,
+              4,
+              5
+            ],
+            "unsupported": [
+              1,
+              6
+            ],
+            "seed": 13,
+            "bounded_actions": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R06-pass-draw-advance",
+      "fact_ids": [
+        "EXPL-C-PASS",
+        "EXPL-C-DRAW-END",
+        "EXPL-C-CLOCKWISE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "PASSEN – Spiele keine Karte aus."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Die Partie geht im Uhrzeigersinn weiter."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "hand_counts": {
+                "0": {
+                  "attack": 1
+                }
+              },
+              "deck_size": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R07-play-card-stays-turn",
+      "fact_ids": [
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Wähle eine deiner Handkarten aus, lege sie OFFEN auf den Ablagestapel und befolge ihre Anweisung."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "see_future"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip",
+          "favor"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "see_future",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "discard_counts": {
+                "see_future": 1
+              },
+              "hand_sizes": {
+                "0": 0,
+                "1": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R08-multiple-pre-draw-plays",
+      "fact_ids": [
+        "EXPL-C-MULTI-PLAY",
+        "EXPL-C-PLAY-CARD"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Wähle eine deiner Handkarten aus, lege sie OFFEN auf den Ablagestapel und befolge ihre Anweisung."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "see_future",
+            "shuffle"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip",
+          "favor",
+          "nope"
+        ],
+        "current_player": 0,
+        "seed": 4
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "see_future",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "discard_counts": {
+                "see_future": 1
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "shuffle",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "discard_counts": {
+                "see_future": 1,
+                "shuffle": 1
+              },
+              "hand_sizes": {
+                "0": 0,
+                "1": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R09-public-count-private-hands",
+      "fact_ids": [
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-PILE-COUNT"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Halte dein Blatt stets verdeckt."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Mischt den Spielstapel und legt ihn verdeckt in die Mitte des Tisches."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Du darfst die Anzahl der übrigen Karten im Spielstapel jederzeit nachzählen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack"
+          ],
+          "1": [
+            "skip"
+          ]
+        },
+        "deck": [
+          "favor",
+          "nope"
+        ],
+        "current_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "observations": {
+            "0": {
+              "own_hand": [
+                "attack"
+              ],
+              "opponent_hand_sizes": {
+                "1": 1
+              },
+              "deck_size": 2,
+              "preview": []
+            },
+            "1": {
+              "own_hand": [
+                "skip"
+              ],
+              "opponent_hand_sizes": {
+                "0": 1
+              },
+              "deck_size": 2,
+              "preview": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "EXPL-R10-empty-hand-continues",
+      "fact_ids": [
+        "EXPL-C-NO-HAND-LIMIT",
+        "EXPL-C-EMPTY-HAND",
+        "EXPL-C-DRAW-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Es gibt keine minimale oder maximale Handkartenzahl."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Falls du keine Karten mehr auf der Hand hast – keine Panik. Spiele einfach weiter. Am Ende deines nächsten Zuges ziehst du wieder eine!"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [
+            "skip"
+          ]
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0
+      },
+      "initial": {
+        "legal_action_count_min": 1,
+        "adapter": {
+          "hand_sizes": {
+            "0": 0,
+            "1": 1
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "hand_counts": {
+                "0": {
+                  "attack": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R11-explosion-eliminates",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REVEAL",
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-CLOCKWISE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Diese Karte musst du sofort offen zeigen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Solltest du keine „Entschärfung“ mehr besitzen, war’s das."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Alle deine restlichen Karten und das Exploding Kitten wandern auf den Ablagestapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Die Partie geht im Uhrzeigersinn weiter."
+        }
+      ],
+      "fixture": {
+        "players": 3,
+        "hands": {
+          "0": [
+            "attack",
+            "skip"
+          ],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "exploding_kitten",
+          "favor"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "adapter": {
+              "alive": [
+                false,
+                true,
+                true
+              ],
+              "discard_counts": {
+                "exploding_kitten": 1,
+                "attack": 1,
+                "skip": 1
+              },
+              "hand_sizes": {
+                "0": 0,
+                "1": 0,
+                "2": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R12-last-survivor-wins",
+      "fact_ids": [
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-TERMINAL",
+        "EXPL-C-WINNER"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Solltest du keine „Entschärfung“ mehr besitzen, war’s das."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Alle deine restlichen Karten und das Exploding Kitten wandern auf den Ablagestapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Eine Runde endet, wenn nur noch ein Spieler am Leben ist: der Gewinner."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Der Spieler, der nicht explodiert und als Letzter übrig ist, gewinnt."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack"
+          ],
+          "1": []
+        },
+        "deck": [
+          "exploding_kitten"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "alive": [
+                false,
+                true
+              ],
+              "winner": 1,
+              "discard_counts": {
+                "exploding_kitten": 1,
+                "attack": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R13-defuse-top",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-SAVES",
+        "EXPL-C-DEFUSE-DISCARD",
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-DEFUSE-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du ein Exploding Kitten ziehst, kannst du eine „Entschärfung“ ausspielen, statt zu sterben."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Spiele sie einfach aus und lege sie auf den Ablagestapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl"
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Dann ist dein Spielzug beendet."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "defuse"
+          ],
+          "1": []
+        },
+        "deck": [
+          "exploding_kitten",
+          "attack",
+          "skip"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "terminal": false,
+            "adapter": {
+              "phase": "defuse_reinsert",
+              "alive": [
+                true,
+                true
+              ],
+              "discard_counts": {
+                "defuse": 1
+              },
+              "action_match_cases": [
+                {
+                  "action": {
+                    "type": "reinsert",
+                    "actor": 0,
+                    "args": {
+                      "position": 0
+                    }
+                  },
+                  "count": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "reinsert",
+              "actor": 0,
+              "args": {
+                "position": 0
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "phase": "play",
+              "deck": [
+                "exploding_kitten",
+                "attack",
+                "skip"
+              ],
+              "discard_counts": {
+                "defuse": 1
+              },
+              "alive": [
+                true,
+                true
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R14-defuse-bottom-order",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-REINSERT-ORDER",
+        "EXPL-C-DEFUSE-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Lege danach das Exploding Kitten zurück in den Spielstapel, und zwar geheim an eine Stelle deiner Wahl"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "ohne die anderen Karten anzusehen oder umzusortieren."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Dann ist dein Spielzug beendet."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "defuse"
+          ],
+          "1": []
+        },
+        "deck": [
+          "exploding_kitten",
+          "attack",
+          "skip"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "defuse_reinsert"
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "reinsert",
+              "actor": 0,
+              "args": {
+                "position": 2
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "deck": [
+                "attack",
+                "skip",
+                "exploding_kitten"
+              ],
+              "discard_counts": {
+                "defuse": 1
+              },
+              "observations": {
+                "1": {
+                  "own_hand": [],
+                  "opponent_hand_sizes": {
+                    "0": 0
+                  },
+                  "deck_size": 3,
+                  "preview": []
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R15-defuse-under-attack",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-END",
+        "EXPL-C-ATTACK-TWO"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Dann ist dein Spielzug beendet."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "defuse"
+          ],
+          "1": []
+        },
+        "deck": [
+          "exploding_kitten",
+          "attack"
+        ],
+        "current_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "defuse_reinsert"
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "reinsert",
+              "actor": 0,
+              "args": {
+                "position": 1
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "turns_owed": 1,
+              "phase": "play",
+              "alive": [
+                true,
+                true
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R16-attack-two-turns",
+      "fact_ids": [
+        "EXPL-C-ATTACK-END",
+        "EXPL-C-ATTACK-TWO"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du beendest deinen eigenen Zug, ohne eine Karte zu ziehen"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack"
+          ],
+          "1": []
+        },
+        "deck": [
+          "skip"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "attack",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "turns_owed": 2,
+              "deck_size": 1,
+              "discard_counts": {
+                "attack": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R17-first-attacked-draw",
+      "fact_ids": [
+        "EXPL-C-ATTACK-TWO",
+        "EXPL-C-DRAW-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "und zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Du beendest deinen Zug, indem du die oberste Karte vom Spielstapel ziehst."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip"
+        ],
+        "current_player": 1,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 1,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "turns_owed": 1,
+              "hand_counts": {
+                "1": {
+                  "attack": 1
+                }
+              },
+              "deck": [
+                "skip"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R18-attack-chain",
+      "fact_ids": [
+        "EXPL-C-ATTACK-CHAIN",
+        "EXPL-C-ATTACK-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Spielt dein Opfer dabei selbst eine Karte „Angriff“ aus, ist er nicht mehr an der Reihe und der nächste Spieler muss zwei Spielzüge ausführen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Du beendest deinen eigenen Zug, ohne eine Karte zu ziehen"
+        }
+      ],
+      "fixture": {
+        "players": 3,
+        "hands": {
+          "0": [],
+          "1": [
+            "attack"
+          ],
+          "2": []
+        },
+        "deck": [
+          "skip"
+        ],
+        "current_player": 1,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 1,
+              "args": {
+                "card": "attack",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 2,
+            "adapter": {
+              "turns_owed": 2,
+              "deck_size": 1,
+              "discard_counts": {
+                "attack": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R19-skip-normal",
+      "fact_ids": [
+        "EXPL-C-SKIP-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Beende sofort deinen Zug, ohne eine Karte zu ziehen."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "skip"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "skip",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "turns_owed": 1,
+              "deck_size": 1,
+              "discard_counts": {
+                "skip": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R20-skip-one-owed",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK",
+        "EXPL-C-SKIP-END"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Falls du „Hops!“ ausspielst, um einen Angriff abzuwehren, überspringst du nur einen der zwei Züge. Du müsstest schon zweimal „Hops!“ ausspielen, um beide Züge zu beenden."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Beende sofort deinen Zug, ohne eine Karte zu ziehen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "skip"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "skip",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "turns_owed": 1,
+              "deck_size": 1,
+              "discard_counts": {
+                "skip": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R21-two-skips-two-owed",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Falls du „Hops!“ ausspielst, um einen Angriff abzuwehren, überspringst du nur einen der zwei Züge. Du müsstest schon zweimal „Hops!“ ausspielen, um beide Züge zu beenden."
+      },
+      "fixture": {
+        "hands": {
+          "0": [
+            "skip",
+            "skip"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "skip",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "turns_owed": 1
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "skip",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "turns_owed": 1,
+              "deck_size": 1,
+              "discard_counts": {
+                "skip": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R22-one-nope-cancels",
+      "fact_ids": [
+        "EXPL-C-NOPE-CANCEL",
+        "EXPL-C-NOPE-OFFTURN",
+        "EXPL-C-NOPE-DISCARD",
+        "EXPL-C-NOPED-CONTINUE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Mit NÖ! setzt du eine andere Karte und deren Aktion außer Kraft"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Du kannst ein NÖ! auch spielen, wenn du nicht an der Reihe bist."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "setzt deinen Angriff außer Kraft. Du bist weiter am Zug."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": []
+        },
+        "deck": [
+          "skip"
+        ],
+        "discard": [
+          "attack",
+          "nope"
+        ],
+        "current_player": 0,
+        "phase": "reaction",
+        "pending": {
+          "type": "reaction",
+          "proposed": {
+            "type": "play_card",
+            "actor": 0,
+            "args": {
+              "card": "attack",
+              "target": null
+            }
+          },
+          "cards": [
+            "attack"
+          ],
+          "nope_count": 1,
+          "responder": 1,
+          "remaining_responders": []
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass_nope",
+              "actor": 1,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "phase": "play",
+              "turns_owed": 1,
+              "discard_counts": {
+                "attack": 1,
+                "nope": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R23-two-nopes-restore",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auf ein anderes NÖ! legen, um es aufzuheben und daraus ein DOCH! zu machen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": []
+        },
+        "deck": [
+          "skip"
+        ],
+        "discard": [
+          "attack",
+          "nope",
+          "nope"
+        ],
+        "current_player": 0,
+        "phase": "reaction",
+        "pending": {
+          "type": "reaction",
+          "proposed": {
+            "type": "play_card",
+            "actor": 0,
+            "args": {
+              "card": "attack",
+              "target": null
+            }
+          },
+          "cards": [
+            "attack"
+          ],
+          "nope_count": 2,
+          "responder": 1,
+          "remaining_responders": []
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass_nope",
+              "actor": 1,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "phase": "play",
+              "turns_owed": 2,
+              "discard_counts": {
+                "attack": 1,
+                "nope": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R24-three-nopes-cancel",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Du kannst ein NÖ! auf ein anderes NÖ! legen, um es aufzuheben und daraus ein DOCH! zu machen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Alle Karten, die ge-NÖ!-t wurden, sind raus und bleiben auf dem Ablagestapel."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": []
+        },
+        "deck": [
+          "skip"
+        ],
+        "discard": [
+          "attack",
+          "nope",
+          "nope",
+          "nope"
+        ],
+        "current_player": 0,
+        "phase": "reaction",
+        "pending": {
+          "type": "reaction",
+          "proposed": {
+            "type": "play_card",
+            "actor": 0,
+            "args": {
+              "card": "attack",
+              "target": null
+            }
+          },
+          "cards": [
+            "attack"
+          ],
+          "nope_count": 3,
+          "responder": 1,
+          "remaining_responders": []
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass_nope",
+              "actor": 1,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "phase": "play",
+              "turns_owed": 1,
+              "discard_counts": {
+                "attack": 1,
+                "nope": 3
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R25-nope-exceptions",
+      "fact_ids": [
+        "EXPL-C-NOPE-EXCEPT"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "ausgenommen Exploding Kittens und Entschärfung."
+      },
+      "fixture": {
+        "hands": {
+          "0": [],
+          "1": [
+            "nope"
+          ]
+        },
+        "deck": [
+          "attack"
+        ],
+        "discard": [
+          "defuse"
+        ],
+        "current_player": 0,
+        "phase": "defuse_reinsert",
+        "pending": {
+          "type": "defuse",
+          "actor": 0,
+          "kitten": "exploding_kitten"
+        }
+      },
+      "initial": {
+        "adapter": {
+          "action_match_cases": [
+            {
+              "action": {
+                "type": "play_nope",
+                "actor": 1,
+                "args": {}
+              },
+              "count": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EXPL-R26-favor-target-chooses",
+      "fact_ids": [
+        "EXPL-C-FAVOR-GIVE",
+        "EXPL-C-FAVOR-CHOICE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Dieser Spieler entscheidet, welche Karte du bekommst."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "favor"
+          ],
+          "1": [
+            "attack",
+            "skip"
+          ]
+        },
+        "deck": [
+          "shuffle"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "favor",
+                "target": 1
+              }
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "phase": "favor_give",
+              "pending": {
+                "type": "favor",
+                "actor": 0,
+                "target": 1
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "give_card",
+              "actor": 1,
+              "args": {
+                "card": "skip"
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "phase": "play",
+              "hand_counts": {
+                "0": {
+                  "skip": 1
+                },
+                "1": {
+                  "attack": 1,
+                  "skip": 0
+                }
+              },
+              "discard_counts": {
+                "favor": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R27-empty-target-illegal",
+      "fact_ids": [
+        "EXPL-X-EMPTY-TARGET"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 1,
+        "quote": "Es gibt keine minimale oder maximale Handkartenzahl."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Zwinge einen Mitspieler deiner Wahl, dir eine Karte zu geben."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "um einem Mitspieler eine zufällige Karte zu stehlen."
+        },
+        {
+          "source_id": "EXPL-V2-DECISIONS",
+          "json_pointer": "/decisions/2",
+          "quote": "{\"id\":\"EXPL-D-EMPTY-TARGET\",\"status\":\"approved\",\"claim_ids\":[\"EXPL-X-EMPTY-TARGET\"],\"decision\":\"Players with empty hands are illegal targets for Favor and Pair.\",\"user_quote\":\"Nicht legal (Recommended)\"}"
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "favor",
+            "cat_beard",
+            "cat_beard"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "action_match_cases": [
+            {
+              "action": {
+                "type": "play_card",
+                "actor": 0,
+                "args": {
+                  "card": "favor",
+                  "target": 1
+                }
+              },
+              "count": 0
+            },
+            {
+              "action": {
+                "type": "play_pair",
+                "actor": 0,
+                "args": {
+                  "card": "cat_beard",
+                  "target": 1
+                }
+              },
+              "count": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EXPL-R28-shuffle-conserves",
+      "fact_ids": [
+        "EXPL-C-SHUFFLE",
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Misch den Spielstapel sorgfältig neu."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Wähle eine deiner Handkarten aus, lege sie OFFEN auf den Ablagestapel und befolge ihre Anweisung."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Nachdem du die Anweisung der Karte befolgt hast, kannst du weitere Karten spielen, so viele du möchtest."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "shuffle"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip",
+          "favor",
+          "nope",
+          "see_future"
+        ],
+        "current_player": 0,
+        "seed": 7
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "shuffle",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "deck_size": 5,
+              "deck_multiset": [
+                "attack",
+                "skip",
+                "favor",
+                "nope",
+                "see_future"
+              ],
+              "discard_counts": {
+                "shuffle": 1
+              },
+              "hand_sizes": {
+                "0": 0,
+                "1": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R29-future-top-three-private",
+      "fact_ids": [
+        "EXPL-C-FUTURE-THREE",
+        "EXPL-C-FUTURE-ORDER",
+        "EXPL-C-FUTURE-PRIVATE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Schau dir die obersten drei Karten des Spielstapels an"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "und lege sie zurück, ohne deren Reihenfolge zu verändern."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Zeige diese Karten bloß nicht deinen Mitspielern."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "see_future"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip",
+          "favor",
+          "nope"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "see_future",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "deck": [
+                "attack",
+                "skip",
+                "favor",
+                "nope"
+              ],
+              "observations": {
+                "0": {
+                  "own_hand": [],
+                  "opponent_hand_sizes": {
+                    "1": 0
+                  },
+                  "deck_size": 4,
+                  "preview": [
+                    "attack",
+                    "skip",
+                    "favor"
+                  ]
+                },
+                "1": {
+                  "own_hand": [],
+                  "opponent_hand_sizes": {
+                    "0": 0
+                  },
+                  "deck_size": 4,
+                  "preview": []
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R30-future-short-pile",
+      "fact_ids": [
+        "EXPL-M-SHORT-FUTURE"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Schau dir die obersten drei Karten des Spielstapels an"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-V2-DECISIONS",
+          "json_pointer": "/decisions/7",
+          "quote": "{\"id\":\"EXPL-D-SHORT-FUTURE\",\"status\":\"approved\",\"claim_ids\":[\"EXPL-M-SHORT-FUTURE\"],\"decision\":\"With fewer than three draw-pile cards, See the Future privately shows all remaining cards in unchanged order.\",\"user_quote\":\"Alle übrigen (Recommended)\"}"
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "see_future"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack",
+          "skip"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_card",
+              "actor": 0,
+              "args": {
+                "card": "see_future",
+                "target": null
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "deck": [
+                "attack",
+                "skip"
+              ],
+              "observations": {
+                "0": {
+                  "own_hand": [],
+                  "opponent_hand_sizes": {
+                    "1": 0
+                  },
+                  "deck_size": 2,
+                  "preview": [
+                    "attack",
+                    "skip"
+                  ]
+                },
+                "1": {
+                  "own_hand": [],
+                  "opponent_hand_sizes": {
+                    "0": 0
+                  },
+                  "deck_size": 2,
+                  "preview": []
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R32-pair-random-steal",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-PAIR-STEAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Jetzt können ALLE gleichen Karten als Pärchen gespielt werden"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "um einem Mitspieler eine zufällige Karte zu stehlen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "cat_beard",
+            "cat_beard"
+          ],
+          "1": [
+            "attack",
+            "skip"
+          ]
+        },
+        "deck": [
+          "favor"
+        ],
+        "current_player": 0,
+        "seed": 3
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_pair",
+              "actor": 0,
+              "args": {
+                "card": "cat_beard",
+                "target": 1
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_sizes": {
+                "0": 1,
+                "1": 1
+              },
+              "discard_counts": {
+                "cat_beard": 2
+              },
+              "turns_owed": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R33-action-pair-suppresses",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-COMBO-SUPPRESS",
+        "EXPL-C-PAIR-STEAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Jetzt können ALLE gleichen Karten als Pärchen gespielt werden"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Wenn du eine Kombination spielst, gelten die Anweisungen auf den Karten nicht."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "um einem Mitspieler eine zufällige Karte zu stehlen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack",
+            "attack"
+          ],
+          "1": [
+            "skip"
+          ]
+        },
+        "deck": [
+          "favor"
+        ],
+        "current_player": 0,
+        "seed": 3
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_pair",
+              "actor": 0,
+              "args": {
+                "card": "attack",
+                "target": 1
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "turns_owed": 1,
+              "hand_sizes": {
+                "0": 1,
+                "1": 0
+              },
+              "discard_counts": {
+                "attack": 2
+              },
+              "deck_size": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R34-triple-present",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-HAS",
+        "EXPL-C-COMBO-SUPPRESS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wie ein Pärchen, außer dass du dir eine Karte von dem Mitspieler wünschen darfst."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Besitzt er solch eine Karte, muss er sie dir geben."
+        },
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Wenn du eine Kombination spielst, gelten die Anweisungen auf den Karten nicht."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "cat_beard",
+            "cat_beard",
+            "cat_beard"
+          ],
+          "1": [
+            "attack",
+            "skip"
+          ]
+        },
+        "deck": [
+          "favor"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_triple",
+              "actor": 0,
+              "args": {
+                "card": "cat_beard",
+                "target": 1,
+                "requested": "attack"
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_counts": {
+                "0": {
+                  "attack": 1,
+                  "cat_beard": 0
+                },
+                "1": {
+                  "attack": 0,
+                  "skip": 1
+                }
+              },
+              "discard_counts": {
+                "cat_beard": 3
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R35-triple-absent",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-LACKS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wie ein Pärchen, außer dass du dir eine Karte von dem Mitspieler wünschen darfst."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Hat er keine solche Karte, hast du Pech gehabt."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "cat_beard",
+            "cat_beard",
+            "cat_beard"
+          ],
+          "1": [
+            "skip"
+          ]
+        },
+        "deck": [
+          "favor"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_triple",
+              "actor": 0,
+              "args": {
+                "card": "cat_beard",
+                "target": 1,
+                "requested": "attack"
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_exact": {
+                "0": [],
+                "1": [
+                  "skip"
+                ]
+              },
+              "discard_counts": {
+                "cat_beard": 3
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R36-five-retrieve-existing",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-FIVE-RETRIEVE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "darfst du dir eine beliebige Karte aus dem Ablagestapel nehmen."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack",
+            "skip",
+            "favor",
+            "shuffle",
+            "see_future"
+          ],
+          "1": []
+        },
+        "deck": [
+          "cat_beard"
+        ],
+        "discard": [
+          "nope"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_five",
+              "actor": 0,
+              "args": {
+                "cards": [
+                  "attack",
+                  "skip",
+                  "favor",
+                  "shuffle",
+                  "see_future"
+                ],
+                "retrieve": "nope"
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "hand_exact": {
+                "0": [
+                  "nope"
+                ],
+                "1": []
+              },
+              "discard_counts": {
+                "nope": 0,
+                "attack": 1,
+                "skip": 1,
+                "favor": 1,
+                "shuffle": 1,
+                "see_future": 1
+              },
+              "deck": [
+                "cat_beard"
+              ],
+              "turns_owed": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R37-five-suppresses-components",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-COMBO-SUPPRESS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du 5 verschiedene Karten (jede mit einem anderen Titel) spielst"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 2,
+          "quote": "Wenn du eine Kombination spielst, gelten die Anweisungen auf den Karten nicht."
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "attack",
+            "skip",
+            "favor",
+            "shuffle",
+            "see_future"
+          ],
+          "1": [
+            "nope"
+          ]
+        },
+        "deck": [
+          "cat_beard",
+          "cat_rainbow"
+        ],
+        "discard": [
+          "cat_tacocat"
+        ],
+        "current_player": 0
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "play_five",
+              "actor": 0,
+              "args": {
+                "cards": [
+                  "attack",
+                  "skip",
+                  "favor",
+                  "shuffle",
+                  "see_future"
+                ],
+                "retrieve": "cat_tacocat"
+              }
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "adapter": {
+              "turns_owed": 1,
+              "deck": [
+                "cat_beard",
+                "cat_rainbow"
+              ],
+              "hand_exact": {
+                "0": [
+                  "cat_tacocat"
+                ],
+                "1": [
+                  "nope"
+                ]
+              },
+              "observations": {
+                "0": {
+                  "own_hand": [
+                    "cat_tacocat"
+                  ],
+                  "opponent_hand_sizes": {
+                    "1": 1
+                  },
+                  "deck_size": 2,
+                  "preview": []
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R38-attack-death-clears-debt",
+      "fact_ids": [
+        "EXPL-M-ATTACK-DEATH-DEBT"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "zwingst den nächsten Spieler, zwei Spielzüge direkt nacheinander auszuführen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-NSFW-DE-2018-RULES",
+          "page": 1,
+          "quote": "Er ist tot und scheidet aus dem Spiel aus."
+        },
+        {
+          "source_id": "EXPL-V2-DECISIONS",
+          "json_pointer": "/decisions/1",
+          "quote": "{\"id\":\"EXPL-D-ATTACK-DEATH\",\"status\":\"approved\",\"claim_ids\":[\"EXPL-M-ATTACK-DEATH-DEBT\"],\"decision\":\"After Defuse, another owed Attack turn remains; after elimination, all remaining turns owed by that player expire.\",\"user_quote\":\"also wenn eine bombe hochgeht und man kann überleben mitels entschärfen bleibt der zweite zug noch, falls man stirbt verfällt der extra zug\"}"
+        }
+      ],
+      "fixture": {
+        "players": 3,
+        "hands": {
+          "0": [],
+          "1": [],
+          "2": []
+        },
+        "deck": [
+          "exploding_kitten",
+          "attack"
+        ],
+        "current_player": 0,
+        "turns_owed": 2
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "draw",
+              "actor": 0,
+              "args": {}
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "adapter": {
+              "alive": [
+                false,
+                true,
+                true
+              ],
+              "turns_owed": 1,
+              "discard_counts": {
+                "exploding_kitten": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "EXPL-R39-defuse-only-on-kitten",
+      "fact_ids": [
+        "EXPL-A-DEFUSE-TRIGGER"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "EXPL-NSFW-DE-2018-RULES",
+        "page": 2,
+        "quote": "Wenn du ein Exploding Kitten ziehst, kannst du eine „Entschärfung“ ausspielen"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "EXPL-V2-DECISIONS",
+          "json_pointer": "/decisions/6",
+          "quote": "{\"id\":\"EXPL-D-DEFUSE-TRIGGER\",\"status\":\"approved\",\"claim_ids\":[\"EXPL-A-DEFUSE-TRIGGER\"],\"decision\":\"Defuse is legal only in response to a drawn Exploding Kitten, not as an ordinary no-effect hand play.\",\"user_quote\":\"Nur bei Kitten (Recommended)\"}"
+        }
+      ],
+      "fixture": {
+        "hands": {
+          "0": [
+            "defuse"
+          ],
+          "1": []
+        },
+        "deck": [
+          "attack"
+        ],
+        "current_player": 0
+      },
+      "initial": {
+        "adapter": {
+          "action_match_cases": [
+            {
+              "action": {
+                "type": "play_card",
+                "actor": 0,
+                "args": {
+                  "card": "defuse",
+                  "target": null
+                }
+              },
+              "count": 0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "claim_inventory": "inputs/games/expl/claims_v2.json"
+}

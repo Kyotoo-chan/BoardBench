@@ -1,0 +1,68 @@
+{
+  "profile_version": 2,
+  "default_num_players": 2,
+  "player_counts": {
+    "supported": [2, 3, 4, 5],
+    "unsupported": [1, 6]
+  },
+  "state_schema": "boardbench/exploding-kittens/state/1",
+  "action_schema": "boardbench/exploding-kittens/action/1",
+  "observation_schema": "boardbench/exploding-kittens/observation/1",
+  "note": "Representation-only profile for the supplied German NSFW Edition 2018 base game. It fixes JSON-safe card, state, action and private-observation shapes, not unresolved rule interpretations. Player 0 is only the deterministic API default when no external start player is supplied.",
+  "card_ids": [
+    "exploding_kitten", "defuse", "attack", "nope", "skip", "favor", "shuffle", "see_future",
+    "cat_beard", "cat_cattermelon", "cat_hairy_potato", "cat_rainbow", "cat_tacocat"
+  ],
+  "phase_ids": ["play", "reaction", "favor_give", "defuse_reinsert", "terminal"],
+  "state_data": {
+    "required": ["configuration", "players", "zones", "current_player", "turns_owed", "phase", "pending", "terminal", "winner", "turn_number", "chance"],
+    "configuration": {"players": "int", "seed": "int|null", "variant": "base"},
+    "players": [{"id": "int", "alive": "bool", "hand": ["card_id"], "preview": ["card_id"]}],
+    "zones": {"deck": ["card_id"], "discard": ["card_id"], "box": ["card_id"]},
+    "current_player": "int",
+    "turns_owed": "int",
+    "phase": "phase_id",
+    "pending": {
+      "none": "null",
+      "reaction": {"type": "reaction", "proposed": "action data", "cards": ["card_id"], "nope_count": "int", "responder": "int", "remaining_responders": ["int"]},
+      "favor": {"type": "favor", "actor": "int", "target": "int"},
+      "defuse": {"type": "defuse", "actor": "int", "kitten": "exploding_kitten"}
+    },
+    "terminal": "bool",
+    "winner": "int|null",
+    "turn_number": "int",
+    "chance": {"seed": "int|null", "counter": "int"}
+  },
+  "action_data": {
+    "required": ["type", "actor", "args"],
+    "types": {
+      "draw": {},
+      "play_card": {"card": "card_id", "target": "int|null"},
+      "play_pair": {"card": "card_id", "target": "int"},
+      "play_triple": {"card": "card_id", "target": "int", "requested": "card_id"},
+      "play_five": {"cards": ["card_id"], "retrieve": "card_id"},
+      "give_card": {"card": "card_id"},
+      "reinsert": {"position": "int"},
+      "play_nope": {},
+      "pass_nope": {}
+    },
+    "type_ids": ["draw", "play_card", "play_pair", "play_triple", "play_five", "give_card", "reinsert", "play_nope", "pass_nope"]
+  },
+  "observation_data": {
+    "required": ["player", "own_hand", "opponent_hand_sizes", "deck_size", "discard", "alive", "current_player", "turns_owed", "phase", "pending", "preview", "terminal", "winner", "turn_number"],
+    "player": "int",
+    "own_hand": ["card_id"],
+    "opponent_hand_sizes": {"<player_id>": "int"},
+    "deck_size": "int",
+    "discard": ["card_id"],
+    "alive": ["bool"],
+    "current_player": "int",
+    "turns_owed": "int",
+    "phase": "phase_id",
+    "pending": "null|public object",
+    "preview": ["card_id"],
+    "terminal": "bool",
+    "winner": "int|null",
+    "turn_number": "int"
+  }
+}

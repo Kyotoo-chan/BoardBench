@@ -1,0 +1,437 @@
+{
+  "version": 1,
+  "status": "approved-for-v2-original-packet",
+  "scenarios": [
+    {
+      "id": "EXPL-R01-setup-two",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-INV-TOTAL",
+        "EXPL-C-INV-KITTEN",
+        "EXPL-C-INV-DEFUSE",
+        "EXPL-C-INV-ATTACK",
+        "EXPL-C-INV-NOPE",
+        "EXPL-C-INV-SKIP",
+        "EXPL-C-INV-FAVOR",
+        "EXPL-C-INV-SHUFFLE",
+        "EXPL-C-INV-FUTURE",
+        "EXPL-C-INV-CATS",
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-2",
+        "EXPL-C-START-PLAYER"
+      ],
+      "title": "Exact two-player setup and full inventory",
+      "expectation": "Two hands of 8 each, each with one Defuse and no Kitten; draw pile 35 with 1 Kitten and 2 Defuses; boxed 3 Kittens and 2 Defuses; every card-type total matches the printed 56-card inventory; a valid designated current player has a legal action."
+    },
+    {
+      "id": "EXPL-R02-setup-three",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "title": "Exact three-player setup",
+      "expectation": "Three hands of 8; draw pile 30 with 2 Kittens and 3 Defuses; boxed 2 Kittens; legal initial action exists."
+    },
+    {
+      "id": "EXPL-R03-setup-four",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "title": "Exact four-player setup",
+      "expectation": "Four hands of 8; draw pile 23 with 3 Kittens and 2 Defuses; boxed 1 Kitten; legal initial action exists."
+    },
+    {
+      "id": "EXPL-R04-setup-five",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ],
+      "title": "Exact five-player setup",
+      "expectation": "Five hands of 8; draw pile 16 with 4 Kittens and 1 Defuse; nothing boxed; legal initial action exists."
+    },
+    {
+      "id": "EXPL-R05-player-range",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS"
+      ],
+      "title": "Reject unsupported player counts",
+      "expectation": "Constructors reject 1 and 6 players with ValueError; separate player-count gate performs bounded rollouts for 2, 3, 4 and 5."
+    },
+    {
+      "id": "EXPL-R06-pass-draw-advance",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PASS",
+        "EXPL-C-DRAW-END",
+        "EXPL-C-CLOCKWISE"
+      ],
+      "title": "Pass, draw and clockwise advance",
+      "expectation": "Drawing without first playing a card takes exactly the top non-Kitten into hand, reduces pile by one, and advances to the next living player."
+    },
+    {
+      "id": "EXPL-R07-play-card-stays-turn",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ],
+      "title": "Card enters public discard before effect",
+      "expectation": "Playing See the Future removes it from hand, adds it face-up to discard, resolves it, and leaves the actor on turn with draw still available."
+    },
+    {
+      "id": "EXPL-R08-multiple-pre-draw-plays",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-MULTI-PLAY",
+        "EXPL-C-PLAY-CARD"
+      ],
+      "title": "Multiple cards before draw",
+      "expectation": "The actor can resolve See the Future and Shuffle in one turn before drawing; both cards enter discard and the actor remains current."
+    },
+    {
+      "id": "EXPL-R09-public-count-private-hands",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-PILE-COUNT"
+      ],
+      "title": "Public counts and private identities",
+      "expectation": "Each observation exposes draw-pile size and own hand but not opponents’ card identities or draw-pile order."
+    },
+    {
+      "id": "EXPL-R10-empty-hand-continues",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NO-HAND-LIMIT",
+        "EXPL-C-EMPTY-HAND",
+        "EXPL-C-DRAW-END"
+      ],
+      "title": "Empty hand remains playable",
+      "expectation": "A living player with zero cards has a legal draw; drawing adds the top card and advances normally."
+    },
+    {
+      "id": "EXPL-R11-explosion-eliminates",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REVEAL",
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-CLOCKWISE"
+      ],
+      "title": "Explosion eliminates and discards",
+      "expectation": "In a three-player fixture, drawing a Kitten without Defuse makes it public, eliminates the actor, discards the actor’s complete hand plus Kitten, and advances to the next living player."
+    },
+    {
+      "id": "EXPL-R12-last-survivor-wins",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-TERMINAL",
+        "EXPL-C-WINNER"
+      ],
+      "title": "Immediate terminal survivor",
+      "expectation": "In a two-player fixture, an undefused explosion immediately ends the game with the other player as sole winner."
+    },
+    {
+      "id": "EXPL-R13-defuse-top",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-SAVES",
+        "EXPL-C-DEFUSE-DISCARD",
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-DEFUSE-END"
+      ],
+      "title": "Defuse and top reinsertion",
+      "expectation": "Defuse prevents elimination, enters discard, reinserts exactly one Kitten on top at the player’s explicit choice, and ends that individual turn."
+    },
+    {
+      "id": "EXPL-R14-defuse-bottom-order",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-REINSERT-ORDER",
+        "EXPL-C-DEFUSE-END"
+      ],
+      "title": "Bottom reinsertion preserves order",
+      "expectation": "Choosing the bottom inserts the Kitten exactly once there while every unrelated pile card keeps relative order; the position is hidden from opponent observation."
+    },
+    {
+      "id": "EXPL-R15-defuse-under-attack",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-END",
+        "EXPL-C-ATTACK-TWO"
+      ],
+      "title": "Defuse ends one attacked turn",
+      "expectation": "A player owing two turns draws a Kitten, Defuses, and remains current with exactly one owed turn."
+    },
+    {
+      "id": "EXPL-R16-attack-two-turns",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-END",
+        "EXPL-C-ATTACK-TWO"
+      ],
+      "title": "Attack creates two turns",
+      "expectation": "Attack is discarded, ends the actor’s turn without drawing, and makes the next living player current with two owed turns."
+    },
+    {
+      "id": "EXPL-R17-first-attacked-draw",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-TWO",
+        "EXPL-C-DRAW-END"
+      ],
+      "title": "First attacked draw retains actor",
+      "expectation": "After the first normal draw of two owed turns, the same player remains current with one owed turn."
+    },
+    {
+      "id": "EXPL-R18-attack-chain",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-CHAIN",
+        "EXPL-C-ATTACK-END"
+      ],
+      "title": "Attack replaces current obligation",
+      "expectation": "An attacked player plays Attack; that player leaves turn immediately and the following living player owes exactly two, not accumulated, turns."
+    },
+    {
+      "id": "EXPL-R19-skip-normal",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-END"
+      ],
+      "title": "Normal Skip",
+      "expectation": "Skip ends a normal turn without changing draw-pile size and advances clockwise."
+    },
+    {
+      "id": "EXPL-R20-skip-one-owed",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK",
+        "EXPL-C-SKIP-END"
+      ],
+      "title": "One Skip consumes one debt",
+      "expectation": "With two owed turns, one Skip leaves the same player current with one owed turn and no draw."
+    },
+    {
+      "id": "EXPL-R21-two-skips-two-owed",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK"
+      ],
+      "title": "Two Skips consume both debts",
+      "expectation": "Two consecutive Skips consume both owed turns without draws and then advance."
+    },
+    {
+      "id": "EXPL-R22-one-nope-cancels",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-CANCEL",
+        "EXPL-C-NOPE-OFFTURN",
+        "EXPL-C-NOPE-DISCARD",
+        "EXPL-C-NOPED-CONTINUE"
+      ],
+      "title": "One Nope cancels Attack",
+      "expectation": "An off-turn player Nopes a pending Attack: no debt is assigned, Attack and Nope remain discarded, and the Attack actor continues the same turn."
+    },
+    {
+      "id": "EXPL-R23-two-nopes-restore",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ],
+      "title": "Second Nope restores",
+      "expectation": "A second Nope restores the pending Attack; all proposed/reaction cards remain discarded and the next player owes two turns."
+    },
+    {
+      "id": "EXPL-R24-three-nopes-cancel",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ],
+      "title": "Third Nope cancels again",
+      "expectation": "A third Nope cancels the pending effect; all cards remain discarded and no Attack debt is assigned."
+    },
+    {
+      "id": "EXPL-R25-nope-exceptions",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-EXCEPT"
+      ],
+      "title": "Kitten and Defuse cannot be Noped",
+      "expectation": "No Nope action is legal against a drawn Kitten or its Defuse resolution."
+    },
+    {
+      "id": "EXPL-R26-favor-target-chooses",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FAVOR-GIVE",
+        "EXPL-C-FAVOR-CHOICE"
+      ],
+      "title": "Favor target chooses transfer",
+      "expectation": "Favor announces a nonempty target; that target explicitly chooses one held card, exactly that card transfers, and the actor remains on turn."
+    },
+    {
+      "id": "EXPL-R27-empty-target-illegal",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-X-EMPTY-TARGET"
+      ],
+      "title": "Empty Favor and Pair targets rejected",
+      "expectation": "Neither Favor nor Pair exposes an action targeting a living player with zero cards."
+    },
+    {
+      "id": "EXPL-R28-shuffle-conserves",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SHUFFLE",
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ],
+      "title": "Shuffle conservation and timing",
+      "expectation": "Shuffle acts only on draw-pile order, preserves size/multiset, enters discard, and does not end the current turn; no exact permutation is scored."
+    },
+    {
+      "id": "EXPL-R29-future-top-three-private",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FUTURE-THREE",
+        "EXPL-C-FUTURE-ORDER",
+        "EXPL-C-FUTURE-PRIVATE"
+      ],
+      "title": "See top three privately",
+      "expectation": "Actor observation shows exactly controlled top three; opponent observation does not; pile order remains byte-for-byte equivalent."
+    },
+    {
+      "id": "EXPL-R30-future-short-pile",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-M-SHORT-FUTURE"
+      ],
+      "title": "See all remaining short pile",
+      "expectation": "With two cards left, actor privately sees both in order, opponent sees neither, and pile is unchanged."
+    },
+    {
+      "id": "EXPL-R32-pair-random-steal",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-PAIR-STEAL"
+      ],
+      "title": "Same-title pair steals one",
+      "expectation": "Two same-title cat cards enter discard; seeded random choice transfers exactly one target card; printed cat effect does not run."
+    },
+    {
+      "id": "EXPL-R33-action-pair-suppresses",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-COMBO-SUPPRESS",
+        "EXPL-C-PAIR-STEAL"
+      ],
+      "title": "Action-card pair suppresses printing",
+      "expectation": "Two Attack cards used as a pair steal one card but create no Attack debt; both enter discard and actor remains on turn."
+    },
+    {
+      "id": "EXPL-R34-triple-present",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-HAS",
+        "EXPL-C-COMBO-SUPPRESS"
+      ],
+      "title": "Triple requested title present",
+      "expectation": "Three same-title cards enter discard; one explicitly requested matching title transfers from target; no component effects execute."
+    },
+    {
+      "id": "EXPL-R35-triple-absent",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-LACKS"
+      ],
+      "title": "Triple requested title absent",
+      "expectation": "If the target lacks the announced title, no card transfers; triple cards remain discarded and actor remains on turn."
+    },
+    {
+      "id": "EXPL-R36-five-retrieve-existing",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-FIVE-RETRIEVE"
+      ],
+      "title": "Five distinct retrieve existing discard",
+      "expectation": "Five distinct announced titles enter discard and one chosen card that pre-existed in discard transfers to actor."
+    },
+    {
+      "id": "EXPL-R37-five-suppresses-components",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-COMBO-SUPPRESS"
+      ],
+      "title": "Five suppresses all component effects",
+      "expectation": "A five-card combination containing Attack, Skip, Shuffle, Future and Favor executes none of those individual effects; only approved retrieval occurs and actor stays on turn."
+    },
+    {
+      "id": "EXPL-R38-attack-death-clears-debt",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-M-ATTACK-DEATH-DEBT"
+      ],
+      "title": "Elimination clears remaining debt",
+      "expectation": "A player on the first of two owed turns explodes without Defuse; elimination removes that player’s remaining obligation and play advances to the next living player."
+    },
+    {
+      "id": "EXPL-R39-defuse-only-on-kitten",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-A-DEFUSE-TRIGGER"
+      ],
+      "title": "Defuse is not ordinary play",
+      "expectation": "A held Defuse is absent from legal play actions unless resolving a drawn Exploding Kitten."
+    }
+  ]
+}

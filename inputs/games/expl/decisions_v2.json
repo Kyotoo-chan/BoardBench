@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "source_id": "EXPL-V2-DECISIONS",
+  "authorship": "Evaluator decisions approved by the user on 2026-07-26; not publisher rules and not model-facing in the Original condition",
+  "model_facing_original": false,
+  "decisions": [
+    {
+      "id": "EXPL-D-DEFUSE-OPTION",
+      "status": "unscored",
+      "claim_ids": ["EXPL-A-DEFUSE-OPTIONAL"],
+      "decision": "Do not hard-score whether a player holding Defuse may voluntarily die.",
+      "user_quote": "eig macht es keinen sinn es nicht zu tun, aber ich würde es nicht werten"
+    },
+    {
+      "id": "EXPL-D-ATTACK-DEATH",
+      "status": "approved",
+      "claim_ids": ["EXPL-M-ATTACK-DEATH-DEBT"],
+      "decision": "After Defuse, another owed Attack turn remains; after elimination, all remaining turns owed by that player expire.",
+      "user_quote": "also wenn eine bombe hochgeht und man kann überleben mitels entschärfen bleibt der zweite zug noch, falls man stirbt verfällt der extra zug"
+    },
+    {
+      "id": "EXPL-D-EMPTY-TARGET",
+      "status": "approved",
+      "claim_ids": ["EXPL-X-EMPTY-TARGET"],
+      "decision": "Players with empty hands are illegal targets for Favor and Pair.",
+      "user_quote": "Nicht legal (Recommended)"
+    },
+    {
+      "id": "EXPL-D-NOPE-PRIORITY",
+      "status": "unscored",
+      "claim_ids": ["EXPL-M-NOPE-PRIORITY"],
+      "decision": "Do not hard-score a deterministic Nope priority protocol.",
+      "user_quote": "Keine harte Prüfung"
+    },
+    {
+      "id": "EXPL-D-NOPE-ANNOUNCEMENT",
+      "status": "unscored",
+      "claim_ids": ["EXPL-M-NOPE-ANNOUNCEMENT"],
+      "decision": "Do not hard-score whether all action parameters must be announced before the Nope window.",
+      "user_quote": "Add or explicitly mark unscored: (a) triple request announced before Nope window"
+    },
+    {
+      "id": "EXPL-D-NOPE-EMPTY-RESTORE",
+      "status": "unscored",
+      "claim_ids": ["EXPL-M-NOPE-EMPTY-RESTORE"],
+      "decision": "Do not hard-score a restored action whose target emptied its hand during the reaction chain.",
+      "user_quote": "Add or explicitly mark unscored: (b) restored action vs target emptied mid-reaction"
+    },
+    {
+      "id": "EXPL-D-DEFUSE-TRIGGER",
+      "status": "approved",
+      "claim_ids": ["EXPL-A-DEFUSE-TRIGGER"],
+      "decision": "Defuse is legal only in response to a drawn Exploding Kitten, not as an ordinary no-effect hand play.",
+      "user_quote": "Nur bei Kitten (Recommended)"
+    },
+    {
+      "id": "EXPL-D-SHORT-FUTURE",
+      "status": "approved",
+      "claim_ids": ["EXPL-M-SHORT-FUTURE"],
+      "decision": "With fewer than three draw-pile cards, See the Future privately shows all remaining cards in unchanged order.",
+      "user_quote": "Alle übrigen (Recommended)"
+    },
+    {
+      "id": "EXPL-D-FIVE-SELF",
+      "status": "unresolved_unscored",
+      "claim_ids": ["EXPL-A-FIVE-SELF-RETRIEVE"],
+      "decision": "Leave immediate retrieval of one of the five just-played component cards unresolved and unscored.",
+      "user_quote": "mir egal ist lowkey auslegungssache der regeln"
+    },
+    {
+      "id": "EXPL-D-FIVE-KITTEN",
+      "status": "nonmaterial_unscored",
+      "claim_ids": ["EXPL-A-FIVE-KITTEN-SAFE"],
+      "decision": "Do not hard-score retrieval or hand behavior of a discarded Exploding Kitten as it is not material for this study condition.",
+      "user_quote": "würde nie jemand machen, daher nicht spielrelevant"
+    }
+  ]
+}
