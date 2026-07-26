@@ -1,0 +1,129 @@
+attempt 1: removed runtime metadata before repair validation: .git, __pycache__
+
+attempt 1:
+$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
+exit_code=0
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
+exit_code=0
+agentic-self-check OK states=300 actions=19924
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
+exit_code=0
+profile-fixture-self-check OK
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
+exit_code=0
+PASS players=2
+PASS players=1: rejected
+PASS players=3: rejected
+PLAYER_COUNTS 3/3
+
+
+=== TECHNICAL_ROBUSTNESS_INTERFACE ===
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.00s
+OK   04_required_api                    9/9 score=1.000    0.01s
+OK   05_random_rollouts             100/100 score=1.000  124.51s
+OK   06_action_language     8888062/8888062 score=1.000  115.45s
+---- summary                            6/6 score=1.000  239.98s
+
+
+
+=== PLAYER_COUNTS ===
+PASS players=2
+PASS players=1: rejected
+PASS players=3: rejected
+PLAYER_COUNTS 3/3
+
+
+
+=== SCENARIOS_V4 ===
+FAIL ABAL-R01-exact-initial-setup: marble_counts: expected {'black': 14, 'white': 14}, got {'black': 13, 'white': 13}
+PASS ABAL-R02-single-marble-one-step-and-turn
+PASS ABAL-R03-two-marble-inline
+PASS ABAL-R04-three-marble-broadside
+PASS ABAL-R05-four-marble-move-illegal
+PASS ABAL-R06-two-v-one-sumito
+PASS ABAL-R07-three-v-one-sumito
+PASS ABAL-R08-three-v-two-sumito
+PASS ABAL-R09-broadside-push-illegal
+PASS ABAL-R10-equal-strength-pushes-illegal
+PASS ABAL-R11-four-v-three-still-patt
+PASS ABAL-R12-blocked-sumito-illegal
+PASS ABAL-R13-gap-does-not-push
+PASS ABAL-R14-non-collinear-push-illegal
+PASS ABAL-R15-edge-ejection
+PASS ABAL-R16-sixth-ejection-wins
+PASS ABAL-R17-sumito-is-optional
+PASS ABAL-R18-patt-may-withdraw
+PASS ABAL-R20-three-marble-inline
+PASS ABAL-R21-two-broadside-from-longer-row
+PASS ABAL-R22-one-v-one-patt
+PASS ABAL-R23-two-v-two-patt
+PASS ABAL-R19-forced-pass-only-with-no-move
+CRASH ABAL-R24-player-count-and-bounded-playability: KeyError: 'exception'
+PASS ABAL-R25-single-step-e
+PASS ABAL-R26-single-step-ne
+PASS ABAL-R27-single-step-nw
+PASS ABAL-R28-single-step-w
+PASS ABAL-R29-single-step-sw
+PASS ABAL-R30-single-step-se
+PASS ABAL-R31-invalid-group-and-destination-boundaries
+PASS ABAL-R32-broadside-blocked-and-offboard
+PASS ABAL-R33-patt-broadside-withdrawal
+PASS ABAL-R34-crossing-angle-breaks-patt
+PASS ABAL-R35-three-v-two-edge-ejects-one
+PASS ABAL-R36-terminal-api-and-returns
+PASS ABAL-R37-action-serialization-is-unique
+PASS ABAL-R38-public-contract-observability
+SCENARIOS PASS=36 FAIL=1 CRASH=1 UNREACHED=0 UNTESTABLE=0 evaluated=38/38 coverage=1.000 clear=31/33 human_decision=5/5
+CLAIMS mapped=33/33 evaluated=33/33 exceptions=0
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/abalone_codex_ag.py --scenarios checks/scenarios/abalone_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\abalone\v2\original_scenarios.json` failed. (See above for error)
+
+
+=== SCENARIOS_V4_CORRECTED_EXPECTATION_SCHEMA ===
+FAIL ABAL-R01-exact-initial-setup: marble_counts: expected {'black': 14, 'white': 14}, got {'black': 13, 'white': 13}
+PASS ABAL-R02-single-marble-one-step-and-turn
+PASS ABAL-R03-two-marble-inline
+PASS ABAL-R04-three-marble-broadside
+PASS ABAL-R05-four-marble-move-illegal
+PASS ABAL-R06-two-v-one-sumito
+PASS ABAL-R07-three-v-one-sumito
+PASS ABAL-R08-three-v-two-sumito
+PASS ABAL-R09-broadside-push-illegal
+PASS ABAL-R10-equal-strength-pushes-illegal
+PASS ABAL-R11-four-v-three-still-patt
+PASS ABAL-R12-blocked-sumito-illegal
+PASS ABAL-R13-gap-does-not-push
+PASS ABAL-R14-non-collinear-push-illegal
+PASS ABAL-R15-edge-ejection
+PASS ABAL-R16-sixth-ejection-wins
+PASS ABAL-R17-sumito-is-optional
+PASS ABAL-R18-patt-may-withdraw
+PASS ABAL-R20-three-marble-inline
+PASS ABAL-R21-two-broadside-from-longer-row
+PASS ABAL-R22-one-v-one-patt
+PASS ABAL-R23-two-v-two-patt
+PASS ABAL-R19-forced-pass-only-with-no-move
+PASS ABAL-R24-player-count-and-bounded-playability
+PASS ABAL-R25-single-step-e
+PASS ABAL-R26-single-step-ne
+PASS ABAL-R27-single-step-nw
+PASS ABAL-R28-single-step-w
+PASS ABAL-R29-single-step-sw
+PASS ABAL-R30-single-step-se
+PASS ABAL-R31-invalid-group-and-destination-boundaries
+PASS ABAL-R32-broadside-blocked-and-offboard
+PASS ABAL-R33-patt-broadside-withdrawal
+PASS ABAL-R34-crossing-angle-breaks-patt
+PASS ABAL-R35-three-v-two-edge-ejects-one
+PASS ABAL-R36-terminal-api-and-returns
+PASS ABAL-R37-action-serialization-is-unique
+PASS ABAL-R38-public-contract-observability
+SCENARIOS PASS=37 FAIL=1 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=38/38 coverage=1.000 clear=32/33 human_decision=5/5
+CLAIMS mapped=33/33 evaluated=33/33 exceptions=0
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/abalone_codex_ag.py --scenarios checks/scenarios/abalone_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\abalone\v2\original_scenarios.json` failed. (See above for error)
