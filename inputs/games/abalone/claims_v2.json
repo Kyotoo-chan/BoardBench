@@ -1,0 +1,478 @@
+{
+  "version": 1,
+  "game": "abalone",
+  "source_register": [
+    {
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "role": "publisher_rulebook",
+      "path": "inputs/games/abalone/game_rules.pdf",
+      "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+      "edition": "Schmidt Spiele German rules, 4 PDF pages"
+    }
+  ],
+  "claims": [
+    {
+      "id": "ABAL-C-PLAYERS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Ein Spiel für 2 Spieler",
+      "statement": "The base game supports exactly two players."
+    },
+    {
+      "id": "ABAL-C-SETUP-FIGURE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Setzen Sie die Kugeln wie in Abb. 1 gezeigt in ihre Startpositionen.",
+      "statement": "A new game uses the Figure 1 starting positions."
+    },
+    {
+      "id": "ABAL-C-BOARD-61",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Abb. 1",
+      "statement": "The playable board has 61 pits in rows 5/6/7/8/9/8/7/6/5."
+    },
+    {
+      "id": "ABAL-C-SETUP-COUNTS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Abb. 1",
+      "statement": "The initial board has 14 black, 14 white, and 33 empty pits."
+    },
+    {
+      "id": "ABAL-C-SETUP-ROWS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Abb. 1",
+      "statement": "Top-to-bottom setup rows are BBBBB / BBBBBB / ..BBB.. / empty / empty / empty / ..WWW.. / WWWWWW / WWWWW."
+    },
+    {
+      "id": "ABAL-C-COLOR-LOTTERY",
+      "classification": "clear",
+      "material": false,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Losen Sie aus, welcher Spieler welche Farbe erhält.",
+      "statement": "Human player colors are assigned by drawing lots.",
+      "coverage_exception": "A deterministic environment cannot reproduce a social lottery; player-to-color mapping is an interface convention."
+    },
+    {
+      "id": "ABAL-C-TURN-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Die Spieler sind abwechselnd an der Reihe. Schwarz fängt immer an.",
+      "statement": "Black moves first and nonterminal legal moves alternate turns."
+    },
+    {
+      "id": "ABAL-C-ONE-MOVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "nur eine „Bewegung“ vornehmen – eigene Kugeln verschieben",
+      "statement": "A turn applies one atomic movement initiated with active-player marbles."
+    },
+    {
+      "id": "ABAL-C-ONE-STEP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Eine Bewegung beinhaltet die Entfernung bis zur nächsten Mulde – nicht mehr.",
+      "statement": "Every moved marble advances exactly one adjacent pit."
+    },
+    {
+      "id": "ABAL-C-SIX-DIRECTIONS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "eine der sechs möglichen Richtungen",
+      "statement": "Movement uses one of the six hex-grid directions."
+    },
+    {
+      "id": "ABAL-C-GROUP-SIZE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Eine „Bewegung“ kann eine, zwei oder drei Kugeln umfassen.",
+      "statement": "A movement selects exactly one, two, or three own marbles."
+    },
+    {
+      "id": "ABAL-C-SAME-DIRECTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "alle in die gleiche Richtung geschoben",
+      "statement": "All selected marbles move in the same direction."
+    },
+    {
+      "id": "ABAL-C-STRAIGHT-CONTIGUOUS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Kugelreihe",
+      "statement": "A multi-marble group is one contiguous straight row."
+    },
+    {
+      "id": "ABAL-C-INLINE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "Eine Bewegung in gerader Linie: Die Kugeln werden geradeaus in die nächste Mulde geschoben.",
+      "statement": "Inline movement is parallel to the selected row."
+    },
+    {
+      "id": "ABAL-C-BROADSIDE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "Eine Bewegung zur Seite: Die Kugeln werden seitlich in die nächsten Mulden geschoben.",
+      "statement": "Broadside movement is not parallel to the selected row."
+    },
+    {
+      "id": "ABAL-C-EMPTY-DESTINATION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "wenn die angrenzende Mulde frei ist",
+      "statement": "An ordinary non-push movement enters empty adjacent pits."
+    },
+    {
+      "id": "ABAL-C-MAX-THREE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "nicht mehr als drei Kugeln einer Farbe",
+      "statement": "Selecting four or more own marbles for one action is illegal."
+    },
+    {
+      "id": "ABAL-C-SUBSET-LONG-ROW",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "eine vorhandene, längere Kugelreihe trennen",
+      "statement": "A contiguous subset of one to three may move from a longer row."
+    },
+    {
+      "id": "ABAL-C-MOVE-FINAL",
+      "classification": "clear",
+      "material": true,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "Ist eine Bewegung ausgeführt, kann sie nicht mehr verändert werden.",
+      "statement": "An applied movement cannot be revised or taken back.",
+      "coverage_exception": "The public contract has no undo or revision operation; turn advancement is tested under ABAL-C-TURN-ORDER."
+    },
+    {
+      "id": "ABAL-C-SUMITO-SUPERIOR",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "die Anzahl Ihrer Kugeln höher ist als die Ihres Gegners",
+      "statement": "An inline push requires strictly more effective attackers than contiguous defenders."
+    },
+    {
+      "id": "ABAL-C-SUMITO-PATTERNS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "2-zu-1, 3-zu-1, 3-zu-2",
+      "statement": "Legal strength patterns are 2v1, 3v1, and 3v2."
+    },
+    {
+      "id": "ABAL-C-SUMITO-INLINE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "Durch eine Bewegung in gerader Linie.",
+      "statement": "Opponent marbles may be pushed only inline."
+    },
+    {
+      "id": "ABAL-C-SUMITO-ADJACENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "in direkt aneinander grenzenden Mulden",
+      "statement": "Attackers and defenders must be directly adjacent without a gap."
+    },
+    {
+      "id": "ABAL-C-SUMITO-FREE-BEHIND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "hinter der oder den angegriffenen Kugeln eine freie Mulde",
+      "statement": "An on-board push requires the pit immediately behind defenders to be empty."
+    },
+    {
+      "id": "ABAL-C-SUMITO-BLOCKED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "hier hinter der weißen Gruppe keine freie Mulde ist",
+      "statement": "A marble behind the defenders blocks an on-board push."
+    },
+    {
+      "id": "ABAL-C-SUMITO-GAP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "hier eine leere Mulde zwischen Schwarz und Weiß ist",
+      "statement": "A push across a gap is illegal."
+    },
+    {
+      "id": "ABAL-C-SUMITO-COLLINEAR",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "hier die Kugeln nicht in einer geraden Linie liegen",
+      "statement": "A non-collinear push is illegal."
+    },
+    {
+      "id": "ABAL-C-SUMITO-OPTIONAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "muss er nicht ausgeführt werden",
+      "statement": "A legal Sumito is optional when another legal movement exists."
+    },
+    {
+      "id": "ABAL-C-PATT-EQUAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 3,
+      "quote": "1-zu-1, 2-zu-2, 3-zu-3",
+      "statement": "Equal inline groups cannot push each other."
+    },
+    {
+      "id": "ABAL-C-PATT-FOUR-THREE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "Ein 4-zu-3 … entspricht … einem 3-zu-3 Patt.",
+      "statement": "More than three supporting marbles add no pushing strength; four versus three remains blocked."
+    },
+    {
+      "id": "ABAL-C-PATT-WITHDRAW",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "so dass sie sich nicht gegenseitig wegschieben dürfen",
+      "statement": "Patt forbids the equal inline push but not an otherwise legal withdrawal or broadside move."
+    },
+    {
+      "id": "ABAL-C-PATT-CROSSING",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "Angriff über eine andere Gerade … in einem anderen Winkel",
+      "statement": "A stronger crossing-angle Sumito may break a local Patt."
+    },
+    {
+      "id": "ABAL-C-EJECTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "Eine Kugel ist aus dem Spiel, wenn sie aus dem Spielfeld hinaus auf den Rand geschoben wird.",
+      "statement": "A defender pushed beyond the playable board is removed."
+    },
+    {
+      "id": "ABAL-C-EDGE-EXCEPTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "Schwarz kann Weiß hinausschieben.",
+      "statement": "The outside edge is the specific exception to the on-board free-pit requirement."
+    },
+    {
+      "id": "ABAL-C-SIXTH-WINS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "Der Spieler, der zuerst sechs Kugeln des Gegners hinaus geschoben hat, gewinnt das Spiel!",
+      "statement": "The game ends immediately when a player ejects the opponent sixth time; that player wins."
+    },
+    {
+      "id": "ABAL-C-CLOCK-OPTIONAL",
+      "classification": "clear",
+      "material": false,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "kann jedem Spieler eine bestimmte Spielzeit zugeteilt werden",
+      "statement": "Allocating a play clock is optional.",
+      "coverage_exception": "Clock operation and timeout outcomes are unspecified and excluded from the base environment."
+    },
+    {
+      "id": "ABAL-G-BROADSIDE-DESTINATIONS",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 2,
+      "quote": "Eine Bewegung zur Seite",
+      "statement": "For broadside movement every corresponding destination must be on-board and empty."
+    },
+    {
+      "id": "ABAL-G-PASS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Die Spieler sind abwechselnd an der Reihe.",
+      "statement": "Behavior when the active player has no legal movement is not specified."
+    },
+    {
+      "id": "ABAL-G-DRAW",
+      "classification": "missing",
+      "material": true,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "No draw or repetition rule is provided.",
+      "statement": "Draw, repetition, and move-limit outcomes are not specified."
+    },
+    {
+      "id": "ABAL-G-CLOCK",
+      "classification": "missing",
+      "material": false,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "kann jedem Spieler eine bestimmte Spielzeit zugeteilt werden",
+      "statement": "Clock operation, expiration, and timeout result are not specified."
+    },
+    {
+      "id": "ABAL-G-BOX-INVENTORY",
+      "classification": "missing",
+      "material": false,
+      "testable": false,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Abb. 1",
+      "statement": "Packaged component inventory beyond the in-play Figure 1 setup is not specified."
+    },
+    {
+      "id": "ABAL-G-TERMINAL-API",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "zuerst sechs Kugeln … gewinnt",
+      "statement": "Post-win legal actions and current-player representation are not specified."
+    },
+    {
+      "id": "ABAL-G-RETURNS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 4,
+      "quote": "zuerst sechs Kugeln … gewinnt",
+      "statement": "Numeric nonterminal and terminal returns are not specified."
+    },
+    {
+      "id": "ABAL-G-ACTION-UNIQUE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "No action serialization rule is provided.",
+      "statement": "Whether aliases may encode one physical movement is not specified."
+    },
+    {
+      "id": "ABAL-G-PUBLIC-STATE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "No software observation contract is provided.",
+      "statement": "Canonical public board, capture, turn, terminal, and winner fields are not specified."
+    },
+    {
+      "id": "ABAL-G-PLAYER-MAPPING",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "page": 1,
+      "quote": "Losen Sie aus, welcher Spieler welche Farbe erhält.",
+      "statement": "The mapping from software player IDs to black and white is not specified."
+    }
+  ]
+}

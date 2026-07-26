@@ -1,0 +1,44 @@
+{
+  "profile_version": 2,
+  "default_num_players": 2,
+  "player_counts": {"supported": [2], "unsupported": [1, 3]},
+  "state_schema": "boardbench/abalone/state/1",
+  "action_schema": "boardbench/abalone/action/1",
+  "observation_schema": "boardbench/abalone/observation/1",
+  "note": "Representation-only profile for the supplied two-player Abalone base game. Axial coordinates are <q>,<r> with radius 4; player 0 is black and player 1 is white.",
+  "color_ids": ["black", "white"],
+  "direction_ids": ["E", "NE", "NW", "W", "SW", "SE"],
+  "phase_ids": ["play", "terminal"],
+  "state_data": {
+    "required": ["configuration", "board", "current_player", "captures", "terminal", "winner", "phase", "move_number", "pending", "chance"],
+    "configuration": {"players": "int", "seed": "int|null", "variant": "base"},
+    "board": {"<q>,<r>": "color_id|null"},
+    "current_player": "int",
+    "captures": ["int", "int"],
+    "terminal": "bool",
+    "winner": "int|null",
+    "phase": "phase_id",
+    "move_number": "int",
+    "pending": "null",
+    "chance": {"seed": "int|null"}
+  },
+  "action_data": {
+    "required": ["type", "actor", "args"],
+    "types": {
+      "move": {"group": ["<q>,<r>"], "direction": "direction_id"},
+      "pass": {}
+    },
+    "type_ids": ["move", "pass"]
+  },
+  "observation_data": {
+    "required": ["player", "board", "current_player", "captures", "terminal", "winner", "phase", "move_number"],
+    "player": "int",
+    "board": {"<q>,<r>": "color_id|null"},
+    "current_player": "int",
+    "captures": ["int", "int"],
+    "terminal": "bool",
+    "winner": "int|null",
+    "phase": "phase_id",
+    "move_number": "int"
+  }
+}

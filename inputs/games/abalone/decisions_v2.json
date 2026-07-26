@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "game": "abalone",
+  "source_register": {
+    "source_id": "ABALONE-V2-DECISIONS",
+    "role": "human_decision",
+    "authorship": "BoardBench evaluator decisions approved by the user on 2026-07-26; not publisher text",
+    "model_facing_original": false
+  },
+  "authorship": "BoardBench evaluator decisions approved by the user on 2026-07-26; not publisher text and not model-facing in the original condition",
+  "decisions": [
+    {
+      "id": "ABAL-DEC-BROADSIDE",
+      "claim_ids": ["ABAL-G-BROADSIDE-DESTINATIONS"],
+      "decision": "For a broadside move, every corresponding destination pit must be on the board and empty.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "ABAL-DEC-PASS",
+      "claim_ids": ["ABAL-G-PASS"],
+      "decision": "Expose exactly one forced pass if and only if the active player has no legal movement. Never expose a voluntary pass while a movement exists.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "ABAL-DEC-TERMINAL",
+      "claim_ids": ["ABAL-G-TERMINAL-API"],
+      "decision": "The sixth ejection ends the game immediately, leaves current_player as the winner, and exposes no terminal legal actions.",
+      "affected_mechanics": ["terminal", "legal_actions", "state_transition"]
+    },
+    {
+      "id": "ABAL-DEC-RETURNS",
+      "claim_ids": ["ABAL-G-RETURNS"],
+      "decision": "Returns are [0, 0] before terminal and [+1, -1] from player-ID order for a player-0 win, reversed for a player-1 win.",
+      "affected_mechanics": ["terminal_results"]
+    },
+    {
+      "id": "ABAL-DEC-ACTION-UNIQUE",
+      "claim_ids": ["ABAL-G-ACTION-UNIQUE"],
+      "decision": "Exactly one canonical serialized action represents each physical movement; group-order aliases and duplicate successor transitions are forbidden.",
+      "affected_mechanics": ["legal_actions", "action_serialization"]
+    },
+    {
+      "id": "ABAL-DEC-PUBLIC",
+      "claim_ids": ["ABAL-G-PUBLIC-STATE"],
+      "decision": "The canonical public contract exposes complete board occupancy, current player, capture counts, terminal status, winner, phase, and move number.",
+      "affected_mechanics": ["observations", "state_serialization"]
+    },
+    {
+      "id": "ABAL-DEC-PLAYER-MAPPING",
+      "claim_ids": ["ABAL-G-PLAYER-MAPPING"],
+      "decision": "Software player 0 controls black and player 1 controls white; black/player 0 moves first.",
+      "affected_mechanics": ["setup", "turn_order"]
+    }
+  ]
+}
