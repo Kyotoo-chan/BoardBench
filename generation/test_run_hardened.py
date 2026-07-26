@@ -64,6 +64,9 @@ class HardenedRunnerTests(unittest.TestCase):
                 "condition_kind": "original",
                 "game": original["game"],
                 "run_config_sha256": run_hardened.config_digest(original),
+                "calls": [{"model_packet_sha256": {
+                    "TASK.txt": run_hardened.sha256(run_hardened.ROOT / "inputs/prompts/rulebook_to_python.txt")
+                }}],
             }), encoding="utf-8")
             clarified = {
                 **original,
@@ -115,9 +118,17 @@ class HardenedRunnerTests(unittest.TestCase):
                 return {"model_packet_sha256": {name: "hash" for name in kwargs["packet_files"]}}
 
             gate_results = iter([(False, "missing artifacts"), (True, "all checks pass")])
+
+            def fake_gate(workspace):
+                result = next(gate_results)
+                if not result[0]:
+                    (workspace / "__pycache__").mkdir(exist_ok=True)
+                    (workspace / "__pycache__/host.pyc").write_bytes(b"cache")
+                return result
+
             with mock.patch.object(run_hardened, "OUTPUTS", outputs), mock.patch.object(
                 run_hardened, "run_codex", side_effect=fake_codex
-            ), mock.patch.object(run_hardened, "gate", side_effect=lambda workspace: next(gate_results)):
+            ), mock.patch.object(run_hardened, "gate", side_effect=fake_gate):
                 self.assertTrue(run_hardened.run(config))
 
             self.assertNotIn("implementation.py", calls[0])

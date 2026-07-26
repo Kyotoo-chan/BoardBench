@@ -8,6 +8,7 @@ import json
 import os
 import shlex
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -230,6 +231,36 @@ def verify_codex_isolation(npx: str, codex_home: Path) -> None:
     _ISOLATION_VERIFIED = True
 
 
+def _run_with_tree_timeout(
+    command: list[str], *, input_bytes: bytes, cwd: Path, environment: dict[str, str], timeout: int
+) -> subprocess.CompletedProcess[bytes]:
+    windows = os.name == "nt"
+    process = subprocess.Popen(
+        command,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        cwd=cwd,
+        env=environment,
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if windows else 0,
+        start_new_session=not windows,
+    )
+    try:
+        stdout, stderr = process.communicate(input=input_bytes, timeout=timeout)
+    except subprocess.TimeoutExpired as exc:
+        if windows:
+            subprocess.run(
+                ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                capture_output=True,
+                timeout=30,
+            )
+        else:
+            os.killpg(process.pid, signal.SIGKILL)
+        stdout, stderr = process.communicate(timeout=30)
+        raise subprocess.TimeoutExpired(command, timeout, output=stdout, stderr=stderr) from exc
+    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+
+
 def run_codex(
     *,
     prompt: str,
@@ -316,12 +347,11 @@ def run_codex(
         verify_codex_isolation(npx, codex_home)
         environment = os.environ.copy()
         environment["CODEX_HOME"] = str(codex_home)
-        result = subprocess.run(
+        result = _run_with_tree_timeout(
             command,
-            input=prompt.encode("utf-8"),
-            capture_output=True,
+            input_bytes=prompt.encode("utf-8"),
             cwd=cwd,
-            env=environment,
+            environment=environment,
             timeout=timeout,
         )
     elapsed = time.perf_counter() - started

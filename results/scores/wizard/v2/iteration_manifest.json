@@ -1,30 +1,20 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "game": "wizard",
   "iteration": "v2",
+  "current_presentation": true,
   "conditions": {
-    "original_failed_1": {
-      "original_failed_1.md": "9337ee8a9ce16e60e5caee0d94c9bd289715c936fc66097b24fdb29a10f3a1e2",
-      "original_failed_1.py": "914bc9f50af8127aa7879d4bdfd5a4aa4436a9ec27647d52e844ded4553ee208",
-      "original_failed_1_agentic.json": "2da58d8f24c6047af8ac5e23a70729f56dd4030ede12d34d744696996c8828eb",
-      "original_failed_1_assumptions.json": "3d246e11ab07e224ee519c36ec05a1ed472c6be4681662e33ce6e5346fdef98a",
-      "original_failed_1_checks.txt": "b7447319735649b8d809fd90befc241426a544d52a8cae1528755246d78a40ea",
-      "raw/original_failed_1_events.jsonl": "9655924ca34dc66a3b2984e3dfbda85e8e2224c5c81ac71d1a6a34d1a9b69f8d",
-      "original_failed_1_rule_coverage.md": "147c24980ae5bc1328a65831e2ea87b28487bc4630769312197b384a4154ae6a",
-      "original_failed_1_task.txt": "0a545106005b4862a9ad3cec9a4019fe1fea74a5e87f06160de27c26c842e0ba"
-    },
     "original": {
-      "original.md": "7504b9a40d4135ac8eba2eeb92faadff6febf2f254faea564b63e8c4a78d8655",
-      "original.py": "5d4871a25452f59af2f9fe5e28206cb3ca156e2ab61dbe922a676dd74edc9063",
-      "original_agentic.json": "b389ccf9be0112b5e864ae0502a4a3ab339a811e3026b1cd7b46f3a9624b67de",
-      "original_assumptions.json": "3a5d4a294a7b364c5524cd5a07c85d2d1fbcace953562becc85cedb9663d763c",
-      "original_checks.txt": "b0aec7582d6a725a52f4858f1a01f92175aa90e74f4e29972901d6c12e0fb3f7",
-      "raw/original_events.jsonl": "8870300efeb27ee4ab1e8f1431f21911626ab2e73afe59e0830fd966672b98f0",
-      "original_judge_1.md": "74a92f0749c225821786d6c0ed93a21ad94554069b01be086b5a1750102aa878",
-      "original_judge_2.md": "b8f1a7f1dfa519d217dcc0a367d8bfe88854744c6cf36e53d1058b0bdd8c010d",
-      "original_judge_3.md": "da6913ef28462c0407fb1fb1f14874b5047b4a2a13f807263bc59c3898bfac38",
-      "original_rule_coverage.md": "476e54f6df70d67cdb58abb4a33f5c0df3830311e4489fbe19f41f1022a92968",
-      "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+      "original_result.json": "37ecaacb1f0f12858f33549a246c44f1f4e9b70bf269ea65e992a583c99b20be",
+      "original_result.md": "f9ebe187d2511b8f74d4a0cfb76ecd868bc9f4f4f0ffe23f276daa5819c01ccd",
+      "original_findings.md": "c37608d1552485c58c859de602f37d9bd6f81339bbfc00d1890a8ca152add366",
+      "raw/study_artifacts.tar.gz": "e8a836b403dfc31817232184e175f293ca64d04da7dd76f6291015144a134221"
+    },
+    "clarified": {
+      "clarified_result.json": "4ed72314e9d56597daccb4d11b557d18c7cf6a827bf33e9f3e86bf426b0014e4",
+      "clarified_result.md": "366275270ea4bc7b7715ac9ee23dd209e9295dd62d048cc5356b552ed838522f",
+      "clarified_findings.md": "8194fca8935e3155357284e9603e863f88b016bb1870116b47d52b0a9ec275e3",
+      "raw/study_artifacts.tar.gz": "e8a836b403dfc31817232184e175f293ca64d04da7dd76f6291015144a134221"
     }
   }
 }

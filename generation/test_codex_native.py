@@ -1,6 +1,7 @@
 import hashlib
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -15,6 +16,22 @@ class CodexNativeTest(unittest.TestCase):
         self.assertEqual(default_effort("agentic"), "low")
         self.assertEqual(default_effort("judge"), "medium")
         self.assertEqual(DEFAULT_VERBOSITY, "low")
+
+    def test_process_tree_timeout_returns(self) -> None:
+        child = "import time; time.sleep(60)"
+        parent = (
+            "import subprocess,sys,time; "
+            "subprocess.Popen([sys.executable,'-c'," + repr(child) + "]); time.sleep(60)"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(subprocess.TimeoutExpired):
+                codex_native._run_with_tree_timeout(
+                    [sys.executable, "-c", parent],
+                    input_bytes=b"",
+                    cwd=Path(directory),
+                    environment=os.environ.copy(),
+                    timeout=1,
+                )
 
     def test_parse_event_usage_uses_final_cumulative_record(self) -> None:
         raw = "\n".join(

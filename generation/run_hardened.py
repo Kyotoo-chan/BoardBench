@@ -90,7 +90,6 @@ def original_pair(config: dict, *, require_frozen: bool = True) -> tuple[dict, d
     for key, default in (
         ("profile", None),
         ("profile_fixture_self_check", None),
-        ("prompt", "inputs/prompts/rulebook_to_python.txt"),
         ("contract", "inputs/prompts/environment_contract_v2.md"),
     ):
         original_path = resolve(value.get(key, default))
@@ -339,6 +338,12 @@ def run(config: dict) -> bool:
                 break
             passed, output = gate(workspace)
             checks.append(f"attempt {attempt + 1}:\n{output}")
+            if not passed:
+                gate_caches = list(workspace.rglob("__pycache__"))
+                for cache in gate_caches:
+                    shutil.rmtree(cache)
+                if gate_caches:
+                    checks.append(f"attempt {attempt + 1}: removed host-check __pycache__ before repair")
             if passed:
                 preserve(config, workspace, host, calls, checks, True, render_evidence, original_evidence_sha256)
                 return True

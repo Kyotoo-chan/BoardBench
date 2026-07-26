@@ -10,6 +10,7 @@ from generation.source_condition import validate_pair
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "inputs/games/wizard"
 CONFIG = GAME / "run_v2_original.json"
+CLARIFIED_CONFIG = GAME / "run_v2_clarified.json"
 SUITE = ROOT / "checks/scenarios/wizard_v2.json"
 
 
@@ -40,6 +41,16 @@ class WizardV2Tests(unittest.TestCase):
             "sha256": "aabb56f76253b565063e325fcf83debbcce0c8037a8a6ea26814bb3924fdff83",
         }]
         validate_pair(original, clarified, GAME, GAME)
+
+    def test_clarified_packet_adds_only_attributed_clarification(self):
+        workspace, _images, allowed, _immutable, _renders = build_workspace(load_config(CLARIFIED_CONFIG))
+        try:
+            self.assertIn("clarifications_v2.json", allowed)
+            self.assertNotIn("claims_v2.json", allowed)
+            self.assertNotIn("wizard_v2.json", allowed)
+            self.assertNotIn("rulefacts_v2.md", allowed)
+        finally:
+            shutil.rmtree(workspace, ignore_errors=True)
 
     def test_original_model_packet_is_exact_and_rendered(self):
         config = load_config(CONFIG)

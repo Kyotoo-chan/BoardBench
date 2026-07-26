@@ -1,4 +1,0 @@
-attempt 1:
-assumptions[0] selected value is not an alternative
-
-launch failure: RuntimeError: Codex workspace must not be inside a Git worktree

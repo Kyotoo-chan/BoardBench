@@ -1,6 +1,0 @@
-attempt 1: removed Codex-internal .git metadata before repair validation
-
-attempt 1:
-assumptions[0] selected value is not an alternative
-
-launch failure: ValueError: model packet mismatch: missing=[], extra=['__pycache__/implementation.cpython-312.pyc']
