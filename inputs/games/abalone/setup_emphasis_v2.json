@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "game": "abalone",
+  "intervention_kind": "clear_rule_emphasis",
+  "authorship": "BoardBench experimenter emphasis approved by the user after evaluation of v2_original_1 on 2026-07-26; not publisher text and not a source-gap clarification",
+  "trigger": {
+    "original_scenario": "ABAL-R01-exact-initial-setup",
+    "original_result": "FAIL",
+    "observed_behavior": "The implementation placed 13 black and 13 white marbles instead of 14 each."
+  },
+  "emphasis": [
+    {
+      "id": "ABAL-EMPH-SETUP",
+      "claim_ids": ["ABAL-C-SETUP-FIGURE", "ABAL-C-BOARD-61", "ABAL-C-SETUP-COUNTS", "ABAL-C-SETUP-ROWS"],
+      "publisher_locator": "game_rules.pdf page 1, Figure 1",
+      "text": "Implement Figure 1 exactly: the board has 61 playable pits; the initial position has 14 black marbles, 14 white marbles, and 33 empty pits. Top-to-bottom rows are BBBBB / BBBBBB / ..BBB.. / empty / empty / empty / ..WWW.. / WWWWWW / WWWWW. Do not omit either outer marble from either six-marble row."
+    }
+  ]
+}

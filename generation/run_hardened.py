@@ -257,6 +257,7 @@ def preserve(
         "game": config["game"],
         "run_id": config["run_id"],
         "condition_kind": config["condition_kind"],
+        "intervention_kind": config.get("intervention_kind"),
         "adapted_from_run_id": config.get("adapted_from_run_id"),
         "adaptation": config.get("adaptation"),
         "model": config.get("model", "gpt-5.6-sol"),

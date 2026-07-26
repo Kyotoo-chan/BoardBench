@@ -9,6 +9,7 @@ from generation.run_hardened import build_workspace, load_config
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "inputs/games/abalone"
 CONFIG = GAME / "run_v2_original.json"
+EMPHASIS_CONFIG = GAME / "run_v2_setup_emphasis.json"
 SUITE = ROOT / "checks/scenarios/abalone_v2.json"
 
 
@@ -34,6 +35,20 @@ class AbaloneV2Tests(unittest.TestCase):
             self.assertNotIn("abalone_v2.json", allowed)
             self.assertNotIn("rulefacts_v2.md", allowed)
             self.assertNotIn("decisions_v2.json", allowed)
+        finally:
+            shutil.rmtree(workspace, ignore_errors=True)
+
+    def test_setup_emphasis_is_paired_but_not_mislabelled_as_gap_clarification(self):
+        config = load_config(EMPHASIS_CONFIG)
+        self.assertEqual(config["intervention_kind"], "clear_rule_emphasis")
+        workspace, _images, allowed, _immutable, _renders = build_workspace(config)
+        try:
+            self.assertIn("setup_emphasis_v2.json", allowed)
+            self.assertNotIn("decisions_v2.json", allowed)
+            self.assertNotIn("claims_v2.json", allowed)
+            emphasis = json.loads((workspace / "setup_emphasis_v2.json").read_text(encoding="utf-8"))
+            self.assertEqual(emphasis["intervention_kind"], "clear_rule_emphasis")
+            self.assertIn("not a source-gap clarification", emphasis["authorship"])
         finally:
             shutil.rmtree(workspace, ignore_errors=True)
 

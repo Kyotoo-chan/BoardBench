@@ -1,18 +1,11 @@
 # Attempt 1
 
-1. Material assumptions/open questions:
+1. Open questions/material assumptions: axial coordinate orientation for the pictured setup; opposing marbles in a Sumito are treated as one contiguous line.
 
-- The pictured setup is interpreted as centered rows of 5, 5, and 3 marbles per player.
-- Because the rulebook does not define a no-move situation, `pass` is available only when no movement exists.
-
-2. Files changed:
-
-- `implementation.py`
-- `rule_coverage.md`
-- `assumptions.json`
+2. Files changed: [implementation.py](C:/Users/benti/AppData/Local/Temp/boardbench_abalone_v2_setup_emphasis_1_5_dp4jnm/implementation.py), [rule_coverage.md](C:/Users/benti/AppData/Local/Temp/boardbench_abalone_v2_setup_emphasis_1_5_dp4jnm/rule_coverage.md), [assumptions.json](C:/Users/benti/AppData/Local/Temp/boardbench_abalone_v2_setup_emphasis_1_5_dp4jnm/assumptions.json).
 
 3. Validation:
 
-- `python -m py_compile implementation.py` — passed
-- `python agentic_self_check.py` — `agentic-self-check OK states=300 actions=19924`
-- `python profile_fixture_self_check.py` — `profile-fixture-self-check OK`
+- `python -m py_compile implementation.py` — passed.
+- `python agentic_self_check.py` — passed: `agentic-self-check OK states=300 actions=20209`.
+- `python profile_fixture_self_check.py` — passed: `profile-fixture-self-check OK`.

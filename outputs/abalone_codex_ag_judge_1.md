@@ -1,80 +1,78 @@
 ## Review result
 
-**score: 0.86 — confidence: high**
+**Score: 0.80 — confidence: high.** The implementation accurately covers the printed setup, six-direction movement, inline/broadside movement, Sumito, Patt, ejection, turn alternation, immediate sixth-ejection victory, returns, and public observation. Two material approved software-contract requirements are contradicted: forced passes and unique action serialization.
 
-The movement, Sumito, forced-pass, terminal, return, and public-state logic closely follows the approved facts and human decisions. The material defect is that every new game starts with only 13 marbles per player instead of 14.
+No optional-clock, draw, repetition, or outside-rule assumptions were introduced.
 
 ## Findings
 
-### Major — Initial setup omits one marble from each full six-marble row
+### Major — Forced pass is never legal
 
-- Canonical facts: `ABAL-C-SETUP-FIGURE`, `ABAL-C-SETUP-COUNTS`, `ABAL-C-SETUP-ROWS`
-- Evidence type: `rule_quote`
-- Source: `ABALONE-RULES-SCHMIDT-4P`
-- Stable locator: PDF page 1, Figure 1
-- Exact evidence: “Setzen Sie die Kugeln wie in Abb. 1 gezeigt in ihre Startpositionen.” Figure 1 establishes the approved rows `BBBBB / BBBBBB / ..BBB.. / empty / empty / empty / ..WWW.. / WWWWWW / WWWWW`.
-- Conflicting symbol: `Game.initial_state`
-- Implemented transition:
-  - Black’s second row uses `range(-1, 4)`, producing five marbles and omitting `(4, -3)`.
-  - White’s second row uses `range(-3, 2)`, producing five marbles and omitting `(-4, 3)`.
-- Expected: 14 black, 14 white, 33 empty pits.
-- Implemented: 13 black, 13 white, 35 empty pits.
-- Impact: This affects every normal game from setup onward and can materially change mobility, board balance, and eventual winner.
+- Canonical fact ID: `ABAL-G-PASS`
+- Evidence type: `human_decision`
+- Source ID: `ABALONE-V2-RULEFACTS`
+- Stable locator: `canonical_rulefacts.md`, “Approved human decisions,” item 2
+- Exact evidence: “Exactly one forced pass exists only when no legal movement exists; no voluntary pass exists.”
+- Conflicting symbols/transitions: `Game.legal_actions`, `Game.apply_action`
+- Expected: When the active player has no legal movement, `legal_actions` returns exactly one pass. A pass is unavailable whenever any movement exists, and applying the forced pass advances the turn.
+- Implemented: `legal_actions` returns an empty list when no generated movement succeeds. It never generates `Action("pass", ...)`. Because `apply_action` requires membership in `legal_actions`, every pass is rejected, even though pass objects can be parsed and serialized.
+- Impact: A valid no-movement state deadlocks instead of continuing. This materially contradicts the approved turn-flow decision.
 
-### Question — No draw, repetition, or move-limit termination
+### Major — Multiple accepted serializations can describe the same movement
 
-- Canonical fact: `ABAL-G-DRAW`
-- The publisher rulebook provides no draw, repetition, or move-limit result. The implementation consequently permits indefinite non-winning play.
-- This is not scored as a contradiction. A human decision is required only if deterministic bounded termination is desired.
-
-No critical or minor contradictions were found.
+- Canonical fact ID: `ABAL-G-ACTION-UNIQUE`
+- Evidence type: `human_decision`
+- Source ID: `ABALONE-V2-RULEFACTS`
+- Stable locator: `canonical_rulefacts.md`, “Approved human decisions,” item 5
+- Exact evidence: “Exactly one canonical serialized action represents each physical movement.”
+- Conflicting symbols: `Game.action_to_data`, `Game.action_from_data`, `Game.action_to_name`, `Game.name_to_action`
+- Expected: A multi-marble group has one canonical ordering in serialized actions; permutations must either be normalized to that ordering or rejected.
+- Implemented: Data and name parsing accept the group in any supplied order, while serialization preserves that order. A two- or three-marble movement therefore has multiple accepted encodings. Moreover, `legal_actions` generates only sorted tuples, so a permuted encoding can parse successfully but then be rejected by `apply_action`.
+- Impact: The public action contract is non-canonical and permits accepted-but-unexecutable aliases.
 
 ## Rule-area coverage
 
-| Rule area | Result | Relevant facts |
+| Rule area | Status | Relevant facts |
 |---|---|---|
-| Two-player configuration and player/color mapping | Pass | `ABAL-C-PLAYERS`, `ABAL-G-PLAYER-MAPPING` decision |
-| Board geometry | Pass: 61 valid axial cells | `ABAL-C-BOARD-61` |
-| Initial placement and counts | **Fail** | `ABAL-C-SETUP-FIGURE`, `ABAL-C-SETUP-COUNTS`, `ABAL-C-SETUP-ROWS` |
-| Turn order and one movement | Pass | `ABAL-C-TURN-ORDER`, `ABAL-C-ONE-MOVE` |
-| One-step, six-direction, groups of 1–3 | Pass | `ABAL-C-ONE-STEP`, `ABAL-C-SIX-DIRECTIONS`, `ABAL-C-GROUP-SIZE`, `ABAL-C-MAX-THREE` |
-| Straight contiguous groups and longer-row subsets | Pass | `ABAL-C-STRAIGHT-CONTIGUOUS`, `ABAL-C-SUBSET-LONG-ROW` |
-| Inline and broadside movement | Pass | `ABAL-C-INLINE`, `ABAL-C-BROADSIDE`, `ABAL-G-BROADSIDE-DESTINATIONS` decision |
-| Sumito strength and geometry | Pass | `ABAL-C-SUMITO-SUPERIOR` through `ABAL-C-SUMITO-COLLINEAR` |
-| Patt, withdrawal, and crossing attacks | Pass | `ABAL-C-PATT-EQUAL` through `ABAL-C-PATT-CROSSING` |
-| Edge ejection | Pass | `ABAL-C-EJECTION`, `ABAL-C-EDGE-EXCEPTION` |
-| Sixth-ejection terminal transition | Pass | `ABAL-C-SIXTH-WINS`, `ABAL-G-TERMINAL-API` decision |
-| Forced pass | Pass | `ABAL-G-PASS` decision |
-| Returns and public information | Pass | `ABAL-G-RETURNS`, `ABAL-G-PUBLIC-STATE` decisions |
-| Unique serialized legal actions | Pass | `ABAL-G-ACTION-UNIQUE` decision |
-| Chance/private information | Pass: none required; state is public | Approved public-state decision |
-| Optional clocks | Correctly omitted from play | `ABAL-C-CLOCK-OPTIONAL`, `ABAL-G-CLOCK` |
+| Players and initial setup | Conforms | `ABAL-C-PLAYERS`, `ABAL-C-SETUP-FIGURE`, `ABAL-C-BOARD-61`, `ABAL-C-SETUP-COUNTS`, `ABAL-C-SETUP-ROWS` |
+| Player/color mapping and first turn | Conforms | `ABAL-C-TURN-ORDER`, `ABAL-G-PLAYER-MAPPING` |
+| One-step, six-direction movement | Conforms | `ABAL-C-ONE-MOVE`, `ABAL-C-ONE-STEP`, `ABAL-C-SIX-DIRECTIONS` |
+| Group formation and maximum size | Conforms | `ABAL-C-GROUP-SIZE`, `ABAL-C-STRAIGHT-CONTIGUOUS`, `ABAL-C-MAX-THREE`, `ABAL-C-SUBSET-LONG-ROW` |
+| Inline and broadside movement | Conforms | `ABAL-C-INLINE`, `ABAL-C-BROADSIDE`, `ABAL-C-EMPTY-DESTINATION`, `ABAL-G-BROADSIDE-DESTINATIONS` |
+| Sumito legality | Conforms | `ABAL-C-SUMITO-SUPERIOR` through `ABAL-C-SUMITO-OPTIONAL` |
+| Patt and crossing attacks | Conforms | `ABAL-C-PATT-EQUAL`, `ABAL-C-PATT-FOUR-THREE`, `ABAL-C-PATT-WITHDRAW`, `ABAL-C-PATT-CROSSING` |
+| Ejection and victory | Conforms | `ABAL-C-EJECTION`, `ABAL-C-EDGE-EXCEPTION`, `ABAL-C-SIXTH-WINS`, `ABAL-G-TERMINAL-API` |
+| Forced pass | Fails | `ABAL-G-PASS` |
+| Returns | Conforms | `ABAL-G-RETURNS` |
+| Public observation | Conforms | `ABAL-G-PUBLIC-STATE` |
+| Canonical action encoding | Fails | `ABAL-G-ACTION-UNIQUE` |
+| Chance/private information | No material issue; deterministic mapping is approved | `ABAL-C-COLOR-LOTTERY`, `ABAL-G-PLAYER-MAPPING` |
+| Clock, draw, repetition | Excluded or unresolved; not penalized | `ABAL-C-CLOCK-OPTIONAL`, `ABAL-G-CLOCK`, `ABAL-G-DRAW` |
 
 ## Missing deterministic scenarios
 
-Recommended scenarios not evidenced within the permitted review packet:
+Recommended scenarios not evidenced by the permitted review packet:
 
-1. Assert all nine initial row strings and exact `14/14/33` counts. This directly catches the identified defect.
-2. Assert ordinary inline and broadside moves for groups of one, two, and three, including edge-side broadside rejection.
-3. Exercise every Sumito strength pattern: legal `2v1`, `3v1`, `3v2`; illegal `1v1`, `2v2`, `3v3`, and `4v3`.
-4. Reject pushes with a gap, non-collinear defenders, or an occupied pit behind defenders.
-5. Verify Patt withdrawal, broadside escape, and crossing-angle Sumito.
-6. Verify fifth versus sixth ejection, immediate terminal state, empty terminal actions, winner-retained `current_player`, and `[+1,-1]` returns.
-7. Verify forced pass is the sole legal action only when no movement exists, and that voluntary pass is rejected otherwise.
-8. Round-trip every public action/state field and confirm one serialized action per physical movement.
+1. A nonterminal state with no movement produces exactly one pass; applying it changes only turn-related state.
+2. Pass is absent whenever at least one movement exists.
+3. Every two- and three-marble action rejects or normalizes every noncanonical group permutation across both name and data APIs.
+4. Every generated legal action survives name/data round trips and remains applicable.
+5. A sixth edge ejection simultaneously sets terminal, winner, phase, empty legal actions, winner-retained `current_player`, and `[+1,-1]` returns.
+6. Broadside moves with one off-board or occupied destination are rejected.
+7. `4v3` remains blocked while legal withdrawal, broadside escape, and crossing-angle Sumito remain available.
+8. Moving a one-to-three-marble subset out of a longer row remains legal where its destinations permit it.
 
 ## Material questions for a human
 
-- Should a draw, repetition rule, or move limit be added to guarantee bounded games? The supplied rulebook does not decide this (`ABAL-G-DRAW`).
-- No clarification is needed for forced pass, terminal API behavior, returns, player mapping, public state, or action uniqueness; those are already resolved by approved human decisions.
+The approved facts decide the scored behavior above. One unscored API question remains: should `state_from_data` reject relationally inconsistent snapshots—for example, terminal/winner/phase combinations that disagree or capture totals incompatible with the board—or is it intentionally only a structural decoder? The rulebook does not define deserialization validation.
 
-```text
-score: 0.86
+The source still supplies no draw, repetition, move-limit, or clock-expiration result. The implementation makes no conflicting outcome assumption, so these omissions are not findings.
+
+score: 0.80
 confidence: high
 critical_issues: 0
-major_issues: 1
+major_issues: 2
 minor_issues: 0
-needs_rulebook_clarification: true
+needs_rulebook_clarification: false
 needs_code_change: true
 needs_more_tests: true
-```

@@ -1,20 +1,20 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "game": "abalone",
   "iteration": "v2",
+  "current_presentation": true,
   "conditions": {
     "original": {
-      "original.md": "ff10c320aa587b1d023abfefb1d850a8336bbf5667ef94a5ccec870dd96fd1f0",
-      "original.py": "4098c2dfc360915fd2760393907fe107e878c7b9a4ac3d2c4fcebab71b7e4ccd",
-      "original_agentic.json": "3fd7a74b04484c40413dd6e3f3d02e1401cda12bce5f963d4b867d970f154220",
-      "original_assumptions.json": "7d3d3939bebc3642679544aafb517d51b0e23977c61e1a1113405224f277e691",
-      "original_checks.txt": "743adbc8961495c09144a1419bb32faf4a5121b123464d0349c996aced9e7be8",
-      "raw/original_events.jsonl": "e1179fa86afe141afd47106113df7a6b022b15a3813c2e37b5905c42eb9bcc9f",
-      "original_judge_1.md": "8600ec383f63a685a58c8c58359f3ef080c58061351e35374c8db20ad6f64f85",
-      "original_judge_2.md": "d442fd3a1bcbc026543e2b7766d607115d48297425d03424772e07cee10e1b29",
-      "original_judge_3.md": "218da120153f79ade355874b6475c7f7b7a85433d287a291bd9d75fdad1d3f3c",
-      "original_rule_coverage.md": "006b5a051dd13aca2ecba5f26c87c04803394e27421cbe41571e0844513e34c5",
-      "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+      "original_result.json": "e79fd5842b0c625a535b8ffb88b0c32182801895e8f0e899216c511a58f46486",
+      "original_result.md": "90446635b46b498fae3a0851b01c64fa147b2cadec8b4f8f6e1ebb3c259bf3bc",
+      "original_findings.md": "86dba65f18217f5a2afbc78bce1c0dfcef9ca7e98a9bee3525dd37018a93848a",
+      "raw/study_artifacts.tar.gz": "5b1f4d2d85debac2f0eabf0925f3b96783592a6c6e1e03b7e2f1314c593e4045"
+    },
+    "setup_emphasis": {
+      "setup_emphasis_result.json": "cc99df12abe0d4d7d992e4027b2d6f09245734373f41b94f4e68937b4133db0d",
+      "setup_emphasis_result.md": "2354244708dc40761f55a89991828d395995ede114401c744304fd7e60773f7e",
+      "setup_emphasis_findings.md": "e869418290c0b0e1c0b9640fbb934db99fa723c125e52851966682d8a3db2403",
+      "raw/study_artifacts.tar.gz": "5b1f4d2d85debac2f0eabf0925f3b96783592a6c6e1e03b7e2f1314c593e4045"
     }
   }
 }

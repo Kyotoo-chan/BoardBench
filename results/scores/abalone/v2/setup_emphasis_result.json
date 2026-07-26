@@ -1,0 +1,691 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "game": "abalone",
+    "condition": "setup_emphasis_v2",
+    "source_path": "../../../../inputs/games/abalone/game_rules.pdf",
+    "source_format": "pdf+clear-rule-emphasis",
+    "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935",
+    "adapter_sha256": "7b83946eb17394320b77b5b2da3925172a14ef8434322243080c498c707141da",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "hardened-iteration-v1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 36,
+    "human_decision": 7,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_basis_scenarios": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decision_basis_scenarios": {
+      "values": [
+        0.8
+      ],
+      "mean": 0.8,
+      "sample_sd": null
+    },
+    "scenario_evaluated_coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.8,
+        0.93,
+        0.95
+      ],
+      "mean": 0.8933333333333333,
+      "sample_sd": 0.08144527815247074,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "abalone_codex_ag": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 2,
+    "interpretation_agreement": {
+      "page 1 / Vorbereitung / Abbildung 1": {
+        "Map the pictured setup to axial rows r=-4,-3,-2 for black and r=2,3,4 for white, with the three-marble rows centered as q=0,1,2 and q=-2,-1,0 respectively.": 1
+      },
+      "page 2 / Sumito; page 3 / Abbildung 5": {
+        "Permit an in-line push only when the contiguous opposing line is shorter than the moving group and the cell beyond it is empty or off-board.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "page 1 / Vorbereitung / Abbildung 1",
+        "source_basis": "missing",
+        "alternatives": [
+          "Map the pictured setup to axial rows r=-4,-3,-2 for black and r=2,3,4 for white, with the three-marble rows centered as q=0,1,2 and q=-2,-1,0 respectively.",
+          "Use a different rotation or reflection when mapping the pictured setup to the profile's axial coordinates."
+        ],
+        "selected": "Map the pictured setup to axial rows r=-4,-3,-2 for black and r=2,3,4 for white, with the three-marble rows centered as q=0,1,2 and q=-2,-1,0 respectively.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "page 2 / Sumito; page 3 / Abbildung 5",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "Permit an in-line push only when the contiguous opposing line is shorter than the moving group and the cell beyond it is empty or off-board.",
+          "Permit an in-line push whenever the illustrated 2-to-1, 3-to-1, or 3-to-2 count occurs, without requiring all opposing marbles to be contiguous."
+        ],
+        "selected": "Permit an in-line push only when the contiguous opposing line is shorter than the moving group and the cell beyond it is empty or off-board.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        662.597
+      ],
+      "mean": 662.597,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        944830.0
+      ],
+      "mean": 944830.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        747264.0
+      ],
+      "mean": 747264.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        21111.0
+      ],
+      "mean": 21111.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        8197.0
+      ],
+      "mean": 8197.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        1.994792
+      ],
+      "mean": 1.994792,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        344.0
+      ],
+      "mean": 344.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      1.994792
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically executable; 33/33 configured clear-basis and 4/5 human-decision-basis scenarios passed; all configured scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "abalone_codex_ag",
+      "protocol": "hardened-iteration-v1",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "abalone-v2-atomic-2026-07-26",
+        "suite_sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935",
+        "adapter_sha256": "7b83946eb17394320b77b5b2da3925172a14ef8434322243080c498c707141da",
+        "counts": {
+          "PASS": 37,
+          "FAIL": 1,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 33,
+          "evaluated": 33,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 4,
+          "evaluated": 5,
+          "score": 0.8
+        },
+        "results": [
+          {
+            "id": "ABAL-R01-exact-initial-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SETUP-FIGURE",
+              "ABAL-C-BOARD-61",
+              "ABAL-C-SETUP-COUNTS",
+              "ABAL-C-SETUP-ROWS"
+            ]
+          },
+          {
+            "id": "ABAL-R02-single-marble-one-step-and-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-MOVE",
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS",
+              "ABAL-C-TURN-ORDER"
+            ]
+          },
+          {
+            "id": "ABAL-R03-two-marble-inline",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-GROUP-SIZE",
+              "ABAL-C-SAME-DIRECTION",
+              "ABAL-C-STRAIGHT-CONTIGUOUS",
+              "ABAL-C-INLINE"
+            ]
+          },
+          {
+            "id": "ABAL-R04-three-marble-broadside",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-GROUP-SIZE",
+              "ABAL-C-SAME-DIRECTION",
+              "ABAL-C-STRAIGHT-CONTIGUOUS",
+              "ABAL-C-BROADSIDE",
+              "ABAL-C-EMPTY-DESTINATION"
+            ]
+          },
+          {
+            "id": "ABAL-R05-four-marble-move-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-GROUP-SIZE",
+              "ABAL-C-MAX-THREE"
+            ]
+          },
+          {
+            "id": "ABAL-R06-two-v-one-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-SUPERIOR",
+              "ABAL-C-SUMITO-PATTERNS",
+              "ABAL-C-SUMITO-INLINE",
+              "ABAL-C-SUMITO-ADJACENT",
+              "ABAL-C-SUMITO-FREE-BEHIND"
+            ]
+          },
+          {
+            "id": "ABAL-R07-three-v-one-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-SUPERIOR",
+              "ABAL-C-SUMITO-PATTERNS"
+            ]
+          },
+          {
+            "id": "ABAL-R08-three-v-two-sumito",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-SUPERIOR",
+              "ABAL-C-SUMITO-PATTERNS"
+            ]
+          },
+          {
+            "id": "ABAL-R09-broadside-push-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-INLINE",
+              "ABAL-C-BROADSIDE",
+              "ABAL-C-EMPTY-DESTINATION"
+            ]
+          },
+          {
+            "id": "ABAL-R10-equal-strength-pushes-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-EQUAL"
+            ]
+          },
+          {
+            "id": "ABAL-R11-four-v-three-still-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-FOUR-THREE",
+              "ABAL-C-MAX-THREE"
+            ]
+          },
+          {
+            "id": "ABAL-R12-blocked-sumito-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-FREE-BEHIND",
+              "ABAL-C-SUMITO-BLOCKED"
+            ]
+          },
+          {
+            "id": "ABAL-R13-gap-does-not-push",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-ADJACENT",
+              "ABAL-C-SUMITO-GAP"
+            ]
+          },
+          {
+            "id": "ABAL-R14-non-collinear-push-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-INLINE",
+              "ABAL-C-SUMITO-COLLINEAR"
+            ]
+          },
+          {
+            "id": "ABAL-R15-edge-ejection",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-EJECTION",
+              "ABAL-C-EDGE-EXCEPTION",
+              "ABAL-C-SUMITO-SUPERIOR"
+            ]
+          },
+          {
+            "id": "ABAL-R16-sixth-ejection-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SIXTH-WINS",
+              "ABAL-C-EJECTION"
+            ]
+          },
+          {
+            "id": "ABAL-R17-sumito-is-optional",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-OPTIONAL"
+            ]
+          },
+          {
+            "id": "ABAL-R18-patt-may-withdraw",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-EQUAL",
+              "ABAL-C-PATT-WITHDRAW"
+            ]
+          },
+          {
+            "id": "ABAL-R20-three-marble-inline",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-GROUP-SIZE",
+              "ABAL-C-STRAIGHT-CONTIGUOUS",
+              "ABAL-C-INLINE"
+            ]
+          },
+          {
+            "id": "ABAL-R21-two-broadside-from-longer-row",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-STRAIGHT-CONTIGUOUS",
+              "ABAL-C-BROADSIDE",
+              "ABAL-C-SUBSET-LONG-ROW"
+            ]
+          },
+          {
+            "id": "ABAL-R22-one-v-one-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-EQUAL"
+            ]
+          },
+          {
+            "id": "ABAL-R23-two-v-two-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-EQUAL"
+            ]
+          },
+          {
+            "id": "ABAL-R19-forced-pass-only-with-no-move",
+            "status": "FAIL",
+            "message": "legal_action_count: expected 1, got 0",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ABAL-G-PASS"
+            ]
+          },
+          {
+            "id": "ABAL-R24-player-count-and-bounded-playability",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PLAYERS"
+            ]
+          },
+          {
+            "id": "ABAL-R25-single-step-e",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R26-single-step-ne",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R27-single-step-nw",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R28-single-step-w",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R29-single-step-sw",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R30-single-step-se",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-ONE-STEP",
+              "ABAL-C-SIX-DIRECTIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R31-invalid-group-and-destination-boundaries",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-STRAIGHT-CONTIGUOUS",
+              "ABAL-C-GROUP-SIZE",
+              "ABAL-C-EMPTY-DESTINATION",
+              "ABAL-C-SUMITO-INLINE"
+            ]
+          },
+          {
+            "id": "ABAL-R32-broadside-blocked-and-offboard",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ABAL-G-BROADSIDE-DESTINATIONS"
+            ]
+          },
+          {
+            "id": "ABAL-R33-patt-broadside-withdrawal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-WITHDRAW",
+              "ABAL-C-BROADSIDE"
+            ]
+          },
+          {
+            "id": "ABAL-R34-crossing-angle-breaks-patt",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-PATT-EQUAL",
+              "ABAL-C-PATT-CROSSING"
+            ]
+          },
+          {
+            "id": "ABAL-R35-three-v-two-edge-ejects-one",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "ABAL-C-SUMITO-PATTERNS",
+              "ABAL-C-EJECTION",
+              "ABAL-C-EDGE-EXCEPTION"
+            ]
+          },
+          {
+            "id": "ABAL-R36-terminal-api-and-returns",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ABAL-G-TERMINAL-API",
+              "ABAL-G-RETURNS"
+            ]
+          },
+          {
+            "id": "ABAL-R37-action-serialization-is-unique",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ABAL-G-ACTION-UNIQUE"
+            ]
+          },
+          {
+            "id": "ABAL-R38-public-contract-observability",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "ABAL-G-PUBLIC-STATE",
+              "ABAL-G-PLAYER-MAPPING"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.8,
+        0.93,
+        0.95
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "page 1 / Vorbereitung / Abbildung 1",
+          "source_basis": "missing",
+          "alternatives": [
+            "Map the pictured setup to axial rows r=-4,-3,-2 for black and r=2,3,4 for white, with the three-marble rows centered as q=0,1,2 and q=-2,-1,0 respectively.",
+            "Use a different rotation or reflection when mapping the pictured setup to the profile's axial coordinates."
+          ],
+          "selected": "Map the pictured setup to axial rows r=-4,-3,-2 for black and r=2,3,4 for white, with the three-marble rows centered as q=0,1,2 and q=-2,-1,0 respectively.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "page 2 / Sumito; page 3 / Abbildung 5",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "Permit an in-line push only when the contiguous opposing line is shorter than the moving group and the cell beyond it is empty or off-board.",
+            "Permit an in-line push whenever the illustrated 2-to-1, 3-to-1, or 3-to-2 count occurs, without requiring all opposing marbles to be contiguous."
+          ],
+          "selected": "Permit an in-line push only when the contiguous opposing line is shorter than the moving group and the cell beyond it is empty or off-board.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 662.597,
+        "input_tokens": 944830,
+        "cached_input_tokens": 747264,
+        "output_tokens": 21111,
+        "reasoning_tokens": 8197,
+        "money": null,
+        "api_equivalent_usd": 1.994792,
+        "code_lines": 344
+      },
+      "hashes": {
+        "agentic_evidence": "27747df505ddcfa2a3ea7b8e89dcf9eed9fe3719b9429e2c46b2fd68992d7f75",
+        "checks": "9fd2efd3fd4713767fcb8c26c0372d1f6126139a3592024ed0df1e4a1f2612f0",
+        "scenarios": "942577cef8298c33d547b26c3d023d27ee45252059cfc34ca345affc6fdfe7cc",
+        "usage": "559ff108546532c938cf021708fc473d0c6e255edb6761b601494605001da4a9",
+        "code": "e90443a23286c3e13645f0b464b346834db8c7641b66d6db913a4231f5c6f446"
+      }
+    }
+  ]
+}

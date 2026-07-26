@@ -12,6 +12,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import urllib.request
 from contextlib import contextmanager
@@ -33,6 +34,7 @@ from generation.source_condition import (
 DEFAULT_VERBOSITY = "low"
 ISOLATION_PROFILE = "boardbench-workspace-only"
 _ISOLATION_VERIFIED = False
+_ISOLATION_LOCK = threading.Lock()
 
 TOKEN_KEYS = {
     "input_tokens",
@@ -344,7 +346,8 @@ def run_codex(
     started_at = datetime.now(timezone.utc)
     started = time.perf_counter()
     with _isolated_codex_home() as codex_home:
-        verify_codex_isolation(npx, codex_home)
+        with _ISOLATION_LOCK:
+            verify_codex_isolation(npx, codex_home)
         environment = os.environ.copy()
         environment["CODEX_HOME"] = str(codex_home)
         result = _run_with_tree_timeout(
