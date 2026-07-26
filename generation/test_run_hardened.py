@@ -20,6 +20,7 @@ class HardenedRunnerTests(unittest.TestCase):
             "game": "test_game",
             "run_id": "v2_original_1",
             "condition_kind": "original",
+            "scope": "test base game only",
             "source_base_dir": str(source),
             "sources": [{
                 "path": "rules.txt",

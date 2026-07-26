@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "game": "wizard",
+  "run_id": "v2_original_1",
+  "condition_kind": "original",
+  "scope": "Wizard Version 1.0 base game only; page-2 variants remain visible in the PDF but are excluded",
+  "source_base_dir": "inputs/games/wizard",
+  "sources": [
+    {
+      "source_id": "WIZARD-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+    }
+  ],
+  "profile": "inputs/games/wizard/environment_profile_v2.json",
+  "profile_fixture_self_check": "inputs/games/wizard/profile_fixture_self_check_v2.py",
+  "prompt": "inputs/prompts/rulebook_to_python.txt",
+  "contract": "inputs/prompts/environment_contract_v2.md",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "verbosity": "low",
+  "max_repairs": 2,
+  "timeout": 1800,
+  "output_stem": "wizard_codex_ag"
+}

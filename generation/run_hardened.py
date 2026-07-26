@@ -40,7 +40,7 @@ def resolve(path: str | Path) -> Path:
 
 def load_config(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
-    required = {"game", "run_id", "condition_kind", "source_base_dir", "sources", "profile", "profile_fixture_self_check"}
+    required = {"game", "run_id", "condition_kind", "scope", "source_base_dir", "sources", "profile", "profile_fixture_self_check"}
     missing = required - value.keys()
     if value.get("schema_version") != 1 or missing:
         raise ValueError(f"invalid hardened run config; missing={sorted(missing)}")
@@ -103,6 +103,7 @@ def original_pair(config: dict, *, require_frozen: bool = True) -> tuple[dict, d
 def source_manifest(config: dict) -> str:
     return json.dumps({
         "condition_kind": config["condition_kind"],
+        "scope": config["scope"],
         "sources": config["sources"],
     }, indent=2, ensure_ascii=False) + "\n"
 

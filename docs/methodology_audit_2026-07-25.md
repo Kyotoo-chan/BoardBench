@@ -43,7 +43,7 @@ This note supersedes the causal classifications proposed in the untracked `MODEL
 - Retain but exclude the contaminated first Judge set; the three replacement reviews are the reported Judge evidence.
 - Treat CATAN as an observational complexity/stress case, not clarification-effect evidence.
 - Promote qualitative privacy or query-mutation concerns to hard findings only after a deterministic cited scenario is frozen and replayed.
-- A v2 clarification comparison requires a fresh original and clarified pair under one expanded atomic-claim rubric and the hardened runner.
+- CATAN is excluded from the planned v2 reruns because its complexity would dominate the iterative study. Mention it only as a bounded historical stress case; do not use it as fixed central evidence.
 
 ### Bohnanza Base 2023 (`a076a9b`, documentation `b624c4f`)
 
@@ -124,7 +124,7 @@ During and after generation:
 
 Do not overwrite historical bytes or duplicate whole result trees. Existing game-specific result paths are iteration v1 and remain Git-addressable. New reruns use one flat `results/scores/<game>/v2/` directory with condition-prefixed canonical files (for example `original_result.json`, `clarified_result.json`, `original.py`, and `clarified.py`) plus one shared `raw/` directory for Judge events/usage. Copy the single active run idempotently with `generation/archive_iteration.py`; its manifest refuses changed bytes. The game README points to v2 as the current presentation while identifying the legacy v1 paths. Later iterations use `v3/`, not `final-final` folders. `outputs/` remains the single-active-run workspace and is copied into the iteration directory only once.
 
-The planned v2 roll-up covers Wizard, Abalone, Exploding Kittens, Bohnanza Base 2023, and CATAN. For each game, first expand and freeze atomic claims/player-count cases, then generate a fresh original condition; create the clarified condition only from cited ambiguous, missing, or conflicting claims approved after the original review. Clear-rule implementation failures remain hard expectations in both conditions and must not be disguised as source gaps.
+The planned v2 roll-up covers Wizard, Abalone, Exploding Kittens, and Bohnanza Base 2023. CATAN remains peripheral historical evidence only. For each game, first expand and freeze atomic claims/player-count cases, then generate a fresh original condition; create the clarified condition only from cited ambiguous, missing, or conflicting claims approved after the original review. Clear-rule implementation failures remain hard expectations in both conditions and must not be disguised as source gaps.
 
 ## Recommended study order
 

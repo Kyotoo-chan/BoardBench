@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "game": "wizard",
+  "role": "experimenter_clarification",
+  "authorship": "user-approved BoardBench clarification",
+  "approved_at": "2026-07-26",
+  "base_source": {
+    "source_id": "WIZARD-RULES",
+    "sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+  },
+  "guardrail": "These decisions resolve only source gaps. They do not weaken the publisher-clear rule that after a Wizard opens a trick every later card is legal and no led suit arises.",
+  "clarifications": [
+    {
+      "id": "WIZ-DEC-INV",
+      "claim_ids": ["WIZ-G-EXACT-INVENTORY"],
+      "decision": "Use exactly one ordinary card of every rank 1 through 13 in each of the four named suits, plus four Wizards and four Jesters. Magier and Zauberer denote the same Wizard type.",
+      "affected_mechanics": ["component inventory", "dealing", "state reconstruction"]
+    },
+    {
+      "id": "WIZ-DEC-FLOW",
+      "claim_ids": ["WIZ-G-FIRST-DEALER-RESET"],
+      "decision": "Player 0 is the first dealer and scorekeeper. At each non-final round boundary collect and reshuffle all 60 cards, then rotate the dealer one player clockwise and deal the next round.",
+      "affected_mechanics": ["initial dealer", "round reset", "dealer rotation"]
+    },
+    {
+      "id": "WIZ-DEC-TRUMP",
+      "claim_ids": ["WIZ-G-WIZARD-CHOICE-MANDATORY"],
+      "decision": "When the revealed card is a Wizard, the dealer must choose exactly one of the four suits as trump after receiving and viewing their hand. Declining to choose is not legal.",
+      "affected_mechanics": ["trump selection", "legal actions", "phase transition"]
+    },
+    {
+      "id": "WIZ-DEC-BID",
+      "claim_ids": ["WIZ-G-BID-DOMAIN", "WIZ-G-BID-SUM"],
+      "decision": "Predictions are integers from zero through the current hand size, made clockwise beginning with the dealer's left neighbor. The base game imposes no restriction on the sum of predictions.",
+      "affected_mechanics": ["prediction order", "prediction actions", "base-game scope"]
+    },
+    {
+      "id": "WIZ-DEC-JESTER",
+      "claim_ids": ["WIZ-G-JESTER-CHAIN", "WIZ-G-JESTER-WIZARD"],
+      "decision": "After one or more leading Jesters, the first subsequently played ordinary card establishes the led suit. If a Wizard is played before any ordinary card, the trick remains colorless, every later card remains legal, and the first Wizard wins.",
+      "affected_mechanics": ["led suit", "legal plays", "trick winner"]
+    },
+    {
+      "id": "WIZ-DEC-TIE",
+      "claim_ids": ["WIZ-G-TIE"],
+      "decision": "Players tied for the highest final score are joint winners.",
+      "affected_mechanics": ["terminal returns", "winner set"]
+    },
+    {
+      "id": "WIZ-DEC-PRIVACY",
+      "claim_ids": ["WIZ-G-PRIVACY"],
+      "decision": "Each player observes their own cards and only opponents' hand sizes. Predictions, revealed trump, played cards, turn information, and scores are public.",
+      "affected_mechanics": ["observations", "private hands", "public state"]
+    }
+  ]
+}
