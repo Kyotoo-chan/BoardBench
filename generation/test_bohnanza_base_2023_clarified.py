@@ -20,11 +20,11 @@ class BohnanzaBase2023ClarifiedStudyTests(unittest.TestCase):
         workspace, _ = study.make_workspace(manifest["conditions"]["clarified"])
         try:
             names = {path.name for path in workspace.iterdir() if path.is_file()}
-            for required in ("game_rules.pdf", "clarifications.json", "ENVIRONMENT_CONTRACT.md", "GAME_PROFILE.json", "agentic_self_check.py", "profile_fixture_self_check.py", "TASK.txt", "SOURCE_MANIFEST.md"):
-                self.assertIn(required, names)
-            for hidden in ("rulefacts.md", "approved_rulefacts.md", "bohnanza_base_2023_comparison_v4.json", "bohnanza_base_2023_comparison_v4.py"):
-                self.assertNotIn(hidden, names)
-            self.assertNotIn("game_components.json", names)
+            self.assertEqual(names, {
+                "game_rules.pdf", "clarifications.json", "ENVIRONMENT_CONTRACT.md",
+                "GAME_PROFILE.json", "agentic_self_check.py", "profile_fixture_self_check.py",
+                "TASK.txt", "SOURCE_MANIFEST.md",
+            })
             task = (workspace / "TASK.txt").read_text(encoding="utf-8")
             self.assertIn('"material": true', task)
             self.assertIn("profile_fixture_self_check.py", task)

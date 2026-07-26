@@ -48,9 +48,14 @@ Do not continue past material ambiguities without user approval.
 - Keep ambiguous and untestable rules visible instead of scoring them as failures.
 - New contract-v2 generations must implement the frozen canonical state/action data profile. Scenario evaluators use only that public data contract, never generated attributes, tuple positions, module constants, or guessed aliases. Legacy introspective replays remain separately labelled.
 - Judges are fallible signals. Critical/major findings need quote, page, code location, and expected/actual behaviour.
+- Scenario basis scores are pass rates over configured evaluated scenarios, not complete rule-fact coverage. Label clear-basis scenarios, human-decision-basis scenarios, and scenario evaluated coverage explicitly; never present the mixed runner score as correctness.
+- Split rules into atomic `clear`, `ambiguous`, `missing`, `conflicting`, or `untestable` claims. Every deterministic material clear claim needs a hard scenario or an explicit coverage exception; report claim-to-scenario mapping coverage and evaluated-claim coverage separately.
+- When a source states supported player counts, hard-test every listed count, count-specific setup, initial legal play, bounded playability, and rejection outside the range. Treat component/range mismatches as source conflicts.
 - Do not combine smoke checks, rollouts, action naming, judges, and scenarios into one claim of correctness.
 - Keep raw generations, raw reviews, code, logs, model/thinking settings, and timings.
+- New implementation runs must pass the native Codex isolation canary and an exact model-packet allowlist before launch. Original packets reject clarification roles; clarified packets retain every non-clarification source byte-identically and add one separately attributed clarification artifact.
 - Each source-condition run produces one final scored implementation. Pre-evaluation crashes, technical/API/self-check failures, or objectively source-required omissions may be repaired or reimplemented only inside the same blind isolated workflow; record every attempt, reason, and repair count, retain its raw evidence, and score only the final gate-passing implementation. Repair attempts are not separate generations. If the bounded repair loop does not pass, record a failed run; never repair after evaluation under the same run ID.
+- Sequential post-evaluation improvement is allowed only as a new versioned run with its prior run retained, changed methodology/rubric/source intervention recorded, and final iteration declared before launch. Such iterations are adapted successors, not independent replicates; never report only the best score.
 - Never silently rewrite old experimental results after methodology changes.
 
 ## Evaluation groups

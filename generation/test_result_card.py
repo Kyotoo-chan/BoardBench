@@ -56,14 +56,16 @@ class ResultCardTests(unittest.TestCase):
                 "headline": "Separated evidence.",
             }
             result = aggregate(spec, root)
-            self.assertEqual(result["implementation_evidence"]["clear_rules"]["mean"], 0.75)
-            self.assertEqual(result["implementation_evidence"]["clear_rules"]["sample_sd"], 0.25)
+            self.assertEqual(result["schema_version"], 2)
+            self.assertEqual(result["implementation_evidence"]["clear_basis_scenarios"]["mean"], 0.75)
+            self.assertEqual(result["implementation_evidence"]["clear_basis_scenarios"]["sample_sd"], 0.25)
             self.assertEqual(result["efficiency"]["input_tokens"]["mean"], 200)
             self.assertEqual(result["review_evidence"]["neutral_judges"]["mean"], 0.75)
             self.assertIsNone(result["monetary_cost"]["exact_total"])
             self.assertNotIn("overall_correctness_score", result)
             rendered = markdown(result)
-            self.assertIn("Clear rules", rendered)
+            self.assertIn("Clear-basis scenarios", rendered)
+            self.assertIn("not complete rule-fact coverage", rendered)
             self.assertIn("Source COMPONENTS (user_observation)", rendered)
 
     def test_public_price_estimate_separates_cached_tokens(self):

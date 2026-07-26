@@ -5,11 +5,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import shlex
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.request
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,7 +21,17 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from generation.source_condition import (
+    validate_packet_files,
+    validate_packet_sources,
+    validate_pair,
+    validate_pdf_renders,
+    validate_sources,
+)
+
 DEFAULT_VERBOSITY = "low"
+ISOLATION_PROFILE = "boardbench-workspace-only"
+_ISOLATION_VERIFIED = False
 
 TOKEN_KEYS = {
     "input_tokens",
@@ -98,6 +112,124 @@ def default_effort(mode: str) -> str:
     return "low" if mode == "agentic" else "medium"
 
 
+def _isolation_config() -> str:
+    windows = '\n[windows]\nsandbox = "elevated"\n' if os.name == "nt" else ""
+    repository = REPO_ROOT.as_posix().replace('"', '\\"')
+    return f'''default_permissions = "{ISOLATION_PROFILE}"
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+
+[permissions.{ISOLATION_PROFILE}]
+extends = ":workspace"
+
+[permissions.{ISOLATION_PROFILE}.filesystem]
+":root" = "deny"
+":minimal" = "read"
+":tmpdir" = "deny"
+":slash_tmp" = "deny"
+"{repository}" = "deny"
+{windows}'''
+
+
+@contextmanager
+def _isolated_codex_home():
+    source = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex"))
+    home = Path(os.environ.get("BOARDBENCH_CODEX_HOME", Path.home() / ".codex-boardbench"))
+    home.mkdir(parents=True, exist_ok=True)
+    copied_auth = home / "auth.json"
+    copied_auth.unlink(missing_ok=True)
+    auth = source / "auth.json"
+    if auth.exists():
+        shutil.copy2(auth, copied_auth)
+    elif not os.environ.get("OPENAI_API_KEY"):
+        raise RuntimeError(f"Codex authentication not found at {auth}")
+    (home / "config.toml").write_text(_isolation_config(), encoding="utf-8")
+    try:
+        yield home
+    finally:
+        copied_auth.unlink(missing_ok=True)
+
+
+def _assert_isolated_workspace(cwd: Path, image_paths: list[Path]) -> None:
+    if not cwd.is_dir():
+        raise FileNotFoundError(f"Codex workspace does not exist: {cwd}")
+    try:
+        cwd.relative_to(REPO_ROOT)
+    except ValueError:
+        pass
+    else:
+        raise RuntimeError("Codex workspace must be outside the BoardBench repository")
+    if any((parent / ".git").exists() for parent in (cwd, *cwd.parents)):
+        raise RuntimeError("Codex workspace must not be inside a Git worktree")
+    for path in image_paths:
+        try:
+            path.resolve().relative_to(cwd)
+        except ValueError as exc:
+            raise RuntimeError(f"Model-facing image is outside the isolated workspace: {path}") from exc
+
+
+def verify_codex_isolation(npx: str, codex_home: Path) -> None:
+    """Fail closed unless Codex can write only inside a non-repository workspace."""
+    global _ISOLATION_VERIFIED
+    if _ISOLATION_VERIFIED:
+        return
+    with tempfile.TemporaryDirectory(prefix="boardbench-isolation-canary-") as directory:
+        parent = Path(directory)
+        workspace = parent / "workspace"
+        workspace.mkdir()
+        (workspace / "inside.txt").write_text("inside", encoding="utf-8")
+        outside = parent / "outside.txt"
+        outside.write_text("secret", encoding="utf-8")
+        if os.name == "nt":
+            inside = str(workspace / "inside.txt").replace("'", "''")
+            written = str(workspace / "write.txt").replace("'", "''")
+            forbidden = [outside, codex_home / "config.toml", REPO_ROOT / "checks/run_scenarios.py"]
+            forbidden_array = ",".join(
+                f"'{str(path).replace(chr(39), chr(39) * 2)}'" for path in forbidden
+            )
+            probe = (
+                f"$value = Get-Content -Raw -LiteralPath '{inside}'; "
+                "if ($value -ne 'inside') { exit 11 }; "
+                f"Set-Content -LiteralPath '{written}' -Value ok; "
+                f"$forbidden = @({forbidden_array}); for ($i = 0; $i -lt $forbidden.Count; $i++) {{ "
+                "try { Get-Content -Raw -LiteralPath $forbidden[$i] -ErrorAction Stop | Out-Null; exit (20 + $i) } catch {} }; "
+                f"try {{ Set-Content -LiteralPath '{str(outside).replace(chr(39), chr(39) * 2)}' -Value changed -ErrorAction Stop; exit 40 }} catch {{}}; "
+                "exit 0"
+            )
+            shell = ["powershell.exe", "-NoProfile", "-Command", probe]
+        else:
+            checks = "; ".join(
+                f"if cat {shlex.quote(str(path))} >/dev/null 2>&1; then exit 12; fi"
+                for path in (outside, codex_home / "config.toml", REPO_ROOT / "checks/run_scenarios.py")
+            )
+            shell = [
+                "sh", "-c",
+                f"test \"$(cat inside.txt)\" = inside && echo ok > write.txt; {checks}; "
+                f"if echo changed > {shlex.quote(str(outside))}; then exit 40; fi; exit 0",
+            ]
+        command = [
+            npx, "--yes", "@openai/codex", "sandbox", "-C", str(workspace),
+            "-P", ISOLATION_PROFILE, "--", *shell,
+        ]
+        environment = os.environ.copy()
+        environment["CODEX_HOME"] = str(codex_home)
+        result = subprocess.run(command, capture_output=True, cwd=workspace, env=environment, timeout=120)
+        if 20 <= result.returncode < 20 + len(forbidden):
+            leaked = forbidden[result.returncode - 20]
+            raise RuntimeError(f"Codex isolation canary read outside its workspace: {leaked}")
+        if result.returncode == 40:
+            raise RuntimeError("Codex isolation canary wrote outside its workspace")
+        if result.returncode != 0 or not (workspace / "write.txt").exists():
+            detail = (result.stderr or result.stdout).decode("utf-8", errors="replace").strip()
+            raise RuntimeError(
+                "Codex workspace isolation is unavailable; configure the elevated Windows sandbox "
+                f"before generation. {detail}"
+            )
+        if not outside.exists() or outside.read_text(encoding="utf-8") != "secret":
+            raise RuntimeError("Codex isolation canary modified a file outside its workspace")
+    _ISOLATION_VERIFIED = True
+
+
 def run_codex(
     *,
     prompt: str,
@@ -112,8 +244,35 @@ def run_codex(
     timeout: int = 4000,
     image_paths: list[Path] | None = None,
     sandbox: str | None = None,
+    packet_files: set[str] | None = None,
+    source_kind: str | None = None,
+    sources: list[dict] | None = None,
+    source_base_dir: Path | None = None,
+    original_sources: list[dict] | None = None,
+    original_source_base_dir: Path | None = None,
 ) -> dict[str, object]:
     cwd = cwd.resolve()
+    images = [path.resolve() for path in image_paths or []]
+    if sandbox not in {None, "workspace-write"}:
+        raise ValueError("BoardBench Codex calls require workspace-write isolation")
+    _assert_isolated_workspace(cwd, images)
+    if mode == "agentic":
+        if packet_files is None:
+            raise ValueError("agentic Codex calls require an exact packet_files allowlist")
+        if source_kind is None or sources is None or source_base_dir is None:
+            raise ValueError("agentic Codex calls require a validated source condition")
+        if source_kind == "clarified":
+            if original_sources is None or original_source_base_dir is None:
+                raise ValueError("clarified Codex calls require the original source condition")
+            validate_pair(
+                original_sources, sources, original_source_base_dir, source_base_dir
+            )
+        else:
+            validate_sources(source_kind, sources, source_base_dir)
+    packet_manifest = validate_packet_files(cwd, packet_files) if packet_files is not None else None
+    if mode == "agentic":
+        validate_packet_sources(packet_manifest, sources)
+        validate_pdf_renders(cwd, sources, images)
     response_path.parent.mkdir(parents=True, exist_ok=True)
     events_path.parent.mkdir(parents=True, exist_ok=True)
     usage_path.parent.mkdir(parents=True, exist_ok=True)
@@ -135,15 +294,14 @@ def run_codex(
         f'model_reasoning_effort="{effort}"',
         "-c",
         f'model_verbosity="{verbosity}"',
-        "-s",
-        sandbox or ("danger-full-access" if mode == "agentic" else "read-only"),
+        "-c",
+        f'default_permissions="{ISOLATION_PROFILE}"',
         "-C",
         cwd.as_posix(),
     ]
-    for image_path in image_paths or []:
+    for image_path in images:
         command += ["--image", image_path.resolve().as_posix()]
     command += [
-        "--ignore-user-config",
         "--ignore-rules",
         "--json",
         "--output-last-message",
@@ -154,13 +312,18 @@ def run_codex(
     quota_before = fetch_codex_quota()
     started_at = datetime.now(timezone.utc)
     started = time.perf_counter()
-    result = subprocess.run(
-        command,
-        input=prompt.encode("utf-8"),
-        capture_output=True,
-        cwd=cwd,
-        timeout=timeout,
-    )
+    with _isolated_codex_home() as codex_home:
+        verify_codex_isolation(npx, codex_home)
+        environment = os.environ.copy()
+        environment["CODEX_HOME"] = str(codex_home)
+        result = subprocess.run(
+            command,
+            input=prompt.encode("utf-8"),
+            capture_output=True,
+            cwd=cwd,
+            env=environment,
+            timeout=timeout,
+        )
     elapsed = time.perf_counter() - started
     ended_at = datetime.now(timezone.utc)
     quota_after = fetch_codex_quota()
@@ -174,7 +337,11 @@ def run_codex(
         "reasoning_effort": effort,
         "verbosity": verbosity,
         "mode": mode,
-        "sandbox": sandbox or ("danger-full-access" if mode == "agentic" else "read-only"),
+        "sandbox": "workspace-write",
+        "permission_profile": ISOLATION_PROFILE,
+        "isolation_canary_passed": True,
+        "source_condition_kind": source_kind,
+        "model_packet_sha256": packet_manifest,
         "started_at": started_at.isoformat(),
         "ended_at": ended_at.isoformat(),
         "elapsed_seconds": round(elapsed, 3),
@@ -185,7 +352,7 @@ def run_codex(
         "provider_usage_records": records,
         "events_path": events_path.as_posix(),
         "response_path": response_path.as_posix(),
-        "image_paths": [path.as_posix() for path in image_paths or []],
+        "image_paths": [path.as_posix() for path in images],
         "stderr": stderr,
     }
     usage_path.write_text(json.dumps(metadata, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -208,9 +375,10 @@ def main() -> int:
     parser.add_argument("--effort", help="default: low for generation, medium for judging")
     parser.add_argument("--verbosity", choices=("low", "medium", "high"), default=DEFAULT_VERBOSITY)
     parser.add_argument("--mode", choices=("agentic", "judge"), default="agentic")
-    parser.add_argument("--sandbox", choices=("read-only", "workspace-write", "danger-full-access"))
+    parser.add_argument("--sandbox", choices=("workspace-write",))
     parser.add_argument("--timeout", type=int, default=4000)
     parser.add_argument("--image", type=Path, action="append", default=[])
+    parser.add_argument("--packet-file", action="append", default=[])
     args = parser.parse_args()
     run_codex(
         prompt=args.prompt.read_text(encoding="utf-8"),
@@ -225,6 +393,7 @@ def main() -> int:
         timeout=args.timeout,
         image_paths=args.image,
         sandbox=args.sandbox,
+        packet_files=set(args.packet_file) if args.packet_file else None,
     )
     return 0
 

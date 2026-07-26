@@ -219,7 +219,7 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
     money = [run["resources"]["money"] for run in runs]
     estimates = [run["resources"]["api_equivalent_usd"] for run in runs]
     result = {
-        "schema_version": 1,
+        "schema_version": 2,
         "identity": identity,
         "reproducibility": {
             "run_count": len(runs),
@@ -235,9 +235,9 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
             "technical_gate_pass_rate": sum(run["technical_gate"] for run in runs) / len(runs),
             "robustness": summary(values(("robustness",))),
             "interface": summary(values(("interface",))),
-            "clear_rules": summary(values(("scenario", "clear", "score"))),
-            "human_decisions": summary(values(("scenario", "human_decision", "score"))),
-            "coverage": summary(values(("scenario", "coverage"))),
+            "clear_basis_scenarios": summary(values(("scenario", "clear", "score"))),
+            "human_decision_basis_scenarios": summary(values(("scenario", "human_decision", "score"))),
+            "scenario_evaluated_coverage": summary(values(("scenario", "coverage"))),
         },
         "review_evidence": {
             "neutral_judges": {
@@ -302,11 +302,13 @@ def markdown(result: dict[str, Any]) -> str:
         "| Group | Mean | Sample SD |",
         "|---|---:|---:|",
     ]
-    for label, key in (("Robustness", "robustness"), ("Interface", "interface"), ("Clear rules", "clear_rules"), ("Human decisions", "human_decisions"), ("Coverage", "coverage")):
+    for label, key in (("Robustness", "robustness"), ("Interface", "interface"), ("Clear-basis scenarios", "clear_basis_scenarios"), ("Human-decision-basis scenarios", "human_decision_basis_scenarios"), ("Scenario evaluated coverage", "scenario_evaluated_coverage")):
         item = evidence[key]
         lines.append(f"| {label} | {fmt(item['mean'])} | {fmt(item['sample_sd'])} |")
     lines += [
         f"| Neutral judges | {fmt(review['mean'])} | {fmt(review['sample_sd'])} |",
+        "",
+        "Scenario rows are pass rates over evaluated scenarios, not complete rule-fact coverage. Coverage measures only whether configured scenarios reached an evaluated outcome.",
         "",
         "## Assumptions",
         "",

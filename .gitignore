@@ -211,6 +211,8 @@ outputs/rulebook_pages/
 # Ephemeral LLM judge input packets (see AGENTS.md)
 outputs/judge_packet_*.md
 generation_workspaces/
+.pi-subagents/
+.tmp/
 
 # Ruff stuff:
 .ruff_cache/

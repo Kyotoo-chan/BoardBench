@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 GROUPS = (
-    ("Klare Regeln (EV4)", "clear_rules"),
-    ("Klarstellungsabhängig (EV5)", "human_decisions"),
+    ("Clear-basis-Szenarien (EV4)", "clear_basis_scenarios", "clear_rules"),
+    ("Decision-basis-Szenarien (EV5)", "human_decision_basis_scenarios", "human_decisions"),
 )
 
 DISPLAY_NAMES = {"pdf": "Original-PDF", "clarified": "Präzisierte Fassung"}
@@ -31,11 +31,14 @@ def plot(results: list[dict[str, object]], output: Path) -> None:
         raise ValueError("plots support one or two rulebook conditions")
     conditions = [str(result["identity"].get("condition", f"condition {index + 1}")) for index, result in enumerate(results)]
     labels = [DISPLAY_NAMES.get(condition, condition) for condition in conditions]
-    group_labels = [label for label, _ in GROUPS] + ["Neutrale Judges (EV7)"]
+    group_labels = [label for label, _, _ in GROUPS] + ["Neutrale Judges (EV7)"]
     values = []
     for result in results:
         evidence = result["implementation_evidence"]
-        values.append([evidence[key]["mean"] for _, key in GROUPS] + [result["review_evidence"]["neutral_judges"]["mean"]])
+        values.append([
+            evidence[new_key if new_key in evidence else legacy_key]["mean"]
+            for _, new_key, legacy_key in GROUPS
+        ] + [result["review_evidence"]["neutral_judges"]["mean"]])
 
     x = np.arange(len(group_labels))
     width = 0.64 / len(results)

@@ -1,26 +1,32 @@
-# BoardBench scenario schema v3
+# BoardBench scenario schema v4
 
-A scored scenario must be traceable, deterministic where material, and explicit about human adjudication. Each suite declares a `rubric_version`; machine-readable results retain suite, adapter, and implementation hashes.
+A scored scenario must be traceable, deterministic where material, and explicit about human adjudication. Each suite declares a `rubric_version`; machine-readable results retain suite, adapter, and implementation hashes. New version-4 suites also declare `claim_inventory`, a repository-relative JSON file containing atomic `clear`, `ambiguous`, `missing`, `conflicting`, or `untestable` claims with boolean `material` and `testable` fields.
 
 ```json
 {
-  "id": "GAME-R01-stable-name",
-  "fact_ids": ["TURN-01"],
-  "basis": "clear",
-  "source": {"source_id": "RULES", "page": 1, "quote": "Direct rulebook quote ..."},
-  "fixture": {},
-  "initial": {},
-  "steps": [
+  "version": 4,
+  "claim_inventory": "inputs/games/game/claims.json",
+  "scenarios": [
     {
-      "action": {"contains_any": ["source-visible action label"]},
-      "settle": [],
-      "expect": {}
+      "id": "GAME-R01-stable-name",
+      "fact_ids": ["TURN-01"],
+      "basis": "clear",
+      "source": {"source_id": "RULES", "page": 1, "quote": "Direct rulebook quote ..."},
+      "fixture": {},
+      "initial": {},
+      "steps": [
+        {
+          "action": {"contains_any": ["source-visible action label"]},
+          "settle": [],
+          "expect": {}
+        }
+      ]
     }
   ]
 }
 ```
 
-`basis` is `clear` or `human_decision`. Unresolved assumptions do not become scored scenarios. Source evidence uses either a positive PDF `page` or an RFC 6901 `json_pointer`; `quote` contains the cited text or compact JSON fragment. When one expectation genuinely combines multiple pages or assigned sources, add `supporting_sources` as a list of additional source objects with the same locator/quote shape; do not compress multi-page evidence into a false single-page citation.
+`basis` is `clear` or `human_decision`. `fact_ids` are atomic claim IDs from the inventory. Every deterministic, material, testable clear claim needs a scenario or a non-empty `coverage_exception`; exceptions remain outside the hard-coverage numerator. Unresolved assumptions do not become clear-basis scenarios. Ambiguous, missing, or conflicting claims may support human-decision-basis scenarios after a decision is approved. Source evidence uses either a positive PDF `page` or an RFC 6901 `json_pointer`; `quote` contains the cited text or compact JSON fragment. When one expectation genuinely combines multiple pages or assigned sources, add `supporting_sources` as a list of additional source objects with the same locator/quote shape; do not compress multi-page evidence into a false single-page citation.
 
 ## Outcomes
 
@@ -30,7 +36,7 @@ A scored scenario must be traceable, deterministic where material, and explicit 
 - `UNREACHED`: exploratory public search did not find the requested action.
 - `UNTESTABLE`: the configured API/adapter cannot construct or observe the evidence.
 
-Scores use `PASS+FAIL+CRASH`; coverage reports that evaluated denominator over all scenarios. Keep clear-rule and human-decision scores separate.
+Basis pass rates use `PASS+FAIL+CRASH`; scenario evaluated coverage reports that denominator over all scenarios. Keep clear-basis and human-decision-basis rates separate. The runner does not emit a mixed correctness score. Version-4 results additionally report claim-to-scenario mapping and evaluated-claim coverage. Mapping is not proof that every clause was asserted; the approved matrix and non-empty scenario checks remain auditable evidence.
 
 ## Action selectors
 
