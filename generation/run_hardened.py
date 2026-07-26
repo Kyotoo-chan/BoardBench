@@ -111,8 +111,9 @@ def source_manifest(config: dict) -> str:
 def build_workspace(config: dict) -> tuple[Path, list[Path], set[str], dict[str, str], dict[str, dict]]:
     source_base = resolve(config["source_base_dir"])
     sources = config["sources"]
+    original_evidence = None
     if config["condition_kind"] == "clarified":
-        original, _evidence = original_pair(config)
+        original, original_evidence = original_pair(config)
         validate_pair(
             original["sources"], sources,
             resolve(original["source_base_dir"]), source_base,
@@ -145,6 +146,14 @@ def build_workspace(config: dict) -> tuple[Path, list[Path], set[str], dict[str,
     immutable = validate_packet_files(workspace, allowed)
     validate_packet_sources(immutable, sources)
     validate_pdf_renders(workspace, sources, images)
+    if original_evidence is not None:
+        original_packet = original_evidence["calls"][-1]["model_packet_sha256"]
+        changed = [
+            name for name, digest in original_packet.items()
+            if name != "SOURCE_MANIFEST.json" and immutable.get(name) != digest
+        ]
+        if changed:
+            raise ValueError("clarified packet changed original model-facing files: " + ", ".join(changed))
     render_evidence = {
         path.relative_to(workspace).as_posix(): json.loads(path.read_text(encoding="utf-8"))
         for path in sorted(workspace.rglob("render_manifest.json"))
@@ -249,10 +258,13 @@ def preserve(
         "game": config["game"],
         "run_id": config["run_id"],
         "condition_kind": config["condition_kind"],
+        "adapted_from_run_id": config.get("adapted_from_run_id"),
+        "adaptation": config.get("adaptation"),
         "model": config.get("model", "gpt-5.6-sol"),
         "reasoning_effort": config.get("effort", "low"),
         "success": success,
         "repair_count": max(0, len(calls) - 1),
+        "prior_pre_evaluation_attempts": config.get("prior_pre_evaluation_attempts", []),
         "calls": calls,
         "source_manifest": config["sources"],
         "run_config_sha256": config_digest(config),
@@ -306,6 +318,21 @@ def run(config: dict) -> bool:
                 original_source_base_dir=resolve(original["source_base_dir"]) if original else None,
             )
             calls.append(call)
+            removed_metadata = []
+            internal_git = workspace / ".git"
+            if internal_git.is_dir():
+                shutil.rmtree(internal_git)
+                removed_metadata.append(".git")
+            elif internal_git.exists():
+                internal_git.unlink()
+                removed_metadata.append(".git")
+            caches = list(workspace.rglob("__pycache__"))
+            for cache in caches:
+                shutil.rmtree(cache)
+            if caches:
+                removed_metadata.append("__pycache__")
+            if removed_metadata:
+                checks.append(f"attempt {attempt + 1}: removed runtime metadata before repair validation: {', '.join(removed_metadata)}")
             changed = [name for name, digest in immutable.items() if not (workspace / name).is_file() or sha256(workspace / name) != digest]
             if changed:
                 checks.append(f"attempt {attempt + 1}: immutable packet changed: {', '.join(changed)}")

@@ -1,0 +1,557 @@
+{
+  "version": 4,
+  "rubric_version": "wizard-v2-atomic-2026-07-26",
+  "suite": "checks/scenarios/wizard_v2.json",
+  "suite_sha256": "9b3963cf9e220f707ed43fdda2719950794639be4c3c0f177eb8beaff79f01c5",
+  "adapter": "checks/scenario_adapters/wizard_v2.py",
+  "adapter_sha256": "8fea7418ea86340b5d5bbec7baeb8a8f7e34fa688e615b655f9e8ab0fe52473a",
+  "runner_sha256": "002f9c000cba5993633c4af2fab10ced464603b0f16c6d16a251ae76f67f2aac",
+  "code": "outputs/wizard_codex_ag.py",
+  "code_sha256": "5d4871a25452f59af2f9fe5e28206cb3ca156e2ab61dbe922a676dd74edc9063",
+  "counts": {
+    "PASS": 31,
+    "FAIL": 3,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 34,
+  "total": 34,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 22,
+      "evaluated": 23,
+      "score": 0.9565217391304348
+    },
+    "human_decision": {
+      "passed": 9,
+      "evaluated": 11,
+      "score": 0.8181818181818182
+    }
+  },
+  "claim_coverage": {
+    "inventory": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/inputs/games/wizard/claims_v2.json",
+    "required": [
+      "WIZ-C-ALL-JESTERS-FIRST",
+      "WIZ-C-BID-FIRST",
+      "WIZ-C-BID-RECORDED",
+      "WIZ-C-BID-REQUIRED",
+      "WIZ-C-BID-SEQUENTIAL",
+      "WIZ-C-DEAL-REMAINDER",
+      "WIZ-C-DEAL-ROUND",
+      "WIZ-C-DEALER-ROTATES",
+      "WIZ-C-END-3P",
+      "WIZ-C-END-4P",
+      "WIZ-C-END-5P",
+      "WIZ-C-END-6P",
+      "WIZ-C-END-ALL-DEALT",
+      "WIZ-C-END-HIGHEST-WINS",
+      "WIZ-C-END-SCORE-FIRST",
+      "WIZ-C-FINAL-NO-TRUMP",
+      "WIZ-C-FIRST-LEADER",
+      "WIZ-C-FOLLOW-SUIT",
+      "WIZ-C-INV-JESTERS",
+      "WIZ-C-INV-SUITS",
+      "WIZ-C-INV-TOTAL",
+      "WIZ-C-INV-WIZARDS",
+      "WIZ-C-JESTER-ALWAYS-LEGAL",
+      "WIZ-C-JESTER-NOT-TRUMP",
+      "WIZ-C-JESTER-ORDINARY-LEADS",
+      "WIZ-C-JESTER-SECOND-FREE",
+      "WIZ-C-NEXT-LEADER",
+      "WIZ-C-PLAYERS-REJECT",
+      "WIZ-C-PLAYERS-SUPPORTED",
+      "WIZ-C-RANK-HIGH",
+      "WIZ-C-RANK-LOW",
+      "WIZ-C-SCORE-EXACT-BONUS",
+      "WIZ-C-SCORE-EXACT-TRICKS",
+      "WIZ-C-SCORE-OVER",
+      "WIZ-C-SCORE-UNDER",
+      "WIZ-C-TRICK-CREDIT",
+      "WIZ-C-TRUMP-AFTER-HAND",
+      "WIZ-C-TRUMP-JESTER",
+      "WIZ-C-TRUMP-ORDINARY",
+      "WIZ-C-TRUMP-REVEAL",
+      "WIZ-C-TRUMP-WIZARD-DEALER",
+      "WIZ-C-TURN-CLOCKWISE",
+      "WIZ-C-VOID-DISCARD",
+      "WIZ-C-VOID-TRUMP",
+      "WIZ-C-WIN-FIRST-WIZARD",
+      "WIZ-C-WIN-HIGHEST-LED",
+      "WIZ-C-WIN-HIGHEST-TRUMP",
+      "WIZ-C-WIZARD-ALWAYS-LEGAL",
+      "WIZ-C-WIZARD-LEAD-FREE",
+      "WIZ-C-WIZARD-PRIORITY"
+    ],
+    "scenario_covered": [
+      "WIZ-C-ALL-JESTERS-FIRST",
+      "WIZ-C-BID-FIRST",
+      "WIZ-C-BID-RECORDED",
+      "WIZ-C-BID-REQUIRED",
+      "WIZ-C-BID-SEQUENTIAL",
+      "WIZ-C-DEAL-REMAINDER",
+      "WIZ-C-DEAL-ROUND",
+      "WIZ-C-DEALER-ROTATES",
+      "WIZ-C-END-3P",
+      "WIZ-C-END-4P",
+      "WIZ-C-END-5P",
+      "WIZ-C-END-6P",
+      "WIZ-C-END-ALL-DEALT",
+      "WIZ-C-END-HIGHEST-WINS",
+      "WIZ-C-END-SCORE-FIRST",
+      "WIZ-C-FINAL-NO-TRUMP",
+      "WIZ-C-FIRST-LEADER",
+      "WIZ-C-FOLLOW-SUIT",
+      "WIZ-C-INV-JESTERS",
+      "WIZ-C-INV-SUITS",
+      "WIZ-C-INV-TOTAL",
+      "WIZ-C-INV-WIZARDS",
+      "WIZ-C-JESTER-ALWAYS-LEGAL",
+      "WIZ-C-JESTER-NOT-TRUMP",
+      "WIZ-C-JESTER-ORDINARY-LEADS",
+      "WIZ-C-JESTER-SECOND-FREE",
+      "WIZ-C-NEXT-LEADER",
+      "WIZ-C-PLAYERS-REJECT",
+      "WIZ-C-PLAYERS-SUPPORTED",
+      "WIZ-C-RANK-HIGH",
+      "WIZ-C-RANK-LOW",
+      "WIZ-C-SCORE-EXACT-BONUS",
+      "WIZ-C-SCORE-EXACT-TRICKS",
+      "WIZ-C-SCORE-OVER",
+      "WIZ-C-SCORE-UNDER",
+      "WIZ-C-TRICK-CREDIT",
+      "WIZ-C-TRUMP-AFTER-HAND",
+      "WIZ-C-TRUMP-JESTER",
+      "WIZ-C-TRUMP-ORDINARY",
+      "WIZ-C-TRUMP-REVEAL",
+      "WIZ-C-TRUMP-WIZARD-DEALER",
+      "WIZ-C-TURN-CLOCKWISE",
+      "WIZ-C-VOID-DISCARD",
+      "WIZ-C-VOID-TRUMP",
+      "WIZ-C-WIN-FIRST-WIZARD",
+      "WIZ-C-WIN-HIGHEST-LED",
+      "WIZ-C-WIN-HIGHEST-TRUMP",
+      "WIZ-C-WIZARD-ALWAYS-LEGAL",
+      "WIZ-C-WIZARD-LEAD-FREE",
+      "WIZ-C-WIZARD-PRIORITY"
+    ],
+    "coverage_exceptions": [],
+    "mapping_coverage": 1.0,
+    "evaluated": [
+      "WIZ-C-ALL-JESTERS-FIRST",
+      "WIZ-C-BID-FIRST",
+      "WIZ-C-BID-RECORDED",
+      "WIZ-C-BID-REQUIRED",
+      "WIZ-C-BID-SEQUENTIAL",
+      "WIZ-C-DEAL-REMAINDER",
+      "WIZ-C-DEAL-ROUND",
+      "WIZ-C-DEALER-ROTATES",
+      "WIZ-C-END-3P",
+      "WIZ-C-END-4P",
+      "WIZ-C-END-5P",
+      "WIZ-C-END-6P",
+      "WIZ-C-END-ALL-DEALT",
+      "WIZ-C-END-HIGHEST-WINS",
+      "WIZ-C-END-SCORE-FIRST",
+      "WIZ-C-FINAL-NO-TRUMP",
+      "WIZ-C-FIRST-LEADER",
+      "WIZ-C-FOLLOW-SUIT",
+      "WIZ-C-INV-JESTERS",
+      "WIZ-C-INV-SUITS",
+      "WIZ-C-INV-TOTAL",
+      "WIZ-C-INV-WIZARDS",
+      "WIZ-C-JESTER-ALWAYS-LEGAL",
+      "WIZ-C-JESTER-NOT-TRUMP",
+      "WIZ-C-JESTER-ORDINARY-LEADS",
+      "WIZ-C-JESTER-SECOND-FREE",
+      "WIZ-C-NEXT-LEADER",
+      "WIZ-C-PLAYERS-REJECT",
+      "WIZ-C-PLAYERS-SUPPORTED",
+      "WIZ-C-RANK-HIGH",
+      "WIZ-C-RANK-LOW",
+      "WIZ-C-SCORE-EXACT-BONUS",
+      "WIZ-C-SCORE-EXACT-TRICKS",
+      "WIZ-C-SCORE-OVER",
+      "WIZ-C-SCORE-UNDER",
+      "WIZ-C-TRICK-CREDIT",
+      "WIZ-C-TRUMP-AFTER-HAND",
+      "WIZ-C-TRUMP-JESTER",
+      "WIZ-C-TRUMP-ORDINARY",
+      "WIZ-C-TRUMP-REVEAL",
+      "WIZ-C-TRUMP-WIZARD-DEALER",
+      "WIZ-C-TURN-CLOCKWISE",
+      "WIZ-C-VOID-DISCARD",
+      "WIZ-C-VOID-TRUMP",
+      "WIZ-C-WIN-FIRST-WIZARD",
+      "WIZ-C-WIN-HIGHEST-LED",
+      "WIZ-C-WIN-HIGHEST-TRUMP",
+      "WIZ-C-WIZARD-ALWAYS-LEGAL",
+      "WIZ-C-WIZARD-LEAD-FREE",
+      "WIZ-C-WIZARD-PRIORITY"
+    ],
+    "evaluated_coverage": 1.0
+  },
+  "results": [
+    {
+      "id": "WIZ-R01-cited-card-totals",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-INV-TOTAL",
+        "WIZ-C-INV-SUITS",
+        "WIZ-C-INV-WIZARDS",
+        "WIZ-C-INV-JESTERS"
+      ]
+    },
+    {
+      "id": "WIZ-R02-exact-suit-rank-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-EXACT-INVENTORY"
+      ]
+    },
+    {
+      "id": "WIZ-R03-round-count-by-player-count",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-PLAYERS-SUPPORTED",
+        "WIZ-C-END-3P",
+        "WIZ-C-END-4P",
+        "WIZ-C-END-5P",
+        "WIZ-C-END-6P"
+      ]
+    },
+    {
+      "id": "WIZ-R04-first-round-deal-and-start",
+      "status": "FAIL",
+      "message": "dealer: expected 0, got 1",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-FIRST-DEALER-RESET"
+      ]
+    },
+    {
+      "id": "WIZ-R05-revealed-wizard-requires-color",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-WIZARD-CHOICE-MANDATORY"
+      ]
+    },
+    {
+      "id": "WIZ-R06-prediction-domain",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-BID-DOMAIN"
+      ]
+    },
+    {
+      "id": "WIZ-R07-base-bids-may-equal-trick-count",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-BID-SUM"
+      ]
+    },
+    {
+      "id": "WIZ-R08-follow-suit-with-special-exceptions",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-FOLLOW-SUIT",
+        "WIZ-C-WIZARD-ALWAYS-LEGAL",
+        "WIZ-C-JESTER-ALWAYS-LEGAL"
+      ]
+    },
+    {
+      "id": "WIZ-R09-void-player-may-discard-or-trump",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-VOID-DISCARD",
+        "WIZ-C-VOID-TRUMP"
+      ]
+    },
+    {
+      "id": "WIZ-R10-first-wizard-wins-midgame",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-WIZARD-PRIORITY",
+        "WIZ-C-WIN-FIRST-WIZARD",
+        "WIZ-C-TRICK-CREDIT",
+        "WIZ-C-NEXT-LEADER"
+      ]
+    },
+    {
+      "id": "WIZ-R11-first-wizard-also-wins-final-round",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-WIN-FIRST-WIZARD"
+      ]
+    },
+    {
+      "id": "WIZ-R12-jester-then-ordinary-establishes-suit",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-JESTER-ORDINARY-LEADS"
+      ]
+    },
+    {
+      "id": "WIZ-R13-leading-jesters-wait-for-first-color",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-JESTER-CHAIN"
+      ]
+    },
+    {
+      "id": "WIZ-R14-jester-wizard-keeps-trick-colorless",
+      "status": "FAIL",
+      "message": "step 1: led_suit: expected None, got 'zwerge_rot'",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-JESTER-WIZARD"
+      ]
+    },
+    {
+      "id": "WIZ-R15-all-jesters-first-wins",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-ALL-JESTERS-FIRST",
+        "WIZ-C-TRICK-CREDIT"
+      ]
+    },
+    {
+      "id": "WIZ-R16-highest-trump-wins-without-wizard",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-WIN-HIGHEST-TRUMP",
+        "WIZ-C-JESTER-NOT-TRUMP"
+      ]
+    },
+    {
+      "id": "WIZ-R17-highest-led-color-wins-without-trump",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-WIN-HIGHEST-LED"
+      ]
+    },
+    {
+      "id": "WIZ-R18-final-round-scoring-and-winner",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-SCORE-EXACT-BONUS",
+        "WIZ-C-SCORE-EXACT-TRICKS",
+        "WIZ-C-SCORE-OVER",
+        "WIZ-C-SCORE-UNDER",
+        "WIZ-C-END-SCORE-FIRST",
+        "WIZ-C-END-HIGHEST-WINS"
+      ]
+    },
+    {
+      "id": "WIZ-R19-joint-winners-on-equal-high-score",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-TIE"
+      ]
+    },
+    {
+      "id": "WIZ-R20-private-hands-in-base-game",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-PRIVACY"
+      ]
+    },
+    {
+      "id": "WIZ-R21-round-reset-deal-and-dealer-rotation",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-FIRST-DEALER-RESET"
+      ]
+    },
+    {
+      "id": "WIZ-R22-player-count-setup-boundaries",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-PLAYERS-SUPPORTED",
+        "WIZ-C-PLAYERS-REJECT",
+        "WIZ-C-DEAL-ROUND",
+        "WIZ-C-DEAL-REMAINDER",
+        "WIZ-C-END-3P",
+        "WIZ-C-END-4P",
+        "WIZ-C-END-5P",
+        "WIZ-C-END-6P"
+      ]
+    },
+    {
+      "id": "WIZ-R23-complete-game-final-round-by-count",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-FINAL-NO-TRUMP",
+        "WIZ-C-END-3P",
+        "WIZ-C-END-4P",
+        "WIZ-C-END-5P",
+        "WIZ-C-END-6P",
+        "WIZ-C-END-ALL-DEALT",
+        "WIZ-C-END-SCORE-FIRST"
+      ]
+    },
+    {
+      "id": "WIZ-R24-revealed-card-trump-rules",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-TRUMP-REVEAL",
+        "WIZ-C-TRUMP-ORDINARY",
+        "WIZ-C-TRUMP-JESTER",
+        "WIZ-C-TRUMP-WIZARD-DEALER",
+        "WIZ-C-TRUMP-AFTER-HAND"
+      ]
+    },
+    {
+      "id": "WIZ-R25-complete-bid-order-and-first-leader",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-BID-REQUIRED",
+        "WIZ-C-BID-SEQUENTIAL",
+        "WIZ-C-BID-FIRST",
+        "WIZ-C-BID-RECORDED",
+        "WIZ-C-FIRST-LEADER"
+      ]
+    },
+    {
+      "id": "WIZ-R26-clockwise-play-and-next-leader",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-TURN-CLOCKWISE",
+        "WIZ-C-TRICK-CREDIT",
+        "WIZ-C-NEXT-LEADER"
+      ]
+    },
+    {
+      "id": "WIZ-R27-rank-endpoints-and-jester-no-priority",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-RANK-HIGH",
+        "WIZ-C-RANK-LOW",
+        "WIZ-C-JESTER-NOT-TRUMP",
+        "WIZ-C-WIN-HIGHEST-LED"
+      ]
+    },
+    {
+      "id": "WIZ-R28-wizard-lead-keeps-all-cards-legal",
+      "status": "FAIL",
+      "message": "step 1: led_suit: expected None, got 'zwerge_rot'",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-WIZARD-LEAD-FREE"
+      ]
+    },
+    {
+      "id": "WIZ-R29-jester-second-card-free-then-follow-suit",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-JESTER-SECOND-FREE",
+        "WIZ-C-JESTER-ORDINARY-LEADS",
+        "WIZ-C-FOLLOW-SUIT"
+      ]
+    },
+    {
+      "id": "WIZ-R30-jester-does-not-remove-existing-suit",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-FOLLOW-SUIT",
+        "WIZ-C-JESTER-ALWAYS-LEGAL"
+      ]
+    },
+    {
+      "id": "WIZ-R31-midtrick-wizard-wins-without-erasing-suit",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-FOLLOW-SUIT",
+        "WIZ-C-WIN-FIRST-WIZARD"
+      ]
+    },
+    {
+      "id": "WIZ-R32-cumulative-scoring-boundaries",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-SCORE-EXACT-BONUS",
+        "WIZ-C-SCORE-EXACT-TRICKS",
+        "WIZ-C-SCORE-OVER",
+        "WIZ-C-SCORE-UNDER"
+      ]
+    },
+    {
+      "id": "WIZ-R33-expanded-private-observations",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "WIZ-G-PRIVACY"
+      ]
+    },
+    {
+      "id": "WIZ-R34-clear-dealer-rotation-and-next-deal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "WIZ-C-DEALER-ROTATES",
+        "WIZ-C-DEAL-ROUND"
+      ]
+    }
+  ]
+}

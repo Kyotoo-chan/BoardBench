@@ -9,6 +9,12 @@ from generation import run_hardened
 
 
 class HardenedRunnerTests(unittest.TestCase):
+    def test_model_prompt_matches_assumptions_validator_vocabulary(self):
+        prompt = (run_hardened.ROOT / "inputs/prompts/rulebook_to_python_v2.txt").read_text(encoding="utf-8")
+        self.assertIn("`ambiguous`, `missing`, and `conflicting`", prompt)
+        self.assertIn("`selected` value must exactly equal", prompt)
+        self.assertNotIn("`contradictory`", prompt)
+
     def config(self, root: Path) -> dict:
         source = root / "source"
         source.mkdir()
@@ -94,7 +100,14 @@ class HardenedRunnerTests(unittest.TestCase):
                 calls.append(set(kwargs["packet_files"]))
                 workspace = kwargs["cwd"]
                 (workspace / "implementation.py").write_text("# implementation\n", encoding="utf-8")
+                if len(calls) == 1:
+                    (workspace / ".git").mkdir()
+                    (workspace / ".git/config").write_text("internal", encoding="utf-8")
+                    (workspace / "__pycache__").mkdir()
+                    (workspace / "__pycache__/implementation.pyc").write_bytes(b"cache")
                 if len(calls) == 2:
+                    self.assertFalse((workspace / ".git").exists())
+                    self.assertFalse((workspace / "__pycache__").exists())
                     (workspace / "rule_coverage.md").write_text("covered\n", encoding="utf-8")
                     (workspace / "assumptions.json").write_text(json.dumps({"version": 1, "assumptions": []}), encoding="utf-8")
                 kwargs["response_path"].write_text("response", encoding="utf-8")
@@ -114,6 +127,9 @@ class HardenedRunnerTests(unittest.TestCase):
             evidence = json.loads((outputs / "test_game_codex_ag_agentic.json").read_text(encoding="utf-8"))
             self.assertEqual(evidence["run_id"], "v2_original_1")
             self.assertEqual(evidence["repair_count"], 1)
+            checks = (outputs / "test_game_codex_ag_checks.txt").read_text(encoding="utf-8")
+            self.assertIn("removed runtime metadata", checks)
+            self.assertIn(".git, __pycache__", checks)
 
     def test_launch_failure_preserves_prior_attempt_evidence(self):
         with tempfile.TemporaryDirectory() as directory:

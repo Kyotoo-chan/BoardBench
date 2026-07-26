@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "game": "wizard",
-  "run_id": "v2_original_1",
+  "run_id": "v2_original_2",
   "condition_kind": "original",
   "scope": "Wizard Version 1.0 base game only; page-2 variants remain visible in the PDF but are excluded",
   "source_base_dir": "inputs/games/wizard",
@@ -23,5 +23,24 @@
   "verbosity": "low",
   "max_repairs": 2,
   "timeout": 1800,
+  "adapted_from_run_id": "v2_original_1",
+  "adaptation": "Align the model-facing assumptions schema with the already enforced validator: source_basis uses conflicting and selected exactly equals one listed alternative.",
+  "prior_pre_evaluation_attempts": [
+    {
+      "id": "preflight_runner_failure_1",
+      "evidence": "results/scores/wizard/v2/raw/preflight_runner_failure_1.json",
+      "reason": "Codex-internal .git metadata blocked the harness repair call after the first model attempt; no evaluation occurred."
+    },
+    {
+      "id": "preflight_runner_failure_2",
+      "evidence": "results/scores/wizard/v2/raw/preflight_runner_failure_2.json",
+      "reason": "Model-side interpreter cache files blocked the exact repair-packet allowlist after the first model attempt; no evaluation occurred."
+    },
+    {
+      "id": "v2_original_1",
+      "evidence": "results/scores/wizard/v2/original_failed_1_agentic.json",
+      "reason": "The bounded three-attempt generation failed the assumptions schema gate before evaluation; retained as a failed adapted predecessor, not a scored implementation."
+    }
+  ],
   "output_stem": "wizard_codex_ag"
 }

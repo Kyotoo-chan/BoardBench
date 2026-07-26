@@ -1,0 +1,70 @@
+Implement the provided rulebook as one self-contained Python module.
+
+Source rules:
+- Use only the supplied rulebook as game-rule evidence.
+- Do not use remembered or web rules.
+- Do not invent missing rules. Keep unresolved gaps explicit.
+
+Implementation rules:
+- Read `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` completely. They define evaluator representation only and are not additional rule sources.
+- Standard library only; no files, network, subprocesses, API keys, or input prompts at runtime.
+- Keep the code small and readable.
+- Model setup, phases, legal actions, transitions, chance/private information, terminal conditions, and returns explicitly when required.
+- Terminal states have no legal actions.
+
+Provide `GameState` and `Game` with:
+- `initial_state()`
+- `current_player(state)`
+- `legal_actions(state)`
+- `apply_action(state, action)`
+- `is_terminal(state)`
+- `returns(state)`
+- `render(state)`
+- `action_to_name(action)`
+- `name_to_action(name)`
+- `state_to_data(state)`
+- `state_from_data(payload)`
+- `action_to_data(action)`
+- `action_from_data(payload)`
+- `observation_to_data(state, player)`
+
+`Game` must accept optional `num_players` and `seed` keyword arguments; a supplied seed controls every chance operation. Canonical state/action/observation payloads must follow `ENVIRONMENT_CONTRACT.md` and `GAME_PROFILE.json` exactly. Every legal action must be accepted by `apply_action`. Action names must be unique, stable, human-readable, reversible, and preserve source labels.
+
+Work on the actual `implementation.py`. Before finishing, run:
+
+```text
+python -m py_compile implementation.py
+python agentic_self_check.py
+```
+
+Do not modify `agentic_self_check.py`.
+
+Create `rule_coverage.md`. Map every supplied section and named rule/card/combination to its implementing symbol, a source-only probe or reason it was not probed, and any assumption.
+
+Create `assumptions.json` with exactly this shape:
+
+```json
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "page/section or exact heading",
+      "source_basis": "ambiguous",
+      "alternatives": ["plausible behavior A", "plausible behavior B"],
+      "selected": "implemented behavior",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    }
+  ]
+}
+```
+
+Allowed `source_basis` values are `ambiguous`, `missing`, and `contradictory`. Include only material assumptions that affect legal actions, transitions, private information, elimination, terminal results, or scoring. Use an empty list when there are none. This is a source audit, not evaluator access.
+
+Final response only:
+1. brief open questions/material assumptions;
+2. files changed: `implementation.py`, `rule_coverage.md`, `assumptions.json`;
+3. exact validation commands and outcomes.
+
+Do not repeat the complete module in the final response.

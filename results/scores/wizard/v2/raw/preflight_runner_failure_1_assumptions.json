@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Die Vorbereitung",
+      "source_basis": "missing",
+      "alternatives": ["first dealer is selected randomly", "first dealer is player 0 by table convention"],
+      "selected": "player 0 is the first dealer; dealing, predicting, and leading begin with player 1",
+      "affected_mechanics": ["state_transition"]
+    }
+  ]
+}

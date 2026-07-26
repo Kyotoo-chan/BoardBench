@@ -1,0 +1,14 @@
+attempt 1: removed runtime metadata before repair validation: .git, __pycache__
+
+attempt 1:
+assumptions[0] selected value is not an alternative
+
+attempt 2: removed runtime metadata before repair validation: .git, __pycache__
+
+attempt 2:
+assumptions[1] selected value is not an alternative
+
+attempt 3: removed runtime metadata before repair validation: .git, __pycache__
+
+attempt 3:
+assumptions[0] selected value is not an alternative

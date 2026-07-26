@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "run_id": "v2_original_1",
+  "stage": "pre_evaluation_generation",
+  "scored": false,
+  "reason": "After the first model attempt, interpreter cache files created by model-side self-checks caused the exact repair-packet allowlist to reject the evaluator-neutral repair call before launch.",
+  "model_attempt_completed": true,
+  "host_gate_result": "assumptions[0] selected value is not an alternative",
+  "repair_call_launched": false,
+  "disposition": "Raw attempt artifacts retained; harness corrected to remove only __pycache__ directories between model calls; fresh blind generation remains under the same run ID before any evaluation.",
+  "source_packet_changed": false,
+  "evaluation_started": false,
+  "preparation_commit": "8146dd2"
+}

@@ -128,9 +128,12 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         "model": evidence.get("model"),
         "thinking": evidence.get("reasoning_effort"),
         "verbosity": verbosities[0] if len(verbosities) == 1 else None,
-        "agentic_gate": bool(evidence.get("independent_gate_passed") and evidence.get("agent_ran_self_check")),
+        "agentic_gate": bool(evidence.get("success", evidence.get("independent_gate_passed") and evidence.get("agent_ran_self_check"))),
         "repairs": int(evidence.get("repair_count", 0)),
-        "technical_gate": bool(re.search(r"summary\s+4/4\s+score=1\.000", checks)),
+        "technical_gate": bool(
+            re.search(r"summary\s+4/4\s+score=1\.000", checks)
+            or all(re.search(rf"0{number}_[^\n]*score=1\.000", checks) for number in range(1, 5))
+        ),
         "robustness": parse_score(checks, r"05_random_rollouts[^\n]*score=([0-9.]+)"),
         "interface": parse_score(checks, r"06_action_language[^\n]*score=([0-9.]+)"),
         "scenario": {

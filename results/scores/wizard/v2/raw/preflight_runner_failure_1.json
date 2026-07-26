@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "run_id": "v2_original_1",
+  "stage": "pre_evaluation_generation",
+  "scored": false,
+  "reason": "After the first model attempt, Codex-created internal .git metadata caused the harness to reject the evaluator-neutral repair call before it launched.",
+  "model_attempt_completed": true,
+  "host_gate_result": "assumptions[0] selected value is not an alternative",
+  "repair_call_launched": false,
+  "disposition": "Raw attempt artifacts retained; harness corrected to remove only Codex-internal .git metadata between calls; fresh blind generation remains under the same run ID before any evaluation.",
+  "source_packet_changed": false,
+  "evaluation_started": false,
+  "preparation_commit": "c3351d3"
+}

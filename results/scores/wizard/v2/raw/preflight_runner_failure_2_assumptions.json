@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Die Vorbereitung",
+      "source_basis": "missing",
+      "alternatives": ["choose the first dealer externally", "select the first dealer randomly", "use a fixed first dealer"],
+      "selected": "player 0 is the first dealer",
+      "affected_mechanics": ["state_transition"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Die Vorbereitung / Das Verteilen der Karten / Die Vorhersage",
+      "source_basis": "missing",
+      "alternatives": ["player identifiers follow an externally supplied seating order", "player identifiers increase clockwise"],
+      "selected": "player identifiers increase clockwise; dealing and prediction begin at dealer + 1",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "Spezielle Rechte der Zauberer und Narren",
+      "source_basis": "ambiguous",
+      "alternatives": ["after a leading Fool, only the literal second card can establish the required suit", "after a leading Fool, the first later ordinary suited card establishes the required suit when intervening cards are colorless specials"],
+      "selected": "the first ordinary suited card after one or more leading Fools establishes the required suit; Wizards and Fools never establish a suit",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "workspace-write",
+  "permission_profile": "boardbench-workspace-only",
+  "isolation_canary_passed": true,
+  "source_condition_kind": null,
+  "model_packet_sha256": null,
+  "started_at": "2026-07-26T11:17:35.091254+00:00",
+  "ended_at": "2026-07-26T11:20:06.404347+00:00",
+  "elapsed_seconds": 151.313,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 36,
+      "reset_at": 1785621651,
+      "reset_after_seconds": 556998,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 36,
+      "reset_at": 1785621652,
+      "reset_after_seconds": 556846,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 199626,
+    "reasoning_output_tokens": 2179,
+    "cached_input_tokens": 157952,
+    "output_tokens": 4703
+  },
+  "provider_usage_records": [
+    {
+      "line": 20,
+      "path": "$.usage",
+      "input_tokens": 199626,
+      "cached_input_tokens": 157952,
+      "output_tokens": 4703,
+      "reasoning_output_tokens": 2179
+    }
+  ],
+  "events_path": "results/scores/wizard/v2/raw/original_judge_3_events.jsonl",
+  "response_path": "outputs/wizard_codex_ag_judge_3.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_wizard_codex_ag_judge_3_aqgkzd9a/canonical_rulebook_pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_wizard_codex_ag_judge_3_aqgkzd9a/canonical_rulebook_pages/page-2.png"
+  ],
+  "stderr": "2026-07-26T11:18:02.352246Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 6.8 seconds\nOutput:\nrg: ./tmp: Zugriff verweigert (os error 5)\nrg: ./Windows\\WUModels: Zugriff verweigert (os error 5)\nrg: ./Program Files\\WireGuard\\Data: Zugriff verweigert (os error 5)\nrg: ./Program Files\\Windows Defender Advanced Threat Protection\\Classification\\Configuration: Zugriff verweigert (os error 5)\nrg: ./Windows\\LiveKernelReports: Zugriff verweigert (os error 5)\nrg: ./Windows\\CSC: Zugriff verweigert (os error 5)\nrg: ./Windows\\appcompat\\UA: Zugriff verweigert (os error 5)\nrg: ./Windows\\appcompat\\Programs: Zugriff verweigert (os error 5)\nrg: ./Windows\\appcompat\\Backup: Zugriff verweigert (os error 5)\nrg: ./Windows\\appcompat\\appraiser: Zugriff verweigert (os error 5)\nrg: ./Windows\\appcompat\\AIDD: Zugriff verweigert (os error 5)\nrg: ./Users\\benti: Zugriff verweigert (os error 5)\nrg: ./Windows\\ServiceState: Zugriff verweigert (os error 5)\nrg: ./Windows\\ServiceProfiles\\NetworkService: Zugriff verweigert (os error 5)\nrg: ./Windows\\ServiceProfiles\\LocalService: Zugriff verweigert (os error 5)\nrg: ./Windows\\security\\cap: Zugriff verweigert (os error 5)\nrg: ./Windows\\security\\audit: Zugriff verweigert (os error 5)\nrg: ./Windows\\Resources\\Themes\\aero\\VSCache: Zugriff verweigert (os error 5)\nrg: ./Windows\\Provisioning\\Autopilot: Zugriff verweigert (os error 5)\nrg: ./Windows\\Prefetch: Zugriff verweigert (os error 5)\nrg: ./Windows\\PLA\\Templates: Zugriff verweigert (os error 5)\nrg: ./Windows\\ModemLogs: Zugriff verweigert (os error 5)\nrg: ./Windows\\PLA\\Rules: Zugriff verweigert (os error 5)\nrg: ./Windows\\PLA\\Reports: Zugriff verweigert (os error 5)\nrg: ./Windows\\Temp: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\Configuration: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\config: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\Com\\dmp: Zugriff verweigert (os error 5)\nrg: ./Windows\\SystemTemp: Zugriff verweigert (os error 5)\nrg: ./PerfLogs: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\Tasks: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\sru: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\Recovery\\Settings: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\NetworkList: Zugriff verweigert (os error 5)\nrg: ./Windows\\SysWOW64\\Msdtc: Zugriff verweigert (os error 5)\nrg: ./Windows\\Microsoft\\Windows\\Models: Zugriff verweigert (os error 5)\nrg: ./Windows\\Logs\\SystemRestore: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\WebThreatDefSvc: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\WDI: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\wbem\\MOF: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\Tasks_Migrated: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\Tasks: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\sru: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\spool\\SERVERS: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\spool\\PRINTERS: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\SleepStudy: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\Recovery\\Settings: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\networklist: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\MsDtc: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\LogFiles\\WMI: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\ias: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\Configuration: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\config: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\Com\\dmp: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\DriverState: Zugriff verweigert (os error 5)\nrg: ./Windows\\System32\\drivers\\DriverData: Zugriff verweigert (os error 5)\n\n"
+}

@@ -1,0 +1,693 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "game": "wizard",
+    "condition": "original_v2_successor",
+    "source_path": "../../../../inputs/games/wizard/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "167254a64b0866266746833c0b98836db51c08171b5b96e25f7461d5bf3dee79"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "9b3963cf9e220f707ed43fdda2719950794639be4c3c0f177eb8beaff79f01c5",
+    "adapter_sha256": "8fea7418ea86340b5d5bbec7baeb8a8f7e34fa688e615b655f9e8ab0fe52473a",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "hardened-iteration-v1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 50,
+    "human_decision": 9,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_basis_scenarios": {
+      "values": [
+        0.9565217391304348
+      ],
+      "mean": 0.9565217391304348,
+      "sample_sd": null
+    },
+    "human_decision_basis_scenarios": {
+      "values": [
+        0.8181818181818182
+      ],
+      "mean": 0.8181818181818182,
+      "sample_sd": null
+    },
+    "scenario_evaluated_coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.78,
+        0.72,
+        0.72
+      ],
+      "mean": 0.74,
+      "sample_sd": 0.034641016151377574,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "wizard_codex_ag": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 3,
+    "interpretation_agreement": {
+      "Die Vorbereitung": {
+        "The initial dealer is selected by the seeded chance source.": 1
+      },
+      "Das Verteilen der Karten / Die Vorhersage / Der Kampf um den Stich": {
+        "Clockwise order advances through increasing player IDs modulo the player count.": 1
+      },
+      "Spezielle Rechte der Zauberer und Narren": {
+        "After one or more leading Fools, the first ordinary suit card establishes the suit to follow; a Wizard establishes no suit.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Die Vorbereitung",
+        "source_basis": "missing",
+        "alternatives": [
+          "The initial dealer is selected by the seeded chance source.",
+          "Player 0 is always the initial dealer."
+        ],
+        "selected": "The initial dealer is selected by the seeded chance source.",
+        "affected_mechanics": [
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Das Verteilen der Karten / Die Vorhersage / Der Kampf um den Stich",
+        "source_basis": "missing",
+        "alternatives": [
+          "Clockwise order advances through increasing player IDs modulo the player count.",
+          "Clockwise order advances through decreasing player IDs modulo the player count."
+        ],
+        "selected": "Clockwise order advances through increasing player IDs modulo the player count.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Spezielle Rechte der Zauberer und Narren",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "After one or more leading Fools, the first ordinary suit card establishes the suit to follow; a Wizard establishes no suit.",
+          "A leading Fool establishes no suit for the entire trick even after an ordinary suit card is played."
+        ],
+        "selected": "After one or more leading Fools, the first ordinary suit card establishes the suit to follow; a Wizard establishes no suit.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        892.778
+      ],
+      "mean": 892.778,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        1174314.0
+      ],
+      "mean": 1174314.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        968192.0
+      ],
+      "mean": 968192.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        26421.0
+      ],
+      "mean": 26421.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        10215.0
+      ],
+      "mean": 10215.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        2.307336
+      ],
+      "mean": 2.307336,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        331.0
+      ],
+      "mean": 331.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      2.307336
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically executable; 22/23 configured clear-basis and 9/11 human-decision-basis scenarios passed; all configured scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "wizard_codex_ag",
+      "protocol": "hardened-iteration-v1",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "wizard-v2-atomic-2026-07-26",
+        "suite_sha256": "9b3963cf9e220f707ed43fdda2719950794639be4c3c0f177eb8beaff79f01c5",
+        "adapter_sha256": "8fea7418ea86340b5d5bbec7baeb8a8f7e34fa688e615b655f9e8ab0fe52473a",
+        "counts": {
+          "PASS": 31,
+          "FAIL": 3,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 22,
+          "evaluated": 23,
+          "score": 0.9565217391304348
+        },
+        "human_decision": {
+          "passed": 9,
+          "evaluated": 11,
+          "score": 0.8181818181818182
+        },
+        "results": [
+          {
+            "id": "WIZ-R01-cited-card-totals",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-INV-TOTAL",
+              "WIZ-C-INV-SUITS",
+              "WIZ-C-INV-WIZARDS",
+              "WIZ-C-INV-JESTERS"
+            ]
+          },
+          {
+            "id": "WIZ-R02-exact-suit-rank-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-EXACT-INVENTORY"
+            ]
+          },
+          {
+            "id": "WIZ-R03-round-count-by-player-count",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-PLAYERS-SUPPORTED",
+              "WIZ-C-END-3P",
+              "WIZ-C-END-4P",
+              "WIZ-C-END-5P",
+              "WIZ-C-END-6P"
+            ]
+          },
+          {
+            "id": "WIZ-R04-first-round-deal-and-start",
+            "status": "FAIL",
+            "message": "dealer: expected 0, got 1",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-FIRST-DEALER-RESET"
+            ]
+          },
+          {
+            "id": "WIZ-R05-revealed-wizard-requires-color",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-WIZARD-CHOICE-MANDATORY"
+            ]
+          },
+          {
+            "id": "WIZ-R06-prediction-domain",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-BID-DOMAIN"
+            ]
+          },
+          {
+            "id": "WIZ-R07-base-bids-may-equal-trick-count",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-BID-SUM"
+            ]
+          },
+          {
+            "id": "WIZ-R08-follow-suit-with-special-exceptions",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-FOLLOW-SUIT",
+              "WIZ-C-WIZARD-ALWAYS-LEGAL",
+              "WIZ-C-JESTER-ALWAYS-LEGAL"
+            ]
+          },
+          {
+            "id": "WIZ-R09-void-player-may-discard-or-trump",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-VOID-DISCARD",
+              "WIZ-C-VOID-TRUMP"
+            ]
+          },
+          {
+            "id": "WIZ-R10-first-wizard-wins-midgame",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-WIZARD-PRIORITY",
+              "WIZ-C-WIN-FIRST-WIZARD",
+              "WIZ-C-TRICK-CREDIT",
+              "WIZ-C-NEXT-LEADER"
+            ]
+          },
+          {
+            "id": "WIZ-R11-first-wizard-also-wins-final-round",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-WIN-FIRST-WIZARD"
+            ]
+          },
+          {
+            "id": "WIZ-R12-jester-then-ordinary-establishes-suit",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-JESTER-ORDINARY-LEADS"
+            ]
+          },
+          {
+            "id": "WIZ-R13-leading-jesters-wait-for-first-color",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-JESTER-CHAIN"
+            ]
+          },
+          {
+            "id": "WIZ-R14-jester-wizard-keeps-trick-colorless",
+            "status": "FAIL",
+            "message": "step 1: led_suit: expected None, got 'zwerge_rot'",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-JESTER-WIZARD"
+            ]
+          },
+          {
+            "id": "WIZ-R15-all-jesters-first-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-ALL-JESTERS-FIRST",
+              "WIZ-C-TRICK-CREDIT"
+            ]
+          },
+          {
+            "id": "WIZ-R16-highest-trump-wins-without-wizard",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-WIN-HIGHEST-TRUMP",
+              "WIZ-C-JESTER-NOT-TRUMP"
+            ]
+          },
+          {
+            "id": "WIZ-R17-highest-led-color-wins-without-trump",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-WIN-HIGHEST-LED"
+            ]
+          },
+          {
+            "id": "WIZ-R18-final-round-scoring-and-winner",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-SCORE-EXACT-BONUS",
+              "WIZ-C-SCORE-EXACT-TRICKS",
+              "WIZ-C-SCORE-OVER",
+              "WIZ-C-SCORE-UNDER",
+              "WIZ-C-END-SCORE-FIRST",
+              "WIZ-C-END-HIGHEST-WINS"
+            ]
+          },
+          {
+            "id": "WIZ-R19-joint-winners-on-equal-high-score",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-TIE"
+            ]
+          },
+          {
+            "id": "WIZ-R20-private-hands-in-base-game",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-PRIVACY"
+            ]
+          },
+          {
+            "id": "WIZ-R21-round-reset-deal-and-dealer-rotation",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-FIRST-DEALER-RESET"
+            ]
+          },
+          {
+            "id": "WIZ-R22-player-count-setup-boundaries",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-PLAYERS-SUPPORTED",
+              "WIZ-C-PLAYERS-REJECT",
+              "WIZ-C-DEAL-ROUND",
+              "WIZ-C-DEAL-REMAINDER",
+              "WIZ-C-END-3P",
+              "WIZ-C-END-4P",
+              "WIZ-C-END-5P",
+              "WIZ-C-END-6P"
+            ]
+          },
+          {
+            "id": "WIZ-R23-complete-game-final-round-by-count",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-FINAL-NO-TRUMP",
+              "WIZ-C-END-3P",
+              "WIZ-C-END-4P",
+              "WIZ-C-END-5P",
+              "WIZ-C-END-6P",
+              "WIZ-C-END-ALL-DEALT",
+              "WIZ-C-END-SCORE-FIRST"
+            ]
+          },
+          {
+            "id": "WIZ-R24-revealed-card-trump-rules",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-TRUMP-REVEAL",
+              "WIZ-C-TRUMP-ORDINARY",
+              "WIZ-C-TRUMP-JESTER",
+              "WIZ-C-TRUMP-WIZARD-DEALER",
+              "WIZ-C-TRUMP-AFTER-HAND"
+            ]
+          },
+          {
+            "id": "WIZ-R25-complete-bid-order-and-first-leader",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-BID-REQUIRED",
+              "WIZ-C-BID-SEQUENTIAL",
+              "WIZ-C-BID-FIRST",
+              "WIZ-C-BID-RECORDED",
+              "WIZ-C-FIRST-LEADER"
+            ]
+          },
+          {
+            "id": "WIZ-R26-clockwise-play-and-next-leader",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-TURN-CLOCKWISE",
+              "WIZ-C-TRICK-CREDIT",
+              "WIZ-C-NEXT-LEADER"
+            ]
+          },
+          {
+            "id": "WIZ-R27-rank-endpoints-and-jester-no-priority",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-RANK-HIGH",
+              "WIZ-C-RANK-LOW",
+              "WIZ-C-JESTER-NOT-TRUMP",
+              "WIZ-C-WIN-HIGHEST-LED"
+            ]
+          },
+          {
+            "id": "WIZ-R28-wizard-lead-keeps-all-cards-legal",
+            "status": "FAIL",
+            "message": "step 1: led_suit: expected None, got 'zwerge_rot'",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-WIZARD-LEAD-FREE"
+            ]
+          },
+          {
+            "id": "WIZ-R29-jester-second-card-free-then-follow-suit",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-JESTER-SECOND-FREE",
+              "WIZ-C-JESTER-ORDINARY-LEADS",
+              "WIZ-C-FOLLOW-SUIT"
+            ]
+          },
+          {
+            "id": "WIZ-R30-jester-does-not-remove-existing-suit",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-FOLLOW-SUIT",
+              "WIZ-C-JESTER-ALWAYS-LEGAL"
+            ]
+          },
+          {
+            "id": "WIZ-R31-midtrick-wizard-wins-without-erasing-suit",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-FOLLOW-SUIT",
+              "WIZ-C-WIN-FIRST-WIZARD"
+            ]
+          },
+          {
+            "id": "WIZ-R32-cumulative-scoring-boundaries",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-SCORE-EXACT-BONUS",
+              "WIZ-C-SCORE-EXACT-TRICKS",
+              "WIZ-C-SCORE-OVER",
+              "WIZ-C-SCORE-UNDER"
+            ]
+          },
+          {
+            "id": "WIZ-R33-expanded-private-observations",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "WIZ-G-PRIVACY"
+            ]
+          },
+          {
+            "id": "WIZ-R34-clear-dealer-rotation-and-next-deal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "WIZ-C-DEALER-ROTATES",
+              "WIZ-C-DEAL-ROUND"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.78,
+        0.72,
+        0.72
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Die Vorbereitung",
+          "source_basis": "missing",
+          "alternatives": [
+            "The initial dealer is selected by the seeded chance source.",
+            "Player 0 is always the initial dealer."
+          ],
+          "selected": "The initial dealer is selected by the seeded chance source.",
+          "affected_mechanics": [
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Das Verteilen der Karten / Die Vorhersage / Der Kampf um den Stich",
+          "source_basis": "missing",
+          "alternatives": [
+            "Clockwise order advances through increasing player IDs modulo the player count.",
+            "Clockwise order advances through decreasing player IDs modulo the player count."
+          ],
+          "selected": "Clockwise order advances through increasing player IDs modulo the player count.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Spezielle Rechte der Zauberer und Narren",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "After one or more leading Fools, the first ordinary suit card establishes the suit to follow; a Wizard establishes no suit.",
+            "A leading Fool establishes no suit for the entire trick even after an ordinary suit card is played."
+          ],
+          "selected": "After one or more leading Fools, the first ordinary suit card establishes the suit to follow; a Wizard establishes no suit.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 892.778,
+        "input_tokens": 1174314,
+        "cached_input_tokens": 968192,
+        "output_tokens": 26421,
+        "reasoning_tokens": 10215,
+        "money": null,
+        "api_equivalent_usd": 2.307336,
+        "code_lines": 331
+      },
+      "hashes": {
+        "agentic_evidence": "b389ccf9be0112b5e864ae0502a4a3ab339a811e3026b1cd7b46f3a9624b67de",
+        "checks": "b0aec7582d6a725a52f4858f1a01f92175aa90e74f4e29972901d6c12e0fb3f7",
+        "scenarios": "17fcaf7846fd4ad5ff5de5c503caf466256d824fc063deb10b93df30da2ffa8f",
+        "usage": "efc26765247c87004cff269309228afb393daf8717e4fe754028377687295ce6",
+        "code": "5d4871a25452f59af2f9fe5e28206cb3ca156e2ab61dbe922a676dd74edc9063"
+      }
+    }
+  ]
+}
