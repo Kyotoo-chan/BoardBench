@@ -21,8 +21,8 @@ CARD_COUNTS = {
     "cat_rainbow": 4,
     "cat_tacocat": 4,
 }
-STATE_SCHEMA = "boardbench/exploding-kittens/state/1"
-ACTION_SCHEMA = "boardbench/exploding-kittens/action/1"
+STATE_SCHEMA = "boardbench/exploding-kittens/state/2"
+ACTION_SCHEMA = "boardbench/exploding-kittens/action/2"
 
 
 def _data(game: Any, state: Any) -> dict[str, Any]:
@@ -63,7 +63,8 @@ def setup(module: Any, game: Any, fixture: dict[str, Any]) -> Any:
             "preview": list(previews.get(str(player), previews.get(player, []))),
         })
     zones = {
-        "deck": list(fixture.get("deck", [])),
+        # Scenario fixtures are source-readable top-to-bottom; canonical state is bottom-to-top.
+        "deck": list(reversed(fixture.get("deck", []))),
         "discard": list(fixture.get("discard", [])),
         "box": list(fixture.get("box", [])),
     }
@@ -202,7 +203,7 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
     if "deck_size" in expected:
         _assert("deck_size", len(data["zones"]["deck"]), int(expected["deck_size"]))
     if "deck" in expected:
-        _assert("deck", data["zones"]["deck"], expected["deck"])
+        _assert("deck (top to bottom)", list(reversed(data["zones"]["deck"])), expected["deck"])
     if "deck_multiset" in expected:
         _assert("deck_multiset", _counter(data["zones"]["deck"]), _counter(expected["deck_multiset"]))
     if "discard" in expected:
@@ -233,7 +234,7 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
         _assert(f"action matches {case['action']}", count, int(case["count"]))
     for player, wanted in expected.get("observations", {}).items():
         payload = game.observation_to_data(state, int(player))
-        if payload.get("schema") != "boardbench/exploding-kittens/observation/1":
+        if payload.get("schema") != "boardbench/exploding-kittens/observation/2":
             raise NotImplementedError("observation_to_data does not expose the frozen Exploding Kittens schema")
         observation = payload["data"]
         for key, value in wanted.items():

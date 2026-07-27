@@ -6,17 +6,11 @@ exit_code=0
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
 exit_code=0
-agentic-self-check OK states=300 actions=1154
+agentic-self-check OK states=300 actions=1375
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
-exit_code=1
-Traceback (most recent call last):
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-CXOS8h\boardbench_expl_v2_original_1_becmc87a\profile_fixture_self_check.py", line 116, in <module>
-    main()
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-CXOS8h\boardbench_expl_v2_original_1_becmc87a\profile_fixture_self_check.py", line 110, in main
-    assert Counter(cards(data)) == Counter(COUNTS)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError
+exit_code=0
+profile-fixture-self-check OK
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
 exit_code=0
@@ -28,30 +22,19 @@ PASS players=1: rejected
 PASS players=6: rejected
 PLAYER_COUNTS 6/6
 
-attempt 1: removed host-check __pycache__ before repair
 
-attempt 2: removed runtime metadata before repair validation: .git, __pycache__
+=== TECHNICAL_ROBUSTNESS_INTERFACE ===
+OK   01_result_file                     1/1 score=1.000    0.01s
+OK   02_python_syntax                   1/1 score=1.000    0.02s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api                    9/9 score=1.000    0.02s
+OK   05_random_rollouts             100/100 score=1.000    0.66s
+OK   06_action_language         18518/18518 score=1.000    0.63s
+---- summary                            6/6 score=1.000    1.35s
 
-attempt 2:
-$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
-exit_code=0
 
-$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
-exit_code=0
-agentic-self-check OK states=300 actions=1154
 
-$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
-exit_code=1
-Traceback (most recent call last):
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-CXOS8h\boardbench_expl_v2_original_1_becmc87a\profile_fixture_self_check.py", line 116, in <module>
-    main()
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-CXOS8h\boardbench_expl_v2_original_1_becmc87a\profile_fixture_self_check.py", line 110, in main
-    assert Counter(cards(data)) == Counter(COUNTS)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError
-
-$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
-exit_code=0
+=== PLAYER_COUNTS ===
 PASS players=2
 PASS players=3
 PASS players=4
@@ -60,8 +43,48 @@ PASS players=1: rejected
 PASS players=6: rejected
 PLAYER_COUNTS 6/6
 
-attempt 2: removed host-check __pycache__ before repair
 
-attempt 3: removed runtime metadata before repair validation: .git, __pycache__
 
-attempt 3: immutable packet changed: profile_fixture_self_check.py
+=== SCENARIOS_V4 ===
+PASS EXPL-R01-setup-two
+PASS EXPL-R02-setup-three
+PASS EXPL-R03-setup-four
+PASS EXPL-R04-setup-five
+PASS EXPL-R05-player-range
+PASS EXPL-R06-pass-draw-advance
+PASS EXPL-R07-play-card-stays-turn
+PASS EXPL-R08-multiple-pre-draw-plays
+PASS EXPL-R09-public-count-private-hands
+PASS EXPL-R10-empty-hand-continues
+FAIL EXPL-R11-explosion-eliminates: step 1: hand_sizes: expected {'0': 0, '1': 0, '2': 0}, got {'0': 3, '1': 0, '2': 0}
+PASS EXPL-R12-last-survivor-wins
+FAIL EXPL-R13-defuse-top: step 1: current_player: expected 0, got 1
+FAIL EXPL-R14-defuse-bottom-order: step 1: phase: expected 'defuse_reinsert', got 'play'
+FAIL EXPL-R15-defuse-under-attack: step 1: phase: expected 'defuse_reinsert', got 'play'
+PASS EXPL-R16-attack-two-turns
+FAIL EXPL-R17-first-attacked-draw: step 1: hand 1 attack: expected 1, got 0
+FAIL EXPL-R18-attack-chain: step 1: current_player: expected 2, got 1
+PASS EXPL-R19-skip-normal
+PASS EXPL-R20-skip-one-owed
+PASS EXPL-R21-two-skips-two-owed
+PASS EXPL-R22-one-nope-cancels
+PASS EXPL-R23-two-nopes-restore
+PASS EXPL-R24-three-nopes-cancel
+PASS EXPL-R25-nope-exceptions
+FAIL EXPL-R26-favor-target-chooses: step 1: current_player: expected 1, got 0
+FAIL EXPL-R27-empty-target-illegal: action matches {'type': 'play_card', 'actor': 0, 'args': {'card': 'favor', 'target': 1}}: expected 0, got 1
+PASS EXPL-R28-shuffle-conserves
+FAIL EXPL-R29-future-top-three-private: step 1: observation 0 preview: expected ['attack', 'skip', 'favor'], got ['nope', 'favor', 'skip']
+FAIL EXPL-R30-future-short-pile: step 1: observation 0 preview: expected ['attack', 'skip'], got ['skip', 'attack']
+PASS EXPL-R32-pair-random-steal
+PASS EXPL-R33-action-pair-suppresses
+PASS EXPL-R34-triple-present
+PASS EXPL-R35-triple-absent
+PASS EXPL-R36-five-retrieve-existing
+PASS EXPL-R37-five-suppresses-components
+FAIL EXPL-R38-attack-death-clears-debt: step 1: current_player: expected 1, got 0
+PASS EXPL-R39-defuse-only-on-kitten
+SCENARIOS PASS=27 FAIL=11 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=38/38 coverage=1.000 clear=26/34 human_decision=1/4
+CLAIMS mapped=65/65 evaluated=65/65 exceptions=0
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/expl_codex_ag.py --scenarios checks/scenarios/expl_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\exploding_kittens\v2\original_scenarios.json` failed. (See above for error)

@@ -12,7 +12,7 @@ from generation.run_hardened import build_workspace, load_config
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "inputs/games/expl"
-CONFIG = GAME / "run_v2_original.json"
+CONFIG = GAME / "run_v2_original_2.json"
 SUITE = ROOT / "checks/scenarios/expl_v2.json"
 MATRIX = GAME / "scenario_matrix_v2.json"
 
@@ -22,7 +22,7 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         suite = load_suite(SUITE, ROOT)
         matrix = json.loads(MATRIX.read_text(encoding="utf-8"))
         coverage = suite["claim_coverage"]
-        self.assertEqual(matrix["status"], "approved-for-v2-original-packet")
+        self.assertEqual(matrix["status"], "approved-for-v2.1-original-packet")
         self.assertEqual(len(suite["scenarios"]), 38)
         self.assertEqual(sum(item["basis"] == "clear" for item in suite["scenarios"]), 34)
         self.assertEqual(sum(item["basis"] == "human_decision" for item in suite["scenarios"]), 4)
@@ -69,7 +69,7 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         assert spec.loader is not None
         spec.loader.exec_module(module)
         inventory = sorted(Counter(module.COUNTS).elements())
-        base = {"schema": "boardbench/exploding-kittens/state/1", "data": {
+        base = {"schema": "boardbench/exploding-kittens/state/2", "data": {
             "players": [{"id": 0, "alive": True, "hand": inventory[:16], "preview": []}, {"id": 1, "alive": True, "hand": [], "preview": []}],
             "zones": {"deck": inventory[16:], "discard": [], "box": []},
             "current_player": 0, "turns_owed": 1, "phase": "play", "pending": None,
@@ -90,11 +90,13 @@ class ExplodingKittensV2Tests(unittest.TestCase):
 
         state = adapter.setup(None, FakeGame(), {
             "hands": {"0": [], "1": ["nope"]},
-            "deck": ["attack"],
+            "deck": ["attack", "skip"],
             "discard": ["defuse"],
             "phase": "defuse_reinsert",
             "pending": {"type": "defuse", "actor": 0, "kitten": "exploding_kitten"},
         })
+        self.assertEqual(state["data"]["zones"]["deck"], ["skip", "attack"])
+        adapter.check(None, FakeGame(), state, {"deck": ["attack", "skip"]})
         self.assertEqual(Counter(adapter._cards(state["data"])), Counter(adapter.CARD_COUNTS))
 
     def test_original_packet_contains_only_pdf_profile_contract_and_fresh_renders(self):
@@ -118,7 +120,11 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         profile = json.loads((GAME / "environment_profile_v2.json").read_text(encoding="utf-8"))
         manifest = json.loads((GAME / "game_rules_render_manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(profile["player_counts"], {"supported": [2, 3, 4, 5], "unsupported": [1, 6]})
-        self.assertEqual(profile["state_schema"], "boardbench/exploding-kittens/state/1")
+        self.assertEqual(profile["state_schema"], "boardbench/exploding-kittens/state/2")
+        self.assertEqual(profile["action_schema"], "boardbench/exploding-kittens/action/2")
+        self.assertEqual(profile["observation_schema"], "boardbench/exploding-kittens/observation/2")
+        self.assertIn("final item is the top draw", profile["state_data"]["zones"]["deck"][0])
+        self.assertIn("top to bottom", profile["state_data"]["players"][0]["preview"][0])
         self.assertEqual(len(profile["card_ids"]), 13)
         self.assertEqual(manifest["source_sha256"], "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853")
         self.assertEqual(manifest["dpi"], 150)

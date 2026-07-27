@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "game": "expl",
+  "run_id": "v2_original_2",
+  "condition_kind": "original",
+  "adapted_from_run_id": "v2_original_1-invalid-profile",
+  "scope": "Complete supplied German Exploding Kittens NSFW Edition 2018 base game for 2–5 players, including combinations",
+  "source_base_dir": "inputs/games/expl",
+  "sources": [
+    {
+      "source_id": "EXPL-NSFW-DE-2018-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+    }
+  ],
+  "profile": "inputs/games/expl/environment_profile_v2.json",
+  "profile_fixture_self_check": "inputs/games/expl/profile_fixture_self_check_v2.py",
+  "prompt": "inputs/prompts/rulebook_to_python_v2.txt",
+  "contract": "inputs/prompts/environment_contract_v2.md",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "verbosity": "low",
+  "max_repairs": 2,
+  "timeout": 1800,
+  "output_stem": "expl_codex_ag"
+}

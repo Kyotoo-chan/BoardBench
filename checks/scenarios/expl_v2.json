@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "rubric_version": "exploding-kittens-v2-atomic-2026-07-26",
+  "rubric_version": "exploding-kittens-v2.1-atomic-2026-07-27",
   "game": "expl",
   "adapter": "checks/scenario_adapters/expl_v2.py",
   "rulebook": {
@@ -1007,7 +1007,7 @@
                     "type": "reinsert",
                     "actor": 0,
                     "args": {
-                      "position": 0
+                      "position": 2
                     }
                   },
                   "count": 1
@@ -1022,7 +1022,7 @@
               "type": "reinsert",
               "actor": 0,
               "args": {
-                "position": 0
+                "position": 2
               }
             }
           },
@@ -1107,7 +1107,7 @@
               "type": "reinsert",
               "actor": 0,
               "args": {
-                "position": 2
+                "position": 0
               }
             }
           },
@@ -1368,6 +1368,13 @@
               }
             }
           },
+          "settle": [
+            {
+              "while_all_contains_any": ["NÖ", "Nope", "passen", "pass"],
+              "choose_contains_any": ["passen", "pass"],
+              "max_steps": 5
+            }
+          ],
           "expect": {
             "current_player": 2,
             "adapter": {
@@ -1885,7 +1892,6 @@
             }
           },
           "expect": {
-            "current_player": 1,
             "adapter": {
               "phase": "favor_give",
               "pending": {

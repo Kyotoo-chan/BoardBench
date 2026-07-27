@@ -49,7 +49,7 @@ def roundtrip(game, payload, label):
         assert game.action_to_data(game.action_from_data(copy.deepcopy(encoded))) == encoded
     for player in range(payload["data"]["configuration"]["players"]):
         observation = game.observation_to_data(rebuilt, player)
-        assert observation["schema"] == "boardbench/exploding-kittens/observation/1"
+        assert observation["schema"] == "boardbench/exploding-kittens/observation/2"
 
 
 def fixture(base, phase, pending=None):

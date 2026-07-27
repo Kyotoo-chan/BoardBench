@@ -4,47 +4,62 @@
     {
       "id": "A-01",
       "material": true,
-      "source_location": "SPIELAUFBAU, Schritt 7",
+      "source_location": "page 2 / NÖ!",
       "source_basis": "missing",
-      "alternatives": ["Spieler 0 ist Startspieler, wenn kein externer Startspieler angegeben wird", "Die Initialisierung wählt einen zufälligen Startspieler"],
-      "selected": "Spieler 0 ist Startspieler, wenn kein externer Startspieler angegeben wird",
-      "affected_mechanics": ["state_transition"]
+      "alternatives": [
+        "After a card or combination is proposed, each other living player receives one NÖ! opportunity in clockwise order; every played NÖ! restarts such a round after its player, and resolution occurs after a full round of passes.",
+        "Only the next player receives a NÖ! opportunity before the proposed action resolves."
+      ],
+      "selected": "After a card or combination is proposed, each other living player receives one NÖ! opportunity in clockwise order; every played NÖ! restarts such a round after its player, and resolution occurs after a full round of passes.",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
     },
     {
       "id": "A-02",
       "material": true,
-      "source_location": "ANGRIFF / HOPS!",
+      "source_location": "page 2 / ANGRIFF",
       "source_basis": "ambiguous",
-      "alternatives": ["Angriff beendet alle noch geschuldeten Züge des Angreifers und setzt den nächsten Spieler auf genau zwei geschuldete Züge", "Angriff addiert zwei geschuldete Züge zu bereits bestehenden Zugschulden des nächsten Spielers"],
-      "selected": "Angriff beendet alle noch geschuldeten Züge des Angreifers und setzt den nächsten Spieler auf genau zwei geschuldete Züge",
-      "affected_mechanics": ["legal_actions", "state_transition"]
+      "alternatives": [
+        "A successfully resolved Angriff ends the current owed turn and sets the next player's owed turns to exactly two, including when played during an attacked turn.",
+        "A successfully resolved Angriff adds two owed turns to the next player, allowing attack stacks to accumulate."
+      ],
+      "selected": "A successfully resolved Angriff ends the current owed turn and sets the next player's owed turns to exactly two, including when played during an attacked turn.",
+      "affected_mechanics": ["state_transition"]
     },
     {
       "id": "A-03",
       "material": true,
-      "source_location": "NÖ!",
+      "source_location": "page 1 / SO FUNKTIONIERT'S; page 2 / EXPLODING KITTEN",
       "source_basis": "missing",
-      "alternatives": ["Nach einer gespielten Karte erhalten lebende Mitspieler reihum Nö!-Gelegenheiten; jedes Nö! startet die Reihenfolge nach seinem Spieler neu, und erst eine vollständige Passrunde löst die Aktion gemäß der Parität aus", "Nur der unmittelbar nächste Spieler erhält eine einzelne Nö!-Gelegenheit"],
-      "selected": "Nach einer gespielten Karte erhalten lebende Mitspieler reihum Nö!-Gelegenheiten; jedes Nö! startet die Reihenfolge nach seinem Spieler neu, und erst eine vollständige Passrunde löst die Aktion gemäß der Parität aus",
-      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
+      "alternatives": [
+        "When a player explodes, the Exploding Kitten and all cards remaining in that player's hand move to the discard pile.",
+        "When a player explodes, the Exploding Kitten and all cards remaining in that player's hand move to the box."
+      ],
+      "selected": "When a player explodes, the Exploding Kitten and all cards remaining in that player's hand move to the discard pile.",
+      "affected_mechanics": ["state_transition", "elimination"]
     },
     {
       "id": "A-04",
       "material": true,
-      "source_location": "SPIELEN / NÖ!",
-      "source_basis": "ambiguous",
-      "alternatives": ["Die ausgespielten Karten werden vor dem Nö!-Fenster aus der Hand auf den Ablagestapel gelegt und bleiben dort auch bei negierter Aktion", "Die ausgespielten Karten gelangen erst nach dem Nö!-Fenster auf den Ablagestapel"],
-      "selected": "Die ausgespielten Karten werden vor dem Nö!-Fenster aus der Hand auf den Ablagestapel gelegt und bleiben dort auch bei negierter Aktion",
-      "affected_mechanics": ["state_transition", "private_information"]
+      "source_location": "page 2 / WUNSCH",
+      "source_basis": "missing",
+      "alternatives": [
+        "If the chosen player has no cards, Wunsch resolves without transferring a card.",
+        "A player with no cards cannot be chosen as the target of Wunsch."
+      ],
+      "selected": "If the chosen player has no cards, Wunsch resolves without transferring a card.",
+      "affected_mechanics": ["state_transition"]
     },
     {
       "id": "A-05",
       "material": true,
-      "source_location": "EXPLODING KITTEN / SPIELENDE",
+      "source_location": "page 1 / SPIELENDE",
       "source_basis": "missing",
-      "alternatives": ["Beim Explodieren werden die gesamte Hand und das Exploding Kitten offen auf den Ablagestapel gelegt", "Beim Explodieren werden Hand und Exploding Kitten aus dem aktiven Spiel entfernt"],
-      "selected": "Beim Explodieren werden die gesamte Hand und das Exploding Kitten offen auf den Ablagestapel gelegt",
-      "affected_mechanics": ["state_transition", "private_information", "elimination", "terminal_results"]
+      "alternatives": [
+        "Terminal returns are +1 for the sole winner and -1 for every eliminated player; all nonterminal returns are 0.",
+        "Terminal returns are +1 for the sole winner and 0 for every eliminated player; all nonterminal returns are 0."
+      ],
+      "selected": "Terminal returns are +1 for the sole winner and -1 for every eliminated player; all nonterminal returns are 0.",
+      "affected_mechanics": ["scoring"]
     }
   ]
 }

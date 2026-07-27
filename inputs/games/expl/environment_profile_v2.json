@@ -5,9 +5,9 @@
     "supported": [2, 3, 4, 5],
     "unsupported": [1, 6]
   },
-  "state_schema": "boardbench/exploding-kittens/state/1",
-  "action_schema": "boardbench/exploding-kittens/action/1",
-  "observation_schema": "boardbench/exploding-kittens/observation/1",
+  "state_schema": "boardbench/exploding-kittens/state/2",
+  "action_schema": "boardbench/exploding-kittens/action/2",
+  "observation_schema": "boardbench/exploding-kittens/observation/2",
   "note": "Representation-only profile for the supplied German NSFW Edition 2018 base game. It fixes JSON-safe card, state, action and private-observation shapes, not unresolved rule interpretations. Player 0 is only the deterministic API default when no external start player is supplied.",
   "card_ids": [
     "exploding_kitten", "defuse", "attack", "nope", "skip", "favor", "shuffle", "see_future",
@@ -17,8 +17,8 @@
   "state_data": {
     "required": ["configuration", "players", "zones", "current_player", "turns_owed", "phase", "pending", "terminal", "winner", "turn_number", "chance"],
     "configuration": {"players": "int", "seed": "int|null", "variant": "base"},
-    "players": [{"id": "int", "alive": "bool", "hand": ["card_id"], "preview": ["card_id"]}],
-    "zones": {"deck": ["card_id"], "discard": ["card_id"], "box": ["card_id"]},
+    "players": [{"id": "int", "alive": "bool", "hand": ["card_id"], "preview": ["card_id (top to bottom)"]}],
+    "zones": {"deck": ["card_id (bottom to top; final item is the top draw)"], "discard": ["card_id (oldest to newest)"], "box": ["card_id"]},
     "current_player": "int",
     "turns_owed": "int",
     "phase": "phase_id",
@@ -42,7 +42,7 @@
       "play_triple": {"card": "card_id", "target": "int", "requested": "card_id"},
       "play_five": {"cards": ["card_id"], "retrieve": "card_id"},
       "give_card": {"card": "card_id"},
-      "reinsert": {"position": "int"},
+      "reinsert": {"position": "int in 0..deck_size; number of cards below the inserted Kitten (0 = bottom, deck_size = top)"},
       "play_nope": {},
       "pass_nope": {}
     },
@@ -60,7 +60,7 @@
     "turns_owed": "int",
     "phase": "phase_id",
     "pending": "null|public object",
-    "preview": ["card_id"],
+    "preview": ["card_id (top to bottom)"],
     "terminal": "bool",
     "winner": "int|null",
     "turn_number": "int"
