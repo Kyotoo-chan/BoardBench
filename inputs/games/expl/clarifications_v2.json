@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "game": "exploding_kittens",
+  "role": "experimenter_clarification",
+  "authorship": "user-approved BoardBench clarification",
+  "approved_at": "2026-07-27",
+  "base_source": {
+    "source_id": "EXPL-NSFW-DE-2018-RULES",
+    "sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+  },
+  "guardrail": "This artifact resolves only the observed empty-target source gap. It does not restate or weaken the publisher-clear requirement that an eliminated player's complete remaining hand and Exploding Kitten enter the discard pile.",
+  "clarifications": [
+    {
+      "id": "EXPL-D-EMPTY-TARGET",
+      "claim_ids": ["EXPL-X-EMPTY-TARGET"],
+      "decision": "Favor and Pair may target only a living opponent who currently holds at least one card. A living opponent with an empty hand is not a legal target.",
+      "affected_mechanics": ["legal actions", "Favor targeting", "Pair targeting", "pending choice phases"]
+    }
+  ]
+}

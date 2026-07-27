@@ -9,10 +9,12 @@ from pathlib import Path
 from checks.run_scenarios_v4 import load_suite
 from checks.scenario_adapters import expl_v2 as adapter
 from generation.run_hardened import build_workspace, load_config
+from generation.source_condition import validate_pair
 
 ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "inputs/games/expl"
 CONFIG = GAME / "run_v2_original_2.json"
+CLARIFIED_CONFIG = GAME / "run_v2_clarified.json"
 SUITE = ROOT / "checks/scenarios/expl_v2.json"
 MATRIX = GAME / "scenario_matrix_v2.json"
 
@@ -110,6 +112,21 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         self.assertEqual(state["data"]["zones"]["deck"], ["skip", "attack"])
         adapter.check(None, FakeGame(), state, {"deck": ["attack", "skip"]})
         self.assertEqual(Counter(adapter._cards(state["data"])), Counter(adapter.CARD_COUNTS))
+
+    def test_targeted_clarification_is_separate_and_packet_identical(self):
+        original = load_config(CONFIG)["sources"]
+        clarified_config = load_config(CLARIFIED_CONFIG)
+        clarification = json.loads((GAME / "clarifications_v2.json").read_text(encoding="utf-8"))
+        self.assertEqual([item["claim_ids"] for item in clarification["clarifications"]], [["EXPL-X-EMPTY-TARGET"]])
+        self.assertIn("does not restate or weaken", clarification["guardrail"])
+        validate_pair(original, clarified_config["sources"], GAME, GAME)
+        workspace, _images, allowed, _immutable, _renders = build_workspace(clarified_config)
+        try:
+            self.assertIn("clarifications_v2.json", allowed)
+            for excluded in ("claims_v2.json", "decisions_v2.json", "rulefacts_v2.md", "expl_v2.json"):
+                self.assertNotIn(excluded, allowed)
+        finally:
+            shutil.rmtree(workspace, ignore_errors=True)
 
     def test_original_packet_contains_only_pdf_profile_contract_and_fresh_renders(self):
         workspace, images, allowed, _immutable, renders = build_workspace(load_config(CONFIG))

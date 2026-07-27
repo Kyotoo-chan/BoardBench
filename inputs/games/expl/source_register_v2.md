@@ -17,3 +17,7 @@ The complete two-page PDF was freshly rendered without cropping at 150 DPI. Mani
 - Page 2 SHA-256: `be12dbff635adee26efc3d89b36ce790e55e4b15af226f240dde0d45bda1dfea`
 
 Extracted text, legacy facts, historical implementations, historical clarified text and evaluator decisions are derived or excluded artifacts and are not publisher rule sources.
+
+## Targeted clarified condition
+
+After the committed eligible Original run exposed an empty-target deadlock, the Clarified condition keeps the publisher PDF byte-identical and adds only `clarifications_v2.json` (`experimenter_clarification`, SHA-256 `03f295bb413faffb35fd313c20ee46d14aabbc1b40f66db2bc274bca3f6c6a89`). It resolves `EXPL-X-EMPTY-TARGET`: Favor and Pair require a living opponent with at least one card. It does not restate the clear publisher rule requiring an eliminated player's remaining hand and Kitten to enter discard.
