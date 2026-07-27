@@ -1,54 +1,49 @@
-# Exploding Kittens: Original-PDF vs. präzisierte Fassung
+# Exploding Kittens V2: Original-PDF vs. gezielte Klarstellung
 
 ## Ergebnis auf einen Blick
 
-Beide Spielumgebungen bestehen die technischen und gesampelten Stabilitätsprüfungen. Die Implementierung aus dem Original-PDF verfehlt vier getestete Regelinteraktionen. Nach Präzisierung der gefundenen Regelungslücken besteht eine frische Implementierung alle 22 Szenarien; der neutrale Judge-Mittelwert steigt von `0,467` auf `0,953`.
+Der gültige Original-Run besteht den technischen Gate, alle Spielerzahlprüfungen und 35 von 38 Szenarien, erzeugt aber in 2 von 100 Rollouts eine Sackgasse: Favor darf ein leeres Ziel wählen und wartet danach auf eine unmögliche Kartenübergabe. Die gezielte Klarstellung verbietet leere Favor- und Pärchenziele. Eine frische Implementierung besteht danach 37 von 38 Szenarien und 100 von 100 Rollouts.
 
-**Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges und drei Personas mit `gpt-5.6-sol`, Thinking `medium`.
+Die Intervention behebt damit genau den beobachteten Source-Gap-Defekt. Gleichzeitig entsteht im frischen Lauf eine neue klare Abweichung: ein geketteter Angriff weist drei statt genau zwei Züge zu. Eine weitere Verbesserung bei der Eliminierungsablage ist nicht der Klarstellung zurechenbar.
 
-| Evidenz | Original-PDF | Präzisierte Fassung |
+| Evidenzgruppe | Original-PDF | PDF + gezielte Klarstellung |
 |---|---:|---:|
-| Technical Gate (**EV1**) | 4/4 | 4/4 |
-| Runtime Robustness (**EV2**) | 100/100 | 100/100 |
-| Interface (**EV3**) | 1,000 | 1,000 |
-| Klare Regeln (**EV4**) | 11/12 | 12/12 |
-| Klarstellungsabhängige Regeln (**EV5**) | 7/10 | 10/10 |
-| Szenarioabdeckung (**EV6**) | 22/22 | 22/22 |
-| Neutraler Judge-Mittelwert (**EV7**) | 0,467 (SD 0,042) | 0,953 (SD 0,055) |
-| Persona-Reviews (**EV8**, kein Score) | zusätzliche Regel- und Randfallbefunde | keine belegten kritischen/großen Defekte; 3 offene Fragen |
-| Deklarierte materielle Annahmen (**EV9**, kein Score) | 3 Deklarationen | 2 Deklarationen |
+| Agentischer Gate | PASS | PASS (1 Pre-Eval-Reparatur) |
+| Technische Checks 01–04 | 4/4 | 4/4 |
+| Robustheit, 100 Rollouts | 98/100 | 100/100 |
+| Interface | 12.436/12.436 | 15.589/15.589 |
+| Spielerzahl-Probes | 6/6 | 6/6 |
+| Klare Regeln | 32/34 | 33/34 |
+| Human-Decision-Regeln | 3/4 | 4/4 |
+| Szenarioabdeckung | 38/38 | 38/38 |
+| Clear-Claim-Mapping/Evaluation | 65/65 | 65/65 |
+| Neutraler Judge-Mittelwert | 0,813 (SD 0,012) | 0,907 (SD 0,012) |
 
-<img src="../../plots/exploding_kittens/pdf_vs_clarified/evidence_profile.png" alt="Original-PDF im Vergleich zur präzisierten Fassung" width="50%">
+*Die Evidenzgruppen werden nicht zu einem Gesamtscore kombiniert. Szenarioabdeckung bedeutet nur, dass alle konfigurierten Fälle ausgewertet wurden. Claim-Mapping ist kein Vollständigkeitsbeweis jeder Assertion.*
 
-*EV1–EV3 sind technische Kontrollen; EV6 bestätigt vollständige Szenarioabdeckung, nicht Korrektheit. EV4, EV5 und EV7 zeigen den für die Quellenänderung relevanten Unterschied.*
+## Bestätigte Veränderungen
 
-## Erkannte Abweichungen des Originals
+- **Gezielter Erfolg:** `EXPL-R27` wechselt von FAIL zu PASS; leere Hände sind keine legalen Favor-/Pärchenziele mehr. Die zugehörige Runtime-Sackgasse verschwindet.
+- **Nicht zurechenbare Verbesserung:** `EXPL-R11` und `EXPL-R12` wechseln zu PASS; die vollständige Hand eines eliminierten Spielers wird nun abgelegt. Diese Publisher-Regel war nicht Teil der Klarstellung.
+- **Neue klare Regression:** `EXPL-R18` wechselt zu FAIL; ein Gegenangriff erzeugt drei statt genau zwei geschuldete Züge.
 
-- **EV4:** Fünf-Karten-Kombination bei anfangs leerem Ablagestapel.
-- **EV5:** verbleibende Angriffszüge nach einer Entschärfung.
-- **EV5:** Ankündigung der Drilling-Parameter vor NÖ!/DOCH!-Reaktionen.
-- **EV5:** wiederhergestellte Aktion gegen ein inzwischen leeres Ziel.
+Alle drei Original-Judges bestätigen die beiden Originaldefekte. Alle drei Clarified-Judges bestätigen ausschließlich die Angriffsketten-Regression. Bei je einer frischen Implementierung pro Bedingung (`n=1`) ist dies kein allgemeiner Kausal- oder Varianznachweis.
 
-Die präzisierte Implementierung besteht EV1–EV6 vollständig. Das stützt die Diagnose, dass die Quellspezifikation zu Problemen der ursprünglichen Übersetzung beigetragen hat. Mit einem Implementierungslauf pro Bedingung (`n=1`) ist dies noch kein Varianz- oder alleiniger Kausalitätsnachweis.
+## Ressourcen
 
-## Offene qualitative Fragen (EV8, nicht als Fail gewertet)
-
-- Darf eine Katzenkarte einzeln und ohne Effekt gespielt werden?
-- Darf ein Drilling einen Spieler ohne Handkarten als Ziel wählen?
-- Wie lange soll unverändertes Vorschauwissen digital sichtbar bleiben?
-
-## Aufwand
-
-| Ressource | Original-PDF | Präzisierte Fassung |
+| Messwert | Original | Clarified |
 |---|---:|---:|
-| Implementierungsmodell | `gpt-5.6-sol` (`low`) | `gpt-5.6-sol` (`low`) |
-| Reviewmodell für Judges/Personas | `gpt-5.6-sol` (`medium`) | `gpt-5.6-sol` (`medium`) |
-| LLM-Aufrufe | 7 | 7 |
-| Input-Tokens (davon gecacht) | 1.035.093 (802.304) | 1.523.405 (1.251.584) |
-| Output-Tokens | 48.345 | 44.734 |
-| API-äquivalente Kostenschätzung | 3,02 USD | 3,33 USD |
-| Python-Codezeilen | 187 | 320 |
+| Modellaufrufe inklusive Judges | 4 | 5 |
+| Provider-Zeit | 846,120 s | 856,884 s |
+| Input-Tokens (gecacht) | 1.704.563 (1.460.992) | 1.857.484 (1.587.712) |
+| Output-/Reasoning-Tokens | 32.106 / 13.704 | 31.738 / 12.726 |
+| API-äquivalente Schätzung | 2,91 USD | 3,09 USD |
+| Python-Codezeilen | 504 | 486 |
+
+Der Clarified-Lauf enthält zwei Implementierungsaufrufe, weil der erste vor der Evaluation keine Pflichtartefakte erzeugte und evaluatorneutral repariert wurde. Tatsächliche OAuth-Abonnementkosten sind nicht verfügbar.
 
 ## Detailansicht
 
-**[Alle Evaluationen, Checks 01–06, 22 Szenarien, Einzel-Judges, Personas und Rohpfade öffnen](DETAILS.md)**
+**[Methodik, Defekte, Annahmen, Provenienz und Artefakte öffnen](DETAILS.md)**
+
+Maschinennahe Profile: [`v2/original_result.md`](v2/original_result.md) · [`v2/clarified_result.md`](v2/clarified_result.md) · [Vergleich](v2/COMPARISON.md)

@@ -1,0 +1,765 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "v2_clarified_1",
+    "source_path": "../../../../inputs/games/expl/game_rules.pdf",
+    "source_format": "pdf+experimenter_clarification",
+    "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "8a0c4acd4da77cd5f40e2bc2c59f2924f481a5fc565c19085f59428962ef5352",
+    "adapter_sha256": "ec9414df50150a6e570cb62021208854da210769471e3ab0fbff9c88df6cd14d",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "hardened-iteration-v1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 66,
+    "ambiguous": 4,
+    "missing": 5,
+    "conflicting": 1,
+    "untestable": 2
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_basis_scenarios": {
+      "values": [
+        0.9705882352941176
+      ],
+      "mean": 0.9705882352941176,
+      "sample_sd": null
+    },
+    "human_decision_basis_scenarios": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "scenario_evaluated_coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.9,
+        0.9,
+        0.92
+      ],
+      "mean": 0.9066666666666667,
+      "sample_sd": 0.011547005383792526,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "expl_codex_ag": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 3,
+    "interpretation_agreement": {
+      "Schlachtplan / Angriff": {
+        "An Attack transfers the current obligation and adds one, so the next player owes the current turns_owed plus one turns.": 1
+      },
+      "Schlachtplan / NÖ!": {
+        "After a Nope, every other living player gets a new reaction opportunity; the chain resolves after all eligible players pass.": 1
+      },
+      "Schlachtplan / Spielaufbau, Schritt 7": {
+        "The API uses player 0 as start player because no external physical start-player criterion is supplied.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Schlachtplan / Angriff",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "An Attack transfers the current obligation and adds one, so the next player owes the current turns_owed plus one turns.",
+          "An Attack always makes the next player take exactly two turns, regardless of any existing obligation."
+        ],
+        "selected": "An Attack transfers the current obligation and adds one, so the next player owes the current turns_owed plus one turns.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Schlachtplan / NÖ!",
+        "source_basis": "missing",
+        "alternatives": [
+          "After a Nope, every other living player gets a new reaction opportunity; the chain resolves after all eligible players pass.",
+          "Only the player whose action was Noped gets the next reaction opportunity."
+        ],
+        "selected": "After a Nope, every other living player gets a new reaction opportunity; the chain resolves after all eligible players pass.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Schlachtplan / Spielaufbau, Schritt 7",
+        "source_basis": "missing",
+        "alternatives": [
+          "The API uses player 0 as start player because no external physical start-player criterion is supplied.",
+          "The seeded chance mechanism randomly chooses the start player."
+        ],
+        "selected": "The API uses player 0 as start player because no external physical start-player criterion is supplied.",
+        "affected_mechanics": [
+          "state_transition"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        5.0
+      ],
+      "mean": 5.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        856.884
+      ],
+      "mean": 856.884,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        1857484.0
+      ],
+      "mean": 1857484.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        1587712.0
+      ],
+      "mean": 1587712.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        31738.0
+      ],
+      "mean": 31738.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        12726.0
+      ],
+      "mean": 12726.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        3.094856
+      ],
+      "mean": 3.094856,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        486.0
+      ],
+      "mean": 486.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      3.094856
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technical gate 4/4; robustness 100/100; 33/34 configured clear-basis and 4/4 human-decision-basis scenarios passed; all 38 scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "expl_codex_ag",
+      "protocol": "hardened-iteration-v1",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 1,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "exploding-kittens-v2.2-atomic-2026-07-27",
+        "suite_sha256": "8a0c4acd4da77cd5f40e2bc2c59f2924f481a5fc565c19085f59428962ef5352",
+        "adapter_sha256": "ec9414df50150a6e570cb62021208854da210769471e3ab0fbff9c88df6cd14d",
+        "counts": {
+          "PASS": 37,
+          "FAIL": 1,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 33,
+          "evaluated": 34,
+          "score": 0.9705882352941176
+        },
+        "human_decision": {
+          "passed": 4,
+          "evaluated": 4,
+          "score": 1.0
+        },
+        "results": [
+          {
+            "id": "EXPL-R01-setup-two",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-INV-TOTAL",
+              "EXPL-C-INV-KITTEN",
+              "EXPL-C-INV-DEFUSE",
+              "EXPL-C-INV-ATTACK",
+              "EXPL-C-INV-NOPE",
+              "EXPL-C-INV-SKIP",
+              "EXPL-C-INV-FAVOR",
+              "EXPL-C-INV-SHUFFLE",
+              "EXPL-C-INV-FUTURE",
+              "EXPL-C-INV-CATS",
+              "EXPL-C-PLAYERS",
+              "EXPL-C-SET-ASIDE",
+              "EXPL-C-DEAL-SEVEN",
+              "EXPL-C-START-DEFUSE",
+              "EXPL-C-START-EIGHT",
+              "EXPL-C-HANDS-HIDDEN",
+              "EXPL-C-SETUP-KITTENS",
+              "EXPL-C-BOX-KITTENS",
+              "EXPL-C-PILE-HIDDEN",
+              "EXPL-C-DEFUSE-2",
+              "EXPL-C-START-PLAYER"
+            ]
+          },
+          {
+            "id": "EXPL-R02-setup-three",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PLAYERS",
+              "EXPL-C-SET-ASIDE",
+              "EXPL-C-DEAL-SEVEN",
+              "EXPL-C-START-DEFUSE",
+              "EXPL-C-START-EIGHT",
+              "EXPL-C-HANDS-HIDDEN",
+              "EXPL-C-SETUP-KITTENS",
+              "EXPL-C-BOX-KITTENS",
+              "EXPL-C-PILE-HIDDEN",
+              "EXPL-C-DEFUSE-3-5"
+            ]
+          },
+          {
+            "id": "EXPL-R03-setup-four",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PLAYERS",
+              "EXPL-C-SET-ASIDE",
+              "EXPL-C-DEAL-SEVEN",
+              "EXPL-C-START-DEFUSE",
+              "EXPL-C-START-EIGHT",
+              "EXPL-C-HANDS-HIDDEN",
+              "EXPL-C-SETUP-KITTENS",
+              "EXPL-C-BOX-KITTENS",
+              "EXPL-C-PILE-HIDDEN",
+              "EXPL-C-DEFUSE-3-5"
+            ]
+          },
+          {
+            "id": "EXPL-R04-setup-five",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PLAYERS",
+              "EXPL-C-SET-ASIDE",
+              "EXPL-C-DEAL-SEVEN",
+              "EXPL-C-START-DEFUSE",
+              "EXPL-C-START-EIGHT",
+              "EXPL-C-HANDS-HIDDEN",
+              "EXPL-C-SETUP-KITTENS",
+              "EXPL-C-BOX-KITTENS",
+              "EXPL-C-PILE-HIDDEN",
+              "EXPL-C-DEFUSE-3-5"
+            ]
+          },
+          {
+            "id": "EXPL-R05-player-range",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PLAYERS"
+            ]
+          },
+          {
+            "id": "EXPL-R06-pass-draw-advance",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PASS",
+              "EXPL-C-DRAW-END",
+              "EXPL-C-CLOCKWISE"
+            ]
+          },
+          {
+            "id": "EXPL-R07-play-card-stays-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PLAY-CARD",
+              "EXPL-C-MULTI-PLAY"
+            ]
+          },
+          {
+            "id": "EXPL-R08-multiple-pre-draw-plays",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-MULTI-PLAY",
+              "EXPL-C-PLAY-CARD"
+            ]
+          },
+          {
+            "id": "EXPL-R09-public-count-private-hands",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-HANDS-HIDDEN",
+              "EXPL-C-PILE-HIDDEN",
+              "EXPL-C-PILE-COUNT"
+            ]
+          },
+          {
+            "id": "EXPL-R10-empty-hand-continues",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-NO-HAND-LIMIT",
+              "EXPL-C-EMPTY-HAND",
+              "EXPL-C-DRAW-END"
+            ]
+          },
+          {
+            "id": "EXPL-R11-explosion-eliminates",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-KITTEN-REVEAL",
+              "EXPL-C-KITTEN-ELIMINATE",
+              "EXPL-C-ELIMINATE-DISCARD",
+              "EXPL-C-CLOCKWISE"
+            ]
+          },
+          {
+            "id": "EXPL-R12-last-survivor-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-KITTEN-ELIMINATE",
+              "EXPL-C-ELIMINATE-DISCARD",
+              "EXPL-C-TERMINAL",
+              "EXPL-C-WINNER"
+            ]
+          },
+          {
+            "id": "EXPL-R13-defuse-top",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-DEFUSE-SAVES",
+              "EXPL-C-DEFUSE-DISCARD",
+              "EXPL-C-KITTEN-REINSERT",
+              "EXPL-C-DEFUSE-END"
+            ]
+          },
+          {
+            "id": "EXPL-R14-defuse-bottom-order",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-KITTEN-REINSERT",
+              "EXPL-C-REINSERT-ORDER",
+              "EXPL-C-DEFUSE-END"
+            ]
+          },
+          {
+            "id": "EXPL-R15-defuse-under-attack",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-DEFUSE-END",
+              "EXPL-C-ATTACK-TWO"
+            ]
+          },
+          {
+            "id": "EXPL-R16-attack-two-turns",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-ATTACK-END",
+              "EXPL-C-ATTACK-TWO"
+            ]
+          },
+          {
+            "id": "EXPL-R17-first-attacked-draw",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-ATTACK-TWO",
+              "EXPL-C-DRAW-END"
+            ]
+          },
+          {
+            "id": "EXPL-R18-attack-chain",
+            "status": "FAIL",
+            "message": "step 1: turns_owed: expected 2, got 3",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-ATTACK-CHAIN",
+              "EXPL-C-ATTACK-END"
+            ]
+          },
+          {
+            "id": "EXPL-R19-skip-normal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-SKIP-END"
+            ]
+          },
+          {
+            "id": "EXPL-R20-skip-one-owed",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-SKIP-ATTACK",
+              "EXPL-C-SKIP-END"
+            ]
+          },
+          {
+            "id": "EXPL-R21-two-skips-two-owed",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-SKIP-ATTACK"
+            ]
+          },
+          {
+            "id": "EXPL-R22-one-nope-cancels",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-NOPE-CANCEL",
+              "EXPL-C-NOPE-OFFTURN",
+              "EXPL-C-NOPE-DISCARD",
+              "EXPL-C-NOPED-CONTINUE"
+            ]
+          },
+          {
+            "id": "EXPL-R23-two-nopes-restore",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-NOPE-PARITY",
+              "EXPL-C-NOPE-DISCARD"
+            ]
+          },
+          {
+            "id": "EXPL-R24-three-nopes-cancel",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-NOPE-PARITY",
+              "EXPL-C-NOPE-DISCARD"
+            ]
+          },
+          {
+            "id": "EXPL-R25-nope-exceptions",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-NOPE-EXCEPT"
+            ]
+          },
+          {
+            "id": "EXPL-R26-favor-target-chooses",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-FAVOR-GIVE",
+              "EXPL-C-FAVOR-CHOICE"
+            ]
+          },
+          {
+            "id": "EXPL-R27-empty-target-illegal",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "EXPL-X-EMPTY-TARGET"
+            ]
+          },
+          {
+            "id": "EXPL-R28-shuffle-conserves",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-SHUFFLE",
+              "EXPL-C-PLAY-CARD",
+              "EXPL-C-MULTI-PLAY"
+            ]
+          },
+          {
+            "id": "EXPL-R29-future-top-three-private",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-FUTURE-THREE",
+              "EXPL-C-FUTURE-ORDER",
+              "EXPL-C-FUTURE-PRIVATE"
+            ]
+          },
+          {
+            "id": "EXPL-R30-future-short-pile",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "EXPL-M-SHORT-FUTURE"
+            ]
+          },
+          {
+            "id": "EXPL-R32-pair-random-steal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PAIR-ANY",
+              "EXPL-C-PAIR-STEAL"
+            ]
+          },
+          {
+            "id": "EXPL-R33-action-pair-suppresses",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-PAIR-ANY",
+              "EXPL-C-COMBO-SUPPRESS",
+              "EXPL-C-PAIR-STEAL"
+            ]
+          },
+          {
+            "id": "EXPL-R34-triple-present",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-TRIPLE",
+              "EXPL-C-TRIPLE-HAS",
+              "EXPL-C-COMBO-SUPPRESS"
+            ]
+          },
+          {
+            "id": "EXPL-R35-triple-absent",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-TRIPLE",
+              "EXPL-C-TRIPLE-LACKS"
+            ]
+          },
+          {
+            "id": "EXPL-R36-five-retrieve-existing",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-FIVE-DISTINCT",
+              "EXPL-C-FIVE-RETRIEVE"
+            ]
+          },
+          {
+            "id": "EXPL-R37-five-suppresses-components",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "EXPL-C-FIVE-DISTINCT",
+              "EXPL-C-COMBO-SUPPRESS"
+            ]
+          },
+          {
+            "id": "EXPL-R38-attack-death-clears-debt",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "EXPL-M-ATTACK-DEATH-DEBT"
+            ]
+          },
+          {
+            "id": "EXPL-R39-defuse-only-on-kitten",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "EXPL-A-DEFUSE-TRIGGER"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.9,
+        0.9,
+        0.92
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Schlachtplan / Angriff",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "An Attack transfers the current obligation and adds one, so the next player owes the current turns_owed plus one turns.",
+            "An Attack always makes the next player take exactly two turns, regardless of any existing obligation."
+          ],
+          "selected": "An Attack transfers the current obligation and adds one, so the next player owes the current turns_owed plus one turns.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Schlachtplan / NÖ!",
+          "source_basis": "missing",
+          "alternatives": [
+            "After a Nope, every other living player gets a new reaction opportunity; the chain resolves after all eligible players pass.",
+            "Only the player whose action was Noped gets the next reaction opportunity."
+          ],
+          "selected": "After a Nope, every other living player gets a new reaction opportunity; the chain resolves after all eligible players pass.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Schlachtplan / Spielaufbau, Schritt 7",
+          "source_basis": "missing",
+          "alternatives": [
+            "The API uses player 0 as start player because no external physical start-player criterion is supplied.",
+            "The seeded chance mechanism randomly chooses the start player."
+          ],
+          "selected": "The API uses player 0 as start player because no external physical start-player criterion is supplied.",
+          "affected_mechanics": [
+            "state_transition"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 5,
+        "provider_seconds": 856.884,
+        "input_tokens": 1857484,
+        "cached_input_tokens": 1587712,
+        "output_tokens": 31738,
+        "reasoning_tokens": 12726,
+        "money": null,
+        "api_equivalent_usd": 3.094856,
+        "code_lines": 486
+      },
+      "hashes": {
+        "agentic_evidence": "b4fcfb8c395c633685376a5e8b23fe96049c1676311cc7b6126638a0b612c991",
+        "checks": "c8d580f246adbc1e7bfa7dc58129792ea5bd2e43942bb240c2eeb0773c6e4db4",
+        "scenarios": "ad328b123e79abdd71aa73ecc208f2aa77f789037e7574c3c23cf24758ca0a58",
+        "usage": "f4562115615b232c9a69b279d5d46ebea403b9f87c5d73c2a5fa0136bec84a40",
+        "code": "c71840ff7630ea6b10923897f435d127cc00db542a392a734edc770de8bf1415"
+      }
+    }
+  ]
+}

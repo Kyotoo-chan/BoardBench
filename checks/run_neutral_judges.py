@@ -41,10 +41,21 @@ def judge(index: int, args: argparse.Namespace) -> None:
                 {"source_id": args.claims_source_id, "role": "atomic_claim_inventory", "packet_name": claims.name, "sha256": sha256(claims)},
             ],
         }
+        packet_names = [rules.name, facts.name, claims.name, code.name]
+        if args.supplement:
+            supplement = workspace / f"canonical_supplement{args.supplement.suffix.lower()}"
+            shutil.copy2(args.supplement, supplement)
+            manifest["sources"].append({
+                "source_id": args.supplement_source_id,
+                "role": args.supplement_role,
+                "packet_name": supplement.name,
+                "sha256": sha256(supplement),
+            })
+            packet_names.append(supplement.name)
         (workspace / "SOURCE_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         images = render_pdf_pages(rules, workspace / "canonical_rulebook_pages", dpi=150)
         review = (ROOT / "inputs/prompts/llm_judge_review.md").read_text(encoding="utf-8")
-        prompt = f"""You are one of three fresh, mutually blind neutral BoardBench rule reviewers. Work only with SOURCE_MANIFEST.json, canonical_rulebook.pdf, its attached 150-DPI page images and render manifest, canonical_rulefacts.md, canonical_claims.json, and implementation.py. Respect the declared base-game scope. Do not inspect checks, scenarios, scores, prior reviews, other implementations, or other source conditions. Do not use outside game knowledge. Cite canonical claim IDs where applicable.\n\n{review}"""
+        prompt = f"""You are one of three fresh, mutually blind neutral BoardBench rule reviewers. Work only with SOURCE_MANIFEST.json, its listed sources, the attached 150-DPI rulebook page images and render manifest, and implementation.py. Assigned files: {', '.join(packet_names)}. Respect the declared base-game scope and source roles. Do not inspect checks, scenarios, scores, prior reviews, other implementations, or other source conditions. Do not use outside game knowledge. Cite canonical claim IDs where applicable.\n\n{review}"""
         run_codex(
             prompt=prompt,
             cwd=workspace,
@@ -77,10 +88,15 @@ def main() -> int:
     parser.add_argument("--rulebook-source-id", required=True)
     parser.add_argument("--rulefacts-source-id", required=True)
     parser.add_argument("--claims-source-id", required=True)
+    parser.add_argument("--supplement", type=Path, help="Optional assigned clarification or companion source")
+    parser.add_argument("--supplement-source-id")
+    parser.add_argument("--supplement-role", default="experimenter_clarification")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--effort", default="medium")
     args = parser.parse_args()
-    for path in (args.rulebook, args.rulefacts, args.claims, args.code):
+    if bool(args.supplement) != bool(args.supplement_source_id):
+        parser.error("--supplement and --supplement-source-id must be supplied together")
+    for path in (args.rulebook, args.rulefacts, args.claims, args.code, *([args.supplement] if args.supplement else [])):
         if not path.is_file():
             parser.error(f"missing file: {path}")
     args.output_dir.mkdir(parents=True, exist_ok=True)

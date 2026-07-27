@@ -1,70 +1,68 @@
-score: 0.82, confidence: high. The module implements setup, turn debt, actions, information boundaries, combinations, and terminal resolution well. Two material defects remain: exploded hands are not discarded, and empty-handed Favor/Pair targets remain legal—with Favor able to deadlock the game. No critical defect was found.
+## 1. Score
 
-## Findings
+**score: 0.90 — confidence: high**
 
-### Major — Explosion fails to discard the eliminated player’s hand
+The module covers setup, ordinary turn flow, card effects, combinations, private observations, elimination, and terminal returns well across the packet’s 78 claims. One material defect affects chained Attacks: an attacked player who immediately plays Attack assigns three turns instead of exactly two. Explicitly unresolved matters were not scored as defects.
 
-- Canonical fact: `EXPL-C-ELIMINATE-DISCARD`
+## 2. Findings
+
+### Major — Chained Attack assigns excessive turn debt
+
+- Canonical fact: `EXPL-C-ATTACK-CHAIN`
 - Evidence type: `rule_quote`
-- Source: `EXPL-NSFW-DE-2018-RULES`, PDF page 2
-- Exact evidence: “Alle deine restlichen Karten und das Exploding Kitten wandern auf den Ablagestapel.”
-- Conflicting transition: [`Game._draw()`](/C:/Users/benti/AppData/Local/Temp/.ctx-mode-y4Kyjx/boardbench_expl_codex_ag_judge_2_00u6xr3b/implementation.py:220)
-- Expected: When an undefused Kitten eliminates a player, the Kitten and every card remaining in that player’s hand enter the discard pile; the hand becomes empty.
-- Implemented: Only the Kitten is appended to discard before the player is marked dead. The eliminated player retains the rest of their hand.
-- Impact: Discard contents, public hand counts, card conservation, and later five-card retrieval choices are wrong.
+- Source: `EXPL-NSFW-DE-2018-RULES`
+- Locator: canonical_rulebook.pdf, page 2
+- Exact evidence: “Spielt dein Opfer dabei selbst eine Karte „Angriff“ aus, ist er nicht mehr an der Reihe und der nächste Spieler muss zwei Spielzüge ausführen.”
+- Conflicting code: `Game._resolve_proposed`, Attack transition at [implementation.py](C:/Users/benti/AppData/Local/Temp/.ctx-mode-qMUh81/boardbench_expl_codex_ag_judge_2_ub2bvbnb/implementation.py:194), particularly `s.turns_owed + 1`.
+- Expected: An attacked player’s Attack terminates that player’s obligation and assigns the following living player exactly two turns.
+- Implemented: If the attacked player still owes two turns, the code sets the next player’s debt to `2 + 1 = 3`. The normal, non-chained Attack case happens to produce the correct value of two.
 
-### Major — Empty-handed players are offered as Favor and Pair targets
+No critical or minor contradictions were found.
 
-- Canonical fact: `EXPL-X-EMPTY-TARGET`
-- Evidence type: `human_decision`
-- Source: `EXPL-V2-CLAIMS`, JSON Pointer `/claims/71/expectation`
-- Exact evidence: “Evaluator decision: empty-handed players are illegal Favor and Pair targets.”
-- Conflicting symbols: [`Game.legal_actions()`](/C:/Users/benti/AppData/Local/Temp/.ctx-mode-y4Kyjx/boardbench_expl_codex_ag_judge_2_00u6xr3b/implementation.py:134), [`Game._resolve()`](/C:/Users/benti/AppData/Local/Temp/.ctx-mode-y4Kyjx/boardbench_expl_codex_ag_judge_2_00u6xr3b/implementation.py:249)
-- Expected: Empty-handed opponents are excluded from both Favor and Pair target choices.
-- Implemented: `opponents` includes every living opponent regardless of hand size. A Pair silently steals nothing; a Favor enters `favor_give`, where the empty target has no legal `give_card` action, producing a deadlock.
-- Provenance note: This is an adjudication-dependent deviation, not a contradiction of an unambiguous printed targeting rule.
-
-No critical or minor findings.
-
-## Rule-area coverage
+## 3. Rule-area coverage
 
 | Rule area | Result | Notes |
 |---|---|---|
-| Inventory and 2–5 player setup | Pass | Counts, dealing, Defuses, Kittens, box, and pile arithmetic agree with the packet. |
-| Turn flow and clockwise advancement | Pass | Pass/draw, repeated card play, and living-player advancement are represented. |
-| Kitten and Defuse | Partial | Reveal, automatic save, reinsertion, and turn completion work; explosion does not discard the hand. |
-| Attack and Skip | Pass | Two-turn debt, Attack chaining, and one-debt-per-Skip behavior agree with approved facts. |
-| Nope | Pass for source-clear claims | Cancellation, parity, off-turn use, retained discards, and continuation are represented. Priority details remain unresolved. |
-| Favor | Partial | Target chooses the transferred card, but empty-target legality can deadlock. |
-| Shuffle and See the Future | Pass | Pile conservation and private ordered preview are represented, including short piles. |
-| Pair, triple, five-card combination | Partial | Core effects and component-effect suppression work; Pair permits an adjudication-illegal empty target. |
-| Private/public information | Pass | Hands and previews are private; pile size and discard are public. |
-| Terminal state and returns | Pass | Sole survivor wins immediately; returns consistently distinguish winner and losers. |
+| Inventory and 2–5 player setup | Covered | Correct 56-card inventory, hands, Kittens, Defuses, box, and pile arithmetic (`EXPL-C-INV-*`, `EXPL-C-SET-*`). |
+| Normal turn flow | Covered | Zero-or-more plays, mandatory top draw, clockwise advancement, empty hands (`EXPL-C-PASS` through `EXPL-C-EMPTY-HAND`). |
+| Kitten and Defuse | Covered | Elimination, complete discard, reinsertion positions/order, and turn completion are represented. Automatic Defuse use is permitted by the unresolved optionality. |
+| Attack and Skip | Partial | Normal Attack and Skip debt work; immediate chained Attack incorrectly creates three turns. |
+| Nope reactions | Covered with source questions | Cancellation, parity, off-turn use, discard retention, and continuation are modeled. Response priority is packet-unresolved. |
+| Favor | Covered | Target chooses one transferred card; empty targets are excluded per `EXPL-D-EMPTY-TARGET`. |
+| Shuffle / See the Future | Covered | Shuffle conserves the pile; preview is private and top-to-bottom. |
+| Pair / Triple | Covered | Same-title pair random theft and requested-title triple behavior are represented. |
+| Five-card combination | Covered with source questions | Five distinct titles and effect suppression work. Retrieval is limited to cards already discarded before the combination. |
+| Information and chance | Covered | Hands and previews are private in player observations; pile size and discard are public. |
+| Elimination / terminal / returns | Covered | Sole survivor becomes winner immediately; returns identify winner and losers. |
+| Serialization | Covered | State, action, and observation round-trip structures are present, though broad semantic invariant validation is outside printed-rule scope. |
 
-## Deterministic scenarios to add
+## 4. Missing deterministic scenarios
 
-The existing test corpus was out of scope and was not inspected. Add scenarios for:
+Add or ensure coverage for:
 
-1. Undefused explosion with several cards in hand: verify the entire hand and Kitten enter discard and the dead hand is empty.
-2. Empty-handed opponent: verify neither Favor nor Pair targeting that opponent is legal.
-3. Favor attempted against an empty hand: verify no `favor_give` state with zero legal actions is reachable.
-4. Explosion-hand discard followed by a five-card retrieval: verify one of the eliminated player’s former cards is retrievable.
-5. Empty target created during a Nope chain, once the unresolved restoration policy is decided.
+1. An attacked player plays Attack before completing either owed turn: the following player must owe exactly two turns, not three.
+2. The same chain with the Attack Noped and double-Noped, confirming debt changes only when the Attack ultimately resolves.
+3. Chained Attack after one owed turn has already been consumed, again confirming the replacement debt is exactly two.
+4. Empty-target clarification cases for both Favor and Pair using `EXPL-D-EMPTY-TARGET`.
+5. Five-card retrieval of a pre-existing discard while confirming all five component instructions remain suppressed.
+6. See the Future followed by Shuffle, defining what the persistent `preview` field communicates after the known order is destroyed.
 
-## Material questions for a human
+## 5. Material questions for a human
 
-- `EXPL-A-DEFUSE-OPTIONAL`: The implementation automatically consumes Defuse whenever available. The packet leaves voluntary death unresolved; should a player receive a choice?
-- `EXPL-M-NOPE-ANNOUNCEMENT`: The pending action publicly exposes all parameters, including a triple’s requested title, before reactions. Must every parameter be announced before the Nope window?
-- `EXPL-M-NOPE-EMPTY-RESTORE`: If a targeted action is restored after its target spends its last card as a Nope, should it fizzle, require retargeting, or resolve another way?
-- `EXPL-A-FIVE-SELF-RETRIEVE`: Immediate retrieval of one of the five just-discarded components remains unresolved. The current module generally does not offer that newly discarded component unless another copy was already present; this was not scored.
+These are not scored contradictions:
 
-```text
-score: 0.82
+- `EXPL-A-FIVE-SELF-RETRIEVE`: The implementation cannot retrieve one of the five newly discarded components. The packet explicitly leaves immediate self-retrieval unresolved.
+- `EXPL-M-NOPE-EMPTY-RESTORE`: A Favor restored by Nope parity can enter `favor_give` after its target spent its last card as a Nope, leaving no legal action. The packet does not determine how this case resolves.
+- `EXPL-A-FIVE-KITTEN-SAFE`: The implementation can retrieve a discarded Exploding Kitten into a hand; subsequent hand behavior is unresolved.
+- `EXPL-A-DEFUSE-OPTIONAL`: Defuse is consumed automatically whenever available. The source does not decide whether voluntary elimination is permitted.
+- `EXPL-M-NOPE-PRIORITY`: The implementation imposes a deterministic responder order, but the rulebook supplies no authoritative priority/window-closing protocol.
+- The implementation excludes empty-handed Triple targets, while the approved clarification expressly governs only Favor and Pair. This is outcome-neutral when the requested card cannot exist, but its legality is not explicitly settled.
+
+score: 0.90
 confidence: high
 critical_issues: 0
-major_issues: 2
+major_issues: 1
 minor_issues: 0
 needs_rulebook_clarification: true
 needs_code_change: true
 needs_more_tests: true
-```

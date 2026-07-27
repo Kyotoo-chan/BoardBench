@@ -1,162 +1,108 @@
-# Exploding Kittens: detaillierte Auswertung
+# Exploding Kittens V2: detaillierte Auswertung
 
 [← Kurzüberblick](README.md)
 
-**Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges und drei Personas mit `gpt-5.6-sol`, Thinking `medium`. Alle aktuellen Vergleichsläufe wurden direkt über die native Codex-CLI ausgeführt.
+**Modellsetup:** Beide Implementierungen `gpt-5.6-sol`, Thinking `low`; je drei gegenseitig blinde neutrale Judges `gpt-5.6-sol`, Thinking `medium`. Beide Bedingungen verwenden dasselbe vollständige Publisher-PDF, Contract-v2-Profil, Prompt und dieselbe V2.2-Rubrik. Clarified erhält zusätzlich ausschließlich `clarifications_v2.json`.
 
-## Auswertungsfolge
+## Studiendesign
 
-1. Für Original-PDF und präzisierte Fassung wird jeweils eine frische, isolierte Implementierung erzeugt.
-2. Checks 01–06 prüfen technische Ausführbarkeit, Robustheit und Interface (`EV1–EV3`).
-3. 22 zitierte Szenarien prüfen klare und klarstellungsabhängige Regeln (`EV4–EV6`).
-4. Drei neutrale Judges und drei getrennte Personas prüfen die Implementierungen blind (`EV7–EV8`).
-5. Materielle Annahmen und Ressourcen bleiben separate Evidenz (`EV9` und Aufwand).
+1. 78 atomare Claims: 66 `clear`, 5 `missing`, 4 `ambiguous`, 2 `untestable`, 1 `conflicting`.
+2. 65 materielle/testbare Clear Claims sind 65/65 auf Szenarien gemappt und ausgewertet.
+3. Original wird blind generiert, gegated und vollständig evaluiert.
+4. Erst danach wird der reproduzierte Source-Gap-Defekt ausgewählt: leere Favor-/Pärchenziele.
+5. Clarified behält PDF, Modell, Prompt, Contract, Profil und Evaluator byte- bzw. methodengleich und ergänzt genau eine attribuierte Entscheidung.
+6. Technischer Gate, Robustheit, Interface, Spielerzahlen, 38 Szenarien und drei neutrale Judges bleiben getrennte Evidenz.
 
-Es gibt keinen vermischten Gesamtscore.
+Es gibt keinen vermischten Korrektheitsscore und keine Best-of-Auswahl.
 
-## EV1–EV3: ausführbare Checks 01–06
+## Ausführbare Evidenz
 
-| Check | Inhalt | Original-PDF | Präzisierte Fassung |
-|---|---|---:|---:|
-| **01 – Result file (EV1)** | Generierte Python-Datei vorhanden und nicht leer. | PASS 1/1 | PASS 1/1 |
-| **02 – Python syntax (EV1)** | Datei lässt sich als Python kompilieren. | PASS 1/1 | PASS 1/1 |
-| **03 – Startable game (EV1)** | Modul importierbar; `Game()` und `initial_state()` liefern Objekte. | PASS 1/1 | PASS 1/1 |
-| **04 – Required API (EV1)** | Acht Prüfungen: Klassen und Methoden vorhanden, Rendering, legale Aktionen, Action-Name-Roundtrip und numerische Returns. | PASS 8/8 | PASS 8/8 |
-| **05 – Random rollouts (EV2)** | 100 reproduzierbare Zufallsspiele ohne Absturz, ungültige Sackgasse oder inkonsistenten Terminalzustand. | PASS 100/100 | PASS 100/100 |
-| **06 – Action language (EV3)** | Jede beobachtete legale Aktion hat einen nicht leeren, eindeutigen Namen und besteht `action → name → action`. | PASS 20.204/20.204 | PASS 36.590/36.590 |
-
-Die unterschiedliche Zahl bei Check 06 entsteht durch unterschiedlich viele beobachtete Zustände und Aktionen; beide Bedingungen bestehen alle jeweils ausgeführten Prüfungen. EV2 und EV3 sind Stichproben mit festem Seed und keine Vollständigkeitsbeweise für alle erreichbaren Zustände.
-
-Rohlogs: [Original](pdf/raw/expl_pdf_current_checks.txt) · [Präzisiert](clarified/raw/expl_clarified_current_checks.txt)
-
-## EV4–EV6: alle 22 Regelszenarien
-
-**Basis `clear` (EV4):** Erwartung mit Seite und direktem Zitat aus der gedruckten Anleitung.
-
-**Basis `human_decision` (EV5):** Erwartung zu einer Lücke oder Mehrdeutigkeit, die menschlich bestätigt und sichtbar getrennt wurde.
-
-**Coverage (EV6):** Ein Szenario zählt nur als abgedeckt, wenn es tatsächlich erreicht und ausgewertet wurde.
-
-| ID | Basis | Geprüftes Verhalten | Original | Präzisiert |
-|---|---|---|---:|---:|
-| R01 | clear | Zwei-Spieler-Startzustand und acht Handkarten. | PASS | PASS |
-| R02 | clear | Ein normaler Zug kann durch Ziehen beendet werden. | PASS | PASS |
-| R03 | clear | Angriff gibt dem nächsten Spieler zwei Züge. | PASS | PASS |
-| R04 | clear | Zwei Hops!-Karten verbrauchen zwei geschuldete Züge. | PASS | PASS |
-| R05 | clear | Blick in die Zukunft beendet den aktuellen Zug nicht. | PASS | PASS |
-| R06 | clear | Mischen beendet den aktuellen Zug nicht. | PASS | PASS |
-| R07 | clear | Favor wird aufgelöst und der Zug läuft weiter. | PASS | PASS |
-| R08 | clear | Der letzte verbleibende Spieler gewinnt. | PASS | PASS |
-| R09 | human_decision | Gegenangriff ersetzt die Zugschuld durch genau zwei. | PASS | PASS |
-| R10 | human_decision | Eine vorhandene Entschärfung muss benutzt werden. | PASS | PASS |
-| R11 | human_decision | Entschärfung beendet nur einen von mehreren geschuldeten Zügen. | **FAIL** | PASS |
-| R12 | clear | Fünf verschiedene Karten dürfen eine gerade abgelegte Komponente zurückholen. | **FAIL** | PASS |
-| R13 | human_decision | Ein aus dem Ablagestapel geholtes Kitten explodiert nicht sofort. | PASS | PASS |
-| R14 | human_decision | Favor darf keinen Spieler ohne Handkarten als Ziel wählen. | PASS | PASS |
-| R15 | human_decision | Pärchen darf keinen Spieler ohne Handkarten als Ziel wählen. | PASS | PASS |
-| R16 | human_decision | Drilling darf ein gehaltenes Exploding Kitten anfragen. | **FAIL** | PASS |
-| R17 | clear | Katzenkarten können als Pärchen ausgespielt werden. | PASS | PASS |
-| R18 | clear | Gültiger Aufbau enthält ein Kitten pro künftiger Eliminierung. | PASS | PASS |
-| R19 | clear | Entschärfung setzt das Kitten ein, ohne andere Karten umzuordnen. | PASS | PASS |
-| R20 | human_decision | Mischen macht eine frühere Vorschau ungültig. | PASS | PASS |
-| R21 | human_decision | Ziel der Fünf-Karten-Rückholung wird vor NÖ! angekündigt. | PASS | PASS |
-| R22 | human_decision | Wiederhergestellte Aktion gegen leeres Ziel endet ohne Transfer. | **FAIL** | PASS |
-
-Gesamt: Original `18 PASS / 4 FAIL`, präzisiert `22 PASS / 0 FAIL`; Coverage jeweils `22/22`.
-
-### Erklärung der vier Original-Fehler
-
-- **R11:** Nach der Entschärfung wechselte die Implementierung zum nächsten Spieler, obwohl noch ein Angriffszug geschuldet war.
-- **R12:** Bei anfangs leerem Ablagestapel wurde keine Fünf-Karten-Aktion angeboten; die gerade abgelegten Komponenten waren nicht als Rückholziel verfügbar.
-- **R16:** Die möglichen Drilling-Anfragen wurden aus der privaten Zielhand abgeleitet. Dadurch fehlte die korrekte, vor der Reaktion angekündigte Kitten-Anfrage.
-- **R22:** Nach NÖ!/DOCH! wurde die wiederhergestellte Aktion nicht als transferloses Ergebnis abgeschlossen, wenn das Ziel inzwischen keine Karte mehr hatte.
-
-Ausführbare Definitionen und Zitate: `../../../checks/scenarios/expl.json`
-
-Rohresultate: [Original](pdf/raw/expl_pdf_current_scenarios.json) · [Präzisiert](clarified/raw/expl_clarified_current_scenarios.json)
-
-## EV7: drei neutrale Judges
-
-Für beide Bedingungen erhalten die neutralen Judges dieselbe Evaluationsreferenz: das kanonische Original-PDF, die bestätigten Regelfakten und genau eine Implementierung. Die präzisierte Textfassung selbst wird ihnen nicht zusätzlich gezeigt. Tests, andere Reviews und die Vergleichsimplementierung bleiben verborgen. So bewertet EV7 beide Implementierungen gegen dasselbe Ziel. Der Judge prüft Setup, Zugfolge, Aktionen, Zustandsübergänge, Zufall, private Information, Eliminierung und Spielende. Kritische oder große Befunde benötigen Zitat, Seite, Fact-ID, Codeort sowie Soll-/Ist-Verhalten.
-
-| Review | Original-PDF | Präzisierte Fassung |
+| Evidenz | Original | Clarified |
 |---|---:|---:|
-| Judge 1 | 0,42 | 0,98 |
-| Judge 2 | 0,50 | 0,99 |
-| Judge 3 | 0,48 | 0,89 |
-| **Mittelwert** | **0,467** | **0,953** |
-| **Sample SD** | **0,042** | **0,055** |
+| Agentischer Gate | PASS; 1 Call, 0 Repairs | PASS; 2 Calls, 1 Pre-Eval-Repair |
+| Checks 01–04 | 4/4 | 4/4 |
+| Random Rollouts | 98/100 | 100/100 |
+| Action-Language | 12.436/12.436 | 15.589/15.589 |
+| Spielerzahlen 2–5 / Ablehnung 1,6 | 6/6 | 6/6 |
+| Szenarien gesamt | 35 PASS / 3 FAIL | 37 PASS / 1 FAIL |
+| Clear-basis | 32/34 | 33/34 |
+| Human-decision-basis | 3/4 | 4/4 |
+| Ausgewertete Szenarien | 38/38 | 38/38 |
+| Clear Claim-Mapping/Evaluation | 65/65 | 65/65 |
 
-Die Sample SD beschreibt hier nur die Streuung zwischen den drei Judges derselben Implementierung. Sie ist keine Streuung zwischen Implementierungsläufen. Die Judge-Werte sind qualitative Signale, keine Wahrscheinlichkeit vollständiger Korrektheit.
+Die 34 Clear- und 4 Human-Decision-Fälle stehen mit Quellenzitaten, Fixtures und exakten Erwartungen in `checks/scenarios/expl_v2.json`. Vollständige Einzelergebnisse: `v2/original_scenarios.json` und `v2/clarified_scenarios.json` im gebündelten Roharchiv.
 
-- Originalreviews: [1](pdf/raw/expl_pdf_current_judge_1.md) · [2](pdf/raw/expl_pdf_current_judge_2.md) · [3](pdf/raw/expl_pdf_current_judge_3.md)
-- Präzisierte Reviews: [1](clarified/raw/expl_clarified_current_judge_1.md) · [2](clarified/raw/expl_clarified_current_judge_2.md) · [3](clarified/raw/expl_clarified_current_judge_3.md)
+## Bestätigte Szenarioabweichungen
 
-## EV8: drei getrennte Personas
+| Szenario | Basis | Original | Clarified | Diagnose |
+|---|---|---:|---:|---|
+| `EXPL-R11-explosion-eliminates` | clear | FAIL | PASS | Original eliminiert den Spieler, legt aber dessen Resthand nicht ab. |
+| `EXPL-R12-last-survivor-wins` | clear | FAIL | PASS | Derselbe Ablagefehler ist im terminalen Zwei-Spieler-Fall sichtbar. |
+| `EXPL-R27-empty-target-illegal` | human_decision | FAIL | PASS | Gezielte Klarstellung verbietet leere Favor-/Pärchenziele. |
+| `EXPL-R18-attack-chain` | clear | PASS | FAIL | Clarified addiert die Zugschuld und erzeugt drei statt genau zwei Züge. |
 
-Personas ergänzen EV7 um spezialisierte Fragestellungen. Anders als EV7 erhalten sie die jeweilige Quellenbedingung (Original-PDF oder präzisierte Fassung), die bestätigten Regelfakten und genau eine Implementierung. Tests, Szenarien und andere Reviews bleiben verborgen. Sie werden weder miteinander noch mit dem neutralen Judge-Mittelwert verrechnet; ihre Befunde sind qualitative Hinweise und werden nicht nachträglich als Szenario-Pass oder -Fail gezählt.
+Alle übrigen konfigurierten Szenarien bestehen in beiden Bedingungen. Die zwei Original-Rolloutfehler und ein zusätzlicher reproduzierter Diagnosezustand enden jeweils in `favor_give` gegen eine leere Hand; sie sind dieselbe Ursache wie `R27`.
 
-| Persona | Auftrag | Original-PDF | Präzisierte Fassung |
-|---|---|---|---|
-| **Regeltreue** | Konkrete Widersprüche zwischen Quelle und Code mit Zitat, Fact-ID, Codeort und Soll-/Ist-Verhalten finden. | Markiert u. a. Eliminierungsablage, Angriff/Entschärfung, Kombinationen, Drilling-Privatsphäre, Reaktionszeitpunkt und leeres Ziel. | Keine belegten kritischen oder großen Widersprüche; offene Frage zur Dauer angezeigten Vorschauwissens. |
-| **Ambiguität / Spezifikation** | Fehlende oder mehrdeutige Regeln, plausible Auslegungen, Implementierungsentscheidung und passende Klarstellung benennen. | Zeigt mehrere Quelllücken; viele sind durch bestätigte Entscheidungen aufgelöst, werden von der Implementierung aber teilweise anders umgesetzt. | Drei ungelöste Fragen: einzelne Katzenkarte, Drilling gegen leere Hand, Dauer unveränderten Vorschauwissens. |
-| **Ausführbare Systeme** | Phasenübergänge, Reaktionen, Mehrfachzüge, explizite Parameter, Hidden Information, Eliminierung sowie leere/kurze Ressourcen prüfen. | Markiert kritische Grenzen bei Angriff/Entschärfung, Drilling und wiederhergestellten Transfers sowie weitere Kombinations- und Vorschauprobleme. | Keine belegten kritischen oder großen Defekte; verbleibende Fragen zur Beobachtungsschnittstelle und historischem Wissen. |
+## Unabhängige Judges
 
-- Original: [Regeltreue](pdf/raw/expl_pdf_current_persona_rule_fidelity.md) · [Ambiguität](pdf/raw/expl_pdf_current_persona_ambiguity.md) · [Systeme](pdf/raw/expl_pdf_current_persona_executable_systems.md)
-- Präzisiert: [Regeltreue](clarified/raw/expl_clarified_current_persona_rule_fidelity.md) · [Ambiguität](clarified/raw/expl_clarified_current_persona_ambiguity.md) · [Systeme](clarified/raw/expl_clarified_current_persona_executable_systems.md)
-
-## EV9: materielle Annahmen
-
-EV9 ist **kein Test und kein Score**. Es dokumentiert, welche materiellen Quellenentscheidungen der jeweilige Implementierer selbst angegeben hat. Die IDs beginnen in jedem Lauf neu; beispielsweise sind die beiden Einträge `A-01` nicht miteinander gleichzusetzen.
-
-| Bedingung | Lauf-ID | Quellenstelle | Deklarierte Entscheidung |
-|---|---|---|---|
-| Original-PDF | A-01 | NÖ!-Reaktionen | Jeder andere lebende Spieler erhält eine Pass-/NÖ!-Gelegenheit; ein NÖ! startet die Passrunde neu und wechselt den Auflösungszustand. |
-| Original-PDF | A-02 | Angriff und Hops! | Angriff beendet die aktuelle Verpflichtung und gibt dem nächsten Spieler genau zwei Züge; Hops! verbraucht einen geschuldeten Zug. |
-| Original-PDF | A-03 | Fehlende Katzenkartentitel | Fünf unterscheidbare Platzhalterarten zu je vier Karten erhalten die Kombinationsmechanik. |
-| Präzisierte Fassung | A-01 | Fehlende Katzenkartentitel | Fünf Arten zu je vier Karten; drei nicht gelieferte Titel werden sichtbar als unbenannte Arten geführt. |
-| Präzisierte Fassung | A-02 | Vorschauwissen | Die private Vorschau wird nach Ziehen, Entschärfen/Einlegen, Mischen oder Ende des Einzelzugs gelöscht. |
-
-Nur die fehlenden Katzenkartentitel erscheinen in beiden Läufen als direkt verwandtes Problem. Die anderen Deklarationen unterscheiden sich. Deshalb darf `3` gegenüber `2` nicht als Verbesserungsscore gelesen werden. Der Quellenvergleich stützt sich primär auf EV4, EV5 und EV7; EV9 ergänzt ihn als Auditspur.
-
-Vollständige strukturierte Einträge: [Original](pdf/raw/expl_pdf_current_assumptions.json) · [Präzisiert](clarified/raw/expl_clarified_current_assumptions.json)
-
-## Offene Punkte
-
-Die Ambiguitäts-Persona (EV8) hält nach der Präzisierung drei qualitative Quellfragen fest. Sie sind nicht als Szenario-Fails gewertet:
-
-1. Darf eine Katzenkarte einzeln und ohne Effekt gespielt werden?
-2. Darf ein Drilling einen Spieler ohne Handkarten als Ziel wählen?
-3. Wie lange soll unverändertes Vorschauwissen digital sichtbar bleiben?
-
-Zusätzlich gilt: Mit einem Implementierungslauf pro Bedingung (`n=1`) lässt sich noch keine Laufvarianz schätzen.
-
-## Aufwand
-
-| Ressource | Original-PDF | Präzisierte Fassung |
+| Review | Original | Clarified |
 |---|---:|---:|
-| Implementierungsmodell | `gpt-5.6-sol` (`low`) | `gpt-5.6-sol` (`low`) |
-| Reviewmodell für EV7/EV8 | `gpt-5.6-sol` (`medium`) | `gpt-5.6-sol` (`medium`) |
-| LLM-Aufrufe inklusive EV7/EV8 | 7 | 7 |
-| Provider-Zeit | 1.598,681 s | 1.605,015 s |
-| Input-Tokens (davon gecacht) | 1.035.093 (802.304) | 1.523.405 (1.251.584) |
-| Output-Tokens | 48.345 | 44.734 |
-| Reasoning-Tokens | 26.367 | 25.972 |
-| Python-Codezeilen | 187 | 320 |
-| API-äquivalente Kostenschätzung | 3,02 USD | 3,33 USD |
+| Judge 1 | 0,80 | 0,90 |
+| Judge 2 | 0,82 | 0,90 |
+| Judge 3 | 0,82 | 0,92 |
+| **Mittelwert** | **0,813** | **0,907** |
+| **Sample SD** | **0,012** | **0,012** |
 
-Die sieben LLM-Aufrufe bestehen jeweils aus einer Implementierung, drei neutralen Judges und drei Personas; beide Läufe benötigten keine Reparatur. Die Provider-Zeit ist die Summe der einzelnen Call-Dauern und wegen paralleler Reviews nicht die verstrichene Gesamtzeit des Experiments. Gecachte Tokens sind erneut verwendete identische Kontextpräfixe, keine übernommenen Antworten oder ein gemeinsames Gedächtnis zwischen den isolierten Läufen.
+Alle drei Original-Judges nennen sowohl die fehlende Eliminierungsablage als auch leere Favor-/Pärchenziele. Alle drei Clarified-Judges nennen ausschließlich die überhöhte Angriffsschuld. Judges sahen die vollständige jeweils zugewiesene Quellenbedingung einschließlich der attribuierten Klarstellung, aber keine Szenarien, Scores, anderen Reviews oder Vergleichsimplementierung.
 
-Die Kostenschätzung nutzt die am 15.07.2026 dokumentierten öffentlichen `gpt-5.6-sol`-Preise aus `../../../generation/model_prices.json`; sie ist nicht die tatsächliche Codex-OAuth-Abrechnung.
+## Deklarierte materielle Annahmen
 
-## Original- und Rohpfade
+### Original
 
-- Original-PDF: `../../../inputs/games/expl/game_rules.pdf`
-- Präzisierte Quelle: `../../../inputs/games/expl/variants/expl_clarified.txt`
-- Bestätigte Regelfakten: `../../../inputs/games/expl/rulefacts.md`
-- Szenarien: `../../../checks/scenarios/expl.json`
-- Originalprofil: `pdf/result.md`
-- Präzisiertes Profil: `clarified/result.md`
-- Original-Rohdaten: `pdf/raw/`
-- Präzisierte Rohdaten: `clarified/raw/`
-- Vergleichsabbildung: `../../plots/exploding_kittens/pdf_vs_clarified/evidence_profile.png`
+- NÖ!-Reaktionen laufen als explizite Pass-/Reaktionsrunden.
+- Angriff ersetzt eine vorhandene Zugschuld durch genau zwei Züge.
+- Pärchen stiehlt reproduzierbar zufällig aus der Zielhand.
+
+### Clarified
+
+- Angriff wurde als `vorhandene Schuld + 1` interpretiert; diese Annahme verursacht `R18`.
+- Nach einem NÖ! beginnt eine neue Reaktionsrunde für alle lebenden Mitspieler.
+- Spieler 0 startet, weil kein digitales physisches Startkriterium vorliegt.
+
+Die Anzahl der Annahmen ist kein Score.
+
+## Intervention und Zurechnung
+
+Die Klarstellung enthält nur `EXPL-D-EMPTY-TARGET`. Daher ist der Wechsel von `R27` und der zugehörigen Robustheit direkt interventionskongruent. Die korrigierte Eliminierungsablage und die neue Angriffsketten-Regression stammen aus der frischen Generation und dürfen nicht der Klarstellung zugerechnet werden.
+
+## Ungültige Vorläufer
+
+Vier frühere Artefaktgruppen bleiben ausdrücklich ungescort:
+
+- `failed_preflight_1.tar.gz`: fehlerhafte evaluatorseitige Fixture-Inventur.
+- `invalid_profile_evaluation_1.tar.gz`: nicht definierte Deckoberseite und falsche Evaluator-Timingannahmen.
+- `failed_preflight_2.tar.gz`: der generische Self-Check akzeptierte das eingefrorene Schema `/2` noch nicht.
+- `invalid_temporal_evaluation_2.tar.gz`: verbliebene Reaktions-/Zwischenphasenfehler im Replay.
+
+Keine dieser Gruppen erhielt eine Result-Card oder Judges. `v2_original_2` ist der einzige gescorte Original-Run. Der Clarified-Repair blieb vor jeder Evaluation im selben isolierten Run.
+
+## Provenienz
+
+- Publisher-PDF SHA-256: `f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853`
+- Klarstellung SHA-256: `03f295bb413faffb35fd313c20ee46d14aabbc1b40f66db2bc274bca3f6c6a89`
+- Szenario-Suite SHA-256: `8a0c4acd4da77cd5f40e2bc2c59f2924f481a5fc565c19085f59428962ef5352`
+- Adapter SHA-256: `ec9414df50150a6e570cb62021208854da210769471e3ab0fbff9c88df6cd14d`
+- V4-Runner SHA-256: `002f9c000cba5993633c4af2fab10ced464603b0f16c6d16a251ae76f67f2aac`
+- Original-Code SHA-256: `0bdb0e8d02565e0467e16b42bd5095836417e1f03d5ea4c7a8299f87f2ed9c7c`
+- Clarified-Code SHA-256: `c71840ff7630ea6b10923897f435d127cc00db542a392a734edc770de8bf1415`
+
+## Artefakte
+
+- Maschinenprofile: `v2/original_result.json`, `v2/clarified_result.json`
+- Befunde: `v2/original_findings.md`, `v2/clarified_findings.md`
+- Kurzvergleich: `v2/COMPARISON.md`
+- Erfolgreiche Lauf-, Check-, Szenario-, Judge- und Usage-Artefakte: `v2/raw/study_artifacts.tar.gz`
+- Ungültige Vorläufer und Erläuterung: `v2/raw/FAILED_ATTEMPTS.md` plus die drei benannten Archive
+- Aktive kanonische Clarified-Artefakte: `outputs/expl_codex_ag*`
+
+Die ältere Exploding-Kittens-Präsentation wurde durch diese V2-Ansicht ersetzt und bleibt über Git nachvollziehbar.
