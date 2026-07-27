@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "game": "exploding_kittens",
+  "iteration": "v2",
+  "conditions": {
+    "original": {
+      "original.md": "de0966fb7717b901b9dbaad41f9ff2439773c83d244b5000381d42115af5bf03",
+      "original.py": "0bdb0e8d02565e0467e16b42bd5095836417e1f03d5ea4c7a8299f87f2ed9c7c",
+      "original_agentic.json": "5343002c6da019214f9dd7ae0f96d5c82c602094739f6823c3c328a93a1ddf6c",
+      "original_assumptions.json": "ac23125b21c646314f6fd756dbfd06345a9f844579916d0c2727e11af2115326",
+      "original_checks.txt": "43d01fd5aa470995e247b150e3df8fa8c63ccf11e4f13aa2700c7eff671957bf",
+      "raw/original_events.jsonl": "97cb8b9523eac0813b1c606081a677d7bf217953add9de8db6614747719f27df",
+      "original_judge_1.md": "889f01285ab72571c210002dc574c56cc0673c48253f7b25b476762bce1dbb75",
+      "original_judge_2.md": "5f6479b15cd539b6ad0cf217c45220fd20dcd062d45784a651dabc9f4b811cbf",
+      "original_judge_3.md": "45d421f47b00458b198a4bf12c3a6adf75250e46614a130a7a1e174d2cc01489",
+      "original_rule_coverage.md": "5f68fd0a7d468cd67be6eb4cf90104aaaacd2ca1c1a856f8f10f1a9e38dfdc20",
+      "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    }
+  }
+}

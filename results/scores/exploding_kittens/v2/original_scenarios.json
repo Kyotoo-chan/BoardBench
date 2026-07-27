@@ -1,0 +1,673 @@
+{
+  "version": 4,
+  "rubric_version": "exploding-kittens-v2.2-atomic-2026-07-27",
+  "suite": "checks/scenarios/expl_v2.json",
+  "suite_sha256": "8a0c4acd4da77cd5f40e2bc2c59f2924f481a5fc565c19085f59428962ef5352",
+  "adapter": "checks/scenario_adapters/expl_v2.py",
+  "adapter_sha256": "ec9414df50150a6e570cb62021208854da210769471e3ab0fbff9c88df6cd14d",
+  "runner_sha256": "002f9c000cba5993633c4af2fab10ced464603b0f16c6d16a251ae76f67f2aac",
+  "code": "outputs/expl_codex_ag.py",
+  "code_sha256": "0bdb0e8d02565e0467e16b42bd5095836417e1f03d5ea4c7a8299f87f2ed9c7c",
+  "counts": {
+    "PASS": 35,
+    "FAIL": 3,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 38,
+  "total": 38,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 32,
+      "evaluated": 34,
+      "score": 0.9411764705882353
+    },
+    "human_decision": {
+      "passed": 3,
+      "evaluated": 4,
+      "score": 0.75
+    }
+  },
+  "claim_coverage": {
+    "inventory": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/inputs/games/expl/claims_v2.json",
+    "required": [
+      "EXPL-C-ATTACK-CHAIN",
+      "EXPL-C-ATTACK-END",
+      "EXPL-C-ATTACK-TWO",
+      "EXPL-C-BOX-KITTENS",
+      "EXPL-C-CLOCKWISE",
+      "EXPL-C-COMBO-SUPPRESS",
+      "EXPL-C-DEAL-SEVEN",
+      "EXPL-C-DEFUSE-2",
+      "EXPL-C-DEFUSE-3-5",
+      "EXPL-C-DEFUSE-DISCARD",
+      "EXPL-C-DEFUSE-END",
+      "EXPL-C-DEFUSE-SAVES",
+      "EXPL-C-DRAW-END",
+      "EXPL-C-ELIMINATE-DISCARD",
+      "EXPL-C-EMPTY-HAND",
+      "EXPL-C-FAVOR-CHOICE",
+      "EXPL-C-FAVOR-GIVE",
+      "EXPL-C-FIVE-DISTINCT",
+      "EXPL-C-FIVE-RETRIEVE",
+      "EXPL-C-FUTURE-ORDER",
+      "EXPL-C-FUTURE-PRIVATE",
+      "EXPL-C-FUTURE-THREE",
+      "EXPL-C-HANDS-HIDDEN",
+      "EXPL-C-INV-ATTACK",
+      "EXPL-C-INV-CATS",
+      "EXPL-C-INV-DEFUSE",
+      "EXPL-C-INV-FAVOR",
+      "EXPL-C-INV-FUTURE",
+      "EXPL-C-INV-KITTEN",
+      "EXPL-C-INV-NOPE",
+      "EXPL-C-INV-SHUFFLE",
+      "EXPL-C-INV-SKIP",
+      "EXPL-C-INV-TOTAL",
+      "EXPL-C-KITTEN-ELIMINATE",
+      "EXPL-C-KITTEN-REINSERT",
+      "EXPL-C-KITTEN-REVEAL",
+      "EXPL-C-MULTI-PLAY",
+      "EXPL-C-NO-HAND-LIMIT",
+      "EXPL-C-NOPE-CANCEL",
+      "EXPL-C-NOPE-DISCARD",
+      "EXPL-C-NOPE-EXCEPT",
+      "EXPL-C-NOPE-OFFTURN",
+      "EXPL-C-NOPE-PARITY",
+      "EXPL-C-NOPED-CONTINUE",
+      "EXPL-C-PAIR-ANY",
+      "EXPL-C-PAIR-STEAL",
+      "EXPL-C-PASS",
+      "EXPL-C-PILE-COUNT",
+      "EXPL-C-PILE-HIDDEN",
+      "EXPL-C-PLAY-CARD",
+      "EXPL-C-PLAYERS",
+      "EXPL-C-REINSERT-ORDER",
+      "EXPL-C-SET-ASIDE",
+      "EXPL-C-SETUP-KITTENS",
+      "EXPL-C-SHUFFLE",
+      "EXPL-C-SKIP-ATTACK",
+      "EXPL-C-SKIP-END",
+      "EXPL-C-START-DEFUSE",
+      "EXPL-C-START-EIGHT",
+      "EXPL-C-START-PLAYER",
+      "EXPL-C-TERMINAL",
+      "EXPL-C-TRIPLE",
+      "EXPL-C-TRIPLE-HAS",
+      "EXPL-C-TRIPLE-LACKS",
+      "EXPL-C-WINNER"
+    ],
+    "scenario_covered": [
+      "EXPL-C-ATTACK-CHAIN",
+      "EXPL-C-ATTACK-END",
+      "EXPL-C-ATTACK-TWO",
+      "EXPL-C-BOX-KITTENS",
+      "EXPL-C-CLOCKWISE",
+      "EXPL-C-COMBO-SUPPRESS",
+      "EXPL-C-DEAL-SEVEN",
+      "EXPL-C-DEFUSE-2",
+      "EXPL-C-DEFUSE-3-5",
+      "EXPL-C-DEFUSE-DISCARD",
+      "EXPL-C-DEFUSE-END",
+      "EXPL-C-DEFUSE-SAVES",
+      "EXPL-C-DRAW-END",
+      "EXPL-C-ELIMINATE-DISCARD",
+      "EXPL-C-EMPTY-HAND",
+      "EXPL-C-FAVOR-CHOICE",
+      "EXPL-C-FAVOR-GIVE",
+      "EXPL-C-FIVE-DISTINCT",
+      "EXPL-C-FIVE-RETRIEVE",
+      "EXPL-C-FUTURE-ORDER",
+      "EXPL-C-FUTURE-PRIVATE",
+      "EXPL-C-FUTURE-THREE",
+      "EXPL-C-HANDS-HIDDEN",
+      "EXPL-C-INV-ATTACK",
+      "EXPL-C-INV-CATS",
+      "EXPL-C-INV-DEFUSE",
+      "EXPL-C-INV-FAVOR",
+      "EXPL-C-INV-FUTURE",
+      "EXPL-C-INV-KITTEN",
+      "EXPL-C-INV-NOPE",
+      "EXPL-C-INV-SHUFFLE",
+      "EXPL-C-INV-SKIP",
+      "EXPL-C-INV-TOTAL",
+      "EXPL-C-KITTEN-ELIMINATE",
+      "EXPL-C-KITTEN-REINSERT",
+      "EXPL-C-KITTEN-REVEAL",
+      "EXPL-C-MULTI-PLAY",
+      "EXPL-C-NO-HAND-LIMIT",
+      "EXPL-C-NOPE-CANCEL",
+      "EXPL-C-NOPE-DISCARD",
+      "EXPL-C-NOPE-EXCEPT",
+      "EXPL-C-NOPE-OFFTURN",
+      "EXPL-C-NOPE-PARITY",
+      "EXPL-C-NOPED-CONTINUE",
+      "EXPL-C-PAIR-ANY",
+      "EXPL-C-PAIR-STEAL",
+      "EXPL-C-PASS",
+      "EXPL-C-PILE-COUNT",
+      "EXPL-C-PILE-HIDDEN",
+      "EXPL-C-PLAY-CARD",
+      "EXPL-C-PLAYERS",
+      "EXPL-C-REINSERT-ORDER",
+      "EXPL-C-SET-ASIDE",
+      "EXPL-C-SETUP-KITTENS",
+      "EXPL-C-SHUFFLE",
+      "EXPL-C-SKIP-ATTACK",
+      "EXPL-C-SKIP-END",
+      "EXPL-C-START-DEFUSE",
+      "EXPL-C-START-EIGHT",
+      "EXPL-C-START-PLAYER",
+      "EXPL-C-TERMINAL",
+      "EXPL-C-TRIPLE",
+      "EXPL-C-TRIPLE-HAS",
+      "EXPL-C-TRIPLE-LACKS",
+      "EXPL-C-WINNER"
+    ],
+    "coverage_exceptions": [],
+    "mapping_coverage": 1.0,
+    "evaluated": [
+      "EXPL-C-ATTACK-CHAIN",
+      "EXPL-C-ATTACK-END",
+      "EXPL-C-ATTACK-TWO",
+      "EXPL-C-BOX-KITTENS",
+      "EXPL-C-CLOCKWISE",
+      "EXPL-C-COMBO-SUPPRESS",
+      "EXPL-C-DEAL-SEVEN",
+      "EXPL-C-DEFUSE-2",
+      "EXPL-C-DEFUSE-3-5",
+      "EXPL-C-DEFUSE-DISCARD",
+      "EXPL-C-DEFUSE-END",
+      "EXPL-C-DEFUSE-SAVES",
+      "EXPL-C-DRAW-END",
+      "EXPL-C-ELIMINATE-DISCARD",
+      "EXPL-C-EMPTY-HAND",
+      "EXPL-C-FAVOR-CHOICE",
+      "EXPL-C-FAVOR-GIVE",
+      "EXPL-C-FIVE-DISTINCT",
+      "EXPL-C-FIVE-RETRIEVE",
+      "EXPL-C-FUTURE-ORDER",
+      "EXPL-C-FUTURE-PRIVATE",
+      "EXPL-C-FUTURE-THREE",
+      "EXPL-C-HANDS-HIDDEN",
+      "EXPL-C-INV-ATTACK",
+      "EXPL-C-INV-CATS",
+      "EXPL-C-INV-DEFUSE",
+      "EXPL-C-INV-FAVOR",
+      "EXPL-C-INV-FUTURE",
+      "EXPL-C-INV-KITTEN",
+      "EXPL-C-INV-NOPE",
+      "EXPL-C-INV-SHUFFLE",
+      "EXPL-C-INV-SKIP",
+      "EXPL-C-INV-TOTAL",
+      "EXPL-C-KITTEN-ELIMINATE",
+      "EXPL-C-KITTEN-REINSERT",
+      "EXPL-C-KITTEN-REVEAL",
+      "EXPL-C-MULTI-PLAY",
+      "EXPL-C-NO-HAND-LIMIT",
+      "EXPL-C-NOPE-CANCEL",
+      "EXPL-C-NOPE-DISCARD",
+      "EXPL-C-NOPE-EXCEPT",
+      "EXPL-C-NOPE-OFFTURN",
+      "EXPL-C-NOPE-PARITY",
+      "EXPL-C-NOPED-CONTINUE",
+      "EXPL-C-PAIR-ANY",
+      "EXPL-C-PAIR-STEAL",
+      "EXPL-C-PASS",
+      "EXPL-C-PILE-COUNT",
+      "EXPL-C-PILE-HIDDEN",
+      "EXPL-C-PLAY-CARD",
+      "EXPL-C-PLAYERS",
+      "EXPL-C-REINSERT-ORDER",
+      "EXPL-C-SET-ASIDE",
+      "EXPL-C-SETUP-KITTENS",
+      "EXPL-C-SHUFFLE",
+      "EXPL-C-SKIP-ATTACK",
+      "EXPL-C-SKIP-END",
+      "EXPL-C-START-DEFUSE",
+      "EXPL-C-START-EIGHT",
+      "EXPL-C-START-PLAYER",
+      "EXPL-C-TERMINAL",
+      "EXPL-C-TRIPLE",
+      "EXPL-C-TRIPLE-HAS",
+      "EXPL-C-TRIPLE-LACKS",
+      "EXPL-C-WINNER"
+    ],
+    "evaluated_coverage": 1.0
+  },
+  "results": [
+    {
+      "id": "EXPL-R01-setup-two",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-INV-TOTAL",
+        "EXPL-C-INV-KITTEN",
+        "EXPL-C-INV-DEFUSE",
+        "EXPL-C-INV-ATTACK",
+        "EXPL-C-INV-NOPE",
+        "EXPL-C-INV-SKIP",
+        "EXPL-C-INV-FAVOR",
+        "EXPL-C-INV-SHUFFLE",
+        "EXPL-C-INV-FUTURE",
+        "EXPL-C-INV-CATS",
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-2",
+        "EXPL-C-START-PLAYER"
+      ]
+    },
+    {
+      "id": "EXPL-R02-setup-three",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ]
+    },
+    {
+      "id": "EXPL-R03-setup-four",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ]
+    },
+    {
+      "id": "EXPL-R04-setup-five",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS",
+        "EXPL-C-SET-ASIDE",
+        "EXPL-C-DEAL-SEVEN",
+        "EXPL-C-START-DEFUSE",
+        "EXPL-C-START-EIGHT",
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-SETUP-KITTENS",
+        "EXPL-C-BOX-KITTENS",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-DEFUSE-3-5"
+      ]
+    },
+    {
+      "id": "EXPL-R05-player-range",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAYERS"
+      ]
+    },
+    {
+      "id": "EXPL-R06-pass-draw-advance",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PASS",
+        "EXPL-C-DRAW-END",
+        "EXPL-C-CLOCKWISE"
+      ]
+    },
+    {
+      "id": "EXPL-R07-play-card-stays-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ]
+    },
+    {
+      "id": "EXPL-R08-multiple-pre-draw-plays",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-MULTI-PLAY",
+        "EXPL-C-PLAY-CARD"
+      ]
+    },
+    {
+      "id": "EXPL-R09-public-count-private-hands",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-HANDS-HIDDEN",
+        "EXPL-C-PILE-HIDDEN",
+        "EXPL-C-PILE-COUNT"
+      ]
+    },
+    {
+      "id": "EXPL-R10-empty-hand-continues",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NO-HAND-LIMIT",
+        "EXPL-C-EMPTY-HAND",
+        "EXPL-C-DRAW-END"
+      ]
+    },
+    {
+      "id": "EXPL-R11-explosion-eliminates",
+      "status": "FAIL",
+      "message": "step 1: hand_sizes: expected {'0': 0, '1': 0, '2': 0}, got {'0': 2, '1': 0, '2': 0}",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REVEAL",
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-CLOCKWISE"
+      ]
+    },
+    {
+      "id": "EXPL-R12-last-survivor-wins",
+      "status": "FAIL",
+      "message": "step 1: discard attack: expected 1, got 0",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-ELIMINATE",
+        "EXPL-C-ELIMINATE-DISCARD",
+        "EXPL-C-TERMINAL",
+        "EXPL-C-WINNER"
+      ]
+    },
+    {
+      "id": "EXPL-R13-defuse-top",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-SAVES",
+        "EXPL-C-DEFUSE-DISCARD",
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-DEFUSE-END"
+      ]
+    },
+    {
+      "id": "EXPL-R14-defuse-bottom-order",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-KITTEN-REINSERT",
+        "EXPL-C-REINSERT-ORDER",
+        "EXPL-C-DEFUSE-END"
+      ]
+    },
+    {
+      "id": "EXPL-R15-defuse-under-attack",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-DEFUSE-END",
+        "EXPL-C-ATTACK-TWO"
+      ]
+    },
+    {
+      "id": "EXPL-R16-attack-two-turns",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-END",
+        "EXPL-C-ATTACK-TWO"
+      ]
+    },
+    {
+      "id": "EXPL-R17-first-attacked-draw",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-TWO",
+        "EXPL-C-DRAW-END"
+      ]
+    },
+    {
+      "id": "EXPL-R18-attack-chain",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-ATTACK-CHAIN",
+        "EXPL-C-ATTACK-END"
+      ]
+    },
+    {
+      "id": "EXPL-R19-skip-normal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-END"
+      ]
+    },
+    {
+      "id": "EXPL-R20-skip-one-owed",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK",
+        "EXPL-C-SKIP-END"
+      ]
+    },
+    {
+      "id": "EXPL-R21-two-skips-two-owed",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SKIP-ATTACK"
+      ]
+    },
+    {
+      "id": "EXPL-R22-one-nope-cancels",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-CANCEL",
+        "EXPL-C-NOPE-OFFTURN",
+        "EXPL-C-NOPE-DISCARD",
+        "EXPL-C-NOPED-CONTINUE"
+      ]
+    },
+    {
+      "id": "EXPL-R23-two-nopes-restore",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ]
+    },
+    {
+      "id": "EXPL-R24-three-nopes-cancel",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-PARITY",
+        "EXPL-C-NOPE-DISCARD"
+      ]
+    },
+    {
+      "id": "EXPL-R25-nope-exceptions",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-NOPE-EXCEPT"
+      ]
+    },
+    {
+      "id": "EXPL-R26-favor-target-chooses",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FAVOR-GIVE",
+        "EXPL-C-FAVOR-CHOICE"
+      ]
+    },
+    {
+      "id": "EXPL-R27-empty-target-illegal",
+      "status": "FAIL",
+      "message": "action matches {'type': 'play_card', 'actor': 0, 'args': {'card': 'favor', 'target': 1}}: expected 0, got 1",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-X-EMPTY-TARGET"
+      ]
+    },
+    {
+      "id": "EXPL-R28-shuffle-conserves",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-SHUFFLE",
+        "EXPL-C-PLAY-CARD",
+        "EXPL-C-MULTI-PLAY"
+      ]
+    },
+    {
+      "id": "EXPL-R29-future-top-three-private",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FUTURE-THREE",
+        "EXPL-C-FUTURE-ORDER",
+        "EXPL-C-FUTURE-PRIVATE"
+      ]
+    },
+    {
+      "id": "EXPL-R30-future-short-pile",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-M-SHORT-FUTURE"
+      ]
+    },
+    {
+      "id": "EXPL-R32-pair-random-steal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-PAIR-STEAL"
+      ]
+    },
+    {
+      "id": "EXPL-R33-action-pair-suppresses",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-PAIR-ANY",
+        "EXPL-C-COMBO-SUPPRESS",
+        "EXPL-C-PAIR-STEAL"
+      ]
+    },
+    {
+      "id": "EXPL-R34-triple-present",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-HAS",
+        "EXPL-C-COMBO-SUPPRESS"
+      ]
+    },
+    {
+      "id": "EXPL-R35-triple-absent",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-TRIPLE",
+        "EXPL-C-TRIPLE-LACKS"
+      ]
+    },
+    {
+      "id": "EXPL-R36-five-retrieve-existing",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-FIVE-RETRIEVE"
+      ]
+    },
+    {
+      "id": "EXPL-R37-five-suppresses-components",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "EXPL-C-FIVE-DISTINCT",
+        "EXPL-C-COMBO-SUPPRESS"
+      ]
+    },
+    {
+      "id": "EXPL-R38-attack-death-clears-debt",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-M-ATTACK-DEATH-DEBT"
+      ]
+    },
+    {
+      "id": "EXPL-R39-defuse-only-on-kitten",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "EXPL-A-DEFUSE-TRIGGER"
+      ]
+    }
+  ]
+}

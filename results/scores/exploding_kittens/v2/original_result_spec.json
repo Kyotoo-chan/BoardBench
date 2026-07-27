@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "game": "Exploding Kittens",
+    "condition": "v2_original_2",
+    "source_path": "../../../../inputs/games/expl/game_rules.pdf",
+    "source_format": "pdf",
+    "source_sha256": "f15c85be6345ff0101d01059509bc07e4989896f4f1927ace4248bba4ce1e853"
+  },
+  "source_diagnosis": {
+    "clear": 66,
+    "ambiguous": 4,
+    "missing": 5,
+    "conflicting": 1,
+    "untestable": 2
+  },
+  "headline": "Technical gate 4/4; robustness 98/100; 32/34 configured clear-basis and 3/4 human-decision-basis scenarios passed; all 38 scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "expl_codex_ag",
+      "agentic_evidence": "../../../../outputs/expl_codex_ag_agentic.json",
+      "checks": "../../../../outputs/expl_codex_ag_checks.txt",
+      "scenarios": "original_scenarios.json",
+      "usage": "original_usage.json",
+      "code": "../../../../outputs/expl_codex_ag.py",
+      "assumptions": "../../../../outputs/expl_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/expl_codex_ag_judge_1.md",
+        "../../../../outputs/expl_codex_ag_judge_2.md",
+        "../../../../outputs/expl_codex_ag_judge_3.md"
+      ]
+    }
+  ]
+}

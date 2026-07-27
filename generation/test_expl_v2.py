@@ -22,7 +22,8 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         suite = load_suite(SUITE, ROOT)
         matrix = json.loads(MATRIX.read_text(encoding="utf-8"))
         coverage = suite["claim_coverage"]
-        self.assertEqual(matrix["status"], "approved-for-v2.1-original-packet")
+        self.assertEqual(matrix["status"], "approved-for-v2.2-evaluation")
+        self.assertEqual(suite["rubric_version"], "exploding-kittens-v2.2-atomic-2026-07-27")
         self.assertEqual(len(suite["scenarios"]), 38)
         self.assertEqual(sum(item["basis"] == "clear" for item in suite["scenarios"]), 34)
         self.assertEqual(sum(item["basis"] == "human_decision" for item in suite["scenarios"]), 4)
@@ -37,6 +38,17 @@ class ExplodingKittensV2Tests(unittest.TestCase):
             self.assertEqual(markdown.count(f"`{item['id']}`"), 1)
             self.assertIn(item["expectation"], markdown)
         py_compile.compile(str(ROOT / suite["adapter"]), doraise=True)
+
+    def test_reaction_boundaries_are_settled_without_scoring_priority(self):
+        suite = json.loads(SUITE.read_text(encoding="utf-8"))
+        for scenario in suite["scenarios"]:
+            for step in scenario.get("steps", []):
+                kind = step.get("action", {}).get("adapter", {}).get("type")
+                if kind in {"play_card", "play_pair", "play_triple", "play_five"}:
+                    self.assertTrue(step.get("settle"), scenario["id"])
+        for scenario in suite["scenarios"]:
+            if scenario["id"] in {"EXPL-R22-one-nope-cancels", "EXPL-R23-two-nopes-restore", "EXPL-R24-three-nopes-cancel"}:
+                self.assertEqual(scenario["fixture"]["current_player"], scenario["fixture"]["pending"]["responder"])
 
     def test_cat_single_and_nope_gaps_are_not_hard_scored(self):
         claims = {item["id"]: item for item in json.loads((GAME / "claims_v2.json").read_text(encoding="utf-8"))["claims"]}

@@ -5,7 +5,7 @@
 - Material/testable clear claims mapped: **65/65**
 - Hard scenarios: **38** (`34` clear basis, `4` human-decision basis)
 - Source scope: complete supplied German NSFW Edition 2018 PDF, base game, 2–5 players, both pages and combinations.
-- Status: **approved rule matrix; V2.1 representation correction on 2026-07-27 defines deck top and reinsertion indexing without changing any rule expectation; not yet validly scored**.
+- Status: **approved rule matrix; V2.2 evaluator correction on 2026-07-27 defines deck/preview order and checks post-effect state only after mechanical NÖ!-passes; no game-rule expectation changed**.
 
 The matrix intentionally leaves voluntary non-use of Defuse, deterministic Nope priority, pre-Nope parameter announcement, restored actions whose target emptied mid-reaction, five-card self-retrieval, and discarded-Kitten hand behavior unscored. `EXPL-C-CAT-SINGLE` remains clear (“Einzeln sind diese Karten machtlos”) but has no transition scenario because that would additionally invent standalone play legality; therefore there is intentionally no R31. Player-count gate additionally performs an initial legal-action check and bounded rollout for every supported count.
 

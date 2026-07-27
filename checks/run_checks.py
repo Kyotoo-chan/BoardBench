@@ -42,6 +42,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-steps", type=int, default=1000, help="Maximum steps per random game")
     parser.add_argument("--seed", type=int, default=1, help="Random seed for reproducible checks")
     parser.add_argument("--check", action="append", default=[], help="Run only this check, e.g. 05_random_rollouts")
+    parser.add_argument("--required-api-check", default=None, help="Repository-relative versioned replacement for check 04")
     parser.add_argument("--no-summary", action="store_true", help="Skip the final summary line (for notebook pipeline phases)")
     return parser.parse_args()
 
@@ -91,6 +92,14 @@ def main() -> int:
     check_dir = Path(__file__).resolve().parent
     try:
         check_paths = selected_checks(check_dir, args.check)
+        if args.required_api_check:
+            replacement = (repo_root / args.required_api_check).resolve()
+            if not replacement.is_file() or replacement.parent.parent != check_dir:
+                raise RuntimeError("required API replacement must be a file directly under checks/versioned")
+            positions = [index for index, path in enumerate(check_paths) if path.stem.startswith("04_")]
+            if positions != [3]:
+                raise RuntimeError("cannot locate exactly one default check 04")
+            check_paths[positions[0]] = replacement
     except Exception as exc:
         print(f"FAIL check selection: {exc}", flush=True)
         return 1

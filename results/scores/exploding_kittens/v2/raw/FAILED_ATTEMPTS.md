@@ -23,3 +23,10 @@
 - Two repair calls could not change the immutable evaluator self-check, so the pre-evaluation gate failed. No evaluation or judges ran and this is not a scored condition.
 - A versioned `agentic_self_check_v2.py` now accepts any positive schema version and, when a profile exists, requires the exact profile schema; historical packets retain the original self-check byte-for-byte. A runner option selects the versioned check only for this packet. Regression tests cover `/2`, wrong-kind, mismatched, zero, malformed schemas, and exact custom-check packet copying.
 - Both corrected self-checks replay successfully against the retained generated module. Raw artifacts and all three calls are retained in `failed_preflight_2.tar.gz`.
+
+## `v2_original_2` invalid first evaluator replay — 2026-07-27
+
+- The final blind one-call implementation passed its corrected pre-evaluation gate. Its first replay was not reported because two remaining evaluator defects were immediately exposed: technical check 04 still hard-coded schema `/1`, and ordinary card/combination scenarios checked before implementation-declared NÖ! reaction opportunities were mechanically passed.
+- The scenario adapter also constructed three direct reaction fixtures with `current_player` different from the explicitly stored pending responder, making their pass action unreachable.
+- Corrections accept any positive canonical schema version, mechanically settle only pass/Nope reaction phases before post-effect assertions, and align those three synthetic fixtures with their declared responder. No game-rule expectation or model-facing packet changed.
+- The invalid 17/38 replay and its check log are retained only in `invalid_temporal_evaluation_2.tar.gz`. The corrected replay against the same blind implementation reached 35/38 and isolated three actual deviations.
