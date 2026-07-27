@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "game": "bohnanza_base_2023",
+  "approved_at": "2026-07-27",
+  "decisions": [
+    {
+      "id": "BOHN-D-START",
+      "status": "approved",
+      "claim_ids": [
+        "BOHN-A-START-SELECTION"
+      ],
+      "decision": "The supplied seed reproducibly selects the start player."
+    },
+    {
+      "id": "BOHN-D-PHASE3-ORDER",
+      "status": "approved",
+      "claim_ids": [
+        "BOHN-M-PHASE3-INTERPLAYER-ORDER"
+      ],
+      "decision": "Any affected player with staged cards may plant next; all staged cards must be planted before phase four, and each owner chooses their own card order."
+    },
+    {
+      "id": "BOHN-D-HARVEST",
+      "status": "approved",
+      "claim_ids": [
+        "BOHN-A-HARVEST-INTERRUPT"
+      ],
+      "decision": "Off-turn harvesting is exposed at stable player decision boundaries, not inside an atomic draw, shuffle, transfer, or planting transition."
+    },
+    {
+      "id": "BOHN-D-OBS",
+      "status": "approved",
+      "claim_ids": [
+        "BOHN-M-OBS-DEEPER-HAND"
+      ],
+      "decision": "Observations expose own full ordered hand and each opponent’s hand size and source-visible front card, but not deeper opponent identities."
+    }
+  ]
+}

@@ -1,0 +1,1112 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "source_id": "BOHN-BASE-2023-RULES",
+  "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655",
+  "claims": [
+    {
+      "id": "BOHN-C-PLAYERS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "3–5 Personen"
+      },
+      "expectation": "The environment supports 3, 4, and 5 players and rejects 2 and 6 as outside the stated range."
+    },
+    {
+      "id": "BOHN-C-FIELDS-3",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Spielt ihr zu dritt, legt ihr die Seite mit den drei Bohnenfeldern vor euch ab. Spielt ihr zu viert oder zu fünft, legt ihr die Seite mit den zwei Bohnenfeldern vor euch ab."
+      },
+      "expectation": "Every player has three bean fields in a three-player game."
+    },
+    {
+      "id": "BOHN-C-FIELDS-4-5",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Spielt ihr zu dritt, legt ihr die Seite mit den drei Bohnenfeldern vor euch ab. Spielt ihr zu viert oder zu fünft, legt ihr die Seite mit den zwei Bohnenfeldern vor euch ab."
+      },
+      "expectation": "Every player has two bean fields in four- and five-player games."
+    },
+    {
+      "id": "BOHN-C-DEAL-FIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Mischt alle Karten und teilt an alle jeweils fünf Handkarten aus."
+      },
+      "expectation": "Every player receives exactly five hand cards."
+    },
+    {
+      "id": "BOHN-C-INV-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Es gibt 104 Karten mit acht verschiedenen Bohnensorten."
+      },
+      "expectation": "The base deck contains exactly 104 cards."
+    },
+    {
+      "id": "BOHN-C-INV-TYPES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Es gibt 104 Karten mit acht verschiedenen Bohnensorten."
+      },
+      "expectation": "The deck contains exactly eight bean types."
+    },
+    {
+      "id": "BOHN-C-INV-GARTEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 6 gartenbohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-ROT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 8 rote_bohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-AUGEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 10 augenbohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-SOJA",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 12 sojabohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-BRECH",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 14 brechbohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-SAU",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 16 saubohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-FEUER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 18 feuerbohne cards."
+    },
+    {
+      "id": "BOHN-C-INV-BLAU",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the eight card illustrations, page 1] 6x Gartenbohne; 8x Rote Bohne; 10x Augenbohne; 12x Sojabohne; 14x Brechbohne; 16x Saubohne; 18x Feuerbohne; 20x Blaue Bohne."
+      },
+      "expectation": "The base deck contains exactly 20 blaue_bohne cards."
+    },
+    {
+      "id": "BOHN-C-START-CARD-FIXED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die Start-Karte wird nicht weitergegeben. Sie bleibt das ganze Spiel über bei der Person, die das Spiel begonnen hat."
+      },
+      "expectation": "The selected start player remains the fixed Start-card holder."
+    },
+    {
+      "id": "BOHN-C-HAND-FRONT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckst du dahinter. … Du darfst die Karten nicht sortieren."
+      },
+      "expectation": "The first dealt card is the visible front hand card."
+    },
+    {
+      "id": "BOHN-C-HAND-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckst du dahinter. … Du darfst die Karten nicht sortieren."
+      },
+      "expectation": "Hand order cannot be rearranged or sorted."
+    },
+    {
+      "id": "BOHN-C-HAND-APPEND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckst du dahinter. … Du darfst die Karten nicht sortieren."
+      },
+      "expectation": "Later cards are appended behind existing cards."
+    },
+    {
+      "id": "BOHN-C-OBS-FRONT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckst du dahinter. … Du darfst die Karten nicht sortieren."
+      },
+      "expectation": "Each opponent's front hand card is public."
+    },
+    {
+      "id": "BOHN-C-CLOCKWISE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Wer das Spiel beginnt, ist die erste „aktive Person“. Danach geht es im Uhrzeigersinn weiter."
+      },
+      "expectation": "Turns advance clockwise."
+    },
+    {
+      "id": "BOHN-C-PHASES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Als aktive Person führst du nacheinander vier Phasen durch: 1. Bohnenkarten aus der Hand anbauen; 2. Bohnenkarten aufdecken und handeln; 3. Gehandelte und aufgedeckte Bohnen anbauen; 4. Bohnenkarten nachziehen."
+      },
+      "expectation": "A normal turn follows the four printed phases in order."
+    },
+    {
+      "id": "BOHN-C-EMPTY-HAND-SKIP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Hast du zu Beginn der 1. Phase keine Karten auf der Hand, gehst du gleich zur 2. Phase über."
+      },
+      "expectation": "An empty hand at phase-one start skips to phase two."
+    },
+    {
+      "id": "BOHN-C-FIELD-ONE-TYPE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Auf einem Feld darfst du nur Bohnen der gleichen Sorte anbauen. Es ist dir aber erlaubt, dieselbe Sorte auf mehreren Feldern zur gleichen Zeit anzubauen."
+      },
+      "expectation": "A field contains only one bean type."
+    },
+    {
+      "id": "BOHN-C-SAME-TYPE-MULTIPLE-FIELDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Auf einem Feld darfst du nur Bohnen der gleichen Sorte anbauen. Es ist dir aber erlaubt, dieselbe Sorte auf mehreren Feldern zur gleichen Zeit anzubauen."
+      },
+      "expectation": "The same bean type may occupy multiple fields."
+    },
+    {
+      "id": "BOHN-C-FIRST-PLANT-MANDATORY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Du musst die vorderste Bohnenkarte, also die ganz sichtbare Karte, aus deiner Hand auf eines deiner Bohnenfelder anbauen. Danach darfst du eine weitere Bohnenkarte, die nun ganz sichtbar ist, auf eines deiner Felder anbauen. Eine dritte Bohne darfst du nicht anbauen."
+      },
+      "expectation": "The front hand card must be planted."
+    },
+    {
+      "id": "BOHN-C-SECOND-PLANT-OPTIONAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Du musst die vorderste Bohnenkarte, also die ganz sichtbare Karte, aus deiner Hand auf eines deiner Bohnenfelder anbauen. Danach darfst du eine weitere Bohnenkarte, die nun ganz sichtbar ist, auf eines deiner Felder anbauen. Eine dritte Bohne darfst du nicht anbauen."
+      },
+      "expectation": "The newly exposed front card may optionally be planted second."
+    },
+    {
+      "id": "BOHN-C-NO-THIRD-HAND-PLANT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Du musst die vorderste Bohnenkarte, also die ganz sichtbare Karte, aus deiner Hand auf eines deiner Bohnenfelder anbauen. Danach darfst du eine weitere Bohnenkarte, die nun ganz sichtbar ist, auf eines deiner Felder anbauen. Eine dritte Bohne darfst du nicht anbauen."
+      },
+      "expectation": "A third hand card cannot be planted in phase one."
+    },
+    {
+      "id": "BOHN-C-FORCED-HARVEST",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Musst du eine Bohnensorte anbauen, hast aber kein Feld dafür zur Verfügung, musst du zuerst ein Feld abernten."
+      },
+      "expectation": "A field must be harvested before a mandatory card that fits no field is planted."
+    },
+    {
+      "id": "BOHN-C-REVEAL-TWO",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Ziehe die obersten zwei Karten vom Nachziehstapel und lege sie für alle sichtbar aufgedeckt daneben. Die aufgedeckten Karten gehören dir."
+      },
+      "expectation": "Phase two reveals the top two draw-pile cards, subject to depletion."
+    },
+    {
+      "id": "BOHN-C-REVEALED-OWNED-ACTIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Ziehe die obersten zwei Karten vom Nachziehstapel und lege sie für alle sichtbar aufgedeckt daneben. Die aufgedeckten Karten gehören dir."
+      },
+      "expectation": "Newly revealed cards initially belong to the active player."
+    },
+    {
+      "id": "BOHN-C-TRADE-ACTIVE-ONLY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Nur du als aktive Person darfst mit anderen handeln. Deine Mitspielenden dürfen untereinander nicht handeln. … Als aktive Person darfst du auch mit den zwei aufgedeckten Karten handeln. … Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln."
+      },
+      "expectation": "Every legal trade includes the active player."
+    },
+    {
+      "id": "BOHN-C-TRADE-NONACTIVE-BLOCKED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Nur du als aktive Person darfst mit anderen handeln. Deine Mitspielenden dürfen untereinander nicht handeln. … Als aktive Person darfst du auch mit den zwei aufgedeckten Karten handeln. … Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln."
+      },
+      "expectation": "Non-active players may not trade with one another."
+    },
+    {
+      "id": "BOHN-C-TRADE-ANY-HAND-POSITION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ihr dürft alle mit euren Handkarten handeln. Dabei spielt es keine Rolle, wo sich die Karten auf der Hand befinden."
+      },
+      "expectation": "Any hand position may be traded."
+    },
+    {
+      "id": "BOHN-C-TRADE-REVEALED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Nur du als aktive Person darfst mit anderen handeln. Deine Mitspielenden dürfen untereinander nicht handeln. … Als aktive Person darfst du auch mit den zwei aufgedeckten Karten handeln. … Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln."
+      },
+      "expectation": "The active player may trade revealed cards."
+    },
+    {
+      "id": "BOHN-C-TRADE-UNEQUAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Nur du als aktive Person darfst mit anderen handeln. Deine Mitspielenden dürfen untereinander nicht handeln. … Als aktive Person darfst du auch mit den zwei aufgedeckten Karten handeln. … Ihr dürft mit einer unterschiedlichen Kartenanzahl handeln."
+      },
+      "expectation": "Unequal bundle sizes are legal."
+    },
+    {
+      "id": "BOHN-C-NO-FIELD-TRADE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Mit Karten, die ihr nach einem Handel bekommt, dürft ihr nicht weiterhandeln. Mit Karten, die auf Feldern liegen, dürft ihr ebenfalls nicht handeln."
+      },
+      "expectation": "Cards on fields cannot be traded."
+    },
+    {
+      "id": "BOHN-C-NO-RECEIVED-RETRADE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Mit Karten, die ihr nach einem Handel bekommt, dürft ihr nicht weiterhandeln. Mit Karten, die auf Feldern liegen, dürft ihr ebenfalls nicht handeln."
+      },
+      "expectation": "Received staged cards cannot be traded onward."
+    },
+    {
+      "id": "BOHN-C-TRADE-CONSENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe eine Karte erst aus der Hand, sobald der Handel auch wirklich zustande kommt. Denn beide beteiligten Personen müssen dem Handel zustimmen."
+      },
+      "expectation": "Both participants must consent to a trade."
+    },
+    {
+      "id": "BOHN-C-TRADE-TRANSFER-ON-ACCEPT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe eine Karte erst aus der Hand, sobald der Handel auch wirklich zustande kommt. Denn beide beteiligten Personen müssen dem Handel zustimmen."
+      },
+      "expectation": "Hand cards transfer only after acceptance."
+    },
+    {
+      "id": "BOHN-C-RECEIVED-STAGED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Bohnenkarten, die du nach einem Handel erhältst, legst du zunächst quer neben deinen Feldern ab. Auf die Hand nehmen darfst du sie nicht."
+      },
+      "expectation": "Received cards are placed sideways beside the recipient’s fields."
+    },
+    {
+      "id": "BOHN-C-GIFT-CONSENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Als besondere Form des Handels dürft ihr euch auch Bohnenkarten schenken. Die beschenkte Person muss dem Geschenk aber zustimmen. Lehnt sie ab, kommt der Handel nicht zustande."
+      },
+      "expectation": "A gift requires recipient consent and rejection transfers nothing."
+    },
+    {
+      "id": "BOHN-C-END-TRADE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Auch wenn du deine aufgedeckten Karten gehandelt hast, darfst du weiterhin mit deinen Handkarten handeln. Erst wenn du nicht mehr handeln möchtest, sagst du das laut an und beendest diese Phase."
+      },
+      "expectation": "The active player explicitly ends phase two."
+    },
+    {
+      "id": "BOHN-C-PLANT-ALL-RECEIVED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Alle, die Karten quer neben ihren Feldern liegen haben, müssen diese nun anbauen. Als aktive Person musst du auch die aufgedeckten Karten anbauen, falls du nicht mit ihnen gehandelt hast. Jede Person darf selbst entscheiden, in welcher Reihenfolge sie die neuen Bohnenkarten anbaut."
+      },
+      "expectation": "Every player must plant all received cards."
+    },
+    {
+      "id": "BOHN-C-PLANT-UNTRADED-REVEALED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Alle, die Karten quer neben ihren Feldern liegen haben, müssen diese nun anbauen. Als aktive Person musst du auch die aufgedeckten Karten anbauen, falls du nicht mit ihnen gehandelt hast. Jede Person darf selbst entscheiden, in welcher Reihenfolge sie die neuen Bohnenkarten anbaut."
+      },
+      "expectation": "The active player must plant every untraded revealed card."
+    },
+    {
+      "id": "BOHN-C-PLANT-OWNER-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Alle, die Karten quer neben ihren Feldern liegen haben, müssen diese nun anbauen. Als aktive Person musst du auch die aufgedeckten Karten anbauen, falls du nicht mit ihnen gehandelt hast. Jede Person darf selbst entscheiden, in welcher Reihenfolge sie die neuen Bohnenkarten anbaut."
+      },
+      "expectation": "Each owner chooses the order of their own staged cards."
+    },
+    {
+      "id": "BOHN-C-DRAW-THREE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe als aktive Person nacheinander drei Karten vom Nachziehstapel. Stecke sie, ohne die Reihenfolge zu ändern, hinter deine letzte Handkarte. Danach ist die Person links von dir am Zug und wird zur nächsten aktiven Person."
+      },
+      "expectation": "The active player draws three cards sequentially, subject to depletion."
+    },
+    {
+      "id": "BOHN-C-DRAW-APPEND-ORDER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe als aktive Person nacheinander drei Karten vom Nachziehstapel. Stecke sie, ohne die Reihenfolge zu ändern, hinter deine letzte Handkarte. Danach ist die Person links von dir am Zug und wird zur nächsten aktiven Person."
+      },
+      "expectation": "Drawn cards append in unchanged draw order."
+    },
+    {
+      "id": "BOHN-C-NEXT-PLAYER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe als aktive Person nacheinander drei Karten vom Nachziehstapel. Stecke sie, ohne die Reihenfolge zu ändern, hinter deine letzte Handkarte. Danach ist die Person links von dir am Zug und wird zur nächsten aktiven Person."
+      },
+      "expectation": "After phase four, the player to the left becomes active."
+    },
+    {
+      "id": "BOHN-C-HARVEST-OFFTURN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht die aktive Person bist."
+      },
+      "expectation": "A player may harvest their own field while not active."
+    },
+    {
+      "id": "BOHN-C-HARVEST-BEANOMETER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Beachte: Bei manchen Ernten erhältst du keine Taler. … Drehe so viele Karten, wie du laut Bohnometer an Bohnentalern bekommst, auf die Talerseite. Lege diese Karten auf deinen Talerstapel. Die restlichen Karten des geernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das geerntete Feld immer leer."
+      },
+      "expectation": "Harvest payout follows the field bean type’s beanometer."
+    },
+    {
+      "id": "BOHN-C-HARVEST-COIN-CARDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Beachte: Bei manchen Ernten erhältst du keine Taler. … Drehe so viele Karten, wie du laut Bohnometer an Bohnentalern bekommst, auf die Talerseite. Lege diese Karten auf deinen Talerstapel. Die restlichen Karten des geernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das geerntete Feld immer leer."
+      },
+      "expectation": "The paid number of harvested cards becomes coins."
+    },
+    {
+      "id": "BOHN-C-HARVEST-DISCARD-REST",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Beachte: Bei manchen Ernten erhältst du keine Taler. … Drehe so viele Karten, wie du laut Bohnometer an Bohnentalern bekommst, auf die Talerseite. Lege diese Karten auf deinen Talerstapel. Die restlichen Karten des geernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das geerntete Feld immer leer."
+      },
+      "expectation": "All remaining harvested cards enter discard."
+    },
+    {
+      "id": "BOHN-C-HARVEST-EMPTIES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Beachte: Bei manchen Ernten erhältst du keine Taler. … Drehe so viele Karten, wie du laut Bohnometer an Bohnentalern bekommst, auf die Talerseite. Lege diese Karten auf deinen Talerstapel. Die restlichen Karten des geernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das geerntete Feld immer leer."
+      },
+      "expectation": "A harvested field becomes empty."
+    },
+    {
+      "id": "BOHN-C-HARVEST-ZERO",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Beachte: Bei manchen Ernten erhältst du keine Taler. … Drehe so viele Karten, wie du laut Bohnometer an Bohnentalern bekommst, auf die Talerseite. Lege diese Karten auf deinen Talerstapel. Die restlichen Karten des geernteten Feldes legst du offen auf den Ablagestapel. Nach einer Ernte ist das geerntete Feld immer leer."
+      },
+      "expectation": "A zero-coin harvest is legal when singleton protection permits."
+    },
+    {
+      "id": "BOHN-C-SINGLETON-BLOCKED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Du darfst auf einem Feld keine einzelne Bohnenkarte ernten, wenn auf mindestens einem deiner Felder mehr als eine Bohnenkarte liegt."
+      },
+      "expectation": "A singleton cannot be harvested while another own field has more than one card."
+    },
+    {
+      "id": "BOHN-C-SINGLETON-ALLOWED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Du darfst auf einem Feld keine einzelne Bohnenkarte ernten, wenn auf mindestens einem deiner Felder mehr als eine Bohnenkarte liegt."
+      },
+      "expectation": "A singleton may be harvested when no own field has more than one card."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-GARTEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Garden: size 1 pays 0, size 2 pays 2, size 3 or more pays 3."
+      },
+      "expectation": "Garden: size 1 pays 0, size 2 pays 2, size 3 or more pays 3."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-ROT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Red: thresholds 2/3/4/5 pay 1/2/3/4."
+      },
+      "expectation": "Red: thresholds 2/3/4/5 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-AUGEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Black-eyed: thresholds 2/4/5/6 pay 1/2/3/4."
+      },
+      "expectation": "Black-eyed: thresholds 2/4/5/6 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-SOJA",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Soy: thresholds 2/4/6/7 pay 1/2/3/4."
+      },
+      "expectation": "Soy: thresholds 2/4/6/7 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-BRECH",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Green: thresholds 3/5/6/7 pay 1/2/3/4."
+      },
+      "expectation": "Green: thresholds 3/5/6/7 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-SAU",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Stink: thresholds 3/5/7/8 pay 1/2/3/4."
+      },
+      "expectation": "Stink: thresholds 3/5/7/8 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-FEUER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Chili: thresholds 3/6/8/9 pay 1/2/3/4."
+      },
+      "expectation": "Chili: thresholds 3/6/8/9 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-PAYOUT-BLAU",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "[Visual transcription of the named card’s Bohnometer, page 1] Blue: thresholds 4/6/8/10 pay 1/2/3/4."
+      },
+      "expectation": "Blue: thresholds 4/6/8/10 pay 1/2/3/4."
+    },
+    {
+      "id": "BOHN-C-RECYCLE-FIRST-SECOND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehst du die letzte Karte vom Nachziehstapel, mische die Karten des Ablagestapels. Danach legst du sie als neuen Nachziehstapel wieder verdeckt in die Tischmitte."
+      },
+      "expectation": "On the first and second depletion, discard is shuffled into a new draw pile."
+    },
+    {
+      "id": "BOHN-C-RECYCLE-CONTINUES-DRAW",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehst du die letzte Karte vom Nachziehstapel, mische die Karten des Ablagestapels. Danach legst du sie als neuen Nachziehstapel wieder verdeckt in die Tischmitte."
+      },
+      "expectation": "When the discard has sufficient cards, a multi-card reveal or draw continues from the recycled pile."
+    },
+    {
+      "id": "BOHN-C-END-THIRD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird. Sollte dies beim Aufdecken der Karten in der 2. Phase passieren (auch wenn nur eine Karte aufgedeckt werden konnte), werden die 2. und die 3. Phase noch zu Ende gespielt."
+      },
+      "expectation": "The third draw-pile depletion triggers game end."
+    },
+    {
+      "id": "BOHN-C-END-PHASE2-CONTINUE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird. Sollte dies beim Aufdecken der Karten in der 2. Phase passieren (auch wenn nur eine Karte aufgedeckt werden konnte), werden die 2. und die 3. Phase noch zu Ende gespielt."
+      },
+      "expectation": "A third depletion during phase-two reveal finishes phases two and three but not phase four."
+    },
+    {
+      "id": "BOHN-C-FINAL-HARVEST",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Jede Person erntet noch ihre Bohnenfelder und erhält gegebenenfalls dafür Bohnentaler. Die Karten auf der Hand zählen nicht mehr. Anschließend zählen alle ihre Karten in ihrem jeweiligen Talerstapel. Jede Karte ist einen Taler wert. Wer die meisten Taler besitzt, gewinnt. Bei einem Gleichstand gewinnt die Person, die im Uhrzeigersinn am weitesten weg von der Person mit der Start-Karte sitzt."
+      },
+      "expectation": "Every player harvests all fields at game end."
+    },
+    {
+      "id": "BOHN-C-FINAL-HANDS-IGNORED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Jede Person erntet noch ihre Bohnenfelder und erhält gegebenenfalls dafür Bohnentaler. Die Karten auf der Hand zählen nicht mehr. Anschließend zählen alle ihre Karten in ihrem jeweiligen Talerstapel. Jede Karte ist einen Taler wert. Wer die meisten Taler besitzt, gewinnt. Bei einem Gleichstand gewinnt die Person, die im Uhrzeigersinn am weitesten weg von der Person mit der Start-Karte sitzt."
+      },
+      "expectation": "Hand cards do not score."
+    },
+    {
+      "id": "BOHN-C-COIN-VALUE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Jede Person erntet noch ihre Bohnenfelder und erhält gegebenenfalls dafür Bohnentaler. Die Karten auf der Hand zählen nicht mehr. Anschließend zählen alle ihre Karten in ihrem jeweiligen Talerstapel. Jede Karte ist einen Taler wert. Wer die meisten Taler besitzt, gewinnt. Bei einem Gleichstand gewinnt die Person, die im Uhrzeigersinn am weitesten weg von der Person mit der Start-Karte sitzt."
+      },
+      "expectation": "Every coin-pile card is worth one coin."
+    },
+    {
+      "id": "BOHN-C-HIGHEST-WINS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Jede Person erntet noch ihre Bohnenfelder und erhält gegebenenfalls dafür Bohnentaler. Die Karten auf der Hand zählen nicht mehr. Anschließend zählen alle ihre Karten in ihrem jeweiligen Talerstapel. Jede Karte ist einen Taler wert. Wer die meisten Taler besitzt, gewinnt. Bei einem Gleichstand gewinnt die Person, die im Uhrzeigersinn am weitesten weg von der Person mit der Start-Karte sitzt."
+      },
+      "expectation": "The highest coin total wins."
+    },
+    {
+      "id": "BOHN-C-TIEBREAK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Jede Person erntet noch ihre Bohnenfelder und erhält gegebenenfalls dafür Bohnentaler. Die Karten auf der Hand zählen nicht mehr. Anschließend zählen alle ihre Karten in ihrem jeweiligen Talerstapel. Jede Karte ist einen Taler wert. Wer die meisten Taler besitzt, gewinnt. Bei einem Gleichstand gewinnt die Person, die im Uhrzeigersinn am weitesten weg von der Person mit der Start-Karte sitzt."
+      },
+      "expectation": "Among tied leaders, the tied player farthest clockwise from the Start-card holder wins."
+    },
+    {
+      "id": "BOHN-A-START-SELECTION",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Bestimmt, wer beginnt. Diese Person erhält eine der beiden Start-Karten. Die Start-Karte wird nicht weitergegeben. Sie bleibt das ganze Spiel über bei der Person, die das Spiel begonnen hat."
+      },
+      "expectation": "The source does not prescribe how the starting player is selected."
+    },
+    {
+      "id": "BOHN-M-PHASE3-INTERPLAYER-ORDER",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Alle, die Karten quer neben ihren Feldern liegen haben, müssen diese nun anbauen. Als aktive Person musst du auch die aufgedeckten Karten anbauen, falls du nicht mit ihnen gehandelt hast. Jede Person darf selbst entscheiden, in welcher Reihenfolge sie die neuen Bohnenkarten anbaut."
+      },
+      "expectation": "The source does not order different affected players during phase three."
+    },
+    {
+      "id": "BOHN-A-HARVEST-INTERRUPT",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht die aktive Person bist."
+      },
+      "expectation": "The source does not define digital interrupt priority for anytime harvesting."
+    },
+    {
+      "id": "BOHN-M-OBS-DEEPER-HAND",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte auf deiner Hand ist die vorderste Karte. Sie ist komplett sichtbar. Jede weitere steckt du dahinter. Die Reihenfolge der Karten auf deiner Hand darfst du während des gesamten Spiels nicht ändern. Du darfst die Karten nicht sortieren."
+      },
+      "expectation": "The source makes the front card visible but gives no full privacy policy for deeper cards."
+    },
+    {
+      "id": "BOHN-M-DEAL-DIRECTION",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Mischt alle Karten und teilt an alle jeweils fünf Handkarten aus."
+      },
+      "expectation": "The exact deal direction/grouping is unspecified."
+    },
+    {
+      "id": "BOHN-M-EMPTY-DISCARD-RECYCLE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehst du die letzte Karte vom Nachziehstapel, mische die Karten des Ablagestapels. Danach legst du sie als neuen Nachziehstapel wieder verdeckt in die Tischmitte."
+      },
+      "expectation": "No behavior is given if a nonterminal recycle has insufficient discard cards."
+    },
+    {
+      "id": "BOHN-M-TRADE-REFERENCE-STABILITY",
+      "classification": "missing",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe eine Karte erst aus der Hand, sobald der Handel auch wirklich zustande kommt. Denn beide beteiligten Personen müssen dem Handel zustimmen."
+      },
+      "expectation": "Physical rules do not define stale numeric card references."
+    },
+    {
+      "id": "BOHN-M-CONCURRENT-NEGOTIATION",
+      "classification": "missing",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehe eine Karte erst aus der Hand, sobald der Handel auch wirklich zustande kommt. Denn beide beteiligten Personen müssen dem Handel zustimmen."
+      },
+      "expectation": "Ordering of simultaneous verbal offers is unspecified."
+    },
+    {
+      "id": "BOHN-M-SHUFFLE-ALGORITHM",
+      "classification": "missing",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Ziehst du die letzte Karte vom Nachziehstapel, mische die Karten des Ablagestapels. Danach legst du sie als neuen Nachziehstapel wieder verdeckt in die Tischmitte."
+      },
+      "expectation": "No exact shuffle permutation is prescribed."
+    },
+    {
+      "id": "BOHN-U-PHYSICAL-PRESENTATION",
+      "classification": "untestable",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Die erste verteilte Karte ... ist komplett sichtbar."
+      },
+      "expectation": "Physical overlap, artwork, spoken announcements, age and duration are not executable gameplay expectations."
+    },
+    {
+      "id": "BOHN-C-SETUP-SHUFFLE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Mischt alle Karten und teilt an alle jeweils fünf Handkarten aus."
+      },
+      "expectation": "All 104 bean cards are shuffled before dealing."
+    },
+    {
+      "id": "BOHN-C-SETUP-DRAW-PILE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Legt die restlichen Karten mit der Talerseite nach oben als Nachziehstapel in die Tischmitte."
+      },
+      "expectation": "Every undealt card forms the central draw pile."
+    },
+    {
+      "id": "BOHN-C-INITIAL-DECK-SIZES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Mischt alle Karten und teilt an alle jeweils fünf Handkarten aus."
+      },
+      "expectation": "After dealing from 104 cards, the draw pile has 89/84/79 cards for 3/4/5 players."
+    },
+    {
+      "id": "BOHN-C-DRAW-PILE-HIDDEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 1,
+        "quote": "Legt die restlichen Karten mit der Talerseite nach oben als Nachziehstapel in die Tischmitte."
+      },
+      "expectation": "Bean identities in the draw pile are face-down/private."
+    },
+    {
+      "id": "BOHN-C-RECEIVED-NOT-HAND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Auf die Hand nehmen darfst du sie nicht."
+      },
+      "expectation": "Received cards never enter the hand."
+    },
+    {
+      "id": "BOHN-C-CONTINUE-AFTER-REVEALED-TRADE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Auch wenn du deine aufgedeckten Karten gehandelt hast, darfst du weiterhin mit deinen Handkarten handeln."
+      },
+      "expectation": "Trading revealed cards does not prevent further hand-card trades in the same phase."
+    },
+    {
+      "id": "BOHN-C-PHASE3-FORCED-HARVEST",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Solltest du eine Bohnenkarte anbauen müssen, die zu keiner Sorte auf deinen Feldern passt, musst du zuerst ein Feld abernten, bevor du weiter anbauen darfst."
+      },
+      "expectation": "A mandatory staged card that fits no field requires a harvest before planting continues."
+    },
+    {
+      "id": "BOHN-C-HARVEST-ANYTIME",
+      "classification": "clear",
+      "material": true,
+      "testable": false,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht die aktive Person bist."
+      },
+      "expectation": "A player may harvest their own field at any time, subject to singleton protection."
+    },
+    {
+      "id": "BOHN-C-END-OUTSIDE-PHASE2-IMMEDIATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "BOHN-BASE-2023-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, sobald der Nachziehstapel zum dritten Mal leer wird. Sollte dies beim Aufdecken der Karten in der 2. Phase … passieren, werden die 2. und die 3. Phase noch zu Ende gespielt."
+      },
+      "expectation": "Outside the sole phase-two continuation exception, third depletion ends immediately."
+    }
+  ]
+}
