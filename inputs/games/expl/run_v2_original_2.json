@@ -16,6 +16,7 @@
     }
   ],
   "profile": "inputs/games/expl/environment_profile_v2.json",
+  "agentic_self_check": "generation/agentic_self_check_v2.py",
   "profile_fixture_self_check": "inputs/games/expl/profile_fixture_self_check_v2.py",
   "prompt": "inputs/prompts/rulebook_to_python_v2.txt",
   "contract": "inputs/prompts/environment_contract_v2.md",

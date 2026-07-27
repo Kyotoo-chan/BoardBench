@@ -16,3 +16,10 @@
 - The raw 27/38 replay is **not a scored Original condition** and no judges were run.
 - V2.1 freezes deck state bottom-to-top, defines reinsertion indexing, removes the unsupported intermediate assertion, and settles the mechanical reaction boundary. Game-rule claims and expected source behavior are unchanged.
 - The generated module, raw generation evidence, grouped checks, and invalid scenario replay are retained in `invalid_profile_evaluation_1.tar.gz`.
+
+## `v2_original_2` preflight attempt 1 — 2026-07-27
+
+- A fresh generation produced a schema-v2 implementation and the game-local profile fixture check passed, but the generic evaluator-neutral `agentic_self_check.py` still hard-coded envelope suffix `/1` and falsely rejected the profile-declared state/action/observation `/2` schemas.
+- Two repair calls could not change the immutable evaluator self-check, so the pre-evaluation gate failed. No evaluation or judges ran and this is not a scored condition.
+- A versioned `agentic_self_check_v2.py` now accepts any positive schema version and, when a profile exists, requires the exact profile schema; historical packets retain the original self-check byte-for-byte. A runner option selects the versioned check only for this packet. Regression tests cover `/2`, wrong-kind, mismatched, zero, malformed schemas, and exact custom-check packet copying.
+- Both corrected self-checks replay successfully against the retained generated module. Raw artifacts and all three calls are retained in `failed_preflight_2.tar.gz`.

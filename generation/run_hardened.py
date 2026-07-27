@@ -131,7 +131,7 @@ def build_workspace(config: dict) -> tuple[Path, list[Path], set[str], dict[str,
     infrastructure = {
         "ENVIRONMENT_CONTRACT.md": resolve(config.get("contract", "inputs/prompts/environment_contract_v2.md")),
         "GAME_PROFILE.json": resolve(config["profile"]),
-        "agentic_self_check.py": ROOT / "generation/agentic_self_check.py",
+        "agentic_self_check.py": resolve(config.get("agentic_self_check", "generation/agentic_self_check.py")),
         "profile_fixture_self_check.py": resolve(config["profile_fixture_self_check"]),
     }
     for name, source in infrastructure.items():

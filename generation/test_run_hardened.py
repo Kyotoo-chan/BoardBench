@@ -1,5 +1,6 @@
 import hashlib
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -39,6 +40,19 @@ class HardenedRunnerTests(unittest.TestCase):
             "max_repairs": 1,
             "output_stem": "test_game_codex_ag",
         }
+
+    def test_config_can_select_a_versioned_agentic_self_check(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config = self.config(root)
+            custom = root / "custom_self_check.py"
+            custom.write_text("# schema-v2 check\n", encoding="utf-8")
+            config["agentic_self_check"] = str(custom)
+            workspace, _images, _allowed, _immutable, _renders = run_hardened.build_workspace(config)
+            try:
+                self.assertEqual((workspace / "agentic_self_check.py").read_text(encoding="utf-8"), "# schema-v2 check\n")
+            finally:
+                shutil.rmtree(workspace, ignore_errors=True)
 
     def test_assumptions_entries_are_schema_validated(self):
         with tempfile.TemporaryDirectory() as directory:
