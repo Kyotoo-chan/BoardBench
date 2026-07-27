@@ -55,11 +55,12 @@ def roundtrip(game, payload, label):
 def fixture(base, phase, pending=None):
     payload = copy.deepcopy(base)
     data = payload["data"]
+    inventory = Counter(cards(data))
     for player in data["players"]:
         player["hand"] = []
         player["preview"] = []
         player["alive"] = True
-    data["zones"] = {"deck": [], "discard": [], "box": sorted(Counter(cards(data)).elements())}
+    data["zones"] = {"deck": [], "discard": [], "box": sorted(inventory.elements())}
     data["current_player"] = 0
     data["turns_owed"] = 1
     data["phase"] = phase

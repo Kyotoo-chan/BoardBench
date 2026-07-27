@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import py_compile
 import shutil
@@ -60,6 +61,22 @@ class ExplodingKittensV2Tests(unittest.TestCase):
         suite = json.loads(SUITE.read_text(encoding="utf-8"))
         human = {claim_id for item in suite["scenarios"] if item["basis"] == "human_decision" for claim_id in item["fact_ids"]}
         self.assertEqual(human, approved)
+
+    def test_profile_fixture_rehomes_cards_before_clearing_hands(self):
+        path = GAME / "profile_fixture_self_check_v2.py"
+        spec = importlib.util.spec_from_file_location("expl_profile_check_test", path)
+        module = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(module)
+        inventory = sorted(Counter(module.COUNTS).elements())
+        base = {"schema": "boardbench/exploding-kittens/state/1", "data": {
+            "players": [{"id": 0, "alive": True, "hand": inventory[:16], "preview": []}, {"id": 1, "alive": True, "hand": [], "preview": []}],
+            "zones": {"deck": inventory[16:], "discard": [], "box": []},
+            "current_player": 0, "turns_owed": 1, "phase": "play", "pending": None,
+            "terminal": False, "winner": None,
+        }}
+        rebuilt = module.fixture(base, "play")
+        self.assertEqual(Counter(module.cards(rebuilt["data"])), Counter(module.COUNTS))
 
     def test_adapter_fixture_conserves_pending_kitten(self):
         class FakeGame:
