@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "run_id": "v2_original_1",
+  "condition_kind": "original",
+  "scope": "Complete supplied German Bohnanza Base Game Version 5.4 (2023), base game only, for 3–5 players",
+  "source_base_dir": "inputs/games/bohnanza_base_2023",
+  "sources": [
+    {
+      "source_id": "BOHN-BASE-2023-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    }
+  ],
+  "profile": "inputs/games/bohnanza_base_2023/environment_profile_v2.json",
+  "agentic_self_check": "generation/agentic_self_check_v2.py",
+  "profile_fixture_self_check": "inputs/games/bohnanza_base_2023/profile_fixture_self_check_v2.py",
+  "prompt": "inputs/prompts/rulebook_to_python_v2.txt",
+  "contract": "inputs/prompts/environment_contract_v2.md",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "verbosity": "low",
+  "max_repairs": 2,
+  "timeout": 1800,
+  "output_stem": "bohnanza_base_2023_codex_ag"
+}

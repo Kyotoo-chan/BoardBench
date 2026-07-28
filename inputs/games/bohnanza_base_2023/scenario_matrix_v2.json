@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "pending-user-approval",
+  "status": "approved-for-v2-evaluation",
   "game": "bohnanza_base_2023",
   "claims_total": 92,
   "clear_required": 81,
@@ -76,7 +76,7 @@
         "BOHN-C-START-CARD-FIXED"
       ],
       "title": "Fixed Start card",
-      "expectation": "The initial Start-card holder remains fixed while turns advance."
+      "expectation": "After a complete phase-four draw advances from player 2 to player 0, the original Start-card holder remains player 1 and turn_number advances exactly once."
     },
     {
       "id": "BOHN-R06-seeded-start",
@@ -85,7 +85,7 @@
         "BOHN-A-START-SELECTION"
       ],
       "title": "Seeded starting player",
-      "expectation": "The same seed reproducibly selects the same start player."
+      "expectation": "Each of twelve seeds reproduces its own start player on repeat construction, and the seed set selects at least two different players without requiring a specific mapping."
     },
     {
       "id": "BOHN-R07-opponent-front-visible",
@@ -162,7 +162,7 @@
         "BOHN-C-PHASES"
       ],
       "title": "Four phase order",
-      "expectation": "A deterministic trace visits the four phase boundaries in printed order."
+      "expectation": "A deterministic trace plants or skips phase one, reveals and ends trade in phase two, plants both retained revealed cards in phase three, then draws three and advances clockwise in phase four."
     },
     {
       "id": "BOHN-R15-reveal-two-owned",
@@ -257,7 +257,7 @@
         "BOHN-M-PHASE3-INTERPLAYER-ORDER"
       ],
       "title": "Arbitrary affected-player order",
-      "expectation": "Either affected owner may plant next; phase four waits until all are finished."
+      "expectation": "Both affected owners are initially legal; player 1 may finish before player 0, draw stays blocked while either staging list remains, and phase four appears only after both lists clear."
     },
     {
       "id": "BOHN-R24-active-plants-revealed",
@@ -435,7 +435,7 @@
         "BOHN-C-FINAL-HARVEST"
       ],
       "title": "Immediate third depletion",
-      "expectation": "When an exact phase-four draw empties the pile for the third time, stop before any remaining draw or next turn, final-harvest and terminate."
+      "expectation": "Drawing the exact last card in phase four appends that card, immediately stops before further draws or next turn, clears final fields into coins/discard, derives the winner and terminates."
     },
     {
       "id": "BOHN-R42-final-score-tiebreak",
@@ -449,7 +449,7 @@
         "BOHN-C-START-CARD-FIXED"
       ],
       "title": "Final score and tiebreak",
-      "expectation": "Final fields score, hands do not, and farthest-clockwise tied leader wins."
+      "expectation": "A real third-depletion transition final-harvests equal Red fields, leaves a five-card hand unscored, creates a 3–3 tie between players 1 and 3, and derives player 3 as farthest clockwise from fixed Start holder 0."
     }
   ]
 }

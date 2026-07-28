@@ -1,6 +1,6 @@
 # Bohnanza Base Game 2023 V2 rule facts
 
-- **status:** pending matrix approval
+- **status:** approved (2026-07-28)
 - **condition:** publisher PDF only
 - **source ID:** `BOHN-BASE-2023-RULES`
 - **source role:** `publisher_rulebook`
@@ -12,7 +12,7 @@
 
 ## Audit summary
 
-The two complete publisher pages yield 92 atomic claims: 82 clear claims, 2 ambiguous claims, 7 missing claims and 1 untestable presentation claim. Of the clear claims, 81 are material and deterministically testable; all 81 are mapped. The broad physical word “jederzeit” remains visible as a clear but non-exhaustively-testable coverage exception, while deterministic stable boundaries are tested. Historical 157-card inventories, expansion beans, third-field purchasing, mutation conditions, prior clarification texts, old implementations and evaluator outputs are excluded.
+The two complete publisher pages yield 92 atomic claims: 82 clear claims, 2 ambiguous claims, 7 missing claims and 1 untestable presentation claim. Of the clear claims, 81 are material and scored by the coverage register: 80 are scenario-mapped and `BOHN-C-HARVEST-ANYTIME` has one explicit non-exhaustive coverage exception, while deterministic off-turn and stable boundaries are tested. Exact shuffle order is clear but not deterministically scoreable because the source prescribes no permutation. Historical 157-card inventories, expansion beans, third-field purchasing, mutation conditions, prior clarification texts, old implementations and evaluator outputs are excluded.
 
 ## Clear rule groups
 
@@ -47,4 +47,4 @@ These remain missing or untestable claims rather than silent implementation rule
 
 ## Coverage statement
 
-The planned V2 matrix contains 42 cases: 38 clear-basis and 4 human-decision-basis. It maps all 81 required clear claims and records one explicit clear coverage exception for exhaustive physical “anytime” timing. Player-count evidence will separately include exact setup, initial legal play and bounded reproducible play for 3, 4 and 5 players plus rejection of 2 and 6. Mapping coverage does not claim assertion completeness or total game correctness.
+The planned V2 matrix contains 42 cases: 38 clear-basis and 4 human-decision-basis. It maps 80 of 81 required clear claims and records one explicit clear coverage exception for exhaustive physical “anytime” timing. Player-count evidence will separately include exact setup, initial legal play and bounded reproducible play for 3, 4 and 5 players plus rejection of 2 and 6. Mapping coverage does not claim assertion completeness or total game correctness.

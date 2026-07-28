@@ -1,9 +1,9 @@
 # Bohnanza Base 2023 V2 scenario matrix
 
-- Status: **pending user approval**
+- Status: **approved for V2 evaluation (2026-07-28)**
 - Atomic claims: **92**
-- Required clear claims: **81/81 mapped**
-- Coverage exception: `BOHN-C-HARVEST-ANYTIME` is publisher-clear but not exhaustively testable; deterministic stable boundaries are covered by `BOHN-R27` without claiming every physical instant.
+- Required clear claims: **80/81 mapped**, plus one explicit exception
+- Coverage exception: `BOHN-C-HARVEST-ANYTIME` is publisher-clear but not exhaustively testable; deterministic off-turn and stable boundaries are covered by `BOHN-R26`/`BOHN-R27` without claiming every physical instant.
 - Executable cases planned: **42** (38 clear, 4 human decision)
 
 | ID | Basis | Claims | Exact expectation |
@@ -12,8 +12,8 @@
 | `BOHN-R02-4p-setup` | clear | `BOHN-C-PLAYERS`, `BOHN-C-FIELDS-4-5`, `BOHN-C-DEAL-FIVE`, `BOHN-C-SETUP-SHUFFLE`, `BOHN-C-SETUP-DRAW-PILE`, `BOHN-C-INITIAL-DECK-SIZES`, `BOHN-C-DRAW-PILE-HIDDEN` | **Four-player setup:** With seed 20260727: same-seed reproducible shuffle, four players each with two fields and five cards, an 84-card hidden draw pile and an initial legal action. |
 | `BOHN-R03-5p-setup` | clear | `BOHN-C-PLAYERS`, `BOHN-C-FIELDS-4-5`, `BOHN-C-DEAL-FIVE`, `BOHN-C-SETUP-SHUFFLE`, `BOHN-C-SETUP-DRAW-PILE`, `BOHN-C-INITIAL-DECK-SIZES`, `BOHN-C-DRAW-PILE-HIDDEN` | **Five-player setup:** With seed 20260727: same-seed reproducible shuffle, five players each with two fields and five cards, a 79-card hidden draw pile and an initial legal action. |
 | `BOHN-R04-player-count-contract` | clear | `BOHN-C-PLAYERS` | **Player-count boundary:** With seed 20260727 and bound 100, repeatedly choose the lexicographically first canonical action name: 3, 4 and 5 each remain terminal or actionable without crash/deadlock; 2 and 6 raise ValueError. |
-| `BOHN-R05-start-card-fixed` | clear | `BOHN-C-START-CARD-FIXED` | **Fixed Start card:** The initial Start-card holder remains fixed while turns advance. |
-| `BOHN-R06-seeded-start` | human_decision | `BOHN-A-START-SELECTION` | **Seeded starting player:** The same seed reproducibly selects the same start player. |
+| `BOHN-R05-start-card-fixed` | clear | `BOHN-C-START-CARD-FIXED` | **Fixed Start card:** After a complete phase-four draw advances from player 2 to player 0, the original Start-card holder remains player 1 and turn_number advances exactly once. |
+| `BOHN-R06-seeded-start` | human_decision | `BOHN-A-START-SELECTION` | **Seeded starting player:** Each of twelve seeds reproduces its own start player on repeat construction, and the seed set selects at least two different players without requiring a specific mapping. |
 | `BOHN-R07-opponent-front-visible` | clear | `BOHN-C-OBS-FRONT`, `BOHN-C-DRAW-PILE-HIDDEN` | **Visible opponent front:** Opponent observations expose the source-visible front card. |
 | `BOHN-R08-deeper-hand-private` | human_decision | `BOHN-M-OBS-DEEPER-HAND` | **Deeper opponent cards hidden:** The selected player sees their complete ordered hand; opponents expose only size and front card, never deeper identities. |
 | `BOHN-R09-front-plant-preserves-order` | clear | `BOHN-C-HAND-FRONT`, `BOHN-C-HAND-ORDER`, `BOHN-C-FIRST-PLANT-MANDATORY` | **Mandatory front plant:** Only the front card is plantable and removing it preserves suffix order. |
@@ -21,7 +21,7 @@
 | `BOHN-R11-empty-hand-skip` | clear | `BOHN-C-EMPTY-HAND-SKIP` | **Empty-hand phase skip:** An empty hand begins directly with reveal. |
 | `BOHN-R12-field-types` | clear | `BOHN-C-FIELD-ONE-TYPE`, `BOHN-C-SAME-TYPE-MULTIPLE-FIELDS` | **Field type constraints:** Mixed types are illegal while one type may occupy multiple fields. |
 | `BOHN-R13-forced-harvest` | clear | `BOHN-C-FORCED-HARVEST` | **Forced harvest before planting:** A mandatory unmatched front card remains pending until a legal field is harvested and then is planted. |
-| `BOHN-R14-four-phase-turn` | clear | `BOHN-C-PHASES` | **Four phase order:** A deterministic trace visits the four phase boundaries in printed order. |
+| `BOHN-R14-four-phase-turn` | clear | `BOHN-C-PHASES` | **Four phase order:** A deterministic trace plants or skips phase one, reveals and ends trade in phase two, plants both retained revealed cards in phase three, then draws three and advances clockwise in phase four. |
 | `BOHN-R15-reveal-two-owned` | clear | `BOHN-C-REVEAL-TWO`, `BOHN-C-REVEALED-OWNED-ACTIVE` | **Reveal two:** Two known top cards become public and controlled by the active player. |
 | `BOHN-R16-trade-legality` | clear | `BOHN-C-TRADE-ACTIVE-ONLY`, `BOHN-C-TRADE-NONACTIVE-BLOCKED`, `BOHN-C-TRADE-ANY-HAND-POSITION`, `BOHN-C-TRADE-REVEALED`, `BOHN-C-TRADE-UNEQUAL`, `BOHN-C-NO-FIELD-TRADE` | **Trade legality matrix:** Only active-involving trades over legal hand/revealed zones are exposed; unequal bundles are legal. |
 | `BOHN-R17-accepted-trade` | clear | `BOHN-C-TRADE-CONSENT`, `BOHN-C-TRADE-TRANSFER-ON-ACCEPT`, `BOHN-C-RECEIVED-STAGED`, `BOHN-C-RECEIVED-NOT-HAND` | **Accepted trade atomicity:** Proposal leaves zones unchanged; acceptance atomically stages exact bundles without changing hand order otherwise. |
@@ -30,7 +30,7 @@
 | `BOHN-R20-no-retrade` | clear | `BOHN-C-NO-RECEIVED-RETRADE`, `BOHN-C-NO-FIELD-TRADE` | **No onward or field trade:** Staged received and planted cards are absent from offer actions. |
 | `BOHN-R21-end-trade` | clear | `BOHN-C-END-TRADE`, `BOHN-C-CONTINUE-AFTER-REVEALED-TRADE` | **Continue and end trade:** The active player may continue hand trades and explicitly end phase two. |
 | `BOHN-R22-plant-all-owner-order` | clear | `BOHN-C-PLANT-ALL-RECEIVED`, `BOHN-C-PLANT-OWNER-ORDER`, `BOHN-C-PHASE3-FORCED-HARVEST` | **Plant all staged cards:** Each owner chooses their staged-card order, all cards are planted, and an unmatched mandatory staged card forces a legal harvest before continuing. |
-| `BOHN-R23-phase3-any-player-order` | human_decision | `BOHN-M-PHASE3-INTERPLAYER-ORDER` | **Arbitrary affected-player order:** Either affected owner may plant next; phase four waits until all are finished. |
+| `BOHN-R23-phase3-any-player-order` | human_decision | `BOHN-M-PHASE3-INTERPLAYER-ORDER` | **Arbitrary affected-player order:** Both affected owners are initially legal; player 1 may finish before player 0, draw stays blocked while either staging list remains, and phase four appears only after both lists clear. |
 | `BOHN-R24-active-plants-revealed` | clear | `BOHN-C-PLANT-UNTRADED-REVEALED` | **Plant untraded revealed cards:** The active player plants every retained revealed card before drawing. |
 | `BOHN-R25-draw-append-clockwise` | clear | `BOHN-C-DRAW-THREE`, `BOHN-C-DRAW-APPEND-ORDER`, `BOHN-C-HAND-APPEND`, `BOHN-C-CLOCKWISE`, `BOHN-C-NEXT-PLAYER` | **Draw three and advance:** Known top cards append in order and the next clockwise player becomes active. |
 | `BOHN-R26-offturn-harvest` | clear | `BOHN-C-HARVEST-OFFTURN` | **Off-turn harvest permission:** A non-active player can harvest their own legal field. |
@@ -48,8 +48,8 @@
 | `BOHN-R38-first-recycle-reveal` | clear | `BOHN-C-RECYCLE-FIRST-SECOND`, `BOHN-C-RECYCLE-CONTINUES-DRAW` | **First recycle during reveal:** Seed 20260727; deck top [blau], discard [feuer, soja, rot], depletions 0: reveal blau, increment to 1, empty discard into a seeded refill, reveal exactly one refill card, leave two deck cards, conserve the four-card multiset and remain nonterminal. |
 | `BOHN-R39-second-recycle-draw` | clear | `BOHN-C-RECYCLE-FIRST-SECOND`, `BOHN-C-RECYCLE-CONTINUES-DRAW` | **Second recycle during draw:** Seed 20260727; existing hand [garten], deck top [blau], discard [feuer, soja, rot], depletions 1: append blau plus exactly two refill cards, increment to 2, leave one deck card, empty discard, conserve order/multiset, and advance clockwise. |
 | `BOHN-R40-third-depletion-phase2` | clear | `BOHN-C-END-THIRD`, `BOHN-C-END-PHASE2-CONTINUE`, `BOHN-C-FINAL-HARVEST`, `BOHN-C-COIN-VALUE` | **Third depletion in phase two:** On depletions 2→3 during reveal, expose available card(s), finish trade and every mandatory phase-three planting, perform final harvest, skip phase four and terminate. |
-| `BOHN-R41-third-depletion-outside-phase2` | clear | `BOHN-C-END-OUTSIDE-PHASE2-IMMEDIATE`, `BOHN-C-END-THIRD`, `BOHN-C-FINAL-HARVEST` | **Immediate third depletion:** When an exact phase-four draw empties the pile for the third time, stop before any remaining draw or next turn, final-harvest and terminate. |
-| `BOHN-R42-final-score-tiebreak` | clear | `BOHN-C-FINAL-HARVEST`, `BOHN-C-FINAL-HANDS-IGNORED`, `BOHN-C-COIN-VALUE`, `BOHN-C-HIGHEST-WINS`, `BOHN-C-TIEBREAK`, `BOHN-C-START-CARD-FIXED` | **Final score and tiebreak:** Final fields score, hands do not, and farthest-clockwise tied leader wins. |
+| `BOHN-R41-third-depletion-outside-phase2` | clear | `BOHN-C-END-OUTSIDE-PHASE2-IMMEDIATE`, `BOHN-C-END-THIRD`, `BOHN-C-FINAL-HARVEST` | **Immediate third depletion:** Drawing the exact last card in phase four appends that card, immediately stops before further draws or next turn, clears final fields into coins/discard, derives the winner and terminates. |
+| `BOHN-R42-final-score-tiebreak` | clear | `BOHN-C-FINAL-HARVEST`, `BOHN-C-FINAL-HANDS-IGNORED`, `BOHN-C-COIN-VALUE`, `BOHN-C-HIGHEST-WINS`, `BOHN-C-TIEBREAK`, `BOHN-C-START-CARD-FIXED` | **Final score and tiebreak:** A real third-depletion transition final-harvests equal Red fields, leaves a five-card hand unscored, creates a 3–3 tie between players 1 and 3, and derives player 3 as farthest clockwise from fixed Start holder 0. |
 
 ## Approved human decisions
 

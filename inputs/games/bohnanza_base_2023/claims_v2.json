@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "version": 1,
   "game": "bohnanza_base_2023",
   "source_id": "BOHN-BASE-2023-RULES",
   "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655",
@@ -1004,13 +1004,14 @@
       "id": "BOHN-C-SETUP-SHUFFLE",
       "classification": "clear",
       "material": true,
-      "testable": true,
+      "testable": false,
       "source": {
         "source_id": "BOHN-BASE-2023-RULES",
         "page": 1,
         "quote": "Mischt alle Karten und teilt an alle jeweils fünf Handkarten aus."
       },
-      "expectation": "All 104 bean cards are shuffled before dealing."
+      "expectation": "All 104 bean cards are shuffled before dealing.",
+      "coverage_exception": "The source requires a shuffle but prescribes no exact permutation; seeded reproducibility and inventory conservation are tested without scoring one order."
     },
     {
       "id": "BOHN-C-SETUP-DRAW-PILE",
@@ -1088,13 +1089,14 @@
       "id": "BOHN-C-HARVEST-ANYTIME",
       "classification": "clear",
       "material": true,
-      "testable": false,
+      "testable": true,
       "source": {
         "source_id": "BOHN-BASE-2023-RULES",
         "page": 2,
         "quote": "Du darfst jederzeit im Spiel deine Bohnenfelder abernten, auch wenn du nicht die aktive Person bist."
       },
-      "expectation": "A player may harvest their own field at any time, subject to singleton protection."
+      "expectation": "A player may harvest their own field at any time, subject to singleton protection.",
+      "coverage_exception": "The physical word jederzeit cannot be exhaustively sampled; BOHN-R26 and BOHN-R27 cover deterministic off-turn and stable decision boundaries without claiming sub-transition interrupts."
     },
     {
       "id": "BOHN-C-END-OUTSIDE-PHASE2-IMMEDIATE",

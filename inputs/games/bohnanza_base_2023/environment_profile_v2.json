@@ -1,0 +1,87 @@
+{
+  "profile_version": 2,
+  "default_num_players": 3,
+  "player_counts": {"supported": [3, 4, 5], "unsupported": [2, 6]},
+  "state_schema": "boardbench/bohnanza-base-2023/state/2",
+  "action_schema": "boardbench/bohnanza-base-2023/action/2",
+  "observation_schema": "boardbench/bohnanza-base-2023/observation/2",
+  "note": "Representation-only profile for the supplied German Bohnanza Base Game Version 5.4 (2023). Rules come only from assigned sources. A supplied seed reproducibly chooses the start player and all shuffle behavior.",
+  "bean_ids": ["gartenbohne", "rote_bohne", "augenbohne", "sojabohne", "brechbohne", "saubohne", "feuerbohne", "blaue_bohne"],
+  "phase_ids": ["plant_first", "plant_second", "reveal", "trade", "trade_response", "plant_received", "draw", "terminal"],
+  "state_data": {
+    "required": ["configuration", "current_player", "active_player", "start_player", "phase", "terminal", "winner", "players", "zones", "depletions", "pending", "turn_number", "chance"],
+    "configuration": {"players": "int", "seed": "int|null", "variant": "base_2023"},
+    "current_player": "int",
+    "active_player": "int",
+    "start_player": "int",
+    "phase": "phase_id",
+    "terminal": "bool",
+    "winner": "int|null",
+    "players": [{"id": "int", "hand": ["bean_id (front to back)"], "fields": [["one bean_id per nonempty field"]], "coins": "nonnegative int counting flipped bean cards; each coin is one physical card whose bean identity is no longer represented"}],
+    "zones": {
+      "deck": ["bean_id (bottom to top; final item is next draw)"],
+      "discard": ["bean_id (oldest to newest)"],
+      "revealed": ["bean_id (reveal order)"],
+      "pending_received": [["bean_id (owner-chosen planting order, one list per player)"]],
+      "reserve": ["bean_id (fixture-only inventory outside active play)"]
+    },
+    "depletions": "int in 0..3",
+    "pending": {
+      "none": "null",
+      "proposal": {
+        "type": "trade|gift",
+        "actor": "int",
+        "partner": "int",
+        "offered": [{"owner": "int", "zone": "hand|revealed", "index": "int snapshot index", "bean": "bean_id"}],
+        "requested": [{"owner": "int", "zone": "hand", "index": "int snapshot index", "bean": "bean_id"}],
+        "awaiting_player": "int"
+      }
+    },
+    "turn_number": "int",
+    "chance": {"seed": "int|null", "counter": "int"}
+  },
+  "representation_choices": {
+    "inventory_invariant": "The total physical inventory is 104: every named bean card in hands, fields, deck, discard, revealed, pending_received and reserve, plus every player coin (a flipped bean card).",
+    "trade_refs": "A proposal stores immutable snapshot references. Source zones do not change on proposal and exact referenced cards transfer atomically only on acceptance.",
+    "pending_limit": "At most one proposal is pending. This serializes physical negotiation without adding a trade-legality rule.",
+    "phase3_order": "Any player with pending_received cards, plus the active player while revealed cards remain, may supply the next plant action. Draw remains unavailable until all such cards are planted.",
+    "harvest_boundary": "Any player may harvest their own legal field at every stable decision state. No interrupt is inserted inside one apply_action transition.",
+    "terminal": "Terminal states use phase terminal, terminal true, winner equal to the unique tiebreak winner, pending null, and no legal actions."
+  },
+  "action_data": {
+    "required": ["type", "actor", "args"],
+    "types": {
+      "plant": {"field": "int", "source": "hand|revealed|received", "index": "int", "bean": "bean_id"},
+      "harvest": {"player": "int", "field": "int"},
+      "reveal": {},
+      "trade_propose": {"partner": "int", "offered": ["card_ref"], "requested": ["card_ref"], "gift": "bool"},
+      "trade_accept": {},
+      "trade_reject": {},
+      "end_trade": {},
+      "draw": {},
+      "pass": {}
+    },
+    "card_ref": {"owner": "int", "zone": "hand|revealed", "index": "int", "bean": "bean_id"},
+    "type_ids": ["plant", "harvest", "reveal", "trade_propose", "trade_accept", "trade_reject", "end_trade", "draw", "pass"]
+  },
+  "observation_data": {
+    "required": ["player", "current_player", "active_player", "start_player", "phase", "terminal", "winner", "own_hand", "opponents", "fields", "coins", "revealed", "deck_size", "discard_size", "pending_received_counts", "pending", "turn_number"],
+    "player": "int",
+    "current_player": "int",
+    "active_player": "int",
+    "start_player": "int",
+    "phase": "phase_id",
+    "terminal": "bool",
+    "winner": "int|null",
+    "own_hand": ["bean_id (front to back)"],
+    "opponents": [{"id": "int", "hand_size": "int", "front_card": "bean_id|null"}],
+    "fields": [[["bean_id"]]],
+    "coins": ["int"],
+    "revealed": ["bean_id"],
+    "deck_size": "int",
+    "discard_size": "int",
+    "pending_received_counts": ["int"],
+    "pending": "null|public proposal object",
+    "turn_number": "int"
+  }
+}
