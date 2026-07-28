@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "run_id": "v2_clear_rule_emphasis_1",
+  "condition_kind": "clarified",
+  "intervention_kind": "clear_rule_emphasis",
+  "scope": "Complete supplied German Bohnanza Base Game Version 5.4 (2023) for 3–5 players",
+  "source_base_dir": "inputs/games/bohnanza_base_2023",
+  "sources": [
+    {
+      "source_id": "BOHN-BASE-2023-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    },
+    {
+      "source_id": "BOHN-V2-CLEAR-RULE-EMPHASIS",
+      "path": "clear_rule_emphasis_v2.json",
+      "packet_name": "clear_rule_emphasis_v2.json",
+      "role": "experimenter_clarification",
+      "sha256": "3ccdfaad3d03411c1407a2954a8836d13f7b4e155542296e4e1432fe0aca995c"
+    }
+  ],
+  "profile": "inputs/games/bohnanza_base_2023/environment_profile_v2.json",
+  "agentic_self_check": "generation/agentic_self_check_v2.py",
+  "profile_fixture_self_check": "inputs/games/bohnanza_base_2023/profile_fixture_self_check_v2.py",
+  "prompt": "inputs/prompts/rulebook_to_python_v2.txt",
+  "contract": "inputs/prompts/environment_contract_v2.md",
+  "original_run_config": "inputs/games/bohnanza_base_2023/run_v2_original.json",
+  "original_evidence": "results/scores/bohnanza_base_2023/v2/original_agentic.json",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "verbosity": "low",
+  "max_repairs": 2,
+  "timeout": 1800,
+  "output_stem": "bohnanza_base_2023_codex_ag"
+}

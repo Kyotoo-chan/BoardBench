@@ -17,3 +17,7 @@ The complete two-page PDF was freshly rendered without cropping at 150 DPI. Mani
 - Page 2 SHA-256: `786d7dadd70e1cd0c29f30abd5c80aff9adddf8d62f545d09c83df38c60b8b0f`
 
 Original generation receives only the registered publisher PDF, complete fresh page renderings, neutral contract/profile/self-check files and source manifest. Evaluator claims, decisions, scenarios and historical conditions remain hidden.
+
+## Post-evaluation clear-rule emphasis
+
+After the committed Original evaluation, the user approved one fresh **clear-rule emphasis** condition. It keeps the publisher PDF byte-identical and adds only `clear_rule_emphasis_v2.json` (`experimenter_clarification` transport role, intervention kind `clear_rule_emphasis`, SHA-256 `3ccdfaad3d03411c1407a2954a8836d13f7b4e155542296e4e1432fe0aca995c`). The artifact repeats the publisher-clear multi-card unequal-trade rule, Garden and Soy Bohnometers, and phase-two third-depletion ending. It is explicitly not a source-gap clarification and cannot show that these Original failures were caused by missing rulebook content; it tests salience of already-clear text in a fresh generation.

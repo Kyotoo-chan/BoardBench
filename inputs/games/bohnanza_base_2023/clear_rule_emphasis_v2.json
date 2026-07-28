@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "game": "bohnanza_base_2023",
+  "intervention_kind": "clear_rule_emphasis",
+  "authorship": "BoardBench experimenter emphasis approved by the user after evaluation of v2_original_1 on 2026-07-28; not publisher text and not a source-gap clarification",
+  "guardrail": "This artifact repeats only publisher-clear rules that the Original implementation violated. It does not support a claim that the rulebook was missing these rules; it tests whether making already-clear rules more salient changes a fresh generation.",
+  "emphasis": [
+    {
+      "id": "BOHN-EMPH-UNEQUAL-MULTICARD-TRADE",
+      "claim_ids": ["BOHN-C-TRADE-ANY-HAND-POSITION", "BOHN-C-TRADE-UNEQUAL", "BOHN-C-TRADE-CONSENT", "BOHN-C-TRADE-TRANSFER-ON-ACCEPT"],
+      "publisher_locator": "game_rules.pdf page 2, Regeln für den Bohnenhandel",
+      "text": "A single agreed trade may contain multiple cards on either side and the bundle sizes may differ, for example two cards for one. Cards may come from arbitrary hand positions. Represent the complete proposed bundles atomically, leave both hands unchanged while awaiting consent, and transfer every referenced card only after acceptance. Do not reduce source-legal multi-card bundles to single-card-only proposals."
+    },
+    {
+      "id": "BOHN-EMPH-GARDEN-METER",
+      "claim_ids": ["BOHN-C-PAYOUT-GARTEN"],
+      "publisher_locator": "game_rules.pdf page 1, Gartenbohne card Bohnometer",
+      "text": "Apply the printed Garden Bean meter exactly: 1 Garden Bean pays 0 coins; 2 Garden Beans pay 2 coins; 3 or more Garden Beans pay 3 coins. There is no 1-coin Garden payout."
+    },
+    {
+      "id": "BOHN-EMPH-SOY-METER",
+      "claim_ids": ["BOHN-C-PAYOUT-SOJA"],
+      "publisher_locator": "game_rules.pdf page 1, Sojabohne card Bohnometer",
+      "text": "Apply the printed Soy Bean thresholds exactly: sizes 0–1 pay 0; 2–3 pay 1; 4–5 pay 2; size 6 pays 3; size 7 or more pays 4."
+    },
+    {
+      "id": "BOHN-EMPH-THIRD-DEPLETION-PHASE2-END",
+      "claim_ids": ["BOHN-C-END-THIRD", "BOHN-C-END-PHASE2-CONTINUE", "BOHN-C-FINAL-HARVEST"],
+      "publisher_locator": "game_rules.pdf page 2, Ende des Spiels",
+      "text": "If the draw pile becomes empty for the third time while revealing in phase 2, finish phases 2 and 3 only. As soon as all required phase-3 planting is complete, perform the final harvest and make the state terminal. Do not enter or require a phase-4 draw."
+    }
+  ]
+}

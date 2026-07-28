@@ -8,10 +8,12 @@ from pathlib import Path
 from checks.run_scenarios_v4 import load_suite
 from checks.scenario_adapters import bohnanza_base_2023_v2 as adapter
 from generation.run_hardened import build_workspace, load_config
+from generation.source_condition import validate_pair
 
 ROOT=Path(__file__).resolve().parents[1]
 GAME=ROOT/'inputs/games/bohnanza_base_2023'
 CONFIG=GAME/'run_v2_original.json'
+EMPHASIS_CONFIG=GAME/'run_v2_clear_rule_emphasis.json'
 SUITE=ROOT/'checks/scenarios/bohnanza_base_2023_v2.json'
 MATRIX=GAME/'scenario_matrix_v2.json'
 
@@ -94,6 +96,18 @@ class BohnanzaV2Tests(unittest.TestCase):
   self.assertFalse(by['BOHN-R42-final-score-tiebreak']['fixture'].get('terminal',False));self.assertNotIn('winner',by['BOHN-R42-final-score-tiebreak']['fixture']);self.assertEqual(by['BOHN-R42-final-score-tiebreak']['steps'][0]['action']['adapter']['type'],'draw')
   adapter_text=(ROOT/'checks/scenario_adapters/bohnanza_base_2023_v2.py').read_text()
   for hidden in ('second_plant_contract','field_type_contract','gift_outcomes','phase3_forced_harvest','harvest_conservation','stable_harvest_boundaries'):self.assertNotIn(hidden,adapter_text)
+ def test_clear_rule_emphasis_is_separate_and_pair_identical(self):
+  original=load_config(CONFIG)['sources'];emphasis_config=load_config(EMPHASIS_CONFIG)
+  artifact=json.loads((GAME/'clear_rule_emphasis_v2.json').read_text())
+  self.assertEqual(artifact['intervention_kind'],'clear_rule_emphasis')
+  self.assertIn('not a source-gap clarification',artifact['authorship'])
+  self.assertEqual({claim for item in artifact['emphasis'] for claim in item['claim_ids']},{'BOHN-C-TRADE-ANY-HAND-POSITION','BOHN-C-TRADE-UNEQUAL','BOHN-C-TRADE-CONSENT','BOHN-C-TRADE-TRANSFER-ON-ACCEPT','BOHN-C-PAYOUT-GARTEN','BOHN-C-PAYOUT-SOJA','BOHN-C-END-THIRD','BOHN-C-END-PHASE2-CONTINUE','BOHN-C-FINAL-HARVEST'})
+  validate_pair(original,emphasis_config['sources'],GAME,GAME)
+  workspace,_images,allowed,_immutable,_renders=build_workspace(emphasis_config)
+  try:
+   self.assertIn('clear_rule_emphasis_v2.json',allowed)
+   for hidden in ('claims_v2.json','decisions_v2.json','rulefacts_v2.md','bohnanza_base_2023_v2.json'):self.assertNotIn(hidden,allowed)
+  finally:shutil.rmtree(workspace,ignore_errors=True)
  def test_original_packet_exact_allowlist(self):
   workspace,images,allowed,_immutable,renders=build_workspace(load_config(CONFIG))
   try:
