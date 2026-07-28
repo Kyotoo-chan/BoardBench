@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "iteration": "v2",
+  "conditions": {
+    "original": {
+      "original.md": "ccc712d052331d5e5dcc26350c33eeebf316e7306225d69b9111b7d0535384b2",
+      "original.py": "741f6bb3e6df859cccb2b06e616d0f1ae04a1a483f893f43ce85eb08e10dd070",
+      "original_agentic.json": "df535427baac4a30194256208b890c87b500cc66eeb0b6aa2a311c6e18033598",
+      "original_assumptions.json": "06419d19b6582ba0e3d1ea65157c13d98f79a80e6db5ec9bca4b5cf9c57fafa0",
+      "original_checks.txt": "df2152d39a3a480298f769699a6ed9426cd5852511529955071bf8f34165c5b5",
+      "raw/original_events.jsonl": "dd14fdab73c3345393adf8a636e8b92b7ee1dc80e8a83e5459dc9002c48903fc",
+      "original_judge_1.md": "8bac1a173863a94fa0d4c2abbe65a286c3a3b16e041a378232c340b6aa9af3aa",
+      "original_judge_2.md": "b83c3c3a5ef8b03d8d59de08e6dc822e1d3de0d03036da7d1822434dbd905953",
+      "original_judge_3.md": "ee2b211527e939de01cde022f0cdecefe66b7435ded1ae28161edf229d895e2e",
+      "original_rule_coverage.md": "b49e39ca9456be751b121b629a0a984681f7733602abb62fe5058c68d6311607",
+      "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    }
+  }
+}

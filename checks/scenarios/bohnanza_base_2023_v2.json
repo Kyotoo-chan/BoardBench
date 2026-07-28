@@ -943,7 +943,7 @@
       "initial": {
         "adapter": {
           "legal_action_type_any": [
-            "reveal"
+            "pass"
           ]
         }
       },
@@ -953,6 +953,24 @@
           "source_id": "BOHN-BASE-2023-RULES",
           "page": 1,
           "quote": "Hast du zu Beginn der 1. Phase keine Karten auf der Hand, gehst du gleich zur 2. Phase über."
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "args": {}
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "reveal",
+              "legal_action_type_any": [
+                "reveal"
+              ]
+            }
+          }
         }
       ]
     },
@@ -1338,8 +1356,27 @@
           },
           "expect": {
             "adapter": {
+              "phase": "plant_received",
+              "revealed_size": 0,
+              "legal_action_type_not": [
+                "draw"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "args": {}
+            }
+          },
+          "expect": {
+            "adapter": {
               "phase": "draw",
-              "revealed_size": 0
+              "legal_action_type_any": [
+                "draw"
+              ]
             }
           }
         },
@@ -2374,11 +2411,30 @@
           },
           "expect": {
             "adapter": {
-              "phase": "draw",
+              "phase": "plant_received",
               "pending_received": {
                 "0": [],
                 "1": []
               },
+              "legal_action_type_any": [
+                "pass"
+              ],
+              "legal_action_type_not": [
+                "draw"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "args": {}
+            }
+          },
+          "expect": {
+            "adapter": {
+              "phase": "draw",
               "legal_action_type_any": [
                 "draw"
               ]
@@ -3812,6 +3868,29 @@
                 "field": 1
               },
               "choose_first": true
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "adapter": {
+              "phase": "plant_received",
+              "field_sizes": {
+                "0": [
+                  2,
+                  1
+                ]
+              },
+              "legal_action_type_not": [
+                "draw"
+              ]
+            }
+          }
+        },
+        {
+          "action": {
+            "adapter": {
+              "type": "pass",
+              "args": {}
             }
           },
           "expect": {

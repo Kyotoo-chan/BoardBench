@@ -50,6 +50,8 @@ def _actions(game: Any, state: Any) -> list[tuple[Any, dict[str, Any]]]:
 
 
 def _bean(value: str) -> str:
+    if value in BEANS.values():
+        return value
     try:
         return BEANS[value]
     except KeyError as error:

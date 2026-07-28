@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "protocol": "hardened-iteration-v1",
+  "game": "bohnanza_base_2023",
+  "run_id": "v2_original_1",
+  "condition_kind": "original",
+  "intervention_kind": null,
+  "adapted_from_run_id": null,
+  "adaptation": null,
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "success": true,
+  "repair_count": 0,
+  "prior_pre_evaluation_attempts": [],
+  "calls": [
+    {
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "mode": "agentic",
+      "sandbox": "workspace-write",
+      "permission_profile": "boardbench-workspace-only",
+      "isolation_canary_passed": true,
+      "source_condition_kind": "original",
+      "model_packet_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "55368aa0d2fe142bfd5f5111b29c8b1e64a9fbecbc7cf652dd525882e3f99ed4",
+        "SOURCE_MANIFEST.json": "1d2f77a50d80398fbad1b7f762a28008ac545320c30f3c1b96470fc1fdea83fa",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "c89915f934732947f4df3bb4a826dc4c5c21599771f57a3a6e162f7eac3e6869",
+        "game_rules.pdf": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655",
+        "game_rules_pages/page-1.png": "66ac33709a8b0683c6445cb7dabbdfdff08b28adb44444f1c0153254b923c034",
+        "game_rules_pages/page-2.png": "786d7dadd70e1cd0c29f30abd5c80aff9adddf8d62f545d09c83df38c60b8b0f",
+        "game_rules_pages/render_manifest.json": "3ab29a48473594a8adbaffcecc049996371743f53aaaefc854f583ae15fd5d76",
+        "profile_fixture_self_check.py": "5855316b38203042ffa09808293860d1548c35f392e1ccb96ad669b2ad038635"
+      },
+      "started_at": "2026-07-28T19:54:35.607783+00:00",
+      "ended_at": "2026-07-28T19:58:56.998420+00:00",
+      "elapsed_seconds": 261.391,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 13,
+          "reset_at": 1785860102,
+          "reset_after_seconds": 591626,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 14,
+          "reset_at": 1785860102,
+          "reset_after_seconds": 591364,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "cached_input_tokens": 486912,
+        "reasoning_output_tokens": 1179,
+        "output_tokens": 10268,
+        "input_tokens": 549909
+      },
+      "provider_usage_records": [
+        {
+          "line": 37,
+          "path": "$.usage",
+          "input_tokens": 549909,
+          "cached_input_tokens": 486912,
+          "output_tokens": 10268,
+          "reasoning_output_tokens": 1179
+        }
+      ],
+      "events_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-3YCFwz/boardbench_host_artifacts_7kjikinn/events_0.jsonl",
+      "response_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-3YCFwz/boardbench_host_artifacts_7kjikinn/response_0.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-3YCFwz/boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp/game_rules_pages/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-3YCFwz/boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp/game_rules_pages/page-2.png"
+      ],
+      "stderr": "2026-07-28T19:54:56.328155Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 4.3 seconds\nOutput:\n\n---FILES---\r\n\n---IMPLEMENTATION---\r\n\n---SELF_CHECK---\r\nGet-Content : Der Pfad \"C:\\ENVIRONMENT_CONTRACT.md\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:1\r\n+ Get-Content -Raw ENVIRONMENT_CONTRACT.md; Get-Content -Raw GAME_PROFI ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\ENVIRONMENT_CONTRACT.md:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\nGet-Content : Der Pfad \"C:\\GAME_PROFILE.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:43\r\n+ ... w ENVIRONMENT_CONTRACT.md; Get-Content -Raw GAME_PROFILE.json; Write- ...\r\n+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\GAME_PROFILE.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\nrg : Die Benennung \"rg\" wurde nicht als Name eines Cmdlet, einer Funktion, einer Skriptdatei oder eines ausführbaren \r\nProgramms erkannt. Überprüfen Sie die Schreibweise des Namens, oder ob der Pfad korrekt ist (sofern enthalten), und \r\nwiederholen Sie den Vorgang.\r\nIn Zeile:2 Zeichen:109\r\n+ ... tent -Raw GAME_PROFILE.json; Write-Output \"`n---FILES---\"; rg --files ...\r\n+                                                                ~~\r\n    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException\r\n \r\nGet-Content : Der Pfad \"C:\\agentic_self_check.py\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:268\r\n+ ... e-Output \"`n---SELF_CHECK---\"; Get-Content -Raw agentic_self_check.py\r\n+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\agentic_self_check.py:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n2026-07-28T19:55:03.312424Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.6 seconds\nOutput:\n\r\nName                        Length      Mode  \r\n----                        ------      ----  \r\n$Recycle.Bin                            d--hs-\r\nAMD                                     d-----\r\nDokumente und Einstellungen             d--hsl\r\ninetpub                                 d-----\r\nminecraft                               d-----\r\nOneDriveTemp                            d--h--\r\nPerfLogs                                d-----\r\nProgram Files                           d-r---\r\nProgram Files (x86)                     d-r---\r\nProgramData                             d--h--\r\nProgramme                               d--hsl\r\nRecovery                                d--h--\r\nRiot Games                              d-----\r\nStrawberry                              d-----\r\nSystem Volume Information               d--hs-\r\ntmp                                     d-----\r\nUsers                                   d-r---\r\nWindows                                 d-----\r\nXboxGames                               d-----\r\n.GamingRoot                 28          -a-h--\r\nDumpStack.log               12288       -a----\r\nDumpStack.log.tmp           12288       -a-hs-\r\nhiberfil.sys                13395374080 -a-hs-\r\nmylog.log                   194         -a----\r\npagefile.sys                8589934592  -a-hs-\r\nRHDSetup.log                3295        -a----\r\nswapfile.sys                16777216    -a-hs-\r\n\n---CONTRACT---\r\n\n---PROFILE---\r\n\n---IMPLEMENTATION---\r\n\n---SELF_CHECK---\r\n\r\n\r\nSet-Location : Zugriff verweigert\r\nIn Zeile:2 Zeichen:1\r\n+ Set-Location -LiteralPath 'C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mod ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Set-Location], UnauthorizedAccessException\r\n    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.SetLocationCommand\r\n \r\nGet-Content : Der Pfad \".\\ENVIRONMENT_CONTRACT.md\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:222\r\n+ ... NTRACT---\"; Get-Content -Raw -LiteralPath '.\\ENVIRONMENT_CONTRACT.md' ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (.\\ENVIRONMENT_CONTRACT.md:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\nGet-Content : Der Pfad \".\\GAME_PROFILE.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:313\r\n+ ... ROFILE---\"; Get-Content -Raw -LiteralPath '.\\GAME_PROFILE.json'; Writ ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (.\\GAME_PROFILE.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\nGet-Content : Der Pfad \".\\agentic_self_check.py\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:547\r\n+ ... LF_CHECK---\"; Get-Content -Raw -LiteralPath '.\\agentic_self_check.py'\r\n+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (.\\agentic_self_check.py:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n2026-07-28T19:57:55.676344Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.7 seconds\nOutput:\n[Errno 2] No such file or directory: 'C:\\\\Users\\\\benti\\\\AppData\\\\Local\\\\Temp\\\\.ctx-mode-3YCFwz\\\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\\\implementation.py'Traceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 133, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 79, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 74, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 991, in exec_module\r\n  File \"<frozen importlib._bootstrap_external>\", line 1128, in get_code\r\n  File \"<frozen importlib._bootstrap_external>\", line 1186, in get_data\r\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\benti\\\\AppData\\\\Local\\\\Temp\\\\.ctx-mode-3YCFwz\\\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\\\implementation.py'\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\profile_fixture_self_check.py\", line 74, in <module>\r\n    if __name__==\"__main__\": main()\r\n                             ^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\profile_fixture_self_check.py\", line 49, in main\r\n    module=load_module();profile=json.loads(PROFILE_PATH.read_text(encoding=\"utf-8\"))\r\n           ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\profile_fixture_self_check.py\", line 15, in load_module\r\n    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module\r\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"<frozen importlib._bootstrap_external>\", line 991, in exec_module\r\n  File \"<frozen importlib._bootstrap_external>\", line 1128, in get_code\r\n  File \"<frozen importlib._bootstrap_external>\", line 1186, in get_data\r\nFileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\benti\\\\AppData\\\\Local\\\\Temp\\\\.ctx-mode-3YCFwz\\\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\\\implementation.py'\r\n\n2026-07-28T19:58:21.881170Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.6 seconds\nOutput:\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 133, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 79, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\agentic_self_check.py\", line 74, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-3YCFwz\\boardbench_bohnanza_base_2023_v2_original_1_v6bikxsp\\implementation.py\", line 27, in <module>\r\n    @dataclass(eq=True)\r\n     ^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 1258, in wrap\r\n    return _process_class(cls, init, repr, eq, order, unsafe_hash,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 983, in _process_class\r\n    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 749, in _is_type\r\n    ns = sys.modules.get(cls.__module__).__dict__\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?\r\n\n"
+    }
+  ],
+  "source_manifest": [
+    {
+      "source_id": "BOHN-BASE-2023-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    }
+  ],
+  "run_config_sha256": "993be528e64f53375d065d93af54b49958230546112b35e4f3bfea0554fa0b49",
+  "original_evidence_sha256": null,
+  "render_manifests": {
+    "game_rules_pages/render_manifest.json": {
+      "version": 1,
+      "source_file": "game_rules.pdf",
+      "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655",
+      "dpi": 150,
+      "renderer": "pdftoppm",
+      "renderer_version": "pdftoppm version 24.04.0",
+      "pages": [
+        {
+          "page": 1,
+          "file": "page-1.png",
+          "sha256": "66ac33709a8b0683c6445cb7dabbdfdff08b28adb44444f1c0153254b923c034"
+        },
+        {
+          "page": 2,
+          "file": "page-2.png",
+          "sha256": "786d7dadd70e1cd0c29f30abd5c80aff9adddf8d62f545d09c83df38c60b8b0f"
+        }
+      ]
+    }
+  },
+  "implementation_sha256": "741f6bb3e6df859cccb2b06e616d0f1ae04a1a483f893f43ce85eb08e10dd070",
+  "created_at": "2026-07-28T19:58:58.944658+00:00"
+}
