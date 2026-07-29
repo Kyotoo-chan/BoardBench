@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "run_id": "v2_original_1",
+  "status": "valid-evaluation-complete",
+  "implementation_changed_after_generation": false,
+  "rubric_version": "catan-2022-v2-atomic-r2-2026-07-29",
+  "technical_gate": "4/4",
+  "robustness": "100/100",
+  "interface": "8883707/8883707",
+  "player_counts": "4/4",
+  "clear_basis": "37/40",
+  "human_decision_basis": "8/11",
+  "scenario_coverage": "51/51",
+  "named_cases": "107/107",
+  "judge_scores": [
+    0.62,
+    0.66,
+    0.61
+  ],
+  "artifacts": {
+    "implementation": {
+      "path": "outputs/catan_codex_ag.py",
+      "sha256": "0ae19100b78800681b5efe0e3617e29e6b69bea10a62fda28fe082f13970fd77"
+    },
+    "agentic": {
+      "path": "outputs/catan_codex_ag_agentic.json",
+      "sha256": "74584b855a9beb0abf45582d6c8d48035654554571492433b57d4089ce892720"
+    },
+    "checks": {
+      "path": "outputs/catan_codex_ag_checks.txt",
+      "sha256": "3e49a8a0ea74f8937e5e74e804ca3dc9fcfe00cc446fc6b3fa8e0072e35b6362"
+    },
+    "scenarios": {
+      "path": "results/scores/catan/v2/original_scenarios.json",
+      "sha256": "04856d3affa5be5abeea8d4cde1b3aaa293b6ad2f5dc0cbef1e9a8cbe8faa220"
+    },
+    "result": {
+      "path": "results/scores/catan/v2/original_result.json",
+      "sha256": "6883b42510c5a1429e01738d5a9562bbff974f169735c17e194e880d7f85ff56"
+    },
+    "evaluator_revision": {
+      "path": "inputs/games/catan/evaluator_revision_v2_r2.json",
+      "sha256": "f453c911d52f28654e1f028bd9b28289b8231edd90da8c18a181d29fd5c6f6ad"
+    },
+    "judge_1": {
+      "path": "outputs/catan_codex_ag_judge_1.md",
+      "sha256": "f54213265b8fd8d58cca087e3dee463ebcac94d07364448d9272f50403b604b3"
+    },
+    "judge_2": {
+      "path": "outputs/catan_codex_ag_judge_2.md",
+      "sha256": "4c3933a0525d78dd78fccad3a5ff19b409a934d117039614aaa1048e3208d7fe"
+    },
+    "judge_3": {
+      "path": "outputs/catan_codex_ag_judge_3.md",
+      "sha256": "d2f39238822dfc22082686c86b3f994cf9837702cdbb1916f3e06d6746b182fa"
+    }
+  }
+}

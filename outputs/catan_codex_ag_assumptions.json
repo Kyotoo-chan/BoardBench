@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Spielanleitung p.2 'Der Spielablauf im Überblick'; Almanach p.6 'Bauen'",
+      "source_basis": "conflicting",
+      "alternatives": [
+        "Use the beginner rules' strict sequence: roll, then trade, then build, and building ends the turn.",
+        "Use the almanac's experienced variant in which trading and building may be interleaved."
+      ],
+      "selected": "Use the beginner rules' strict sequence: roll, then trade, then build, and building ends the turn.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Spielanleitung p.4 'Siegpunkte'; 'Spielende'",
+      "source_basis": "ambiguous",
+      "alternatives": [
+        "Check victory after every committed action by the active player and end immediately once that player has at least 10 points.",
+        "Check victory only at the beginning or end of the active player's turn."
+      ],
+      "selected": "Check victory after every committed action by the active player and end immediately once that player has at least 10 points.",
+      "affected_mechanics": ["state_transition", "scoring", "terminal_results"]
+    },
+    {
+      "id": "A-03",
+      "material": true,
+      "source_location": "Spielanleitung p.3 'Längste Handelsstraße'; Almanach p.8 same heading",
+      "source_basis": "missing",
+      "alternatives": [
+        "Do not award Longest Road because the supplied text does not fully define a computable path algorithm for every branching network.",
+        "Choose an inferred graph-search definition for branching networks."
+      ],
+      "selected": "Do not award Longest Road because the supplied text does not fully define a computable path algorithm for every branching network.",
+      "affected_mechanics": ["scoring", "state_transition"]
+    }
+  ]
+}

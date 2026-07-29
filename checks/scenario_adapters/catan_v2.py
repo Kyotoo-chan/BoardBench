@@ -459,6 +459,11 @@ def check(module: Any, game: Any, state: Any, expected: dict[str, Any]) -> None:
     for raw_player, wanted in expected.get("development_hand", {}).items():
         actual = [card["id"] for card in data["players"][int(raw_player)]["development_hand"]]
         _assert_equal(f"development_hand[{raw_player}]", actual, wanted)
+    for raw_player, wanted in expected.get("development_cards", {}).items():
+        _assert_equal(f"development_cards[{raw_player}]", data["players"][int(raw_player)]["development_hand"], wanted)
+    for raw_player, wanted in expected.get("development_hand_counts", {}).items():
+        actual = Counter(card["id"] for card in data["players"][int(raw_player)]["development_hand"])
+        _assert_equal(f"development_hand_counts[{raw_player}]", actual, Counter(wanted))
     if "development_deck_size" in expected:
         _assert_equal("development_deck_size", len(data["bank"]["development_deck"]), int(expected["development_deck_size"]))
     if "played_development" in expected:

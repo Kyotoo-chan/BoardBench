@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "rubric_version": "catan-2022-v2-atomic-2026-07-29",
+  "rubric_version": "catan-2022-v2-atomic-r2-2026-07-29",
   "game": "catan",
   "adapter": "checks/scenario_adapters/catan_v2.py",
   "scenario_matrix": "inputs/games/catan/scenario_matrix_v2.json",
@@ -2385,17 +2385,6 @@
                 }
               },
               "expect": {
-                "adapter": {}
-              }
-            },
-            {
-              "action": {
-                "adapter": {
-                  "type": "propose_domestic_trade",
-                  "actor": 0
-                }
-              },
-              "expect": {
                 "adapter": {
                   "action_legal": [
                     {
@@ -3679,11 +3668,11 @@
               "expect": {
                 "adapter": {
                   "development_deck_size": 0,
-                  "development_hand": {
-                    "0": [
-                      "library",
-                      "marketplace"
-                    ]
+                  "development_hand_counts": {
+                    "0": {
+                      "library": 1,
+                      "marketplace": 1
+                    }
                   }
                 }
               }
@@ -5746,15 +5735,6 @@
                 "adapter": {
                   "phase": "road_building",
                   "pending_type": "road_building",
-                  "development_hand": {
-                    "0": []
-                  },
-                  "played_development": [
-                    {
-                      "owner": 0,
-                      "id": "road_building"
-                    }
-                  ],
                   "development_played": true,
                   "pieces": {
                     "0": {
@@ -6172,6 +6152,22 @@
                     {
                       "owner": 0,
                       "id": "year_of_plenty"
+                    }
+                  ],
+                  "action_legal": [
+                    {
+                      "selector": {
+                        "type": "play_year_of_plenty",
+                        "actor": 0,
+                        "args": {
+                          "card": "year_of_plenty",
+                          "resources": [
+                            "ore",
+                            "ore"
+                          ]
+                        }
+                      },
+                      "expected": false
                     }
                   ]
                 }
@@ -6684,12 +6680,16 @@
                 "terminal": true,
                 "adapter": {
                   "winner": 0,
-                  "played_development": [
-                    {
-                      "owner": 0,
-                      "id": "library"
-                    }
-                  ]
+                  "development_cards": {
+                    "0": [
+                      {
+                        "id": "library",
+                        "bought_turn": 1,
+                        "revealed": true
+                      }
+                    ]
+                  },
+                  "played_development": []
                 }
               }
             }
@@ -6776,21 +6776,26 @@
                 "terminal": true,
                 "adapter": {
                   "winner": 0,
-                  "development_hand": {
+                  "played_development": [],
+                  "development_cards": {
                     "0": [
-                      "chapel"
+                      {
+                        "id": "library",
+                        "bought_turn": 0,
+                        "revealed": true
+                      },
+                      {
+                        "id": "marketplace",
+                        "bought_turn": 0,
+                        "revealed": true
+                      },
+                      {
+                        "id": "chapel",
+                        "bought_turn": 0,
+                        "revealed": false
+                      }
                     ]
-                  },
-                  "played_development": [
-                    {
-                      "owner": 0,
-                      "id": "library"
-                    },
-                    {
-                      "owner": 0,
-                      "id": "marketplace"
-                    }
-                  ]
+                  }
                 }
               }
             }
@@ -7274,15 +7279,6 @@
               "expect": {
                 "adapter": {
                   "phase": "road_building",
-                  "development_hand": {
-                    "0": []
-                  },
-                  "played_development": [
-                    {
-                      "owner": 0,
-                      "id": "road_building"
-                    }
-                  ],
                   "development_played": true,
                   "pieces": {
                     "0": {
@@ -7395,10 +7391,7 @@
               },
               "expect": {
                 "adapter": {
-                  "pending_depth": 0,
-                  "development_hand": {
-                    "0": []
-                  }
+                  "pending_depth": 0
                 }
               }
             }

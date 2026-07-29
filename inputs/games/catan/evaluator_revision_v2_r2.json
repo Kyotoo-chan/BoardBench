@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "revision_id": "catan-v2-evaluator-r2",
+  "status": "frozen-post-generation-pre-valid-replay",
+  "created_on": "2026-07-29",
+  "rubric_version": "catan-2022-v2-atomic-r2-2026-07-29",
+  "prior_frozen_manifest": {
+    "path": "inputs/games/catan/experiment_manifest_v2.json",
+    "sha256": "54de3d1c971e153d483d41ac7c62418584118a4165908fc266a8b772a992097d"
+  },
+  "generated_run": {
+    "run_id": "v2_original_1",
+    "implementation_path": "outputs/catan_codex_ag.py",
+    "implementation_sha256": "0ae19100b78800681b5efe0e3617e29e6b69bea10a62fda28fe082f13970fd77",
+    "agentic_evidence_sha256": "74584b855a9beb0abf45582d6c8d48035654554571492433b57d4089ce892720"
+  },
+  "invalid_replay": "results/scores/catan/v2/raw/invalid_evaluator_replay_1.tar.gz",
+  "corrections": [
+    "Do not execute a trade proposal that the same case expects to be illegal.",
+    "Treat development-deck order as an unspecified representation and assert the unordered two-card result.",
+    "Use profile-v2 revealed flags for victory-point disclosure and test played progress removal behavior without imposing an undeclared physical storage layout."
+  ],
+  "artifacts": {
+    "scenario_suite": {
+      "path": "checks/scenarios/catan_v2.json",
+      "sha256": "23ec1400e266cf7988601b71d928604d81f5180c10e42634ec32c03db28f21f6"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/catan_v2.py",
+      "sha256": "822a6855514af6865001f8574a07a2699d1f15473007a056cda3aa62c8716d78"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claim_coverage": {
+      "path": "checks/claim_coverage.py",
+      "sha256": "c66a9912c21fe9bdac7b03ae7a2750d0649ed6d8bd9fec771320b414bdd0d169"
+    },
+    "profile": {
+      "path": "inputs/games/catan/environment_profile_v2.json",
+      "sha256": "b505331f53b1d32ea0f6c824ffb6747a633764692e250d9ab4b7ff237be3ec01"
+    },
+    "matrix": {
+      "path": "inputs/games/catan/scenario_matrix_v2.json",
+      "sha256": "016ef37d7a748e8689a0e3a67111f1c73bc8d2e37049bc5a96440b827d5763fd"
+    }
+  }
+}

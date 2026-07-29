@@ -38,7 +38,11 @@ class CatanV2PacketTests(unittest.TestCase):
   manifest=load(GAME/'experiment_manifest_v2.json');self.assertEqual(manifest['status'],'frozen-pre-generation');self.assertEqual(manifest['evaluation']['status'],'not_run');self.assertEqual((manifest['evaluation']['scenarios'],manifest['evaluation']['named_cases'],manifest['evaluation']['required_clear_claims']),(51,107,99))
   for item in manifest['condition']['sources']:
    self.assertEqual(sha(ROOT/item['path']),item['sha256'],item['source_id'])
-  for name,item in manifest['artifacts'].items():self.assertEqual(sha(ROOT/item['path']),item['sha256'],name)
+  revised={'scenario_suite','scenario_adapter','packet_test'}
+  for name,item in manifest['artifacts'].items():
+   if name not in revised:self.assertEqual(sha(ROOT/item['path']),item['sha256'],name)
+  revision=load(GAME/'evaluator_revision_v2_r2.json');self.assertEqual(revision['prior_frozen_manifest']['sha256'],sha(GAME/'experiment_manifest_v2.json'));self.assertEqual(revision['rubric_version'],'catan-2022-v2-atomic-r2-2026-07-29')
+  for name,item in revision['artifacts'].items():self.assertEqual(sha(ROOT/item['path']),item['sha256'],name)
  def test_original_packet_exact_allowlist(self):
   config=load_config(CONFIG);workspace,images,allowed,_immutable,renders=build_workspace(config)
   try:
