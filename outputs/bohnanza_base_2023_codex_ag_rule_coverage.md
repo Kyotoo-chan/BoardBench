@@ -1,35 +1,27 @@
 # Rule coverage
 
-Source: supplied German rulebook, pages 1–2. Probes below are source-only checks
-implemented in `agentic_self_check.py`, `profile_fixture_self_check.py`, or direct
-state/action probes; the evaluator contract and profile supply representation only.
+All probes use only source-derived states/actions. `Game` methods named below are in `implementation.py`.
 
-| Source section / named rule | Implementing symbol | Probe or reason not probed | Assumption |
+| Supplied section / named rule | Implementing symbol(s) | Probe or non-probe reason | Assumption |
 |---|---|---|---|
-| Spielidee | `Game.returns`, `_finish` | Terminal winner/returns probe | A-03 tie detail |
-| Spielmaterial & Spielvorbereitung; 104 cards; 8 types; 3 fields for 3 players, 2 for 4–5; five ordered hand cards; start card | `COUNTS`, `BEANS`, `initial_state` | Fixture inventory and 3/4/5-player setup probes | A-01 dealing order |
-| Hand order may never change; front card visible | hand list convention, plant actions use index 0; `observation_to_data` | Privacy fixture checks front only | None |
-| Four phases and clockwise active player | `legal_actions`, `apply_action` | rollout phase-transition probes | None |
-| Bean planting: same type per field; same type may occupy several fields; cards stacked | `_plant_fields`, plant transition | direct legal-field probes | None |
-| Phase 1: first card mandatory, second optional; forced harvest if no field; skip if hand empty | `legal_actions`, plant/pass transitions | rollout plus fixture probes | None |
-| Phase 2: reveal top two; revealed cards belong to active player and may be traded | reveal/trade actions | rollout probes | None |
-| Trade: only active player trades; any hand position; revealed cards; unequal multi-card bundles; no field cards; no re-trading received cards; consent; gifts | `_refs`, `_nonempty_subsets`, trade proposal/response transitions | canonical multi-card proposal probes; atomic acceptance | A-02 negotiation serialization |
-| Agreed cards placed beside fields, not into hand; continue trading until active player stops | `pending_received`, `end_trade` | fixture and rollout probes | None |
-| Phase 3: all traded/gifted and remaining revealed cards must be planted; owner chooses order | `plant_received` legal actions | multi-owner fixture | None |
-| Phase 4: active player draws three to back of hand; next player clockwise | draw transition | rollout probes | None |
-| Harvest at any time, including inactive player | `_harvest_actions`, `_harvest` | harvest exposed at stable decision states | Contract representation choice defines stable boundary |
-| Beanometer payouts: Garten 2→2, 3+→3 | `METERS["gartenbohne"]` | direct threshold probe | None |
-| Beanometer payouts: Rot 3/6/7/8→1/2/3/4 | `METERS["rote_bohne"]` | direct threshold probe | None |
-| Beanometer payouts: Augen 2/4/5/6→1/2/3/4 | `METERS["augenbohne"]` | direct threshold probe | None |
-| Beanometer payouts: Soja 2/4/6/7→1/2/3/4 | `METERS["sojabohne"]` | direct threshold probe | None |
-| Beanometer payouts: Brech 3/5/6/7→1/2/3/4 | `METERS["brechbohne"]` | direct threshold probe | None |
-| Beanometer payouts: Sau 3/5/7/8→1/2/3/4 | `METERS["saubohne"]` | direct threshold probe | None |
-| Beanometer payouts: Feuer 3/6/8/9→1/2/3/4 | `METERS["feuerbohne"]` | direct threshold probe | None |
-| Beanometer payouts: Blau 4/6/8/10→1/2/3/4 | `METERS["blaue_bohne"]` | direct threshold probe | None |
-| Harvest procedure: count, read top card meter, flip paid cards, discard remainder, field empty | `_payout`, `_harvest` | coin-inventory fixture and direct probe | None |
-| Bean protection: no singleton harvest if any field has more than one card | `_harvestable` | direct legal-action probe | None |
-| Empty deck: shuffle discard to form new deck | `_draw_one`, `_rng_shuffle` | recycle fixture | None |
-| End: third depletion; if during phase 2 finish phases 2–3; final harvest; hand ignored | `_draw_one`, phase-3 pass, draw, `_finish` | depletion fixtures/direct probes | None |
-| Tie: tied player furthest clockwise from start wins | `_finish` | direct tied terminal probe | A-03 |
-| Terminal states have no actions | `legal_actions` | agentic self-check | None |
-| Canonical state/action/observation and private hands | serialization methods | both supplied self-checks | Representation only; no rule assumption |
+| Spielidee | `Game._finish`, `returns` | Rollout and terminal fixture: most coins wins | none |
+| Spielmaterial & Spielvorbereitung; 104 cards; 3–5 players; two fields; five hand cards | `COUNTS`, `Game.__init__`, `initial_state` | `profile_fixture_self_check.py` inventory/count fixtures | A-01 start-player method |
+| Hand order may not change; front card visible | hand lists; `legal_actions`; `observation_to_data` | privacy fixture and phase-1 rollout | none |
+| Four phases / clockwise active player | `legal_actions`, `apply_action` | agentic phase rollouts | none |
+| Bean planting: one variety per field; same variety on several fields; cards overlap | `_can_plant`, field lists | legal-action rollout | none |
+| Phase 1: first card mandatory; second card optional; empty hand skips | `plant_first`, `plant_second`, `pass` | agentic rollout | none |
+| “Die Bohnenernte”: incompatible planting forces a harvest | absence of plant action until a legal `harvest` | legal-action rollout | none |
+| Phase 2: reveal top two cards | `reveal`, `_draw_one` | agentic rollout and recycle fixture | none |
+| Trade: active player alone trades; all hand cards; revealed cards; no onward trading; no field cards; unequal quantities | `_trade_proposals`, `trade_propose`, pending snapshot refs | action round trips and trade fixture | A-02 finite proposal bound |
+| Trade agreement; cards remain in hand until agreement | `trade_accept`, pending snapshot refs | trade-response fixture | none |
+| Traded cards placed beside fields, never taken into hand | `pending_received` | phase-3 fixture | none |
+| Gifts require recipient consent | gift `trade_propose`, accept/reject | trade-response action probe | A-02 |
+| Phase 3: all traded and revealed cards must be planted; player chooses order | `plant_received`, `_next_phase3_actor` | multi-owner fixture | A-03 because cross-player/order procedure is absent |
+| Phase 4: draw three, preserve order behind hand; next player clockwise | `draw`, hand append, `apply_action` | agentic rollout | none |
+| Harvest any time, including outside active turn | harvest actions at stable decisions | action rollout | contract defines stable decision boundary |
+| Bean meters: Garten 2/3; Rot 2/3/4/5; Auge 2/4/5/6; Soja 2/4/6/7; Brech 3/5/6/7; Sau 3/5/7/8; Feuer 3/6/8/9; Blau 4/6/8/10 | `METERS`, harvest branch | source-only threshold probes are directly representable; not separately scripted | none |
+| Harvest: flip paid cards to coin pile, discard remainder, field empty | harvest branch; `coins`; `discard` | coin inventory fixture and rollout | none |
+| Bean-protection rule | `_harvestable` | legal-action source fixture is representable; rollout exercises it | none |
+| Empty deck: shuffle discard; game ends after deck empties third time | `_recycle_or_end`, `_draw_one` | recycle fixture and rollout | none |
+| End during phase 2: finish phases 2 and 3 (even with one revealed card); no phase 4 | `_draw_one`, reveal/end-trade branches | depletion transition is exercised by rollout; fixture reconstruction covers depleted deck states | none |
+| End scoring; hand ignored; each coin card worth one; clockwise-furthest tied player wins | `_finish`, `returns` | terminal fixture | none |

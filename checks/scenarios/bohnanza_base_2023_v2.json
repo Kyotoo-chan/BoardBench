@@ -1356,29 +1356,25 @@
           },
           "expect": {
             "adapter": {
-              "phase": "plant_received",
-              "revealed_size": 0,
-              "legal_action_type_not": [
-                "draw"
-              ]
-            }
-          }
-        },
-        {
-          "action": {
-            "adapter": {
-              "type": "pass",
-              "args": {}
-            }
-          },
-          "expect": {
-            "adapter": {
               "phase": "draw",
+              "revealed_size": 0,
               "legal_action_type_any": [
                 "draw"
               ]
             }
-          }
+          },
+          "settle": [
+            {
+              "while_all_contains_any": [
+                "pass",
+                "harvest"
+              ],
+              "choose_contains_any": [
+                "pass"
+              ],
+              "max_steps": 1
+            }
+          ]
         },
         {
           "action": {
@@ -2411,35 +2407,28 @@
           },
           "expect": {
             "adapter": {
-              "phase": "plant_received",
+              "phase": "draw",
               "pending_received": {
                 "0": [],
                 "1": []
               },
               "legal_action_type_any": [
-                "pass"
-              ],
-              "legal_action_type_not": [
                 "draw"
               ]
-            }
-          }
-        },
-        {
-          "action": {
-            "adapter": {
-              "type": "pass",
-              "args": {}
             }
           },
-          "expect": {
-            "adapter": {
-              "phase": "draw",
-              "legal_action_type_any": [
-                "draw"
-              ]
+          "settle": [
+            {
+              "while_all_contains_any": [
+                "pass",
+                "harvest"
+              ],
+              "choose_contains_any": [
+                "pass"
+              ],
+              "max_steps": 1
             }
-          }
+          ]
         },
         {
           "action": {
@@ -3871,29 +3860,6 @@
             }
           },
           "expect": {
-            "terminal": false,
-            "adapter": {
-              "phase": "plant_received",
-              "field_sizes": {
-                "0": [
-                  2,
-                  1
-                ]
-              },
-              "legal_action_type_not": [
-                "draw"
-              ]
-            }
-          }
-        },
-        {
-          "action": {
-            "adapter": {
-              "type": "pass",
-              "args": {}
-            }
-          },
-          "expect": {
             "terminal": true,
             "adapter": {
               "phase": "terminal",
@@ -3908,7 +3874,19 @@
               },
               "total_cards": 104
             }
-          }
+          },
+          "settle": [
+            {
+              "while_all_contains_any": [
+                "pass",
+                "harvest"
+              ],
+              "choose_contains_any": [
+                "pass"
+              ],
+              "max_steps": 1
+            }
+          ]
         }
       ],
       "supporting_sources": [

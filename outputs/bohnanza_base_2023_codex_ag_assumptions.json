@@ -4,14 +4,14 @@
     {
       "id": "A-01",
       "material": true,
-      "source_location": "Spielmaterial & Spielvorbereitung",
+      "source_location": "Spielmaterial & Spielvorbereitung / Start-Karte",
       "source_basis": "missing",
       "alternatives": [
-        "deal five consecutive cards to player 0, then five to player 1, and so on",
-        "deal one card at a time around the table until every player has five"
+        "Choose the start player uniformly using the seeded chance stream.",
+        "Always choose player 0 as the start player."
       ],
-      "selected": "deal five consecutive cards to player 0, then five to player 1, and so on",
-      "affected_mechanics": ["private_information", "state_transition"]
+      "selected": "Choose the start player uniformly using the seeded chance stream.",
+      "affected_mechanics": ["state_transition", "private_information"]
     },
     {
       "id": "A-02",
@@ -19,23 +19,23 @@
       "source_location": "Regeln für den Bohnenhandel",
       "source_basis": "missing",
       "alternatives": [
-        "serialize negotiation as at most one complete proposal awaiting one partner response, with rejection returning control to the active player",
-        "represent simultaneous or counter-proposal negotiation with multiple outstanding offers"
+        "A proposal contains one or two offered cards and, for a trade, one or two requested cards; a gift contains one offered card and no requested cards.",
+        "A proposal may contain any positive number of offered and requested cards."
       ],
-      "selected": "serialize negotiation as at most one complete proposal awaiting one partner response, with rejection returning control to the active player",
+      "selected": "A proposal contains one or two offered cards and, for a trade, one or two requested cards; a gift contains one offered card and no requested cards.",
       "affected_mechanics": ["legal_actions", "state_transition"]
     },
     {
       "id": "A-03",
       "material": true,
-      "source_location": "Ende des Spiels",
-      "source_basis": "ambiguous",
+      "source_location": "3. Phase: Gehandelte und aufgedeckte Bohnenkarten anbauen",
+      "source_basis": "missing",
       "alternatives": [
-        "for a coin tie, scan counterclockwise from the start player and select the first tied player, treating the start player as last in that scan",
-        "for a coin tie that includes the start player, select the start player because they are zero seats away"
+        "Players plant received cards in clockwise order beginning with the active player, and each player's received order is proposal-acceptance order.",
+        "The active player chooses every next player and every received-card planting order."
       ],
-      "selected": "for a coin tie, scan counterclockwise from the start player and select the first tied player, treating the start player as last in that scan",
-      "affected_mechanics": ["terminal_results"]
+      "selected": "Players plant received cards in clockwise order beginning with the active player, and each player's received order is proposal-acceptance order.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
     }
   ]
 }

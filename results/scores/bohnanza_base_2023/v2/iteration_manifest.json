@@ -25,6 +25,19 @@
       "raw/clear_rule_emphasis_1_events.jsonl": "d6f5aae9f2099f5c428274cb78c5895c7512ae7d62bc105b66c3ef68e4911e38",
       "clear_rule_emphasis_1_rule_coverage.md": "e3b545a8622f894b7da9fce5f1abe44d12e406fd8ed7aadcdfdda74cb0ec27e8",
       "clear_rule_emphasis_1_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    },
+    "clear_rule_emphasis_2": {
+      "clear_rule_emphasis_2.md": "264fc6e24c4b952b76e3b47bb3ca895e23194559487b6bbc3b4749f71d8c91ce",
+      "clear_rule_emphasis_2.py": "6d1a871d9892bc206572968e9aafdf904b89b038750288d678ac8095a5a2b167",
+      "clear_rule_emphasis_2_agentic.json": "5955157f63ecd748a7916039696099961369104f6ba43521cba9545c8d8927e7",
+      "clear_rule_emphasis_2_assumptions.json": "94a54f6a467bc69105e9f052b7ab3d17370afa85d84030dfea4ce0f47c7bf451",
+      "clear_rule_emphasis_2_checks.txt": "f5c01ac2d30d677343d84110eb89d260c7ff770705f5c47c7a90867c28737122",
+      "raw/clear_rule_emphasis_2_events.jsonl": "78f1430d0e46e74722673d0f5ccb8eee72bdbb4caad153e0dc4bb7e0fd786bdb",
+      "clear_rule_emphasis_2_judge_1.md": "8fea91546ccf7d341cebec93196eaaadefaab113995c0d28faa6cf1cea0f75a7",
+      "clear_rule_emphasis_2_judge_2.md": "45ebf06ac3164e1c3f8c6f0521c8bd9b769318e358637cd9c413b5c11455d9ee",
+      "clear_rule_emphasis_2_judge_3.md": "51e50dfcf2145cc82610f463c464bf88830393c361b74d457d11555ebbbf8628",
+      "clear_rule_emphasis_2_rule_coverage.md": "04b06127b3c95ec054f96e57ad137139b65837f2fa9fad478bd937a817ac0038",
+      "clear_rule_emphasis_2_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
     }
   }
 }

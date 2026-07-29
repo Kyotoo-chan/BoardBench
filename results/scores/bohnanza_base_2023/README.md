@@ -1,53 +1,40 @@
-# Bohnanza Base 2023: Original-PDF vs. präzisierte Fassung
+# Bohnanza Base Game 2023 V2
 
 ## Ergebnis auf einen Blick
 
-Beide Spielumgebungen bestehen die technischen und gesampelten Stabilitätsprüfungen. Die Implementierung aus dem Original-PDF verfehlt sieben getestete Regelinteraktionen. Nach Präzisierung steigen die Szenarien von `34/41` auf `39/41`; der neutrale Judge-Mittelwert steigt von `0,32` auf `0,60`. Zwei finale Erntefälle bleiben in beiden Bedingungen fehlgeschlagen — mit unterschiedlichen Defekten.
+Alle drei frischen Implementierungen bestehen technische Checks, 100 reproduzierbare Rollouts, Interface und Spielerzahlen. Die Regeltreue bleibt jedoch instabil. Das Original besteht 33/38 Clear-Szenarien. Zwei Generierungen mit demselben Clear-Rule-Emphasis-Paket bestehen jeweils nur 30/38.
 
-**Modellsetup für beide Bedingungen:** Implementierung mit `gpt-5.6-sol`, Thinking `low`; drei neutrale Judges mit `gpt-5.6-sol`, Thinking `medium`. Personas wurden in diesem Pilotlauf nicht ausgeführt.
+Die Betonung verbessert mehrere ausdrücklich angesprochene Mechaniken, erzeugt aber in beiden Läufen neue, nicht betonte Regressionen. Der schlechte erste Emphasis-Lauf ist damit kein isolierter Ausreißer. Da sämtliche betonten Regeln bereits im Publisher-PDF klar waren, handelt es sich nicht um Evidenz für eine Quellenlücke.
 
-| Evidenz | Original-PDF | Präzisierte Fassung |
-|---|---:|---:|
-| Technical Gate (**EV1**) | 4/4 | 4/4 |
-| Runtime Robustness (**EV2**) | 100/100 | 100/100 |
-| Interface (**EV3**) | 1,000 | 1,000 |
-| Klare Regeln (**EV4**) | 25/26 | 25/26 |
-| Klarstellungsabhängige Regeln (**EV5**) | 9/15 | 14/15 |
-| Szenarioabdeckung (**EV6**) | 41/41 | 41/41 |
-| Neutraler Judge-Mittelwert (**EV7**) | 0,320 (SD 0,069) | 0,600 (SD 0,035) |
-| Persona-Reviews (**EV8**, kein Score) | nicht ausgeführt | nicht ausgeführt |
-| Deklarierte materielle Annahmen (**EV9**, kein Score) | 3 Deklarationen | 4 Deklarationen |
+| Evidenzgruppe | Original | Emphasis 1 | Emphasis 2 |
+|---|---:|---:|---:|
+| Agentischer Gate | PASS | PASS | PASS |
+| Technische Checks 01–04 | 4/4 | 4/4 | 4/4 |
+| Robustheit | 100/100 | 100/100 | 100/100 |
+| Spielerzahl-Probes | 5/5 | 5/5 | 5/5 |
+| Clear-basis | 33/38 | 30/38 | 30/38 |
+| Human-decision-basis | 4/4 | 3/4 | 2/4 |
+| Szenarioabdeckung | 42/42 | 42/42 | 42/42 |
+| Clear-Claim-Mapping | 80/81 + Ausnahme | gleich | gleich |
+| Neutraler Judge-Mittelwert | 0,643 (SD 0,081) | nicht ausgeführt | 0,423 (SD 0,038) |
 
-*EV1–EV3 sind technische Kontrollen; EV6 bestätigt vollständige Szenarioabdeckung, nicht Korrektheit. EV4, EV5 und EV7 zeigen den für die Quellenänderung relevanten Unterschied. Kein Plot vorhanden (optional).*
+*Diese Gruppen werden nicht zu einem Gesamtscore kombiniert. Emphasis 1 bleibt als gültige unjudged Szenarioevidenz erhalten; nur Emphasis 2 erhielt wie vorab festgelegt Judges.*
 
-## Erkannte Abweichungen des Originals (durch Klarstellung behoben)
+## Gezielte Effekte
 
-- **EV5:** dritte Leerung in Phase 4 beendet sofort (erste Ziehkarte).
-- **EV5:** Gartenbohnen-Auszahlungskurve.
-- **EV5:** dritte Leerung genau auf der dritten Phase-4-Karte.
-- **EV5:** Phase 3 geht an nicht-aktive Empfänger mit eigener Pflanzreihenfolge.
-- **EV5:** dritte Leerung genau auf der zweiten Phase-4-Karte.
+- Ungleiche Mehrkarten-Trades: beide Emphasis-Läufe verbessern die gescorten Zwei-gegen-eins-Fälle.
+- Soy-Bohnometer: beide verbessern den Originalfehler.
+- Garden-Bohnometer: nur Emphasis 1 verbessert ihn; Emphasis 2 regressiert erneut.
+- Dritte Leerung in Phase 2: der Terminalübergang verbessert sich, aber neue Fehler bei Red-Auszahlung beziehungsweise finaler Ernte verhindern vollständiges Bestehen.
 
-## Gemeinsame verbleibende Fehler
+## Wichtigste Regressionen
 
-- **EV5 / EV4:** verpflichtende Endernte nach Phase-4-Leerung bzw. nach Phase-2-Fortsetzung — in beiden Bedingungen Fail, aber mit unterschiedlichen Ursachen (siehe DETAILS).
+Emphasis 1 führt Fehler bei optionalem zweitem Pflanzen, separatem Zwangsernten, Pflanzreihenfolge und Red-Bohnometer ein. Emphasis 2 erzeugt falsches Drei-Spieler-Setup, erzwungene Pflanzreihenfolge, fehlendes Off-turn-Ernten, falsches Garden-Bohnometer und ausgelassene finale Ernten.
 
-Die Klarstellung reduziert gezielte Übersetzungsfehler, löst aber weder die beobachtbare Endernte noch die von Judges markierten Action-Space-Probleme. Mit einem Implementierungslauf pro Bedingung (`n=1`) ist dies noch kein Varianz- oder alleiniger Kausalitätsnachweis.
+Alle drei Emphasis-2-Judges bewerten die fehlende finale Ernte als kritisch.
 
-## Aufwand
+## Details
 
-| Ressource | Original-PDF | Präzisierte Fassung |
-|---|---:|---:|
-| Implementierungsmodell | `gpt-5.6-sol` (`low`) | `gpt-5.6-sol` (`low`) |
-| Reviewmodell für Judges | `gpt-5.6-sol` (`medium`) | `gpt-5.6-sol` (`medium`) |
-| LLM-Aufrufe | 4 | 4 |
-| Input-Tokens (davon gecacht) | 718.808 (529.152) | 856.596 (687.616) |
-| Output-Tokens | 29.020 | 35.967 |
-| API-äquivalente Kostenschätzung | 2,08 USD | 2,27 USD |
-| Python-Codezeilen | 383 | 551 |
+**[Vollständige Methodik, Fehlergruppen, Wiederholungsdesign, Judges und Provenienz](DETAILS.md)**
 
-## Detailansicht
-
-**[Alle Evaluationen, Checks 01–06, 41 Szenarien, Einzel-Judges, Annahmen und Rohpfade öffnen](DETAILS.md)**
-
-Maschinennahe Zwischenberichte: [`base_pdf_1/REPORT.md`](base_pdf_1/REPORT.md) · [`clarified_1/COMPARISON.md`](clarified_1/COMPARISON.md)
+Maschinenprofile: [`v2/original_result.md`](v2/original_result.md) · [`v2/clear_rule_emphasis_2_result.md`](v2/clear_rule_emphasis_2_result.md) · [Dreifachvergleich](v2/COMPARISON.md)
