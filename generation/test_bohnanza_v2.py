@@ -15,6 +15,7 @@ GAME=ROOT/'inputs/games/bohnanza_base_2023'
 CONFIG=GAME/'run_v2_original.json'
 EMPHASIS_CONFIG=GAME/'run_v2_clear_rule_emphasis.json'
 EMPHASIS_REPEAT_CONFIG=GAME/'run_v2_clear_rule_emphasis_2.json'
+STRUCTURED_CONFIG=GAME/'run_v2_structured_clarification_1.json'
 SUITE=ROOT/'checks/scenarios/bohnanza_base_2023_v2.json'
 MATRIX=GAME/'scenario_matrix_v2.json'
 
@@ -111,6 +112,19 @@ class BohnanzaV2Tests(unittest.TestCase):
   workspace,_images,allowed,_immutable,_renders=build_workspace(emphasis_config)
   try:
    self.assertIn('clear_rule_emphasis_v2.json',allowed)
+   for hidden in ('claims_v2.json','decisions_v2.json','rulefacts_v2.md','bohnanza_base_2023_v2.json'):self.assertNotIn(hidden,allowed)
+  finally:shutil.rmtree(workspace,ignore_errors=True)
+ def test_structured_clarification_is_balanced_and_evaluator_blind(self):
+  original=load_config(CONFIG);config=load_config(STRUCTURED_CONFIG);guide=(GAME/'structured_clarification_v3.md').read_text(encoding='utf-8')
+  validate_pair(original['sources'],config['sources'],GAME,GAME)
+  self.assertNotIn('BOHN-C-',guide);self.assertNotIn('BOHN-R',guide)
+  for term in ('Three-player games give every player three fields','any positive number of cards','all eight beanometers','harvest every field of every player','deeper opponent cards remain private'):
+   self.assertIn(term,guide)
+  for key in ('profile','agentic_self_check','profile_fixture_self_check','prompt','contract','model','effort','verbosity','max_repairs','timeout','output_stem'):
+   self.assertEqual(config[key],load_config(EMPHASIS_REPEAT_CONFIG)[key],key)
+  workspace,_images,allowed,_immutable,_renders=build_workspace(config)
+  try:
+   self.assertIn('STRUCTURED_CLARIFICATION.md',allowed)
    for hidden in ('claims_v2.json','decisions_v2.json','rulefacts_v2.md','bohnanza_base_2023_v2.json'):self.assertNotIn(hidden,allowed)
   finally:shutil.rmtree(workspace,ignore_errors=True)
  def test_original_packet_exact_allowlist(self):
