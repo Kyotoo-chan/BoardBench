@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "rubric_version": "catan-2022-v2-atomic-r2-2026-07-29",
+  "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
   "game": "catan",
   "adapter": "checks/scenario_adapters/catan_v2.py",
   "scenario_matrix": "inputs/games/catan/scenario_matrix_v2.json",
@@ -7956,6 +7956,656 @@
             }
           ],
           "name": "CAT-D08-victory-after-first-free-road"
+        }
+      ]
+    },
+    {
+      "id": "CAT-R44-finite-trade-bound",
+      "fact_ids": [
+        "CAT-M-TRADE-OFFER-BOUND"
+      ],
+      "basis": "human_decision",
+      "title": "Finite public-hand-size trade bound",
+      "expectation": "Incremental give/take totals stop at the respective public hand sizes without using private resource identities; unaffordable accepted bundles remain impossible.",
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf frei ausgehandelt werden, wie viele Rohstoffkarten getauscht werden."
+      },
+      "supporting_sources": [
+        {
+          "fact_id": "CAT-M-TRADE-OFFER-BOUND",
+          "source_id": "CATAN22-ALMANAC",
+          "page": 6,
+          "quote": "Es darf frei ausgehandelt werden, wie viele Rohstoffkarten getauscht werden."
+        }
+      ],
+      "cases": [
+        {
+          "name": "give-and-take-capped-by-public-count",
+          "fixture": {
+            "phase": "trade",
+            "resources": {
+              "0": {
+                "wood": 2,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              },
+              "1": {
+                "wood": 0,
+                "brick": 1,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "begin_domestic_trade",
+                  "actor": 0,
+                  "args": {
+                    "partner": 1
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {}
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "add_trade_item",
+                  "actor": 0,
+                  "args": {
+                    "direction": "give",
+                    "resource": "wood"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {}
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "add_trade_item",
+                  "actor": 0,
+                  "args": {
+                    "direction": "give",
+                    "resource": "wood"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "action_legal": [
+                    {
+                      "selector": {
+                        "type": "add_trade_item",
+                        "actor": 0,
+                        "args": {
+                          "direction": "give",
+                          "resource": "wood"
+                        }
+                      },
+                      "expected": false
+                    },
+                    {
+                      "selector": {
+                        "type": "add_trade_item",
+                        "actor": 0,
+                        "args": {
+                          "direction": "give",
+                          "resource": "brick"
+                        }
+                      },
+                      "expected": false
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "add_trade_item",
+                  "actor": 0,
+                  "args": {
+                    "direction": "take",
+                    "resource": "brick"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "action_legal": [
+                    {
+                      "selector": {
+                        "type": "add_trade_item",
+                        "actor": 0,
+                        "args": {
+                          "direction": "take",
+                          "resource": "brick"
+                        }
+                      },
+                      "expected": false
+                    },
+                    {
+                      "selector": {
+                        "type": "add_trade_item",
+                        "actor": 0,
+                        "args": {
+                          "direction": "take",
+                          "resource": "ore"
+                        }
+                      },
+                      "expected": false
+                    },
+                    {
+                      "selector": {
+                        "type": "propose_domestic_trade",
+                        "actor": 0
+                      },
+                      "expected": true
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAT-R45-discard-escrow-interrupt",
+      "fact_ids": [
+        "CAT-M-DISCARD-ESCROW"
+      ],
+      "basis": "human_decision",
+      "title": "Submitted discard escrow survives interrupt",
+      "expectation": "A submitted private selection cannot be transferred or invalidated by an interrupt; all escrowed selections settle together without negative counts.",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler ... wählen die Hälfte ihrer Rohstoffkarten aus und legen diese zurück."
+      },
+      "supporting_sources": [
+        {
+          "fact_id": "CAT-M-DISCARD-ESCROW",
+          "source_id": "CATAN22-RULES",
+          "page": 4,
+          "quote": "Alle Spieler ... wählen die Hälfte ihrer Rohstoffkarten aus und legen diese zurück."
+        }
+      ],
+      "cases": [
+        {
+          "name": "monopoly-cannot-touch-submitted-escrow",
+          "fixture": {
+            "phase": "discard",
+            "current_player": 1,
+            "resources": {
+              "1": {
+                "wood": 1,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              },
+              "2": {
+                "wood": 0,
+                "brick": 1,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            },
+            "development_hands": {
+              "0": [
+                {
+                  "id": "monopoly",
+                  "bought_turn": 0
+                }
+              ]
+            },
+            "pending": [
+              {
+                "type": "discard",
+                "required": {
+                  "1": 1,
+                  "2": 1
+                },
+                "selected": {
+                  "1": {
+                    "wood": 0,
+                    "brick": 0,
+                    "wool": 0,
+                    "grain": 0,
+                    "ore": 0
+                  },
+                  "2": {
+                    "wood": 0,
+                    "brick": 0,
+                    "wool": 0,
+                    "grain": 0,
+                    "ore": 0
+                  }
+                },
+                "submitted_players": [],
+                "resume_phase": "robber_move",
+                "resume_current_player": 0
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_discard_resource",
+                  "actor": 1,
+                  "args": {
+                    "resource": "wood"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {}
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "submit_discard",
+                  "actor": 1
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "resources": {
+                    "0": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "1": {
+                      "wood": 1,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "2": {
+                      "wood": 0,
+                      "brick": 1,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  },
+                  "phase": "discard",
+                  "current_player": 2
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "play_monopoly",
+                  "actor": 0,
+                  "args": {
+                    "card": "monopoly",
+                    "resource": "wood"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "resources": {
+                    "0": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "1": {
+                      "wood": 1,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "2": {
+                      "wood": 0,
+                      "brick": 1,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  },
+                  "phase": "discard",
+                  "current_player": 2,
+                  "pending_type": "discard"
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_discard_resource",
+                  "actor": 2,
+                  "args": {
+                    "resource": "brick"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {}
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "submit_discard",
+                  "actor": 2
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "resources": {
+                    "0": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "1": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "2": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  },
+                  "phase": "robber_move",
+                  "pending_type": "robber_move"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAT-R46-knight-robbery-required",
+      "fact_ids": [
+        "CAT-X-KNIGHT-DECLINE"
+      ],
+      "basis": "human_decision",
+      "title": "Knight robbery has no decline action",
+      "expectation": "After a Knight move with an adjacent opponent, a victim choice is required; choosing an empty adjacent hand transfers nothing and resumes the interrupted phase.",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Dann raubt er einem Mitspieler ... 1 Rohstoffkarte."
+      },
+      "supporting_sources": [
+        {
+          "fact_id": "CAT-X-KNIGHT-DECLINE",
+          "source_id": "CATAN22-RULES",
+          "page": 4,
+          "quote": "Dann raubt er einem Mitspieler ... 1 Rohstoffkarte."
+        }
+      ],
+      "cases": [
+        {
+          "name": "empty-adjacent-victim-still-required",
+          "fixture": {
+            "phase": "roll",
+            "development_hands": {
+              "0": [
+                {
+                  "id": "knight",
+                  "bought_turn": 0
+                }
+              ]
+            },
+            "buildings": {
+              "v00": {
+                "owner": 1,
+                "type": "settlement"
+              }
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "play_knight",
+                  "actor": 0,
+                  "args": {
+                    "card": "knight"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "pending_type": "robber_move"
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "move_robber",
+                  "actor": 0,
+                  "args": {
+                    "hex": "h00"
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "pending_type": "robber_steal",
+                  "action_legal": [
+                    {
+                      "selector": {
+                        "type": "steal_resource",
+                        "actor": 0,
+                        "args": {
+                          "victim": 1
+                        }
+                      },
+                      "expected": true
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "steal_resource",
+                  "actor": 0,
+                  "args": {
+                    "victim": 1
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "phase": "roll",
+                  "pending_depth": 0,
+                  "resources": {
+                    "0": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    },
+                    "1": {
+                      "wood": 0,
+                      "brick": 0,
+                      "wool": 0,
+                      "grain": 0,
+                      "ore": 0
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAT-R47-maritime-receive-differs",
+      "fact_ids": [
+        "CAT-A-MARITIME-SAME"
+      ],
+      "basis": "human_decision",
+      "title": "Maritime receive type differs",
+      "expectation": "Same-resource 4:1, 3:1 and 2:1 maritime actions are illegal.",
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "4 gleiche Rohstoffkarten ... 1 Rohstoffkarte seiner Wahl."
+      },
+      "supporting_sources": [
+        {
+          "fact_id": "CAT-A-MARITIME-SAME",
+          "source_id": "CATAN22-RULES",
+          "page": 3,
+          "quote": "4 gleiche Rohstoffkarten ... 1 Rohstoffkarte seiner Wahl."
+        }
+      ],
+      "cases": [
+        {
+          "name": "4-to-1",
+          "fixture": {
+            "phase": "trade",
+            "resources": {
+              "0": {
+                "wood": 4,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            }
+          },
+          "initial": {
+            "adapter": {
+              "action_legal": [
+                {
+                  "selector": {
+                    "type": "maritime_trade",
+                    "actor": 0,
+                    "args": {
+                      "give": "wood",
+                      "receive": "wood"
+                    }
+                  },
+                  "expected": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "3-to-1",
+          "fixture": {
+            "phase": "trade",
+            "resources": {
+              "0": {
+                "wood": 4,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            },
+            "harbor_buildings": [
+              {
+                "ratio": 3,
+                "resource": null,
+                "owner": 0
+              }
+            ]
+          },
+          "initial": {
+            "adapter": {
+              "action_legal": [
+                {
+                  "selector": {
+                    "type": "maritime_trade",
+                    "actor": 0,
+                    "args": {
+                      "give": "wood",
+                      "receive": "wood"
+                    }
+                  },
+                  "expected": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "2-to-1",
+          "fixture": {
+            "phase": "trade",
+            "resources": {
+              "0": {
+                "wood": 4,
+                "brick": 0,
+                "wool": 0,
+                "grain": 0,
+                "ore": 0
+              }
+            },
+            "harbor_buildings": [
+              {
+                "ratio": 2,
+                "resource": "wood",
+                "owner": 0
+              }
+            ]
+          },
+          "initial": {
+            "adapter": {
+              "action_legal": [
+                {
+                  "selector": {
+                    "type": "maritime_trade",
+                    "actor": 0,
+                    "args": {
+                      "give": "wood",
+                      "receive": "wood"
+                    }
+                  },
+                  "expected": false
+                }
+              ]
+            }
+          }
         }
       ]
     }

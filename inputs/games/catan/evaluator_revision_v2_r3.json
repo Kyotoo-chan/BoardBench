@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "revision_id": "catan-v2-evaluator-r3",
+  "status": "frozen-pre-intervention-generation",
+  "created_on": "2026-07-29",
+  "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
+  "prior_revision": {
+    "path": "inputs/games/catan/evaluator_revision_v2_r2.json",
+    "sha256": "f453c911d52f28654e1f028bd9b28289b8231edd90da8c18a181d29fd5c6f6ad"
+  },
+  "reason": "Add four user-approved source-gap decisions and hard human-decision scenarios before either independent intervention generation; retain Original r2 score and replay unchanged Original code under r3 for comparison.",
+  "evaluation": {
+    "scenarios": 55,
+    "named_cases": 113,
+    "clear_basis": 40,
+    "human_decision_basis": 15,
+    "required_clear_claims": 99
+  },
+  "artifacts": {
+    "scenario_suite": {
+      "path": "checks/scenarios/catan_v2.json",
+      "sha256": "63c6165d480c7e2a4357ac2c63b172e76153f7add907789e6c17748955d1885c"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/catan_v2.py",
+      "sha256": "822a6855514af6865001f8574a07a2699d1f15473007a056cda3aa62c8716d78"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claim_coverage": {
+      "path": "checks/claim_coverage.py",
+      "sha256": "c66a9912c21fe9bdac7b03ae7a2750d0649ed6d8bd9fec771320b414bdd0d169"
+    },
+    "claims": {
+      "path": "inputs/games/catan/claims_v2.json",
+      "sha256": "cfed81ed936017420382c097a855c4a3573704452143dd0c13295c0863b7c47b"
+    },
+    "decisions": {
+      "path": "inputs/games/catan/decisions_v2.json",
+      "sha256": "b0eaf1f51b33fb74d292c7131376cd62f4312e8c599bdcb2d69b32ffde1b4fa5"
+    },
+    "matrix": {
+      "path": "inputs/games/catan/scenario_matrix_v2.json",
+      "sha256": "1cffe2df6eddfce293069d75190280628b798a5bdcbdf7d11141ea12c76c3ad4"
+    },
+    "profile": {
+      "path": "inputs/games/catan/environment_profile_v2.json",
+      "sha256": "b505331f53b1d32ea0f6c824ffb6747a633764692e250d9ab4b7ff237be3ec01"
+    },
+    "clear_emphasis": {
+      "path": "inputs/games/catan/clear_rule_emphasis_v2.json",
+      "sha256": "3f695ee66f927bba4c4bd41656acfa6a96c6b8f4cbf63a5b34d539ee03c0cd0d"
+    },
+    "clarifications": {
+      "path": "inputs/games/catan/clarifications_v2.json",
+      "sha256": "7468c42e061640d5685b65ce20d6b4da19201792bd8e401d98087d6dde9ce9d8"
+    },
+    "emphasis_config": {
+      "path": "inputs/games/catan/run_v2_clear_rule_emphasis.json",
+      "sha256": "c29d1854973684e2065341a3a4a6ac50619d148e73c982d41060700ba1d34d1c"
+    },
+    "clarified_config": {
+      "path": "inputs/games/catan/run_v2_clarified.json",
+      "sha256": "f9b2a9621726d83e5d0da6fa6cb1cfbd091804940a252728ddbc46609c368879"
+    }
+  }
+}

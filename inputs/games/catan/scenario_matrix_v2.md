@@ -1,9 +1,9 @@
 # CATAN V2 approval matrix
 
-- status: **frozen-for-v2-original-run**
+- status: **frozen-for-v2-intervention-comparison-r3**
 - scope: Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup and experienced merged phases excluded
-- claims: 121 total; 99 required clear
-- scenarios: 51 (40 clear, 11 human decision)
+- claims: 125 total; 99 required clear
+- scenarios: 55 (40 clear, 15 human decision)
 
 | ID | Basis | Facts | Expectation |
 |---|---|---|---|
@@ -58,10 +58,14 @@
 | `CAT-R41-designated-oldest-start` | human_decision | `CAT-M-OLDEST-INPUT` | The profile designates player 0 as the oldest seat; player 0 is active and has the initial legal roll in both 3p and 4p games. |
 | `CAT-R42-development-boundaries` | human_decision | `CAT-M-DEV-BOUNDARY` | Subject to the one-card-per-turn limit, an eligible active-player development card may interrupt pending discard, seven-sourced robber and bilateral-consent decisions; it resolves on top, then the exact interrupted state resumes unless terminal. |
 | `CAT-R43-victory-during-card-effect` | human_decision | `CAT-M-TERMINAL-SUBACTION` | Victory after the first committed Road Building road or other atomic subaction terminates immediately and cancels the remaining effect. |
+| `CAT-R44-finite-trade-bound` | human_decision | `CAT-M-TRADE-OFFER-BOUND` | Incremental give/take totals stop at the respective public hand sizes without using private resource identities; unaffordable accepted bundles remain impossible. |
+| `CAT-R45-discard-escrow-interrupt` | human_decision | `CAT-M-DISCARD-ESCROW` | A submitted private selection cannot be transferred or invalidated by an interrupt; all escrowed selections settle together without negative counts. |
+| `CAT-R46-knight-robbery-required` | human_decision | `CAT-X-KNIGHT-DECLINE` | After a Knight move with an adjacent opponent, a victim choice is required; choosing an empty adjacent hand transfers nothing and resumes the interrupted phase. |
+| `CAT-R47-maritime-receive-differs` | human_decision | `CAT-A-MARITIME-SAME` | Same-resource 4:1, 3:1 and 2:1 maritime actions are illegal. |
 
 ## Numbering
 
-Numeric stems remain `R01`–`R43`. The explicit setup/inventory splits `R01A`–`R01C`, `R02A`–`R02C`, and `R04A`–`R04D` produce 51 physical scenarios without renumbering stable later IDs; `R40`–`R43` are therefore intentionally contiguous.
+Numeric stems now extend through `R47`. The explicit setup/inventory splits `R01A`–`R01C`, `R02A`–`R02C`, and `R04A`–`R04D` produce 55 physical scenarios without renumbering prior stable IDs; `R40`–`R47` are intentionally contiguous.
 
 ## Approval boundary
 

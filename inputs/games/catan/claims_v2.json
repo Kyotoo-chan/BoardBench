@@ -1463,6 +1463,54 @@
         "quote": "Es beginnt der älteste Spieler."
       },
       "expectation": "The sources do not define a digital age input or equal-age tie; the profile must designate the oldest seat."
+    },
+    {
+      "id": "CAT-M-TRADE-OFFER-BOUND",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf frei ausgehandelt werden, wie viele Rohstoffkarten getauscht werden."
+      },
+      "expectation": "The source gives no finite digital bound for incremental offer construction."
+    },
+    {
+      "id": "CAT-M-DISCARD-ESCROW",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler ... wählen die Hälfte ihrer Rohstoffkarten aus und legen diese zurück."
+      },
+      "expectation": "The source gives no submitted-card escrow behavior under a development-card interrupt before simultaneous settlement."
+    },
+    {
+      "id": "CAT-X-KNIGHT-DECLINE",
+      "classification": "conflicting",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Dann raubt er einem Mitspieler ... 1 Rohstoffkarte."
+      },
+      "expectation": "Primary mandatory wording and Almanac permissive wording do not resolve a digital decline action after a Knight move."
+    },
+    {
+      "id": "CAT-A-MARITIME-SAME",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "4 gleiche Rohstoffkarten ... 1 Rohstoffkarte seiner Wahl."
+      },
+      "expectation": "The 4:1 wording does not explicitly say whether receive type must differ, while harbor examples say another resource."
     }
   ]
 }

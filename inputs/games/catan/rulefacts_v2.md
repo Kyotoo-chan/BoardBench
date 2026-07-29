@@ -10,7 +10,7 @@
 
 ## Fresh audit summary
 
-The complete 4-page primary and matching 24-page companion were read from the supplied PDFs and fresh 150-DPI page renders without web or remembered rules. After independent review and image-level citation correction, the inventory contains **121 claims**: **104 clear**, **1 ambiguous**, **15 missing**, and **1 untestable**. Of the clear claims, **99** are material and executable; five physical accessory counts remain visible but are not represented as game state. All 99 required clear claims are mapped into the hard matrix.
+The complete 4-page primary and matching 24-page companion were read from the supplied PDFs and fresh 150-DPI page renders without web or remembered rules. After Original evaluation and pre-intervention gap approval, the inventory contains **125 claims**: **104 clear**, **2 ambiguous**, **17 missing**, **1 conflicting**, and **1 untestable**. Of the clear claims, **99** are material and executable; five physical accessory counts remain visible but are not represented as game state. All 99 required clear claims remain mapped into the hard matrix.
 
 No in-scope cross-source conflict was found. The Almanac's combined trade/build procedure is an expressly recommended experienced-player option and is outside the approved beginner scope rather than a precedence conflict.
 
@@ -28,6 +28,10 @@ The atomic register covers exact components; 3-player red removal and 4-player b
 6. **Victory cards:** reveal only the minimum number needed to establish ten, in development-hand order.
 7. **Development interrupts:** subject to the clear one-card-per-turn limit, an eligible card may interrupt pending discard, seven-sourced robber or trade-consent decisions; resolve it on a pending-state stack, then resume unless terminal. A pending development-card effect cannot be interrupted by a second card.
 8. **Immediate victory:** check after each committed atomic action or subaction; reaching ten immediately cancels any unfinished card effect.
+9. **Finite trade bound:** give/take totals are capped by each side's public resource-hand size without revealing identities; acceptance validates actual holdings.
+10. **Discard escrow:** submitted private selections are unavailable to interrupts and settle together after every required submission.
+11. **Knight robbery:** with any adjacent opponent, a victim choice is mandatory; an empty adjacent hand remains selectable and transfers nothing.
+12. **Maritime receive type:** 4:1, 3:1 and 2:1 exchanges must receive a type different from the type given.
 
 An image-level reread of Almanac p.6 found the explicit text “Es gibt je zweimal” for Road Building, Year of Plenty and Monopoly. Their two-each distribution is therefore publisher-clear; the user's earlier answer to leave the distribution unknown is not applied because that question was based on an incomplete extracted-text premise.
 
@@ -39,4 +43,4 @@ Spoken negotiation remains untestable. Random distribution quality beyond reprod
 
 ## Coverage statement
 
-The revised V2 matrix has **51 scenarios**: **40 clear-basis** and **11 human-decision-basis**. Numeric stems remain `R01`–`R43`; letter-suffixed splits `R01A`–`R01C`, `R02A`–`R02C`, and `R04A`–`R04D` make the physical total 51 without renumbering stable later IDs. It maps all 99 required clear claims without a coverage exception. Large setup/inventory bundles are split into explicit board, resource, development, piece, starting-resource, bank/deck and initial-action assertions. Mapping does not prove every clause is exhaustively asserted; setup, both approved player counts, initial legal play, bounded playability, and rejection outside 3–4 receive separate evidence.
+The intervention-comparison rubric r3 has **55 scenarios**: **40 clear-basis** and **15 human-decision-basis**. Numeric stems now extend through `R47`; letter-suffixed splits `R01A`–`R01C`, `R02A`–`R02C`, and `R04A`–`R04D` make the physical total 55 without renumbering prior stable IDs. It maps all 99 required clear claims without a coverage exception. Large setup/inventory bundles are split into explicit board, resource, development, piece, starting-resource, bank/deck and initial-action assertions. Mapping does not prove every clause is exhaustively asserted; setup, both approved player counts, initial legal play, bounded playability, and rejection outside 3–4 receive separate evidence.

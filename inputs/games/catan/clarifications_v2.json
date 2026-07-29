@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "game": "catan_2022",
+  "intervention_kind": "source_gap_clarification",
+  "authorship": "User-approved BoardBench digital clarification after evaluation of v2_original_1; not publisher text and not a clear-rule emphasis",
+  "guardrail": "This artifact resolves only source-underspecified digital procedures. The unchanged publisher rulebook and matching Almanac remain authoritative for every clear rule. It does not repeat or prioritize the Original implementation's clear-rule failures.",
+  "clarifications": [
+    {
+      "id": "CATAN-CLAR-TRADE-BOUND",
+      "source_gap": "The tabletop sources permit freely negotiated quantities but prescribe no finite digital offer-building bound.",
+      "decision": "During bilateral offer construction, the total number of cards on the give side may not exceed the active player's public resource-hand size, and the total on the take side may not exceed the partner's public resource-hand size. Resource types remain freely nameable so legal actions do not disclose private identities. Proposal requires both totals positive. Acceptance alone checks actual per-resource holdings and transfers atomically; an unaffordable offer cannot be accepted."
+    },
+    {
+      "id": "CATAN-CLAR-DISCARD-ESCROW",
+      "source_gap": "The sources do not define how a privately submitted seven-discard interacts with a permitted development-card interruption before all players submit.",
+      "decision": "A submitted selection becomes private escrow represented by that player's counts in the pending discard frame. It remains included in the privileged aggregate resource counts until simultaneous settlement, but is unavailable to Monopoly, robbery, trade, building, maritime trade, or any other interrupt. After every required player submits, all escrowed cards move to the bank together. An interrupt must resume the exact pending selections without changing or invalidating them."
+    },
+    {
+      "id": "CATAN-CLAR-KNIGHT-ROBBERY",
+      "source_gap": "The primary says the mover robs a player while the Almanac says the mover may rob, leaving digital decline behavior unclear.",
+      "decision": "After a Knight moves the robber, if at least one opponent has a settlement or city adjacent to the destination, the mover must choose one adjacent opponent; there is no separate decline action. An adjacent opponent with an empty resource hand remains selectable and then transfers nothing. With no adjacent opponent, movement completes without a robbery choice."
+    },
+    {
+      "id": "CATAN-CLAR-MARITIME-SAME",
+      "source_gap": "The 4:1 wording says a resource of choice, while harbor examples expressly describe receiving another resource.",
+      "decision": "Every maritime exchange, including 4:1, 3:1 and 2:1, must receive a resource type different from the type given. Same-resource maritime actions are illegal."
+    }
+  ]
+}

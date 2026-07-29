@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "game": "catan_2022",
+  "intervention_kind": "clear_rule_emphasis",
+  "authorship": "BoardBench experimenter emphasis approved after evaluation of v2_original_1; not publisher text and not a source-gap clarification",
+  "guardrail": "This artifact repeats publisher-clear rules that the Original implementation omitted or violated. The unchanged rulebook and matching Almanac remain authoritative in full. Do not optimize only these bullets or neglect any other supplied rule.",
+  "emphasis": [
+    {
+      "id": "CATAN-EMPH-LONGEST-ROAD",
+      "publisher_locators": [
+        "game_rules.pdf page 3, Längste Handelsstraße",
+        "game_almanac.pdf page 8, Längste Handelsstraße"
+      ],
+      "text": "Implement and invoke a complete Longest Road recalculation whenever a road is placed or a settlement/city can interrupt a route. Measure one player's maximum continuous route without summing branches; an opponent building interrupts, an own building does not. At length at least five, award two points. A strictly longer route transfers the card immediately. After an interruption, a tied incumbent retains it; a leading tie excluding the incumbent leaves it unowned; no qualifying route also leaves it unowned. Keep owner and measured length synchronized, and check immediate victory after every resulting award change."
+    },
+    {
+      "id": "CATAN-EMPH-ROAD-STOCK",
+      "publisher_locators": [
+        "game_almanac.pdf page 6, Bauen and Fortschrittskarten/Straßenbau",
+        "game_almanac.pdf page 23, Spielfiguren"
+      ],
+      "text": "Physical road stock applies to paid roads and to both free Road Building placements. Never expose or apply a road action when that player's road stock is zero, never permit negative stock, and after each free placement recompute whether another normal-legal road remains feasible. Road Building places no more physical roads than are actually available."
+    }
+  ],
+  "final_audit": "Before finishing, exercise threshold, branch, own/opponent interruption, longer-route transfer, both interruption tie outcomes, loop handling under the supplied profile, zero/one/two remaining road pieces, and victory triggered by a newly awarded Longest Road. Then audit the rest of the supplied game normally."
+}

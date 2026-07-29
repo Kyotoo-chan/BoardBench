@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "status": "frozen-for-v2-original-run",
+  "status": "frozen-for-v2-intervention-comparison-r3",
   "approved_at": "2026-07-29",
   "game": "catan",
   "scope": "Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup and experienced merged phases excluded",
-  "claims_total": 121,
+  "claims_total": 125,
   "clear_required": 99,
   "coverage_exceptions": [],
   "scenarios": [
@@ -536,6 +536,42 @@
       ],
       "title": "Immediate victory cancels pending effect",
       "expectation": "Victory after the first committed Road Building road or other atomic subaction terminates immediately and cancels the remaining effect."
+    },
+    {
+      "id": "CAT-R44-finite-trade-bound",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TRADE-OFFER-BOUND"
+      ],
+      "title": "Finite public-hand-size trade bound",
+      "expectation": "Incremental give/take totals stop at the respective public hand sizes without using private resource identities; unaffordable accepted bundles remain impossible."
+    },
+    {
+      "id": "CAT-R45-discard-escrow-interrupt",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DISCARD-ESCROW"
+      ],
+      "title": "Submitted discard escrow survives interrupt",
+      "expectation": "A submitted private selection cannot be transferred or invalidated by an interrupt; all escrowed selections settle together without negative counts."
+    },
+    {
+      "id": "CAT-R46-knight-robbery-required",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-X-KNIGHT-DECLINE"
+      ],
+      "title": "Knight robbery has no decline action",
+      "expectation": "After a Knight move with an adjacent opponent, a victim choice is required; choosing an empty adjacent hand transfers nothing and resumes the interrupted phase."
+    },
+    {
+      "id": "CAT-R47-maritime-receive-differs",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-A-MARITIME-SAME"
+      ],
+      "title": "Maritime receive type differs",
+      "expectation": "Same-resource 4:1, 3:1 and 2:1 maritime actions are illegal."
     }
   ]
 }

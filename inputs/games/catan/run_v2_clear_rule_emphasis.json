@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "game": "catan",
+  "run_id": "v2_clear_rule_emphasis_1",
+  "condition_kind": "clarified",
+  "intervention_kind": "clear_rule_emphasis",
+  "adapted_from_run_id": "v2_original_1",
+  "adaptation": "Post-evaluation clear-rule salience intervention for publisher-clear Longest Road and physical road-stock rules; not a source-gap clarification and not an independent replicate.",
+  "scope": "Complete supplied 2022 German CATAN base-game mechanics under illustrated beginner setup for 3 and 4 players with strict roll-trade-build phases",
+  "source_base_dir": "inputs/games/catan",
+  "sources": [
+    {"source_id":"CATAN22-RULES","path":"game_rules.pdf","packet_name":"game_rules.pdf","role":"publisher_rulebook","sha256":"e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"},
+    {"source_id":"CATAN22-ALMANAC","path":"game_almanac.pdf","packet_name":"game_almanac.pdf","role":"publisher_companion","sha256":"8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc","match_evidence":"Same 2022 copyright, article 68 26 82 and matching production stem; primary explicitly delegates details."},
+    {"source_id":"CATAN-V2-CLEAR-RULE-EMPHASIS","path":"clear_rule_emphasis_v2.json","packet_name":"CLEAR_RULE_EMPHASIS.json","role":"experimenter_clarification","sha256":"3f695ee66f927bba4c4bd41656acfa6a96c6b8f4cbf63a5b34d539ee03c0cd0d"}
+  ],
+  "profile":"inputs/games/catan/environment_profile_v2.json",
+  "agentic_self_check":"generation/agentic_self_check_v2.py",
+  "profile_fixture_self_check":"inputs/games/catan/profile_fixture_self_check_v2.py",
+  "prompt":"inputs/prompts/rulebook_to_python_v2.txt",
+  "contract":"inputs/prompts/environment_contract_v2.md",
+  "original_run_config":"inputs/games/catan/run_v2_original.json",
+  "original_evidence":"results/scores/catan/v2/original_agentic.json",
+  "model":"gpt-5.6-sol","effort":"low","verbosity":"low","max_repairs":2,"timeout":1800,"output_stem":"catan_codex_ag"
+}

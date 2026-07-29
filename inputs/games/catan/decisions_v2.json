@@ -74,6 +74,38 @@
         "CAT-M-TERMINAL-SUBACTION"
       ],
       "decision": "Check active-player victory after every completed atomic action or committed subaction; immediate victory cancels any remaining Road Building placement or other pending effect."
+    },
+    {
+      "id": "CAT-D-TRADE-OFFER-BOUND",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-TRADE-OFFER-BOUND"
+      ],
+      "decision": "Give total cannot exceed active public resource-hand size; take total cannot exceed partner public resource-hand size; types remain freely nameable; acceptance checks actual holdings."
+    },
+    {
+      "id": "CAT-D-DISCARD-ESCROW",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-DISCARD-ESCROW"
+      ],
+      "decision": "Submitted selection is private escrow in the pending frame, remains in aggregate count until simultaneous settlement, and is unavailable to every interrupt."
+    },
+    {
+      "id": "CAT-D-KNIGHT-DECLINE",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-X-KNIGHT-DECLINE"
+      ],
+      "decision": "If adjacent opponents exist after a Knight move, one must be chosen; there is no decline action. Empty hands remain selectable and transfer nothing."
+    },
+    {
+      "id": "CAT-D-MARITIME-SAME",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-A-MARITIME-SAME"
+      ],
+      "decision": "Every maritime exchange must receive a resource type different from the type given."
     }
   ]
 }

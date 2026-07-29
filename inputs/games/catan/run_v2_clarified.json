@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "game": "catan",
+  "run_id": "v2_clarified_1",
+  "condition_kind": "clarified",
+  "intervention_kind": "source_gap_clarification",
+  "adapted_from_run_id": "v2_original_1",
+  "adaptation": "Independent post-evaluation source-gap intervention for finite trade bounds, discard escrow under interrupts, Knight robbery decline, and same-resource maritime exchange; does not include clear-rule emphasis.",
+  "scope": "Complete supplied 2022 German CATAN base-game mechanics under illustrated beginner setup for 3 and 4 players with strict roll-trade-build phases",
+  "source_base_dir": "inputs/games/catan",
+  "sources": [
+    {"source_id":"CATAN22-RULES","path":"game_rules.pdf","packet_name":"game_rules.pdf","role":"publisher_rulebook","sha256":"e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"},
+    {"source_id":"CATAN22-ALMANAC","path":"game_almanac.pdf","packet_name":"game_almanac.pdf","role":"publisher_companion","sha256":"8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc","match_evidence":"Same 2022 copyright, article 68 26 82 and matching production stem; primary explicitly delegates details."},
+    {"source_id":"CATAN-V2-SOURCE-GAP-CLARIFICATIONS","path":"clarifications_v2.json","packet_name":"CLARIFICATIONS.json","role":"experimenter_clarification","sha256":"7468c42e061640d5685b65ce20d6b4da19201792bd8e401d98087d6dde9ce9d8"}
+  ],
+  "profile":"inputs/games/catan/environment_profile_v2.json",
+  "agentic_self_check":"generation/agentic_self_check_v2.py",
+  "profile_fixture_self_check":"inputs/games/catan/profile_fixture_self_check_v2.py",
+  "prompt":"inputs/prompts/rulebook_to_python_v2.txt",
+  "contract":"inputs/prompts/environment_contract_v2.md",
+  "original_run_config":"inputs/games/catan/run_v2_original.json",
+  "original_evidence":"results/scores/catan/v2/original_agentic.json",
+  "model":"gpt-5.6-sol","effort":"low","verbosity":"low","max_repairs":2,"timeout":1800,"output_stem":"catan_codex_ag"
+}
