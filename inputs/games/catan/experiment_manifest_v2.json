@@ -1,0 +1,113 @@
+{
+  "schema_version": 2,
+  "study": "catan-2022-beginner-3-4-contract-v2",
+  "status": "frozen-pre-generation",
+  "frozen_on": "2026-07-29",
+  "planned_runs": [
+    "v2_original_1"
+  ],
+  "generation": {
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "max_neutral_repairs": 2
+  },
+  "condition": {
+    "scope": "Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup, experienced phase merge, app and expansions excluded",
+    "sources": [
+      {
+        "source_id": "CATAN22-RULES",
+        "role": "publisher_rulebook",
+        "path": "inputs/games/catan/game_rules.pdf",
+        "sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+      },
+      {
+        "source_id": "CATAN22-ALMANAC",
+        "role": "publisher_companion",
+        "path": "inputs/games/catan/game_almanac.pdf",
+        "sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc",
+        "match_evidence": "Same 2022 copyright, article 68 26 82 and matching 682682_Cat_Basis34 production stem; primary explicitly delegates details."
+      }
+    ]
+  },
+  "evaluation": {
+    "rubric_version": "catan-2022-v2-atomic-2026-07-29",
+    "scenarios": 51,
+    "named_cases": 107,
+    "clear_basis_scenarios": 40,
+    "human_decision_basis_scenarios": 11,
+    "required_clear_claims": 99,
+    "coverage_exceptions": [],
+    "status": "not_run"
+  },
+  "artifacts": {
+    "claims": {
+      "path": "inputs/games/catan/claims_v2.json",
+      "sha256": "f452f32ef8c952141366f38974e00f06133e264a1cc9471c556a02aea88d6eec"
+    },
+    "decisions": {
+      "path": "inputs/games/catan/decisions_v2.json",
+      "sha256": "989cc634205ca87aa73848d3556bccbde135c336399694b6d926610219576267"
+    },
+    "rulefacts": {
+      "path": "inputs/games/catan/rulefacts_v2.md",
+      "sha256": "4330ddcf028b485a084dfd5ec6c8b7a7de393d2e8a73f478cb7fe4e7ea418d6f"
+    },
+    "matrix_json": {
+      "path": "inputs/games/catan/scenario_matrix_v2.json",
+      "sha256": "016ef37d7a748e8689a0e3a67111f1c73bc8d2e37049bc5a96440b827d5763fd"
+    },
+    "matrix_md": {
+      "path": "inputs/games/catan/scenario_matrix_v2.md",
+      "sha256": "2428c9d4169bb617b8603736600ff67d671ef87bcbaa95abc580c88f119087f9"
+    },
+    "profile": {
+      "path": "inputs/games/catan/environment_profile_v2.json",
+      "sha256": "b505331f53b1d32ea0f6c824ffb6747a633764692e250d9ab4b7ff237be3ec01"
+    },
+    "fixture_self_check": {
+      "path": "inputs/games/catan/profile_fixture_self_check_v2.py",
+      "sha256": "ecdb2d4ce869d03fc573fc2f300f9f6e08e71df2988fe06a43b552cfcb269b22"
+    },
+    "scenario_suite": {
+      "path": "checks/scenarios/catan_v2.json",
+      "sha256": "e7b2618b5ea5d5790cd791c9b794c9cd5be45349e13585203da3c90a94124583"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/catan_v2.py",
+      "sha256": "49747352523169b3a4d755f29b672ab3b99cd6bb75ee299a37024c54a6f324ff"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claim_coverage": {
+      "path": "checks/claim_coverage.py",
+      "sha256": "c66a9912c21fe9bdac7b03ae7a2750d0649ed6d8bd9fec771320b414bdd0d169"
+    },
+    "contract": {
+      "path": "inputs/prompts/environment_contract_v2.md",
+      "sha256": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd"
+    },
+    "prompt": {
+      "path": "inputs/prompts/rulebook_to_python_v2.txt",
+      "sha256": "cd9f0d942b90c7d698b249cb5f9fbe27974eb793327a873235493aad3fd33a91"
+    },
+    "agentic_self_check": {
+      "path": "generation/agentic_self_check_v2.py",
+      "sha256": "c89915f934732947f4df3bb4a826dc4c5c21599771f57a3a6e162f7eac3e6869"
+    },
+    "run_config": {
+      "path": "inputs/games/catan/run_v2_original.json",
+      "sha256": "92720528e9db9060fd3b49bf067365709c6d3f67f43f055a57be3d31716dfc65"
+    },
+    "packet_test": {
+      "path": "generation/test_catan_v2_packet.py",
+      "sha256": "62e1383bfcdb3ef432e95d021ffe1930d49a728efe8a2af162dea371c1291678"
+    },
+    "matrix_test": {
+      "path": "generation/test_catan_v2_matrix.py",
+      "sha256": "dd65fb31c188b22c765aaf7244fd64176e11cd09cfac3afd0f782f37cfcaf7c8"
+    }
+  }
+}

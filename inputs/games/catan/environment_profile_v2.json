@@ -1,0 +1,1229 @@
+{
+  "profile_version": 2,
+  "state_schema": "boardbench/catan/state/2",
+  "action_schema": "boardbench/catan/action/2",
+  "observation_schema": "boardbench/catan/observation/2",
+  "note": "Representation-only profile for the matching 2022 German manual+almanac condition, illustrated beginner setup for 3 and 4 players, and strict roll-trade-build phases. Rule behavior comes only from assigned sources and separately approved decisions.",
+  "player_counts": {
+    "supported": [
+      3,
+      4
+    ],
+    "unsupported": [
+      2,
+      5
+    ]
+  },
+  "configuration": {
+    "players": "int=3|4",
+    "colors_by_count": {
+      "3": [
+        "blue",
+        "orange",
+        "white"
+      ],
+      "4": [
+        "red",
+        "blue",
+        "orange",
+        "white"
+      ]
+    },
+    "oldest_player": 0,
+    "setup": "beginner_illustrated"
+  },
+  "resource_ids": [
+    "wood",
+    "brick",
+    "wool",
+    "grain",
+    "ore"
+  ],
+  "terrain_ids": [
+    "wood",
+    "brick",
+    "wool",
+    "grain",
+    "ore",
+    "desert"
+  ],
+  "development_ids": [
+    "knight",
+    "road_building",
+    "year_of_plenty",
+    "monopoly",
+    "library",
+    "marketplace",
+    "city_hall",
+    "chapel",
+    "university"
+  ],
+  "development_inventory": {
+    "knight": 14,
+    "road_building": 2,
+    "year_of_plenty": 2,
+    "monopoly": 2,
+    "library": 1,
+    "marketplace": 1,
+    "city_hall": 1,
+    "chapel": 1,
+    "university": 1
+  },
+  "victory_point_development_ids": [
+    "library",
+    "marketplace",
+    "city_hall",
+    "chapel",
+    "university"
+  ],
+  "phase_ids": [
+    "roll",
+    "discard",
+    "robber_move",
+    "robber_steal",
+    "trade",
+    "trade_offer",
+    "build",
+    "road_building",
+    "terminal"
+  ],
+  "topology": {
+    "orientation": "pointy",
+    "hex_rows": [
+      [
+        "h00",
+        "h01",
+        "h02"
+      ],
+      [
+        "h03",
+        "h04",
+        "h05",
+        "h06"
+      ],
+      [
+        "h07",
+        "h08",
+        "h09",
+        "h10",
+        "h11"
+      ],
+      [
+        "h12",
+        "h13",
+        "h14",
+        "h15"
+      ],
+      [
+        "h16",
+        "h17",
+        "h18"
+      ]
+    ],
+    "vertex_ids": [
+      "v00",
+      "v01",
+      "v02",
+      "v03",
+      "v04",
+      "v05",
+      "v06",
+      "v07",
+      "v08",
+      "v09",
+      "v10",
+      "v11",
+      "v12",
+      "v13",
+      "v14",
+      "v15",
+      "v16",
+      "v17",
+      "v18",
+      "v19",
+      "v20",
+      "v21",
+      "v22",
+      "v23",
+      "v24",
+      "v25",
+      "v26",
+      "v27",
+      "v28",
+      "v29",
+      "v30",
+      "v31",
+      "v32",
+      "v33",
+      "v34",
+      "v35",
+      "v36",
+      "v37",
+      "v38",
+      "v39",
+      "v40",
+      "v41",
+      "v42",
+      "v43",
+      "v44",
+      "v45",
+      "v46",
+      "v47",
+      "v48",
+      "v49",
+      "v50",
+      "v51",
+      "v52",
+      "v53"
+    ],
+    "vertex_hexes": {
+      "v00": [
+        "h00"
+      ],
+      "v01": [
+        "h01"
+      ],
+      "v02": [
+        "h02"
+      ],
+      "v03": [
+        "h00"
+      ],
+      "v04": [
+        "h00",
+        "h01"
+      ],
+      "v05": [
+        "h01",
+        "h02"
+      ],
+      "v06": [
+        "h02"
+      ],
+      "v07": [
+        "h00",
+        "h03"
+      ],
+      "v08": [
+        "h00",
+        "h01",
+        "h04"
+      ],
+      "v09": [
+        "h01",
+        "h02",
+        "h05"
+      ],
+      "v10": [
+        "h02",
+        "h06"
+      ],
+      "v11": [
+        "h03"
+      ],
+      "v12": [
+        "h00",
+        "h03",
+        "h04"
+      ],
+      "v13": [
+        "h01",
+        "h04",
+        "h05"
+      ],
+      "v14": [
+        "h02",
+        "h05",
+        "h06"
+      ],
+      "v15": [
+        "h06"
+      ],
+      "v16": [
+        "h03",
+        "h07"
+      ],
+      "v17": [
+        "h03",
+        "h04",
+        "h08"
+      ],
+      "v18": [
+        "h04",
+        "h05",
+        "h09"
+      ],
+      "v19": [
+        "h05",
+        "h06",
+        "h10"
+      ],
+      "v20": [
+        "h06",
+        "h11"
+      ],
+      "v21": [
+        "h07"
+      ],
+      "v22": [
+        "h03",
+        "h07",
+        "h08"
+      ],
+      "v23": [
+        "h04",
+        "h08",
+        "h09"
+      ],
+      "v24": [
+        "h05",
+        "h09",
+        "h10"
+      ],
+      "v25": [
+        "h06",
+        "h10",
+        "h11"
+      ],
+      "v26": [
+        "h11"
+      ],
+      "v27": [
+        "h07"
+      ],
+      "v28": [
+        "h07",
+        "h08",
+        "h12"
+      ],
+      "v29": [
+        "h08",
+        "h09",
+        "h13"
+      ],
+      "v30": [
+        "h09",
+        "h10",
+        "h14"
+      ],
+      "v31": [
+        "h10",
+        "h11",
+        "h15"
+      ],
+      "v32": [
+        "h11"
+      ],
+      "v33": [
+        "h07",
+        "h12"
+      ],
+      "v34": [
+        "h08",
+        "h12",
+        "h13"
+      ],
+      "v35": [
+        "h09",
+        "h13",
+        "h14"
+      ],
+      "v36": [
+        "h10",
+        "h14",
+        "h15"
+      ],
+      "v37": [
+        "h11",
+        "h15"
+      ],
+      "v38": [
+        "h12"
+      ],
+      "v39": [
+        "h12",
+        "h13",
+        "h16"
+      ],
+      "v40": [
+        "h13",
+        "h14",
+        "h17"
+      ],
+      "v41": [
+        "h14",
+        "h15",
+        "h18"
+      ],
+      "v42": [
+        "h15"
+      ],
+      "v43": [
+        "h12",
+        "h16"
+      ],
+      "v44": [
+        "h13",
+        "h16",
+        "h17"
+      ],
+      "v45": [
+        "h14",
+        "h17",
+        "h18"
+      ],
+      "v46": [
+        "h15",
+        "h18"
+      ],
+      "v47": [
+        "h16"
+      ],
+      "v48": [
+        "h16",
+        "h17"
+      ],
+      "v49": [
+        "h17",
+        "h18"
+      ],
+      "v50": [
+        "h18"
+      ],
+      "v51": [
+        "h16"
+      ],
+      "v52": [
+        "h17"
+      ],
+      "v53": [
+        "h18"
+      ]
+    },
+    "edge_ids": [
+      "e_v00_v03",
+      "e_v00_v04",
+      "e_v01_v04",
+      "e_v01_v05",
+      "e_v02_v05",
+      "e_v02_v06",
+      "e_v03_v07",
+      "e_v04_v08",
+      "e_v05_v09",
+      "e_v06_v10",
+      "e_v07_v11",
+      "e_v07_v12",
+      "e_v08_v12",
+      "e_v08_v13",
+      "e_v09_v13",
+      "e_v09_v14",
+      "e_v10_v14",
+      "e_v10_v15",
+      "e_v11_v16",
+      "e_v12_v17",
+      "e_v13_v18",
+      "e_v14_v19",
+      "e_v15_v20",
+      "e_v16_v21",
+      "e_v16_v22",
+      "e_v17_v22",
+      "e_v17_v23",
+      "e_v18_v23",
+      "e_v18_v24",
+      "e_v19_v24",
+      "e_v19_v25",
+      "e_v20_v25",
+      "e_v20_v26",
+      "e_v21_v27",
+      "e_v22_v28",
+      "e_v23_v29",
+      "e_v24_v30",
+      "e_v25_v31",
+      "e_v26_v32",
+      "e_v27_v33",
+      "e_v28_v33",
+      "e_v28_v34",
+      "e_v29_v34",
+      "e_v29_v35",
+      "e_v30_v35",
+      "e_v30_v36",
+      "e_v31_v36",
+      "e_v31_v37",
+      "e_v32_v37",
+      "e_v33_v38",
+      "e_v34_v39",
+      "e_v35_v40",
+      "e_v36_v41",
+      "e_v37_v42",
+      "e_v38_v43",
+      "e_v39_v43",
+      "e_v39_v44",
+      "e_v40_v44",
+      "e_v40_v45",
+      "e_v41_v45",
+      "e_v41_v46",
+      "e_v42_v46",
+      "e_v43_v47",
+      "e_v44_v48",
+      "e_v45_v49",
+      "e_v46_v50",
+      "e_v47_v51",
+      "e_v48_v51",
+      "e_v48_v52",
+      "e_v49_v52",
+      "e_v49_v53",
+      "e_v50_v53"
+    ],
+    "edge_id_format": "e_<lexicographically-smaller-vertex-id>_<larger-vertex-id>",
+    "vertex_derivation": "Hex centers use x=(column+abs(2-row)/2)*sqrt(3), y=1.5*row; corners use angles 30,90,150,210,270,330 degrees; deduplicate rounded x/y*1000; sort by (y,x) to assign v00..v53."
+  },
+  "fixed_beginner_board": {
+    "hexes": [
+      {
+        "id": "h00",
+        "terrain": "ore",
+        "number": 10
+      },
+      {
+        "id": "h01",
+        "terrain": "wool",
+        "number": 2
+      },
+      {
+        "id": "h02",
+        "terrain": "wood",
+        "number": 9
+      },
+      {
+        "id": "h03",
+        "terrain": "grain",
+        "number": 12
+      },
+      {
+        "id": "h04",
+        "terrain": "brick",
+        "number": 6
+      },
+      {
+        "id": "h05",
+        "terrain": "wool",
+        "number": 4
+      },
+      {
+        "id": "h06",
+        "terrain": "brick",
+        "number": 10
+      },
+      {
+        "id": "h07",
+        "terrain": "grain",
+        "number": 9
+      },
+      {
+        "id": "h08",
+        "terrain": "wood",
+        "number": 11
+      },
+      {
+        "id": "h09",
+        "terrain": "desert",
+        "number": null
+      },
+      {
+        "id": "h10",
+        "terrain": "wood",
+        "number": 3
+      },
+      {
+        "id": "h11",
+        "terrain": "ore",
+        "number": 8
+      },
+      {
+        "id": "h12",
+        "terrain": "wood",
+        "number": 8
+      },
+      {
+        "id": "h13",
+        "terrain": "ore",
+        "number": 3
+      },
+      {
+        "id": "h14",
+        "terrain": "grain",
+        "number": 4
+      },
+      {
+        "id": "h15",
+        "terrain": "wool",
+        "number": 5
+      },
+      {
+        "id": "h16",
+        "terrain": "brick",
+        "number": 5
+      },
+      {
+        "id": "h17",
+        "terrain": "grain",
+        "number": 6
+      },
+      {
+        "id": "h18",
+        "terrain": "wool",
+        "number": 11
+      }
+    ],
+    "robber_hex": "h09",
+    "harbors_clockwise_from_highlighted_north": [
+      {
+        "id": "p00",
+        "ratio": 2,
+        "resource": "grain",
+        "vertices": [
+          "v01",
+          "v05"
+        ]
+      },
+      {
+        "id": "p01",
+        "ratio": 2,
+        "resource": "wood",
+        "vertices": [
+          "v10",
+          "v15"
+        ]
+      },
+      {
+        "id": "p02",
+        "ratio": 3,
+        "resource": null,
+        "vertices": [
+          "v26",
+          "v32"
+        ]
+      },
+      {
+        "id": "p03",
+        "ratio": 2,
+        "resource": "wool",
+        "vertices": [
+          "v46",
+          "v50"
+        ]
+      },
+      {
+        "id": "p04",
+        "ratio": 3,
+        "resource": null,
+        "vertices": [
+          "v49",
+          "v52"
+        ]
+      },
+      {
+        "id": "p05",
+        "ratio": 3,
+        "resource": null,
+        "vertices": [
+          "v47",
+          "v51"
+        ]
+      },
+      {
+        "id": "p06",
+        "ratio": 2,
+        "resource": "brick",
+        "vertices": [
+          "v27",
+          "v33"
+        ]
+      },
+      {
+        "id": "p07",
+        "ratio": 2,
+        "resource": "ore",
+        "vertices": [
+          "v11",
+          "v16"
+        ]
+      },
+      {
+        "id": "p08",
+        "ratio": 3,
+        "resource": null,
+        "vertices": [
+          "v00",
+          "v03"
+        ]
+      }
+    ]
+  },
+  "setup_by_player_count": {
+    "3": {
+      "colors": [
+        "blue",
+        "orange",
+        "white"
+      ],
+      "settlements": [
+        {
+          "player": 0,
+          "vertex": "v39",
+          "label": "B"
+        },
+        {
+          "player": 0,
+          "vertex": "v41",
+          "label": null
+        },
+        {
+          "player": 1,
+          "vertex": "v14",
+          "label": null
+        },
+        {
+          "player": 1,
+          "vertex": "v40",
+          "label": "C"
+        },
+        {
+          "player": 2,
+          "vertex": "v17",
+          "label": null
+        },
+        {
+          "player": 2,
+          "vertex": "v31",
+          "label": "D"
+        }
+      ],
+      "roads": [
+        {
+          "player": 0,
+          "edge": "e_v39_v44"
+        },
+        {
+          "player": 0,
+          "edge": "e_v36_v41"
+        },
+        {
+          "player": 1,
+          "edge": "e_v09_v14"
+        },
+        {
+          "player": 1,
+          "edge": "e_v40_v45"
+        },
+        {
+          "player": 2,
+          "edge": "e_v17_v22"
+        },
+        {
+          "player": 2,
+          "edge": "e_v25_v31"
+        }
+      ],
+      "starting_resources": [
+        {
+          "wood": 1,
+          "brick": 1,
+          "wool": 0,
+          "grain": 0,
+          "ore": 1
+        },
+        {
+          "wood": 0,
+          "brick": 0,
+          "wool": 0,
+          "grain": 2,
+          "ore": 1
+        },
+        {
+          "wood": 1,
+          "brick": 0,
+          "wool": 1,
+          "grain": 0,
+          "ore": 1
+        }
+      ],
+      "starting_bank": {
+        "wood": 17,
+        "brick": 18,
+        "wool": 18,
+        "grain": 17,
+        "ore": 16
+      }
+    },
+    "4": {
+      "colors": [
+        "red",
+        "blue",
+        "orange",
+        "white"
+      ],
+      "settlements": [
+        {
+          "player": 0,
+          "vertex": "v08",
+          "label": null
+        },
+        {
+          "player": 0,
+          "vertex": "v28",
+          "label": "A"
+        },
+        {
+          "player": 1,
+          "vertex": "v39",
+          "label": "B"
+        },
+        {
+          "player": 1,
+          "vertex": "v41",
+          "label": null
+        },
+        {
+          "player": 2,
+          "vertex": "v14",
+          "label": null
+        },
+        {
+          "player": 2,
+          "vertex": "v40",
+          "label": "C"
+        },
+        {
+          "player": 3,
+          "vertex": "v17",
+          "label": null
+        },
+        {
+          "player": 3,
+          "vertex": "v31",
+          "label": "D"
+        }
+      ],
+      "roads": [
+        {
+          "player": 0,
+          "edge": "e_v08_v13"
+        },
+        {
+          "player": 0,
+          "edge": "e_v28_v34"
+        },
+        {
+          "player": 1,
+          "edge": "e_v39_v44"
+        },
+        {
+          "player": 1,
+          "edge": "e_v36_v41"
+        },
+        {
+          "player": 2,
+          "edge": "e_v09_v14"
+        },
+        {
+          "player": 2,
+          "edge": "e_v40_v45"
+        },
+        {
+          "player": 3,
+          "edge": "e_v17_v22"
+        },
+        {
+          "player": 3,
+          "edge": "e_v25_v31"
+        }
+      ],
+      "starting_resources": [
+        {
+          "wood": 2,
+          "brick": 0,
+          "wool": 0,
+          "grain": 1,
+          "ore": 0
+        },
+        {
+          "wood": 1,
+          "brick": 1,
+          "wool": 0,
+          "grain": 0,
+          "ore": 1
+        },
+        {
+          "wood": 0,
+          "brick": 0,
+          "wool": 0,
+          "grain": 2,
+          "ore": 1
+        },
+        {
+          "wood": 1,
+          "brick": 0,
+          "wool": 1,
+          "grain": 0,
+          "ore": 1
+        }
+      ],
+      "starting_bank": {
+        "wood": 15,
+        "brick": 18,
+        "wool": 18,
+        "grain": 16,
+        "ore": 16
+      }
+    }
+  },
+  "state_data": {
+    "required": [
+      "configuration",
+      "current_player",
+      "active_player",
+      "phase",
+      "turn",
+      "terminal",
+      "winner",
+      "players",
+      "board",
+      "bank",
+      "special_cards",
+      "pending",
+      "chance",
+      "zones"
+    ],
+    "configuration": {
+      "players": "int=3|4",
+      "seed": "int|null",
+      "oldest_player": "int=0",
+      "setup": "literal:beginner_illustrated"
+    },
+    "current_player": "int; primary actor for the top pending decision or active player; legal actions may additionally include an eligible active-player development interrupt while another actor is pending",
+    "active_player": "int; owner of the current turn",
+    "phase": "phase_id",
+    "turn": {
+      "number": "int",
+      "development_played": "bool",
+      "last_roll": "[int,int]|null"
+    },
+    "terminal": "bool",
+    "winner": "int|null",
+    "players": [
+      {
+        "id": "int",
+        "color": "red|blue|orange|white",
+        "resources": "resource_count_object",
+        "development_hand": [
+          {
+            "id": "development_id",
+            "bought_turn": "int",
+            "revealed": "bool"
+          }
+        ],
+        "played_knights": "int",
+        "pieces": {
+          "roads": "int",
+          "settlements": "int",
+          "cities": "int"
+        }
+      }
+    ],
+    "board": {
+      "hexes": [
+        {
+          "id": "hex_id",
+          "terrain": "terrain_id",
+          "number": "int|null",
+          "robber": "bool"
+        }
+      ],
+      "vertices": [
+        {
+          "id": "vertex_id",
+          "building": "null|{owner:int,type:settlement|city}",
+          "harbor_ids": [
+            "harbor_id"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge_id",
+          "vertices": [
+            "vertex_id",
+            "vertex_id"
+          ],
+          "road_owner": "int|null"
+        }
+      ],
+      "harbors": [
+        {
+          "id": "harbor_id",
+          "ratio": "2|3",
+          "resource": "resource_id|null",
+          "vertices": [
+            "vertex_id",
+            "vertex_id"
+          ]
+        }
+      ]
+    },
+    "bank": {
+      "resources": "resource_count_object",
+      "development_deck": [
+        "development_id"
+      ],
+      "played_development": [
+        {
+          "owner": "int",
+          "id": "development_id"
+        }
+      ]
+    },
+    "special_cards": {
+      "longest_road_owner": "int|null",
+      "longest_road_length": "int",
+      "largest_army_owner": "int|null"
+    },
+    "pending": {
+      "type": "list[pending_frame], bottom-to-top; final item is active top frame; empty list means no pending frame",
+      "variants": {
+        "discard": {
+          "type": "literal:discard",
+          "required": "player_to_int_object",
+          "selected": "player_to_resource_count_object (privileged/private)",
+          "submitted_players": [
+            "int"
+          ],
+          "resume_phase": "literal:robber_move",
+          "resume_current_player": "int"
+        },
+        "robber_move": {
+          "type": "literal:robber_move",
+          "resume_phase": "phase_id",
+          "resume_current_player": "int",
+          "source": "seven|knight"
+        },
+        "robber_steal": {
+          "type": "literal:robber_steal",
+          "resume_phase": "phase_id",
+          "resume_current_player": "int",
+          "victims": [
+            "int"
+          ],
+          "source": "seven|knight"
+        },
+        "trade_offer": {
+          "type": "literal:trade_offer",
+          "partner": "int",
+          "give": "resource_count_object",
+          "take": "resource_count_object",
+          "status": "building|awaiting_response",
+          "resume_phase": "literal:trade",
+          "resume_current_player": "int"
+        },
+        "road_building": {
+          "type": "literal:road_building",
+          "resume_phase": "phase_id",
+          "resume_current_player": "int",
+          "remaining": "int=1|2"
+        }
+      }
+    },
+    "chance": {
+      "rng_state": "int",
+      "scripted_rolls": [
+        [
+          "int",
+          "int"
+        ]
+      ],
+      "scripted_steals": [
+        "resource_id"
+      ]
+    },
+    "zones": {
+      "reserve": {
+        "resources": "resource_count_object",
+        "development_cards": [
+          "development_id"
+        ],
+        "removed_colors": [
+          "red"
+        ]
+      }
+    }
+  },
+  "action_data": {
+    "required": [
+      "type",
+      "actor",
+      "args"
+    ],
+    "types": {
+      "roll_dice": {},
+      "choose_discard_resource": {
+        "resource": "resource_id"
+      },
+      "undo_discard_resource": {
+        "resource": "resource_id"
+      },
+      "submit_discard": {},
+      "move_robber": {
+        "hex": "hex_id"
+      },
+      "steal_resource": {
+        "victim": "int"
+      },
+      "begin_domestic_trade": {
+        "partner": "int"
+      },
+      "add_trade_item": {
+        "direction": "give|take",
+        "resource": "resource_id"
+      },
+      "propose_domestic_trade": {},
+      "accept_domestic_trade": {},
+      "reject_domestic_trade": {},
+      "cancel_domestic_trade": {},
+      "maritime_trade": {
+        "give": "resource_id",
+        "receive": "resource_id"
+      },
+      "end_trade": {},
+      "build_road": {
+        "edge": "edge_id"
+      },
+      "build_settlement": {
+        "vertex": "vertex_id"
+      },
+      "build_city": {
+        "vertex": "vertex_id"
+      },
+      "buy_development": {},
+      "play_knight": {
+        "card": "literal:knight"
+      },
+      "play_road_building": {
+        "card": "literal:road_building"
+      },
+      "place_free_road": {
+        "edge": "edge_id"
+      },
+      "play_year_of_plenty": {
+        "card": "literal:year_of_plenty",
+        "resources": [
+          "resource_id",
+          "resource_id"
+        ]
+      },
+      "play_monopoly": {
+        "card": "literal:monopoly",
+        "resource": "resource_id"
+      },
+      "end_turn": {}
+    },
+    "type_ids": [
+      "roll_dice",
+      "choose_discard_resource",
+      "undo_discard_resource",
+      "submit_discard",
+      "move_robber",
+      "steal_resource",
+      "begin_domestic_trade",
+      "add_trade_item",
+      "propose_domestic_trade",
+      "accept_domestic_trade",
+      "reject_domestic_trade",
+      "cancel_domestic_trade",
+      "maritime_trade",
+      "end_trade",
+      "build_road",
+      "build_settlement",
+      "build_city",
+      "buy_development",
+      "play_knight",
+      "play_road_building",
+      "place_free_road",
+      "play_year_of_plenty",
+      "play_monopoly",
+      "end_turn"
+    ]
+  },
+  "observation_data": {
+    "required": [
+      "player",
+      "current_player",
+      "active_player",
+      "phase",
+      "turn",
+      "terminal",
+      "winner",
+      "own_resources",
+      "own_development",
+      "opponents",
+      "board",
+      "bank",
+      "visible_scores",
+      "special_cards",
+      "pending"
+    ],
+    "player": "int",
+    "current_player": "int",
+    "active_player": "int",
+    "phase": "phase_id",
+    "turn": "public turn object",
+    "terminal": "bool",
+    "winner": "int|null",
+    "own_resources": "resource_count_object",
+    "own_development": [
+      {
+        "id": "development_id",
+        "bought_turn": "int",
+        "revealed": "bool"
+      }
+    ],
+    "opponents": [
+      {
+        "id": "int",
+        "resource_count": "int",
+        "development_count": "int",
+        "played_knights": "int"
+      }
+    ],
+    "board": "complete public board object",
+    "bank": {
+      "resources": "resource_count_object",
+      "development_deck_size": "int",
+      "played_development": "public list"
+    },
+    "visible_scores": [
+      "int; excludes every unrevealed victory-point development card"
+    ],
+    "special_cards": "public special-card object",
+    "pending": {
+      "type": "sanitized list of pending frames, bottom-to-top",
+      "privacy": "discard selections and opponent private identities are omitted; required counts, submitted players, offer aggregate bundles, public victims/source, and remaining free-road count are visible"
+    }
+  },
+  "representation_choices": {
+    "fixed_scope": "illustrated beginner board for 3 and 4 players; strict roll-trade-build; no variable setup or experienced phase merge",
+    "oldest_seat": "player 0 is designated oldest and starts",
+    "pending_stack": "subject to the one-development-card-per-turn limit, an eligible active-player card can interrupt pending discard, seven-sourced robber, or trade consent; push its frame, resolve top frame, then resume the exact prior frame unless terminal",
+    "domestic_trade": "finite bilateral builder for one partner; add one resource per action; partner accepts/rejects; no power-set bundle enumeration; transfer only on acceptance",
+    "seven_discards": "private selections commit together after every required player submits; public observations hide selected identities",
+    "shortages": "production for a resource is all-or-none across entitlements; bank actions require full availability; Road Building places maximum feasible up to two",
+    "chance": "seed controls dice, development shuffle and blind theft; scripted fixture queues are evaluator-only",
+    "robber_victim": "adjacent building owner remains selectable with an empty resource hand; empty choice or no adjacent opponent transfers nothing",
+    "longest_road": "maximum edge-simple trail; no edge reuse; vertex revisit allowed; opponent-occupied vertices stop traversal",
+    "victory": "check after every committed atomic action/subaction; terminal immediately cancels pending frames; reveal minimum VP cards needed in hand order",
+    "privacy": "opponent resource/development identities and hidden VP-derived points are private; aggregate resource/development counts, bank, board, played cards and visible scores are public"
+  },
+  "contract_conventions": {
+    "invalid_actions": "validate before mutation and reject atomically",
+    "complete_fixtures": "state_from_data accepts any complete schema-valid profile payload, including unusual pending stacks and reserve allocations"
+  }
+}

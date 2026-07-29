@@ -50,24 +50,32 @@ def validate_claim_coverage(inventory_path: Path, scenarios: list[dict]) -> dict
     inventory = load_claim_inventory(inventory_path)
     claims = {claim["id"]: claim for claim in inventory["claims"]}
     mapped: dict[str, list[str]] = {claim_id: [] for claim_id in claims}
-    for scenario in scenarios:
-        initial_check = _check_expectation_keys(scenario.get("initial", {}), f"scenario {scenario.get('id')} initial")
+    def validate_body(body: dict, label: str) -> bool:
+        initial_check = _check_expectation_keys(body.get("initial", {}), f"{label} initial")
         step_check = False
-        for index, step in enumerate(scenario.get("steps", []), 1):
+        for index, step in enumerate(body.get("steps", []), 1):
             action = step.get("action", {})
             if not isinstance(action, dict) or set(action) - ACTION_KEYS:
-                raise ValueError(f"scenario {scenario.get('id')} step {index} has unsupported action selector")
-            expectation = _check_expectation_keys(step.get("expect", {}), f"scenario {scenario.get('id')} step {index}")
+                raise ValueError(f"{label} step {index} has unsupported action selector")
+            expectation = _check_expectation_keys(step.get("expect", {}), f"{label} step {index}")
             step_check |= bool(action) or expectation
-        search_check = bool(scenario.get("search"))
+        search_check = bool(body.get("search"))
         if search_check:
-            _check_expectation_keys(scenario.get("expect", {}), f"scenario {scenario.get('id')} search", search=True)
-        terminal_check = bool(scenario.get("terminal_rollout"))
+            _check_expectation_keys(body.get("expect", {}), f"{label} search", search=True)
+        terminal_check = bool(body.get("terminal_rollout"))
         if terminal_check:
-            _check_expectation_keys(scenario.get("expect", {}), f"scenario {scenario.get('id')} terminal")
-        checkable = initial_check or step_check or search_check or terminal_check
+            _check_expectation_keys(body.get("expect", {}), f"{label} terminal")
+        return initial_check or step_check or search_check or terminal_check
+    for scenario in scenarios:
+        label = f"scenario {scenario.get('id')}"
+        if "cases" in scenario:
+            checkable = False
+            for index, case in enumerate(scenario["cases"], 1):
+                checkable |= validate_body(case, f"{label} case {case.get('name', index)}")
+        else:
+            checkable = validate_body(scenario, label)
         if not checkable:
-            raise ValueError(f"scenario {scenario.get('id')} has no checkable expectation, action, or search")
+            raise ValueError(f"{label} has no checkable expectation, action, or search")
         for claim_id in scenario.get("fact_ids", []):
             if claim_id not in claims:
                 raise ValueError(f"scenario {scenario.get('id')} references unknown claim {claim_id}")

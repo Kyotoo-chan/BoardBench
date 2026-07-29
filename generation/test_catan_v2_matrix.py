@@ -25,7 +25,7 @@ class CatanV2MatrixTests(unittest.TestCase):
   required={x['id'] for x in claims if x['material'] and x['testable'] and x['classification']!='clear'}
   self.assertEqual(covered,required);self.assertTrue(all(d['status']=='approved' for d in decisions))
  def test_complete_proposed_matrix(self):
-  claims={x['id']:x for x in load('claims_v2.json')['claims']};m=load('scenario_matrix_v2.json');self.assertEqual(m['status'],'approved-for-v2-profile-and-evaluator-freeze');self.assertIn('3 and 4 players',m['scope']);self.assertEqual(len(m['scenarios']),51);self.assertEqual(sum(x['basis']=='clear' for x in m['scenarios']),40);self.assertEqual(sum(x['basis']=='human_decision' for x in m['scenarios']),11)
+  claims={x['id']:x for x in load('claims_v2.json')['claims']};m=load('scenario_matrix_v2.json');self.assertEqual(m['status'],'frozen-for-v2-original-run');self.assertIn('3 and 4 players',m['scope']);self.assertEqual(len(m['scenarios']),51);self.assertEqual(sum(x['basis']=='clear' for x in m['scenarios']),40);self.assertEqual(sum(x['basis']=='human_decision' for x in m['scenarios']),11)
   mapped=set();human_mapped=set()
   for s in m['scenarios']:
    self.assertTrue(s['fact_ids']);self.assertTrue(s['expectation'])

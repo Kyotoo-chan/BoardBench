@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "approved-for-v2-profile-and-evaluator-freeze",
+  "status": "frozen-for-v2-original-run",
   "approved_at": "2026-07-29",
   "game": "catan",
   "scope": "Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup and experienced merged phases excluded",
   "claims_total": 121,
-  "clear_required": 104,
+  "clear_required": 99,
   "coverage_exceptions": [],
   "scenarios": [
     {
@@ -89,12 +89,11 @@
         "CAT-C-INV-HUEGEL",
         "CAT-C-INV-GEBIRGE",
         "CAT-C-INV-WUESTE",
-        "CAT-C-INV-FRAME",
         "CAT-C-INV-HARBORS",
         "CAT-C-INV-NUMBERS"
       ],
       "title": "Exact board component inventory",
-      "expectation": "Assert 19 land hexes exactly: wood 4, wool 4, grain 4, brick 3, ore 3, desert 1; six frame pieces; nine harbors; and 18 number tokens with one each 2/12 and two each 3/4/5/6/8/9/10/11."
+      "expectation": "Assert 19 land hexes exactly: wood 4, wool 4, grain 4, brick 3, ore 3, desert 1; nine harbors; and 18 number tokens with one each 2/12 and two each 3/4/5/6/8/9/10/11."
     },
     {
       "id": "CAT-R04B-resource-inventory",
@@ -126,14 +125,10 @@
         "CAT-C-INV-SETTLEMENTS",
         "CAT-C-INV-CITIES",
         "CAT-C-INV-ROBBER",
-        "CAT-C-INV-DICE",
-        "CAT-C-INV-COST-CARDS",
-        "CAT-C-INV-SPECIAL-CARDS",
-        "CAT-C-INV-HOLDERS",
-        "CAT-C-INV-PIECE-BOXES"
+        "CAT-C-INV-SPECIAL-CARDS"
       ],
       "title": "Exact player-piece and other inventory",
-      "expectation": "Assert each of four colors totals 15 roads, 5 settlements and 4 cities across board/supply; additionally one robber, two dice, four cost cards, two special cards, two card holders and four piece boxes."
+      "expectation": "Assert each participating color totals 15 roads, 5 settlements and 4 cities across board/supply; additionally one robber and both represented special cards. Physical accessory counts remain source-visible but unscored."
     },
     {
       "id": "CAT-R05A-oldest-seat-starts",
@@ -531,7 +526,7 @@
         "CAT-M-DEV-BOUNDARY"
       ],
       "title": "Stable development-card boundaries",
-      "expectation": "An eligible active-player development card may interrupt pending discard, robber, bilateral-consent and card-effect decisions; it resolves on top, then the exact interrupted state resumes unless terminal."
+      "expectation": "Subject to the one-card-per-turn limit, an eligible active-player development card may interrupt pending discard, seven-sourced robber and bilateral-consent decisions; it resolves on top, then the exact interrupted state resumes unless terminal."
     },
     {
       "id": "CAT-R43-victory-during-card-effect",

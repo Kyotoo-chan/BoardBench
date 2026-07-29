@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import json
 import sys
 from dataclasses import asdict
@@ -46,11 +47,46 @@ def load_suite(path: Path, repo_root: Path) -> dict[str, Any]:
             raise ValueError(f"version-4 scenario {scenario.get('id')!r} needs fact_ids")
         if scenario.get("basis") not in {"clear", "human_decision"}:
             raise ValueError(f"version-4 scenario {scenario.get('id')!r} needs a valid basis")
+        if "cases" in scenario:
+            cases = scenario["cases"]
+            if not isinstance(cases, list) or not cases or not all(isinstance(case, dict) for case in cases):
+                raise ValueError(f"scenario {scenario.get('id')!r} cases must be a nonempty object list")
+            names = [str(case.get("name", index)) for index, case in enumerate(cases, start=1)]
+            if len(names) != len(set(names)):
+                raise ValueError(f"scenario {scenario.get('id')!r} has duplicate case names")
     inventory = suite.get("claim_inventory")
     if not inventory:
         raise ValueError("version-4 suite needs claim_inventory")
     suite["claim_coverage"] = validate_claim_coverage((repo_root / inventory).resolve(), scenarios)
     return suite
+
+
+def run_scenario_v4(game: Any, scenario: dict[str, Any], module: Any, adapter: Any | None) -> None:
+    if "cases" not in scenario:
+        run_scenario(game, scenario, module, adapter)
+        return
+    base = {key: deepcopy(value) for key, value in scenario.items() if key != "cases"}
+    errors = []
+    for index, raw_case in enumerate(scenario["cases"], start=1):
+        case = deepcopy(raw_case)
+        name = str(case.pop("name", index))
+        merged = deepcopy(base)
+        merged.update(case)
+        try:
+            run_scenario(game, merged, module, adapter)
+        except Exception as error:
+            errors.append((name, error))
+    if not errors:
+        return
+    detail = "; ".join(f"case {name}: {error}" for name, error in errors)
+    unexpected = [error for _, error in errors if not isinstance(error, (AssertionError, ScenarioUnreached, ScenarioUntestable))]
+    if unexpected:
+        raise RuntimeError(detail) from unexpected[0]
+    if any(isinstance(error, AssertionError) for _, error in errors):
+        raise AssertionError(detail)
+    if any(isinstance(error, ScenarioUnreached) for _, error in errors):
+        raise ScenarioUnreached(detail)
+    raise ScenarioUntestable(detail)
 
 
 def run_suite(code_path: Path, suite_path: Path) -> dict[str, Any]:
@@ -67,7 +103,7 @@ def run_suite(code_path: Path, suite_path: Path) -> dict[str, Any]:
             "fact_ids": [str(item) for item in scenario.get("fact_ids", [])],
         }
         try:
-            run_scenario(game, scenario, module, adapter)
+            run_scenario_v4(game, scenario, module, adapter)
         except ScenarioUnreached as exc:
             results.append(ScenarioResult(scenario_id, "UNREACHED", str(exc), **metadata))
         except ScenarioUntestable as exc:

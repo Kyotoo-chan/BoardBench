@@ -1,8 +1,8 @@
 # CATAN V2 approval matrix
 
-- status: **approved-for-v2-profile-and-evaluator-freeze**
+- status: **frozen-for-v2-original-run**
 - scope: Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup and experienced merged phases excluded
-- claims: 121 total; 104 required clear
+- claims: 121 total; 99 required clear
 - scenarios: 51 (40 clear, 11 human decision)
 
 | ID | Basis | Facts | Expectation |
@@ -14,10 +14,10 @@
 | `CAT-R02B-4p-starting-resources` | clear | `CAT-C-SETUP-START-RES` | Red A has wood 2, brick 0, wool 0, grain 1, ore 0; blue B has wood 1, brick 1, wool 0, grain 0, ore 1; orange C has grain 2 and ore 1 only; white D has wood 1, wool 1 and ore 1 only. |
 | `CAT-R02C-4p-bank-deck-start` | clear | `CAT-C-SETUP-BANK`, `CAT-C-SETUP-DEV` | Open bank counts are wood 15, brick 18, wool 18, grain 16, ore 16; the shuffled face-down development deck has 25 cards; the designated start seat has a legal initial roll. |
 | `CAT-R03-player-range` | human_decision | `CAT-M-PLAYER-RANGE` | Approved constructors accept 3 and 4, reject 2 and 5; separate probes check setup, initial action and bounded playability. |
-| `CAT-R04A-board-inventory` | clear | `CAT-C-INV-LAND-TOTAL`, `CAT-C-INV-WALD`, `CAT-C-INV-WEIDE`, `CAT-C-INV-ACKER`, `CAT-C-INV-HUEGEL`, `CAT-C-INV-GEBIRGE`, `CAT-C-INV-WUESTE`, `CAT-C-INV-FRAME`, `CAT-C-INV-HARBORS`, `CAT-C-INV-NUMBERS` | Assert 19 land hexes exactly: wood 4, wool 4, grain 4, brick 3, ore 3, desert 1; six frame pieces; nine harbors; and 18 number tokens with one each 2/12 and two each 3/4/5/6/8/9/10/11. |
+| `CAT-R04A-board-inventory` | clear | `CAT-C-INV-LAND-TOTAL`, `CAT-C-INV-WALD`, `CAT-C-INV-WEIDE`, `CAT-C-INV-ACKER`, `CAT-C-INV-HUEGEL`, `CAT-C-INV-GEBIRGE`, `CAT-C-INV-WUESTE`, `CAT-C-INV-HARBORS`, `CAT-C-INV-NUMBERS` | Assert 19 land hexes exactly: wood 4, wool 4, grain 4, brick 3, ore 3, desert 1; nine harbors; and 18 number tokens with one each 2/12 and two each 3/4/5/6/8/9/10/11. |
 | `CAT-R04B-resource-inventory` | clear | `CAT-C-INV-RESOURCES` | Across bank and all player hands, assert exactly 19 each of wood, brick, wool, grain and ore (95 total) in both 3p and 4p setup. |
 | `CAT-R04C-development-inventory` | clear | `CAT-C-INV-DEV-TOTAL`, `CAT-C-INV-KNIGHTS`, `CAT-C-INV-PROGRESS-TOTAL`, `CAT-C-INV-PROGRESS-DISTRIBUTION`, `CAT-C-INV-VP` | Across deck and hands, assert 25 total: 14 Knights, exactly two each Road Building/Year of Plenty/Monopoly, and five victory-point cards. |
-| `CAT-R04D-player-and-other-inventory` | clear | `CAT-C-INV-ROADS`, `CAT-C-INV-SETTLEMENTS`, `CAT-C-INV-CITIES`, `CAT-C-INV-ROBBER`, `CAT-C-INV-DICE`, `CAT-C-INV-COST-CARDS`, `CAT-C-INV-SPECIAL-CARDS`, `CAT-C-INV-HOLDERS`, `CAT-C-INV-PIECE-BOXES` | Assert each of four colors totals 15 roads, 5 settlements and 4 cities across board/supply; additionally one robber, two dice, four cost cards, two special cards, two card holders and four piece boxes. |
+| `CAT-R04D-player-and-other-inventory` | clear | `CAT-C-INV-ROADS`, `CAT-C-INV-SETTLEMENTS`, `CAT-C-INV-CITIES`, `CAT-C-INV-ROBBER`, `CAT-C-INV-SPECIAL-CARDS` | Assert each participating color totals 15 roads, 5 settlements and 4 cities across board/supply; additionally one robber and both represented special cards. Physical accessory counts remain source-visible but unscored. |
 | `CAT-R05A-oldest-seat-starts` | clear | `CAT-C-START-OLDEST` | At initial state, active_player equals configuration.oldest_player and that seat has the legal initial roll. |
 | `CAT-R05-clockwise-turn` | clear | `CAT-C-CLOCKWISE` | Completing a turn advances to the left-neighbor seat. |
 | `CAT-R06-strict-phases` | clear | `CAT-C-TURN-PHASES`, `CAT-C-TURN-STRICT` | Roll precedes trade, trade precedes build, and trade cannot resume after entering build. |
@@ -56,7 +56,7 @@
 | `CAT-R39-observation-convention` | human_decision | `CAT-M-HAND-COUNTS`, `CAT-M-INFO-DEV-COUNT` | Observations expose resource hand sizes, face-down development counts, bank, board and visible score without private identities or hidden victory points. |
 | `CAT-R40-shortage-package` | human_decision | `CAT-M-BANK-PRODUCTION`, `CAT-M-BANK-ACTIONS`, `CAT-M-ROAD-BUILDING-SHORT`, `CAT-M-DEV-EMPTY` | Production is all-or-none per resource across entitlements; bank actions require full stock; development purchase needs deck card; Road Building places maximum feasible up to two. |
 | `CAT-R41-designated-oldest-start` | human_decision | `CAT-M-OLDEST-INPUT` | The profile designates player 0 as the oldest seat; player 0 is active and has the initial legal roll in both 3p and 4p games. |
-| `CAT-R42-development-boundaries` | human_decision | `CAT-M-DEV-BOUNDARY` | An eligible active-player development card may interrupt pending discard, robber, bilateral-consent and card-effect decisions; it resolves on top, then the exact interrupted state resumes unless terminal. |
+| `CAT-R42-development-boundaries` | human_decision | `CAT-M-DEV-BOUNDARY` | Subject to the one-card-per-turn limit, an eligible active-player development card may interrupt pending discard, seven-sourced robber and bilateral-consent decisions; it resolves on top, then the exact interrupted state resumes unless terminal. |
 | `CAT-R43-victory-during-card-effect` | human_decision | `CAT-M-TERMINAL-SUBACTION` | Victory after the first committed Road Building road or other atomic subaction terminates immediately and cancels the remaining effect. |
 
 ## Numbering

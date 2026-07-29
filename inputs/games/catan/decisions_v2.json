@@ -65,7 +65,7 @@
       "claim_ids": [
         "CAT-M-DEV-BOUNDARY"
       ],
-      "decision": "An eligible active-player development card may interrupt any point of that turn, including pending discard, robber, trade-consent or another card-effect decision. Resolve the new card on top of a pending-state stack, then resume the interrupted decision unless victory terminates the game."
+      "decision": "Subject to the publisher-clear one-development-card-per-turn limit, an eligible active-player development card may interrupt pending discard, seven-sourced robber, or trade-consent decisions. Resolve the new card on top of a pending-state stack, then resume the interrupted decision unless victory terminates the game. A pending Knight/progress effect already consumed the turn's card allowance and cannot be interrupted by another development card."
     },
     {
       "id": "CAT-D-TERMINAL-SUBACTION",

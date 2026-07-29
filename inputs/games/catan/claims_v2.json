@@ -1263,14 +1263,14 @@
     {
       "id": "CAT-C-INV-FRAME",
       "classification": "clear",
-      "material": true,
-      "testable": true,
+      "material": false,
+      "testable": false,
       "source": {
         "source_id": "CATAN22-ALMANAC",
         "page": 23,
         "quote": "6 Rahmenteile mit 9 Häfen"
       },
-      "expectation": "There are exactly six frame pieces."
+      "expectation": "There are exactly six frame pieces. This physical accessory count is retained but not represented in executable state."
     },
     {
       "id": "CAT-C-INV-HARBORS",
@@ -1299,26 +1299,26 @@
     {
       "id": "CAT-C-INV-DICE",
       "classification": "clear",
-      "material": true,
-      "testable": true,
+      "material": false,
+      "testable": false,
       "source": {
         "source_id": "CATAN22-ALMANAC",
         "page": 23,
         "quote": "2 Würfel"
       },
-      "expectation": "The inventory contains exactly 2 dice."
+      "expectation": "The inventory contains exactly 2 dice. This physical accessory count is retained but not represented in executable state."
     },
     {
       "id": "CAT-C-INV-COST-CARDS",
       "classification": "clear",
-      "material": true,
-      "testable": true,
+      "material": false,
+      "testable": false,
       "source": {
         "source_id": "CATAN22-ALMANAC",
         "page": 23,
         "quote": "4 Karten „Baukosten“"
       },
-      "expectation": "The inventory contains exactly 4 building-cost cards."
+      "expectation": "The inventory contains exactly 4 building-cost cards. This physical accessory count is retained but not represented in executable state."
     },
     {
       "id": "CAT-C-INV-SPECIAL-CARDS",
@@ -1335,26 +1335,26 @@
     {
       "id": "CAT-C-INV-HOLDERS",
       "classification": "clear",
-      "material": true,
-      "testable": true,
+      "material": false,
+      "testable": false,
       "source": {
         "source_id": "CATAN22-ALMANAC",
         "page": 23,
         "quote": "2 Kartenhalter"
       },
-      "expectation": "The inventory contains exactly 2 card holders."
+      "expectation": "The inventory contains exactly 2 card holders. This physical accessory count is retained but not represented in executable state."
     },
     {
       "id": "CAT-C-INV-PIECE-BOXES",
       "classification": "clear",
-      "material": true,
-      "testable": true,
+      "material": false,
+      "testable": false,
       "source": {
         "source_id": "CATAN22-ALMANAC",
         "page": 23,
         "quote": "4 Spielfigurenboxen"
       },
-      "expectation": "The inventory contains exactly 4 piece boxes."
+      "expectation": "The inventory contains exactly 4 piece boxes. This physical accessory count is retained but not represented in executable state."
     },
     {
       "id": "CAT-C-INV-PROGRESS-DISTRIBUTION",
