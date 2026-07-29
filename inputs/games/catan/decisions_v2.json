@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "game": "catan",
+  "approved_at": "2026-07-29",
+  "decisions": [
+    {
+      "id": "CAT-D-SCOPE",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-PLAYER-RANGE",
+        "CAT-M-OLDEST-INPUT"
+      ],
+      "decision": "Use exactly 3 and 4 players. Use the illustrated beginner setup; remove red at three players. The profile designates player 0 as the oldest seat and start player. Variable setup and experienced merged phases are out of scope."
+    },
+    {
+      "id": "CAT-D-SHORTAGES",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-BANK-PRODUCTION",
+        "CAT-M-BANK-ACTIONS",
+        "CAT-M-ROAD-BUILDING-SHORT",
+        "CAT-M-DEV-EMPTY"
+      ],
+      "decision": "Production of a resource occurs only if the bank can satisfy every entitlement completely; bank trades, Year of Plenty and development purchases are legal only when their full effect is available; Road Building places the maximum feasible and available number up to two."
+    },
+    {
+      "id": "CAT-D-LONGEST",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-A-LR-CYCLE"
+      ],
+      "decision": "Longest Road is the maximum edge-simple trail: no road edge may be counted twice, a vertex may be revisited when the trail permits it, and opponent-occupied vertices stop traversal."
+    },
+    {
+      "id": "CAT-D-RANDOM-PRIVACY",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-RNG",
+        "CAT-M-NO-VICTIM",
+        "CAT-M-DISCARD-PROTOCOL",
+        "CAT-M-HAND-COUNTS",
+        "CAT-M-INFO-DEV-COUNT"
+      ],
+      "decision": "The supplied seed controls dice, development shuffle and blind theft. Robber victim eligibility is based on adjacent opponent buildings, not hand contents; choosing an empty resource hand transfers nothing, and no adjacent opponent means no theft. Seven discards are privately selected and applied together. Public observations expose resource hand sizes, face-down development counts, bank, board and visible score only; hidden victory points remain excluded."
+    },
+    {
+      "id": "CAT-D-TRADE",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-TRADE-PROTOCOL"
+      ],
+      "decision": "A finite bilateral offer subphase lets the active player build positive give/take bundles for one partner one resource at a time; the partner accepts or rejects; acceptance transfers atomically and rejection/cancellation transfers nothing."
+    },
+    {
+      "id": "CAT-D-VP-REVEAL",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-VP-REVEAL"
+      ],
+      "decision": "Victory detection reveals only the minimum number of hidden victory-point cards needed to establish ten, in development-hand order."
+    },
+    {
+      "id": "CAT-D-DEV-BOUNDARY",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-DEV-BOUNDARY"
+      ],
+      "decision": "An eligible active-player development card may interrupt any point of that turn, including pending discard, robber, trade-consent or another card-effect decision. Resolve the new card on top of a pending-state stack, then resume the interrupted decision unless victory terminates the game."
+    },
+    {
+      "id": "CAT-D-TERMINAL-SUBACTION",
+      "status": "approved",
+      "claim_ids": [
+        "CAT-M-TERMINAL-SUBACTION"
+      ],
+      "decision": "Check active-player victory after every completed atomic action or committed subaction; immediate victory cancels any remaining Road Building placement or other pending effect."
+    }
+  ]
+}

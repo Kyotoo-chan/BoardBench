@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "status": "approved-for-v2-profile-and-evaluator-freeze",
+  "approved_at": "2026-07-29",
+  "game": "catan",
+  "scope": "Illustrated beginner setup for 3 and 4 players; strict roll-trade-build; variable setup and experienced merged phases excluded",
+  "claims_total": 121,
+  "clear_required": 104,
+  "coverage_exceptions": [],
+  "scenarios": [
+    {
+      "id": "CAT-R01A-3p-board-pieces",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BOARD",
+        "CAT-C-SETUP-PIECES",
+        "CAT-C-SETUP-3P-RED",
+        "CAT-C-SETUP-ROBBER"
+      ],
+      "title": "Three-player exact board and pieces",
+      "expectation": "The exact page-1 19-hex terrain/number/harbor layout is used; robber is on the central desert; all red roads/settlements are absent; blue, orange and white each have the two pictured settlements and roads and remaining stock 13 roads, 3 settlements, 4 cities."
+    },
+    {
+      "id": "CAT-R01B-3p-starting-resources",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-START-RES"
+      ],
+      "title": "Three-player lettered starting resources",
+      "expectation": "With red A removed: blue B has wood 1, brick 1, wool 0, grain 0, ore 1; orange C has wood 0, brick 0, wool 0, grain 2, ore 1; white D has wood 1, brick 0, wool 1, grain 0, ore 1."
+    },
+    {
+      "id": "CAT-R01C-3p-bank-deck-start",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BANK",
+        "CAT-C-SETUP-DEV"
+      ],
+      "title": "Three-player bank, deck and initial action",
+      "expectation": "Open bank counts are wood 17, brick 18, wool 18, grain 17, ore 16; the shuffled face-down development deck has 25 cards; the designated start seat has a legal initial roll."
+    },
+    {
+      "id": "CAT-R02A-4p-board-pieces",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BOARD",
+        "CAT-C-SETUP-PIECES",
+        "CAT-C-SETUP-ROBBER"
+      ],
+      "title": "Four-player exact board and pieces",
+      "expectation": "The exact page-1 19-hex terrain/number/harbor layout is used; robber is on the central desert; red, blue, orange and white each have the two pictured settlements and roads and remaining stock 13 roads, 3 settlements, 4 cities."
+    },
+    {
+      "id": "CAT-R02B-4p-starting-resources",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-START-RES"
+      ],
+      "title": "Four-player lettered starting resources",
+      "expectation": "Red A has wood 2, brick 0, wool 0, grain 1, ore 0; blue B has wood 1, brick 1, wool 0, grain 0, ore 1; orange C has grain 2 and ore 1 only; white D has wood 1, wool 1 and ore 1 only."
+    },
+    {
+      "id": "CAT-R02C-4p-bank-deck-start",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BANK",
+        "CAT-C-SETUP-DEV"
+      ],
+      "title": "Four-player bank, deck and initial action",
+      "expectation": "Open bank counts are wood 15, brick 18, wool 18, grain 16, ore 16; the shuffled face-down development deck has 25 cards; the designated start seat has a legal initial roll."
+    },
+    {
+      "id": "CAT-R03-player-range",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-PLAYER-RANGE"
+      ],
+      "title": "Reject unsupported counts",
+      "expectation": "Approved constructors accept 3 and 4, reject 2 and 5; separate probes check setup, initial action and bounded playability."
+    },
+    {
+      "id": "CAT-R04A-board-inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-LAND-TOTAL",
+        "CAT-C-INV-WALD",
+        "CAT-C-INV-WEIDE",
+        "CAT-C-INV-ACKER",
+        "CAT-C-INV-HUEGEL",
+        "CAT-C-INV-GEBIRGE",
+        "CAT-C-INV-WUESTE",
+        "CAT-C-INV-FRAME",
+        "CAT-C-INV-HARBORS",
+        "CAT-C-INV-NUMBERS"
+      ],
+      "title": "Exact board component inventory",
+      "expectation": "Assert 19 land hexes exactly: wood 4, wool 4, grain 4, brick 3, ore 3, desert 1; six frame pieces; nine harbors; and 18 number tokens with one each 2/12 and two each 3/4/5/6/8/9/10/11."
+    },
+    {
+      "id": "CAT-R04B-resource-inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-RESOURCES"
+      ],
+      "title": "Exact resource-card inventory",
+      "expectation": "Across bank and all player hands, assert exactly 19 each of wood, brick, wool, grain and ore (95 total) in both 3p and 4p setup."
+    },
+    {
+      "id": "CAT-R04C-development-inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-DEV-TOTAL",
+        "CAT-C-INV-KNIGHTS",
+        "CAT-C-INV-PROGRESS-TOTAL",
+        "CAT-C-INV-PROGRESS-DISTRIBUTION",
+        "CAT-C-INV-VP"
+      ],
+      "title": "Exact development-card inventory",
+      "expectation": "Across deck and hands, assert 25 total: 14 Knights, exactly two each Road Building/Year of Plenty/Monopoly, and five victory-point cards."
+    },
+    {
+      "id": "CAT-R04D-player-and-other-inventory",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-ROADS",
+        "CAT-C-INV-SETTLEMENTS",
+        "CAT-C-INV-CITIES",
+        "CAT-C-INV-ROBBER",
+        "CAT-C-INV-DICE",
+        "CAT-C-INV-COST-CARDS",
+        "CAT-C-INV-SPECIAL-CARDS",
+        "CAT-C-INV-HOLDERS",
+        "CAT-C-INV-PIECE-BOXES"
+      ],
+      "title": "Exact player-piece and other inventory",
+      "expectation": "Assert each of four colors totals 15 roads, 5 settlements and 4 cities across board/supply; additionally one robber, two dice, four cost cards, two special cards, two card holders and four piece boxes."
+    },
+    {
+      "id": "CAT-R05A-oldest-seat-starts",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-START-OLDEST"
+      ],
+      "title": "Configured oldest seat starts",
+      "expectation": "At initial state, active_player equals configuration.oldest_player and that seat has the legal initial roll."
+    },
+    {
+      "id": "CAT-R05-clockwise-turn",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-CLOCKWISE"
+      ],
+      "title": "Clockwise next player",
+      "expectation": "Completing a turn advances to the left-neighbor seat."
+    },
+    {
+      "id": "CAT-R06-strict-phases",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-TURN-PHASES",
+        "CAT-C-TURN-STRICT"
+      ],
+      "title": "Strict roll-trade-build",
+      "expectation": "Roll precedes trade, trade precedes build, and trade cannot resume after entering build."
+    },
+    {
+      "id": "CAT-R07-production",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROD-ALL",
+        "CAT-C-PROD-SETTLEMENT",
+        "CAT-C-PROD-CITY",
+        "CAT-C-PROD-ADDITIVE"
+      ],
+      "title": "Additive production",
+      "expectation": "A scripted non-seven pays every adjacent settlement one and city two, including multiple entitlements."
+    },
+    {
+      "id": "CAT-R08-desert-robber-block",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROD-DESERT",
+        "CAT-C-PROD-ROBBER"
+      ],
+      "title": "No desert or robber production",
+      "expectation": "Desert never pays and an occupied producing hex pays nobody."
+    },
+    {
+      "id": "CAT-R09-development-timing",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-DEV-ANYTIME",
+        "CAT-C-DEV-ONE",
+        "CAT-C-DEV-NOT-BOUGHT"
+      ],
+      "title": "Development timing",
+      "expectation": "An older eligible card may play before roll; a second play and a same-turn purchase are illegal."
+    },
+    {
+      "id": "CAT-R10-domestic-trade-rules",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-TRADE-ACTIVE",
+        "CAT-C-TRADE-FREE",
+        "CAT-C-TRADE-NO-GIFT",
+        "CAT-C-TRADE-RESOURCES",
+        "CAT-C-TRADE-REPEAT"
+      ],
+      "title": "Domestic trade legality",
+      "expectation": "Arbitrary positive resource bundles involving the active player are possible repeatedly; gifts, development cards and non-active-only transfers are rejected."
+    },
+    {
+      "id": "CAT-R11-bilateral-consent",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TRADE-PROTOCOL"
+      ],
+      "title": "Finite bilateral consent",
+      "expectation": "A finite one-partner offer is built by add-one-resource actions, never by enumerating bundle subsets; construction changes no holdings; partner rejection/cancel changes nothing; acceptance transfers full positive bundles atomically."
+    },
+    {
+      "id": "CAT-R12-maritime-rates",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-MARITIME-4",
+        "CAT-C-MARITIME-3",
+        "CAT-C-MARITIME-2",
+        "CAT-C-HARBOR-ACCESS"
+      ],
+      "title": "Maritime 4:1, 3:1, 2:1",
+      "expectation": "Each rate and port ownership works; wrong specialized resource is rejected."
+    },
+    {
+      "id": "CAT-R13-new-harbor-delay",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-HARBOR-DELAY"
+      ],
+      "title": "New harbor delayed",
+      "expectation": "A harbor settlement built after trade cannot be used in that turn."
+    },
+    {
+      "id": "CAT-R14-building-costs-stock",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-COST-ROAD",
+        "CAT-C-COST-SETTLEMENT",
+        "CAT-C-COST-CITY",
+        "CAT-C-COST-DEVELOPMENT",
+        "CAT-C-BUILD-STOCK",
+        "CAT-C-BUILD-REPEAT"
+      ],
+      "title": "Costs and piece limits",
+      "expectation": "Each purchase removes exact resources and stock; repeated builds/buys are allowed while affordable; no build beyond stock."
+    },
+    {
+      "id": "CAT-R15-road-legality",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROAD-EMPTY",
+        "CAT-C-ROAD-CONNECT",
+        "CAT-C-ROAD-BLOCK"
+      ],
+      "title": "Road occupancy and connectivity",
+      "expectation": "Reject occupied/disconnected edges and continuation through an opponent building; allow valid own connection."
+    },
+    {
+      "id": "CAT-R16-settlement-legality",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETTLE-ROAD",
+        "CAT-C-SETTLE-DISTANCE"
+      ],
+      "title": "Settlement road and distance rules",
+      "expectation": "Require own incident road and empty target/adjacent vertices."
+    },
+    {
+      "id": "CAT-R17-city-upgrade",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-CITY-UPGRADE",
+        "CAT-C-SETTLE-RETURN"
+      ],
+      "title": "City replacement",
+      "expectation": "Only own settlement upgrades; same vertex becomes city and settlement returns to stock."
+    },
+    {
+      "id": "CAT-R18-longest-threshold-branch",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-THRESHOLD",
+        "CAT-C-LR-BRANCH"
+      ],
+      "title": "Longest Road threshold and branch",
+      "expectation": "Four does not qualify, five does, and branch edges are not summed."
+    },
+    {
+      "id": "CAT-R19-longest-interruption",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-OPP-BLOCK",
+        "CAT-C-LR-OWN-NOT-BLOCK"
+      ],
+      "title": "Road interruption",
+      "expectation": "Opponent building splits a route; own building does not."
+    },
+    {
+      "id": "CAT-R20-longest-transfer-ties",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-TRANSFER",
+        "CAT-C-LR-HOLDER-TIE",
+        "CAT-C-LR-VACANT-TIE"
+      ],
+      "title": "Longest Road transfer and ties",
+      "expectation": "Strictly longer route transfers; after interruption, incumbent retains a tied lead and a leading tie excluding incumbent leaves the card vacant."
+    },
+    {
+      "id": "CAT-R21-longest-cycles",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-A-LR-CYCLE"
+      ],
+      "title": "Edge-simple loop semantics",
+      "expectation": "Loop and figure-eight fixtures compute maximum edge-simple trail without edge reuse and with opponent blockers."
+    },
+    {
+      "id": "CAT-R22-seven-discard",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SEVEN-NO-PROD",
+        "CAT-C-DISCARD-THRESHOLD",
+        "CAT-C-DISCARD-AMOUNT",
+        "CAT-C-DISCARD-RESOURCE-ONLY",
+        "CAT-C-SEVEN-SEQUENCE"
+      ],
+      "title": "Seven discard thresholds",
+      "expectation": "Seven pays nothing; sizes 7/8/9/11 discard 0/4/4/5 resources; development cards do not count; trade remains locked until discard, move and robbery finish."
+    },
+    {
+      "id": "CAT-R23-robber-move-steal",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROBBER-MOVE",
+        "CAT-C-ROBBER-CHOOSE",
+        "CAT-C-ROBBER-STEAL"
+      ],
+      "title": "Robber destination and chosen victim",
+      "expectation": "Must move to a different land hex and choose among adjacent opponents; when the selected victim has resources, exactly one blind resource card transfers and development cards never do."
+    },
+    {
+      "id": "CAT-R24-knight-no-discard",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-KNIGHT-NO-DISCARD",
+        "CAT-C-KNIGHT-MOVE",
+        "CAT-C-KNIGHT-STEAL"
+      ],
+      "title": "Knight differs from seven",
+      "expectation": "Knight immediately moves robber and permits one adjacent robbery without seven-discard checks."
+    },
+    {
+      "id": "CAT-R25-random-theft-no-victim",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-RNG",
+        "CAT-M-NO-VICTIM"
+      ],
+      "title": "Seeded blind theft and no victim",
+      "expectation": "Same seed reproduces rolls/deck/theft selection; transfers preserve card counts; an adjacent empty chosen hand or no adjacent opponent transfers nothing."
+    },
+    {
+      "id": "CAT-R26-private-simultaneous-discards",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DISCARD-PROTOCOL"
+      ],
+      "title": "Private committed discards",
+      "expectation": "Choices are private until complete and apply together; public pending data reveals quantities/completion but not identities."
+    },
+    {
+      "id": "CAT-R27-development-purchase",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-DEV-BUY-TOP"
+      ],
+      "title": "Private top development draw",
+      "expectation": "Purchase takes top deck card privately and decrements deck."
+    },
+    {
+      "id": "CAT-R28-road-building",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROAD-BUILDING"
+      ],
+      "title": "Two normally legal free roads",
+      "expectation": "Road Building charges no resources and two sequential placements obey normal road rules when two are feasible."
+    },
+    {
+      "id": "CAT-R29-year-of-plenty",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-YOP"
+      ],
+      "title": "Year of Plenty",
+      "expectation": "Takes any two available resources including a matching pair."
+    },
+    {
+      "id": "CAT-R30-monopoly",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-MONOPOLY"
+      ],
+      "title": "Monopoly",
+      "expectation": "Transfers all opponent cards of one resource and none of other resources."
+    },
+    {
+      "id": "CAT-R31-played-card-zones",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROGRESS-REMOVED",
+        "CAT-C-KNIGHT-FACEUP"
+      ],
+      "title": "Played card destinations",
+      "expectation": "Progress leaves play while Knight remains face-up and public."
+    },
+    {
+      "id": "CAT-R32-largest-army",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ARMY-THRESHOLD",
+        "CAT-C-ARMY-TRANSFER"
+      ],
+      "title": "Largest Army threshold and transfer",
+      "expectation": "First three gets award; tie retains; strictly larger count transfers."
+    },
+    {
+      "id": "CAT-R33-score-components",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SCORE-SETTLEMENT",
+        "CAT-C-SCORE-CITY",
+        "CAT-C-SCORE-AWARDS",
+        "CAT-C-SCORE-VP"
+      ],
+      "title": "Exact scoring",
+      "expectation": "Public and total scoring values match every source-defined point object."
+    },
+    {
+      "id": "CAT-R34-active-immediate-win",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-WIN-ACTIVE",
+        "CAT-C-WIN-IMMEDIATE"
+      ],
+      "title": "Immediate active win",
+      "expectation": "Active player reaching ten terminates immediately with no legal actions."
+    },
+    {
+      "id": "CAT-R35-offturn-no-win",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-WIN-OFFTURN"
+      ],
+      "title": "No off-turn win",
+      "expectation": "Non-active player at ten remains nonterminal, then wins immediately upon becoming active before rolling if still at ten."
+    },
+    {
+      "id": "CAT-R36-vp-win-exception",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-VP-WIN-EXCEPTION"
+      ],
+      "title": "New victory card immediate win",
+      "expectation": "A newly bought VP card may immediately establish active-player victory despite same-turn restriction."
+    },
+    {
+      "id": "CAT-R37-minimal-vp-reveal",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-VP-REVEAL"
+      ],
+      "title": "Minimal victory-card reveal",
+      "expectation": "Only the minimum cards needed for ten reveal, in hand order."
+    },
+    {
+      "id": "CAT-R38-source-privacy",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INFO-RESOURCE-PRIVATE",
+        "CAT-C-INFO-DEV-PRIVATE"
+      ],
+      "title": "Source-visible private information",
+      "expectation": "Own identities visible; opponent resource/development identities and hidden victory points remain hidden."
+    },
+    {
+      "id": "CAT-R39-observation-convention",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-HAND-COUNTS",
+        "CAT-M-INFO-DEV-COUNT"
+      ],
+      "title": "Public aggregate observation",
+      "expectation": "Observations expose resource hand sizes, face-down development counts, bank, board and visible score without private identities or hidden victory points."
+    },
+    {
+      "id": "CAT-R40-shortage-package",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-BANK-PRODUCTION",
+        "CAT-M-BANK-ACTIONS",
+        "CAT-M-ROAD-BUILDING-SHORT",
+        "CAT-M-DEV-EMPTY"
+      ],
+      "title": "Full-feasibility shortage decisions",
+      "expectation": "Production is all-or-none per resource across entitlements; bank actions require full stock; development purchase needs deck card; Road Building places maximum feasible up to two."
+    },
+    {
+      "id": "CAT-R41-designated-oldest-start",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-OLDEST-INPUT"
+      ],
+      "title": "Designated oldest start seat",
+      "expectation": "The profile designates player 0 as the oldest seat; player 0 is active and has the initial legal roll in both 3p and 4p games."
+    },
+    {
+      "id": "CAT-R42-development-boundaries",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DEV-BOUNDARY"
+      ],
+      "title": "Stable development-card boundaries",
+      "expectation": "An eligible active-player development card may interrupt pending discard, robber, bilateral-consent and card-effect decisions; it resolves on top, then the exact interrupted state resumes unless terminal."
+    },
+    {
+      "id": "CAT-R43-victory-during-card-effect",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TERMINAL-SUBACTION"
+      ],
+      "title": "Immediate victory cancels pending effect",
+      "expectation": "Victory after the first committed Road Building road or other atomic subaction terminates immediately and cancels the remaining effect."
+    }
+  ]
+}

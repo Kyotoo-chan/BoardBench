@@ -1,0 +1,1468 @@
+{
+  "version": 1,
+  "game": "catan",
+  "sources": [
+    {
+      "source_id": "CATAN22-RULES",
+      "sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+    },
+    {
+      "source_id": "CATAN22-ALMANAC",
+      "sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc"
+    }
+  ],
+  "claims": [
+    {
+      "id": "CAT-C-INV-LAND-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "19 Landfelder"
+      },
+      "expectation": "The board inventory has exactly 19 land hexes."
+    },
+    {
+      "id": "CAT-C-INV-WALD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Wald (4)"
+      },
+      "expectation": "Land inventory contains exactly 4 wood hexes."
+    },
+    {
+      "id": "CAT-C-INV-WEIDE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Weideland (4)"
+      },
+      "expectation": "Land inventory contains exactly 4 wool hexes."
+    },
+    {
+      "id": "CAT-C-INV-ACKER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Ackerland (4)"
+      },
+      "expectation": "Land inventory contains exactly 4 grain hexes."
+    },
+    {
+      "id": "CAT-C-INV-HUEGEL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Hügelland (3)"
+      },
+      "expectation": "Land inventory contains exactly 3 brick hexes."
+    },
+    {
+      "id": "CAT-C-INV-GEBIRGE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Gebirge (3)"
+      },
+      "expectation": "Land inventory contains exactly 3 ore hexes."
+    },
+    {
+      "id": "CAT-C-INV-WUESTE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Wüste (1)"
+      },
+      "expectation": "Land inventory contains exactly 1 desert hexes."
+    },
+    {
+      "id": "CAT-C-INV-NUMBERS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "18 Zahlenchips: je 1x 2 und 12; je 2x 3, 4, 5, 6, 8, 9, 10 und 11"
+      },
+      "expectation": "The 18 number tokens have the stated exact distribution and omit seven."
+    },
+    {
+      "id": "CAT-C-INV-RESOURCES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "95 Rohstoffkarten (je 19)"
+      },
+      "expectation": "There are exactly 19 cards of each of five resources."
+    },
+    {
+      "id": "CAT-C-INV-DEV-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "25 Entwicklungskarten"
+      },
+      "expectation": "There are exactly 25 development cards."
+    },
+    {
+      "id": "CAT-C-INV-KNIGHTS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Ritter (14)"
+      },
+      "expectation": "There are exactly 14 Knight cards."
+    },
+    {
+      "id": "CAT-C-INV-PROGRESS-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Fortschritt (6)"
+      },
+      "expectation": "There are exactly six progress cards."
+    },
+    {
+      "id": "CAT-C-INV-VP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "Siegpunkte (5)"
+      },
+      "expectation": "There are exactly five one-point development cards."
+    },
+    {
+      "id": "CAT-C-INV-ROADS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Jeder Spieler verfügt über 15 Straßen"
+      },
+      "expectation": "Each color has exactly 15 roads."
+    },
+    {
+      "id": "CAT-C-INV-SETTLEMENTS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Jeder Spieler verfügt über ... 5 Siedlungen"
+      },
+      "expectation": "Each color has exactly 5 settlements."
+    },
+    {
+      "id": "CAT-C-INV-CITIES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Jeder Spieler verfügt über ... 4 Städte"
+      },
+      "expectation": "Each color has exactly 4 cities."
+    },
+    {
+      "id": "CAT-C-SETUP-BOARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "das Spielfeld gemäß der Abbildung auf Seite 1 aufzubauen"
+      },
+      "expectation": "Beginner setup uses the exact illustrated terrain, numbers and harbors."
+    },
+    {
+      "id": "CAT-C-SETUP-PIECES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Jeder Spieler platziert 2 Straßen und 2 Siedlungen ... gemäß der Abbildung auf Seite 1."
+      },
+      "expectation": "Each player starts with the two illustrated settlements and two roads."
+    },
+    {
+      "id": "CAT-C-SETUP-3P-RED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Beteiligen sich nur 3 Spieler, werden alle roten Spielfiguren aus dem Spiel genommen."
+      },
+      "expectation": "Three-player setup removes all red pieces and retains blue, orange and white."
+    },
+    {
+      "id": "CAT-C-SETUP-START-RES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "für die mit einem Buchstaben markierte Siedlung ... die ersten Rohstofferträge"
+      },
+      "expectation": "Each player receives one resource from every producing land adjacent to their lettered settlement."
+    },
+    {
+      "id": "CAT-C-SETUP-ROBBER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Der Räuber wird auf die Wüste gesetzt."
+      },
+      "expectation": "The robber starts on the desert."
+    },
+    {
+      "id": "CAT-C-SETUP-BANK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Die Rohstoffkarten werden in 5 Stapel sortiert und offen"
+      },
+      "expectation": "Resource cards start sorted in five open bank piles after initial resources are removed."
+    },
+    {
+      "id": "CAT-C-SETUP-DEV",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Die Entwicklungskarten werden gemischt und als verdeckter Stapel bereitgelegt."
+      },
+      "expectation": "Development cards start shuffled in a face-down deck."
+    },
+    {
+      "id": "CAT-C-START-OLDEST",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Es beginnt der älteste Spieler."
+      },
+      "expectation": "The oldest player starts."
+    },
+    {
+      "id": "CAT-C-CLOCKWISE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Danach ist sein linker Nachbar an der Reihe."
+      },
+      "expectation": "Turns advance clockwise to the left neighbor."
+    },
+    {
+      "id": "CAT-C-TURN-PHASES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "1. ... auswürfeln ... 2. ... handeln ... 3. ... bauen"
+      },
+      "expectation": "A normal turn follows roll, trade, build in order."
+    },
+    {
+      "id": "CAT-C-TURN-STRICT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Nach dem „Bauen“ ist der Zug des Spielers beendet."
+      },
+      "expectation": "Under the approved beginner scope, trading cannot resume after building."
+    },
+    {
+      "id": "CAT-C-DEV-ANYTIME",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "zu einem beliebigen Zeitpunkt seines Zuges (auch vor dem Würfeln)"
+      },
+      "expectation": "One eligible development card may be played at any source-permitted point of the active turn, including before rolling."
+    },
+    {
+      "id": "CAT-C-DEV-ONE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Pro Zug darf jeder Spieler nur 1 Entwicklungskarte ausspielen."
+      },
+      "expectation": "At most one Knight or progress card may be played per turn."
+    },
+    {
+      "id": "CAT-C-DEV-NOT-BOUGHT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "nicht eine Karte, die in diesem Zug gekauft wurde"
+      },
+      "expectation": "A development card bought this turn cannot be played this turn, except the victory-point win exception."
+    },
+    {
+      "id": "CAT-C-PROD-ALL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "das Ergebnis gilt für alle Spieler"
+      },
+      "expectation": "A non-seven roll resolves production for every player."
+    },
+    {
+      "id": "CAT-C-PROD-SETTLEMENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Für jede Siedlung erhält der Besitzer 1 Rohstoffkarte."
+      },
+      "expectation": "Each adjacent settlement receives one matching resource."
+    },
+    {
+      "id": "CAT-C-PROD-CITY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Für jede Stadt erhält der Besitzer 2 Rohstoffkarten."
+      },
+      "expectation": "Each adjacent city receives two matching resources."
+    },
+    {
+      "id": "CAT-C-PROD-ADDITIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Besitzt ein Spieler 2 oder 3 Siedlungen um ein Landfeld, erhält er für jede Siedlung 1 Rohstoffkarte."
+      },
+      "expectation": "Multiple adjacent entitlements add."
+    },
+    {
+      "id": "CAT-C-PROD-DESERT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Die Wüste erbringt keine Rohstoffe."
+      },
+      "expectation": "The desert never produces."
+    },
+    {
+      "id": "CAT-C-PROD-ROBBER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Solange der Räuber auf einem Landfeld steht, schüttet dieses keine Rohstoffe aus."
+      },
+      "expectation": "A robber-occupied hex produces nothing."
+    },
+    {
+      "id": "CAT-C-TRADE-ACTIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Mitspieler dürfen nur mit dem Spieler tauschen, der an der Reihe ist."
+      },
+      "expectation": "Every domestic trade includes the active player; non-active players cannot trade directly."
+    },
+    {
+      "id": "CAT-C-TRADE-FREE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf frei ausgehandelt werden, wie viele Rohstoffkarten getauscht werden."
+      },
+      "expectation": "Positive bilateral resource bundle sizes and ratios are freely negotiated."
+    },
+    {
+      "id": "CAT-C-TRADE-NO-GIFT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Das Verschenken von Karten ist nicht erlaubt (Tausch von 0 gegen 1 oder mehr Karten)."
+      },
+      "expectation": "Both sides must give at least one resource card."
+    },
+    {
+      "id": "CAT-C-TRADE-RESOURCES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Rohstoffhandel mit Mitspielern"
+      },
+      "expectation": "Domestic and maritime trades use resource cards, not development cards."
+    },
+    {
+      "id": "CAT-C-MARITIME-4",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "4 gleiche Rohstoffkarten ... 1 Rohstoffkarte seiner Wahl"
+      },
+      "expectation": "Without a relevant harbor, four identical resources buy one resource chosen from the bank."
+    },
+    {
+      "id": "CAT-C-MARITIME-3",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "3:1-Hafen"
+      },
+      "expectation": "A generic harbor permits three identical resources for one."
+    },
+    {
+      "id": "CAT-C-MARITIME-2",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Spezialhafen ... 2 Rohstoffkarten der abgebildeten Sorte"
+      },
+      "expectation": "A special harbor permits two of its depicted resource for one."
+    },
+    {
+      "id": "CAT-C-HARBOR-ACCESS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Siedlung (oder Stadt) an einem Hafen"
+      },
+      "expectation": "A settlement or city at a harbor grants access."
+    },
+    {
+      "id": "CAT-C-HARBOR-DELAY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 7,
+        "quote": "Ein soeben errichteter Hafen kann erst in der nächsten Runde ... benutzt werden."
+      },
+      "expectation": "A harbor built after the strict trade phase cannot be used until the next turn."
+    },
+    {
+      "id": "CAT-C-COST-ROAD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Lehm + Holz"
+      },
+      "expectation": "Road costs one brick and one wood."
+    },
+    {
+      "id": "CAT-C-COST-SETTLEMENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Lehm + Holz + Wolle + Getreide"
+      },
+      "expectation": "Settlement costs one each of brick, wood, wool and grain."
+    },
+    {
+      "id": "CAT-C-COST-CITY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "3 Erz + 2 Getreide"
+      },
+      "expectation": "City costs three ore and two grain."
+    },
+    {
+      "id": "CAT-C-COST-DEVELOPMENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Erz + Wolle + Getreide"
+      },
+      "expectation": "Development purchase costs one each of ore, wool and grain."
+    },
+    {
+      "id": "CAT-C-BUILD-STOCK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Sind keine entsprechenden Figuren mehr im Vorrat, kann nicht gebaut werden."
+      },
+      "expectation": "Building is limited by the player piece supply."
+    },
+    {
+      "id": "CAT-C-ROAD-EMPTY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Auf jedem Weg darf nur 1 Straße gebaut werden."
+      },
+      "expectation": "A road requires an empty edge."
+    },
+    {
+      "id": "CAT-C-ROAD-CONNECT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Straße darf nur an eine eigene Straße, Siedlung oder Stadt angelegt werden."
+      },
+      "expectation": "A road must connect through an endpoint to the player network."
+    },
+    {
+      "id": "CAT-C-ROAD-BLOCK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "An einer fremden Siedlung oder Stadt darf nicht vorbeigebaut werden."
+      },
+      "expectation": "An opponent building blocks road continuation through its vertex."
+    },
+    {
+      "id": "CAT-C-SETTLE-ROAD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Siedlung darf nur an einer eigenen Straße gebaut werden."
+      },
+      "expectation": "A built settlement requires an incident own road."
+    },
+    {
+      "id": "CAT-C-SETTLE-DISTANCE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Eine Siedlung darf nur dann auf einer Kreuzung gebaut werden, wenn die drei angrenzenden Kreuzungen NICHT von Siedlungen oder Städten besetzt sind."
+      },
+      "expectation": "The target and every adjacent vertex must be building-free."
+    },
+    {
+      "id": "CAT-C-CITY-UPGRADE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Eine Stadt kann nur durch den Ausbau einer Siedlung entstehen."
+      },
+      "expectation": "A city only replaces an own settlement at the same vertex."
+    },
+    {
+      "id": "CAT-C-SETTLE-RETURN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Die Siedlung wird wieder in den Vorrat zurückgestellt."
+      },
+      "expectation": "A city upgrade returns the replaced settlement to supply."
+    },
+    {
+      "id": "CAT-C-LR-THRESHOLD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Wer zuerst eine durchgehende Straße aus mindestens 5 Einzelstraßen besitzt"
+      },
+      "expectation": "A continuous own route of at least five edges qualifies for Longest Road."
+    },
+    {
+      "id": "CAT-C-LR-BRANCH",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Abzweigungen zählen nicht."
+      },
+      "expectation": "Branches are not summed into route length."
+    },
+    {
+      "id": "CAT-C-LR-OPP-BLOCK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Wird eine Straße durch eine fremde Siedlung unterbrochen"
+      },
+      "expectation": "An opponent building interrupts the route."
+    },
+    {
+      "id": "CAT-C-LR-OWN-NOT-BLOCK",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Eigene Siedlungen und Städte unterbrechen die eigene Straße nicht."
+      },
+      "expectation": "An own building does not interrupt the route."
+    },
+    {
+      "id": "CAT-C-LR-TRANSFER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 3,
+        "quote": "Sobald ein anderer Spieler eine längere Straße besitzt"
+      },
+      "expectation": "A strictly longer qualifying route takes the card immediately."
+    },
+    {
+      "id": "CAT-C-LR-HOLDER-TIE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Haben nach der Unterbrechung einer Handelsstraße mehrere Spieler gleich lange Handelsstraßen ... ist der Besitzer ... am Gleichstand beteiligt, so behält er diese."
+      },
+      "expectation": "After an interruption creates a leading tie, a tied incumbent retains Longest Road."
+    },
+    {
+      "id": "CAT-C-LR-VACANT-TIE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Haben nach der Unterbrechung ... ist der Besitzer ... nicht am Gleichstand beteiligt, so wird diese beiseite gelegt."
+      },
+      "expectation": "After an interruption creates a leading tie excluding the incumbent, Longest Road becomes unowned."
+    },
+    {
+      "id": "CAT-C-SEVEN-NO-PROD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Bei einer „7“ erhält kein Spieler Rohstoffe."
+      },
+      "expectation": "A seven produces no resources."
+    },
+    {
+      "id": "CAT-C-DISCARD-THRESHOLD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "mehr als 7 Rohstoffkarten"
+      },
+      "expectation": "Only players with eight or more resources discard."
+    },
+    {
+      "id": "CAT-C-DISCARD-AMOUNT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "die Hälfte ... abgerundet"
+      },
+      "expectation": "Each affected player discards floor(resource count / 2)."
+    },
+    {
+      "id": "CAT-C-DISCARD-RESOURCE-ONLY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Entwicklungskarten zählen nicht mit."
+      },
+      "expectation": "Development cards neither count nor are discarded for a seven."
+    },
+    {
+      "id": "CAT-C-ROBBER-MOVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "auf ein beliebiges anderes Landfeld"
+      },
+      "expectation": "The robber must move to a different land hex."
+    },
+    {
+      "id": "CAT-C-ROBBER-CHOOSE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "darf er sich aussuchen, wen er beraubt"
+      },
+      "expectation": "The mover chooses among eligible adjacent opponents."
+    },
+    {
+      "id": "CAT-C-ROBBER-STEAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "zieht ... 1 Rohstoffkarte"
+      },
+      "expectation": "If the chosen adjacent opponent has at least one resource card, exactly one blind resource card, never a development card, transfers to the mover."
+    },
+    {
+      "id": "CAT-C-KNIGHT-NO-DISCARD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Karten muss man nur abgeben, wenn eine 7 gewürfelt wird."
+      },
+      "expectation": "A Knight robber move does not trigger seven discards."
+    },
+    {
+      "id": "CAT-C-DEV-BUY-TOP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "die oberste Karte vom Stapel"
+      },
+      "expectation": "Buying development draws the top face-down card into the private hand."
+    },
+    {
+      "id": "CAT-C-ROAD-BUILDING",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "2 Straßen bauen, ohne Rohstoffe zu zahlen"
+      },
+      "expectation": "Road Building places two free roads subject to normal road rules."
+    },
+    {
+      "id": "CAT-C-YOP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "2 Rohstoffkarten seiner Wahl ... auch 2 gleiche"
+      },
+      "expectation": "Year of Plenty takes any two resources, including two of the same type."
+    },
+    {
+      "id": "CAT-C-MONOPOLY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "alle Mitspieler müssen ihm alle Rohstoffkarten dieser Sorte geben"
+      },
+      "expectation": "Monopoly transfers every opponent-held card of one selected resource."
+    },
+    {
+      "id": "CAT-C-PROGRESS-REMOVED",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Fortschrittskarten kommen aus dem Spiel."
+      },
+      "expectation": "Played progress cards leave the game."
+    },
+    {
+      "id": "CAT-C-KNIGHT-FACEUP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Ritterkarten bleiben offen liegen."
+      },
+      "expectation": "Played Knights stay face-up and count publicly."
+    },
+    {
+      "id": "CAT-C-ARMY-THRESHOLD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "zuerst 3 Ritterkarten offen vor sich liegen hat"
+      },
+      "expectation": "The first player with three played Knights receives Largest Army and two points."
+    },
+    {
+      "id": "CAT-C-ARMY-TRANSFER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "mehr Ritterkarten ausgespielt"
+      },
+      "expectation": "Largest Army transfers only to a strictly larger played-Knight count."
+    },
+    {
+      "id": "CAT-C-INFO-RESOURCE-PRIVATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Rohstoffkarten hält jeder Spieler verdeckt in der Hand."
+      },
+      "expectation": "Opponent resource identities are private."
+    },
+    {
+      "id": "CAT-C-INFO-DEV-PRIVATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Entwicklungskarten hält man bis zum Ausspielen geheim."
+      },
+      "expectation": "Unplayed development identities are private."
+    },
+    {
+      "id": "CAT-M-INFO-DEV-COUNT",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Wer vor sich immer 1 oder 2 verdeckte Karten liegen hat ..."
+      },
+      "expectation": "The Almanac discusses inference from face-down cards but does not define a canonical digital public-count field."
+    },
+    {
+      "id": "CAT-C-SCORE-SETTLEMENT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Siedlung 1 Siegpunkt"
+      },
+      "expectation": "A settlement scores one point."
+    },
+    {
+      "id": "CAT-C-SCORE-CITY",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Stadt 2 Siegpunkte"
+      },
+      "expectation": "A city scores two points."
+    },
+    {
+      "id": "CAT-C-SCORE-AWARDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Größte Rittermacht und Längste Handelsstraße je 2 Siegpunkte"
+      },
+      "expectation": "Each special card scores two points."
+    },
+    {
+      "id": "CAT-C-SCORE-VP",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Siegpunktkarte 1 Siegpunkt"
+      },
+      "expectation": "Each victory-point development card scores one point."
+    },
+    {
+      "id": "CAT-C-WIN-ACTIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Wer an der Reihe ist und 10 oder mehr Siegpunkte hat, gewinnt."
+      },
+      "expectation": "Only the active player can win at ten or more points."
+    },
+    {
+      "id": "CAT-C-WIN-IMMEDIATE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "so beendet er sofort das Spiel und gewinnt"
+      },
+      "expectation": "The active player reaching ten ends the game immediately."
+    },
+    {
+      "id": "CAT-C-WIN-OFFTURN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "Ist ein Spieler an der Reihe und hat er 10 Siegpunkte erreicht (oder erreicht er sie in diesem Zug), so beendet er sofort das Spiel und gewinnt."
+      },
+      "expectation": "A player who has ten while non-active does not win until becoming active and still having ten."
+    },
+    {
+      "id": "CAT-C-VP-WIN-EXCEPTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Siegpunktkarten ... dürfen sofort aufgedeckt werden, wenn ... 10 Siegpunkte"
+      },
+      "expectation": "A newly bought victory-point card may establish an immediate active-player win."
+    },
+    {
+      "id": "CAT-A-LR-CYCLE",
+      "classification": "ambiguous",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "durchgehende Straße; Abzweigungen zählen nicht"
+      },
+      "expectation": "The sources do not formalize edge/vertex reuse for loops and figure-eight graphs."
+    },
+    {
+      "id": "CAT-M-BANK-PRODUCTION",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Für jede Siedlung erhält der Besitzer 1 Rohstoffkarte."
+      },
+      "expectation": "The sources do not define a production shortage allocation procedure."
+    },
+    {
+      "id": "CAT-M-BANK-ACTIONS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "2 Rohstoffkarten seiner Wahl"
+      },
+      "expectation": "The sources do not define unavailable bank resources for trade or Year of Plenty."
+    },
+    {
+      "id": "CAT-M-ROAD-BUILDING-SHORT",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "2 Straßen bauen"
+      },
+      "expectation": "The sources do not define fewer than two feasible/available Road Building placements."
+    },
+    {
+      "id": "CAT-M-DEV-EMPTY",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "die oberste Karte vom Stapel"
+      },
+      "expectation": "The sources do not define purchase when the development deck is empty."
+    },
+    {
+      "id": "CAT-M-RNG",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "mit beiden Würfeln würfeln"
+      },
+      "expectation": "The sources do not define software randomization for dice, shuffled deck or blind theft."
+    },
+    {
+      "id": "CAT-M-NO-VICTIM",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "beraubt anschließend einen Spieler"
+      },
+      "expectation": "The sources do not define the no-eligible-resource-victim case."
+    },
+    {
+      "id": "CAT-M-DISCARD-PROTOCOL",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "Alle Spieler ... wählen die Hälfte ihrer Rohstoffkarten aus"
+      },
+      "expectation": "The sources do not define digital discard order, commitment or disclosure."
+    },
+    {
+      "id": "CAT-M-TRADE-PROTOCOL",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf frei ausgehandelt werden"
+      },
+      "expectation": "The sources do not define a finite offer/consent protocol."
+    },
+    {
+      "id": "CAT-M-HAND-COUNTS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Rohstoffkarten hält jeder Spieler verdeckt in der Hand."
+      },
+      "expectation": "The sources do not expressly classify resource hand sizes as public or private."
+    },
+    {
+      "id": "CAT-M-VP-REVEAL",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 10,
+        "quote": "deckt ... seine Siegpunktkarten auf"
+      },
+      "expectation": "The sources do not say whether only the minimum or every held victory-point card is revealed."
+    },
+    {
+      "id": "CAT-U-SOCIAL-NEGOTIATION",
+      "classification": "untestable",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es darf frei ausgehandelt werden"
+      },
+      "expectation": "Spoken negotiation and table talk are not executable hard expectations."
+    },
+    {
+      "id": "CAT-M-PLAYER-RANGE",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Beteiligen sich nur 3 Spieler, werden alle roten Spielfiguren aus dem Spiel genommen."
+      },
+      "expectation": "The PDFs support the illustrated three-player adjustment and four-color setup but do not state an exhaustive software constructor range."
+    },
+    {
+      "id": "CAT-C-INV-FRAME",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "6 Rahmenteile mit 9 Häfen"
+      },
+      "expectation": "There are exactly six frame pieces."
+    },
+    {
+      "id": "CAT-C-INV-HARBORS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "6 Rahmenteile mit 9 Häfen"
+      },
+      "expectation": "There are exactly nine harbors."
+    },
+    {
+      "id": "CAT-C-INV-ROBBER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "1 Räuber-Figur"
+      },
+      "expectation": "The inventory contains exactly 1 robber."
+    },
+    {
+      "id": "CAT-C-INV-DICE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "2 Würfel"
+      },
+      "expectation": "The inventory contains exactly 2 dice."
+    },
+    {
+      "id": "CAT-C-INV-COST-CARDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "4 Karten „Baukosten“"
+      },
+      "expectation": "The inventory contains exactly 4 building-cost cards."
+    },
+    {
+      "id": "CAT-C-INV-SPECIAL-CARDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "2 Sonderkarten"
+      },
+      "expectation": "The inventory contains exactly 2 special cards."
+    },
+    {
+      "id": "CAT-C-INV-HOLDERS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "2 Kartenhalter"
+      },
+      "expectation": "The inventory contains exactly 2 card holders."
+    },
+    {
+      "id": "CAT-C-INV-PIECE-BOXES",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 23,
+        "quote": "4 Spielfigurenboxen"
+      },
+      "expectation": "The inventory contains exactly 4 piece boxes."
+    },
+    {
+      "id": "CAT-C-INV-PROGRESS-DISTRIBUTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "Es gibt je zweimal: Straßenbau ... Erfindung ... Monopol"
+      },
+      "expectation": "The six progress cards contain exactly two Road Building, two Year of Plenty and two Monopoly cards."
+    },
+    {
+      "id": "CAT-C-TRADE-REPEAT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 7,
+        "quote": "darf so lange und so oft tauschen, wie es seine Rohstoffkarten ... zulassen"
+      },
+      "expectation": "The active player may complete multiple trades during the trade phase."
+    },
+    {
+      "id": "CAT-C-BUILD-REPEAT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 6,
+        "quote": "kann beliebig viele Bauwerke errichten und Entwicklungskarten kaufen"
+      },
+      "expectation": "The active player may build and buy repeatedly while resources and stock permit."
+    },
+    {
+      "id": "CAT-C-SEVEN-SEQUENCE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 9,
+        "quote": "Alle Spieler ... ablegen ... Dann ... den Räuber ... Danach setzt der Spieler seinen Zug mit seiner Handelsphase fort."
+      },
+      "expectation": "A seven locks ordinary actions until all required discards, robber movement and robbery finish, then resumes at trade."
+    },
+    {
+      "id": "CAT-C-KNIGHT-MOVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "muss er sofort den Räuber versetzen"
+      },
+      "expectation": "Playing a Knight immediately requires moving the robber to a different land hex."
+    },
+    {
+      "id": "CAT-C-KNIGHT-STEAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-ALMANAC",
+        "page": 8,
+        "quote": "Dann darf er ... 1 Rohstoffkarte rauben"
+      },
+      "expectation": "After a Knight robber move, the player may rob one resource from an adjacent opponent."
+    },
+    {
+      "id": "CAT-M-DEV-BOUNDARY",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "zu einem beliebigen Zeitpunkt seines Zuges"
+      },
+      "expectation": "The sources do not define digital atomic boundaries while another decision or forced effect is pending."
+    },
+    {
+      "id": "CAT-M-TERMINAL-SUBACTION",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 4,
+        "quote": "so beendet er sofort das Spiel"
+      },
+      "expectation": "The sources do not explicitly reconcile immediate victory with an unfinished multi-step development-card effect."
+    },
+    {
+      "id": "CAT-M-OLDEST-INPUT",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "CATAN22-RULES",
+        "page": 2,
+        "quote": "Es beginnt der älteste Spieler."
+      },
+      "expectation": "The sources do not define a digital age input or equal-age tie; the profile must designate the oldest seat."
+    }
+  ]
+}

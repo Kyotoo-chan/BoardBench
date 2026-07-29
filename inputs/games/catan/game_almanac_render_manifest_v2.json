@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "source_file": "game_almanac.pdf",
+  "source_sha256": "8fe89cc65308c08104a2b2afd2f8edae24e8c608383420b044a6f35cd2c611bc",
+  "dpi": 150,
+  "renderer": "pdftoppm",
+  "renderer_version": "pdftoppm version 24.04.0",
+  "pages": [
+    {
+      "page": 1,
+      "file": "page-01.png",
+      "sha256": "600f1b7e1dfdaeb0787714a29aeccbb5fb63976ce8a41cfa527087cfc3255f31"
+    },
+    {
+      "page": 2,
+      "file": "page-02.png",
+      "sha256": "dbac693840bebe6c7c61d9c4d651c1c949e6ed8d9bb478fd48ef92bce2b30c67"
+    },
+    {
+      "page": 3,
+      "file": "page-03.png",
+      "sha256": "71d128e53ca348ad4854e8cccc91bbdabf7b27f8f5a6dff84d95b21264dddbac"
+    },
+    {
+      "page": 4,
+      "file": "page-04.png",
+      "sha256": "f37c9d689b08136934f4357d690201d60d0d9bfb4271a6cf94674f7f216b1197"
+    },
+    {
+      "page": 5,
+      "file": "page-05.png",
+      "sha256": "df5cbc762dfbca0d51f5d645e2c1e190e4076c713bd3f037df479cdb4865bd65"
+    },
+    {
+      "page": 6,
+      "file": "page-06.png",
+      "sha256": "5fc1c1cbeaa4d1417d165489e09a876f690eb6c64f6e50ed6ca565e3842c4b6b"
+    },
+    {
+      "page": 7,
+      "file": "page-07.png",
+      "sha256": "3ed9579816758017d3c407d60f42ea375e0e4fb063db6dacb127756e42354a91"
+    },
+    {
+      "page": 8,
+      "file": "page-08.png",
+      "sha256": "e5cd182c11e1845fdab970330b0ff05cbe45f98542a261a892f1be15e8e9363c"
+    },
+    {
+      "page": 9,
+      "file": "page-09.png",
+      "sha256": "948181d16c55d9e47f74365b6df63d88f2964f90c49b6ca665ce8914b3faa6e6"
+    },
+    {
+      "page": 10,
+      "file": "page-10.png",
+      "sha256": "77c88fda5fb2bfba7a98a2e08c32bb6d9b8c83fa6da3b003dce882fa0c6a17a4"
+    },
+    {
+      "page": 11,
+      "file": "page-11.png",
+      "sha256": "0c74d8e3c5cc0148a90921030d61767b45aa49f8930dc2f3ee256bce94b7ba67"
+    },
+    {
+      "page": 12,
+      "file": "page-12.png",
+      "sha256": "64940ba8f8b8f7aec8d779497147b39c48636515660bab18f0c46016be254434"
+    },
+    {
+      "page": 13,
+      "file": "page-13.png",
+      "sha256": "185339fad0700590b1287109deae7bd34697b10de3b40a77b3ce46cf42c97353"
+    },
+    {
+      "page": 14,
+      "file": "page-14.png",
+      "sha256": "e66f411d3e10a69610be6bd17e1c85ec0370f7bea1cdd28de1d64f475e2f28eb"
+    },
+    {
+      "page": 15,
+      "file": "page-15.png",
+      "sha256": "07e85f8758cd4d605a5b8f0e1cfdfa69dfdb1a28fea31de2b55fd0197c8a93be"
+    },
+    {
+      "page": 16,
+      "file": "page-16.png",
+      "sha256": "17f560ec253fab14949655f736dc0eec90a4d2c34450929408279ca74e46aac3"
+    },
+    {
+      "page": 17,
+      "file": "page-17.png",
+      "sha256": "5869a26e9d237f45fe5407e0f200551e9f7be1d47be2e35c49272728a6d575d6"
+    },
+    {
+      "page": 18,
+      "file": "page-18.png",
+      "sha256": "be1e4e5fb6ac5b034bca8e2043886138ba7da63a66e47af8e75eb757b64b6a12"
+    },
+    {
+      "page": 19,
+      "file": "page-19.png",
+      "sha256": "761395736c74dfcc6f7241f03fdd87f18799ba97859b325e375ad5eadabea152"
+    },
+    {
+      "page": 20,
+      "file": "page-20.png",
+      "sha256": "c21f23e776be5564a766e41808a704affde1350183e3081ecb7fb3ec92192dcf"
+    },
+    {
+      "page": 21,
+      "file": "page-21.png",
+      "sha256": "941d825ffa2394f4cbc8c3fa6057a7da493ba88d3454981c3aa2a67796a37af7"
+    },
+    {
+      "page": 22,
+      "file": "page-22.png",
+      "sha256": "98060eb3d69bf2de8b2ee11c7a1be9d8810aa462eb2a0d6757496441cd4c40a7"
+    },
+    {
+      "page": 23,
+      "file": "page-23.png",
+      "sha256": "ed65ee5e590fb697893a8a465ad7c91648ef2e86371a5cecdea3387140a52e79"
+    },
+    {
+      "page": 24,
+      "file": "page-24.png",
+      "sha256": "58d5613fa25433f138aa2e3645f35ad8df5289a5a481c95526ad414a05808779"
+    }
+  ]
+}
