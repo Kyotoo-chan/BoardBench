@@ -15,6 +15,16 @@
       "original_judge_3.md": "ee2b211527e939de01cde022f0cdecefe66b7435ded1ae28161edf229d895e2e",
       "original_rule_coverage.md": "b49e39ca9456be751b121b629a0a984681f7733602abb62fe5058c68d6311607",
       "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    },
+    "clear_rule_emphasis_1": {
+      "clear_rule_emphasis_1.md": "3265adf04f3fa868312e78fcf58df966e415547077943e5ca8f211d4d8ad4762",
+      "clear_rule_emphasis_1.py": "aed000679abd6cfbd67aa5fa23207b226019c5ce927e6d99a923a131e148a75f",
+      "clear_rule_emphasis_1_agentic.json": "9a32f0022f185bb276d2bfb1b2eaffb049528e9538e2777304cff8c00e44afaf",
+      "clear_rule_emphasis_1_assumptions.json": "4a499dadaa99451c2b42930ca47429a9c52d1a5e60f47965574eea6a1889bca5",
+      "clear_rule_emphasis_1_checks.txt": "ba3aa59c5f06cef8443c00e455c9d68d89f828fae76bc453c7228c6d2b9aa740",
+      "raw/clear_rule_emphasis_1_events.jsonl": "d6f5aae9f2099f5c428274cb78c5895c7512ae7d62bc105b66c3ef68e4911e38",
+      "clear_rule_emphasis_1_rule_coverage.md": "e3b545a8622f894b7da9fce5f1abe44d12e406fd8ed7aadcdfdda74cb0ec27e8",
+      "clear_rule_emphasis_1_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
     }
   }
 }
