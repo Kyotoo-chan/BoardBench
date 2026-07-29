@@ -14,6 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 GAME=ROOT/'inputs/games/bohnanza_base_2023'
 CONFIG=GAME/'run_v2_original.json'
 EMPHASIS_CONFIG=GAME/'run_v2_clear_rule_emphasis.json'
+EMPHASIS_REPEAT_CONFIG=GAME/'run_v2_clear_rule_emphasis_2.json'
 SUITE=ROOT/'checks/scenarios/bohnanza_base_2023_v2.json'
 MATRIX=GAME/'scenario_matrix_v2.json'
 
@@ -103,6 +104,10 @@ class BohnanzaV2Tests(unittest.TestCase):
   self.assertIn('not a source-gap clarification',artifact['authorship'])
   self.assertEqual({claim for item in artifact['emphasis'] for claim in item['claim_ids']},{'BOHN-C-TRADE-ANY-HAND-POSITION','BOHN-C-TRADE-UNEQUAL','BOHN-C-TRADE-CONSENT','BOHN-C-TRADE-TRANSFER-ON-ACCEPT','BOHN-C-PAYOUT-GARTEN','BOHN-C-PAYOUT-SOJA','BOHN-C-END-THIRD','BOHN-C-END-PHASE2-CONTINUE','BOHN-C-FINAL-HARVEST'})
   validate_pair(original,emphasis_config['sources'],GAME,GAME)
+  repeat=load_config(EMPHASIS_REPEAT_CONFIG)
+  for key in ('sources','profile','agentic_self_check','profile_fixture_self_check','prompt','contract','model','effort','verbosity','max_repairs','timeout','output_stem'):
+   self.assertEqual(repeat[key],emphasis_config[key],key)
+  self.assertEqual(repeat['adapted_from_run_id'],'v2_clear_rule_emphasis_1')
   workspace,_images,allowed,_immutable,_renders=build_workspace(emphasis_config)
   try:
    self.assertIn('clear_rule_emphasis_v2.json',allowed)
