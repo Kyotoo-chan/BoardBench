@@ -4,37 +4,49 @@
     {
       "id": "A-01",
       "material": true,
-      "source_location": "Spielmaterial & Spielvorbereitung / Start-Karte",
+      "source_location": "Spielmaterial & Spielvorbereitung / start card",
       "source_basis": "missing",
       "alternatives": [
-        "Choose the start player uniformly using the seeded chance stream.",
-        "Always choose player 0 as the start player."
+        "The seeded chance process selects the starting player uniformly.",
+        "Player 0 always receives the start card."
       ],
-      "selected": "Choose the start player uniformly using the seeded chance stream.",
-      "affected_mechanics": ["state_transition", "private_information"]
+      "selected": "The seeded chance process selects the starting player uniformly.",
+      "affected_mechanics": ["private_information", "state_transition"]
     },
     {
       "id": "A-02",
       "material": true,
-      "source_location": "Regeln für den Bohnenhandel",
-      "source_basis": "missing",
+      "source_location": "2. Phase: Bohnenkarten aufdecken und handeln",
+      "source_basis": "ambiguous",
       "alternatives": [
-        "A proposal contains one or two offered cards and, for a trade, one or two requested cards; a gift contains one offered card and no requested cards.",
-        "A proposal may contain any positive number of offered and requested cards."
+        "Trade proposals and responses are serialized one at a time, while all source-legal bundle contents remain valid.",
+        "Multiple simultaneous verbal proposals remain pending at once."
       ],
-      "selected": "A proposal contains one or two offered cards and, for a trade, one or two requested cards; a gift contains one offered card and no requested cards.",
-      "affected_mechanics": ["legal_actions", "state_transition"]
+      "selected": "Trade proposals and responses are serialized one at a time, while all source-legal bundle contents remain valid.",
+      "affected_mechanics": ["legal_actions", "state_transition", "private_information"]
     },
     {
       "id": "A-03",
       "material": true,
       "source_location": "3. Phase: Gehandelte und aufgedeckte Bohnenkarten anbauen",
-      "source_basis": "missing",
+      "source_basis": "ambiguous",
       "alternatives": [
-        "Players plant received cards in clockwise order beginning with the active player, and each player's received order is proposal-acceptance order.",
-        "The active player chooses every next player and every received-card planting order."
+        "When several players have cards to plant, any affected player may choose and plant their own next card.",
+        "The active player chooses a fixed order in which all players plant."
       ],
-      "selected": "Players plant received cards in clockwise order beginning with the active player, and each player's received order is proposal-acceptance order.",
+      "selected": "When several players have cards to plant, any affected player may choose and plant their own next card.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    },
+    {
+      "id": "A-04",
+      "material": true,
+      "source_location": "Die Bohnenernte / jederzeit",
+      "source_basis": "ambiguous",
+      "alternatives": [
+        "Every player may harvest at stable action boundaries, but harvesting does not interrupt an atomic action.",
+        "Harvesting may interrupt the internal steps of revealing, drawing, transferring, or planting a card."
+      ],
+      "selected": "Every player may harvest at stable action boundaries, but harvesting does not interrupt an atomic action.",
       "affected_mechanics": ["legal_actions", "state_transition"]
     }
   ]

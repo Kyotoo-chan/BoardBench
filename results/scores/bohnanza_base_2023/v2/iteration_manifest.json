@@ -38,6 +38,19 @@
       "clear_rule_emphasis_2_judge_3.md": "51e50dfcf2145cc82610f463c464bf88830393c361b74d457d11555ebbbf8628",
       "clear_rule_emphasis_2_rule_coverage.md": "04b06127b3c95ec054f96e57ad137139b65837f2fa9fad478bd937a817ac0038",
       "clear_rule_emphasis_2_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    },
+    "structured_clarification_1": {
+      "structured_clarification_1.md": "66a1293254f3cbc30d0d6134ca068720b223ce3421545a27a902925bdb606a51",
+      "structured_clarification_1.py": "03216668709ac1711196ec67534b8656bb03021dbbb809759ae09891e7deb3ac",
+      "structured_clarification_1_agentic.json": "d39f210a273dca53e51b5cde6a272555ff04fb90ccea56208d6802952f202010",
+      "structured_clarification_1_assumptions.json": "87663c4882cb5603eb334689355f8829b4618a8d10d60443e1a0ed9c53a864aa",
+      "structured_clarification_1_checks.txt": "8c5989e51f88b1ce2ab2585268dd9ac1166d1ffd8903366cbdf7dd5ca1f569e6",
+      "raw/structured_clarification_1_events.jsonl": "450789d0d01265d713e4a2ba126f1ab3da54760902d9c2e915d502a18f7a971a",
+      "structured_clarification_1_judge_1.md": "deb2288568b00d789e481ca5287c5f84b09c5a441dc1265e37b64968e859cdb3",
+      "structured_clarification_1_judge_2.md": "21b3503029d79403a9e83c66e6f019e2a7da8fe85ac88c15885fdb77cc3d936b",
+      "structured_clarification_1_judge_3.md": "3d64d8972cbf90225d41fcdc957b3dcf6cd582535e4bcd014e1ecf5939aad34e",
+      "structured_clarification_1_rule_coverage.md": "3e6eb57908518769beede2e353e99b115e3d909f8957657a824e7c439e476a1c",
+      "structured_clarification_1_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
     }
   }
 }

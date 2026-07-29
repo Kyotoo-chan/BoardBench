@@ -6,7 +6,7 @@ exit_code=0
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
 exit_code=0
-agentic-self-check OK states=300 actions=5186
+agentic-self-check OK states=300 actions=1716
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
 exit_code=0
@@ -23,13 +23,13 @@ PLAYER_COUNTS 5/5
 
 
 === TECHNICAL_ROBUSTNESS_INTERFACE ===
-OK   01_result_file                     1/1 score=1.000    0.00s
-OK   02_python_syntax                   1/1 score=1.000    0.00s
+OK   01_result_file                     1/1 score=1.000    0.02s
+OK   02_python_syntax                   1/1 score=1.000    0.02s
 OK   03_startable_game                  1/1 score=1.000    0.01s
 OK   04_required_api_v2                 9/9 score=1.000    0.01s
-OK   05_random_rollouts             100/100 score=1.000   56.54s
-OK   06_action_language       976727/976727 score=1.000   54.00s
----- summary                            6/6 score=1.000  110.56s
+OK   05_random_rollouts             100/100 score=1.000   53.25s
+OK   06_action_language       847456/847456 score=1.000   52.50s
+---- summary                            6/6 score=1.000  105.81s
 
 
 
@@ -44,7 +44,7 @@ PLAYER_COUNTS 5/5
 
 
 === SCENARIOS_V4 ===
-FAIL BOHN-R01-3p-inventory-setup: setup.fields[0]: expected 3, got 2
+PASS BOHN-R01-3p-inventory-setup
 PASS BOHN-R02-4p-setup
 PASS BOHN-R03-5p-setup
 PASS BOHN-R04-player-count-contract
@@ -53,14 +53,14 @@ PASS BOHN-R06-seeded-start
 PASS BOHN-R07-opponent-front-visible
 PASS BOHN-R08-deeper-hand-private
 PASS BOHN-R09-front-plant-preserves-order
-PASS BOHN-R10-second-optional-no-third
+FAIL BOHN-R10-second-optional-no-third: phase: expected 'reveal', got 'plant_second'
 PASS BOHN-R11-empty-hand-skip
 PASS BOHN-R12-field-types
 PASS BOHN-R13-forced-harvest
 PASS BOHN-R14-four-phase-turn
 PASS BOHN-R15-reveal-two-owned
-PASS BOHN-R16-trade-legality
-PASS BOHN-R17-accepted-trade
+FAIL BOHN-R16-trade-legality: trade_bundle_legal: expected True, got False
+FAIL BOHN-R17-accepted-trade: canonical action is not legal: {'type': 'trade_propose', 'args': {'partner': 1, 'offered': [{'owner': 0, 'zone': 'hand', 'index': 0, 'bean': 'blaue_bohne'}, {'owner': 0, 'zone': 'hand', 'index': 2, 'bean': 'rote_bohne'}], 'requested': [{'owner': 1, 'zone': 'hand', 'index': 0, 'bean': 'sojabohne'}], 'gift': False}}
 PASS BOHN-R18-rejected-trade
 PASS BOHN-R19-gift-consent
 PASS BOHN-R20-no-retrade
@@ -69,11 +69,11 @@ FAIL BOHN-R22-plant-all-owner-order: player 0 received-card choices: expected ['
 FAIL BOHN-R23-phase3-any-player-order: player 0 received-card choices: expected ['rote_bohne', 'sojabohne'], got ['sojabohne']
 FAIL BOHN-R24-active-plants-revealed: player 0 revealed-card choices: expected ['blaue_bohne', 'feuerbohne'], got ['blaue_bohne']
 PASS BOHN-R25-draw-append-clockwise
-FAIL BOHN-R26-offturn-harvest: harvest_legal[1,0]: expected True, got False
-FAIL BOHN-R27-stable-harvest-boundaries: harvest_legal[1,0]: expected True, got False
+PASS BOHN-R26-offturn-harvest
+PASS BOHN-R27-stable-harvest-boundaries
 PASS BOHN-R28-singleton-boundaries
 PASS BOHN-R29-zero-normal-harvest
-FAIL BOHN-R30-garten-curve: harvest_curve[garten][2]: expected 2, got 1
+PASS BOHN-R30-garten-curve
 PASS BOHN-R31-rot-curve
 PASS BOHN-R32-augen-curve
 PASS BOHN-R33-soja-curve
@@ -83,10 +83,10 @@ PASS BOHN-R36-feuer-curve
 PASS BOHN-R37-blau-curve
 PASS BOHN-R38-first-recycle-reveal
 PASS BOHN-R39-second-recycle-draw
-FAIL BOHN-R40-third-depletion-phase2: step 3: field_sizes[0]: expected [0, 0], got [2, 1]
-FAIL BOHN-R41-third-depletion-outside-phase2: step 1: winner: expected 0, got 1
-FAIL BOHN-R42-final-score-tiebreak: step 1: field_sizes[1]: expected [0, 0], got [2, 0]
-SCENARIOS PASS=32 FAIL=10 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=42/42 coverage=1.000 clear=30/38 human_decision=2/4
+PASS BOHN-R40-third-depletion-phase2
+PASS BOHN-R41-third-depletion-outside-phase2
+PASS BOHN-R42-final-score-tiebreak
+SCENARIOS PASS=36 FAIL=6 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=42/42 coverage=1.000 clear=33/38 human_decision=3/4
 CLAIMS mapped=80/81 evaluated=80/81 exceptions=1
 
-ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/bohnanza_base_2023_codex_ag.py --scenarios checks/scenarios/bohnanza_base_2023_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\v2\clear_rule_emphasis_2_scenarios.json` failed. (See above for error)
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/bohnanza_base_2023_codex_ag.py --scenarios checks/scenarios/bohnanza_base_2023_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\v2\structured_clarification_1_scenarios.json` failed. (See above for error)

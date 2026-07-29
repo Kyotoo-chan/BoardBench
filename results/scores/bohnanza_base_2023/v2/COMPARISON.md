@@ -1,28 +1,45 @@
-# Bohnanza Base Game 2023 V2 — Original and clear-rule-emphasis repeats
+# Bohnanza Base Game 2023 V2 — source-delivery comparison
 
-## Design
+## Conditions
 
-The Original received only the complete publisher PDF. After its committed evaluation, one separately attributed artifact repeated four publisher-clear defect groups. This is a **clear-rule emphasis**, not a source-gap clarification. Run 2 is an exact predeclared repeat of the same emphasis packet; run 1 remains retained and is not selected away.
+1. **Original:** unchanged publisher PDF only.
+2. **Clear-rule emphasis 1:** four already-clear Original defect groups repeated in a separate artifact.
+3. **Clear-rule emphasis 2:** exact retained repeat of condition 2.
+4. **Structured clarification 1:** adapted successor replacing narrow emphasis with the four approved digital gap decisions plus a balanced whole-game source-derived fidelity checklist.
 
-| Evidence | Original | Emphasis 1 | Emphasis 2 repeat |
-|---|---:|---:|---:|
-| Agentic gate | PASS | PASS | PASS |
-| Technical checks 01–04 | 4/4 | 4/4 | 4/4 |
-| Random rollouts | 100/100 | 100/100 | 100/100 |
-| Action-language | 800,371/800,371 | 1,523,314/1,523,314 | 976,727/976,727 |
-| Player-count probes | 5/5 | 5/5 | 5/5 |
-| Clear-basis scenarios | 33/38 | 30/38 | 30/38 |
-| Human-decision-basis scenarios | 4/4 | 3/4 | 2/4 |
-| Scenario evaluated coverage | 42/42 | 42/42 | 42/42 |
-| Clear claim mapping | 80/81 + 1 exception | same | same |
-| Neutral Judges | 0.643 (SD 0.081) | not run | 0.423 (SD 0.038) |
+The structured condition retains the same PDF, model/thinking, prompt, contract and profile, but changes the intervention content and methodology after inspecting prior results. It is therefore an adapted successor, not an independent replicate. No best-of selection is reported.
+
+| Evidence | Original | Emphasis 1 | Emphasis 2 | Structured clarification |
+|---|---:|---:|---:|---:|
+| Agentic gate | PASS | PASS | PASS | PASS |
+| Technical checks 01–04 | 4/4 | 4/4 | 4/4 | 4/4 |
+| Random rollouts | 100/100 | 100/100 | 100/100 | 100/100 |
+| Action-language | 800,371/800,371 | 1,523,314/1,523,314 | 976,727/976,727 | 847,456/847,456 |
+| Player-count probes | 5/5 | 5/5 | 5/5 | 5/5 |
+| Clear-basis scenarios | 33/38 | 30/38 | 30/38 | 33/38 |
+| Human-decision-basis scenarios | 4/4 | 3/4 | 2/4 | 3/4 |
+| Scenario evaluated coverage | 42/42 | 42/42 | 42/42 | 42/42 |
+| Clear claim mapping | 80/81 + 1 exception | same | same | same |
+| Neutral Judges | 0.643 (SD 0.081) | not run | 0.423 (SD 0.038) | 0.713 (SD 0.031) |
 
 Evidence groups are not combined into one correctness score.
 
-## Interpretation
+## What changed
 
-Both emphasis generations correct the scored unequal multi-card trade and Soy-payout failures. Emphasis 1 also corrects Garden payout; the exact repeat does not. Both improve the phase-two third-depletion transition itself, but run 1 introduces a wrong Red meter and run 2 omits final harvesting. Each emphasis generation creates several unrelated regressions.
+The narrow artifact made four known clear rules unusually salient. Both generations improved some target mechanics but lost unrelated rules, consistent with salience trade-offs and generation variance.
 
-Therefore the poor first emphasis run is not an isolated fluke in the ordinary sense: the exact repeat again reaches only 30/38 clear scenarios and is worse on human-decision scenarios. The experiment shows that salience can improve targeted mechanics, but it does not stabilize whole-environment rule translation. Because the emphasized rules were already publisher-clear, these results cannot be attributed to missing rulebook content.
+The structured artifact instead tells the model to preserve whole-game coverage, gives all four approved digital decisions explicitly, and balances setup, phase flow, trading, planting, harvesting, every beanometer, depletion, end scoring and privacy. It removes the narrow runs' setup, beanometer, off-turn-harvest and final-scoring failures.
 
-Emphasis 1 is valid scenario evidence without Judges by prior user decision. Emphasis 2 is the only emphasis repeat with neutral Judge evidence. No best-of selection is reported.
+## What remains
+
+Structured clarification still scores 33/38 Clear, equal to Original rather than perfect. Its failures are concentrated:
+
+- declining the optional second hand card does not advance phase;
+- unequal multi-card trades are not enumerated as legal actions;
+- owners cannot select arbitrary staged/revealed planting order.
+
+All structured-condition Judges additionally detect deeper opponent hand identities leaked through legal trade actions. These requirements are explicit in the supplement, so their persistence is a model/implementation failure rather than a remaining source gap.
+
+## Conclusion
+
+Giving more context **does help when the context is balanced and resolves actual digital gaps**: the structured condition outperforms both narrow-emphasis generations and receives the strongest Judge signal. It does not guarantee perfection. The result supports a more precise thesis claim: clarification can reduce source-specification and salience problems, while action-space completeness and cross-mechanic implementation errors remain model-side challenges.
