@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "game": "CATAN 2022",
+    "condition": "v2_clear_rule_emphasis_1",
+    "source_path": "../../../../inputs/games/catan/game_rules.pdf",
+    "source_format": "pdf+matching-companion+clear-rule-emphasis",
+    "source_sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+  },
+  "source_diagnosis": {
+    "clear": 104,
+    "ambiguous": 2,
+    "missing": 17,
+    "conflicting": 1,
+    "untestable": 1
+  },
+  "headline": "Clear-rule emphasis: technical 4/4; robustness 100/100; 38/40 clear and 13/15 human-decision scenarios passed under r3.",
+  "runs": [
+    {
+      "stem": "catan_codex_ag",
+      "agentic_evidence": "../../../../outputs/catan_codex_ag_agentic.json",
+      "checks": "../../../../outputs/catan_codex_ag_checks.txt",
+      "scenarios": "clear_rule_emphasis_scenarios.json",
+      "usage": "clear_rule_emphasis_usage.json",
+      "code": "../../../../outputs/catan_codex_ag.py",
+      "assumptions": "../../../../outputs/catan_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/catan_codex_ag_judge_1.md",
+        "../../../../outputs/catan_codex_ag_judge_2.md",
+        "../../../../outputs/catan_codex_ag_judge_3.md"
+      ]
+    }
+  ]
+}

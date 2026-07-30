@@ -15,6 +15,19 @@
       "original_judge_3.md": "d2f39238822dfc22082686c86b3f994cf9837702cdbb1916f3e06d6746b182fa",
       "original_rule_coverage.md": "1da08adc76ced203d4642d175aa9df4580c63d0931c18c5fcf526a05ac64fcdf",
       "original_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    },
+    "clear_rule_emphasis": {
+      "clear_rule_emphasis.md": "837a78ca05a7525ebf0371dd77e6afdbbc18d5ce0b2ffe9576c78a7e0314da76",
+      "clear_rule_emphasis.py": "134bc1f5786267a4c01eb90e7139cc0db4a413b85d305381145468275debfe04",
+      "clear_rule_emphasis_agentic.json": "24e5a981f2bb4ccb357e187bb0b81e373052d82aa80f90e6223d9a001cffa004",
+      "clear_rule_emphasis_assumptions.json": "eb88b250225133cb7fc50bde3aa3c2e18607df558ffb08c8ed75ee4a19d121e4",
+      "clear_rule_emphasis_checks.txt": "823cdfdbd0b2dbcd3c4c31bab4f7a05e3416879121aa1491bde47e446c613af0",
+      "raw/clear_rule_emphasis_events.jsonl": "7066fa8f06ce247209351b8a34ff0c2461de04182ef15b1705005627e7d8d521",
+      "clear_rule_emphasis_judge_1.md": "17c09abcf099aec36a5742c04fc33db686fdbd4b53638697ca8a05fbcf44fbd2",
+      "clear_rule_emphasis_judge_2.md": "9f44954090b10dbaa2b0f1e616c62838bb6e50ae403004c573d6f612b70d82bc",
+      "clear_rule_emphasis_judge_3.md": "8b5ee73bacc8dcd8cadede3a449f69b2b78d19b9b66f4312a7b5a56dd96095c1",
+      "clear_rule_emphasis_rule_coverage.md": "b507f615487dee39f6de10518e1d607b36a8b3f163e0f6914f95f6468cad772f",
+      "clear_rule_emphasis_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
     }
   }
 }

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "run_id": "v2_clear_rule_emphasis_1",
+  "status": "valid-evaluation-complete",
+  "implementation_changed_after_generation": false,
+  "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
+  "intervention_kind": "clear_rule_emphasis",
+  "technical_gate": "4/4",
+  "robustness": "100/100",
+  "interface": "4342395/4342395",
+  "player_counts": "4/4",
+  "clear_basis": "38/40",
+  "human_decision_basis": "13/15",
+  "scenario_coverage": "55/55",
+  "named_cases": "113/113",
+  "judge_scores": [
+    0.72,
+    0.72,
+    0.83
+  ],
+  "artifacts": {
+    "implementation": {
+      "path": "clear_rule_emphasis.py",
+      "sha256": "134bc1f5786267a4c01eb90e7139cc0db4a413b85d305381145468275debfe04"
+    },
+    "agentic": {
+      "path": "clear_rule_emphasis_agentic.json",
+      "sha256": "24e5a981f2bb4ccb357e187bb0b81e373052d82aa80f90e6223d9a001cffa004"
+    },
+    "checks": {
+      "path": "clear_rule_emphasis_checks.txt",
+      "sha256": "823cdfdbd0b2dbcd3c4c31bab4f7a05e3416879121aa1491bde47e446c613af0"
+    },
+    "scenarios": {
+      "path": "clear_rule_emphasis_scenarios.json",
+      "sha256": "f27601815038af1242cbd556c9ce95397c725952002737e48cb65da5842ac1b5"
+    },
+    "result": {
+      "path": "clear_rule_emphasis_result.json",
+      "sha256": "2cf572757000af30eeb854d24f262077e6810f99b90e2ab785d4e27955a1740b"
+    },
+    "judge_1": {
+      "path": "clear_rule_emphasis_judge_1.md",
+      "sha256": "17c09abcf099aec36a5742c04fc33db686fdbd4b53638697ca8a05fbcf44fbd2"
+    },
+    "judge_2": {
+      "path": "clear_rule_emphasis_judge_2.md",
+      "sha256": "9f44954090b10dbaa2b0f1e616c62838bb6e50ae403004c573d6f612b70d82bc"
+    },
+    "judge_3": {
+      "path": "clear_rule_emphasis_judge_3.md",
+      "sha256": "8b5ee73bacc8dcd8cadede3a449f69b2b78d19b9b66f4312a7b5a56dd96095c1"
+    },
+    "evaluator_revision": {
+      "path": "../../../../inputs/games/catan/evaluator_revision_v2_r3.json",
+      "sha256": "54e3e3c0b1c612dfc14251b550e5c55201057430005db7a71072dd4e3f061864"
+    },
+    "intervention": {
+      "path": "../../../../inputs/games/catan/clear_rule_emphasis_v2.json",
+      "sha256": "3f695ee66f927bba4c4bd41656acfa6a96c6b8f4cbf63a5b34d539ee03c0cd0d"
+    },
+    "run_config": {
+      "path": "../../../../inputs/games/catan/run_v2_clear_rule_emphasis.json",
+      "sha256": "c29d1854973684e2065341a3a4a6ac50619d148e73c982d41060700ba1d34d1c"
+    }
+  }
+}
