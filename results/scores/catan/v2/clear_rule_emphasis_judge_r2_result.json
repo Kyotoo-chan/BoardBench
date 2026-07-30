@@ -1,0 +1,903 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "game": "CATAN 2022",
+    "condition": "v2_clear_rule_emphasis_1",
+    "source_path": "../../../../inputs/games/catan/game_rules.pdf",
+    "source_format": "pdf+matching-publisher-companion",
+    "source_sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "63c6165d480c7e2a4357ac2c63b172e76153f7add907789e6c17748955d1885c",
+    "adapter_sha256": "822a6855514af6865001f8574a07a2699d1f15473007a056cda3aa62c8716d78",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "hardened-iteration-v1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 104,
+    "missing": 17,
+    "ambiguous": 2,
+    "untestable": 1,
+    "conflicting": 1
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_basis_scenarios": {
+      "values": [
+        0.95
+      ],
+      "mean": 0.95,
+      "sample_sd": null
+    },
+    "human_decision_basis_scenarios": {
+      "values": [
+        0.8666666666666667
+      ],
+      "mean": 0.8666666666666667,
+      "sample_sd": null
+    },
+    "scenario_evaluated_coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.8,
+        0.89,
+        0.76
+      ],
+      "mean": 0.8166666666666667,
+      "sample_sd": 0.06658328118479392,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "clear_rule_emphasis": {}
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 3,
+    "interpretation_agreement": {
+      "Spielanleitung p. 4, Spielenende; Almanach p. 10, Spielende": {
+        "After every committed atomic action, the active player wins immediately upon possessing at least 10 points, and only the minimum needed hidden victory-point cards are revealed.": 1
+      },
+      "Spielanleitung p. 3 and Almanach p. 8, Längste Handelsstraße": {
+        "Longest Road is the maximum edge-simple trail; edges cannot repeat, vertices may repeat, and an opponent building stops traversal through its vertex.": 1
+      },
+      "Spielanleitung p. 3 Binnenhandel; Almanach p. 6 Binnenhandel": {
+        "A domestic trade is represented as one finite bilateral offer; the active player adds give/take cards one at a time and the named partner accepts or rejects.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Spielanleitung p. 4, Spielenende; Almanach p. 10, Spielende",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "After every committed atomic action, the active player wins immediately upon possessing at least 10 points, and only the minimum needed hidden victory-point cards are revealed.",
+          "Victory is checked only after the active player explicitly ends the turn."
+        ],
+        "selected": "After every committed atomic action, the active player wins immediately upon possessing at least 10 points, and only the minimum needed hidden victory-point cards are revealed.",
+        "affected_mechanics": [
+          "state_transition",
+          "terminal_results",
+          "scoring"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Spielanleitung p. 3 and Almanach p. 8, Längste Handelsstraße",
+        "source_basis": "ambiguous",
+        "alternatives": [
+          "Longest Road is the maximum edge-simple trail; edges cannot repeat, vertices may repeat, and an opponent building stops traversal through its vertex.",
+          "Longest Road is the maximum vertex-simple path; neither edges nor vertices may repeat."
+        ],
+        "selected": "Longest Road is the maximum edge-simple trail; edges cannot repeat, vertices may repeat, and an opponent building stops traversal through its vertex.",
+        "affected_mechanics": [
+          "state_transition",
+          "scoring"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Spielanleitung p. 3 Binnenhandel; Almanach p. 6 Binnenhandel",
+        "source_basis": "missing",
+        "alternatives": [
+          "A domestic trade is represented as one finite bilateral offer; the active player adds give/take cards one at a time and the named partner accepts or rejects.",
+          "All players may negotiate an unbounded sequence of simultaneous counteroffers."
+        ],
+        "selected": "A domestic trade is represented as one finite bilateral offer; the active player adds give/take cards one at a time and the named partner accepts or rejects.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        4.0
+      ],
+      "mean": 4.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        1889.374
+      ],
+      "mean": 1889.374,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        2949963.0
+      ],
+      "mean": 2949963.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        2301952.0
+      ],
+      "mean": 2301952.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        39937.0
+      ],
+      "mean": 39937.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        18186.0
+      ],
+      "mean": 18186.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        5.589141
+      ],
+      "mean": 5.589141,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        639.0
+      ],
+      "mean": 639.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      5.589141
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Clear emphasis: 38/40 clear-basis and 13/15 human-decision-basis scenarios; valid rendered-PDF Judges 0.80/0.89/0.76.",
+  "runs": [
+    {
+      "stem": "clear_rule_emphasis",
+      "protocol": "hardened-iteration-v1",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 0,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
+        "suite_sha256": "63c6165d480c7e2a4357ac2c63b172e76153f7add907789e6c17748955d1885c",
+        "adapter_sha256": "822a6855514af6865001f8574a07a2699d1f15473007a056cda3aa62c8716d78",
+        "counts": {
+          "PASS": 51,
+          "FAIL": 4,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 38,
+          "evaluated": 40,
+          "score": 0.95
+        },
+        "human_decision": {
+          "passed": 13,
+          "evaluated": 15,
+          "score": 0.8666666666666667
+        },
+        "results": [
+          {
+            "id": "CAT-R01A-3p-board-pieces",
+            "status": "FAIL",
+            "message": "case board-pieces: zones.reserve.removed_colors: expected ['red'], got []",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-BOARD",
+              "CAT-C-SETUP-PIECES",
+              "CAT-C-SETUP-3P-RED",
+              "CAT-C-SETUP-ROBBER"
+            ]
+          },
+          {
+            "id": "CAT-R01B-3p-starting-resources",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-START-RES"
+            ]
+          },
+          {
+            "id": "CAT-R01C-3p-bank-deck-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-BANK",
+              "CAT-C-SETUP-DEV"
+            ]
+          },
+          {
+            "id": "CAT-R02A-4p-board-pieces",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-BOARD",
+              "CAT-C-SETUP-PIECES",
+              "CAT-C-SETUP-ROBBER"
+            ]
+          },
+          {
+            "id": "CAT-R02B-4p-starting-resources",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-START-RES"
+            ]
+          },
+          {
+            "id": "CAT-R02C-4p-bank-deck-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETUP-BANK",
+              "CAT-C-SETUP-DEV"
+            ]
+          },
+          {
+            "id": "CAT-R03-player-range",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-PLAYER-RANGE"
+            ]
+          },
+          {
+            "id": "CAT-R04A-board-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-INV-LAND-TOTAL",
+              "CAT-C-INV-WALD",
+              "CAT-C-INV-WEIDE",
+              "CAT-C-INV-ACKER",
+              "CAT-C-INV-HUEGEL",
+              "CAT-C-INV-GEBIRGE",
+              "CAT-C-INV-WUESTE",
+              "CAT-C-INV-HARBORS",
+              "CAT-C-INV-NUMBERS"
+            ]
+          },
+          {
+            "id": "CAT-R04B-resource-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-INV-RESOURCES"
+            ]
+          },
+          {
+            "id": "CAT-R04C-development-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-INV-DEV-TOTAL",
+              "CAT-C-INV-KNIGHTS",
+              "CAT-C-INV-PROGRESS-TOTAL",
+              "CAT-C-INV-PROGRESS-DISTRIBUTION",
+              "CAT-C-INV-VP"
+            ]
+          },
+          {
+            "id": "CAT-R04D-player-and-other-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-INV-ROADS",
+              "CAT-C-INV-SETTLEMENTS",
+              "CAT-C-INV-CITIES",
+              "CAT-C-INV-ROBBER",
+              "CAT-C-INV-SPECIAL-CARDS"
+            ]
+          },
+          {
+            "id": "CAT-R05A-oldest-seat-starts",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-START-OLDEST"
+            ]
+          },
+          {
+            "id": "CAT-R05-clockwise-turn",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-CLOCKWISE"
+            ]
+          },
+          {
+            "id": "CAT-R06-strict-phases",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-TURN-PHASES",
+              "CAT-C-TURN-STRICT"
+            ]
+          },
+          {
+            "id": "CAT-R07-production",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-PROD-ALL",
+              "CAT-C-PROD-SETTLEMENT",
+              "CAT-C-PROD-CITY",
+              "CAT-C-PROD-ADDITIVE"
+            ]
+          },
+          {
+            "id": "CAT-R08-desert-robber-block",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-PROD-DESERT",
+              "CAT-C-PROD-ROBBER"
+            ]
+          },
+          {
+            "id": "CAT-R09-development-timing",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-DEV-ANYTIME",
+              "CAT-C-DEV-ONE",
+              "CAT-C-DEV-NOT-BOUGHT"
+            ]
+          },
+          {
+            "id": "CAT-R10-domestic-trade-rules",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-TRADE-ACTIVE",
+              "CAT-C-TRADE-FREE",
+              "CAT-C-TRADE-NO-GIFT",
+              "CAT-C-TRADE-RESOURCES",
+              "CAT-C-TRADE-REPEAT"
+            ]
+          },
+          {
+            "id": "CAT-R11-bilateral-consent",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-TRADE-PROTOCOL"
+            ]
+          },
+          {
+            "id": "CAT-R12-maritime-rates",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-MARITIME-4",
+              "CAT-C-MARITIME-3",
+              "CAT-C-MARITIME-2",
+              "CAT-C-HARBOR-ACCESS"
+            ]
+          },
+          {
+            "id": "CAT-R13-new-harbor-delay",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-HARBOR-DELAY"
+            ]
+          },
+          {
+            "id": "CAT-R14-building-costs-stock",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-COST-ROAD",
+              "CAT-C-COST-SETTLEMENT",
+              "CAT-C-COST-CITY",
+              "CAT-C-COST-DEVELOPMENT",
+              "CAT-C-BUILD-STOCK",
+              "CAT-C-BUILD-REPEAT"
+            ]
+          },
+          {
+            "id": "CAT-R15-road-legality",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-ROAD-EMPTY",
+              "CAT-C-ROAD-CONNECT",
+              "CAT-C-ROAD-BLOCK"
+            ]
+          },
+          {
+            "id": "CAT-R16-settlement-legality",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SETTLE-ROAD",
+              "CAT-C-SETTLE-DISTANCE"
+            ]
+          },
+          {
+            "id": "CAT-R17-city-upgrade",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-CITY-UPGRADE",
+              "CAT-C-SETTLE-RETURN"
+            ]
+          },
+          {
+            "id": "CAT-R18-longest-threshold-branch",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-LR-THRESHOLD",
+              "CAT-C-LR-BRANCH"
+            ]
+          },
+          {
+            "id": "CAT-R19-longest-interruption",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-LR-OPP-BLOCK",
+              "CAT-C-LR-OWN-NOT-BLOCK"
+            ]
+          },
+          {
+            "id": "CAT-R20-longest-transfer-ties",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-LR-TRANSFER",
+              "CAT-C-LR-HOLDER-TIE",
+              "CAT-C-LR-VACANT-TIE"
+            ]
+          },
+          {
+            "id": "CAT-R21-longest-cycles",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-A-LR-CYCLE"
+            ]
+          },
+          {
+            "id": "CAT-R22-seven-discard",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SEVEN-NO-PROD",
+              "CAT-C-DISCARD-THRESHOLD",
+              "CAT-C-DISCARD-AMOUNT",
+              "CAT-C-DISCARD-RESOURCE-ONLY",
+              "CAT-C-SEVEN-SEQUENCE"
+            ]
+          },
+          {
+            "id": "CAT-R23-robber-move-steal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-ROBBER-MOVE",
+              "CAT-C-ROBBER-CHOOSE",
+              "CAT-C-ROBBER-STEAL"
+            ]
+          },
+          {
+            "id": "CAT-R24-knight-no-discard",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-KNIGHT-NO-DISCARD",
+              "CAT-C-KNIGHT-MOVE",
+              "CAT-C-KNIGHT-STEAL"
+            ]
+          },
+          {
+            "id": "CAT-R25-random-theft-no-victim",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-RNG",
+              "CAT-M-NO-VICTIM"
+            ]
+          },
+          {
+            "id": "CAT-R26-private-simultaneous-discards",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-DISCARD-PROTOCOL"
+            ]
+          },
+          {
+            "id": "CAT-R27-development-purchase",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-DEV-BUY-TOP"
+            ]
+          },
+          {
+            "id": "CAT-R28-road-building",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-ROAD-BUILDING"
+            ]
+          },
+          {
+            "id": "CAT-R29-year-of-plenty",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-YOP"
+            ]
+          },
+          {
+            "id": "CAT-R30-monopoly",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-MONOPOLY"
+            ]
+          },
+          {
+            "id": "CAT-R31-played-card-zones",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-PROGRESS-REMOVED",
+              "CAT-C-KNIGHT-FACEUP"
+            ]
+          },
+          {
+            "id": "CAT-R32-largest-army",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-ARMY-THRESHOLD",
+              "CAT-C-ARMY-TRANSFER"
+            ]
+          },
+          {
+            "id": "CAT-R33-score-components",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-SCORE-SETTLEMENT",
+              "CAT-C-SCORE-CITY",
+              "CAT-C-SCORE-AWARDS",
+              "CAT-C-SCORE-VP"
+            ]
+          },
+          {
+            "id": "CAT-R34-active-immediate-win",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-WIN-ACTIVE",
+              "CAT-C-WIN-IMMEDIATE"
+            ]
+          },
+          {
+            "id": "CAT-R35-offturn-no-win",
+            "status": "FAIL",
+            "message": "case CAT-D11-ten-at-own-turn-start-wins: step 1: terminal: expected True, got False",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-WIN-OFFTURN"
+            ]
+          },
+          {
+            "id": "CAT-R36-vp-win-exception",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-VP-WIN-EXCEPTION"
+            ]
+          },
+          {
+            "id": "CAT-R37-minimal-vp-reveal",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-VP-REVEAL"
+            ]
+          },
+          {
+            "id": "CAT-R38-source-privacy",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "CAT-C-INFO-RESOURCE-PRIVATE",
+              "CAT-C-INFO-DEV-PRIVATE"
+            ]
+          },
+          {
+            "id": "CAT-R39-observation-convention",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-HAND-COUNTS",
+              "CAT-M-INFO-DEV-COUNT"
+            ]
+          },
+          {
+            "id": "CAT-R40-shortage-package",
+            "status": "FAIL",
+            "message": "case road-building-zero-feasible: canonical action is not legal: {'type': 'play_road_building', 'actor': 0, 'args': {'card': 'road_building'}}",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-BANK-PRODUCTION",
+              "CAT-M-BANK-ACTIONS",
+              "CAT-M-ROAD-BUILDING-SHORT",
+              "CAT-M-DEV-EMPTY"
+            ]
+          },
+          {
+            "id": "CAT-R41-designated-oldest-start",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-OLDEST-INPUT"
+            ]
+          },
+          {
+            "id": "CAT-R42-development-boundaries",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-DEV-BOUNDARY"
+            ]
+          },
+          {
+            "id": "CAT-R43-victory-during-card-effect",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-TERMINAL-SUBACTION"
+            ]
+          },
+          {
+            "id": "CAT-R44-finite-trade-bound",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-TRADE-OFFER-BOUND"
+            ]
+          },
+          {
+            "id": "CAT-R45-discard-escrow-interrupt",
+            "status": "FAIL",
+            "message": "case monopoly-cannot-touch-submitted-escrow: step 3: resources[0]: expected {'wood': 0, 'brick': 0, 'wool': 0, 'grain': 0, 'ore': 0}, got {'wood': 1, 'brick': 0, 'wool': 0, 'grain': 0, 'ore': 0}",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-M-DISCARD-ESCROW"
+            ]
+          },
+          {
+            "id": "CAT-R46-knight-robbery-required",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-X-KNIGHT-DECLINE"
+            ]
+          },
+          {
+            "id": "CAT-R47-maritime-receive-differs",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "CAT-A-MARITIME-SAME"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.8,
+        0.89,
+        0.76
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {},
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Spielanleitung p. 4, Spielenende; Almanach p. 10, Spielende",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "After every committed atomic action, the active player wins immediately upon possessing at least 10 points, and only the minimum needed hidden victory-point cards are revealed.",
+            "Victory is checked only after the active player explicitly ends the turn."
+          ],
+          "selected": "After every committed atomic action, the active player wins immediately upon possessing at least 10 points, and only the minimum needed hidden victory-point cards are revealed.",
+          "affected_mechanics": [
+            "state_transition",
+            "terminal_results",
+            "scoring"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Spielanleitung p. 3 and Almanach p. 8, Längste Handelsstraße",
+          "source_basis": "ambiguous",
+          "alternatives": [
+            "Longest Road is the maximum edge-simple trail; edges cannot repeat, vertices may repeat, and an opponent building stops traversal through its vertex.",
+            "Longest Road is the maximum vertex-simple path; neither edges nor vertices may repeat."
+          ],
+          "selected": "Longest Road is the maximum edge-simple trail; edges cannot repeat, vertices may repeat, and an opponent building stops traversal through its vertex.",
+          "affected_mechanics": [
+            "state_transition",
+            "scoring"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Spielanleitung p. 3 Binnenhandel; Almanach p. 6 Binnenhandel",
+          "source_basis": "missing",
+          "alternatives": [
+            "A domestic trade is represented as one finite bilateral offer; the active player adds give/take cards one at a time and the named partner accepts or rejects.",
+            "All players may negotiate an unbounded sequence of simultaneous counteroffers."
+          ],
+          "selected": "A domestic trade is represented as one finite bilateral offer; the active player adds give/take cards one at a time and the named partner accepts or rejects.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 4,
+        "provider_seconds": 1889.374,
+        "input_tokens": 2949963,
+        "cached_input_tokens": 2301952,
+        "output_tokens": 39937,
+        "reasoning_tokens": 18186,
+        "money": null,
+        "api_equivalent_usd": 5.589141,
+        "code_lines": 639
+      },
+      "hashes": {
+        "agentic_evidence": "24e5a981f2bb4ccb357e187bb0b81e373052d82aa80f90e6223d9a001cffa004",
+        "checks": "823cdfdbd0b2dbcd3c4c31bab4f7a05e3416879121aa1491bde47e446c613af0",
+        "scenarios": "f27601815038af1242cbd556c9ce95397c725952002737e48cb65da5842ac1b5",
+        "usage": "d61944b2222fa42ab8179c4dc9a4021a5c415df45e9db658e9c294c369f5ae0e",
+        "code": "134bc1f5786267a4c01eb90e7139cc0db4a413b85d305381145468275debfe04"
+      }
+    }
+  ]
+}

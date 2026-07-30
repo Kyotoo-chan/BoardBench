@@ -59,5 +59,7 @@
       "member": "original_judge_3.md",
       "sha256": "d2f39238822dfc22082686c86b3f994cf9837702cdbb1916f3e06d6746b182fa"
     }
-  }
+  },
+  "historical_judge_packet_status": "method-invalid: publisher companion PDF pages not rendered",
+  "valid_judge_packet_r2_result": "original_r3_judge_r2_result.json"
 }

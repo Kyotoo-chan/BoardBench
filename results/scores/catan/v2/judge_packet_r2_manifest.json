@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "revision_id": "catan-v2-neutral-judge-packet-r2",
+  "status": "valid-reruns-complete",
+  "input_manifest": {
+    "path": "../../../../inputs/games/catan/judge_packet_revision_v2_r2.json",
+    "sha256": "72d22a16fbe59d26a9ec545f32d7258f2a0e4af21259c754d66f92d135d0c4ba"
+  },
+  "conditions": {
+    "original": {
+      "implementation": {
+        "path": "original.py",
+        "sha256": "0ae19100b78800681b5efe0e3617e29e6b69bea10a62fda28fe082f13970fd77"
+      },
+      "scores": [
+        0.66,
+        0.72,
+        0.58
+      ],
+      "reviews": [
+        {
+          "path": "original_r2_judge_1.md",
+          "sha256": "6d9da5f1ba32e074b7c256d92e03a141c77a72cf55e40cee8427b109d25e5b94"
+        },
+        {
+          "path": "original_r2_judge_2.md",
+          "sha256": "2363cce9c866a83d5c7f7b30ee616efc5270fc5c7ac2abf5a176e2149b7570ef"
+        },
+        {
+          "path": "original_r2_judge_3.md",
+          "sha256": "76e712ebc1472fc545f645b42b11655184f61d741a778bac43a175eedd7ffb52"
+        }
+      ]
+    },
+    "clear_rule_emphasis": {
+      "implementation": {
+        "path": "clear_rule_emphasis.py",
+        "sha256": "134bc1f5786267a4c01eb90e7139cc0db4a413b85d305381145468275debfe04"
+      },
+      "scores": [
+        0.8,
+        0.89,
+        0.76
+      ],
+      "reviews": [
+        {
+          "path": "clear_rule_emphasis_r2_judge_1.md",
+          "sha256": "470d2f571be351a0e8878e8510905f2c44c2c1c7fc41fd98f28fe1462231d8bf"
+        },
+        {
+          "path": "clear_rule_emphasis_r2_judge_2.md",
+          "sha256": "5a468be7890fddd44c7c7122625f51ac30c711b662362bb1a3bfeb6242ed3a85"
+        },
+        {
+          "path": "clear_rule_emphasis_r2_judge_3.md",
+          "sha256": "385f2ab6e949b87f1c6c9163a3d4b26d06e27dd2dc5993e7912140a6609304be"
+        }
+      ]
+    },
+    "clarified": {
+      "implementation": {
+        "path": "clarified.py",
+        "sha256": "bf9a09e516262fc73b1672f7d56fbca9327fe8aafbf8181dd79f65630d5d30a6"
+      },
+      "scores": [
+        0.85,
+        0.78,
+        0.84
+      ],
+      "reviews": [
+        {
+          "path": "clarified_judge_1.md",
+          "sha256": "bbf1661fa65ebb56b6630971dc938ceece8e45f8e22e157be758243a8bcd19a1"
+        },
+        {
+          "path": "clarified_judge_2.md",
+          "sha256": "570686a631e2d07adaec86dbfd5a9aae1a04d20183980e8e85fc08a7af7fd36e"
+        },
+        {
+          "path": "clarified_judge_3.md",
+          "sha256": "c0eb79e580017172d05198ed2477fd017920d441b22a3cfc7b1f87df3d142f2e"
+        }
+      ]
+    }
+  }
+}

@@ -1,42 +1,37 @@
 # CATAN 2022 V2
 
-## Ergebnis auf einen Blick
+Three separate adapted conditions were generated once each, with no repairs and no Best-of selection. Original uses only the 2022 German rulebook and matching publisher Almanac. Clear-rule emphasis repeats two publisher-clear defect areas. Source-gap clarification receives only four approved digital decisions.
 
-Der frische Original-Run nutzt ausschließlich die vollständige deutsche Spielanleitung 2022 und den editionsgleichen Publisher-Almanach. Er besteht Technik, 100 Rollouts, Interface und beide unterstützten Spielerzahlen vollständig. Die wesentliche Regellücke der Implementierung ist die vollständig fehlende Berechnung der Längsten Handelsstraße.
+## Comparable r3 results
 
-| Evidenzgruppe | Original V2 |
-|---|---:|
-| Agentischer Gate | PASS, 1 Call, 0 Repairs |
-| Technische Checks 01–04 | 4/4 |
-| Robustheit | 100/100 |
-| Action-Language | 8.883.707/8.883.707 |
-| Spielerzahlen | 4/4 |
-| Clear-basis | **37/40** |
-| Human-decision-basis | **8/11** |
-| Szenarioabdeckung | 51/51 |
-| Named Cases | 107/107 |
-| Neutral Judges | 0,62 / 0,66 / 0,61 |
-| Judge-Mittelwert | **0,630** (SD 0,026) |
+| Evidence | Original | Clear emphasis | Clarification |
+|---|---:|---:|---:|
+| Technical / robustness | 4/4 · 100/100 | 4/4 · 100/100 | 4/4 · 100/100 |
+| Player counts | 4/4 | 4/4 | 4/4 |
+| Clear-basis | **37/40** | **38/40** | **32/40** |
+| Human-decision-basis | **10/15** | **13/15** | **11/15** |
+| Coverage | 55/55 | 55/55 | 55/55 |
+| Valid Judges r2 | 0.66 / 0.72 / 0.58 | 0.80 / 0.89 / 0.76 | 0.85 / 0.78 / 0.84 |
+| Judge mean | **0.653** | **0.817** | **0.823** |
 
-*Diese Evidenzgruppen werden nicht zu einem Gesamtscore kombiniert.*
+These evidence groups are not combined into one correctness score.
 
-## Hauptbefunde
+## Main result
 
-- **Clear:** Längste Handelsstraße wird nie berechnet, vergeben, übertragen oder nach Unterbrechung entfernt (`R18`–`R20`).
-- **Human Decision:** Schleifen-/Figure-eight-Fälle scheitern als Folge derselben Auslassung (`R21`).
-- **Human Decision:** Straßenbau ignoriert den verbleibenden Straßenstock (`R40`).
-- **Human Decision:** Der sofortige Sieg nach der ersten kostenlosen Straße bleibt aus, weil die fehlende Handelsstraßenwertung die zwei Punkte nicht vergibt (`R43`).
+Clear emphasis passes all predeclared Longest Road cases and is the strongest deterministic successor in this suite, but introduces two unrelated clear regressions. Source-gap clarification passes three targeted protocol cases and earns the strongest Judge mean, yet introduces major regressions in pre-roll development cards, domestic trade and Longest Road interruption.
 
-Alle Judges bestätigen die fehlende Längste Handelsstraße und den Straßenstockfehler. Zusätzlich zeigen sie eine echte noch offene digitale Spezifikationsfrage: Der schrittweise Handel vermeidet Power-Set-Aktionen, besitzt aber noch keine definierte Obergrenze für die Länge eines Angebots.
+Therefore clarification improved targeted behavior but did not monotonically improve the game as a whole. Every condition is retained as a separate fresh synthesis.
 
-## Methodischer Hinweis
+## Judge-packet correction
 
-Der erste Evaluator-Replay war wegen drei neutralen Repräsentationsfehlern ungültig und wurde weder gescort noch gejudged. Die Implementierung blieb unverändert. Nur Evaluator r2 ist gültige Evidenz.
+The first Original and emphasis Judge sets copied the Almanac PDF without rendering its pages and are retained as method-invalid. Valid r2 reviews render both publisher PDFs completely at 150 DPI and keep the intervention separately attributed.
 
-## Details
+## Reports
 
-**[Vollständige Fehlergruppen, Judge-Evidenz und Evaluatorhistorie](DETAILS.md)**
+- **[Full comparison](v2/COMPARISON.md)**
+- [Original findings](v2/original_findings.md)
+- [Clear-emphasis findings](v2/clear_rule_emphasis_findings.md)
+- [Clarification findings](v2/clarified_findings.md)
+- [Detailed methodology and defect groups](DETAILS.md)
 
-Maschinenprofil: [`v2/original_result.md`](v2/original_result.md) · [Findings](v2/original_findings.md)
-
-Der ältere `base_packet_1/`-Stressfall bleibt unverändert als historische Pilot-Evidenz erhalten und wird nicht mit V2 vermischt.
+The older `base_packet_1/` pilot remains unchanged and is not mixed with V2.

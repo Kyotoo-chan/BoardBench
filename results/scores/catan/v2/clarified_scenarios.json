@@ -1,0 +1,909 @@
+{
+  "version": 4,
+  "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
+  "suite": "checks/scenarios/catan_v2.json",
+  "suite_sha256": "63c6165d480c7e2a4357ac2c63b172e76153f7add907789e6c17748955d1885c",
+  "adapter": "checks/scenario_adapters/catan_v2.py",
+  "adapter_sha256": "822a6855514af6865001f8574a07a2699d1f15473007a056cda3aa62c8716d78",
+  "runner_sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20",
+  "code": "outputs/catan_codex_ag.py",
+  "code_sha256": "bf9a09e516262fc73b1672f7d56fbca9327fe8aafbf8181dd79f65630d5d30a6",
+  "counts": {
+    "PASS": 43,
+    "FAIL": 12,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 55,
+  "total": 55,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 32,
+      "evaluated": 40,
+      "score": 0.8
+    },
+    "human_decision": {
+      "passed": 11,
+      "evaluated": 15,
+      "score": 0.7333333333333333
+    }
+  },
+  "claim_coverage": {
+    "inventory": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/inputs/games/catan/claims_v2.json",
+    "required": [
+      "CAT-C-ARMY-THRESHOLD",
+      "CAT-C-ARMY-TRANSFER",
+      "CAT-C-BUILD-REPEAT",
+      "CAT-C-BUILD-STOCK",
+      "CAT-C-CITY-UPGRADE",
+      "CAT-C-CLOCKWISE",
+      "CAT-C-COST-CITY",
+      "CAT-C-COST-DEVELOPMENT",
+      "CAT-C-COST-ROAD",
+      "CAT-C-COST-SETTLEMENT",
+      "CAT-C-DEV-ANYTIME",
+      "CAT-C-DEV-BUY-TOP",
+      "CAT-C-DEV-NOT-BOUGHT",
+      "CAT-C-DEV-ONE",
+      "CAT-C-DISCARD-AMOUNT",
+      "CAT-C-DISCARD-RESOURCE-ONLY",
+      "CAT-C-DISCARD-THRESHOLD",
+      "CAT-C-HARBOR-ACCESS",
+      "CAT-C-HARBOR-DELAY",
+      "CAT-C-INFO-DEV-PRIVATE",
+      "CAT-C-INFO-RESOURCE-PRIVATE",
+      "CAT-C-INV-ACKER",
+      "CAT-C-INV-CITIES",
+      "CAT-C-INV-DEV-TOTAL",
+      "CAT-C-INV-GEBIRGE",
+      "CAT-C-INV-HARBORS",
+      "CAT-C-INV-HUEGEL",
+      "CAT-C-INV-KNIGHTS",
+      "CAT-C-INV-LAND-TOTAL",
+      "CAT-C-INV-NUMBERS",
+      "CAT-C-INV-PROGRESS-DISTRIBUTION",
+      "CAT-C-INV-PROGRESS-TOTAL",
+      "CAT-C-INV-RESOURCES",
+      "CAT-C-INV-ROADS",
+      "CAT-C-INV-ROBBER",
+      "CAT-C-INV-SETTLEMENTS",
+      "CAT-C-INV-SPECIAL-CARDS",
+      "CAT-C-INV-VP",
+      "CAT-C-INV-WALD",
+      "CAT-C-INV-WEIDE",
+      "CAT-C-INV-WUESTE",
+      "CAT-C-KNIGHT-FACEUP",
+      "CAT-C-KNIGHT-MOVE",
+      "CAT-C-KNIGHT-NO-DISCARD",
+      "CAT-C-KNIGHT-STEAL",
+      "CAT-C-LR-BRANCH",
+      "CAT-C-LR-HOLDER-TIE",
+      "CAT-C-LR-OPP-BLOCK",
+      "CAT-C-LR-OWN-NOT-BLOCK",
+      "CAT-C-LR-THRESHOLD",
+      "CAT-C-LR-TRANSFER",
+      "CAT-C-LR-VACANT-TIE",
+      "CAT-C-MARITIME-2",
+      "CAT-C-MARITIME-3",
+      "CAT-C-MARITIME-4",
+      "CAT-C-MONOPOLY",
+      "CAT-C-PROD-ADDITIVE",
+      "CAT-C-PROD-ALL",
+      "CAT-C-PROD-CITY",
+      "CAT-C-PROD-DESERT",
+      "CAT-C-PROD-ROBBER",
+      "CAT-C-PROD-SETTLEMENT",
+      "CAT-C-PROGRESS-REMOVED",
+      "CAT-C-ROAD-BLOCK",
+      "CAT-C-ROAD-BUILDING",
+      "CAT-C-ROAD-CONNECT",
+      "CAT-C-ROAD-EMPTY",
+      "CAT-C-ROBBER-CHOOSE",
+      "CAT-C-ROBBER-MOVE",
+      "CAT-C-ROBBER-STEAL",
+      "CAT-C-SCORE-AWARDS",
+      "CAT-C-SCORE-CITY",
+      "CAT-C-SCORE-SETTLEMENT",
+      "CAT-C-SCORE-VP",
+      "CAT-C-SETTLE-DISTANCE",
+      "CAT-C-SETTLE-RETURN",
+      "CAT-C-SETTLE-ROAD",
+      "CAT-C-SETUP-3P-RED",
+      "CAT-C-SETUP-BANK",
+      "CAT-C-SETUP-BOARD",
+      "CAT-C-SETUP-DEV",
+      "CAT-C-SETUP-PIECES",
+      "CAT-C-SETUP-ROBBER",
+      "CAT-C-SETUP-START-RES",
+      "CAT-C-SEVEN-NO-PROD",
+      "CAT-C-SEVEN-SEQUENCE",
+      "CAT-C-START-OLDEST",
+      "CAT-C-TRADE-ACTIVE",
+      "CAT-C-TRADE-FREE",
+      "CAT-C-TRADE-NO-GIFT",
+      "CAT-C-TRADE-REPEAT",
+      "CAT-C-TRADE-RESOURCES",
+      "CAT-C-TURN-PHASES",
+      "CAT-C-TURN-STRICT",
+      "CAT-C-VP-WIN-EXCEPTION",
+      "CAT-C-WIN-ACTIVE",
+      "CAT-C-WIN-IMMEDIATE",
+      "CAT-C-WIN-OFFTURN",
+      "CAT-C-YOP"
+    ],
+    "scenario_covered": [
+      "CAT-C-ARMY-THRESHOLD",
+      "CAT-C-ARMY-TRANSFER",
+      "CAT-C-BUILD-REPEAT",
+      "CAT-C-BUILD-STOCK",
+      "CAT-C-CITY-UPGRADE",
+      "CAT-C-CLOCKWISE",
+      "CAT-C-COST-CITY",
+      "CAT-C-COST-DEVELOPMENT",
+      "CAT-C-COST-ROAD",
+      "CAT-C-COST-SETTLEMENT",
+      "CAT-C-DEV-ANYTIME",
+      "CAT-C-DEV-BUY-TOP",
+      "CAT-C-DEV-NOT-BOUGHT",
+      "CAT-C-DEV-ONE",
+      "CAT-C-DISCARD-AMOUNT",
+      "CAT-C-DISCARD-RESOURCE-ONLY",
+      "CAT-C-DISCARD-THRESHOLD",
+      "CAT-C-HARBOR-ACCESS",
+      "CAT-C-HARBOR-DELAY",
+      "CAT-C-INFO-DEV-PRIVATE",
+      "CAT-C-INFO-RESOURCE-PRIVATE",
+      "CAT-C-INV-ACKER",
+      "CAT-C-INV-CITIES",
+      "CAT-C-INV-DEV-TOTAL",
+      "CAT-C-INV-GEBIRGE",
+      "CAT-C-INV-HARBORS",
+      "CAT-C-INV-HUEGEL",
+      "CAT-C-INV-KNIGHTS",
+      "CAT-C-INV-LAND-TOTAL",
+      "CAT-C-INV-NUMBERS",
+      "CAT-C-INV-PROGRESS-DISTRIBUTION",
+      "CAT-C-INV-PROGRESS-TOTAL",
+      "CAT-C-INV-RESOURCES",
+      "CAT-C-INV-ROADS",
+      "CAT-C-INV-ROBBER",
+      "CAT-C-INV-SETTLEMENTS",
+      "CAT-C-INV-SPECIAL-CARDS",
+      "CAT-C-INV-VP",
+      "CAT-C-INV-WALD",
+      "CAT-C-INV-WEIDE",
+      "CAT-C-INV-WUESTE",
+      "CAT-C-KNIGHT-FACEUP",
+      "CAT-C-KNIGHT-MOVE",
+      "CAT-C-KNIGHT-NO-DISCARD",
+      "CAT-C-KNIGHT-STEAL",
+      "CAT-C-LR-BRANCH",
+      "CAT-C-LR-HOLDER-TIE",
+      "CAT-C-LR-OPP-BLOCK",
+      "CAT-C-LR-OWN-NOT-BLOCK",
+      "CAT-C-LR-THRESHOLD",
+      "CAT-C-LR-TRANSFER",
+      "CAT-C-LR-VACANT-TIE",
+      "CAT-C-MARITIME-2",
+      "CAT-C-MARITIME-3",
+      "CAT-C-MARITIME-4",
+      "CAT-C-MONOPOLY",
+      "CAT-C-PROD-ADDITIVE",
+      "CAT-C-PROD-ALL",
+      "CAT-C-PROD-CITY",
+      "CAT-C-PROD-DESERT",
+      "CAT-C-PROD-ROBBER",
+      "CAT-C-PROD-SETTLEMENT",
+      "CAT-C-PROGRESS-REMOVED",
+      "CAT-C-ROAD-BLOCK",
+      "CAT-C-ROAD-BUILDING",
+      "CAT-C-ROAD-CONNECT",
+      "CAT-C-ROAD-EMPTY",
+      "CAT-C-ROBBER-CHOOSE",
+      "CAT-C-ROBBER-MOVE",
+      "CAT-C-ROBBER-STEAL",
+      "CAT-C-SCORE-AWARDS",
+      "CAT-C-SCORE-CITY",
+      "CAT-C-SCORE-SETTLEMENT",
+      "CAT-C-SCORE-VP",
+      "CAT-C-SETTLE-DISTANCE",
+      "CAT-C-SETTLE-RETURN",
+      "CAT-C-SETTLE-ROAD",
+      "CAT-C-SETUP-3P-RED",
+      "CAT-C-SETUP-BANK",
+      "CAT-C-SETUP-BOARD",
+      "CAT-C-SETUP-DEV",
+      "CAT-C-SETUP-PIECES",
+      "CAT-C-SETUP-ROBBER",
+      "CAT-C-SETUP-START-RES",
+      "CAT-C-SEVEN-NO-PROD",
+      "CAT-C-SEVEN-SEQUENCE",
+      "CAT-C-START-OLDEST",
+      "CAT-C-TRADE-ACTIVE",
+      "CAT-C-TRADE-FREE",
+      "CAT-C-TRADE-NO-GIFT",
+      "CAT-C-TRADE-REPEAT",
+      "CAT-C-TRADE-RESOURCES",
+      "CAT-C-TURN-PHASES",
+      "CAT-C-TURN-STRICT",
+      "CAT-C-VP-WIN-EXCEPTION",
+      "CAT-C-WIN-ACTIVE",
+      "CAT-C-WIN-IMMEDIATE",
+      "CAT-C-WIN-OFFTURN",
+      "CAT-C-YOP"
+    ],
+    "coverage_exceptions": [],
+    "mapping_coverage": 1.0,
+    "evaluated": [
+      "CAT-C-ARMY-THRESHOLD",
+      "CAT-C-ARMY-TRANSFER",
+      "CAT-C-BUILD-REPEAT",
+      "CAT-C-BUILD-STOCK",
+      "CAT-C-CITY-UPGRADE",
+      "CAT-C-CLOCKWISE",
+      "CAT-C-COST-CITY",
+      "CAT-C-COST-DEVELOPMENT",
+      "CAT-C-COST-ROAD",
+      "CAT-C-COST-SETTLEMENT",
+      "CAT-C-DEV-ANYTIME",
+      "CAT-C-DEV-BUY-TOP",
+      "CAT-C-DEV-NOT-BOUGHT",
+      "CAT-C-DEV-ONE",
+      "CAT-C-DISCARD-AMOUNT",
+      "CAT-C-DISCARD-RESOURCE-ONLY",
+      "CAT-C-DISCARD-THRESHOLD",
+      "CAT-C-HARBOR-ACCESS",
+      "CAT-C-HARBOR-DELAY",
+      "CAT-C-INFO-DEV-PRIVATE",
+      "CAT-C-INFO-RESOURCE-PRIVATE",
+      "CAT-C-INV-ACKER",
+      "CAT-C-INV-CITIES",
+      "CAT-C-INV-DEV-TOTAL",
+      "CAT-C-INV-GEBIRGE",
+      "CAT-C-INV-HARBORS",
+      "CAT-C-INV-HUEGEL",
+      "CAT-C-INV-KNIGHTS",
+      "CAT-C-INV-LAND-TOTAL",
+      "CAT-C-INV-NUMBERS",
+      "CAT-C-INV-PROGRESS-DISTRIBUTION",
+      "CAT-C-INV-PROGRESS-TOTAL",
+      "CAT-C-INV-RESOURCES",
+      "CAT-C-INV-ROADS",
+      "CAT-C-INV-ROBBER",
+      "CAT-C-INV-SETTLEMENTS",
+      "CAT-C-INV-SPECIAL-CARDS",
+      "CAT-C-INV-VP",
+      "CAT-C-INV-WALD",
+      "CAT-C-INV-WEIDE",
+      "CAT-C-INV-WUESTE",
+      "CAT-C-KNIGHT-FACEUP",
+      "CAT-C-KNIGHT-MOVE",
+      "CAT-C-KNIGHT-NO-DISCARD",
+      "CAT-C-KNIGHT-STEAL",
+      "CAT-C-LR-BRANCH",
+      "CAT-C-LR-HOLDER-TIE",
+      "CAT-C-LR-OPP-BLOCK",
+      "CAT-C-LR-OWN-NOT-BLOCK",
+      "CAT-C-LR-THRESHOLD",
+      "CAT-C-LR-TRANSFER",
+      "CAT-C-LR-VACANT-TIE",
+      "CAT-C-MARITIME-2",
+      "CAT-C-MARITIME-3",
+      "CAT-C-MARITIME-4",
+      "CAT-C-MONOPOLY",
+      "CAT-C-PROD-ADDITIVE",
+      "CAT-C-PROD-ALL",
+      "CAT-C-PROD-CITY",
+      "CAT-C-PROD-DESERT",
+      "CAT-C-PROD-ROBBER",
+      "CAT-C-PROD-SETTLEMENT",
+      "CAT-C-PROGRESS-REMOVED",
+      "CAT-C-ROAD-BLOCK",
+      "CAT-C-ROAD-BUILDING",
+      "CAT-C-ROAD-CONNECT",
+      "CAT-C-ROAD-EMPTY",
+      "CAT-C-ROBBER-CHOOSE",
+      "CAT-C-ROBBER-MOVE",
+      "CAT-C-ROBBER-STEAL",
+      "CAT-C-SCORE-AWARDS",
+      "CAT-C-SCORE-CITY",
+      "CAT-C-SCORE-SETTLEMENT",
+      "CAT-C-SCORE-VP",
+      "CAT-C-SETTLE-DISTANCE",
+      "CAT-C-SETTLE-RETURN",
+      "CAT-C-SETTLE-ROAD",
+      "CAT-C-SETUP-3P-RED",
+      "CAT-C-SETUP-BANK",
+      "CAT-C-SETUP-BOARD",
+      "CAT-C-SETUP-DEV",
+      "CAT-C-SETUP-PIECES",
+      "CAT-C-SETUP-ROBBER",
+      "CAT-C-SETUP-START-RES",
+      "CAT-C-SEVEN-NO-PROD",
+      "CAT-C-SEVEN-SEQUENCE",
+      "CAT-C-START-OLDEST",
+      "CAT-C-TRADE-ACTIVE",
+      "CAT-C-TRADE-FREE",
+      "CAT-C-TRADE-NO-GIFT",
+      "CAT-C-TRADE-REPEAT",
+      "CAT-C-TRADE-RESOURCES",
+      "CAT-C-TURN-PHASES",
+      "CAT-C-TURN-STRICT",
+      "CAT-C-VP-WIN-EXCEPTION",
+      "CAT-C-WIN-ACTIVE",
+      "CAT-C-WIN-IMMEDIATE",
+      "CAT-C-WIN-OFFTURN",
+      "CAT-C-YOP"
+    ],
+    "evaluated_coverage": 1.0
+  },
+  "results": [
+    {
+      "id": "CAT-R01A-3p-board-pieces",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BOARD",
+        "CAT-C-SETUP-PIECES",
+        "CAT-C-SETUP-3P-RED",
+        "CAT-C-SETUP-ROBBER"
+      ]
+    },
+    {
+      "id": "CAT-R01B-3p-starting-resources",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-START-RES"
+      ]
+    },
+    {
+      "id": "CAT-R01C-3p-bank-deck-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BANK",
+        "CAT-C-SETUP-DEV"
+      ]
+    },
+    {
+      "id": "CAT-R02A-4p-board-pieces",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BOARD",
+        "CAT-C-SETUP-PIECES",
+        "CAT-C-SETUP-ROBBER"
+      ]
+    },
+    {
+      "id": "CAT-R02B-4p-starting-resources",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-START-RES"
+      ]
+    },
+    {
+      "id": "CAT-R02C-4p-bank-deck-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETUP-BANK",
+        "CAT-C-SETUP-DEV"
+      ]
+    },
+    {
+      "id": "CAT-R03-player-range",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-PLAYER-RANGE"
+      ]
+    },
+    {
+      "id": "CAT-R04A-board-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-LAND-TOTAL",
+        "CAT-C-INV-WALD",
+        "CAT-C-INV-WEIDE",
+        "CAT-C-INV-ACKER",
+        "CAT-C-INV-HUEGEL",
+        "CAT-C-INV-GEBIRGE",
+        "CAT-C-INV-WUESTE",
+        "CAT-C-INV-HARBORS",
+        "CAT-C-INV-NUMBERS"
+      ]
+    },
+    {
+      "id": "CAT-R04B-resource-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-RESOURCES"
+      ]
+    },
+    {
+      "id": "CAT-R04C-development-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-DEV-TOTAL",
+        "CAT-C-INV-KNIGHTS",
+        "CAT-C-INV-PROGRESS-TOTAL",
+        "CAT-C-INV-PROGRESS-DISTRIBUTION",
+        "CAT-C-INV-VP"
+      ]
+    },
+    {
+      "id": "CAT-R04D-player-and-other-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INV-ROADS",
+        "CAT-C-INV-SETTLEMENTS",
+        "CAT-C-INV-CITIES",
+        "CAT-C-INV-ROBBER",
+        "CAT-C-INV-SPECIAL-CARDS"
+      ]
+    },
+    {
+      "id": "CAT-R05A-oldest-seat-starts",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-START-OLDEST"
+      ]
+    },
+    {
+      "id": "CAT-R05-clockwise-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-CLOCKWISE"
+      ]
+    },
+    {
+      "id": "CAT-R06-strict-phases",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-TURN-PHASES",
+        "CAT-C-TURN-STRICT"
+      ]
+    },
+    {
+      "id": "CAT-R07-production",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROD-ALL",
+        "CAT-C-PROD-SETTLEMENT",
+        "CAT-C-PROD-CITY",
+        "CAT-C-PROD-ADDITIVE"
+      ]
+    },
+    {
+      "id": "CAT-R08-desert-robber-block",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROD-DESERT",
+        "CAT-C-PROD-ROBBER"
+      ]
+    },
+    {
+      "id": "CAT-R09-development-timing",
+      "status": "FAIL",
+      "message": "case CAT-R05-development-before-roll: action_legal[{'type': 'play_knight', 'actor': 0, 'args': {'card': 'knight'}}]: expected True, got False",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-DEV-ANYTIME",
+        "CAT-C-DEV-ONE",
+        "CAT-C-DEV-NOT-BOUGHT"
+      ]
+    },
+    {
+      "id": "CAT-R10-domestic-trade-rules",
+      "status": "FAIL",
+      "message": "case positive-unequal-and-repeatable: canonical action is not legal: {'type': 'accept_domestic_trade', 'actor': 1}",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-TRADE-ACTIVE",
+        "CAT-C-TRADE-FREE",
+        "CAT-C-TRADE-NO-GIFT",
+        "CAT-C-TRADE-RESOURCES",
+        "CAT-C-TRADE-REPEAT"
+      ]
+    },
+    {
+      "id": "CAT-R11-bilateral-consent",
+      "status": "FAIL",
+      "message": "case accept-atomic: canonical action is not legal: {'type': 'accept_domestic_trade', 'actor': 1}",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TRADE-PROTOCOL"
+      ]
+    },
+    {
+      "id": "CAT-R12-maritime-rates",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-MARITIME-4",
+        "CAT-C-MARITIME-3",
+        "CAT-C-MARITIME-2",
+        "CAT-C-HARBOR-ACCESS"
+      ]
+    },
+    {
+      "id": "CAT-R13-new-harbor-delay",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-HARBOR-DELAY"
+      ]
+    },
+    {
+      "id": "CAT-R14-building-costs-stock",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-COST-ROAD",
+        "CAT-C-COST-SETTLEMENT",
+        "CAT-C-COST-CITY",
+        "CAT-C-COST-DEVELOPMENT",
+        "CAT-C-BUILD-STOCK",
+        "CAT-C-BUILD-REPEAT"
+      ]
+    },
+    {
+      "id": "CAT-R15-road-legality",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROAD-EMPTY",
+        "CAT-C-ROAD-CONNECT",
+        "CAT-C-ROAD-BLOCK"
+      ]
+    },
+    {
+      "id": "CAT-R16-settlement-legality",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SETTLE-ROAD",
+        "CAT-C-SETTLE-DISTANCE"
+      ]
+    },
+    {
+      "id": "CAT-R17-city-upgrade",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-CITY-UPGRADE",
+        "CAT-C-SETTLE-RETURN"
+      ]
+    },
+    {
+      "id": "CAT-R18-longest-threshold-branch",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-THRESHOLD",
+        "CAT-C-LR-BRANCH"
+      ]
+    },
+    {
+      "id": "CAT-R19-longest-interruption",
+      "status": "FAIL",
+      "message": "case CAT-R38-opponent-settlement-splits-road: step 1: special_cards.longest_road_owner: expected None, got 0",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-OPP-BLOCK",
+        "CAT-C-LR-OWN-NOT-BLOCK"
+      ]
+    },
+    {
+      "id": "CAT-R20-longest-transfer-ties",
+      "status": "FAIL",
+      "message": "case interruption-tie-excludes-holder: step 1: special_cards.longest_road_owner: expected None, got 0",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-LR-TRANSFER",
+        "CAT-C-LR-HOLDER-TIE",
+        "CAT-C-LR-VACANT-TIE"
+      ]
+    },
+    {
+      "id": "CAT-R21-longest-cycles",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-A-LR-CYCLE"
+      ]
+    },
+    {
+      "id": "CAT-R22-seven-discard",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SEVEN-NO-PROD",
+        "CAT-C-DISCARD-THRESHOLD",
+        "CAT-C-DISCARD-AMOUNT",
+        "CAT-C-DISCARD-RESOURCE-ONLY",
+        "CAT-C-SEVEN-SEQUENCE"
+      ]
+    },
+    {
+      "id": "CAT-R23-robber-move-steal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROBBER-MOVE",
+        "CAT-C-ROBBER-CHOOSE",
+        "CAT-C-ROBBER-STEAL"
+      ]
+    },
+    {
+      "id": "CAT-R24-knight-no-discard",
+      "status": "FAIL",
+      "message": "case knight-move-steal-no-discard: canonical action is not legal: {'type': 'play_knight', 'actor': 0, 'args': {'card': 'knight'}}",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-KNIGHT-NO-DISCARD",
+        "CAT-C-KNIGHT-MOVE",
+        "CAT-C-KNIGHT-STEAL"
+      ]
+    },
+    {
+      "id": "CAT-R25-random-theft-no-victim",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-RNG",
+        "CAT-M-NO-VICTIM"
+      ]
+    },
+    {
+      "id": "CAT-R26-private-simultaneous-discards",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DISCARD-PROTOCOL"
+      ]
+    },
+    {
+      "id": "CAT-R27-development-purchase",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-DEV-BUY-TOP"
+      ]
+    },
+    {
+      "id": "CAT-R28-road-building",
+      "status": "FAIL",
+      "message": "case CAT-D06-road-building-two-sequential: canonical action is not legal: {'type': 'play_road_building', 'actor': 0, 'args': {'card': 'road_building'}}",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ROAD-BUILDING"
+      ]
+    },
+    {
+      "id": "CAT-R29-year-of-plenty",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-YOP"
+      ]
+    },
+    {
+      "id": "CAT-R30-monopoly",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-MONOPOLY"
+      ]
+    },
+    {
+      "id": "CAT-R31-played-card-zones",
+      "status": "FAIL",
+      "message": "case knight-faceup: canonical action is not legal: {'type': 'play_knight', 'actor': 0, 'args': {'card': 'knight'}}",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-PROGRESS-REMOVED",
+        "CAT-C-KNIGHT-FACEUP"
+      ]
+    },
+    {
+      "id": "CAT-R32-largest-army",
+      "status": "FAIL",
+      "message": "case CAT-R39-largest-army-at-three: canonical action is not legal: {'type': 'play_knight', 'actor': 0, 'args': {'card': 'knight'}}; case CAT-R40-largest-army-tie-no-transfer: canonical action is not legal: {'type': 'play_knight', 'actor': 1, 'args': {'card': 'knight'}}; case CAT-R41-largest-army-strictly-more-transfers: canonical action is not legal: {'type': 'play_knight', 'actor': 1, 'args': {'card': 'knight'}}",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-ARMY-THRESHOLD",
+        "CAT-C-ARMY-TRANSFER"
+      ]
+    },
+    {
+      "id": "CAT-R33-score-components",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-SCORE-SETTLEMENT",
+        "CAT-C-SCORE-CITY",
+        "CAT-C-SCORE-AWARDS",
+        "CAT-C-SCORE-VP"
+      ]
+    },
+    {
+      "id": "CAT-R34-active-immediate-win",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-WIN-ACTIVE",
+        "CAT-C-WIN-IMMEDIATE"
+      ]
+    },
+    {
+      "id": "CAT-R35-offturn-no-win",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-WIN-OFFTURN"
+      ]
+    },
+    {
+      "id": "CAT-R36-vp-win-exception",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-VP-WIN-EXCEPTION"
+      ]
+    },
+    {
+      "id": "CAT-R37-minimal-vp-reveal",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-VP-REVEAL"
+      ]
+    },
+    {
+      "id": "CAT-R38-source-privacy",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "CAT-C-INFO-RESOURCE-PRIVATE",
+        "CAT-C-INFO-DEV-PRIVATE"
+      ]
+    },
+    {
+      "id": "CAT-R39-observation-convention",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-HAND-COUNTS",
+        "CAT-M-INFO-DEV-COUNT"
+      ]
+    },
+    {
+      "id": "CAT-R40-shortage-package",
+      "status": "FAIL",
+      "message": "case one-free-road: canonical action is not legal: {'type': 'play_road_building', 'actor': 0, 'args': {'card': 'road_building'}}",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-BANK-PRODUCTION",
+        "CAT-M-BANK-ACTIONS",
+        "CAT-M-ROAD-BUILDING-SHORT",
+        "CAT-M-DEV-EMPTY"
+      ]
+    },
+    {
+      "id": "CAT-R41-designated-oldest-start",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-OLDEST-INPUT"
+      ]
+    },
+    {
+      "id": "CAT-R42-development-boundaries",
+      "status": "FAIL",
+      "message": "case discard: canonical action is not legal: {'type': 'move_robber', 'actor': 0, 'args': {'hex': 'h00'}}; case trade-consent: canonical action is not legal: {'type': 'move_robber', 'actor': 0, 'args': {'hex': 'h00'}}",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DEV-BOUNDARY"
+      ]
+    },
+    {
+      "id": "CAT-R43-victory-during-card-effect",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TERMINAL-SUBACTION"
+      ]
+    },
+    {
+      "id": "CAT-R44-finite-trade-bound",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-TRADE-OFFER-BOUND"
+      ]
+    },
+    {
+      "id": "CAT-R45-discard-escrow-interrupt",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-M-DISCARD-ESCROW"
+      ]
+    },
+    {
+      "id": "CAT-R46-knight-robbery-required",
+      "status": "FAIL",
+      "message": "case empty-adjacent-victim-still-required: canonical action is not legal: {'type': 'play_knight', 'actor': 0, 'args': {'card': 'knight'}}",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-X-KNIGHT-DECLINE"
+      ]
+    },
+    {
+      "id": "CAT-R47-maritime-receive-differs",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "CAT-A-MARITIME-SAME"
+      ]
+    }
+  ]
+}

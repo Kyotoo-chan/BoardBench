@@ -1,99 +1,90 @@
-# CATAN 2022 V2: detaillierte Auswertung
+# CATAN 2022 V2: detailed study record
 
-[← Kurzüberblick](README.md)
+[← Summary](README.md) · [Condition comparison](v2/COMPARISON.md)
 
-## Studiendesign
+## Design
 
-- Publisherquellen: deutsche Spielanleitung 2022 plus editionsgleicher CATAN-Almanach 2022.
-- Scope: abgebildeter Einsteigeraufbau für 3 und 4 Spieler; strikte Phasen Würfeln → Handeln → Bauen.
-- Ausgeschlossen: variabler Aufbau, empfohlener Experten-Phasenmix, App und Erweiterungen.
-- 121 atomare Claims: 104 clear, 15 missing, 1 ambiguous, 1 untestable.
-- 99 materielle und ausführbare Clear Claims.
-- 51 Szenarien mit 107 Named Cases: 40 clear, 11 human decision.
-- Generierung: `gpt-5.6-sol`, Thinking `low`; Judges: dasselbe Modell, Thinking `medium`.
+- Canonical sources: German publisher rulebook 2022 and edition-matched publisher Almanac 2022.
+- Scope: illustrated beginner setup for 3 and 4 players; strict roll → trade → build.
+- Excluded: variable setup, experienced merged phases, app and expansions.
+- Evaluator r3: 125 visible claims (104 clear, 17 missing, 2 ambiguous, 1 conflicting, 1 untestable), 99 required executable clear claims, 55 scenarios and 113 named cases.
+- Generation: `gpt-5.6-sol`, low thinking, one call per condition, zero repairs.
+- Valid Judges: same model, medium thinking, three mutually blind reviews per condition.
 
-## Gruppierte Ergebnisse
+## Conditions
 
-| Gruppe | Ergebnis |
-|---|---:|
-| Agentischer Pre-Evaluation-Gate | PASS |
-| Generation / Repairs | 1 / 0 |
-| Technik 01–04 | 4/4 |
-| Random Rollouts | 100/100 |
-| Action-Language | 8.883.707/8.883.707 |
-| Spielerzahl 3/4 und Ablehnung 2/5 | 4/4 |
-| Clear-basis | 37/40 |
-| Human-decision-basis | 8/11 |
-| Szenarien / Named Cases ausgewertet | 51/51 / 107/107 |
-| Claim-Mapping / evaluated | 99/99 / 99/99 |
-| Judges | 0,62 / 0,66 / 0,61 |
-| Judge-Mittel (sample SD) | 0,630 (0,026) |
+### Original compatibility replay
 
-## Clear-Defektgruppe
+The implementation is byte-identical to the previously scored Original. Evaluator r3 adds four approved human-decision cases without rewriting the r2 result.
 
-### Längste Handelsstraße fehlt vollständig
+- Clear 37/40; Human Decision 10/15.
+- Main defect: Longest Road is never calculated.
+- Other defects: Road Building can exceed stock; submitted discard is mutable; trade builder unbounded.
+- Valid Judges r2: 0.66 / 0.72 / 0.58, mean 0.653.
 
-`special_cards.longest_road_owner` und `longest_road_length` werden initialisiert, danach aber nirgends neu berechnet. Das verursacht sämtliche Clear-Fehler:
+### Clear-rule emphasis
 
-- `CAT-R18-longest-threshold-branch`: keine Vergabe bei fünf zusammenhängenden Straßen;
-- `CAT-R19-longest-interruption`: weder gegnerische Unterbrechung noch eigene Nicht-Unterbrechung wird ausgewertet;
-- `CAT-R20-longest-transfer-ties`: kein Transfer und keine korrekte Vakanz bei Gleichständen nach Unterbrechung.
+Model-facing addition: a separately attributed experimenter artifact repeating publisher-clear Longest Road and physical road-stock requirements. It contains no source-gap decisions.
 
-Die Implementierung kann dadurch Punkte und Sieger falsch bestimmen. Alle drei Judges erkennen diese Auslassung unabhängig.
+- Clear 38/40; Human Decision 13/15.
+- Target success: all Longest Road and edge-simple-cycle scenarios pass; one-road stock handling passes.
+- Remaining target edge: with zero roads, Road Building is made unplayable instead of resolving with zero placements.
+- Regressions: missing explicit red-color removal in three-player setup; no immediate win when a ten-point player becomes active.
+- Valid Judges r2: 0.80 / 0.89 / 0.76, mean 0.817.
 
-## Human-Decision-Fehler
+### Source-gap clarification
 
-### `R21`: Edge-simple Schleifen
+Model-facing addition: only four user-approved decisions:
 
-Schleifen und Figure-eight-Fälle scheitern, weil überhaupt kein Longest-Road-Algorithmus existiert. Das ist keine isolierte Widerlegung der gewählten Edge-simple-Trail-Definition.
+1. offer totals capped by public hand sizes;
+2. submitted private discards become interrupt-safe escrow;
+3. an adjacent Knight victim must be selected, with empty hands still selectable;
+4. maritime receive type must differ from give type.
 
-### `R40`: Straßenbau und Figurenstock
+- Clear 32/40; Human Decision 11/15.
+- Direct target passes: finite offer bound, submitted escrow against Monopoly, different-resource maritime exchange.
+- Mandatory victim behavior is masked by a clear pre-roll development-card defect.
+- Major regressions: development cards unavailable before rolling; valid domestic offers cannot be accepted; settlement interruption does not recompute Longest Road; some interrupt resumptions are wrong.
+- Valid Judges r2: 0.85 / 0.78 / 0.84, mean 0.823.
 
-`_road_actions(..., free=True)` überspringt die Prüfung des verbleibenden Straßenstocks. Eine Person mit nur einer Straße kann nach deren Platzierung in `road_building` verbleiben und eine weitere Straße mit negativem Stock platzieren.
+## Root-cause groups
 
-### `R43`: sofortiger Sieg während Karteneffekt
+### Original
 
-Der Fall erwartet, dass die erste kostenlose Straße die Längste Handelsstraße und damit den zehnten Punkt erzeugt. Wegen der fehlenden Vergabe bleibt der Zustand nichtterminal. Ob ein korrekt erzeugter Sieg den restlichen Effekt ordnungsgemäß abbricht, wird dadurch nicht unabhängig widerlegt.
+1. Longest Road state initialized but never updated.
+2. Free-road generation bypasses physical stock.
+3. No finite cumulative trade-offer bound.
+4. Submitted selections remain available to effects.
 
-## Judge-Evidenz
+### Clear emphasis
 
-Gemeinsamer Kern aller Reviews:
+1. Zero-stock Road Building precondition is too strict.
+2. Three-player removed-color record regresses.
+3. Turn-start immediate victory check regresses.
+4. Untargeted submitted-discard and interrupt issues remain.
 
-1. fehlende Längste Handelsstraße — critical/major;
-2. Straßenbau ignoriert Figurenstock — major;
-3. schrittweiser Inlandshandel hat trotz endlicher Aktionen pro Zustand keine Gesamtobergrenze für Angebotsmengen.
+### Clarification
 
-Weitere Signale:
+1. Legal development interrupts omit the roll phase, causing five clear scenario failures plus dependent human-decision failures.
+2. Awaiting trade acceptance checks the proposer's give bundle against the responder because `current_player` has changed.
+3. Longest Road recomputation occurs after road placement but not after an opponent settlement.
+4. `_available` reserves tentative discard choices before submission; r3 verifies submitted escrow but a valid Judge detects this narrower over-reservation.
 
-- Ein Review findet einen plausiblen ungescorten Interrupt-Fehler: bereits eingereichte private Abgaben werden erst am Ende entfernt und können zuvor durch eine erlaubte Entwicklungskarten-Unterbrechung verändert werden.
-- Der Empty-victim-Befund eines Reviews widerspricht der eingefrorenen Human Decision: angrenzende leere Hände bleiben absichtlich auswählbar und übertragen nichts.
-- Same-resource-Seehandel, optionaler Ritterraub und die physische Ablage gespielter Fortschrittskarten bleiben Interpretations-/Repräsentationsfragen und werden nicht als klare Defekte berichtet.
+## Evaluator history
 
-## Möglicher Interventionsbedarf
+The first Original scenario replay was invalid due to three neutral representation assumptions and remains archived unscored. Evaluator r2 corrected them without changing code. Evaluator r3 was frozen before either intervention and adds four approved gap decisions; it replayed unchanged Original code for comparison.
 
-Noch keine Intervention ist festgelegt. Die Evidenz trennt:
+## Judge history
 
-- **publisher-clear Implementierungsfehler:** Longest Road, Road-Building-Stock;
-- **echte digitale Spezifikationskandidaten:** maximale Angebotslänge, Stabilität bereits eingereichter Abgaben bei Interrupts, optionaler Ritterraub;
-- **Evaluator-/Repräsentationsfragen:** Same-resource-Tausch und physische Kartenablage.
+The initial Original and clear-emphasis Judge packets copied the publisher companion PDF but rendered only the primary PDF. This violates the full-page-image policy. Those reviews and result cards remain historical but are method-invalid. Judge packet r2:
 
-Eine spätere Source-Gap-Klarstellung darf nur die echten digitalen Lücken entscheiden. Eine Betonung der bereits klaren Longest-Road-Regeln müsste separat als Clear-Rule-Emphasis bezeichnet werden.
+- renders the complete rulebook and complete Almanac independently at 150 DPI;
+- includes both PDFs and their separate provenance;
+- attributes an optional intervention separately;
+- reruns all three conditions.
 
-## Evaluatorrevision
+Manifest: `inputs/games/catan/judge_packet_revision_v2_r2.json`.
 
-Der erste Replay (40 PASS / 11 FAIL) war ungültig:
+## Scientific interpretation
 
-1. eine illegale Trade-Proposal-Aktion wurde dennoch ausgeführt;
-2. eine nicht deklarierte Decklistenrichtung wurde hart vorausgesetzt;
-3. historische Karten-Zonen-Erwartungen widersprachen den V2-`revealed`-Feldern.
-
-Das Archiv liegt unter `v2/raw/invalid_evaluator_replay_1.tar.gz`. Evaluator r2 korrigiert ausschließlich diese Punkte; Code, Modellantwort und Generationsevidenz sind byte-identisch geblieben. Drei Judges wurden erst nach dem gültigen r2-Replay gestartet.
-
-## Artefakte
-
-- `v2/original_result.json`, `v2/original_result.md`
-- `v2/original_findings.md`
-- `v2/evaluation_manifest.json`
-- `inputs/games/catan/evaluator_revision_v2_r2.json`
-- `v2/raw/FAILED_ATTEMPTS.md`
-- erfolgreiche Rohartefakte werden kompakt unter `v2/raw/study_artifacts.tar.gz` gebündelt
+The runs show local target associations: two previously failing clarification cases pass with the added decisions, and every tested Longest Road case passes with emphasis. They do not establish causal effects or monotonic global improvement because each condition has only one fresh generation. Unrelated regressions can outweigh target gains, and scenario evidence and Judge evidence rank the conditions differently; both remain separate rather than being averaged.

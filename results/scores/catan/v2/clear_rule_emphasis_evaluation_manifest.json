@@ -63,5 +63,7 @@
       "path": "../../../../inputs/games/catan/run_v2_clear_rule_emphasis.json",
       "sha256": "c29d1854973684e2065341a3a4a6ac50619d148e73c982d41060700ba1d34d1c"
     }
-  }
+  },
+  "historical_judge_packet_status": "method-invalid: publisher companion PDF pages not rendered",
+  "valid_judge_packet_r2_result": "clear_rule_emphasis_judge_r2_result.json"
 }

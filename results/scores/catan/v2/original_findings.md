@@ -11,7 +11,8 @@
 - Clear-basis scenarios: 37/40.
 - Human-decision-basis scenarios: 8/11.
 - Evaluated coverage: 51/51 scenarios and 107/107 named cases under evaluator revision r2.
-- Neutral Judges: 0.62 / 0.66 / 0.61; mean 0.630, sample SD 0.026.
+- Historical Judge packet r1 (method-invalid because Almanac pages were not rendered): 0.62 / 0.66 / 0.61.
+- Valid Judge packet r2: 0.66 / 0.72 / 0.58; mean 0.653, sample SD 0.070.
 
 ## Scored failures
 
@@ -27,7 +28,7 @@ Human-decision failures:
 
 ## Judge-only findings
 
-All Judges independently identify Longest Road as the dominant critical/major omission and Road Building stock as major. They also identify an unbounded domestic-offer builder: each state has a finite add-one-resource action set, but offer counts can grow without a source/profile-defined cap. This is a genuine digital-protocol clarification candidate, not a publisher-clear defect score.
+The valid r2 Judges independently identify Longest Road as the dominant major omission and Road Building stock as major. They also identify an unbounded domestic-offer builder: each state has a finite add-one-resource action set, but offer counts can grow without a source/profile-defined cap. This is a genuine digital-protocol clarification candidate, not a publisher-clear defect score.
 
 One Judge identifies a real unscored robustness risk: a player may privately submit discards, after which a permitted development-card interrupt can alter those resources before simultaneous settlement, potentially producing negative counts. This needs a new evaluator version or clarification before being scored.
 

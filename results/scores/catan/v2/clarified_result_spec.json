@@ -1,0 +1,33 @@
+{
+  "identity": {
+    "game": "CATAN 2022",
+    "condition": "v2_clarified_1",
+    "source_path": "../../../../inputs/games/catan/game_rules.pdf",
+    "source_format": "pdf+matching-publisher-companion",
+    "source_sha256": "e0673fa93040f5b43908b215f52573878f586d26827d3a4f07c2ef8f8a947cf3"
+  },
+  "source_diagnosis": {
+    "clear": 104,
+    "missing": 17,
+    "ambiguous": 2,
+    "untestable": 1,
+    "conflicting": 1
+  },
+  "headline": "Source-gap clarification: 32/40 clear-basis and 11/15 human-decision-basis scenarios; valid rendered-PDF Judges 0.85/0.78/0.84.",
+  "runs": [
+    {
+      "stem": "clarified",
+      "agentic_evidence": "clarified_agentic.json",
+      "checks": "clarified_checks.txt",
+      "scenarios": "clarified_scenarios.json",
+      "usage": "clarified_usage.json",
+      "code": "clarified.py",
+      "assumptions": "clarified_assumptions.json",
+      "neutral_reviews": [
+        "clarified_judge_1.md",
+        "clarified_judge_2.md",
+        "clarified_judge_3.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "run_id": "v2_clarified_1",
+  "status": "valid-evaluation-complete",
+  "implementation_changed_after_generation": false,
+  "rubric_version": "catan-2022-v2-atomic-r3-2026-07-29",
+  "judge_packet_revision": "catan-v2-neutral-judge-packet-r2",
+  "intervention_kind": "source_gap_clarification",
+  "technical_gate": "4/4",
+  "robustness": "100/100",
+  "interface": "798680/798680",
+  "player_counts": "4/4",
+  "clear_basis": "32/40",
+  "human_decision_basis": "11/15",
+  "scenario_coverage": "55/55",
+  "named_cases": "113/113",
+  "judge_scores": [
+    0.85,
+    0.78,
+    0.84
+  ],
+  "artifacts": {
+    "implementation": {
+      "path": "clarified.py",
+      "sha256": "bf9a09e516262fc73b1672f7d56fbca9327fe8aafbf8181dd79f65630d5d30a6"
+    },
+    "agentic": {
+      "path": "clarified_agentic.json",
+      "sha256": "a94b956759bbed78d289e52201fddd3fbe82ceef00f006f3c291b8772c076270"
+    },
+    "checks": {
+      "path": "clarified_checks.txt",
+      "sha256": "02c0bd78846142979252d6c8c39731d4332254091e6412a4a502e7b0271b949d"
+    },
+    "scenarios": {
+      "path": "clarified_scenarios.json",
+      "sha256": "909089ad429cf5809faa33bae4157f644231787cf10c752e79227af21b2e1a90"
+    },
+    "result": {
+      "path": "clarified_result.json",
+      "sha256": "3acade095ff34d2d2fb3824de4aef46f2e7dd9d0ae24fd0bff206b6aefdf1a2a"
+    },
+    "judge_1": {
+      "path": "clarified_judge_1.md",
+      "sha256": "bbf1661fa65ebb56b6630971dc938ceece8e45f8e22e157be758243a8bcd19a1"
+    },
+    "judge_2": {
+      "path": "clarified_judge_2.md",
+      "sha256": "570686a631e2d07adaec86dbfd5a9aae1a04d20183980e8e85fc08a7af7fd36e"
+    },
+    "judge_3": {
+      "path": "clarified_judge_3.md",
+      "sha256": "c0eb79e580017172d05198ed2477fd017920d441b22a3cfc7b1f87df3d142f2e"
+    },
+    "evaluator_revision": {
+      "path": "../../../../inputs/games/catan/evaluator_revision_v2_r3.json",
+      "sha256": "54e3e3c0b1c612dfc14251b550e5c55201057430005db7a71072dd4e3f061864"
+    },
+    "judge_revision": {
+      "path": "../../../../inputs/games/catan/judge_packet_revision_v2_r2.json",
+      "sha256": "72d22a16fbe59d26a9ec545f32d7258f2a0e4af21259c754d66f92d135d0c4ba"
+    },
+    "intervention": {
+      "path": "../../../../inputs/games/catan/clarifications_v2.json",
+      "sha256": "7468c42e061640d5685b65ce20d6b4da19201792bd8e401d98087d6dde9ce9d8"
+    },
+    "run_config": {
+      "path": "../../../../inputs/games/catan/run_v2_clarified.json",
+      "sha256": "f9b2a9621726d83e5d0da6fa6cb1cfbd091804940a252728ddbc46609c368879"
+    }
+  }
+}

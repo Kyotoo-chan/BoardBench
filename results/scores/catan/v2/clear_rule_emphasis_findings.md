@@ -6,11 +6,12 @@
 - Technical 4/4; robustness 100/100; interface 4,342,395/4,342,395; player counts 4/4.
 - Clear-basis: 38/40.
 - Human-decision-basis: 13/15.
-- Judges: 0.72 / 0.72 / 0.83; mean 0.757, sample SD 0.064.
+- Historical Judge packet r1 (method-invalid because Almanac pages were not rendered): 0.72 / 0.72 / 0.83.
+- Valid Judge packet r2: 0.80 / 0.89 / 0.76; mean 0.817, sample SD 0.067.
 
 ## Target effects
 
-The intervention succeeds on its main target: all Longest Road threshold, branch, interruption, transfer, tie and edge-simple-cycle scenarios (`R18`–`R21`) pass. It also enforces road stock after one remaining free road. Judge reviews no longer report missing Longest Road.
+The run passes every predeclared target case: all Longest Road threshold, branch, interruption, transfer, tie and edge-simple-cycle scenarios (`R18`–`R21`) pass. It also enforces road stock after one remaining free road. Judge reviews no longer report missing Longest Road.
 
 The zero-road Road Building case (`R40`) remains a human-decision failure because the implementation makes the card unplayable rather than resolving the approved maximum-feasible effect with zero placements.
 
