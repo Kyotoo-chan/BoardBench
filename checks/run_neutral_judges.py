@@ -42,18 +42,28 @@ def judge(index: int, args: argparse.Namespace) -> None:
             ],
         }
         packet_names = [rules.name, facts.name, claims.name, code.name]
+        assigned = []
+        if args.companion:
+            assigned.append((args.companion, args.companion_source_id, args.companion_role, "canonical_companion"))
         if args.supplement:
-            supplement = workspace / f"canonical_supplement{args.supplement.suffix.lower()}"
-            shutil.copy2(args.supplement, supplement)
+            assigned.append((args.supplement, args.supplement_source_id, args.supplement_role, "canonical_supplement"))
+        copied = []
+        for source, source_id, role, stem in assigned:
+            target = workspace / f"{stem}{source.suffix.lower()}"
+            shutil.copy2(source, target)
             manifest["sources"].append({
-                "source_id": args.supplement_source_id,
-                "role": args.supplement_role,
-                "packet_name": supplement.name,
-                "sha256": sha256(supplement),
+                "source_id": source_id,
+                "role": role,
+                "packet_name": target.name,
+                "sha256": sha256(target),
             })
-            packet_names.append(supplement.name)
+            packet_names.append(target.name)
+            copied.append(target)
         (workspace / "SOURCE_MANIFEST.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         images = render_pdf_pages(rules, workspace / "canonical_rulebook_pages", dpi=150)
+        for source in copied:
+            if source.suffix.lower() == ".pdf":
+                images.extend(render_pdf_pages(source, workspace / f"{source.stem}_pages", dpi=150))
         review = (ROOT / "inputs/prompts/llm_judge_review.md").read_text(encoding="utf-8")
         prompt = f"""You are one of three fresh, mutually blind neutral BoardBench rule reviewers. Work only with SOURCE_MANIFEST.json, its listed sources, the attached 150-DPI rulebook page images and render manifest, and implementation.py. Assigned files: {', '.join(packet_names)}. Respect the declared base-game scope and source roles. Do not inspect checks, scenarios, scores, prior reviews, other implementations, or other source conditions. Do not use outside game knowledge. Cite canonical claim IDs where applicable.\n\n{review}"""
         run_codex(
@@ -88,15 +98,21 @@ def main() -> int:
     parser.add_argument("--rulebook-source-id", required=True)
     parser.add_argument("--rulefacts-source-id", required=True)
     parser.add_argument("--claims-source-id", required=True)
-    parser.add_argument("--supplement", type=Path, help="Optional assigned clarification or companion source")
+    parser.add_argument("--companion", type=Path, help="Optional assigned publisher companion")
+    parser.add_argument("--companion-source-id")
+    parser.add_argument("--companion-role", default="publisher_companion")
+    parser.add_argument("--supplement", type=Path, help="Optional assigned clarification source")
     parser.add_argument("--supplement-source-id")
     parser.add_argument("--supplement-role", default="experimenter_clarification")
     parser.add_argument("--model", default="gpt-5.6-sol")
     parser.add_argument("--effort", default="medium")
     args = parser.parse_args()
+    if bool(args.companion) != bool(args.companion_source_id):
+        parser.error("--companion and --companion-source-id must be supplied together")
     if bool(args.supplement) != bool(args.supplement_source_id):
         parser.error("--supplement and --supplement-source-id must be supplied together")
-    for path in (args.rulebook, args.rulefacts, args.claims, args.code, *([args.supplement] if args.supplement else [])):
+    extras = [path for path in (args.companion, args.supplement) if path]
+    for path in (args.rulebook, args.rulefacts, args.claims, args.code, *extras):
         if not path.is_file():
             parser.error(f"missing file: {path}")
     args.output_dir.mkdir(parents=True, exist_ok=True)

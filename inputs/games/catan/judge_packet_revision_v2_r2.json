@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "revision_id": "catan-v2-neutral-judge-packet-r2",
+  "status": "frozen-pre-rerun",
+  "created_on": "2026-07-29",
+  "reason": "The prior CATAN neutral-judge packet copied the publisher companion PDF but rendered only the primary rulebook. BoardBench requires fresh 150-DPI images for every model-facing PDF. R2 adds a separately attributed companion input, renders every assigned PDF, and supports a simultaneous non-PDF clarification source. Generated implementations, scenario scores, and prior reviews remain unchanged and retained; only R2 reviews are valid comparison evidence.",
+  "invalidated_review_sets": [
+    "v2_original_1 judge 1-3",
+    "v2_clear_rule_emphasis_1 judge 1-3"
+  ],
+  "runner": {
+    "path": "checks/run_neutral_judges.py",
+    "sha256": "f5d716cb51c71526eb80b9f17ce82767e710e244c6568cb4cb3586e1040808d9"
+  },
+  "test": {
+    "path": "checks/test_neutral_judges.py",
+    "sha256": "9a26f3282ce69349ed067b077680386ab198c13cdf20dcad69228a283c5e908d"
+  },
+  "assigned_pdf_policy": {
+    "dpi": 150,
+    "primary_pdf_and_all_companion_pdfs_rendered": true
+  },
+  "conditions_to_rerun": [
+    "v2_original_1",
+    "v2_clear_rule_emphasis_1",
+    "v2_clarified_1"
+  ]
+}
