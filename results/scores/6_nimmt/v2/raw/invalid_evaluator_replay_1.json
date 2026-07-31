@@ -1,0 +1,495 @@
+{
+  "version": 4,
+  "rubric_version": "six-nimmt-v2-atomic-2026-07-31",
+  "suite": "checks/scenarios/six_nimmt_v2.json",
+  "suite_sha256": "ccffb751f2231e39d6ed9307358e5d47bf43a8de4111ea5e7030ed99c2a7d10e",
+  "adapter": "checks/scenario_adapters/six_nimmt_v2.py",
+  "adapter_sha256": "a008367ea405acf225049fd81abb77e3bcab3dd043e4ce69158b68d9d0ab8b51",
+  "runner_sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20",
+  "code": "outputs/six_nimmt_codex_ag.py",
+  "code_sha256": "4d2e40b49042fd7eebd7e5f0140b89ee4605062f1d69cabd5adc17604b1d3cf5",
+  "counts": {
+    "PASS": 14,
+    "FAIL": 0,
+    "CRASH": 19,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 33,
+  "total": 33,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 11,
+      "evaluated": 24,
+      "score": 0.4583333333333333
+    },
+    "human_decision": {
+      "passed": 3,
+      "evaluated": 9,
+      "score": 0.3333333333333333
+    }
+  },
+  "claim_coverage": {
+    "inventory": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/inputs/games/6_nimmt/claims_v2.json",
+    "required": [
+      "6N-C-55-SCORE",
+      "6N-C-ASCENDING-RESOLUTION",
+      "6N-C-BULLS-ARE-POINTS",
+      "6N-C-CAPTURE-FACE-DOWN",
+      "6N-C-CAPTURE-NOT-HAND",
+      "6N-C-CARD-TOTAL",
+      "6N-C-DEAL-TEN",
+      "6N-C-DOUBLE-SCORE",
+      "6N-C-DYNAMIC-RESOLUTION",
+      "6N-C-FACE-DOWN-COMMIT",
+      "6N-C-FIVE-SCORE",
+      "6N-C-FOUR-ROWS",
+      "6N-C-FULL-CAPTURE",
+      "6N-C-GAME-END",
+      "6N-C-GAME-SCORE",
+      "6N-C-JOINT-REVEAL",
+      "6N-C-LOW-CHOOSE-ROW",
+      "6N-C-LOW-STARTER",
+      "6N-C-MATCH-THRESHOLD",
+      "6N-C-MIN-DIFFERENCE",
+      "6N-C-NEW-GAME",
+      "6N-C-PLAYER-RANGE",
+      "6N-C-RESERVE-COUNT",
+      "6N-C-ROW-ASCENDING",
+      "6N-C-ROW-MAX-FIVE",
+      "6N-C-SHUFFLE",
+      "6N-C-SIXTH-STARTER",
+      "6N-C-TEN-ROUNDS",
+      "6N-C-TEN-SCORE",
+      "6N-C-WINNER-MINIMUM"
+    ],
+    "scenario_covered": [
+      "6N-C-55-SCORE",
+      "6N-C-ASCENDING-RESOLUTION",
+      "6N-C-BULLS-ARE-POINTS",
+      "6N-C-CAPTURE-FACE-DOWN",
+      "6N-C-CAPTURE-NOT-HAND",
+      "6N-C-CARD-TOTAL",
+      "6N-C-DEAL-TEN",
+      "6N-C-DOUBLE-SCORE",
+      "6N-C-DYNAMIC-RESOLUTION",
+      "6N-C-FACE-DOWN-COMMIT",
+      "6N-C-FIVE-SCORE",
+      "6N-C-FOUR-ROWS",
+      "6N-C-FULL-CAPTURE",
+      "6N-C-GAME-END",
+      "6N-C-GAME-SCORE",
+      "6N-C-JOINT-REVEAL",
+      "6N-C-LOW-CHOOSE-ROW",
+      "6N-C-LOW-STARTER",
+      "6N-C-MATCH-THRESHOLD",
+      "6N-C-MIN-DIFFERENCE",
+      "6N-C-NEW-GAME",
+      "6N-C-PLAYER-RANGE",
+      "6N-C-RESERVE-COUNT",
+      "6N-C-ROW-ASCENDING",
+      "6N-C-ROW-MAX-FIVE",
+      "6N-C-SHUFFLE",
+      "6N-C-SIXTH-STARTER",
+      "6N-C-TEN-ROUNDS",
+      "6N-C-TEN-SCORE",
+      "6N-C-WINNER-MINIMUM"
+    ],
+    "coverage_exceptions": [],
+    "mapping_coverage": 1.0,
+    "evaluated": [
+      "6N-C-55-SCORE",
+      "6N-C-ASCENDING-RESOLUTION",
+      "6N-C-BULLS-ARE-POINTS",
+      "6N-C-CAPTURE-FACE-DOWN",
+      "6N-C-CAPTURE-NOT-HAND",
+      "6N-C-CARD-TOTAL",
+      "6N-C-DEAL-TEN",
+      "6N-C-DOUBLE-SCORE",
+      "6N-C-DYNAMIC-RESOLUTION",
+      "6N-C-FACE-DOWN-COMMIT",
+      "6N-C-FIVE-SCORE",
+      "6N-C-FOUR-ROWS",
+      "6N-C-FULL-CAPTURE",
+      "6N-C-GAME-END",
+      "6N-C-GAME-SCORE",
+      "6N-C-JOINT-REVEAL",
+      "6N-C-LOW-CHOOSE-ROW",
+      "6N-C-LOW-STARTER",
+      "6N-C-MATCH-THRESHOLD",
+      "6N-C-MIN-DIFFERENCE",
+      "6N-C-NEW-GAME",
+      "6N-C-PLAYER-RANGE",
+      "6N-C-RESERVE-COUNT",
+      "6N-C-ROW-ASCENDING",
+      "6N-C-ROW-MAX-FIVE",
+      "6N-C-SHUFFLE",
+      "6N-C-SIXTH-STARTER",
+      "6N-C-TEN-ROUNDS",
+      "6N-C-TEN-SCORE",
+      "6N-C-WINNER-MINIMUM"
+    ],
+    "evaluated_coverage": 1.0
+  },
+  "results": [
+    {
+      "id": "6N-R01-2p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R02-3p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R03-4p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R04-5p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R05-6p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R06-7p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R07-8p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R08-9p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R09-10p-setup",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ]
+    },
+    {
+      "id": "6N-R10A-supported-count-initial-play",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-FACE-DOWN-COMMIT"
+      ]
+    },
+    {
+      "id": "6N-R10B-supported-count-bounded-play",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END"
+      ]
+    },
+    {
+      "id": "6N-R10-player-range-rejection",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-INVALID-PLAYERS"
+      ]
+    },
+    {
+      "id": "6N-R11-card-inventory",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-CARD-IDENTITIES",
+        "6N-M-BULL-INVENTORY"
+      ]
+    },
+    {
+      "id": "6N-R12-hidden-joint-reveal",
+      "status": "CRASH",
+      "message": "RuntimeError: case first-hidden: fixture player count differs from runner game; case hidden-until-joint-reveal: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-FACE-DOWN-COMMIT",
+        "6N-C-JOINT-REVEAL"
+      ]
+    },
+    {
+      "id": "6N-R13-private-seat-protocol",
+      "status": "CRASH",
+      "message": "RuntimeError: case seat-order: fixture player count differs from runner game; case no-undo-action: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-COMMIT-PROTOCOL"
+      ]
+    },
+    {
+      "id": "6N-R14-ascending-resolution",
+      "status": "CRASH",
+      "message": "RuntimeError: case printed-values-scrambled-seats: fixture player count differs from runner game; case four-independent-destinations: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-ASCENDING-RESOLUTION"
+      ]
+    },
+    {
+      "id": "6N-R15-minimum-difference-example",
+      "status": "CRASH",
+      "message": "RuntimeError: case rulebook-example: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-ROW-ASCENDING",
+        "6N-C-MIN-DIFFERENCE"
+      ]
+    },
+    {
+      "id": "6N-R16-sixth-card-capture",
+      "status": "CRASH",
+      "message": "RuntimeError: case lowest-card-is-sixth: fixture player count differs from runner game; case sixth-owned-by-later-seat: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-ROW-MAX-FIVE",
+        "6N-C-FULL-CAPTURE",
+        "6N-C-SIXTH-STARTER"
+      ]
+    },
+    {
+      "id": "6N-R17-low-card-free-choice",
+      "status": "CRASH",
+      "message": "RuntimeError: case choose-row-0: fixture player count differs from runner game; case choose-row-1: fixture player count differs from runner game; case choose-row-2: fixture player count differs from runner game; case choose-row-3: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-LOW-CHOOSE-ROW",
+        "6N-C-LOW-STARTER"
+      ]
+    },
+    {
+      "id": "6N-R18-low-choice-pending",
+      "status": "CRASH",
+      "message": "RuntimeError: case pause-with-four-actions: fixture player count differs from runner game; case resume-after-choice: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-LOW-PENDING"
+      ]
+    },
+    {
+      "id": "6N-R19-dynamic-3-then-9",
+      "status": "CRASH",
+      "message": "RuntimeError: case printed-3-then-9: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-LOW-CHOOSE-ROW"
+      ]
+    },
+    {
+      "id": "6N-R20-dynamic-adverse-cascade",
+      "status": "CRASH",
+      "message": "RuntimeError: case 29-changes-62-destination: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-FULL-CAPTURE"
+      ]
+    },
+    {
+      "id": "6N-R21-capture-zone",
+      "status": "CRASH",
+      "message": "RuntimeError: case full-row-to-capture-only: fixture player count differs from runner game; case low-row-to-capture-only: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-CAPTURE-FACE-DOWN",
+        "6N-C-CAPTURE-NOT-HAND",
+        "6N-C-BULLS-ARE-POINTS"
+      ]
+    },
+    {
+      "id": "6N-R22A-publisher-scoring-categories",
+      "status": "CRASH",
+      "message": "RuntimeError: case capture-5-scores-2: fixture player count differs from runner game; case capture-10-scores-3: fixture player count differs from runner game; case capture-22-scores-5: fixture player count differs from runner game; case capture-55-scores-7: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-BULLS-ARE-POINTS",
+        "6N-C-FIVE-SCORE",
+        "6N-C-TEN-SCORE",
+        "6N-C-DOUBLE-SCORE",
+        "6N-C-55-SCORE"
+      ]
+    },
+    {
+      "id": "6N-R22B-component-bull-inventory",
+      "status": "CRASH",
+      "message": "RuntimeError: case ordinary-seven-scores-one: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-BULL-INVENTORY"
+      ]
+    },
+    {
+      "id": "6N-R23-ten-round-boundary",
+      "status": "CRASH",
+      "message": "RuntimeError: case after-nine-rounds: fixture player count differs from runner game; case after-tenth-round: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END",
+        "6N-C-GAME-SCORE"
+      ]
+    },
+    {
+      "id": "6N-R24-new-game-reset",
+      "status": "CRASH",
+      "message": "RuntimeError: case below-threshold-reset: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-NEW-GAME",
+        "6N-C-SHUFFLE",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-GAME-SCORE"
+      ]
+    },
+    {
+      "id": "6N-R25-threshold-strictness",
+      "status": "CRASH",
+      "message": "RuntimeError: case exactly-66-continues: fixture player count differs from runner game; case 67-ends-after-game: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-MATCH-THRESHOLD",
+        "6N-C-GAME-SCORE"
+      ]
+    },
+    {
+      "id": "6N-R26-lowest-total-wins",
+      "status": "CRASH",
+      "message": "RuntimeError: case other-player-crosses: fixture player count differs from runner game; case both-over-lower-wins: fixture player count differs from runner game",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-WINNER-MINIMUM"
+      ]
+    },
+    {
+      "id": "6N-R27-shared-winners",
+      "status": "CRASH",
+      "message": "RuntimeError: case two-way-tie: fixture player count differs from runner game; case three-way-tie: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-TIE-WINNER"
+      ]
+    },
+    {
+      "id": "6N-R28-seeded-reset",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-RNG-RESET"
+      ]
+    },
+    {
+      "id": "6N-R29-observation-privacy",
+      "status": "CRASH",
+      "message": "RuntimeError: case hands-private: fixture player count differs from runner game; case commit-private: fixture player count differs from runner game; case captured-private-aggregates-public: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-OBSERVATION"
+      ]
+    },
+    {
+      "id": "6N-R30-return-contract",
+      "status": "CRASH",
+      "message": "RuntimeError: case nonterminal-zero: fixture player count differs from runner game; case co-winner-terminal: fixture player count differs from runner game",
+      "basis": "human_decision",
+      "fact_ids": [
+        "6N-M-RETURNS",
+        "6N-M-TIE-WINNER"
+      ]
+    }
+  ]
+}

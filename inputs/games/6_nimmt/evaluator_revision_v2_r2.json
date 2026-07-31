@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "game": "6_nimmt",
+  "revision": {
+    "suite": {
+      "path": "checks/scenarios/six_nimmt_v2_r2.json",
+      "sha256": "b5e7b63971be442769ff81767f257c6e7499a48a21f5ad68895eeb29f7c01dc5"
+    },
+    "runner": {
+      "path": "checks/run_scenarios_v4_r2.py",
+      "sha256": "87f590657e5328744861946c50a52ed4da7e96b99fa94acfc4d7dbb6cb238170"
+    },
+    "adapter": {
+      "path": "checks/scenario_adapters/six_nimmt_v2_r2.py",
+      "sha256": "b5d2bf533f68045c25766a87289664d391d6e27dfca790b11f55832317cacd09"
+    }
+  },
+  "status": "frozen-before-valid-scoring",
+  "reason": "The predeclared suite was reference-validated only against an oracle whose constructor defaulted to four players. The generated implementation validly defaulted to two, so the original runner reused a two-player Game for four-player fixtures. A first compatibility replay then overconstrained joint visibility to the transient revealed list although the same played identities were public in resolved records or rows. R2 changes no fact IDs, basis labels, expectations, case count, source evidence, or generated implementation. It instantiates the suite Game with num_players=4 and checks played-card visibility across all canonical public locations.",
+  "base_frozen": {
+    "suite": {
+      "path": "checks/scenarios/six_nimmt_v2.json",
+      "sha256": "ccffb751f2231e39d6ed9307358e5d47bf43a8de4111ea5e7030ed99c2a7d10e"
+    },
+    "runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "adapter": {
+      "path": "checks/scenario_adapters/six_nimmt_v2.py",
+      "sha256": "a008367ea405acf225049fd81abb77e3bcab3dd043e4ce69158b68d9d0ab8b51"
+    }
+  },
+  "invalid_replays": [
+    {
+      "id": "invalid_evaluator_replay_1",
+      "path": "results/scores/6_nimmt/v2/raw/invalid_evaluator_replay_1.json",
+      "sha256": "c39f6b33c3b19e86eb5f7a0df34fc89055c7d573fe49025bc9d2057efbced7f5",
+      "reason": "runner constructed default two-player Game while 19 scenario groups used four-player fixtures; 14 PASS, 19 CRASH; not scored"
+    },
+    {
+      "id": "invalid_evaluator_replay_2",
+      "path": "results/scores/6_nimmt/v2/raw/invalid_evaluator_replay_2.json",
+      "sha256": "97eda9b498da7b1d886dfc52c790bfae90252c22fd242fc4529ac1399d50404f",
+      "reason": "joint visibility asserted only zones.revealed although canonical public rows/resolved also expose played cards; 32 PASS, 1 FAIL; not scored"
+    }
+  ],
+  "approved_matrix_invariants": {
+    "scenarios": 33,
+    "named_cases": 74,
+    "clear_basis": 24,
+    "human_decision_basis": 9,
+    "required_clear_claims": 30,
+    "fact_ids_basis_titles_expectations_sources_unchanged": true
+  },
+  "implementation_sha256": "4d2e40b49042fd7eebd7e5f0140b89ee4605062f1d69cabd5adc17604b1d3cf5"
+}
