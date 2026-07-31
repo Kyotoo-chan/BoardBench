@@ -1,0 +1,766 @@
+{
+  "schema_version": 2,
+  "identity": {
+    "game": "6 nimmt! Version 2.3",
+    "condition": "v2_original_augmented_1 under evaluator r2",
+    "source_path": "../../../../inputs/games/6_nimmt/game_rules.pdf",
+    "source_format": "publisher-pdf+user-observation",
+    "source_sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d",
+    "sources": [
+      {
+        "id": "6NIMMT-V23-RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/6_nimmt/game_rules.pdf",
+        "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+      },
+      {
+        "id": "6NIMMT-V2-COMPONENTS",
+        "role": "user_observation",
+        "path": "../../../../inputs/games/6_nimmt/component_observation_v2.json",
+        "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+      }
+    ]
+  },
+  "reproducibility": {
+    "run_count": 1,
+    "suite_sha256": "b5e7b63971be442769ff81767f257c6e7499a48a21f5ad68895eeb29f7c01dc5",
+    "adapter_sha256": "b5d2bf533f68045c25766a87289664d391d6e27dfca790b11f55832317cacd09",
+    "models": [
+      "gpt-5.6-sol"
+    ],
+    "protocols": [
+      "hardened-iteration-v1"
+    ],
+    "verbosities": [
+      "low"
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 32,
+    "missing": 9,
+    "ambiguous": 1,
+    "not_testable": 1
+  },
+  "implementation_evidence": {
+    "agentic_gate_pass_rate": 1.0,
+    "technical_gate_pass_rate": 1.0,
+    "robustness": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "interface": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "clear_basis_scenarios": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "human_decision_basis_scenarios": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    },
+    "scenario_evaluated_coverage": {
+      "values": [
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": null
+    }
+  },
+  "review_evidence": {
+    "neutral_judges": {
+      "values": [
+        0.84,
+        0.88,
+        0.82
+      ],
+      "mean": 0.8466666666666667,
+      "sample_sd": 0.03055050463303896,
+      "models": [
+        "gpt-5.6-sol"
+      ],
+      "thinking": [
+        "medium"
+      ]
+    },
+    "personas": {
+      "original": {
+        "rule_fidelity": {
+          "path": "raw/original_persona_rule_fidelity.md",
+          "sha256": "c071f1fd7b65dac26ae89976d9261f211cc78b7af60b6eeb228c45b96b469a7e"
+        },
+        "ambiguity": {
+          "path": "raw/original_persona_ambiguity.md",
+          "sha256": "fc348eff6b9dd2d674d7c7b438805d63c8ee0ef9bfce38e4236359c6ff63c540"
+        },
+        "executable_systems": {
+          "path": "raw/original_persona_executable_systems.md",
+          "sha256": "3503edca0ecc8c8af34fe71771cadf38adb416ee1d17a7fe8f0accb509723c90"
+        }
+      }
+    }
+  },
+  "assumption_evidence": {
+    "material_count": 4,
+    "interpretation_agreement": {
+      "Spielablauf / 1. Karte ausspielen": {
+        "Represent simultaneous face-down selection as private seat-order commit_card actions; a committed card cannot be changed, and cards are revealed only after every player commits.": 1
+      },
+      "Spielende": {
+        "If several players share the fewest total bullheads when the match ends, all are winners; terminal returns are +1 for each winner and -1 for every other player.": 1
+      },
+      "Constructor default: num_players": {
+        "When num_players is None, select 2 players.": 1
+      },
+      "Constructor default: seed": {
+        "When seed is None, select deterministic seed 0 for chance behavior.": 1
+      }
+    },
+    "items": [
+      {
+        "id": "A-01",
+        "material": true,
+        "source_location": "Spielablauf / 1. Karte ausspielen",
+        "source_basis": "missing",
+        "alternatives": [
+          "Represent simultaneous face-down selection as private seat-order commit_card actions; a committed card cannot be changed, and cards are revealed only after every player commits.",
+          "Represent simultaneous face-down selection as a single joint action containing every player's card."
+        ],
+        "selected": "Represent simultaneous face-down selection as private seat-order commit_card actions; a committed card cannot be changed, and cards are revealed only after every player commits.",
+        "affected_mechanics": [
+          "legal_actions",
+          "state_transition",
+          "private_information"
+        ]
+      },
+      {
+        "id": "A-02",
+        "material": true,
+        "source_location": "Spielende",
+        "source_basis": "missing",
+        "alternatives": [
+          "If several players share the fewest total bullheads when the match ends, all are winners; terminal returns are +1 for each winner and -1 for every other player.",
+          "Resolve a tied fewest-bullheads result by an unspecified tiebreaker and return a single winner."
+        ],
+        "selected": "If several players share the fewest total bullheads when the match ends, all are winners; terminal returns are +1 for each winner and -1 for every other player.",
+        "affected_mechanics": [
+          "terminal_results",
+          "scoring"
+        ]
+      },
+      {
+        "id": "A-03",
+        "material": true,
+        "source_location": "Constructor default: num_players",
+        "source_basis": "missing",
+        "alternatives": [
+          "When num_players is None, select 2 players.",
+          "When num_players is None, require an explicit player count."
+        ],
+        "selected": "When num_players is None, select 2 players.",
+        "affected_mechanics": [
+          "configuration",
+          "setup"
+        ]
+      },
+      {
+        "id": "A-04",
+        "material": true,
+        "source_location": "Constructor default: seed",
+        "source_basis": "missing",
+        "alternatives": [
+          "When seed is None, select deterministic seed 0 for chance behavior.",
+          "When seed is None, select a nondeterministic seed for chance behavior."
+        ],
+        "selected": "When seed is None, select deterministic seed 0 for chance behavior.",
+        "affected_mechanics": [
+          "chance",
+          "setup"
+        ]
+      }
+    ]
+  },
+  "efficiency": {
+    "calls": {
+      "values": [
+        9.0
+      ],
+      "mean": 9.0,
+      "sample_sd": null
+    },
+    "provider_seconds": {
+      "values": [
+        1791.648
+      ],
+      "mean": 1791.648,
+      "sample_sd": null
+    },
+    "input_tokens": {
+      "values": [
+        2561820.0
+      ],
+      "mean": 2561820.0,
+      "sample_sd": null
+    },
+    "cached_input_tokens": {
+      "values": [
+        2115840.0
+      ],
+      "mean": 2115840.0,
+      "sample_sd": null
+    },
+    "output_tokens": {
+      "values": [
+        56099.0
+      ],
+      "mean": 56099.0,
+      "sample_sd": null
+    },
+    "reasoning_tokens": {
+      "values": [
+        21455.0
+      ],
+      "mean": 21455.0,
+      "sample_sd": null
+    },
+    "api_equivalent_usd": {
+      "values": [
+        4.97079
+      ],
+      "mean": 4.97079,
+      "sample_sd": null
+    },
+    "code_lines": {
+      "values": [
+        377.0
+      ],
+      "mean": 377.0,
+      "sample_sd": null
+    }
+  },
+  "monetary_cost": {
+    "actual_values": [
+      null
+    ],
+    "exact_total": null,
+    "api_equivalent_estimates_usd": [
+      4.97079
+    ],
+    "pricing_source": "https://platform.openai.com/docs/pricing",
+    "pricing_retrieved_at": "2026-07-15",
+    "pricing_sha256": "b104541532cf48de166fa67652b0e97874455e0398ef32434093fa3b3415584f"
+  },
+  "headline": "Technically executable; all 24 clear-basis and 9 human-decision-basis configured scenarios pass, while Judges and an unscored deterministic replay identify a joint-reveal information defect.",
+  "runs": [
+    {
+      "stem": "original",
+      "protocol": "hardened-iteration-v1",
+      "model": "gpt-5.6-sol",
+      "thinking": "low",
+      "verbosity": "low",
+      "agentic_gate": true,
+      "repairs": 2,
+      "technical_gate": true,
+      "robustness": 1.0,
+      "interface": 1.0,
+      "scenario": {
+        "rubric_version": "six-nimmt-v2-atomic-2026-07-31-r2",
+        "suite_sha256": "b5e7b63971be442769ff81767f257c6e7499a48a21f5ad68895eeb29f7c01dc5",
+        "adapter_sha256": "b5d2bf533f68045c25766a87289664d391d6e27dfca790b11f55832317cacd09",
+        "counts": {
+          "PASS": 33,
+          "FAIL": 0,
+          "CRASH": 0,
+          "UNREACHED": 0,
+          "UNTESTABLE": 0
+        },
+        "coverage": 1.0,
+        "clear": {
+          "passed": 24,
+          "evaluated": 24,
+          "score": 1.0
+        },
+        "human_decision": {
+          "passed": 9,
+          "evaluated": 9,
+          "score": 1.0
+        },
+        "results": [
+          {
+            "id": "6N-R01-2p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R02-3p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R03-4p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R04-5p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R05-6p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R06-7p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R07-8p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R08-9p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R09-10p-setup",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-CARD-TOTAL",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-RESERVE-COUNT"
+            ]
+          },
+          {
+            "id": "6N-R10A-supported-count-initial-play",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-FACE-DOWN-COMMIT"
+            ]
+          },
+          {
+            "id": "6N-R10B-supported-count-bounded-play",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-PLAYER-RANGE",
+              "6N-C-TEN-ROUNDS",
+              "6N-C-GAME-END"
+            ]
+          },
+          {
+            "id": "6N-R10-player-range-rejection",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-INVALID-PLAYERS"
+            ]
+          },
+          {
+            "id": "6N-R11-card-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-CARD-IDENTITIES",
+              "6N-M-BULL-INVENTORY"
+            ]
+          },
+          {
+            "id": "6N-R12-hidden-joint-reveal",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-FACE-DOWN-COMMIT",
+              "6N-C-JOINT-REVEAL"
+            ]
+          },
+          {
+            "id": "6N-R13-private-seat-protocol",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-COMMIT-PROTOCOL"
+            ]
+          },
+          {
+            "id": "6N-R14-ascending-resolution",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-ASCENDING-RESOLUTION"
+            ]
+          },
+          {
+            "id": "6N-R15-minimum-difference-example",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-ROW-ASCENDING",
+              "6N-C-MIN-DIFFERENCE"
+            ]
+          },
+          {
+            "id": "6N-R16-sixth-card-capture",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-ROW-MAX-FIVE",
+              "6N-C-FULL-CAPTURE",
+              "6N-C-SIXTH-STARTER"
+            ]
+          },
+          {
+            "id": "6N-R17-low-card-free-choice",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-LOW-CHOOSE-ROW",
+              "6N-C-LOW-STARTER"
+            ]
+          },
+          {
+            "id": "6N-R18-low-choice-pending",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-LOW-PENDING"
+            ]
+          },
+          {
+            "id": "6N-R19-dynamic-3-then-9",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-DYNAMIC-RESOLUTION",
+              "6N-C-LOW-CHOOSE-ROW"
+            ]
+          },
+          {
+            "id": "6N-R20-dynamic-adverse-cascade",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-DYNAMIC-RESOLUTION",
+              "6N-C-FULL-CAPTURE"
+            ]
+          },
+          {
+            "id": "6N-R21-capture-zone",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-CAPTURE-FACE-DOWN",
+              "6N-C-CAPTURE-NOT-HAND",
+              "6N-C-BULLS-ARE-POINTS"
+            ]
+          },
+          {
+            "id": "6N-R22A-publisher-scoring-categories",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-BULLS-ARE-POINTS",
+              "6N-C-FIVE-SCORE",
+              "6N-C-TEN-SCORE",
+              "6N-C-DOUBLE-SCORE",
+              "6N-C-55-SCORE"
+            ]
+          },
+          {
+            "id": "6N-R22B-component-bull-inventory",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-BULL-INVENTORY"
+            ]
+          },
+          {
+            "id": "6N-R23-ten-round-boundary",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-TEN-ROUNDS",
+              "6N-C-GAME-END",
+              "6N-C-GAME-SCORE"
+            ]
+          },
+          {
+            "id": "6N-R24-new-game-reset",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-NEW-GAME",
+              "6N-C-SHUFFLE",
+              "6N-C-DEAL-TEN",
+              "6N-C-FOUR-ROWS",
+              "6N-C-GAME-SCORE"
+            ]
+          },
+          {
+            "id": "6N-R25-threshold-strictness",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-MATCH-THRESHOLD",
+              "6N-C-GAME-SCORE"
+            ]
+          },
+          {
+            "id": "6N-R26-lowest-total-wins",
+            "status": "PASS",
+            "message": "",
+            "basis": "clear",
+            "fact_ids": [
+              "6N-C-WINNER-MINIMUM"
+            ]
+          },
+          {
+            "id": "6N-R27-shared-winners",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-TIE-WINNER"
+            ]
+          },
+          {
+            "id": "6N-R28-seeded-reset",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-RNG-RESET"
+            ]
+          },
+          {
+            "id": "6N-R29-observation-privacy",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-OBSERVATION"
+            ]
+          },
+          {
+            "id": "6N-R30-return-contract",
+            "status": "PASS",
+            "message": "",
+            "basis": "human_decision",
+            "fact_ids": [
+              "6N-M-RETURNS",
+              "6N-M-TIE-WINNER"
+            ]
+          }
+        ]
+      },
+      "neutral_judges": [
+        0.84,
+        0.88,
+        0.82
+      ],
+      "judge_model": "gpt-5.6-sol",
+      "judge_thinking": "medium",
+      "personas": {
+        "rule_fidelity": {
+          "path": "raw/original_persona_rule_fidelity.md",
+          "sha256": "c071f1fd7b65dac26ae89976d9261f211cc78b7af60b6eeb228c45b96b469a7e"
+        },
+        "ambiguity": {
+          "path": "raw/original_persona_ambiguity.md",
+          "sha256": "fc348eff6b9dd2d674d7c7b438805d63c8ee0ef9bfce38e4236359c6ff63c540"
+        },
+        "executable_systems": {
+          "path": "raw/original_persona_executable_systems.md",
+          "sha256": "3503edca0ecc8c8af34fe71771cadf38adb416ee1d17a7fe8f0accb509723c90"
+        }
+      },
+      "assumptions": [
+        {
+          "id": "A-01",
+          "material": true,
+          "source_location": "Spielablauf / 1. Karte ausspielen",
+          "source_basis": "missing",
+          "alternatives": [
+            "Represent simultaneous face-down selection as private seat-order commit_card actions; a committed card cannot be changed, and cards are revealed only after every player commits.",
+            "Represent simultaneous face-down selection as a single joint action containing every player's card."
+          ],
+          "selected": "Represent simultaneous face-down selection as private seat-order commit_card actions; a committed card cannot be changed, and cards are revealed only after every player commits.",
+          "affected_mechanics": [
+            "legal_actions",
+            "state_transition",
+            "private_information"
+          ]
+        },
+        {
+          "id": "A-02",
+          "material": true,
+          "source_location": "Spielende",
+          "source_basis": "missing",
+          "alternatives": [
+            "If several players share the fewest total bullheads when the match ends, all are winners; terminal returns are +1 for each winner and -1 for every other player.",
+            "Resolve a tied fewest-bullheads result by an unspecified tiebreaker and return a single winner."
+          ],
+          "selected": "If several players share the fewest total bullheads when the match ends, all are winners; terminal returns are +1 for each winner and -1 for every other player.",
+          "affected_mechanics": [
+            "terminal_results",
+            "scoring"
+          ]
+        },
+        {
+          "id": "A-03",
+          "material": true,
+          "source_location": "Constructor default: num_players",
+          "source_basis": "missing",
+          "alternatives": [
+            "When num_players is None, select 2 players.",
+            "When num_players is None, require an explicit player count."
+          ],
+          "selected": "When num_players is None, select 2 players.",
+          "affected_mechanics": [
+            "configuration",
+            "setup"
+          ]
+        },
+        {
+          "id": "A-04",
+          "material": true,
+          "source_location": "Constructor default: seed",
+          "source_basis": "missing",
+          "alternatives": [
+            "When seed is None, select deterministic seed 0 for chance behavior.",
+            "When seed is None, select a nondeterministic seed for chance behavior."
+          ],
+          "selected": "When seed is None, select deterministic seed 0 for chance behavior.",
+          "affected_mechanics": [
+            "chance",
+            "setup"
+          ]
+        }
+      ],
+      "resources": {
+        "calls": 9,
+        "provider_seconds": 1791.648,
+        "input_tokens": 2561820,
+        "cached_input_tokens": 2115840,
+        "output_tokens": 56099,
+        "reasoning_tokens": 21455,
+        "money": null,
+        "api_equivalent_usd": 4.97079,
+        "code_lines": 377
+      },
+      "hashes": {
+        "agentic_evidence": "ab0a47174ded37256b50cd879a035026108f43e287b697a2311e4cd0f5ab3d16",
+        "checks": "f764af1bb7881da3e56879d2678b881579fcced1040e6c1a5cf631d6522cfb00",
+        "scenarios": "0b76b2e26e9b3ae22e73c175a48866b79199621d7cb45a7dcf85aeb529abcf4b",
+        "usage": "3708f425f74b56780d4186fe066cb3a513e8b3ce07fb6f8b428e3c13e21f9af3",
+        "code": "4d2e40b49042fd7eebd7e5f0140b89ee4605062f1d69cabd5adc17604b1d3cf5"
+      }
+    }
+  ]
+}

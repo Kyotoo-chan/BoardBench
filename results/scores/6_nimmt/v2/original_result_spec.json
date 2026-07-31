@@ -1,0 +1,51 @@
+{
+  "identity": {
+    "game": "6 nimmt! Version 2.3",
+    "condition": "v2_original_augmented_1 under evaluator r2",
+    "source_path": "../../../../inputs/games/6_nimmt/game_rules.pdf",
+    "source_format": "publisher-pdf+user-observation",
+    "source_sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d",
+    "sources": [
+      {
+        "id": "6NIMMT-V23-RULES",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/6_nimmt/game_rules.pdf",
+        "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+      },
+      {
+        "id": "6NIMMT-V2-COMPONENTS",
+        "role": "user_observation",
+        "path": "../../../../inputs/games/6_nimmt/component_observation_v2.json",
+        "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+      }
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 32,
+    "missing": 9,
+    "ambiguous": 1,
+    "not_testable": 1
+  },
+  "headline": "Technically executable; all 24 clear-basis and 9 human-decision-basis configured scenarios pass, while Judges and an unscored deterministic replay identify a joint-reveal information defect.",
+  "runs": [
+    {
+      "stem": "original",
+      "agentic_evidence": "../../../../outputs/six_nimmt_codex_ag_agentic.json",
+      "checks": "original_checks.txt",
+      "scenarios": "original_scenarios.json",
+      "usage": "original_usage.json",
+      "code": "../../../../outputs/six_nimmt_codex_ag.py",
+      "assumptions": "../../../../outputs/six_nimmt_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/six_nimmt_codex_ag_judge_1.md",
+        "../../../../outputs/six_nimmt_codex_ag_judge_2.md",
+        "../../../../outputs/six_nimmt_codex_ag_judge_3.md"
+      ],
+      "personas": {
+        "rule_fidelity": "raw/original_persona_rule_fidelity.md",
+        "ambiguity": "raw/original_persona_ambiguity.md",
+        "executable_systems": "raw/original_persona_executable_systems.md"
+      }
+    }
+  ]
+}

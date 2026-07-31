@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "revision": "six-nimmt-v2-judge-packet-1",
+  "scope": "AMIGO 6 nimmt! Version 2.3 base game for 2-10 players; full default >66 match; professional and optional target/game-count variants excluded",
+  "sources": [
+    {
+      "source_id": "6NIMMT-V23-RULES",
+      "role": "publisher_rulebook",
+      "path": "inputs/games/6_nimmt/game_rules.pdf",
+      "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+    },
+    {
+      "source_id": "6NIMMT-V2-COMPONENTS",
+      "role": "user_observation",
+      "path": "inputs/games/6_nimmt/component_observation_v2.json",
+      "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+    },
+    {
+      "source_id": "6NIMMT-V2-RULEFACTS",
+      "role": "approved_fact_inventory",
+      "path": "inputs/games/6_nimmt/rulefacts_v2.md",
+      "sha256": "13b9c14e96565b13bcc0cbff93ec69a46544e0cc405e8f61e7aef7ab631d2e9a"
+    },
+    {
+      "source_id": "6NIMMT-V2-CLAIMS",
+      "role": "atomic_claim_inventory",
+      "path": "inputs/games/6_nimmt/claims_v2.json",
+      "sha256": "2a968ebb27e89f0047165cecb9dc0ffe0a1b38214bd777956194784cdee41537"
+    }
+  ],
+  "implementation": {
+    "path": "outputs/six_nimmt_codex_ag.py",
+    "sha256": "4d2e40b49042fd7eebd7e5f0140b89ee4605062f1d69cabd5adc17604b1d3cf5"
+  },
+  "pdf_render": {
+    "dpi": 150,
+    "renderer": "pdftoppm",
+    "renderer_version": "pdftoppm version 24.04.0",
+    "page_count": 2,
+    "pages": [
+      {
+        "page": 1,
+        "file": "page-1.png",
+        "sha256": "81c2ba2bae255f80b6e13c8623368966c8cee4048f838dc0ca5336f5ababc7c6"
+      },
+      {
+        "page": 2,
+        "file": "page-2.png",
+        "sha256": "273a94d4a815a0832148ba716ee4f924b0f571f4089738dec5133ac827dfc18c"
+      }
+    ],
+    "archived_manifest_path": "inputs/games/6_nimmt/game_rules_render_manifest_v2.json",
+    "archived_manifest_sha256": "8d280117ce08fe4f684a0dd51f285ce63edae62b0d736b26f5634fcaf0311b89"
+  },
+  "neutral": {
+    "count": 3,
+    "model": "gpt-5.6-sol",
+    "thinking": "medium",
+    "verbosity": "low",
+    "runner": {
+      "path": "checks/run_neutral_judges.py",
+      "sha256": "f5d716cb51c71526eb80b9f17ce82767e710e244c6568cb4cb3586e1040808d9"
+    },
+    "prompt": {
+      "path": "inputs/prompts/llm_judge_review.md",
+      "sha256": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2"
+    },
+    "reviews": [
+      {
+        "path": "outputs/six_nimmt_codex_ag_judge_1.md",
+        "sha256": "10323b4756cb54c783961f216883d3727145acff5afbb78162c6559c8ff00506"
+      },
+      {
+        "path": "outputs/six_nimmt_codex_ag_judge_2.md",
+        "sha256": "a125bafdc45c1b9c946e8fcd20a9f1f69e63134c633a174a5af1191a7105fa65"
+      },
+      {
+        "path": "outputs/six_nimmt_codex_ag_judge_3.md",
+        "sha256": "c64b676ec342a4e1297ccf1b036ca7bb2a9f9db97dd6836252a7b9504b6955ce"
+      }
+    ]
+  },
+  "personas": {
+    "count": 3,
+    "model": "gpt-5.6-sol",
+    "thinking": "medium",
+    "verbosity": "low",
+    "runner": {
+      "path": "checks/run_judge_personas_v2.py",
+      "sha256": "2ab6bf72dfae9f175eb3316e3249f2eb12bdc4596fe63669acafe6ba5b7a3e7f"
+    },
+    "prompts": [
+      {
+        "path": "inputs/prompts/judge_personas/rule_fidelity.md",
+        "sha256": "cf30bb1f30539cece4c8aa09bf340d576c606e01c5c1caff5a447add95ff7d9c"
+      },
+      {
+        "path": "inputs/prompts/judge_personas/ambiguity.md",
+        "sha256": "053a1f29dd6242feed5d559524a3c2d7b2cb34b36f05c675895ce288c16fcdb3"
+      },
+      {
+        "path": "inputs/prompts/judge_personas/executable_systems.md",
+        "sha256": "0ada221726f36df36dce3b4c9eeb014e08b0c73d206cd3dde2c636182c103a0f"
+      }
+    ],
+    "reviews": [
+      {
+        "path": "results/scores/6_nimmt/v2/raw/original_persona_rule_fidelity.md",
+        "sha256": "c071f1fd7b65dac26ae89976d9261f211cc78b7af60b6eeb228c45b96b469a7e"
+      },
+      {
+        "path": "results/scores/6_nimmt/v2/raw/original_persona_ambiguity.md",
+        "sha256": "fc348eff6b9dd2d674d7c7b438805d63c8ee0ef9bfce38e4236359c6ff63c540"
+      },
+      {
+        "path": "results/scores/6_nimmt/v2/raw/original_persona_executable_systems.md",
+        "sha256": "3503edca0ecc8c8af34fe71771cadf38adb416ee1d17a7fe8f0accb509723c90"
+      }
+    ]
+  },
+  "usage_evidence": {
+    "path": "results/scores/6_nimmt/v2/original_usage.json",
+    "sha256": "3708f425f74b56780d4186fe066cb3a513e8b3ce07fb6f8b428e3c13e21f9af3",
+    "all_six_review_calls_exit_zero": true,
+    "all_six_review_calls_isolation_canary_passed": true,
+    "each_review_call_pdf_images": 2
+  },
+  "blinding": "No checks, scenarios, scores, prior reviews, other implementations, or other source conditions were assigned."
+}

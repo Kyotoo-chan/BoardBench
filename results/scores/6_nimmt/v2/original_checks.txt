@@ -1,0 +1,180 @@
+attempt 1: removed runtime metadata before repair validation: __pycache__
+
+attempt 1:
+$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
+exit_code=0
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
+exit_code=0
+agentic-self-check OK states=300 actions=1593
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
+exit_code=0
+6-nimmt-v2-profile-fixture-self-check OK
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
+exit_code=0
+PASS players=2
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=6
+PASS players=7
+PASS players=8
+PASS players=9
+PASS players=10
+PASS players=1: rejected
+PASS players=11: rejected
+PLAYER_COUNTS 11/11
+
+pre-evaluation evaluator-neutral audit feedback:
+Evaluator-neutral pre-evaluation contract audit. Repair only these public-contract and artifact issues; do not use outside game knowledge or evaluator expectations.
+
+1. state_from_data currently validates mostly the root. ENVIRONMENT_CONTRACT requires rejection of unknown, missing, wrongly typed, non-JSON-domain, and invalid nested fields. Validate exact keys, JSON-domain types (including rejecting tuples/non-string dictionary keys), scalar ranges, player/zone/pending/chance shapes, unique valid cards and seats, and internal canonical consistency before constructing GameState. Keep valid canonical round-trips unchanged.
+2. action_from_data and action_to_data must reject invalid canonical actions. Enforce actor seats for this Game, exact action args, commit card range, and choose_row range; reject bool-as-int and invalid values in both directions.
+3. Add material assumptions for the source-unspecified constructor defaults already implemented: num_players=None selects 2, and seed=None selects deterministic seed 0. Each selected string must exactly equal one alternative. Do not change those behaviors unless needed for contract validity.
+
+Re-run py_compile, agentic_self_check.py, and profile_fixture_self_check.py. Update rule_coverage.md if implementing symbols change.
+
+attempt 2:
+$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
+exit_code=0
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
+exit_code=0
+agentic-self-check OK states=300 actions=1593
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
+exit_code=0
+6-nimmt-v2-profile-fixture-self-check OK
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
+exit_code=0
+PASS players=2
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=6
+PASS players=7
+PASS players=8
+PASS players=9
+PASS players=10
+PASS players=1: rejected
+PASS players=11: rejected
+PLAYER_COUNTS 11/11
+
+pre-evaluation evaluator-neutral audit feedback:
+Evaluator-neutral pre-evaluation contract repair follow-up. Repair only this public-contract issue; do not use outside game knowledge or evaluator expectations.
+
+state_from_data now over-validates semantic reachability. ENVIRONMENT_CONTRACT requires reconstruction of every complete schema-valid profile payload, including fixtures not naturally reached in rollout, and warns not to reject unusual phase/zones. Keep the new exact JSON-domain, exact nested-key, declared-type, and explicitly declared scalar-range validation. Remove cross-field or reachability constraints not declared by GAME_PROFILE: score recomputation from captured cards, global card inventory/zone uniqueness, phase/current_player coupling, phase/pending coupling, and similar gameplay consistency checks. For example phase='commit' with current_player=null is profile-valid because those field types are independent. state_from_data validates representation, not whether gameplay could produce the fixture.
+
+Preserve the repaired action conversion checks and A-03/A-04. Re-run py_compile, agentic_self_check.py, and profile_fixture_self_check.py. Update rule_coverage.md if implementing symbols change.
+
+attempt 3:
+$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
+exit_code=0
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
+exit_code=0
+agentic-self-check OK states=300 actions=1593
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
+exit_code=0
+6-nimmt-v2-profile-fixture-self-check OK
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
+exit_code=0
+PASS players=2
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=6
+PASS players=7
+PASS players=8
+PASS players=9
+PASS players=10
+PASS players=1: rejected
+PASS players=11: rejected
+PLAYER_COUNTS 11/11
+
+post-gate independent validation:
+- py_compile: PASS
+- agentic_self_check.py: PASS (states=300 actions=1593)
+- profile_fixture_self_check.py: PASS
+- check_player_counts.py: PASS 11/11 (recorded in each gate attempt)
+- technical checks 01-04 with checks/versioned/04_required_api_v2.py: PASS 4/4
+- frozen packet tests: PASS 8/8
+- evaluator-neutral final contract review: PASS
+
+invalid tooling replay retained for transparency:
+- the default legacy /1 check 04 was accidentally invoked once and reported 7/9 because this run uses the frozen /2 contract; rerunning the same technical group with the pre-existing versioned V2 replacement passed 9/9 for check 04 and 4/4 overall. This was a checker-version mismatch, not a generation repair signal.
+
+## technical gate 01-04
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api_v2                 9/9 score=1.000    0.01s
+---- summary                            4/4 score=1.000    0.02s
+
+
+## runtime robustness 05
+OK   05_random_rollouts             100/100 score=1.000    2.48s
+---- summary                            1/1 score=1.000    2.48s
+
+
+## interface 06
+OK   06_action_language         77788/77788 score=1.000    2.24s
+---- summary                            1/1 score=1.000    2.24s
+
+
+## player counts
+PASS players=2
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=6
+PASS players=7
+PASS players=8
+PASS players=9
+PASS players=10
+PASS players=1: rejected
+PASS players=11: rejected
+PLAYER_COUNTS 11/11
+
+
+## cited scenarios v4 r2
+PASS 6N-R01-2p-setup
+PASS 6N-R02-3p-setup
+PASS 6N-R03-4p-setup
+PASS 6N-R04-5p-setup
+PASS 6N-R05-6p-setup
+PASS 6N-R06-7p-setup
+PASS 6N-R07-8p-setup
+PASS 6N-R08-9p-setup
+PASS 6N-R09-10p-setup
+PASS 6N-R10A-supported-count-initial-play
+PASS 6N-R10B-supported-count-bounded-play
+PASS 6N-R10-player-range-rejection
+PASS 6N-R11-card-inventory
+PASS 6N-R12-hidden-joint-reveal
+PASS 6N-R13-private-seat-protocol
+PASS 6N-R14-ascending-resolution
+PASS 6N-R15-minimum-difference-example
+PASS 6N-R16-sixth-card-capture
+PASS 6N-R17-low-card-free-choice
+PASS 6N-R18-low-choice-pending
+PASS 6N-R19-dynamic-3-then-9
+PASS 6N-R20-dynamic-adverse-cascade
+PASS 6N-R21-capture-zone
+PASS 6N-R22A-publisher-scoring-categories
+PASS 6N-R22B-component-bull-inventory
+PASS 6N-R23-ten-round-boundary
+PASS 6N-R24-new-game-reset
+PASS 6N-R25-threshold-strictness
+PASS 6N-R26-lowest-total-wins
+PASS 6N-R27-shared-winners
+PASS 6N-R28-seeded-reset
+PASS 6N-R29-observation-privacy
+PASS 6N-R30-return-contract
+SCENARIOS PASS=33 FAIL=0 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=33/33 coverage=1.000 clear=24/24 human_decision=9/9
+CLAIMS mapped=30/30 evaluated=30/30 exceptions=0

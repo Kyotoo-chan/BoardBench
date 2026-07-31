@@ -1,0 +1,133 @@
+{
+  "candidates": [
+    {
+      "schema_version": 1,
+      "id": "6N-JC01-joint-reveal-captured-card",
+      "status": "confirmed_regression_candidate",
+      "scored": false,
+      "reason_unscored": "Proposed by neutral Judges after the V2 R2 evaluator was frozen and executed; retained for a future evaluator revision, not added post hoc to the scenario score.",
+      "basis": "clear",
+      "fact_ids": [
+        "6N-C-JOINT-REVEAL"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Erst dann, wenn der Letzte sich entschieden hat, werden die Karten aufgedeckt."
+      },
+      "fixture": {
+        "players": 4,
+        "rows": [
+          [
+            10,
+            11,
+            12,
+            13
+          ],
+          [
+            40
+          ],
+          [
+            60
+          ],
+          [
+            80
+          ]
+        ],
+        "hands": {
+          "0": [
+            20
+          ],
+          "1": [
+            30
+          ],
+          "2": [
+            50
+          ],
+          "3": [
+            70
+          ]
+        }
+      },
+      "commit_order": [
+        {
+          "player": 0,
+          "card": 20
+        },
+        {
+          "player": 1,
+          "card": 30
+        },
+        {
+          "player": 2,
+          "card": 50
+        },
+        {
+          "player": 3,
+          "card": 70
+        }
+      ],
+      "expected": "All players can observe identities 20, 30, 50, and 70 after the final commitment; identity 20 must not disappear merely because card 30 captures its row during the same atomic resolution.",
+      "actual": {
+        "0": {
+          "visible_played_cards": [
+            30,
+            50,
+            70
+          ],
+          "missing_played_cards": [
+            20
+          ],
+          "own_captured": []
+        },
+        "1": {
+          "visible_played_cards": [
+            20,
+            30,
+            50,
+            70
+          ],
+          "missing_played_cards": [],
+          "own_captured": [
+            10,
+            11,
+            12,
+            13,
+            20
+          ]
+        },
+        "2": {
+          "visible_played_cards": [
+            30,
+            50,
+            70
+          ],
+          "missing_played_cards": [
+            20
+          ],
+          "own_captured": []
+        },
+        "3": {
+          "visible_played_cards": [
+            30,
+            50,
+            70
+          ],
+          "missing_played_cards": [
+            20
+          ],
+          "own_captured": []
+        }
+      },
+      "confirmed": true,
+      "implementation": {
+        "path": "outputs/six_nimmt_codex_ag.py",
+        "sha256": "4d2e40b49042fd7eebd7e5f0140b89ee4605062f1d69cabd5adc17604b1d3cf5"
+      },
+      "adapter": {
+        "path": "checks/scenario_adapters/six_nimmt_v2_r2.py",
+        "sha256": "b5d2bf533f68045c25766a87289664d391d6e27dfca790b11f55832317cacd09"
+      }
+    }
+  ]
+}

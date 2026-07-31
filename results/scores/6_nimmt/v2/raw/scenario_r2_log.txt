@@ -1,0 +1,37 @@
+PASS 6N-R01-2p-setup
+PASS 6N-R02-3p-setup
+PASS 6N-R03-4p-setup
+PASS 6N-R04-5p-setup
+PASS 6N-R05-6p-setup
+PASS 6N-R06-7p-setup
+PASS 6N-R07-8p-setup
+PASS 6N-R08-9p-setup
+PASS 6N-R09-10p-setup
+PASS 6N-R10A-supported-count-initial-play
+PASS 6N-R10B-supported-count-bounded-play
+PASS 6N-R10-player-range-rejection
+PASS 6N-R11-card-inventory
+FAIL 6N-R12-hidden-joint-reveal: case hidden-until-joint-reveal: step 4: observation[0].revealed_cards: expected [14, 15, 44, 61], got []
+PASS 6N-R13-private-seat-protocol
+PASS 6N-R14-ascending-resolution
+PASS 6N-R15-minimum-difference-example
+PASS 6N-R16-sixth-card-capture
+PASS 6N-R17-low-card-free-choice
+PASS 6N-R18-low-choice-pending
+PASS 6N-R19-dynamic-3-then-9
+PASS 6N-R20-dynamic-adverse-cascade
+PASS 6N-R21-capture-zone
+PASS 6N-R22A-publisher-scoring-categories
+PASS 6N-R22B-component-bull-inventory
+PASS 6N-R23-ten-round-boundary
+PASS 6N-R24-new-game-reset
+PASS 6N-R25-threshold-strictness
+PASS 6N-R26-lowest-total-wins
+PASS 6N-R27-shared-winners
+PASS 6N-R28-seeded-reset
+PASS 6N-R29-observation-privacy
+PASS 6N-R30-return-contract
+SCENARIOS PASS=32 FAIL=1 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=33/33 coverage=1.000 clear=23/24 human_decision=9/9
+CLAIMS mapped=30/30 evaluated=30/30 exceptions=0
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4_r2.py --code-path outputs/six_nimmt_codex_ag.py --scenarios checks/scenarios/six_nimmt_v2_r2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\6_nimmt\v2\original_scenarios.json` failed. (See above for error)
