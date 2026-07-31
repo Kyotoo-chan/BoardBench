@@ -1,0 +1,4802 @@
+{
+  "version": 4,
+  "rubric_version": "six-nimmt-v2-atomic-2026-07-31",
+  "game": "6_nimmt",
+  "adapter": "checks/scenario_adapters/six_nimmt_v2.py",
+  "sources": [
+    {
+      "source_id": "6NIMMT-V23-RULES",
+      "path": "inputs/games/6_nimmt/game_rules.pdf",
+      "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+    },
+    {
+      "source_id": "6NIMMT-V2-COMPONENTS",
+      "path": "inputs/games/6_nimmt/component_observation_v2.json",
+      "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+    }
+  ],
+  "claim_inventory": "inputs/games/6_nimmt/claims_v2.json",
+  "scenarios": [
+    {
+      "id": "6N-R01-2p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "2-player setup",
+      "expectation": "Constructor accepts 2; each hand has size 10, four one-card rows exist, and reserve size is 80.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "2p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 2,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 80
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R02-3p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "3-player setup",
+      "expectation": "Constructor accepts 3; each hand has size 10, four one-card rows exist, and reserve size is 70.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "3p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 3,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 70
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R03-4p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "4-player setup",
+      "expectation": "Constructor accepts 4; each hand has size 10, four one-card rows exist, and reserve size is 60.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "4p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 4,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 60
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R04-5p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "5-player setup",
+      "expectation": "Constructor accepts 5; each hand has size 10, four one-card rows exist, and reserve size is 50.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "5p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 5,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 50
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R05-6p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "6-player setup",
+      "expectation": "Constructor accepts 6; each hand has size 10, four one-card rows exist, and reserve size is 40.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "6p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 6,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 40
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R06-7p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "7-player setup",
+      "expectation": "Constructor accepts 7; each hand has size 10, four one-card rows exist, and reserve size is 30.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "7p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 7,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 30
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R07-8p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "8-player setup",
+      "expectation": "Constructor accepts 8; each hand has size 10, four one-card rows exist, and reserve size is 20.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "8p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 8,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 20
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R08-9p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "9-player setup",
+      "expectation": "Constructor accepts 9; each hand has size 10, four one-card rows exist, and reserve size is 10.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "9p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 9,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R09-10p-setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "basis": "clear",
+      "title": "10-player setup",
+      "expectation": "Constructor accepts 10; each hand has size 10, four one-card rows exist, and reserve size is 0.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "10p-setup",
+          "initial": {
+            "adapter": {
+              "setup_probe": {
+                "players": 10,
+                "seed": 11,
+                "hand_each": 10,
+                "row_sizes": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "reserve_size": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R10A-supported-count-initial-play",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-FACE-DOWN-COMMIT"
+      ],
+      "basis": "clear",
+      "title": "Initial legal play for every supported count",
+      "expectation": "For each count 2–10, every player has at least one legal semantic face-down card commitment at the start of a round.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; Alle Spieler legen verdeckt eine Karte"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "2p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 2,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "3p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 3,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "4p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 4,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "5p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 5,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "6p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 6,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "7p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 7,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "8p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 8,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "9p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 9,
+                "seed": 17
+              }
+            }
+          }
+        },
+        {
+          "name": "10p-initial",
+          "initial": {
+            "adapter": {
+              "initial_play_probe": {
+                "players": 10,
+                "seed": 17
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R10B-supported-count-bounded-play",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END"
+      ],
+      "basis": "clear",
+      "title": "Bounded game playability for every supported count",
+      "expectation": "For each count 2–10, a deterministic legal-policy rollout reaches the end of one ten-round game within a fixed bound without crashing.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; bis nach zehn Runden alle Karten ausgespielt wurden"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Das Spiel endet, wenn alle Handkarten ausgespielt wurden."
+        }
+      ],
+      "cases": [
+        {
+          "name": "2p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 2,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "3p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 3,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "4p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 4,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "5p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 5,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "6p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 6,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "7p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 7,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "8p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 8,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "9p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 9,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        },
+        {
+          "name": "10p-bounded",
+          "initial": {
+            "adapter": {
+              "bounded_game_probe": {
+                "players": 10,
+                "seed": 23,
+                "max_steps": 160,
+                "expected_rounds": 10
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R10-player-range-rejection",
+      "fact_ids": [
+        "6N-M-INVALID-PLAYERS"
+      ],
+      "basis": "human_decision",
+      "title": "Reject unsupported player counts",
+      "expectation": "Constructor raises ValueError for 0, 1, 11 and a larger count.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "reject-0",
+          "initial": {
+            "adapter": {
+              "reject_players": 0
+            }
+          }
+        },
+        {
+          "name": "reject-1",
+          "initial": {
+            "adapter": {
+              "reject_players": 1
+            }
+          }
+        },
+        {
+          "name": "reject-11",
+          "initial": {
+            "adapter": {
+              "reject_players": 11
+            }
+          }
+        },
+        {
+          "name": "reject-20",
+          "initial": {
+            "adapter": {
+              "reject_players": 20
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R11-card-inventory",
+      "fact_ids": [
+        "6N-M-CARD-IDENTITIES",
+        "6N-M-BULL-INVENTORY"
+      ],
+      "basis": "human_decision",
+      "title": "Exact augmented card inventory",
+      "expectation": "Across hands, rows and reserve, every value 1–104 appears exactly once and bullhead metadata matches the observation.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Inhalt: 104 Spielkarten"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/identities",
+          "quote": "{\"kind\":\"integer_range\",\"minimum\":1,\"maximum\":104,\"copies_each\":1}"
+        },
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/bullheads",
+          "quote": "{\"55\":7,\"other_repeated_digit_values\":5,\"other_multiples_of_10\":3,\"other_multiples_of_5\":2,\"all_remaining_values\":1}"
+        }
+      ],
+      "cases": [
+        {
+          "name": "full-component-inventory",
+          "initial": {
+            "adapter": {
+              "inventory_probe": {
+                "cards": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33,
+                  34,
+                  35,
+                  36,
+                  37,
+                  38,
+                  39,
+                  40,
+                  41,
+                  42,
+                  43,
+                  44,
+                  45,
+                  46,
+                  47,
+                  48,
+                  49,
+                  50,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74,
+                  75,
+                  76,
+                  77,
+                  78,
+                  79,
+                  80,
+                  81,
+                  82,
+                  83,
+                  84,
+                  85,
+                  86,
+                  87,
+                  88,
+                  89,
+                  90,
+                  91,
+                  92,
+                  93,
+                  94,
+                  95,
+                  96,
+                  97,
+                  98,
+                  99,
+                  100,
+                  101,
+                  102,
+                  103,
+                  104
+                ],
+                "bullheads": {
+                  "1": 1,
+                  "2": 1,
+                  "3": 1,
+                  "4": 1,
+                  "5": 2,
+                  "6": 1,
+                  "7": 1,
+                  "8": 1,
+                  "9": 1,
+                  "10": 3,
+                  "11": 5,
+                  "12": 1,
+                  "13": 1,
+                  "14": 1,
+                  "15": 2,
+                  "16": 1,
+                  "17": 1,
+                  "18": 1,
+                  "19": 1,
+                  "20": 3,
+                  "21": 1,
+                  "22": 5,
+                  "23": 1,
+                  "24": 1,
+                  "25": 2,
+                  "26": 1,
+                  "27": 1,
+                  "28": 1,
+                  "29": 1,
+                  "30": 3,
+                  "31": 1,
+                  "32": 1,
+                  "33": 5,
+                  "34": 1,
+                  "35": 2,
+                  "36": 1,
+                  "37": 1,
+                  "38": 1,
+                  "39": 1,
+                  "40": 3,
+                  "41": 1,
+                  "42": 1,
+                  "43": 1,
+                  "44": 5,
+                  "45": 2,
+                  "46": 1,
+                  "47": 1,
+                  "48": 1,
+                  "49": 1,
+                  "50": 3,
+                  "51": 1,
+                  "52": 1,
+                  "53": 1,
+                  "54": 1,
+                  "55": 7,
+                  "56": 1,
+                  "57": 1,
+                  "58": 1,
+                  "59": 1,
+                  "60": 3,
+                  "61": 1,
+                  "62": 1,
+                  "63": 1,
+                  "64": 1,
+                  "65": 2,
+                  "66": 5,
+                  "67": 1,
+                  "68": 1,
+                  "69": 1,
+                  "70": 3,
+                  "71": 1,
+                  "72": 1,
+                  "73": 1,
+                  "74": 1,
+                  "75": 2,
+                  "76": 1,
+                  "77": 5,
+                  "78": 1,
+                  "79": 1,
+                  "80": 3,
+                  "81": 1,
+                  "82": 1,
+                  "83": 1,
+                  "84": 1,
+                  "85": 2,
+                  "86": 1,
+                  "87": 1,
+                  "88": 5,
+                  "89": 1,
+                  "90": 3,
+                  "91": 1,
+                  "92": 1,
+                  "93": 1,
+                  "94": 1,
+                  "95": 2,
+                  "96": 1,
+                  "97": 1,
+                  "98": 1,
+                  "99": 5,
+                  "100": 3,
+                  "101": 1,
+                  "102": 1,
+                  "103": 1,
+                  "104": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R12-hidden-joint-reveal",
+      "fact_ids": [
+        "6N-C-FACE-DOWN-COMMIT",
+        "6N-C-JOINT-REVEAL"
+      ],
+      "basis": "clear",
+      "title": "Hidden commits and joint reveal",
+      "expectation": "Earlier commits remain identity-hidden from opponents; all identities become jointly visible only after the last commit.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt ... wenn der Letzte sich entschieden hat, werden die Karten aufgedeckt."
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "first-hidden",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 14
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "current_player": 1,
+                  "observations": {
+                    "1": {
+                      "equals": {
+                        "commit_status": [
+                          true,
+                          false,
+                          false,
+                          false
+                        ],
+                        "revealed": []
+                      },
+                      "opponent_no_identity": 0
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "hidden-until-joint-reveal",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 14
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 15
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 44
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "current_player": 3,
+                  "observations": {
+                    "3": {
+                      "equals": {
+                        "commit_status": [
+                          true,
+                          true,
+                          true,
+                          false
+                        ],
+                        "revealed": []
+                      },
+                      "opponent_no_identity": 0
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 61
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "observations": {
+                    "0": {
+                      "revealed_cards": [
+                        14,
+                        15,
+                        44,
+                        61
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R13-private-seat-protocol",
+      "fact_ids": [
+        "6N-M-COMMIT-PROTOCOL"
+      ],
+      "basis": "human_decision",
+      "title": "Irrevocable seat-ordered commits",
+      "expectation": "Seats commit in ascending order, cannot undo, and current_player advances only among uncommitted seats.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "seat-order",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 14
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "current_player": 1,
+                  "legal_commit_actor": 1
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 15
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "current_player": 2,
+                  "legal_commit_actor": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "no-undo-action",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "initial": {
+            "adapter": {
+              "reject_action_type": "undo_commit"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R14-ascending-resolution",
+      "fact_ids": [
+        "6N-C-ASCENDING-RESOLUTION"
+      ],
+      "basis": "clear",
+      "title": "Ascending resolution order",
+      "expectation": "A revealed set resolves lowest to highest regardless of seat order.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Wer die niedrigste Karte ausgespielt hat, legt sie als Erster"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "printed-values-scrambled-seats",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 14
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 15
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 44
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 61
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      12,
+                      14,
+                      15
+                    ],
+                    [
+                      37
+                    ],
+                    [
+                      43,
+                      44
+                    ],
+                    [
+                      58,
+                      61
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "four-independent-destinations",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                20
+              ],
+              [
+                30
+              ],
+              [
+                40
+              ]
+            ],
+            "hands": {
+              "0": [
+                41
+              ],
+              "1": [
+                11
+              ],
+              "2": [
+                31
+              ],
+              "3": [
+                21
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 41
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 11
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 31
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 21
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      10,
+                      11
+                    ],
+                    [
+                      20,
+                      21
+                    ],
+                    [
+                      30,
+                      31
+                    ],
+                    [
+                      40,
+                      41
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R15-minimum-difference-example",
+      "fact_ids": [
+        "6N-C-ROW-ASCENDING",
+        "6N-C-MIN-DIFFERENCE"
+      ],
+      "basis": "clear",
+      "title": "Mandatory minimum difference",
+      "expectation": "The printed example resolves to rows 12-14-15, 37, 43-44, and 58-61.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "12, 37, 43 und 58 ... 14, 15, 44 und 61"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "rulebook-example",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {
+              "0": [
+                14
+              ],
+              "1": [
+                15
+              ],
+              "2": [
+                44
+              ],
+              "3": [
+                61
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 14
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 15
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 44
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 61
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      12,
+                      14,
+                      15
+                    ],
+                    [
+                      37
+                    ],
+                    [
+                      43,
+                      44
+                    ],
+                    [
+                      58,
+                      61
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R16-sixth-card-capture",
+      "fact_ids": [
+        "6N-C-ROW-MAX-FIVE",
+        "6N-C-FULL-CAPTURE",
+        "6N-C-SIXTH-STARTER"
+      ],
+      "basis": "clear",
+      "title": "Sixth card captures five",
+      "expectation": "A forced sixth card captures exactly the prior five and remains as the sole starter; it is not itself captured.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "sechste Karte ... alle fünf Karten ... neue Reihe"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "lowest-card-is-sixth",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              [
+                40
+              ],
+              [
+                70
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {
+              "0": [
+                20
+              ],
+              "1": [
+                41
+              ],
+              "2": [
+                71
+              ],
+              "3": [
+                101
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 20
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 41
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 101
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      20
+                    ],
+                    [
+                      40,
+                      41
+                    ],
+                    [
+                      70,
+                      71
+                    ],
+                    [
+                      100,
+                      101
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      10,
+                      11,
+                      12,
+                      13,
+                      14
+                    ]
+                  },
+                  "captured_count": {
+                    "0": 5
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "sixth-owned-by-later-seat",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10,
+                11,
+                12,
+                13,
+                14
+              ],
+              [
+                40
+              ],
+              [
+                70
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {
+              "0": [
+                41
+              ],
+              "1": [
+                71
+              ],
+              "2": [
+                101
+              ],
+              "3": [
+                20
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 41
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 101
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 20
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      20
+                    ],
+                    [
+                      40,
+                      41
+                    ],
+                    [
+                      70,
+                      71
+                    ],
+                    [
+                      100,
+                      101
+                    ]
+                  ],
+                  "captured": {
+                    "3": [
+                      10,
+                      11,
+                      12,
+                      13,
+                      14
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R17-low-card-free-choice",
+      "fact_ids": [
+        "6N-C-LOW-CHOOSE-ROW",
+        "6N-C-LOW-STARTER"
+      ],
+      "basis": "clear",
+      "title": "Low card permits any row",
+      "expectation": "All four row choices are legal; the chosen row is captured regardless of length and replaced by the low card.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "alle Karten einer beliebigen Reihe nehmen"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "choose-row-0",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                20,
+                21
+              ],
+              [
+                30,
+                31,
+                32
+              ],
+              [
+                40,
+                41,
+                42,
+                43
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      1
+                    ],
+                    [
+                      20,
+                      21
+                    ],
+                    [
+                      30,
+                      31,
+                      32
+                    ],
+                    [
+                      40,
+                      41,
+                      42,
+                      43
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      10
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "choose-row-1",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                20,
+                21
+              ],
+              [
+                30,
+                31,
+                32
+              ],
+              [
+                40,
+                41,
+                42,
+                43
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 1
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      10
+                    ],
+                    [
+                      1
+                    ],
+                    [
+                      30,
+                      31,
+                      32
+                    ],
+                    [
+                      40,
+                      41,
+                      42,
+                      43
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      20,
+                      21
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "choose-row-2",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                20,
+                21
+              ],
+              [
+                30,
+                31,
+                32
+              ],
+              [
+                40,
+                41,
+                42,
+                43
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 2
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      10
+                    ],
+                    [
+                      20,
+                      21
+                    ],
+                    [
+                      1
+                    ],
+                    [
+                      40,
+                      41,
+                      42,
+                      43
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      30,
+                      31,
+                      32
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "choose-row-3",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                20,
+                21
+              ],
+              [
+                30,
+                31,
+                32
+              ],
+              [
+                40,
+                41,
+                42,
+                43
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 3
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      10
+                    ],
+                    [
+                      20,
+                      21
+                    ],
+                    [
+                      30,
+                      31,
+                      32
+                    ],
+                    [
+                      1
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      40,
+                      41,
+                      42,
+                      43
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R18-low-choice-pending",
+      "fact_ids": [
+        "6N-M-LOW-PENDING"
+      ],
+      "basis": "human_decision",
+      "title": "Ordered resolution pauses for low choice",
+      "expectation": "Automatic resolution pauses for the low card owner, exposes exactly four row choices, then resumes the next higher card.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "einer beliebigen Reihe"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "pause-with-four-actions",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                60
+              ],
+              [
+                90
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": [
+                {
+                  "player": 1,
+                  "card": 50
+                }
+              ]
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              },
+              {
+                "player": 1,
+                "card": 50
+              }
+            ]
+          },
+          "initial": {
+            "adapter": {
+              "pending_type": "low_choice",
+              "legal_rows": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "pending_remaining": [
+                {
+                  "player": 1,
+                  "card": 50
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "resume-after-choice",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                60
+              ],
+              [
+                90
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": [
+                {
+                  "player": 1,
+                  "card": 50
+                }
+              ]
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              },
+              {
+                "player": 1,
+                "card": 50
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      1
+                    ],
+                    [
+                      30,
+                      50
+                    ],
+                    [
+                      60
+                    ],
+                    [
+                      90
+                    ]
+                  ],
+                  "pending_type": null
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R19-dynamic-3-then-9",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-LOW-CHOOSE-ROW"
+      ],
+      "basis": "clear",
+      "title": "Dynamic low-card recomputation",
+      "expectation": "After 3 replaces a row, 9 is placed against updated rows and follows 3.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Mit seiner ‚3‘ ... Der Spieler mit der Karte ‚9‘ ... hinter die ‚3‘"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "printed-3-then-9",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                12
+              ],
+              [
+                37
+              ],
+              [
+                43
+              ],
+              [
+                58
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 3,
+              "remaining": [
+                {
+                  "player": 1,
+                  "card": 9
+                }
+              ]
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 3
+              },
+              {
+                "player": 1,
+                "card": 9
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 1
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      12
+                    ],
+                    [
+                      3,
+                      9
+                    ],
+                    [
+                      43
+                    ],
+                    [
+                      58
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R20-dynamic-adverse-cascade",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-FULL-CAPTURE"
+      ],
+      "basis": "clear",
+      "title": "Dynamic later sixth-card cascade",
+      "expectation": "After 29 changes a row, 62 recomputes its destination and captures the now-forced five-card row.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "29 ... leert die erste Reihe ... 62 ... vierte Reihe ... alle fünf Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "29-changes-62-destination",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                20,
+                21,
+                32
+              ],
+              [
+                37
+              ],
+              [
+                41
+              ],
+              [
+                35,
+                36,
+                38,
+                40,
+                42
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 29,
+              "remaining": [
+                {
+                  "player": 1,
+                  "card": 62
+                }
+              ]
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 29
+              },
+              {
+                "player": 1,
+                "card": 62
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "rows": [
+                    [
+                      29
+                    ],
+                    [
+                      37
+                    ],
+                    [
+                      41
+                    ],
+                    [
+                      62
+                    ]
+                  ],
+                  "captured": {
+                    "0": [
+                      20,
+                      21,
+                      32
+                    ],
+                    "1": [
+                      35,
+                      36,
+                      38,
+                      40,
+                      42
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R21-capture-zone",
+      "fact_ids": [
+        "6N-C-CAPTURE-FACE-DOWN",
+        "6N-C-CAPTURE-NOT-HAND",
+        "6N-C-BULLS-ARE-POINTS"
+      ],
+      "basis": "clear",
+      "title": "Captured cards leave play",
+      "expectation": "Captured cards enter only the capture pile, increase its subtotal, never return to hand and cannot be committed.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Hornochsenstapel ... dürfen nicht auf die Hand genommen werden"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "full-row-to-capture-only",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                5,
+                10,
+                11,
+                15,
+                20
+              ],
+              [
+                40
+              ],
+              [
+                70
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {
+              "0": [
+                25
+              ],
+              "1": [
+                41
+              ],
+              "2": [
+                71
+              ],
+              "3": [
+                101
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 25
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 41
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 101
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "captured": {
+                    "0": [
+                      5,
+                      10,
+                      11,
+                      15,
+                      20
+                    ]
+                  },
+                  "hands": {
+                    "0": []
+                  },
+                  "game_bullheads": {
+                    "0": 15
+                  },
+                  "legal_commit_cards_not": [
+                    5,
+                    10,
+                    11,
+                    15,
+                    20
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "low-row-to-capture-only",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                5,
+                10
+              ],
+              [
+                30
+              ],
+              [
+                60
+              ],
+              [
+                90
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "captured": {
+                    "0": [
+                      5,
+                      10
+                    ]
+                  },
+                  "hands": {
+                    "0": []
+                  },
+                  "game_bullheads": {
+                    "0": 5
+                  },
+                  "legal_commit_cards_not": [
+                    5,
+                    10
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R22A-publisher-scoring-categories",
+      "fact_ids": [
+        "6N-C-BULLS-ARE-POINTS",
+        "6N-C-FIVE-SCORE",
+        "6N-C-TEN-SCORE",
+        "6N-C-DOUBLE-SCORE",
+        "6N-C-55-SCORE"
+      ],
+      "basis": "clear",
+      "title": "Publisher scoring categories",
+      "expectation": "Given representative stated category values, captured multiples of five, multiples of ten, repeated digits and 55 score exactly 2, 3, 5 and 7 bullheads; each bullhead is one penalty point.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Fünferzahlen ... 2; Zehnerzahlen ... 3; Paschzahlen ... 5; 55 ... 7"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "capture-5-scores-2",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                5
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_bullheads": {
+                    "0": 2
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "capture-10-scores-3",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_bullheads": {
+                    "0": 3
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "capture-22-scores-5",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                22
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_bullheads": {
+                    "0": 5
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "capture-55-scores-7",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                55
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_bullheads": {
+                    "0": 7
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R22B-component-bull-inventory",
+      "fact_ids": [
+        "6N-M-BULL-INVENTORY"
+      ],
+      "basis": "human_decision",
+      "title": "Complete observed bullhead inventory",
+      "expectation": "All 104 observed card identities have the approved complete bullhead mapping, including one bullhead for every remaining ordinary value.",
+      "source": {
+        "source_id": "6NIMMT-V2-COMPONENTS",
+        "json_pointer": "/cards/bullheads",
+        "quote": "{\"55\":7,\"other_repeated_digit_values\":5,\"other_multiples_of_10\":3,\"other_multiples_of_5\":2,\"all_remaining_values\":1}"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Fünferzahlen ... 2; Zehnerzahlen ... 3; Paschzahlen ... 5; 55 ... 7"
+        }
+      ],
+      "cases": [
+        {
+          "name": "complete-map",
+          "initial": {
+            "adapter": {
+              "inventory_probe": {
+                "cards": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33,
+                  34,
+                  35,
+                  36,
+                  37,
+                  38,
+                  39,
+                  40,
+                  41,
+                  42,
+                  43,
+                  44,
+                  45,
+                  46,
+                  47,
+                  48,
+                  49,
+                  50,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74,
+                  75,
+                  76,
+                  77,
+                  78,
+                  79,
+                  80,
+                  81,
+                  82,
+                  83,
+                  84,
+                  85,
+                  86,
+                  87,
+                  88,
+                  89,
+                  90,
+                  91,
+                  92,
+                  93,
+                  94,
+                  95,
+                  96,
+                  97,
+                  98,
+                  99,
+                  100,
+                  101,
+                  102,
+                  103,
+                  104
+                ],
+                "bullheads": {
+                  "1": 1,
+                  "2": 1,
+                  "3": 1,
+                  "4": 1,
+                  "5": 2,
+                  "6": 1,
+                  "7": 1,
+                  "8": 1,
+                  "9": 1,
+                  "10": 3,
+                  "11": 5,
+                  "12": 1,
+                  "13": 1,
+                  "14": 1,
+                  "15": 2,
+                  "16": 1,
+                  "17": 1,
+                  "18": 1,
+                  "19": 1,
+                  "20": 3,
+                  "21": 1,
+                  "22": 5,
+                  "23": 1,
+                  "24": 1,
+                  "25": 2,
+                  "26": 1,
+                  "27": 1,
+                  "28": 1,
+                  "29": 1,
+                  "30": 3,
+                  "31": 1,
+                  "32": 1,
+                  "33": 5,
+                  "34": 1,
+                  "35": 2,
+                  "36": 1,
+                  "37": 1,
+                  "38": 1,
+                  "39": 1,
+                  "40": 3,
+                  "41": 1,
+                  "42": 1,
+                  "43": 1,
+                  "44": 5,
+                  "45": 2,
+                  "46": 1,
+                  "47": 1,
+                  "48": 1,
+                  "49": 1,
+                  "50": 3,
+                  "51": 1,
+                  "52": 1,
+                  "53": 1,
+                  "54": 1,
+                  "55": 7,
+                  "56": 1,
+                  "57": 1,
+                  "58": 1,
+                  "59": 1,
+                  "60": 3,
+                  "61": 1,
+                  "62": 1,
+                  "63": 1,
+                  "64": 1,
+                  "65": 2,
+                  "66": 5,
+                  "67": 1,
+                  "68": 1,
+                  "69": 1,
+                  "70": 3,
+                  "71": 1,
+                  "72": 1,
+                  "73": 1,
+                  "74": 1,
+                  "75": 2,
+                  "76": 1,
+                  "77": 5,
+                  "78": 1,
+                  "79": 1,
+                  "80": 3,
+                  "81": 1,
+                  "82": 1,
+                  "83": 1,
+                  "84": 1,
+                  "85": 2,
+                  "86": 1,
+                  "87": 1,
+                  "88": 5,
+                  "89": 1,
+                  "90": 3,
+                  "91": 1,
+                  "92": 1,
+                  "93": 1,
+                  "94": 1,
+                  "95": 2,
+                  "96": 1,
+                  "97": 1,
+                  "98": 1,
+                  "99": 5,
+                  "100": 3,
+                  "101": 1,
+                  "102": 1,
+                  "103": 1,
+                  "104": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "ordinary-seven-scores-one",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                7
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ],
+              [
+                100
+              ]
+            ],
+            "hands": {},
+            "phase": "choose_row",
+            "current_player": 0,
+            "pending": {
+              "type": "low_choice",
+              "player": 0,
+              "card": 1,
+              "remaining": []
+            },
+            "revealed": [
+              {
+                "player": 0,
+                "card": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "choose_row",
+                  "actor": 0,
+                  "args": {
+                    "row": 0
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_bullheads": {
+                    "0": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R23-ten-round-boundary",
+      "fact_ids": [
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END",
+        "6N-C-GAME-SCORE"
+      ],
+      "basis": "clear",
+      "title": "Exactly ten rounds per game",
+      "expectation": "After nine rounds hands have one card and game continues; after round ten hands empty, captures score, and no further commit occurs in that game.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "nach zehn Runden alle Karten ausgespielt"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Jetzt nimmt jeder seinen Hornochsenstapel und zählt seine Minuspunkte."
+        }
+      ],
+      "cases": [
+        {
+          "name": "after-nine-rounds",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10
+          },
+          "initial": {
+            "adapter": {
+              "round_number": 10,
+              "phase": "commit",
+              "hand_sizes": {
+                "0": 1,
+                "1": 1,
+                "2": 1,
+                "3": 1
+              }
+            }
+          }
+        },
+        {
+          "name": "after-tenth-round",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "game_number": 2,
+                  "round_number": 1,
+                  "phase": "commit",
+                  "hand_sizes": {
+                    "0": 10,
+                    "1": 10,
+                    "2": 10,
+                    "3": 10
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R24-new-game-reset",
+      "fact_ids": [
+        "6N-C-NEW-GAME",
+        "6N-C-SHUFFLE",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-GAME-SCORE"
+      ],
+      "basis": "clear",
+      "title": "New game begins below threshold",
+      "expectation": "Below threshold, the match remains nonterminal and a newly shuffled ten-card/four-row game starts while cumulative scores remain.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Und sofort beginnt ein neues Spiel."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 1,
+          "quote": "Mischen Sie alle Karten und teilen Sie an jeden Spieler 10 Karten aus."
+        },
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 1,
+          "quote": "die obersten vier Karten offen untereinander"
+        },
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Die Ergebnisse von jedem Spieler werden auf einem Blatt Papier notiert."
+        }
+      ],
+      "cases": [
+        {
+          "name": "below-threshold-reset",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 10,
+              "1": 20,
+              "2": 30,
+              "3": 40
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": false,
+                  "game_number": 2,
+                  "round_number": 1,
+                  "total_bullheads": {
+                    "0": 10,
+                    "1": 20,
+                    "2": 30,
+                    "3": 40
+                  },
+                  "hand_sizes": {
+                    "0": 10,
+                    "1": 10,
+                    "2": 10,
+                    "3": 10
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R25-threshold-strictness",
+      "fact_ids": [
+        "6N-C-MATCH-THRESHOLD",
+        "6N-C-GAME-SCORE"
+      ],
+      "basis": "clear",
+      "title": "Strictly greater than 66 after game",
+      "expectation": "Exactly 66 continues; 67 ends, but only after the current game fully scores.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "bis ein Spieler insgesamt über 66"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "exactly-66-continues",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 59,
+              "1": 0,
+              "2": 0,
+              "3": 0
+            },
+            "captured": {
+              "0": [
+                55
+              ],
+              "1": []
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": false,
+                  "game_number": 2,
+                  "total_bullheads": {
+                    "0": 66
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "67-ends-after-game",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 60,
+              "1": 0,
+              "2": 0,
+              "3": 0
+            },
+            "captured": {
+              "0": [
+                55
+              ],
+              "1": []
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": true,
+                  "total_bullheads": {
+                    "0": 67
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R26-lowest-total-wins",
+      "fact_ids": [
+        "6N-C-WINNER-MINIMUM"
+      ],
+      "basis": "clear",
+      "title": "Lowest cumulative score wins",
+      "expectation": "When the threshold is crossed, the unique lowest cumulative score is winner even if another player crossed 66.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler, der die wenigsten Hornochsen besitzt."
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "other-player-crosses",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 30,
+              "1": 60,
+              "2": 80,
+              "3": 90
+            },
+            "captured": {
+              "0": [],
+              "1": [
+                55
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": true,
+                  "winners": [
+                    0
+                  ],
+                  "total_bullheads": {
+                    "1": 67
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "both-over-lower-wins",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 70,
+              "1": 61,
+              "2": 80,
+              "3": 90
+            },
+            "captured": {
+              "0": [],
+              "1": [
+                55
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": true,
+                  "winners": [
+                    1
+                  ],
+                  "total_bullheads": {
+                    "0": 70,
+                    "1": 68
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R27-shared-winners",
+      "fact_ids": [
+        "6N-M-TIE-WINNER"
+      ],
+      "basis": "human_decision",
+      "title": "Tied minimum creates co-winners",
+      "expectation": "All players tied at the minimum are winners.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "die wenigsten Hornochsen"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "two-way-tie",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 60,
+              "1": 60,
+              "2": 80,
+              "3": 90
+            },
+            "captured": {
+              "0": [
+                55
+              ],
+              "1": [
+                11,
+                5
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": true,
+                  "winners": [
+                    0,
+                    1
+                  ],
+                  "total_bullheads": {
+                    "0": 67,
+                    "1": 67
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "three-way-tie",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                71
+              ],
+              "1": [
+                72
+              ],
+              "2": [
+                73
+              ],
+              "3": [
+                74
+              ]
+            },
+            "round_number": 10,
+            "total_bullheads": {
+              "0": 60,
+              "1": 60,
+              "2": 60,
+              "3": 90
+            },
+            "captured": {
+              "0": [
+                55
+              ],
+              "1": [
+                11,
+                5
+              ],
+              "2": [
+                22,
+                7,
+                8
+              ]
+            }
+          },
+          "steps": [
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 0,
+                  "args": {
+                    "card": 71
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 1,
+                  "args": {
+                    "card": 72
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 2,
+                  "args": {
+                    "card": 73
+                  }
+                }
+              }
+            },
+            {
+              "action": {
+                "adapter": {
+                  "type": "commit_card",
+                  "actor": 3,
+                  "args": {
+                    "card": 74
+                  }
+                }
+              },
+              "expect": {
+                "adapter": {
+                  "terminal": true,
+                  "winners": [
+                    0,
+                    1,
+                    2
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6N-R28-seeded-reset",
+      "fact_ids": [
+        "6N-M-RNG-RESET"
+      ],
+      "basis": "human_decision",
+      "title": "Seeded shuffle and full-deck reset",
+      "expectation": "Equal seed reproduces setup and successive games; different seed can differ; every new game accounts for all 104 cards with no stale captured cards.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Mischen Sie alle Karten"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "same-seed-initial",
+          "initial": {
+            "adapter": {
+              "seed_probe": {
+                "players": 4,
+                "seed_a": 101,
+                "seed_b": 101,
+                "relation": "equal",
+                "advance": false
+              }
+            }
+          }
+        },
+        {
+          "name": "different-seed-initial",
+          "initial": {
+            "adapter": {
+              "seed_probe": {
+                "players": 4,
+                "seed_a": 101,
+                "seed_b": 102,
+                "relation": "different",
+                "advance": false
+              }
+            }
+          }
+        },
+        {
+          "name": "full-reset-inventory",
+          "initial": {
+            "adapter": {
+              "seed_probe": {
+                "players": 4,
+                "seed_a": 103,
+                "seed_b": 103,
+                "relation": "equal",
+                "advance": true,
+                "max_steps": 160
+              },
+              "reset_inventory_probe": {
+                "players": 4,
+                "seed": 103,
+                "max_steps": 160,
+                "cards": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                  26,
+                  27,
+                  28,
+                  29,
+                  30,
+                  31,
+                  32,
+                  33,
+                  34,
+                  35,
+                  36,
+                  37,
+                  38,
+                  39,
+                  40,
+                  41,
+                  42,
+                  43,
+                  44,
+                  45,
+                  46,
+                  47,
+                  48,
+                  49,
+                  50,
+                  51,
+                  52,
+                  53,
+                  54,
+                  55,
+                  56,
+                  57,
+                  58,
+                  59,
+                  60,
+                  61,
+                  62,
+                  63,
+                  64,
+                  65,
+                  66,
+                  67,
+                  68,
+                  69,
+                  70,
+                  71,
+                  72,
+                  73,
+                  74,
+                  75,
+                  76,
+                  77,
+                  78,
+                  79,
+                  80,
+                  81,
+                  82,
+                  83,
+                  84,
+                  85,
+                  86,
+                  87,
+                  88,
+                  89,
+                  90,
+                  91,
+                  92,
+                  93,
+                  94,
+                  95,
+                  96,
+                  97,
+                  98,
+                  99,
+                  100,
+                  101,
+                  102,
+                  103,
+                  104
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R29-observation-privacy",
+      "fact_ids": [
+        "6N-M-OBSERVATION"
+      ],
+      "basis": "human_decision",
+      "title": "Player-specific private observations",
+      "expectation": "Own hand/capture identities visible; opponent hand identities, pending commitments and captured identities hidden; opponent counts and bull subtotal visible.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte von ihren Handkarten vor sich auf den Tisch."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Karten, die Sie kassieren mussten, legen Sie verdeckt vor sich auf den Tisch."
+        }
+      ],
+      "cases": [
+        {
+          "name": "hands-private",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                20
+              ],
+              [
+                40
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ]
+            ],
+            "hands": {
+              "0": [
+                11,
+                12
+              ],
+              "1": [
+                31,
+                32
+              ],
+              "2": [
+                51
+              ],
+              "3": [
+                71
+              ]
+            },
+            "captured": {
+              "0": [
+                5,
+                6
+              ],
+              "1": [
+                10
+              ]
+            },
+            "committed": {
+              "0": 13
+            }
+          },
+          "initial": {
+            "adapter": {
+              "observations": {
+                "0": {
+                  "own_hand": [
+                    11,
+                    12
+                  ],
+                  "opponent_no_identity": 1,
+                  "opponent_aggregates": {
+                    "1": {
+                      "hand_size": 2
+                    }
+                  }
+                },
+                "1": {
+                  "own_hand": [
+                    31,
+                    32
+                  ],
+                  "opponent_no_identity": 0
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "commit-private",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                20
+              ],
+              [
+                40
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ]
+            ],
+            "hands": {
+              "0": [
+                11,
+                12
+              ],
+              "1": [
+                31,
+                32
+              ],
+              "2": [
+                51
+              ],
+              "3": [
+                71
+              ]
+            },
+            "captured": {
+              "0": [
+                5,
+                6
+              ],
+              "1": [
+                10
+              ]
+            },
+            "committed": {
+              "0": 13
+            }
+          },
+          "initial": {
+            "adapter": {
+              "observations": {
+                "1": {
+                  "equals": {
+                    "commit_status": [
+                      true,
+                      false,
+                      false,
+                      false
+                    ],
+                    "revealed": []
+                  },
+                  "opponent_no_identity": 0
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "captured-private-aggregates-public",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                20
+              ],
+              [
+                40
+              ],
+              [
+                60
+              ],
+              [
+                80
+              ]
+            ],
+            "hands": {
+              "0": [
+                11,
+                12
+              ],
+              "1": [
+                31,
+                32
+              ],
+              "2": [
+                51
+              ],
+              "3": [
+                71
+              ]
+            },
+            "captured": {
+              "0": [
+                5,
+                6
+              ],
+              "1": [
+                10
+              ]
+            },
+            "committed": {
+              "0": 13
+            }
+          },
+          "initial": {
+            "adapter": {
+              "observations": {
+                "0": {
+                  "own_captured": [
+                    5,
+                    6
+                  ]
+                },
+                "1": {
+                  "opponent_no_identity": 0,
+                  "opponent_aggregates": {
+                    "0": {
+                      "captured_count": 2,
+                      "game_bullheads": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "6N-R30-return-contract",
+      "fact_ids": [
+        "6N-M-RETURNS",
+        "6N-M-TIE-WINNER"
+      ],
+      "basis": "human_decision",
+      "title": "Terminal returns",
+      "expectation": "Nonterminal returns are all zero; every co-winner gets +1 and every loser -1.",
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler"
+      },
+      "supporting_sources": [],
+      "cases": [
+        {
+          "name": "nonterminal-zero",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {
+              "0": [
+                11
+              ],
+              "1": [
+                31
+              ],
+              "2": [
+                51
+              ],
+              "3": [
+                71
+              ]
+            }
+          },
+          "initial": {
+            "adapter": {
+              "returns": [
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "name": "co-winner-terminal",
+          "fixture": {
+            "players": 4,
+            "rows": [
+              [
+                10
+              ],
+              [
+                30
+              ],
+              [
+                50
+              ],
+              [
+                70
+              ]
+            ],
+            "hands": {},
+            "terminal": true,
+            "winners": [
+              0,
+              1
+            ],
+            "total_bullheads": {
+              "0": 67,
+              "1": 67,
+              "2": 80,
+              "3": 90
+            }
+          },
+          "initial": {
+            "adapter": {
+              "returns": [
+                1,
+                1,
+                -1,
+                -1
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "game": "6_nimmt",
+  "role": "user_observation",
+  "authorship": "User-confirmed physical component observation",
+  "approved_on": "2026-07-31",
+  "scope": "Component identity and printed bullhead inventory only; this artifact does not define or override gameplay rules.",
+  "cards": {
+    "total": 104,
+    "identities": {
+      "kind": "integer_range",
+      "minimum": 1,
+      "maximum": 104,
+      "copies_each": 1
+    },
+    "bullheads": {
+      "55": 7,
+      "other_repeated_digit_values": 5,
+      "other_multiples_of_10": 3,
+      "other_multiples_of_5": 2,
+      "all_remaining_values": 1
+    }
+  }
+}

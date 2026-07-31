@@ -1,0 +1,624 @@
+{
+  "version": 1,
+  "game": "6_nimmt",
+  "status": "approved",
+  "condition": "publisher_pdf_plus_user_component_observation",
+  "claims": 42,
+  "required_clear_claims": 30,
+  "scenarios": [
+    {
+      "id": "6N-R01-2p-setup",
+      "basis": "clear",
+      "title": "2-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 2; each hand has size 10, four one-card rows exist, and reserve size is 80.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R02-3p-setup",
+      "basis": "clear",
+      "title": "3-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 3; each hand has size 10, four one-card rows exist, and reserve size is 70.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R03-4p-setup",
+      "basis": "clear",
+      "title": "4-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 4; each hand has size 10, four one-card rows exist, and reserve size is 60.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R04-5p-setup",
+      "basis": "clear",
+      "title": "5-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 5; each hand has size 10, four one-card rows exist, and reserve size is 50.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R05-6p-setup",
+      "basis": "clear",
+      "title": "6-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 6; each hand has size 10, four one-card rows exist, and reserve size is 40.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R06-7p-setup",
+      "basis": "clear",
+      "title": "7-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 7; each hand has size 10, four one-card rows exist, and reserve size is 30.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R07-8p-setup",
+      "basis": "clear",
+      "title": "8-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 8; each hand has size 10, four one-card rows exist, and reserve size is 20.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R08-9p-setup",
+      "basis": "clear",
+      "title": "9-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 9; each hand has size 10, four one-card rows exist, and reserve size is 10.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R09-10p-setup",
+      "basis": "clear",
+      "title": "10-player setup",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-CARD-TOTAL",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-RESERVE-COUNT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; ... jeden Spieler 10 Karten; ... obersten vier Karten"
+      },
+      "expectation": "Constructor accepts 10; each hand has size 10, four one-card rows exist, and reserve size is 0.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R10A-supported-count-initial-play",
+      "basis": "clear",
+      "title": "Initial legal play for every supported count",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-FACE-DOWN-COMMIT"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; Alle Spieler legen verdeckt eine Karte"
+      },
+      "expectation": "For each count 2–10, every player has at least one legal semantic face-down card commitment at the start of a round.",
+      "planned_named_cases": 9
+    },
+    {
+      "id": "6N-R10B-supported-count-bounded-play",
+      "basis": "clear",
+      "title": "Bounded game playability for every supported count",
+      "fact_ids": [
+        "6N-C-PLAYER-RANGE",
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen; bis nach zehn Runden alle Karten ausgespielt wurden"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Das Spiel endet, wenn alle Handkarten ausgespielt wurden."
+        }
+      ],
+      "expectation": "For each count 2–10, a deterministic legal-policy rollout reaches the end of one ten-round game within a fixed bound without crashing.",
+      "planned_named_cases": 9
+    },
+    {
+      "id": "6N-R10-player-range-rejection",
+      "basis": "human_decision",
+      "title": "Reject unsupported player counts",
+      "fact_ids": [
+        "6N-M-INVALID-PLAYERS"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen"
+      },
+      "expectation": "Constructor raises ValueError for 0, 1, 11 and a larger count.",
+      "planned_named_cases": 4
+    },
+    {
+      "id": "6N-R11-card-inventory",
+      "basis": "human_decision",
+      "title": "Exact augmented card inventory",
+      "fact_ids": [
+        "6N-M-CARD-IDENTITIES",
+        "6N-M-BULL-INVENTORY"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Inhalt: 104 Spielkarten"
+      },
+      "expectation": "Across hands, rows and reserve, every value 1–104 appears exactly once and bullhead metadata matches the observation.",
+      "planned_named_cases": 1,
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/identities",
+          "quote": "{\"kind\":\"integer_range\",\"minimum\":1,\"maximum\":104,\"copies_each\":1}"
+        },
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/bullheads",
+          "quote": "{\"55\":7,\"other_repeated_digit_values\":5,\"other_multiples_of_10\":3,\"other_multiples_of_5\":2,\"all_remaining_values\":1}"
+        }
+      ]
+    },
+    {
+      "id": "6N-R12-hidden-joint-reveal",
+      "basis": "clear",
+      "title": "Hidden commits and joint reveal",
+      "fact_ids": [
+        "6N-C-FACE-DOWN-COMMIT",
+        "6N-C-JOINT-REVEAL"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt ... wenn der Letzte sich entschieden hat, werden die Karten aufgedeckt."
+      },
+      "expectation": "Earlier commits remain identity-hidden from opponents; all identities become jointly visible only after the last commit.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R13-private-seat-protocol",
+      "basis": "human_decision",
+      "title": "Irrevocable seat-ordered commits",
+      "fact_ids": [
+        "6N-M-COMMIT-PROTOCOL"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte"
+      },
+      "expectation": "Seats commit in ascending order, cannot undo, and current_player advances only among uncommitted seats.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R14-ascending-resolution",
+      "basis": "clear",
+      "title": "Ascending resolution order",
+      "fact_ids": [
+        "6N-C-ASCENDING-RESOLUTION"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Wer die niedrigste Karte ausgespielt hat, legt sie als Erster"
+      },
+      "expectation": "A revealed set resolves lowest to highest regardless of seat order.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R15-minimum-difference-example",
+      "basis": "clear",
+      "title": "Mandatory minimum difference",
+      "fact_ids": [
+        "6N-C-ROW-ASCENDING",
+        "6N-C-MIN-DIFFERENCE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "12, 37, 43 und 58 ... 14, 15, 44 und 61"
+      },
+      "expectation": "The printed example resolves to rows 12-14-15, 37, 43-44, and 58-61.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R16-sixth-card-capture",
+      "basis": "clear",
+      "title": "Sixth card captures five",
+      "fact_ids": [
+        "6N-C-ROW-MAX-FIVE",
+        "6N-C-FULL-CAPTURE",
+        "6N-C-SIXTH-STARTER"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "sechste Karte ... alle fünf Karten ... neue Reihe"
+      },
+      "expectation": "A forced sixth card captures exactly the prior five and remains as the sole starter; it is not itself captured.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R17-low-card-free-choice",
+      "basis": "clear",
+      "title": "Low card permits any row",
+      "fact_ids": [
+        "6N-C-LOW-CHOOSE-ROW",
+        "6N-C-LOW-STARTER"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "alle Karten einer beliebigen Reihe nehmen"
+      },
+      "expectation": "All four row choices are legal; the chosen row is captured regardless of length and replaced by the low card.",
+      "planned_named_cases": 4
+    },
+    {
+      "id": "6N-R18-low-choice-pending",
+      "basis": "human_decision",
+      "title": "Ordered resolution pauses for low choice",
+      "fact_ids": [
+        "6N-M-LOW-PENDING"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "einer beliebigen Reihe"
+      },
+      "expectation": "Automatic resolution pauses for the low card owner, exposes exactly four row choices, then resumes the next higher card.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R19-dynamic-3-then-9",
+      "basis": "clear",
+      "title": "Dynamic low-card recomputation",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-LOW-CHOOSE-ROW"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Mit seiner ‚3‘ ... Der Spieler mit der Karte ‚9‘ ... hinter die ‚3‘"
+      },
+      "expectation": "After 3 replaces a row, 9 is placed against updated rows and follows 3.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R20-dynamic-adverse-cascade",
+      "basis": "clear",
+      "title": "Dynamic later sixth-card cascade",
+      "fact_ids": [
+        "6N-C-DYNAMIC-RESOLUTION",
+        "6N-C-FULL-CAPTURE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "29 ... leert die erste Reihe ... 62 ... vierte Reihe ... alle fünf Karten"
+      },
+      "expectation": "After 29 changes a row, 62 recomputes its destination and captures the now-forced five-card row.",
+      "planned_named_cases": 1
+    },
+    {
+      "id": "6N-R21-capture-zone",
+      "basis": "clear",
+      "title": "Captured cards leave play",
+      "fact_ids": [
+        "6N-C-CAPTURE-FACE-DOWN",
+        "6N-C-CAPTURE-NOT-HAND",
+        "6N-C-BULLS-ARE-POINTS"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Hornochsenstapel ... dürfen nicht auf die Hand genommen werden"
+      },
+      "expectation": "Captured cards enter only the capture pile, increase its subtotal, never return to hand and cannot be committed.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R22A-publisher-scoring-categories",
+      "basis": "clear",
+      "title": "Publisher scoring categories",
+      "fact_ids": [
+        "6N-C-BULLS-ARE-POINTS",
+        "6N-C-FIVE-SCORE",
+        "6N-C-TEN-SCORE",
+        "6N-C-DOUBLE-SCORE",
+        "6N-C-55-SCORE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Fünferzahlen ... 2; Zehnerzahlen ... 3; Paschzahlen ... 5; 55 ... 7"
+      },
+      "expectation": "Given representative stated category values, captured multiples of five, multiples of ten, repeated digits and 55 score exactly 2, 3, 5 and 7 bullheads; each bullhead is one penalty point.",
+      "planned_named_cases": 4
+    },
+    {
+      "id": "6N-R22B-component-bull-inventory",
+      "basis": "human_decision",
+      "title": "Complete observed bullhead inventory",
+      "fact_ids": [
+        "6N-M-BULL-INVENTORY"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V2-COMPONENTS",
+        "json_pointer": "/cards/bullheads",
+        "quote": "{\"55\":7,\"other_repeated_digit_values\":5,\"other_multiples_of_10\":3,\"other_multiples_of_5\":2,\"all_remaining_values\":1}"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Fünferzahlen ... 2; Zehnerzahlen ... 3; Paschzahlen ... 5; 55 ... 7"
+        }
+      ],
+      "expectation": "All 104 observed card identities have the approved complete bullhead mapping, including one bullhead for every remaining ordinary value.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R23-ten-round-boundary",
+      "basis": "clear",
+      "title": "Exactly ten rounds per game",
+      "fact_ids": [
+        "6N-C-TEN-ROUNDS",
+        "6N-C-GAME-END",
+        "6N-C-GAME-SCORE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "nach zehn Runden alle Karten ausgespielt"
+      },
+      "expectation": "After nine rounds hands have one card and game continues; after round ten hands empty, captures score, and no further commit occurs in that game.",
+      "planned_named_cases": 2,
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Jetzt nimmt jeder seinen Hornochsenstapel und zählt seine Minuspunkte."
+        }
+      ]
+    },
+    {
+      "id": "6N-R24-new-game-reset",
+      "basis": "clear",
+      "title": "New game begins below threshold",
+      "fact_ids": [
+        "6N-C-NEW-GAME",
+        "6N-C-SHUFFLE",
+        "6N-C-DEAL-TEN",
+        "6N-C-FOUR-ROWS",
+        "6N-C-GAME-SCORE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Und sofort beginnt ein neues Spiel."
+      },
+      "expectation": "Below threshold, the match remains nonterminal and a newly shuffled ten-card/four-row game starts while cumulative scores remain.",
+      "planned_named_cases": 1,
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 1,
+          "quote": "Mischen Sie alle Karten und teilen Sie an jeden Spieler 10 Karten aus."
+        },
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 1,
+          "quote": "die obersten vier Karten offen untereinander"
+        },
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Die Ergebnisse von jedem Spieler werden auf einem Blatt Papier notiert."
+        }
+      ]
+    },
+    {
+      "id": "6N-R25-threshold-strictness",
+      "basis": "clear",
+      "title": "Strictly greater than 66 after game",
+      "fact_ids": [
+        "6N-C-MATCH-THRESHOLD",
+        "6N-C-GAME-SCORE"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "bis ein Spieler insgesamt über 66"
+      },
+      "expectation": "Exactly 66 continues; 67 ends, but only after the current game fully scores.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R26-lowest-total-wins",
+      "basis": "clear",
+      "title": "Lowest cumulative score wins",
+      "fact_ids": [
+        "6N-C-WINNER-MINIMUM"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler, der die wenigsten Hornochsen besitzt."
+      },
+      "expectation": "When the threshold is crossed, the unique lowest cumulative score is winner even if another player crossed 66.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R27-shared-winners",
+      "basis": "human_decision",
+      "title": "Tied minimum creates co-winners",
+      "fact_ids": [
+        "6N-M-TIE-WINNER"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "die wenigsten Hornochsen"
+      },
+      "expectation": "All players tied at the minimum are winners.",
+      "planned_named_cases": 2
+    },
+    {
+      "id": "6N-R28-seeded-reset",
+      "basis": "human_decision",
+      "title": "Seeded shuffle and full-deck reset",
+      "fact_ids": [
+        "6N-M-RNG-RESET"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Mischen Sie alle Karten"
+      },
+      "expectation": "Equal seed reproduces setup and successive games; different seed can differ; every new game accounts for all 104 cards with no stale captured cards.",
+      "planned_named_cases": 3
+    },
+    {
+      "id": "6N-R29-observation-privacy",
+      "basis": "human_decision",
+      "title": "Player-specific private observations",
+      "fact_ids": [
+        "6N-M-OBSERVATION"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte von ihren Handkarten vor sich auf den Tisch."
+      },
+      "expectation": "Own hand/capture identities visible; opponent hand identities, pending commitments and captured identities hidden; opponent counts and bull subtotal visible.",
+      "planned_named_cases": 3,
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Karten, die Sie kassieren mussten, legen Sie verdeckt vor sich auf den Tisch."
+        }
+      ]
+    },
+    {
+      "id": "6N-R30-return-contract",
+      "basis": "human_decision",
+      "title": "Terminal returns",
+      "fact_ids": [
+        "6N-M-RETURNS",
+        "6N-M-TIE-WINNER"
+      ],
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler"
+      },
+      "expectation": "Nonterminal returns are all zero; every co-winner gets +1 and every loser -1.",
+      "planned_named_cases": 2
+    }
+  ],
+  "approved_decisions": "inputs/games/6_nimmt/decisions_v2.json"
+}

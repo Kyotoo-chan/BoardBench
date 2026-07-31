@@ -1,0 +1,150 @@
+{
+  "profile_version": 2,
+  "state_schema": "boardbench/six-nimmt/state/2",
+  "action_schema": "boardbench/six-nimmt/action/2",
+  "observation_schema": "boardbench/six-nimmt/observation/2",
+  "note": "Representation-only JSON data profile for AMIGO 6 nimmt! Version 2.3. It defines canonical field and action shapes only; rule behavior comes from the assigned source packet and is evaluated separately.",
+  "player_counts": {
+    "supported": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "unsupported": [1, 11]
+  },
+  "configuration": {
+    "players": "int",
+    "seed": "int|null",
+    "variant": "string",
+    "match_target": "int"
+  },
+  "card_data": {
+    "card_id": "int",
+    "bullheads": "int"
+  },
+  "phase_ids": ["commit", "choose_row", "terminal"],
+  "state_data": {
+    "required": [
+      "configuration",
+      "game_number",
+      "round_number",
+      "phase",
+      "current_player",
+      "players",
+      "card_bullheads",
+      "zones",
+      "pending",
+      "terminal",
+      "winners",
+      "chance"
+    ],
+    "configuration": {
+      "players": "int",
+      "seed": "int|null",
+      "variant": "base",
+      "match_target": "int"
+    },
+    "game_number": "int >= 1",
+    "round_number": "int in 1..10",
+    "phase": "phase_id",
+    "current_player": "int|null",
+    "players": [
+      {
+        "id": "int",
+        "hand": ["card_id"],
+        "captured": ["card_id"],
+        "game_bullheads": "int",
+        "total_bullheads": "int",
+        "committed_card": "card_id|null"
+      }
+    ],
+    "card_bullheads": {"<card_id>": "int"},
+    "zones": {
+      "rows": [["card_id"]],
+      "reserve": ["card_id"],
+      "revealed": [{"player": "int", "card": "card_id"}],
+      "resolved": [{"player": "int", "card": "card_id", "row": "int", "captured": ["card_id"]}]
+    },
+    "pending": {
+      "none": "null",
+      "low_choice": {
+        "type": "low_choice",
+        "player": "int",
+        "card": "card_id",
+        "remaining": [{"player": "int", "card": "card_id"}]
+      }
+    },
+    "terminal": "bool",
+    "winners": ["int"],
+    "chance": {
+      "seed": "int",
+      "shuffle_index": "int",
+      "rng_state": "JSON-safe deterministic generator state sufficient to reproduce future shuffles after state round-trip"
+    }
+  },
+  "action_data": {
+    "required": ["type", "actor", "args"],
+    "types": {
+      "commit_card": {"card": "card_id"},
+      "choose_row": {"row": "int in 0..3, top-to-bottom"}
+    },
+    "type_ids": ["commit_card", "choose_row"]
+  },
+  "observation_data": {
+    "required": [
+      "player",
+      "configuration",
+      "game_number",
+      "round_number",
+      "phase",
+      "current_player",
+      "own_hand",
+      "own_captured",
+      "players",
+      "card_bullheads",
+      "rows",
+      "reserve_size",
+      "commit_status",
+      "revealed",
+      "resolved",
+      "pending",
+      "terminal",
+      "winners"
+    ],
+    "player": "int",
+    "configuration": {"players": "int", "variant": "string", "match_target": "int"},
+    "game_number": "int",
+    "round_number": "int",
+    "phase": "phase_id",
+    "current_player": "int|null",
+    "own_hand": ["card_id"],
+    "own_captured": ["card_id"],
+    "players": [
+      {
+        "id": "int",
+        "hand_size": "int",
+        "captured_count": "int",
+        "game_bullheads": "int",
+        "total_bullheads": "int"
+      }
+    ],
+    "card_bullheads": {"<card_id>": "int"},
+    "rows": [["card_id"]],
+    "reserve_size": "int",
+    "commit_status": ["bool by seat"],
+    "revealed": [{"player": "int", "card": "card_id"}],
+    "resolved": [{"player": "int", "card": "card_id", "row": "int", "captured_count": "int", "captured_bullheads": "int"}],
+    "pending": "null|public low_choice object",
+    "terminal": "bool",
+    "winners": ["int"]
+  },
+  "representation_choices": {
+    "row_indices": "integer row IDs 0..3 in persistent top-to-bottom order",
+    "private_state": "State data is privileged and may contain hand, captured and committed-card identities.",
+    "observation_redaction": "Observations expose own_hand and own_captured separately; opponent entries contain counts and score aggregates only.",
+    "pending_shape": "A low_choice object stores its actor, current card and ordered remaining revealed cards."
+  },
+  "contract_conventions": {
+    "state_envelope": {"schema": "boardbench/six-nimmt/state/2", "data": "state_data"},
+    "action_envelope": {"schema": "boardbench/six-nimmt/action/2", "data": "action_data"},
+    "observation_envelope": {"schema": "boardbench/six-nimmt/observation/2", "data": "observation_data"},
+    "serialization": "Every envelope is JSON-safe and losslessly round-trips without generated private attributes.",
+    "invalid_actions": "Applying an action not present in legal_actions raises ValueError and does not mutate the supplied state."
+  }
+}

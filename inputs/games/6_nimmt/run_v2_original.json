@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "game": "6_nimmt",
+  "run_id": "v2_original_augmented_1",
+  "condition_kind": "original",
+  "scope": "AMIGO 6 nimmt! Version 2.3 base game for 2-10 players as a full default match ending after a completed game when a cumulative score exceeds 66; professional variant and optional target/game-count variants excluded",
+  "source_base_dir": "inputs/games/6_nimmt",
+  "sources": [
+    {
+      "source_id": "6NIMMT-V23-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+    },
+    {
+      "source_id": "6NIMMT-V2-COMPONENTS",
+      "path": "component_observation_v2.json",
+      "packet_name": "game_components.json",
+      "role": "user_observation",
+      "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+    }
+  ],
+  "profile": "inputs/games/6_nimmt/environment_profile_v2.json",
+  "agentic_self_check": "generation/agentic_self_check_v2.py",
+  "profile_fixture_self_check": "inputs/games/6_nimmt/profile_fixture_self_check_v2.py",
+  "prompt": "inputs/prompts/rulebook_to_python_v2.txt",
+  "contract": "inputs/prompts/environment_contract_v2.md",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "verbosity": "low",
+  "max_repairs": 2,
+  "timeout": 1800,
+  "output_stem": "six_nimmt_codex_ag"
+}

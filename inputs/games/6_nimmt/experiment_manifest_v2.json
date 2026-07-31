@@ -1,0 +1,154 @@
+{
+  "schema_version": 2,
+  "study": "six-nimmt-v2-base-2-10-full-match",
+  "status": "frozen-pre-generation",
+  "frozen_on": "2026-07-31",
+  "planned_runs": [
+    "v2_original_augmented_1"
+  ],
+  "generation": {
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "max_neutral_repairs": 2
+  },
+  "condition": {
+    "label": "publisher_pdf_plus_user_component_observation",
+    "scope": "AMIGO 6 nimmt! Version 2.3 base game, 2-10 players, full default >66 match; professional and optional target/game-count variants excluded",
+    "sources": [
+      {
+        "source_id": "6NIMMT-V23-RULES",
+        "role": "publisher_rulebook",
+        "path": "inputs/games/6_nimmt/game_rules.pdf",
+        "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+      },
+      {
+        "source_id": "6NIMMT-V2-COMPONENTS",
+        "role": "user_observation",
+        "path": "inputs/games/6_nimmt/component_observation_v2.json",
+        "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+      }
+    ]
+  },
+  "evaluation": {
+    "rubric_version": "six-nimmt-v2-atomic-2026-07-31",
+    "scenarios": 33,
+    "named_cases": 74,
+    "clear_basis_scenarios": 24,
+    "human_decision_basis_scenarios": 9,
+    "required_clear_claims": 30,
+    "coverage_exceptions": [],
+    "status": "not_run"
+  },
+  "evaluator_validation": {
+    "reference_replay": "33/33 PASS using a temporary evaluator-only contract-v2 oracle, not retained as a study implementation",
+    "mutation_sensitivity": [
+      {
+        "mutation": "wrong minimum-difference row",
+        "detected_by": "6N-R15-minimum-difference-example"
+      },
+      {
+        "mutation": "ignore chosen low-card row",
+        "detected_by": "6N-R17-low-card-free-choice"
+      },
+      {
+        "mutation": "terminate at >=66",
+        "detected_by": "6N-R25-threshold-strictness"
+      },
+      {
+        "mutation": "highest score wins",
+        "detected_by": "6N-R26-lowest-total-wins"
+      },
+      {
+        "mutation": "ordinary cards worth two",
+        "detected_by": "6N-R22B-component-bull-inventory"
+      },
+      {
+        "mutation": "opponent hand identity leak",
+        "detected_by": "6N-R29-observation-privacy"
+      },
+      {
+        "mutation": "game ends after nine rounds",
+        "detected_by": "6N-R10B-supported-count-bounded-play"
+      }
+    ]
+  },
+  "artifacts": {
+    "source_register": {
+      "path": "inputs/games/6_nimmt/source_register_v2.md",
+      "sha256": "64bf6895fefc1685b74e0c74c099144e4717402b4e2c06cca2eee139bb9523c7"
+    },
+    "rules_render_manifest": {
+      "path": "inputs/games/6_nimmt/game_rules_render_manifest_v2.json",
+      "sha256": "8d280117ce08fe4f684a0dd51f285ce63edae62b0d736b26f5634fcaf0311b89"
+    },
+    "component_observation": {
+      "path": "inputs/games/6_nimmt/component_observation_v2.json",
+      "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+    },
+    "claims": {
+      "path": "inputs/games/6_nimmt/claims_v2.json",
+      "sha256": "2a968ebb27e89f0047165cecb9dc0ffe0a1b38214bd777956194784cdee41537"
+    },
+    "decisions": {
+      "path": "inputs/games/6_nimmt/decisions_v2.json",
+      "sha256": "3d9d77db38f0a958c3c64b9a2840811e82a7b7f3fa42ad4b81986e98843857be"
+    },
+    "rulefacts": {
+      "path": "inputs/games/6_nimmt/rulefacts_v2.md",
+      "sha256": "13b9c14e96565b13bcc0cbff93ec69a46544e0cc405e8f61e7aef7ab631d2e9a"
+    },
+    "matrix_json": {
+      "path": "inputs/games/6_nimmt/scenario_matrix_v2.json",
+      "sha256": "b0c62fac8b91d59fecbecc385523d67754771a1c899b6968b14a71d1eafd6679"
+    },
+    "matrix_md": {
+      "path": "inputs/games/6_nimmt/scenario_matrix_v2.md",
+      "sha256": "f68c6962412f64ea2f5ede8ba1c74a0a38939af0b3190130e9d879e7647d4b9d"
+    },
+    "profile": {
+      "path": "inputs/games/6_nimmt/environment_profile_v2.json",
+      "sha256": "905f4275542fe4ba85cf5493ccf17bf1acda2ead6be858ed0550b6e21e47c653"
+    },
+    "fixture_self_check": {
+      "path": "inputs/games/6_nimmt/profile_fixture_self_check_v2.py",
+      "sha256": "b55656a0a76af4020387a197492379af454549b460dc747053a58ba3d4a120e2"
+    },
+    "scenario_suite": {
+      "path": "checks/scenarios/six_nimmt_v2.json",
+      "sha256": "ccffb751f2231e39d6ed9307358e5d47bf43a8de4111ea5e7030ed99c2a7d10e"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/six_nimmt_v2.py",
+      "sha256": "a008367ea405acf225049fd81abb77e3bcab3dd043e4ce69158b68d9d0ab8b51"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claim_coverage": {
+      "path": "checks/claim_coverage.py",
+      "sha256": "c66a9912c21fe9bdac7b03ae7a2750d0649ed6d8bd9fec771320b414bdd0d169"
+    },
+    "contract": {
+      "path": "inputs/prompts/environment_contract_v2.md",
+      "sha256": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd"
+    },
+    "prompt": {
+      "path": "inputs/prompts/rulebook_to_python_v2.txt",
+      "sha256": "cd9f0d942b90c7d698b249cb5f9fbe27974eb793327a873235493aad3fd33a91"
+    },
+    "agentic_self_check": {
+      "path": "generation/agentic_self_check_v2.py",
+      "sha256": "c89915f934732947f4df3bb4a826dc4c5c21599771f57a3a6e162f7eac3e6869"
+    },
+    "run_config": {
+      "path": "inputs/games/6_nimmt/run_v2_original.json",
+      "sha256": "1f5078971a687eaa4d02aefbe73531be66ffe7c0d457b6e5f10f606b602929c5"
+    },
+    "packet_test": {
+      "path": "generation/test_six_nimmt_v2.py",
+      "sha256": "49e971c1673ac952c35700eb4c8023f7bd0d3a9fb9a8ef1b8d59dae4c723aeae"
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "game": "6_nimmt",
+  "condition": "publisher_pdf_plus_user_component_observation",
+  "status": "approved",
+  "sources": [
+    {
+      "source_id": "6NIMMT-V23-RULES",
+      "role": "publisher_rulebook",
+      "sha256": "b200ae0558c283ba86f331037402d9150675958ac6a6dc3e5df188435626539d"
+    },
+    {
+      "source_id": "6NIMMT-V2-COMPONENTS",
+      "role": "user_observation",
+      "sha256": "01e8f5dbe0cdca5ea514e628da3e5ed71ceb17729bbd22ac3a309c44cb2da950"
+    }
+  ],
+  "claims": [
+    {
+      "id": "6N-C-PLAYER-RANGE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen"
+      },
+      "expectation": "Exactly 2 through 10 players are source-supported."
+    },
+    {
+      "id": "6N-C-CARD-TOTAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Inhalt: 104 Spielkarten"
+      },
+      "expectation": "The physical deck contains exactly 104 cards."
+    },
+    {
+      "id": "6N-M-CARD-IDENTITIES",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Inhalt: 104 Spielkarten"
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/identities",
+          "quote": "{\"kind\":\"integer_range\",\"minimum\":1,\"maximum\":104,\"copies_each\":1}"
+        }
+      ],
+      "expectation": "The publisher does not enumerate identities; the approved user observation supplies one copy of every integer value 1 through 104."
+    },
+    {
+      "id": "6N-M-BULL-INVENTORY",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Auf jeder Karte sind ... Hornochsenköpfe abgebildet."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V2-COMPONENTS",
+          "json_pointer": "/cards/bullheads",
+          "quote": "{\"55\":7,\"other_repeated_digit_values\":5,\"other_multiples_of_10\":3,\"other_multiples_of_5\":2,\"all_remaining_values\":1}"
+        }
+      ],
+      "expectation": "The publisher gives special categories but no exhaustive ordinary-card map; the approved user observation supplies the complete bullhead inventory."
+    },
+    {
+      "id": "6N-C-SHUFFLE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Mischen Sie alle Karten"
+      },
+      "expectation": "All 104 cards are shuffled at the start of each game."
+    },
+    {
+      "id": "6N-C-DEAL-TEN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "teilen Sie an jeden Spieler 10 Karten aus"
+      },
+      "expectation": "Each player receives exactly ten hand cards."
+    },
+    {
+      "id": "6N-C-FOUR-ROWS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "die obersten vier Karten offen untereinander"
+      },
+      "expectation": "The next four cards start four public rows, one card per row."
+    },
+    {
+      "id": "6N-C-ROW-MAX-FIVE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "maximal 5 Karten umfassen darf"
+      },
+      "expectation": "A row contains at most five cards before a sixth-card capture."
+    },
+    {
+      "id": "6N-C-RESERVE-COUNT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Der Kartenstapel, der jetzt noch übrig ist, wird ... beiseite gelegt."
+      },
+      "expectation": "With P players the reserve contains 100-10P cards and is unused for the current game."
+    },
+    {
+      "id": "6N-C-FACE-DOWN-COMMIT",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte"
+      },
+      "expectation": "Each player commits one hand card face down per round."
+    },
+    {
+      "id": "6N-C-JOINT-REVEAL",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Erst dann, wenn der Letzte sich entschieden hat, werden die Karten aufgedeckt."
+      },
+      "expectation": "No committed identity is revealed until all players have committed, then all are revealed together."
+    },
+    {
+      "id": "6N-C-ASCENDING-RESOLUTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Wer die niedrigste Karte ausgespielt hat, legt sie als Erster ... bis auch die höchste"
+      },
+      "expectation": "Revealed cards resolve in strictly ascending value order."
+    },
+    {
+      "id": "6N-C-ROW-ASCENDING",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Die Karten einer Reihe müssen immer eine aufsteigende Zahlenfolge bilden."
+      },
+      "expectation": "Ordinary placement appends only to a row ending below the played card."
+    },
+    {
+      "id": "6N-C-MIN-DIFFERENCE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "deren letzte Karte die niedrigste Differenz zu der neuen Karte aufweist"
+      },
+      "expectation": "Among eligible rows, placement uses the row end with the smallest positive difference."
+    },
+    {
+      "id": "6N-C-FULL-CAPTURE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "muss ... alle fünf Karten dieser Reihe zu sich nehmen"
+      },
+      "expectation": "A sixth-card placement captures exactly the five existing cards in the forced row."
+    },
+    {
+      "id": "6N-C-SIXTH-STARTER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Seine sechste Karte stellt den Anfang der neuen Reihe dar."
+      },
+      "expectation": "The played sixth card is not captured and becomes the sole new row starter."
+    },
+    {
+      "id": "6N-C-LOW-CHOOSE-ROW",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "muss alle Karten einer beliebigen Reihe nehmen"
+      },
+      "expectation": "A card lower than every row end forces its owner to choose any one of the four rows and capture all cards in it."
+    },
+    {
+      "id": "6N-C-LOW-STARTER",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "seine ‚niedrige‘ Karte stellt dann die neue erste Karte dieser Reihe dar"
+      },
+      "expectation": "The low card becomes the sole starter of the chosen row."
+    },
+    {
+      "id": "6N-C-DYNAMIC-RESOLUTION",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Der Spieler mit der Karte ‚9‘ ... kann jetzt seine ‚9‘ hinter die ‚3‘ legen."
+      },
+      "expectation": "Every later revealed card is placed against rows updated by all earlier resolved cards."
+    },
+    {
+      "id": "6N-C-TIP-NONBINDING",
+      "classification": "clear",
+      "material": false,
+      "testable": false,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "wählt in der Regel die Reihe mit den wenigsten Minuspunkten"
+      },
+      "expectation": "Choosing the lowest-point row is advice, not a mandatory rule.",
+      "coverage_exception": "Advisory strategy is not a deterministic requirement."
+    },
+    {
+      "id": "6N-C-CAPTURE-FACE-DOWN",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "legen Sie verdeckt vor sich ... im so genannten Hornochsenstapel ab"
+      },
+      "expectation": "Captured cards enter the owner's face-down bull pile."
+    },
+    {
+      "id": "6N-C-CAPTURE-NOT-HAND",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "dürfen nicht auf die Hand genommen werden"
+      },
+      "expectation": "Captured cards never enter the hand and cannot be played."
+    },
+    {
+      "id": "6N-C-BULLS-ARE-POINTS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Jeder Hornochse stellt einen Minuspunkt dar!"
+      },
+      "expectation": "Captured cards contribute their printed bullhead counts as penalty points."
+    },
+    {
+      "id": "6N-C-FIVE-SCORE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Fünferzahlen ... haben 2 Hornochsen"
+      },
+      "expectation": "Other multiples of five are worth two bullheads."
+    },
+    {
+      "id": "6N-C-TEN-SCORE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Zehnerzahlen ... haben 3 Hornochsen"
+      },
+      "expectation": "Multiples of ten are worth three bullheads."
+    },
+    {
+      "id": "6N-C-DOUBLE-SCORE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Paschzahlen ... haben 5 Hornochsen"
+      },
+      "expectation": "Repeated-digit values are worth five bullheads except 55."
+    },
+    {
+      "id": "6N-C-55-SCORE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Die Zahl ‚55‘ ... hat die Karte 7 Hornochsen."
+      },
+      "expectation": "Card 55 is worth exactly seven bullheads."
+    },
+    {
+      "id": "6N-C-TEN-ROUNDS",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "bis nach zehn Runden alle Karten ausgespielt wurden"
+      },
+      "expectation": "Each game has exactly ten card-selection rounds."
+    },
+    {
+      "id": "6N-C-GAME-END",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Das Spiel endet, wenn alle Handkarten ausgespielt wurden."
+      },
+      "expectation": "A game ends only after every hand is empty."
+    },
+    {
+      "id": "6N-C-GAME-SCORE",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Jetzt nimmt jeder seinen Hornochsenstapel und zählt seine Minuspunkte."
+      },
+      "expectation": "At game end each player's captured bullheads are added to the cumulative score."
+    },
+    {
+      "id": "6N-C-NEW-GAME",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Und sofort beginnt ein neues Spiel."
+      },
+      "expectation": "If the match has not ended, a new fully set-up game begins."
+    },
+    {
+      "id": "6N-C-MATCH-THRESHOLD",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "bis ein Spieler insgesamt über 66 Hornochsen eingesammelt hat"
+      },
+      "expectation": "The match ends after a completed game if at least one cumulative score is strictly greater than 66; exactly 66 continues."
+    },
+    {
+      "id": "6N-C-WINNER-MINIMUM",
+      "classification": "clear",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler, der die wenigsten Hornochsen besitzt."
+      },
+      "expectation": "At match end the lowest cumulative bullhead total wins."
+    },
+    {
+      "id": "6N-C-ALTERNATE-TARGET",
+      "classification": "clear",
+      "material": false,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "kann ... eine andere Punktzahl oder Anzahl an Spielen vereinbart werden"
+      },
+      "expectation": "Players may agree on another target or game count, but this condition uses the printed default.",
+      "coverage_exception": "Optional configurable variants are outside the approved default scope."
+    },
+    {
+      "id": "6N-M-COMMIT-PROTOCOL",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt ... Erst dann ... aufgedeckt."
+      },
+      "expectation": "The source requires simultaneous hidden choice but not a digital submission order or undo protocol."
+    },
+    {
+      "id": "6N-M-TIE-WINNER",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler, der die wenigsten Hornochsen besitzt."
+      },
+      "expectation": "The source gives no tie-break when several players share the minimum."
+    },
+    {
+      "id": "6N-M-RNG-RESET",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Mischen Sie alle Karten"
+      },
+      "expectation": "The source gives no seed, shuffle algorithm or explicit digital reset lifecycle."
+    },
+    {
+      "id": "6N-M-INVALID-PLAYERS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Spieler: 2–10 Personen"
+      },
+      "expectation": "The source gives no digital rejection or exception behavior outside the supported range."
+    },
+    {
+      "id": "6N-M-OBSERVATION",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Alle Spieler legen verdeckt eine Karte von ihren Handkarten vor sich auf den Tisch."
+      },
+      "expectation": "The source does not fully define player-specific digital observations for hands, commits and captured piles.",
+      "supporting_sources": [
+        {
+          "source_id": "6NIMMT-V23-RULES",
+          "page": 2,
+          "quote": "Karten, die Sie kassieren mussten, legen Sie verdeckt vor sich auf den Tisch."
+        }
+      ]
+    },
+    {
+      "id": "6N-M-LOW-PENDING",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "einer beliebigen Reihe"
+      },
+      "expectation": "The source does not define a digital pending phase for row choice during ordered resolution."
+    },
+    {
+      "id": "6N-M-RETURNS",
+      "classification": "missing",
+      "material": true,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 2,
+        "quote": "Sieger wird der Spieler"
+      },
+      "expectation": "The source does not define numeric environment returns."
+    },
+    {
+      "id": "6N-A-TEN-PLAYER-REST",
+      "classification": "ambiguous",
+      "material": false,
+      "testable": true,
+      "source": {
+        "source_id": "6NIMMT-V23-RULES",
+        "page": 1,
+        "quote": "Der Kartenstapel, der jetzt noch übrig ist"
+      },
+      "expectation": "At ten players arithmetic leaves an empty reserve although the prose refers to a remaining stack."
+    }
+  ]
+}

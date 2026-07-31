@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "game": "6_nimmt",
+  "approved_on": "2026-07-31",
+  "decisions": [
+    {
+      "id": "6N-D01-COMPONENT-INVENTORY",
+      "basis": "user_observation",
+      "decision": "The physical deck contains exactly one copy of every integer-valued card from 1 through 104, with the bullhead inventory recorded in component_observation_v2.json.",
+      "rationale": "The publisher PDF states 104 cards and the scoring categories but does not exhaustively state card identities or ordinary-card values.",
+      "claim_ids": [
+        "6N-M-CARD-IDENTITIES",
+        "6N-M-BULL-INVENTORY"
+      ]
+    },
+    {
+      "id": "6N-D02-FULL-MATCH",
+      "basis": "source_scope_confirmation",
+      "decision": "Implement the full default match: each game consists of ten simultaneous-choice rounds; after scoring, collect all 104 cards and begin a freshly shuffled game; terminate only after a completed game when at least one cumulative score is greater than 66.",
+      "rationale": "This retains the default printed match rather than selecting the optional alternative target or fixed game count.",
+      "claim_ids": [
+        "6N-C-TEN-ROUNDS",
+        "6N-C-NEW-GAME",
+        "6N-C-MATCH-THRESHOLD"
+      ]
+    },
+    {
+      "id": "6N-D03-PRIVATE-COMMITS",
+      "basis": "human_decision",
+      "decision": "Collect one irrevocable private card commitment per player in ascending seat order. Opponents observe only commitment status, not card identity. Reveal all committed cards together after the last seat commits, then resolve them in ascending card-value order.",
+      "rationale": "This creates a finite deterministic digital protocol while preserving the publisher-required face-down simultaneous choice.",
+      "claim_ids": [
+        "6N-M-COMMIT-PROTOCOL"
+      ]
+    },
+    {
+      "id": "6N-D04-SHARED-WINNERS",
+      "basis": "human_decision",
+      "decision": "At match end, every player tied for the lowest cumulative bullhead total is a co-winner and receives the same winning return.",
+      "rationale": "The publisher rule defines the lowest total as winning but gives no tie-break.",
+      "claim_ids": [
+        "6N-M-TIE-WINNER"
+      ]
+    },
+    {
+      "id": "6N-D05-RUNTIME-BOUNDARY",
+      "basis": "human_decision",
+      "decision": "Accept exactly 2 through 10 players and raise ValueError outside that range. A supplied seed deterministically controls the complete shuffle at setup and at every new game. Every new game collects all 104 cards, clears per-game hands, rows and capture piles, preserves cumulative scores, then reshuffles and redeals.",
+      "rationale": "The source states the supported range and repeated setup but not digital rejection, RNG or reset mechanics.",
+      "claim_ids": [
+        "6N-M-RNG-RESET",
+        "6N-M-INVALID-PLAYERS"
+      ]
+    },
+    {
+      "id": "6N-D06-OBSERVATION-PRIVACY",
+      "basis": "human_decision",
+      "decision": "A player observes own hand identities and only opponent hand sizes. Current commitments expose status but not identity until the joint reveal. Captured-card identities are visible only to their owner after capture; opponents observe captured-card count and bullhead subtotal.",
+      "rationale": "This preserves the explicit face-down hand/commit/capture semantics while retaining public scoring aggregates.",
+      "claim_ids": [
+        "6N-M-OBSERVATION"
+      ]
+    },
+    {
+      "id": "6N-D07-LOW-CARD-CHOICE",
+      "basis": "human_decision",
+      "decision": "After joint reveal, resolve cards automatically in ascending value order until a low card fits no row. Pause resolution for that card's owner to choose one of the four rows, apply the capture and replacement, then continue with the next higher revealed card against the updated rows.",
+      "rationale": "The source makes the row arbitrary and later placements depend on the updated board.",
+      "claim_ids": [
+        "6N-M-LOW-PENDING"
+      ]
+    },
+    {
+      "id": "6N-D08-RETURNS",
+      "basis": "human_decision",
+      "decision": "returns(state) is all zeros before terminal. At match end every co-winner receives +1 and every non-winner receives -1.",
+      "rationale": "The source identifies winners but does not define numeric environment returns.",
+      "claim_ids": [
+        "6N-M-RETURNS",
+        "6N-M-TIE-WINNER"
+      ]
+    }
+  ]
+}
