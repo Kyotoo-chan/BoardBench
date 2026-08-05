@@ -1,0 +1,12 @@
+Meeting 7.8. – Stand vor dem Treffen
+
+Schreiben
+- 6-Kapitel-Plan festgehalten in docs/thesis_writing_plan.md
+- Offene BA-Klärungen in docs/thesis_decisions.md
+- Game-choice-Argumentation entworfen (mittlere Komplexität, Komponentenlücke, CATAN/Almanach-Ausnahme)
+- Introduction soll kurz deutsche PDF-Quellen nennen; Details in Method
+
+Inhaltlich unverändert wichtig
+- Original vs. Klarstellung bleibt Hauptdesign
+- getrennte Evidenzgruppen, kein Misch-Correctness-Score
+- Exposé-Abweichung: kein Modellvergleich / OpenSpiel / RL
