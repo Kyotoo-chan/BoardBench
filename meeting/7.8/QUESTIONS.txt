@@ -1,16 +1,22 @@
 Meeting 7.8. – Fragen
 
-- 6 Kapitel ok? (Intro, Background, Method+Study Design, Results, Discussion inkl. Limitations, Conclusion)
+- 6 Kapitel ok? (Intro, Background, Method, Results, Discussion inkl. Limitations, Conclusion)
 - Hat er ne Strukturvorlage die ich nutzen soll?
 - Macht Fundamentals als Kapitel 2 sinn? Weil wir fangen ja lowkey von null an.
-- Kommen die Regeln in Metheodik oder woanders hin?
-- Sollen die ausführlichen Spielbeschreibungen im Methodenkapitel bleiben oder in den Anhang?
-- schreibe ich auch über alte durchläufe? gehe ich nur auf den aktuellen stand ein?
+- Kommen die Regeln der Spiele in Metheodik oder woanders hin? Wie ausführlich sollen/dürfen diese sein?
+- Sollen die ausführlichen Spielbeschreibungen im Methodenkapitel bleiben oder in den Anhang? Kommen da einfach die ganzen PDFs dran?
+- schreibe ich auch über alte durchläufe? (inkl. openspiel, antichess, etc.) oder gehe ich nur auf den aktuellen stand ein?
 - wie genau schreibe ich? englisch passt? stil? sind enumerations in ordnung? bsp workflow besteht aus 5 schritten
 
-- In Anhang Prompts die ich genutzt habe?
+- In Anhang Prompts die ich genutzt habe? (für llm judge oder generierung)
 - Jz dann anmelden?
 
 StudyOs:
-- was war mit meeting? (danach)
+- was/wann war mit meeting? (danach)
 - sollte es noch uploads geben?
+- Umfang der ausarbeitung?
+
+Business x Ai:
+- 15 Seiten als obere schranke?? Da steht ja schon 15 Seiten each
+- Screenshots und Bilder vom Tag oder vom Ergebniss?
+- Code?
