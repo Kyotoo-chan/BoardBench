@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "study": "v2-structured-clarification-exact-replication",
+  "status": "frozen-before-replicate-2-generation",
+  "frozen_on": "2026-08-07",
+  "purpose": "Observe whether the balanced structured clarification result recurs under an exact second generation and compare both structured runs with the Original. At n=2 this remains descriptive, not causal.",
+  "conditions": {
+    "original": {
+      "run_id": "v2_original_1",
+      "status": "completed",
+      "comparison_anchor": true
+    },
+    "structured_1": {
+      "run_id": "v2_structured_clarification_1",
+      "status": "completed",
+      "retained": true
+    },
+    "structured_2": {
+      "run_id": "v2_structured_clarification_2",
+      "status": "planned",
+      "declared_final_successor_before_launch": true
+    }
+  },
+  "selection_policy": {
+    "best_of_selection": false,
+    "replace_prior_artifacts": false,
+    "report_all_runs": true,
+    "primary_comparison": "Original versus each structured clarification replicate, plus descriptive variation across the two exact structured replicates."
+  },
+  "invariants": {
+    "source_packet_byte_identical_between_structured_replicates": true,
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "profile_contract_prompt_unchanged": true,
+    "evaluator_unchanged": true,
+    "implementation_generated_fresh": true
+  },
+  "artifacts": {
+    "publisher_rulebook": {
+      "path": "inputs/games/bohnanza_base_2023/game_rules.pdf",
+      "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    },
+    "structured_guide": {
+      "path": "inputs/games/bohnanza_base_2023/structured_clarification_v3.md",
+      "sha256": "aaff20337d1dc71f0c00d93c7b1928e5a5dded58f7705fa79f37e4d11ba39d4f"
+    },
+    "profile": {
+      "path": "inputs/games/bohnanza_base_2023/environment_profile_v2.json",
+      "sha256": "55368aa0d2fe142bfd5f5111b29c8b1e64a9fbecbc7cf652dd525882e3f99ed4"
+    },
+    "self_check": {
+      "path": "generation/agentic_self_check_v2.py",
+      "sha256": "c89915f934732947f4df3bb4a826dc4c5c21599771f57a3a6e162f7eac3e6869"
+    },
+    "fixture_check": {
+      "path": "inputs/games/bohnanza_base_2023/profile_fixture_self_check_v2.py",
+      "sha256": "5855316b38203042ffa09808293860d1548c35f392e1ccb96ad669b2ad038635"
+    },
+    "prompt": {
+      "path": "inputs/prompts/rulebook_to_python_v2.txt",
+      "sha256": "cd9f0d942b90c7d698b249cb5f9fbe27974eb793327a873235493aad3fd33a91"
+    },
+    "contract": {
+      "path": "inputs/prompts/environment_contract_v2.md",
+      "sha256": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd"
+    },
+    "suite": {
+      "path": "checks/scenarios/bohnanza_base_2023_v2.json",
+      "sha256": "3c7ba5195570ff3364ac837fbd464471693308e373322d4fc4ded893abe81fb0"
+    },
+    "adapter": {
+      "path": "checks/scenario_adapters/bohnanza_base_2023_v2.py",
+      "sha256": "a93bccef911e4e810d98c3533ad7bbf2c1b041365cc254ac28b4fb79468f3942"
+    },
+    "runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claims": {
+      "path": "inputs/games/bohnanza_base_2023/claims_v2.json",
+      "sha256": "919fc08b7f81428f1f149c0b98452aee6ef77cb3455aa4871fa0c59290bedc2a"
+    },
+    "run_1": {
+      "path": "inputs/games/bohnanza_base_2023/run_v2_structured_clarification_1.json",
+      "sha256": "fde6313d234952e4cf2558dfd8c9fba7d3a9b42416a7069574895cee20742d8c"
+    },
+    "run_2": {
+      "path": "inputs/games/bohnanza_base_2023/run_v2_structured_clarification_2.json",
+      "sha256": "b43a13bdd8bf38c7ce0cc6fe3ac82f5051d5a0b79d69bac8c6ee453ccb896811"
+    }
+  }
+}
