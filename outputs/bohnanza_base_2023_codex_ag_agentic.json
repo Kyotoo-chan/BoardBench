@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "protocol": "hardened-iteration-v1",
+  "game": "bohnanza_base_2023",
+  "run_id": "v2_structured_clarification_2",
+  "condition_kind": "clarified",
+  "intervention_kind": "structured_clarification_and_fidelity_guide",
+  "adapted_from_run_id": "v2_structured_clarification_1",
+  "adaptation": "Exact pre-registered replication of structured clarification v3 to observe generation variance and compare both structured runs with the Original. Packet, model settings, profile, contract, and evaluator are unchanged; all prior runs remain reported regardless of outcome.",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "success": false,
+  "repair_count": 0,
+  "prior_pre_evaluation_attempts": [],
+  "calls": [],
+  "source_manifest": [
+    {
+      "source_id": "BOHN-BASE-2023-RULES",
+      "path": "game_rules.pdf",
+      "packet_name": "game_rules.pdf",
+      "role": "publisher_rulebook",
+      "sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+    },
+    {
+      "source_id": "BOHN-V3-STRUCTURED-CLARIFICATION",
+      "path": "structured_clarification_v3.md",
+      "packet_name": "STRUCTURED_CLARIFICATION.md",
+      "role": "experimenter_clarification",
+      "sha256": "aaff20337d1dc71f0c00d93c7b1928e5a5dded58f7705fa79f37e4d11ba39d4f"
+    }
+  ],
+  "run_config_sha256": "463ff05f11d92424c277f5297908f410a0b2d7925d816a00eabaebb5fb6d8873",
+  "original_evidence_sha256": "df535427baac4a30194256208b890c87b500cc66eeb0b6aa2a311c6e18033598",
+  "render_manifests": {
+    "game_rules_pages/render_manifest.json": {
+      "version": 1,
+      "source_file": "game_rules.pdf",
+      "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655",
+      "dpi": 150,
+      "renderer": "pdftoppm",
+      "renderer_version": "pdftoppm version 24.04.0",
+      "pages": [
+        {
+          "page": 1,
+          "file": "page-1.png",
+          "sha256": "66ac33709a8b0683c6445cb7dabbdfdff08b28adb44444f1c0153254b923c034"
+        },
+        {
+          "page": 2,
+          "file": "page-2.png",
+          "sha256": "786d7dadd70e1cd0c29f30abd5c80aff9adddf8d62f545d09c83df38c60b8b0f"
+        }
+      ]
+    }
+  },
+  "implementation_sha256": null,
+  "created_at": "2026-08-07T10:09:14.699807+00:00"
+}
