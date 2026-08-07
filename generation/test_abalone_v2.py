@@ -1,3 +1,4 @@
+import hashlib
 import json
 import shutil
 import unittest
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 GAME = ROOT / "inputs/games/abalone"
 CONFIG = GAME / "run_v2_original.json"
 EMPHASIS_CONFIG = GAME / "run_v2_setup_emphasis.json"
+REPLICATE_CONFIG = GAME / "run_v2_setup_emphasis_2.json"
 SUITE = ROOT / "checks/scenarios/abalone_v2.json"
 
 
@@ -51,6 +53,21 @@ class AbaloneV2Tests(unittest.TestCase):
             self.assertIn("not a source-gap clarification", emphasis["authorship"])
         finally:
             shutil.rmtree(workspace, ignore_errors=True)
+
+    def test_exact_setup_emphasis_replicate_is_preregistered_without_best_of(self):
+        first = load_config(EMPHASIS_CONFIG)
+        second = load_config(REPLICATE_CONFIG)
+        ignored = {"run_id", "adapted_from_run_id", "adaptation"}
+        self.assertEqual({key: value for key, value in first.items() if key not in ignored},
+                         {key: value for key, value in second.items() if key not in ignored})
+        self.assertEqual(second["adapted_from_run_id"], "v2_setup_emphasis_1")
+        manifest = json.loads((GAME / "setup_emphasis_replication_v2.json").read_text(encoding="utf-8"))
+        self.assertFalse(manifest["selection_policy"]["best_of_selection"])
+        self.assertFalse(manifest["selection_policy"]["replace_prior_artifacts"])
+        self.assertTrue(manifest["selection_policy"]["report_both_raw_results"])
+        for item in manifest["artifacts"].values():
+            path = ROOT / item["path"]
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), item["sha256"])
 
     def test_every_evaluator_decision_resolves_a_gap_claim(self):
         claims = {item["id"]: item for item in json.loads((GAME / "claims_v2.json").read_text(encoding="utf-8"))["claims"]}
