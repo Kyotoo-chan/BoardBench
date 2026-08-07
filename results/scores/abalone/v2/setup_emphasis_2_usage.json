@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "call_count": 4,
+  "elapsed_seconds_total": 683.444,
+  "token_totals": {
+    "input_tokens": 931202,
+    "cached_input_tokens": 744192,
+    "output_tokens": 25237,
+    "reasoning_output_tokens": 10565
+  },
+  "actual_subscription_cost": null,
+  "generation_calls": 1,
+  "neutral_judge_calls": 3,
+  "persona_calls": 0,
+  "calls": [
+    {
+      "review_role": "generation",
+      "attempt": 1,
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "low",
+      "verbosity": "low",
+      "mode": "agentic",
+      "sandbox": "workspace-write",
+      "permission_profile": "boardbench-workspace-only",
+      "isolation_canary_passed": true,
+      "source_condition_kind": "clarified",
+      "model_packet_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480",
+        "SOURCE_MANIFEST.json": "831d15c23ad51f3c02c224a67f820f141df54048661e11797a1f9c22b854e8f4",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
+        "game_rules.pdf": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+        "game_rules_pages/page-1.png": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7",
+        "game_rules_pages/page-2.png": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d",
+        "game_rules_pages/page-3.png": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9",
+        "game_rules_pages/page-4.png": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee",
+        "game_rules_pages/render_manifest.json": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed",
+        "profile_fixture_self_check.py": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f",
+        "setup_emphasis_v2.json": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      },
+      "started_at": "2026-08-07T08:43:58.955942+00:00",
+      "ended_at": "2026-08-07T08:47:47.583456+00:00",
+      "elapsed_seconds": 228.616,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 17,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451724,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 18,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451495,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "input_tokens": 429455,
+        "output_tokens": 8922,
+        "cached_input_tokens": 381184,
+        "reasoning_output_tokens": 896
+      },
+      "provider_usage_records": [
+        {
+          "line": 29,
+          "path": "$.usage",
+          "input_tokens": 429455,
+          "cached_input_tokens": 381184,
+          "output_tokens": 8922,
+          "reasoning_output_tokens": 896
+        }
+      ],
+      "events_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_host_artifacts_nacbjfo1/events_0.jsonl",
+      "response_path": "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_host_artifacts_nacbjfo1/response_0.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_abalone_v2_setup_emphasis_2_fcvim4jj/game_rules_pages/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_abalone_v2_setup_emphasis_2_fcvim4jj/game_rules_pages/page-2.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_abalone_v2_setup_emphasis_2_fcvim4jj/game_rules_pages/page-3.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-AwJRlh/boardbench_abalone_v2_setup_emphasis_2_fcvim4jj/game_rules_pages/page-4.png"
+      ],
+      "stderr": "2026-08-07T08:44:36.859721Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AwJRlh\\boardbench_abalone_v2_setup_emphasis_2_fcvim4jj\\ENVIRONMENT_CONTRACT.md:\n__THIS_LINE_DOES_NOT_EXIST__\n2026-08-07T08:47:00.294093Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\nTraceback (most recent call last):\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AwJRlh\\boardbench_abalone_v2_setup_emphasis_2_fcvim4jj\\agentic_self_check.py\", line 132, in <module>\r\n    main()\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AwJRlh\\boardbench_abalone_v2_setup_emphasis_2_fcvim4jj\\agentic_self_check.py\", line 78, in main\r\n    module = load_module()\r\n             ^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AwJRlh\\boardbench_abalone_v2_setup_emphasis_2_fcvim4jj\\agentic_self_check.py\", line 73, in load_module\r\n    spec.loader.exec_module(module)\r\n  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\r\n  File \"C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mode-AwJRlh\\boardbench_abalone_v2_setup_emphasis_2_fcvim4jj\\implementation.py\", line 27, in <module>\r\n    @dataclass(frozen=True)\r\n     ^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 1258, in wrap\r\n    return _process_class(cls, init, repr, eq, order, unsafe_hash,\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 983, in _process_class\r\n    and _is_type(type, cls, dataclasses, dataclasses.KW_ONLY,\r\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\benti\\.conda\\envs\\boardbench\\Lib\\dataclasses.py\", line 749, in _is_type\r\n    ns = sys.modules.get(cls.__module__).__dict__\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: 'NoneType' object has no attribute '__dict__'. Did you mean: '__dir__'?\r\n\n"
+    },
+    {
+      "review_role": "neutral_1",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "workspace-write",
+      "permission_profile": "boardbench-workspace-only",
+      "isolation_canary_passed": true,
+      "source_condition_kind": null,
+      "model_packet_sha256": null,
+      "started_at": "2026-08-07T08:53:09.739865+00:00",
+      "ended_at": "2026-08-07T08:55:21.757971+00:00",
+      "elapsed_seconds": 132.018,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 18,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451174,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 19,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451041,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "input_tokens": 115245,
+        "cached_input_tokens": 61184,
+        "output_tokens": 5147,
+        "reasoning_output_tokens": 3052
+      },
+      "provider_usage_records": [
+        {
+          "line": 23,
+          "path": "$.usage",
+          "input_tokens": 115245,
+          "cached_input_tokens": 61184,
+          "output_tokens": 5147,
+          "reasoning_output_tokens": 3052
+        }
+      ],
+      "events_path": "results/scores/abalone/v2/raw/setup_emphasis_2_judge_1_events.jsonl",
+      "response_path": "outputs/abalone_codex_ag_judge_1.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_1_8bcmkgas/canonical_rulebook_pages/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_1_8bcmkgas/canonical_rulebook_pages/page-2.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_1_8bcmkgas/canonical_rulebook_pages/page-3.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_1_8bcmkgas/canonical_rulebook_pages/page-4.png"
+      ],
+      "stderr": "2026-08-07T08:53:25.625178Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\nGet-Content : Der Pfad \"C:\\SOURCE_MANIFEST.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:1\r\n+ Get-Content -Raw SOURCE_MANIFEST.json\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\SOURCE_MANIFEST.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n"
+    },
+    {
+      "review_role": "neutral_2",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "workspace-write",
+      "permission_profile": "boardbench-workspace-only",
+      "isolation_canary_passed": true,
+      "source_condition_kind": null,
+      "model_packet_sha256": null,
+      "started_at": "2026-08-07T08:53:09.685416+00:00",
+      "ended_at": "2026-08-07T08:55:39.466144+00:00",
+      "elapsed_seconds": 149.78,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 18,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451174,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 19,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451023,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "input_tokens": 159617,
+        "cached_input_tokens": 112128,
+        "output_tokens": 5733,
+        "reasoning_output_tokens": 3809
+      },
+      "provider_usage_records": [
+        {
+          "line": 26,
+          "path": "$.usage",
+          "input_tokens": 159617,
+          "cached_input_tokens": 112128,
+          "output_tokens": 5733,
+          "reasoning_output_tokens": 3809
+        }
+      ],
+      "events_path": "results/scores/abalone/v2/raw/setup_emphasis_2_judge_2_events.jsonl",
+      "response_path": "outputs/abalone_codex_ag_judge_2.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_2_3a9ya4r8/canonical_rulebook_pages/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_2_3a9ya4r8/canonical_rulebook_pages/page-2.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_2_3a9ya4r8/canonical_rulebook_pages/page-3.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_2_3a9ya4r8/canonical_rulebook_pages/page-4.png"
+      ],
+      "stderr": ""
+    },
+    {
+      "review_role": "neutral_3",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "medium",
+      "verbosity": "low",
+      "mode": "judge",
+      "sandbox": "workspace-write",
+      "permission_profile": "boardbench-workspace-only",
+      "isolation_canary_passed": true,
+      "source_condition_kind": null,
+      "model_packet_sha256": null,
+      "started_at": "2026-08-07T08:53:09.735867+00:00",
+      "ended_at": "2026-08-07T08:56:02.764960+00:00",
+      "elapsed_seconds": 173.03,
+      "exit_code": 0,
+      "quota_before": {
+        "5h": {
+          "used_percent": 18,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451174,
+          "limit_window_seconds": 604800
+        }
+      },
+      "quota_after": {
+        "5h": {
+          "used_percent": 19,
+          "reset_at": 1786543962,
+          "reset_after_seconds": 451000,
+          "limit_window_seconds": 604800
+        }
+      },
+      "token_summary": {
+        "input_tokens": 226885,
+        "cached_input_tokens": 189696,
+        "output_tokens": 5435,
+        "reasoning_output_tokens": 2808
+      },
+      "provider_usage_records": [
+        {
+          "line": 25,
+          "path": "$.usage",
+          "input_tokens": 226885,
+          "cached_input_tokens": 189696,
+          "output_tokens": 5435,
+          "reasoning_output_tokens": 2808
+        }
+      ],
+      "events_path": "results/scores/abalone/v2/raw/setup_emphasis_2_judge_3_events.jsonl",
+      "response_path": "outputs/abalone_codex_ag_judge_3.md",
+      "image_paths": [
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_3_i704dn3k/canonical_rulebook_pages/page-1.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_3_i704dn3k/canonical_rulebook_pages/page-2.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_3_i704dn3k/canonical_rulebook_pages/page-3.png",
+        "C:/Users/benti/AppData/Local/Temp/.ctx-mode-UksRPP/boardbench_abalone_codex_ag_judge_3_i704dn3k/canonical_rulebook_pages/page-4.png"
+      ],
+      "stderr": "2026-08-07T08:53:25.006888Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\nGet-Content : Der Pfad \"SOURCE_MANIFEST.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:1\r\n+ Get-Content -Raw -LiteralPath 'SOURCE_MANIFEST.json'\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (SOURCE_MANIFEST.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n2026-08-07T08:53:38.076414Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 4.9 seconds\nOutput:\nrg : Die Benennung \"rg\" wurde nicht als Name eines Cmdlet, einer Funktion, einer Skriptdatei oder eines ausführbaren \r\nProgramms erkannt. Überprüfen Sie die Schreibweise des Namens, oder ob der Pfad korrekt ist (sofern enthalten), und \r\nwiederholen Sie den Vorgang.\r\nIn Zeile:2 Zeichen:1\r\n+ rg --files -g 'SOURCE_MANIFEST.json' -g 'canonical_rulebook.pdf' -g ' ...\r\n+ ~~\r\n    + CategoryInfo          : ObjectNotFound: (rg:String) [], CommandNotFoundException\r\n    + FullyQualifiedErrorId : CommandNotFoundException\r\n \r\n\n2026-08-07T08:53:53.272132Z ERROR codex_core::tools::router: error=Exit code: 124\nWall time: 10.1 seconds\nOutput:\ncommand timed out after 10081 milliseconds\nGet-ChildItem : Der Zugriff auf den Pfad \"C:\\PerfLogs\" wurde verweigert.\r\nIn Zeile:2 Zeichen:1\r\n+ Get-ChildItem -Recurse -File | Where-Object { $_.Name -in @('SOURCE_M ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : PermissionDenied: (C:\\PerfLogs:String) [Get-ChildItem], UnauthorizedAccessException\r\n    + FullyQualifiedErrorId : DirUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetChildItemCommand\r\n \r\n\n"
+    }
+  ]
+}
