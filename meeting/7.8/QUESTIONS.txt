@@ -4,6 +4,13 @@ Meeting 7.8. – Fragen
 - Hat er ne Strukturvorlage die ich nutzen soll?
 - Macht Fundamentals als Kapitel 2 sinn? Weil wir fangen ja lowkey von null an.
 - Kommen die Regeln in Metheodik oder woanders hin?
-- schreibe ich auch über alte durchläufe?
+- Sollen die ausführlichen Spielbeschreibungen im Methodenkapitel bleiben oder in den Anhang?
+- schreibe ich auch über alte durchläufe? gehe ich nur auf den aktuellen stand ein?
+- wie genau schreibe ich? englisch passt? stil? sind enumerations in ordnung? bsp workflow besteht aus 5 schritten
 
 - In Anhang Prompts die ich genutzt habe?
+- Jz dann anmelden?
+
+StudyOs:
+- was war mit meeting? (danach)
+- sollte es noch uploads geben?

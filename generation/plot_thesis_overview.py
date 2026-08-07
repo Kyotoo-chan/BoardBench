@@ -8,6 +8,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Patch
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "results" / "plots" / "overview" / "v2"
@@ -19,9 +20,17 @@ METRICS = (
 COLORS = {
     "Original": "#4C78A8",
     "Clear-rule emphasis": "#F58518",
-    "Emphasis repeat": "#E45756",
+    "Clear-rule emphasis (repeat)": "#E45756",
     "Structured clarification": "#8E6C8A",
     "Source-gap clarification": "#54A24B",
+}
+FILE_NAMES = {
+    "6 nimmt!": "6_nimmt",
+    "Abalone": "abalone",
+    "Bohnanza": "bohnanza",
+    "CATAN": "catan",
+    "Exploding Kittens": "exploding_kittens",
+    "Wizard": "wizard",
 }
 GAMES = {
     "6 nimmt!": [
@@ -33,7 +42,7 @@ GAMES = {
     ],
     "Bohnanza": [
         ("Original", "results/scores/bohnanza_base_2023/v2/original_result.json"),
-        ("Emphasis repeat", "results/scores/bohnanza_base_2023/v2/clear_rule_emphasis_2_result.json"),
+        ("Clear-rule emphasis (repeat)", "results/scores/bohnanza_base_2023/v2/clear_rule_emphasis_2_result.json"),
         ("Structured clarification", "results/scores/bohnanza_base_2023/v2/structured_clarification_1_result.json"),
     ],
     "CATAN": [
@@ -71,32 +80,47 @@ def judge_sd(result: dict) -> float:
     return float(result["review_evidence"]["neutral_judges"].get("sample_sd") or 0)
 
 
-def profiles() -> None:
-    fig, axes = plt.subplots(2, 3, figsize=(14, 8), sharey=True)
+def draw_profile(ax, game: str, conditions: list[tuple[str, str]], label_size: int = 7) -> None:
     x = np.arange(len(METRICS))
+    width = 0.72 / len(conditions)
+    for index, (label, path) in enumerate(conditions):
+        result = load(path)
+        row = [value(result, key) for _, key in METRICS]
+        offset = (index - (len(conditions) - 1) / 2) * width
+        bars = ax.bar(x + offset, row, width, label=label, color=COLORS[label], yerr=[0, 0, judge_sd(result)], capsize=2)
+        ax.bar_label(bars, labels=[f"{v:.2f}" for v in row], padding=2, fontsize=label_size, rotation=90)
+    ax.set_title(game, fontweight="bold")
+    ax.set_xticks(x, [label for label, _ in METRICS], fontsize=8)
+    ax.set_ylim(0, 1.13)
+    ax.grid(axis="y", color="#D9D9D9", linewidth=0.7, alpha=0.7)
+    ax.spines[["top", "right"]].set_visible(False)
+
+
+def profiles() -> None:
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    fig, axes = plt.subplots(2, 3, figsize=(14, 8), sharey=True)
     for ax, (game, conditions) in zip(axes.flat, GAMES.items()):
-        width = 0.72 / len(conditions)
-        for index, (label, path) in enumerate(conditions):
-            result = load(path)
-            row = [value(result, key) for _, key in METRICS]
-            offset = (index - (len(conditions) - 1) / 2) * width
-            errors = [0, 0, judge_sd(result)]
-            bars = ax.bar(x + offset, row, width, label=label, color=COLORS[label], yerr=errors, capsize=2)
-            ax.bar_label(bars, labels=[f"{v:.2f}" for v in row], padding=2, fontsize=7, rotation=90)
-        ax.set_title(game, fontweight="bold")
-        ax.set_xticks(x, [label for label, _ in METRICS], fontsize=8)
-        ax.set_ylim(0, 1.13)
-        ax.grid(axis="y", color="#D9D9D9", linewidth=0.7, alpha=0.7)
-        ax.spines[["top", "right"]].set_visible(False)
-        ax.legend(frameon=False, fontsize=7, loc="lower left")
+        draw_profile(ax, game, conditions)
     axes[0, 0].set_ylabel("Observed value")
     axes[1, 0].set_ylabel("Observed value")
+    handles = [Patch(color=color, label=label) for label, color in COLORS.items()]
     fig.suptitle("BoardBench V2 evidence profiles by game and condition", fontsize=15)
+    fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.945), ncol=len(handles), frameon=False, fontsize=8)
     fig.text(0.5, 0.01, "Evidence groups are shown side by side and are not combined into a correctness score.", ha="center", fontsize=9)
-    fig.tight_layout(rect=(0, 0.035, 1, 0.96))
-    OUTPUT.mkdir(parents=True, exist_ok=True)
+    fig.tight_layout(rect=(0, 0.035, 1, 0.90))
     fig.savefig(OUTPUT / "evidence_profiles.png", dpi=220, bbox_inches="tight")
     plt.close(fig)
+
+    for game, conditions in GAMES.items():
+        fig, ax = plt.subplots(figsize=(7, 4.5))
+        draw_profile(ax, game, conditions, label_size=9)
+        ax.set_ylabel("Observed value")
+        handles, labels = ax.get_legend_handles_labels()
+        fig.legend(handles, labels, frameon=False, fontsize=8, loc="lower center", bbox_to_anchor=(0.5, 0.055), ncol=len(labels))
+        fig.text(0.5, 0.005, "Separate evidence groups; no combined correctness score.", ha="center", fontsize=8)
+        fig.tight_layout(rect=(0, 0.14, 1, 1))
+        fig.savefig(OUTPUT / f"{FILE_NAMES[game]}.png", dpi=220, bbox_inches="tight")
+        plt.close(fig)
 
 
 def deltas() -> None:
