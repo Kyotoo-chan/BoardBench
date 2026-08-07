@@ -2,7 +2,7 @@
   "schema_version": 1,
   "game": "bohnanza_base_2023",
   "study": "v2-structured-clarification-exact-replication",
-  "status": "frozen-before-replicate-2-generation",
+  "status": "completed",
   "frozen_on": "2026-08-07",
   "purpose": "Observe whether the balanced structured clarification result recurs under an exact second generation and compare both structured runs with the Original. At n=2 this remains descriptive, not causal.",
   "conditions": {
@@ -18,7 +18,7 @@
     },
     "structured_2": {
       "run_id": "v2_structured_clarification_2",
-      "status": "planned",
+      "status": "completed",
       "declared_final_successor_before_launch": true
     }
   },
@@ -90,5 +90,32 @@
       "path": "inputs/games/bohnanza_base_2023/run_v2_structured_clarification_2.json",
       "sha256": "b43a13bdd8bf38c7ce0cc6fe3ac82f5051d5a0b79d69bac8c6ee453ccb896811"
     }
+  },
+  "completed_on": "2026-08-07",
+  "result": {
+    "initial_model_packet_equal": true,
+    "initial_model_packet_aggregate_sha256": "c62eb912128638348e9e57fa5cba97a8d7e9bfef01c5a68eeb16fa0a30b0907b",
+    "implementation_sha256": "5108a7da692d1f675f650fb1b9fcf353c52451ce46851a2bd2a0c58900c32993",
+    "generation_calls": 2,
+    "pre_evaluation_repairs": 1,
+    "technical_gate": "4/4",
+    "robustness": "100/100",
+    "interface": "1395514/1395514",
+    "player_counts": "5/5",
+    "clear_basis": "35/38",
+    "human_decision_basis": "3/4",
+    "scenario_counts": {
+      "PASS": 38,
+      "FAIL": 3,
+      "CRASH": 1
+    },
+    "neutral_judges": [
+      0.47,
+      0.55,
+      0.55
+    ],
+    "neutral_judge_mean": 0.5233333333333333,
+    "neutral_judge_sample_sd": 0.046188021535170105,
+    "interpretation": "Descriptive exact replication at n=2; no causal claim and no best-of replacement."
   }
 }

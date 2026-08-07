@@ -51,6 +51,24 @@
       "structured_clarification_1_judge_3.md": "3d64d8972cbf90225d41fcdc957b3dcf6cd582535e4bcd014e1ecf5939aad34e",
       "structured_clarification_1_rule_coverage.md": "3e6eb57908518769beede2e353e99b115e3d909f8957657a824e7c439e476a1c",
       "structured_clarification_1_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1"
+    },
+    "structured_clarification_2": {
+      "structured_clarification_2.md": "6d66982fce5b7f4f685760fbe68cf0064052c13e898e1fa13af11c853f91248b",
+      "structured_clarification_2.py": "5108a7da692d1f675f650fb1b9fcf353c52451ce46851a2bd2a0c58900c32993",
+      "structured_clarification_2_agentic.json": "ea370ee8058fd24e93b12a9f7cd727656fb9b0e58099632507100429253c05f8",
+      "structured_clarification_2_assumptions.json": "7659ab998248899c9c9669918136a8b34a7d0406bfb3fdc4270cbb4ded0f4eeb",
+      "structured_clarification_2_checks.txt": "8d5e43a4145cd21dfdd23f7a6e3241d06502b7d0d093493c5ac32969ae51b585",
+      "structured_clarification_2_rule_coverage.md": "740bf0e08ce028f009c355a2c8b99f0e8cc457b4d7b67a9260025b699032ee0a",
+      "structured_clarification_2_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+      "structured_clarification_2_judge_1.md": "7385dad047aaaa7f0c969ead5949048523f917900e954af35c2d2c4f34543774",
+      "structured_clarification_2_judge_2.md": "90cc20090795e2f56a1885fe56c9641af4101cc751308230e38361268fc30508",
+      "structured_clarification_2_judge_3.md": "ad893f2392ba2605bb659c8760586604fae56411ec3cc62baa6b1c3a4bbce7c7",
+      "structured_clarification_2_result.json": "71a5febc11f228c537960894b169aa7e4a66bf981f37b42da4c7bfcfe56bfb7f",
+      "structured_clarification_2_result.md": "93f1a6014dbdab8f9bc7e398241ab96bbb906d5904ab2f9cb9dbc905576acb98",
+      "structured_clarification_2_findings.md": "ec290385c3af9d9588615a55d88f8e28e35897146f3a0ec68bb539ba905d085e",
+      "structured_clarification_2_evaluation_manifest.json": "dc9cb45b8e11db7c89281669698ae07ed800019a305cefbcf9cf858fefdc357a",
+      "raw/structured_clarification_2/structured_clarification_2_events.jsonl": "6b288de5d9ad311506020dd875c9dff3dd2dc12c579005f14ecb963749554b8e",
+      "raw/structured_clarification_2/structured_clarification_2_artifacts.tar.gz": "eb8a5a66565ae7dfcefaf5e67630beac2ec9c0509755babf366cf6cc67650e96"
     }
   }
 }

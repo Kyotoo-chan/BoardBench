@@ -6,78 +6,82 @@
 
 - Publisherquelle: vollständiges deutsches PDF Version 5.4 / 2023, SHA-256 `e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655`.
 - 92 atomare Claims: 82 clear, 7 missing, 2 ambiguous, 1 untestable.
-- 81 erforderliche Clear Claims: 80 szenariogemappt plus eine explizite nicht-exhaustive `jederzeit`-Coverage-Ausnahme.
-- 42 eingefrorene Fälle: 38 clear, 4 human decision.
-- Implementierung: `gpt-5.6-sol`, Thinking `low`; Judges: `gpt-5.6-sol`, Thinking `medium`.
-- Alle Bedingungen nutzen dasselbe PDF, Prompt, Contract, Profil und Modellsetting.
+- 81 erforderliche Clear Claims: 80 szenariogemappt plus eine explizite `jederzeit`-Coverage-Ausnahme.
+- 42 eingefrorene Szenariogruppen: 38 clear, 4 human decision.
+- Implementierung: `gpt-5.6-sol`, Thinking `low`; offizielle Judges: `gpt-5.6-sol`, Thinking `medium`.
+- Evidenzgruppen werden nicht zu einem Correctness-Gesamtscore kombiniert.
 
 ## Interventionsfolge
 
 1. **Original:** nur Publisher-PDF.
-2. **Clear-rule emphasis 1:** vier bereits klare Originaldefektgruppen als separates Experimenter-Artefakt.
-3. **Clear-rule emphasis 2:** exakte vorab deklarierte Wiederholung von Emphasis 1.
-4. **Structured clarification 1:** nachträglich angepasster Nachfolger. Vier freigegebene digitale Entscheidungen plus ausgewogene, quellenabgeleitete Ganzspiel-Checkliste ersetzen die schmale Betonung.
+2. **Clear-rule emphasis 1:** vier bereits klare Originaldefektgruppen.
+3. **Clear-rule emphasis 2:** exakte Wiederholung von Emphasis 1.
+4. **Structured clarification 1:** vier freigegebene digitale Entscheidungen plus ausgewogene Ganzspiel-Checkliste.
+5. **Structured clarification 2:** vorab registrierte exakte frische Wiederholung von Structured 1.
 
-Die strukturierte Bedingung ist wegen der post-evaluation Anpassung kein unabhängiges Replikat. Alle Vorgänger bleiben erhalten; es gibt keine Best-of-Auswahl.
+Structured 1 ist gegenüber den Emphasis-Läufen ein angepasster Nachfolger. Structured 2 repliziert diesen Nachfolger mit byte-identischem initialem Modellpaket. Alle Vorgänger bleiben erhalten; es gibt keine Best-of-Auswahl.
 
 ## Evidenzgruppen
 
-| Evidenz | Original | Emphasis 1 | Emphasis 2 | Structured |
-|---|---:|---:|---:|---:|
-| Generationscalls / Repairs | 1 / 0 | 1 / 0 | 1 / 0 | 1 / 0 |
-| Technischer Gate | 4/4 | 4/4 | 4/4 | 4/4 |
-| Random Rollouts | 100/100 | 100/100 | 100/100 | 100/100 |
-| Action-Language | 800.371/800.371 | 1.523.314/1.523.314 | 976.727/976.727 | 847.456/847.456 |
-| Spielerzahlen | 5/5 | 5/5 | 5/5 | 5/5 |
-| Szenarien | 37 PASS / 5 FAIL | 33 / 9 | 32 / 10 | 36 / 6 |
-| Clear-basis | 33/38 | 30/38 | 30/38 | 33/38 |
-| Human-decision-basis | 4/4 | 3/4 | 2/4 | 3/4 |
-| Ausgewertete Abdeckung | 42/42 | 42/42 | 42/42 | 42/42 |
-| Neutral Judges | 0,68 / 0,70 / 0,55 | nicht ausgeführt | 0,38 / 0,45 / 0,44 | 0,74 / 0,68 / 0,72 |
-| Judge-Mittel (SD) | 0,643 (0,081) | – | 0,423 (0,038) | 0,713 (0,031) |
+| Evidenz | Original | Emphasis 1 | Emphasis 2 | Structured 1 | Structured 2 |
+|---|---:|---:|---:|---:|---:|
+| Generationscalls / Repairs | 1/0 | 1/0 | 1/0 | 1/0 | 2/1 |
+| Technischer Gate | 4/4 | 4/4 | 4/4 | 4/4 | 4/4 |
+| Random Rollouts | 100/100 | 100/100 | 100/100 | 100/100 | 100/100 |
+| Action-Language | 800.371/800.371 | 1.523.314/1.523.314 | 976.727/976.727 | 847.456/847.456 | 1.395.514/1.395.514 |
+| Spielerzahlen | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Szenarien PASS/FAIL/CRASH | 37/5/0 | 33/9/0 | 32/10/0 | 36/6/0 | 38/3/1 |
+| Clear-basis | 33/38 | 30/38 | 30/38 | 33/38 | **35/38** |
+| Human-decision-basis | 4/4 | 3/4 | 2/4 | 3/4 | 3/4 |
+| Ausgewertete Abdeckung | 42/42 | 42/42 | 42/42 | 42/42 | 42/42 |
+| Neutral Judges | 0,68/0,70/0,55 | nicht ausgeführt | 0,38/0,45/0,44 | 0,74/0,68/0,72 | 0,47/0,55/0,55 |
+| Judge-Mittel (SD) | 0,643 (0,081) | – | 0,423 (0,038) | 0,713 (0,031) | 0,523 (0,046) |
 
-## Original
+## Ergebnisse nach Bedingung
 
-Fünf Clear-Fehler: ungleiche Mehrkarten-Trades (`R16`, `R17`), Garden- und Soy-Bohnometer (`R30`, `R33`) sowie Phase-two-Ende bei dritter Leerung (`R40`). Alle vier Human Decisions bestehen. Judges ergänzen verzögertes Recycling und private Handidentitäten in Trade-Aktionen.
+### Original
 
-## Narrow emphasis 1
+Fünf Clear-Fehler: ungleiche Mehrkarten-Trades (`R16`, `R17`), Garden- und Soy-Bohnometer (`R30`, `R33`) sowie Phase-two-Ende bei dritter Leerung (`R40`). Alle vier Human Decisions bestehen.
 
-Die Zielmechaniken werden grundsätzlich verbessert. Neue Fehler entstehen bei optionalem zweitem Pflanzen (`R10`), separatem Zwangsernten (`R12`), Pflanzreihenfolge (`R22`–`R24`) und Red-Bohnometer (`R31`, mit Folgen für `R40`–`R42`). Dieser gültige Lauf bleibt auf Nutzerentscheidung unjudged.
+### Clear-rule emphasis 1 und 2
 
-## Narrow emphasis 2
+Beide schmalen Interventionen erreichen 30/38 Clear, verlieren aber unterschiedliche nicht betonte Mechaniken. Emphasis 2 wiederholt den niedrigen Wert, weshalb Emphasis 1 kein isolierter Ausreißer ist. Das bleibt bei `n=2` deskriptiv.
 
-Die exakte Wiederholung erreicht erneut 30/38 Clear. Fehlergruppen: Drei-Spieler-Setup (`R01`), Pflanzreihenfolge (`R22`–`R24`), Off-turn-Ernten (`R26`, `R27`), Garden-Auszahlung (`R30`) und finale Ernte/Wertung (`R40`–`R42`). Alle Judges bewerten die fehlende finale Ernte als kritisch. Der schlechte erste Lauf war damit kein isolierter Ausreißer.
+### Structured clarification 1
 
-## Structured clarification 1
+33/38 Clear und 3/4 Human Decision. Fehler: optionales zweites Pflanzen (`R10`), ungleiche Mehrkarten-Trades (`R16`, `R17`) sowie frei gewählte staged/revealed Pflanzreihenfolge (`R22`–`R24`, einschließlich `R23`). Judge-Mittel 0,713.
 
-Das Supplement enthält keine evaluatorinternen Claims, Szenarien oder Resultate. Es liefert die vier freigegebenen digitalen Entscheidungen und eine ausgewogene Checkliste über alle zentralen Regelgruppen.
+### Structured clarification 2
 
-Es behebt die Setup-, Bohnometer-, Off-turn-Ernte-, Recycling- und Endspieldefekte der Emphasis-Läufe. Verbleibend:
+35/38 Clear und 3/4 Human Decision. Mehrkarten-Trades und freie Kartenreihenfolge bestehen nun. Gescorte Defekte:
 
-- `R10`: Ablehnen der optionalen zweiten Handkarte beendet Phase 1 nicht;
-- `R16`, `R17`: ungleiche Mehrkarten-Trades fehlen in `legal_actions`;
-- `R22`, `R24`: keine frei gewählte Reihenfolge eigener staged/revealed cards;
-- `R23`: dadurch scheitert auch die freigegebene beliebige Phase-three-Spielerreihenfolge.
+- `R04` (Clear, CRASH): exponentielle Materialisierung aller Angebots- und Anfrage-Teilmengen macht bounded play unpraktikabel;
+- `R10` (Clear): Ablehnen der optionalen zweiten Handkarte bleibt in `plant_second`;
+- `R14` (Clear): der Vier-Phasen-Ablauf bleibt in `plant_received`;
+- `R23` (Human Decision): die freigegebene Phase-3-Reihenfolge erreicht ebenfalls nicht `draw`.
 
-Alle drei Judges bestätigen als Major: fehlende Mehrkarten-Trades in der Aktionsoberfläche, feste Pflanzreihenfolge und Leck tiefer gegnerischer Handidentitäten durch Trade-Aktionen. Ungültige Handelspartner sind ein wiederholter Minor-Befund.
+Alle drei offiziellen Judges bewerten die exponentielle Aktionsenumeration als kritisch. Wiederholt genannt werden außerdem zu späte Leerungs-/Recyclinggrenzen, private gegnerische Handidentitäten in Trade-Aktionen und fehlende einseitige Geschenke eines nicht aktiven Spielers an den aktiven Spieler.
 
-## Warum die neue Übergabe besser funktioniert
+## Evaluatorhistorie und Host-Schutz
 
-Die frühere Intervention war kein echtes Clarification-Paket: Sie wiederholte nur vier bereits klare Regeln. Das erhöhte lokale Salienz, ließ dem Modell aber keinen Hinweis, die Gesamtmechanik gegen Regressionen auszubalancieren.
+- Zwei Original-Replays und das erste Emphasis-2-Replay bleiben als frühere ungültige Evaluatorversuche archiviert.
+- Structured 2 hatte einen Auth-Preflight ohne Modellaufruf; er ist kein zusätzlicher Generationslauf.
+- Eine technische Invocation nutzte versehentlich den Legacy- statt V2-Contract-Check; sie bleibt ungescort.
+- Der unveränderte Full-Suite-Runner überschritt bei `R04` 1.800 Sekunden und fror den Host ein. Die Implementierung wurde nicht verändert. Eine dokumentierte Kompatibilitätsausführung rief dieselbe `run_scenario_v4`-Logik szenarioweise mit niedriger Priorität, einem CPU-Kern und 15-Sekunden-Prozessgrenze auf. Original und Structured 1 bestehen `R04` in 0,17/0,30 Sekunden; Structured 2 überschreitet die Grenze und wird als CRASH gewertet.
+- Die erste Judge-Invocation nutzte versehentlich `low`; alle drei Reviews bleiben ungescort archiviert. Offiziell wurde das eingefrorene `medium`-Setting erneut ausgeführt.
 
-Die neue Übergabe entscheidet echte digitale Lücken ausdrücklich und verlangt zusätzlich einen Ganzspiel-Audit. Dadurch steigt die Regelstabilität deutlich und der Judge-Mittelwert von 0,423 auf 0,713. Die weiterhin explizit beschriebenen, aber falsch implementierten Aktionsfälle zeigen zugleich die Grenze: Kontext reduziert Spezifikationsprobleme, ersetzt aber keine zuverlässige Umsetzung komplexer Aktionsräume.
+## Interpretation
 
-## Evaluatorhistorie
+Structured 2 ist weder durchgehend schlechter noch durchgehend besser. Gegenüber Structured 1 steigt die Clear-Passrate von 33/38 auf 35/38, während Laufzeitverhalten und Judge-Signal deutlich schlechter werden. Gegenüber Original verbessert sich die Clear-Passrate ebenfalls, aber Human Decision fällt von 4/4 auf 3/4 und ein schwerer Performance-Crash kommt hinzu.
 
-Zwei Original-Replays und das erste Emphasis-2-Replay wurden vor gültigem Reporting wegen dokumentierter Evaluatorfehler verworfen. Sie erhielten keine Result Cards oder Judges. Details: `v2/raw/FAILED_ATTEMPTS.md`.
+Damit zeigt die exakte Wiederholung vor allem Modellvarianz und die Notwendigkeit getrennter Evidenzgruppen. Zwei Wiederholungen erlauben keine kausale Aussage über die strukturierte Klarstellung.
 
 ## Artefakte
 
 - Supplement: `inputs/games/bohnanza_base_2023/structured_clarification_v3.md`
+- Replikations-Präregistrierung: `inputs/games/bohnanza_base_2023/structured_clarification_replication_v2.json`
 - Original: `v2/original_result.json`, `v2/original_findings.md`
-- Emphasis 1: `v2/clear_rule_emphasis_1_findings.md`
-- Emphasis 2: `v2/clear_rule_emphasis_2_result.json`, `v2/clear_rule_emphasis_2_findings.md`
-- Structured: `v2/structured_clarification_1_result.json`, `v2/structured_clarification_1_findings.md`
+- Structured 1: `v2/structured_clarification_1_result.json`, `v2/structured_clarification_1_findings.md`
+- Structured 2: `v2/structured_clarification_2_result.json`, `v2/structured_clarification_2_findings.md`
+- Structured-2-Rohdaten: `v2/raw/structured_clarification_2/`
 - Vergleich: `v2/COMPARISON.md`
-- Kompakte erfolgreiche Rohartefakte: `v2/raw/study_artifacts.tar.gz`
-- Quellen/Claims/Szenarien: `inputs/games/bohnanza_base_2023/*_v2.*`, `checks/scenarios/bohnanza_base_2023_v2.json`

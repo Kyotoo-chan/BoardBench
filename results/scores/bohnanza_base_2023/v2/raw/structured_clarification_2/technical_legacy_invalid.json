@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "status": "invalid_evaluator_invocation",
+  "scored": false,
+  "implementation_changed": false,
+  "reason": "run_checks.py was invoked without the frozen contract-v2 replacement --required-api-check checks/versioned/04_required_api_v2.py, so legacy check 04 incorrectly evaluated a contract-v2 implementation. Robustness/interface output is retained but not used; the exact intended command is rerun unchanged."
+}

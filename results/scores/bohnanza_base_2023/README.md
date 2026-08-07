@@ -2,45 +2,37 @@
 
 ## Ergebnis auf einen Blick
 
-Die Art der Zusatzinformation macht einen deutlichen Unterschied:
-
-| Evidenzgruppe | Original | Emphasis 1 | Emphasis 2 | Strukturierte Klarstellung |
-|---|---:|---:|---:|---:|
-| Technische Checks 01–04 | 4/4 | 4/4 | 4/4 | 4/4 |
-| Robustheit | 100/100 | 100/100 | 100/100 | 100/100 |
-| Spielerzahl-Probes | 5/5 | 5/5 | 5/5 | 5/5 |
-| Clear-basis | 33/38 | 30/38 | 30/38 | **33/38** |
-| Human-decision-basis | 4/4 | 3/4 | 2/4 | **3/4** |
-| Szenarioabdeckung | 42/42 | 42/42 | 42/42 | 42/42 |
-| Neutraler Judge-Mittelwert | 0,643 | nicht ausgeführt | 0,423 | **0,713** |
+| Evidenzgruppe | Original | Emphasis 1 | Emphasis 2 | Structured 1 | Structured 2 |
+|---|---:|---:|---:|---:|---:|
+| Technische Checks 01–04 | 4/4 | 4/4 | 4/4 | 4/4 | 4/4 |
+| Robustheit | 100/100 | 100/100 | 100/100 | 100/100 | 100/100 |
+| Spielerzahl-Probes | 5/5 | 5/5 | 5/5 | 5/5 | 5/5 |
+| Clear-basis | 33/38 | 30/38 | 30/38 | 33/38 | **35/38** |
+| Human-decision-basis | 4/4 | 3/4 | 2/4 | 3/4 | 3/4 |
+| Szenario PASS/FAIL/CRASH | 37/5/0 | 33/9/0 | 32/10/0 | 36/6/0 | 38/3/1 |
+| Neutraler Judge-Mittelwert | 0,643 | nicht ausgeführt | 0,423 | **0,713** | 0,523 |
 
 *Diese Gruppen werden nicht zu einem Gesamtscore kombiniert.*
 
-Die beiden schmalen Emphasis-Pakete lenkten Aufmerksamkeit auf vier bekannte Fehlergruppen, erzeugten aber viele Regressionen. Die neue strukturierte Klarstellung kombiniert stattdessen:
+## Exakte Wiederholung der verbesserten Form
 
-- vier freigegebene Entscheidungen für digitale Quellenlücken;
-- eine ausgewogene Ganzspiel-Checkliste für Setup, Phasen, Handel, Anbau, Ernte, alle Bohnometer, Recycling, Spielende und Privatinformation;
-- die ausdrückliche Anweisung, keine Regel zugunsten einzelner Highlights zu vernachlässigen.
+`Structured 2` ist eine vorab registrierte, frische Generation mit demselben initialen Modellpaket wie `Structured 1`. Beide behalten das Publisher-PDF und dieselbe strukturierte Klarstellung; frühere Läufe werden nicht ersetzt.
 
-Das hilft: Setup, Bohnometer, Off-turn-Ernten und finale Wertung sind nun korrekt; der Judge-Mittelwert ist der höchste aller Bedingungen. Perfekt ist die Implementierung trotzdem nicht.
+Der zweite Lauf ist nicht einfach schlechter: Er verbessert die Clear-Szenarien von 33/38 auf 35/38 und behebt Mehrkarten-Trades sowie freie Kartenreihenfolge. Gleichzeitig erzeugt er eine exponentielle Trade-Aktionsmenge, wodurch `R04` nicht mehr in praktikabler Zeit läuft, und erhält deutlich niedrigere Judge-Werte.
 
-## Verbleibende Fehler
+Verbleibende gescorte Fehler:
 
-- Ablehnen der optionalen zweiten Handkarte wechselt nicht in Phase 2 (`R10`).
-- Ungleiche Mehrkarten-Trades fehlen in der enumerierten Aktionsmenge (`R16`, `R17`).
-- Eigentümer können die Reihenfolge ihrer neuen Karten nicht frei wählen (`R22`–`R24`).
-- Die Judges finden zusätzlich private gegnerische Handidentitäten in Trade-Aktionen.
-
-Diese Punkte standen ausdrücklich im Supplement. Sie sind daher Implementierungsfehler und keine verbleibenden Quellenlücken.
+- `R04`: bounded play crasht/timeoutet wegen exponentieller Aktionsenumeration;
+- `R10`: Ablehnen der optionalen zweiten Handkarte wechselt nicht in Phase 2;
+- `R14`: der Vier-Phasen-Ablauf bleibt in `plant_received` hängen;
+- `R23`: dieselbe Phasenabschlussstörung betrifft die freigegebene Phase-3-Reihenfolge.
 
 ## Interpretation
 
-Mehr Kontext hilft hier dann, wenn er **ausgewogen strukturiert ist und echte digitale Lücken explizit entscheidet**. Eine schmale Wiederholung bereits klarer Regeln kann dagegen Salienz verschieben und andere Mechaniken destabilisieren.
-
-Die strukturierte Bedingung ist ein nachträglich angepasstes Nachfolgeexperiment, kein unabhängiges Replikat und keine Best-of-Ersetzung. Alle früheren Läufe bleiben sichtbar.
+Ein zweiter identischer Lauf ist nicht automatisch „cooked“. Die beiden strukturierten Läufe zeigen Modellvarianz: bessere abgedeckte Szenarien können mit schlechterer Laufzeit und niedrigerem unabhängigen Review einhergehen. Bei `n=2` ist das deskriptiv, nicht kausal.
 
 ## Details
 
 **[Vollständige Methodik, Fehlergruppen, Judges und Provenienz](DETAILS.md)**
 
-Maschinenprofile: [`v2/original_result.md`](v2/original_result.md) · [`v2/clear_rule_emphasis_2_result.md`](v2/clear_rule_emphasis_2_result.md) · [`v2/structured_clarification_1_result.md`](v2/structured_clarification_1_result.md) · [Vierfachvergleich](v2/COMPARISON.md)
+Maschinenprofile: [`v2/original_result.md`](v2/original_result.md) · [`v2/structured_clarification_1_result.md`](v2/structured_clarification_1_result.md) · [`v2/structured_clarification_2_result.md`](v2/structured_clarification_2_result.md) · [Fünffachvergleich](v2/COMPARISON.md)

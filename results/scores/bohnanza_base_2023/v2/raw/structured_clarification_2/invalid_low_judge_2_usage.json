@@ -1,0 +1,54 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "workspace-write",
+  "permission_profile": "boardbench-workspace-only",
+  "isolation_canary_passed": true,
+  "source_condition_kind": null,
+  "model_packet_sha256": null,
+  "started_at": "2026-08-07T16:46:52.388036+00:00",
+  "ended_at": "2026-08-07T16:49:02.708701+00:00",
+  "elapsed_seconds": 130.32,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 34,
+      "reset_at": 1786543962,
+      "reset_after_seconds": 422751,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 35,
+      "reset_at": 1786543962,
+      "reset_after_seconds": 422620,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "output_tokens": 4333,
+    "cached_input_tokens": 183680,
+    "reasoning_output_tokens": 1738,
+    "input_tokens": 235512
+  },
+  "provider_usage_records": [
+    {
+      "line": 32,
+      "path": "$.usage",
+      "input_tokens": 235512,
+      "cached_input_tokens": 183680,
+      "output_tokens": 4333,
+      "reasoning_output_tokens": 1738
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/v2/raw/structured_clarification_2/structured_clarification_2_judge_2_events.jsonl",
+  "response_path": "outputs/bohnanza_base_2023_codex_ag_judge_2.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-c8Ldax/boardbench_bohnanza_base_2023_codex_ag_judge_2_rzjt77cq/canonical_rulebook_pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-c8Ldax/boardbench_bohnanza_base_2023_codex_ag_judge_2_rzjt77cq/canonical_rulebook_pages/page-2.png"
+  ],
+  "stderr": "2026-08-07T16:47:12.400513Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\n\r\nName                        Length      Mode  \r\n----                        ------      ----  \r\n$Recycle.Bin                            d--hs-\r\nAMD                                     d-----\r\nDokumente und Einstellungen             d--hsl\r\ninetpub                                 d-----\r\nminecraft                               d-----\r\nOneDriveTemp                            d--h--\r\nPerfLogs                                d-----\r\nProgram Files                           d-r---\r\nProgram Files (x86)                     d-r---\r\nProgramData                             d--h--\r\nProgramme                               d--hsl\r\nRecovery                                d--h--\r\nRiot Games                              d-----\r\nStrawberry                              d-----\r\nSystem Volume Information               d--hs-\r\ntmp                                     d-----\r\nUsers                                   d-r---\r\nWindows                                 d-----\r\nXboxGames                               d-----\r\n.GamingRoot                 28          -a-h--\r\nDumpStack.log               12288       -a----\r\nDumpStack.log.tmp           12288       -a-hs-\r\nhiberfil.sys                13395374080 -a-hs-\r\nmylog.log                   194         -a----\r\npagefile.sys                8589934592  -a-hs-\r\nRHDSetup.log                3295        -a----\r\nswapfile.sys                16777216    -a-hs-\r\n\r\n\r\nGet-Content : Der Pfad \"C:\\SOURCE_MANIFEST.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:56\r\n+ ... Select-Object Name,Length,Mode; Get-Content -Raw SOURCE_MANIFEST.json\r\n+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\SOURCE_MANIFEST.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n2026-08-07T16:47:17.952647Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\n\r\nName                        Length      Mode  \r\n----                        ------      ----  \r\n$Recycle.Bin                            d--hs-\r\nAMD                                     d-----\r\nDokumente und Einstellungen             d--hsl\r\ninetpub                                 d-----\r\nminecraft                               d-----\r\nOneDriveTemp                            d--h--\r\nPerfLogs                                d-----\r\nProgram Files                           d-r---\r\nProgram Files (x86)                     d-r---\r\nProgramData                             d--h--\r\nProgramme                               d--hsl\r\nRecovery                                d--h--\r\nRiot Games                              d-----\r\nStrawberry                              d-----\r\nSystem Volume Information               d--hs-\r\ntmp                                     d-----\r\nUsers                                   d-r---\r\nWindows                                 d-----\r\nXboxGames                               d-----\r\n.GamingRoot                 28          -a-h--\r\nDumpStack.log               12288       -a----\r\nDumpStack.log.tmp           12288       -a-hs-\r\nhiberfil.sys                13395374080 -a-hs-\r\nmylog.log                   194         -a----\r\npagefile.sys                8589934592  -a-hs-\r\nRHDSetup.log                3295        -a----\r\nswapfile.sys                16777216    -a-hs-\r\n\r\n\r\nSet-Location : Zugriff verweigert\r\nIn Zeile:2 Zeichen:1\r\n+ Set-Location -LiteralPath 'C:\\Users\\benti\\AppData\\Local\\Temp\\.ctx-mod ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [Set-Location], UnauthorizedAccessException\r\n    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.SetLocationCommand\r\n \r\nGet-Content : Der Pfad \".\\SOURCE_MANIFEST.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:192\r\n+ ... ame,Length,Mode; Get-Content -Raw -LiteralPath .\\SOURCE_MANIFEST.json\r\n+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (.\\SOURCE_MANIFEST.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n"
+}
