@@ -1,6 +1,0 @@
-PASS players=3
-PASS players=4
-PASS players=5
-PASS players=2: rejected
-PASS players=6: rejected
-PLAYER_COUNTS 5/5

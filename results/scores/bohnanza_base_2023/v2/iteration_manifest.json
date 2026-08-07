@@ -69,24 +69,6 @@
       "structured_clarification_2_evaluation_manifest.json": "dc9cb45b8e11db7c89281669698ae07ed800019a305cefbcf9cf858fefdc357a",
       "raw/structured_clarification_2/structured_clarification_2_events.jsonl": "6b288de5d9ad311506020dd875c9dff3dd2dc12c579005f14ecb963749554b8e",
       "raw/structured_clarification_2/structured_clarification_2_artifacts.tar.gz": "eb8a5a66565ae7dfcefaf5e67630beac2ec9c0509755babf366cf6cc67650e96"
-    },
-    "structured_clarification_3": {
-      "structured_clarification_3.md": "764d071033450823700c90b6eb3550a2ccda4fa734b740220e86f7e929b2d760",
-      "structured_clarification_3.py": "4ffdd903e45abbafc0a7d222d31ec2e1493e76104baa05bacc2140229f06c346",
-      "structured_clarification_3_agentic.json": "6779ef4ac15e381e0ed71b09bea0f733b23a9f0df0bb9935df7dbb3c4c14b2a8",
-      "structured_clarification_3_assumptions.json": "059b3ec29ce44c01155a3c6bb9f1cf576b0e5a4a1cad379565311fc186038514",
-      "structured_clarification_3_checks.txt": "24aa5b7eb25bd3c9ae9e6731da66a723ddf09995e03e98c6a31fd935dfd6aeaf",
-      "structured_clarification_3_rule_coverage.md": "2a4a203cded2cd07cd99e7ae9011ae990d6a5d0ba21ecd7ae6ff3c291e794626",
-      "structured_clarification_3_task.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
-      "structured_clarification_3_judge_1.md": "0b9d778753deefcd4eae4e1f2520d192a539548a8ac99e02a7cf600739fc844f",
-      "structured_clarification_3_judge_2.md": "07bc41ccb84c2f7d694c978e7dcca8bd4b401bbb03e0a74d9aa77fc8426e04d7",
-      "structured_clarification_3_judge_3.md": "9cfc0489643066385ed913fd6ff78f3a81274f69f1446d1030d73b2030e89100",
-      "structured_clarification_3_result.json": "de311338e459492ed7d96042df6a323353802b7ee09d9fad320fe4f7c5f2fa53",
-      "structured_clarification_3_result.md": "0d9e47318d5e840d08d58456845e0982b999407e1c1f2c83fff6dacd4fddb7e5",
-      "structured_clarification_3_findings.md": "3bf6fd605876ae989e5c3b10b630becc58e8d294b91cd7daf3ea984ca901d124",
-      "structured_clarification_3_evaluation_manifest.json": "cfe4cd2229c5f422423f33e81874b7a4289b2161c58964811cbbb1d591162924",
-      "raw/structured_clarification_3/structured_clarification_3_events.jsonl": "3720e0a966d1d38420c6c5ce2d067b132c45f44f178a560cca0255d11fa9ef8f",
-      "raw/structured_clarification_3/structured_clarification_3_artifacts.tar.gz": "e70027c6994fc252d356d76c991b1ef5549b7403387be6242244db63930a3bf4"
     }
   }
 }
