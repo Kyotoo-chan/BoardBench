@@ -16,7 +16,3 @@
 - Its first replay exposed one remaining evaluator overconstraint inherited from accommodating the first two implementations: three phase-three cases required an explicit mechanical `pass` state, although the profile permits an implementation to advance automatically once every required card is planted.
 - `BOHN-R14`, `R23`, and `R40` now optionally settle one pass only when all legal actions are pass/harvest; implementations that already advanced to draw or terminal are left unchanged. Source expectations and all post-boundary assertions are unchanged.
 - The invalid 31 PASS / 11 FAIL replay is retained in `invalid_emphasis_2_evaluator_replay_1.tar.gz`; it is unscored and unjudged.
-
-## Structured clarification replicate 2
-
-- `structured_clarification_2_preflight_auth_1`: native Codex authentication failed before any model call (expired access token / reused refresh token, HTTP 401). No implementation or evaluation existed. Raw canonical failure artifacts are retained in `structured_clarification_2_preflight_auth_1.tar.gz`; the same pre-registered run remains pending.

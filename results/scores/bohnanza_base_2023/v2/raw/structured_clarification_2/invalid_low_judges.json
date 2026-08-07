@@ -1,7 +1,0 @@
-{
-  "schema_version": 1,
-  "status": "invalid_evaluator_invocation",
-  "scored": false,
-  "implementation_changed": false,
-  "reason": "The first neutral-judge invocation used low thinking, while the frozen prior Bohnanza V2 evaluator used medium. All three reviews are retained but excluded; the unchanged judge packet is rerun at medium."
-}

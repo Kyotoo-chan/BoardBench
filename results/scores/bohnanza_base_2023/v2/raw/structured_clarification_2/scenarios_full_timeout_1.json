@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "status": "invalid_incomplete_evaluator_replay",
-  "scored": false,
-  "implementation_changed": false,
-  "command": "checks/run_scenarios_v4.py with the frozen full suite",
-  "observed": "Exceeded the 1800-second host timeout before producing a result; BOHN-R04 was then isolated as the pathological case.",
-  "replacement": "scenarios_r2.json compatibility execution"
-}

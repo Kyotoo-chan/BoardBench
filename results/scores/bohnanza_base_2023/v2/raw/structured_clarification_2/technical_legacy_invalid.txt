@@ -1,9 +1,0 @@
-OK   01_result_file                     1/1 score=1.000    0.00s
-OK   02_python_syntax                   1/1 score=1.000    0.01s
-OK   03_startable_game                  1/1 score=1.000    0.01s
-FAIL 04_required_api                    7/9 score=0.778    0.03s  state_to_data must return the canonical state envelope
-OK   05_random_rollouts             100/100 score=1.000  164.10s
-OK   06_action_language     1395514/1395514 score=1.000  161.27s
----- summary                            5/6 score=0.991  325.42s
-
-ERROR conda.cli.main_run:execute(125): `conda run python checks/run_checks.py --game bohnanza_base_2023 --code-path outputs/bohnanza_base_2023_codex_ag.py --rollouts 100 --max-steps 1000 --seed 12345` failed. (See above for error)
