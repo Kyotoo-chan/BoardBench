@@ -2,9 +2,9 @@
   "schema_version": 1,
   "game": "bohnanza_base_2023",
   "study": "v2-structured-clarification-exact-replication",
-  "status": "completed",
+  "status": "replicate-3-frozen-before-generation",
   "frozen_on": "2026-08-07",
-  "purpose": "Observe whether the balanced structured clarification result recurs under an exact second generation and compare both structured runs with the Original. At n=2 this remains descriptive, not causal.",
+  "purpose": "Observe generation variance across three exact generations of the balanced structured clarification and compare every replicate with the Original. At n=3 this remains descriptive, not causal.",
   "conditions": {
     "original": {
       "run_id": "v2_original_1",
@@ -20,13 +20,19 @@
       "run_id": "v2_structured_clarification_2",
       "status": "completed",
       "declared_final_successor_before_launch": true
+    },
+    "structured_3": {
+      "run_id": "v2_structured_clarification_3",
+      "status": "planned",
+      "declared_final_successor_before_launch": true,
+      "retained_regardless_of_outcome": true
     }
   },
   "selection_policy": {
     "best_of_selection": false,
     "replace_prior_artifacts": false,
     "report_all_runs": true,
-    "primary_comparison": "Original versus each structured clarification replicate, plus descriptive variation across the two exact structured replicates."
+    "primary_comparison": "Original versus each structured clarification replicate, plus descriptive variation across all three exact structured replicates."
   },
   "invariants": {
     "source_packet_byte_identical_between_structured_replicates": true,
@@ -35,7 +41,8 @@
     "verbosity": "low",
     "profile_contract_prompt_unchanged": true,
     "evaluator_unchanged": true,
-    "implementation_generated_fresh": true
+    "implementation_generated_fresh": true,
+    "source_packet_byte_identical_between_all_structured_replicates": true
   },
   "artifacts": {
     "publisher_rulebook": {
@@ -89,10 +96,13 @@
     "run_2": {
       "path": "inputs/games/bohnanza_base_2023/run_v2_structured_clarification_2.json",
       "sha256": "b43a13bdd8bf38c7ce0cc6fe3ac82f5051d5a0b79d69bac8c6ee453ccb896811"
+    },
+    "run_3": {
+      "path": "inputs/games/bohnanza_base_2023/run_v2_structured_clarification_3.json",
+      "sha256": "21345137ea831beec5418d0764024c12ea986d75bdcf7ff7a921414c5a822861"
     }
   },
-  "completed_on": "2026-08-07",
-  "result": {
+  "prior_completed_result": {
     "initial_model_packet_equal": true,
     "initial_model_packet_aggregate_sha256": "c62eb912128638348e9e57fa5cba97a8d7e9bfef01c5a68eeb16fa0a30b0907b",
     "implementation_sha256": "5108a7da692d1f675f650fb1b9fcf353c52451ce46851a2bd2a0c58900c32993",
