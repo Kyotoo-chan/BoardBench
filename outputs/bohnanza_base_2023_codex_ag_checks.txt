@@ -1,52 +1,12 @@
+attempt 1: removed runtime metadata before repair validation: __pycache__
+
 attempt 1:
 $ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
 exit_code=0
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
-exit_code=1
-Traceback (most recent call last):
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\agentic_self_check.py", line 133, in <module>
-    main()
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\agentic_self_check.py", line 93, in main
-    validate_state_contract(game, state, profile)
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\agentic_self_check.py", line 41, in validate_state_contract
-    validate_envelope(payload, "state", profile["state_schema"] if profile else None)
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\agentic_self_check.py", line 30, in validate_envelope
-    assert isinstance(value, dict) and set(value) == {"schema", "data"}, f"invalid canonical {suffix} envelope"
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: invalid canonical state envelope
-
-$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
-exit_code=1
-Traceback (most recent call last):
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\profile_fixture_self_check.py", line 74, in <module>
-    if __name__=="__main__": main()
-                             ^^^^^^
-  File "C:\Users\benti\AppData\Local\Temp\.ctx-mode-Npgryw\boardbench_bohnanza_base_2023_v2_structured_clarification_2_avvi16ly\profile_fixture_self_check.py", line 52, in main
-    assert payload["schema"]==profile["state_schema"]
-           ~~~~~~~^^^^^^^^^^
-KeyError: 'schema'
-
-$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
 exit_code=0
-PASS players=3
-PASS players=4
-PASS players=5
-PASS players=2: rejected
-PASS players=6: rejected
-PLAYER_COUNTS 5/5
-
-attempt 1: removed host-check __pycache__ before repair
-
-attempt 2: removed runtime metadata before repair validation: __pycache__
-
-attempt 2:
-$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
-exit_code=0
-
-$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
-exit_code=0
-agentic-self-check OK states=300 actions=6855
+agentic-self-check OK states=300 actions=2045
 
 $ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
 exit_code=0
@@ -60,104 +20,3 @@ PASS players=5
 PASS players=2: rejected
 PASS players=6: rejected
 PLAYER_COUNTS 5/5
-
-=== POST-GENERATION EVALUATION (implementation frozen) ===
-
---- invalid legacy technical invocation (unscored) ---
-OK   01_result_file                     1/1 score=1.000    0.00s
-OK   02_python_syntax                   1/1 score=1.000    0.01s
-OK   03_startable_game                  1/1 score=1.000    0.01s
-FAIL 04_required_api                    7/9 score=0.778    0.03s  state_to_data must return the canonical state envelope
-OK   05_random_rollouts             100/100 score=1.000  164.10s
-OK   06_action_language     1395514/1395514 score=1.000  161.27s
----- summary                            5/6 score=0.991  325.42s
-
-ERROR conda.cli.main_run:execute(125): `conda run python checks/run_checks.py --game bohnanza_base_2023 --code-path outputs/bohnanza_base_2023_codex_ag.py --rollouts 100 --max-steps 1000 --seed 12345` failed. (See above for error)
-
---- official technical / robustness / interface ---
-OK   01_result_file                     1/1 score=1.000    0.00s
-OK   02_python_syntax                   1/1 score=1.000    0.00s
-OK   03_startable_game                  1/1 score=1.000    0.01s
-OK   04_required_api_v2                 9/9 score=1.000    0.01s
-OK   05_random_rollouts             100/100 score=1.000  162.44s
-OK   06_action_language     1395514/1395514 score=1.000  160.32s
----- summary                            6/6 score=1.000  322.78s
-
-
---- player counts ---
-PASS players=3
-PASS players=4
-PASS players=5
-PASS players=2: rejected
-PASS players=6: rejected
-PLAYER_COUNTS 5/5
-
-
---- scenario runner compatibility evidence ---
-Frozen full-suite command exceeded 1800 seconds before producing a result. Implementation unchanged. Exact scenarios were isolated through run_scenario_v4 at below-normal priority, one CPU, 15-second timeout. Original R04 PASS 0.17s; structured clarification 1 R04 PASS 0.30s; replicate 2 R04 CRASH timeout.
-{
-  "counts": {
-    "PASS": 38,
-    "FAIL": 3,
-    "CRASH": 1,
-    "UNREACHED": 0,
-    "UNTESTABLE": 0
-  },
-  "basis_scores": {
-    "clear": {
-      "passed": 35,
-      "evaluated": 38,
-      "score": 0.9210526315789473
-    },
-    "human_decision": {
-      "passed": 3,
-      "evaluated": 4,
-      "score": 0.75
-    }
-  },
-  "non_pass": [
-    {
-      "id": "BOHN-R04-player-count-contract",
-      "status": "CRASH",
-      "basis": "clear",
-      "fact_ids": [
-        "BOHN-C-PLAYERS"
-      ],
-      "elapsed_seconds": 15.13,
-      "message": "ScenarioTimeout: exceeded 15 seconds in isolated low-priority execution"
-    },
-    {
-      "id": "BOHN-R10-second-optional-no-third",
-      "status": "FAIL",
-      "basis": "clear",
-      "fact_ids": [
-        "BOHN-C-SECOND-PLANT-OPTIONAL",
-        "BOHN-C-NO-THIRD-HAND-PLANT"
-      ],
-      "elapsed_seconds": 0.092,
-      "message": "phase: expected 'reveal', got 'plant_second'"
-    },
-    {
-      "id": "BOHN-R14-four-phase-turn",
-      "status": "FAIL",
-      "basis": "clear",
-      "fact_ids": [
-        "BOHN-C-PHASES"
-      ],
-      "elapsed_seconds": 0.092,
-      "message": "step 6: phase: expected 'draw', got 'plant_received'"
-    },
-    {
-      "id": "BOHN-R23-phase3-any-player-order",
-      "status": "FAIL",
-      "basis": "human_decision",
-      "fact_ids": [
-        "BOHN-M-PHASE3-INTERPLAYER-ORDER"
-      ],
-      "elapsed_seconds": 0.087,
-      "message": "step 3: phase: expected 'draw', got 'plant_received'"
-    }
-  ]
-}
---- neutral judges (official medium thinking) ---
-Scores: 0.47, 0.55, 0.55. The earlier low-thinking invocation is retained under results/.../raw and unscored.

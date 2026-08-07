@@ -1,4 +1,17 @@
 {
   "version": 1,
-  "assumptions": []
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Regeln für den Bohnenhandel",
+      "source_basis": "missing",
+      "alternatives": [
+        "Expose every possible multi-card bundle as one proposal action.",
+        "Expose one-card offers (optionally for one requested card); further negotiations occur as later proposals."
+      ],
+      "selected": "Expose one-card offers (optionally for one requested card); further negotiations occur as later proposals.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    }
+  ]
 }
