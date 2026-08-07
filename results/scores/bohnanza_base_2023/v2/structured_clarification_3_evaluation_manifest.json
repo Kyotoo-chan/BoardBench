@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "game": "bohnanza_base_2023",
+  "run_id": "v2_structured_clarification_3",
+  "implementation_frozen_sha256": "4ffdd903e45abbafc0a7d222d31ec2e1493e76104baa05bacc2140229f06c346",
+  "evaluation_started_after_generation_commit": "7ecdfda",
+  "evaluator": {
+    "suite_sha256": "3c7ba5195570ff3364ac837fbd464471693308e373322d4fc4ded893abe81fb0",
+    "adapter_sha256": "a93bccef911e4e810d98c3533ad7bbf2c1b041365cc254ac28b4fb79468f3942",
+    "runner_sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20",
+    "required_api_v2_sha256": "d86c9d737699686e0a0b0a0ace207263a23d1798256a16e9acb46186892f0c91",
+    "judge_runner_sha256": "f5d716cb51c71526eb80b9f17ce82767e710e244c6568cb4cb3586e1040808d9",
+    "judge_prompt_sha256": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2"
+  },
+  "resource_isolation": {
+    "scenario_result": "results/scores/bohnanza_base_2023/v2/raw/structured_clarification_3/scenarios_r2.json",
+    "priority": "below_normal",
+    "cpu_affinity": 1,
+    "per_scenario_timeout_seconds": 15,
+    "declared_before_replicate_3_evaluation": true
+  },
+  "official_results": {
+    "technical": "4/4",
+    "robustness": "100/100",
+    "interface": "563753/563753",
+    "player_counts": "5/5",
+    "clear": "33/38",
+    "human_decision": "3/4",
+    "scenario_counts": {
+      "PASS": 36,
+      "FAIL": 6,
+      "CRASH": 0
+    },
+    "judges": [
+      0.62,
+      0.62,
+      0.61
+    ]
+  },
+  "artifact_archive": {
+    "path": "results/scores/bohnanza_base_2023/v2/raw/structured_clarification_3/structured_clarification_3_artifacts.tar.gz",
+    "sha256": "e70027c6994fc252d356d76c991b1ef5549b7403387be6242244db63930a3bf4"
+  }
+}

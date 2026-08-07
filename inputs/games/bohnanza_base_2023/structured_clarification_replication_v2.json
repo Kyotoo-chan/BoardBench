@@ -2,7 +2,7 @@
   "schema_version": 1,
   "game": "bohnanza_base_2023",
   "study": "v2-structured-clarification-exact-replication",
-  "status": "replicate-3-frozen-before-generation",
+  "status": "completed",
   "frozen_on": "2026-08-07",
   "purpose": "Observe generation variance across three exact generations of the balanced structured clarification and compare every replicate with the Original. At n=3 this remains descriptive, not causal.",
   "conditions": {
@@ -23,7 +23,7 @@
     },
     "structured_3": {
       "run_id": "v2_structured_clarification_3",
-      "status": "planned",
+      "status": "completed",
       "declared_final_successor_before_launch": true,
       "retained_regardless_of_outcome": true
     }
@@ -127,5 +127,52 @@
     "neutral_judge_mean": 0.5233333333333333,
     "neutral_judge_sample_sd": 0.046188021535170105,
     "interpretation": "Descriptive exact replication at n=2; no causal claim and no best-of replacement."
+  },
+  "completed_on": "2026-08-07",
+  "result": {
+    "initial_model_packet_equal_across_three": true,
+    "initial_model_packet_aggregate_sha256": "c62eb912128638348e9e57fa5cba97a8d7e9bfef01c5a68eeb16fa0a30b0907b",
+    "structured_replicates": {
+      "structured_1": {
+        "clear": "33/38",
+        "human_decision": "3/4",
+        "scenario_counts": {
+          "PASS": 36,
+          "FAIL": 6,
+          "CRASH": 0
+        },
+        "judge_mean": 0.7133333333333334
+      },
+      "structured_2": {
+        "clear": "35/38",
+        "human_decision": "3/4",
+        "scenario_counts": {
+          "PASS": 38,
+          "FAIL": 3,
+          "CRASH": 1
+        },
+        "judge_mean": 0.5233333333333333
+      },
+      "structured_3": {
+        "implementation_sha256": "4ffdd903e45abbafc0a7d222d31ec2e1493e76104baa05bacc2140229f06c346",
+        "generation_calls": 1,
+        "pre_evaluation_repairs": 0,
+        "clear": "33/38",
+        "human_decision": "3/4",
+        "scenario_counts": {
+          "PASS": 36,
+          "FAIL": 6,
+          "CRASH": 0
+        },
+        "judge_values": [
+          0.62,
+          0.62,
+          0.61
+        ],
+        "judge_mean": 0.6166666666666667,
+        "judge_sample_sd": 0.005773502691896263
+      }
+    },
+    "interpretation": "Across three exact runs, Clear is 33/38, 35/38, 33/38 and Human Decision is 3/4 throughout. Retain all runs; descriptive only."
   }
 }

@@ -1,0 +1,54 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "workspace-write",
+  "permission_profile": "boardbench-workspace-only",
+  "isolation_canary_passed": true,
+  "source_condition_kind": null,
+  "model_packet_sha256": null,
+  "started_at": "2026-08-07T17:20:10.817872+00:00",
+  "ended_at": "2026-08-07T17:24:37.645625+00:00",
+  "elapsed_seconds": 266.828,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 42,
+      "reset_at": 1786543962,
+      "reset_after_seconds": 420752,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 43,
+      "reset_at": 1786543962,
+      "reset_after_seconds": 420485,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "output_tokens": 9637,
+    "input_tokens": 287610,
+    "cached_input_tokens": 204928,
+    "reasoning_output_tokens": 6549
+  },
+  "provider_usage_records": [
+    {
+      "line": 27,
+      "path": "$.usage",
+      "input_tokens": 287610,
+      "cached_input_tokens": 204928,
+      "output_tokens": 9637,
+      "reasoning_output_tokens": 6549
+    }
+  ],
+  "events_path": "D:/safen/Ben_T/Studium/8.Semester/BoardBench/results/scores/bohnanza_base_2023/v2/raw/structured_clarification_3/structured_clarification_3_judge_1_events.jsonl",
+  "response_path": "outputs/bohnanza_base_2023_codex_ag_judge_1.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-FwgQ6h/boardbench_bohnanza_base_2023_codex_ag_judge_1_dxc0l_nn/canonical_rulebook_pages/page-1.png",
+    "C:/Users/benti/AppData/Local/Temp/.ctx-mode-FwgQ6h/boardbench_bohnanza_base_2023_codex_ag_judge_1_dxc0l_nn/canonical_rulebook_pages/page-2.png"
+  ],
+  "stderr": "2026-08-07T17:20:26.114517Z ERROR codex_core::tools::router: error=Exit code: 1\nWall time: 0.4 seconds\nOutput:\nGet-Content : Der Pfad \"C:\\SOURCE_MANIFEST.json\" kann nicht gefunden werden, da er nicht vorhanden ist.\r\nIn Zeile:2 Zeichen:1\r\n+ Get-Content -Raw SOURCE_MANIFEST.json\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : ObjectNotFound: (C:\\SOURCE_MANIFEST.json:String) [Get-Content], ItemNotFoundException\r\n    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand\r\n \r\n\n"
+}

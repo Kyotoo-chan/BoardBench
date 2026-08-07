@@ -138,8 +138,10 @@ class BohnanzaV2Tests(unittest.TestCase):
   self.assertEqual(second['adapted_from_run_id'],'v2_structured_clarification_1')
   self.assertEqual(third['adapted_from_run_id'],'v2_structured_clarification_2')
   manifest=json.loads((GAME/'structured_clarification_replication_v2.json').read_text(encoding='utf-8'))
-  self.assertEqual(manifest['status'],'replicate-3-frozen-before-generation')
+  self.assertEqual(manifest['status'],'completed')
+  self.assertEqual(manifest['conditions']['structured_3']['status'],'completed')
   self.assertTrue(manifest['conditions']['structured_3']['retained_regardless_of_outcome'])
+  self.assertTrue(manifest['result']['initial_model_packet_equal_across_three'])
   self.assertFalse(manifest['selection_policy']['best_of_selection']);self.assertFalse(manifest['selection_policy']['replace_prior_artifacts']);self.assertTrue(manifest['selection_policy']['report_all_runs'])
   for item in manifest['artifacts'].values():
    path=ROOT/item['path'];self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),item['sha256'])
