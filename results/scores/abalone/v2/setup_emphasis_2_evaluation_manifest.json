@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "game": "abalone",
+  "run_id": "v2_setup_emphasis_2",
+  "status": "complete",
+  "implementation_sha256": "174b4743c056ef578cf38547713ade4260b897762dd7d3fa54cc6fc6695adc9f",
+  "preregistration": {
+    "path": "inputs/games/abalone/setup_emphasis_replication_v2.json",
+    "sha256": "5f10cd3a65bc19a0297269e4c6bedbd6fa3b8e8770de2ad2ceb6ee18f2d38bce"
+  },
+  "model_packet_sha256_equal_to_replicate_1": true,
+  "source_condition": [
+    {
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "role": "publisher_rulebook",
+      "path": "inputs/games/abalone/game_rules.pdf",
+      "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+    },
+    {
+      "source_id": "ABALONE-V2-SETUP-EMPHASIS",
+      "role": "experimenter_clarification",
+      "path": "inputs/games/abalone/setup_emphasis_v2.json",
+      "sha256": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+    }
+  ],
+  "evaluator": {
+    "suite": {
+      "path": "checks/scenarios/abalone_v2.json",
+      "sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935"
+    },
+    "adapter": {
+      "path": "checks/scenario_adapters/abalone_v2.py",
+      "sha256": "7b83946eb17394320b77b5b2da3925172a14ef8434322243080c498c707141da"
+    },
+    "runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "profile": {
+      "path": "inputs/games/abalone/environment_profile_v2.json",
+      "sha256": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480"
+    },
+    "claims": {
+      "path": "inputs/games/abalone/claims_v2.json",
+      "sha256": "e576c846bf1193a106792e25fa221f82e73d02d5b5892428e77169c486c9e5f0"
+    }
+  },
+  "deterministic_evidence": {
+    "technical": "4/4",
+    "robustness": "100/100",
+    "interface": "5704536/5704536",
+    "player_counts": "3/3",
+    "clear_basis": "33/33",
+    "human_decision_basis": "4/5",
+    "scenario_evaluated_coverage": "38/38",
+    "claim_mapping": "33/33",
+    "evaluated_claims": "33/33",
+    "scored_failures": [
+      "ABAL-R19-forced-pass-only-with-no-move"
+    ]
+  },
+  "neutral_judges": {
+    "scores": [
+      0.9,
+      0.87,
+      0.84
+    ],
+    "mean": 0.87,
+    "sample_sd": 0.030000000000000027,
+    "model": "gpt-5.6-sol",
+    "thinking": "medium"
+  },
+  "confirmed_unscored_candidates": [
+    {
+      "id": "ABAL-JC-REP2-ACTION-ALIASES",
+      "path": "results/scores/abalone/v2/raw/setup_emphasis_2_judge_candidate_replays.json",
+      "sha256": "fdc68f9d9970bbe9f0e9fb73309e5ee70463f96205d05ebab9e18ca693639f45"
+    }
+  ],
+  "artifacts": {
+    "checks": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_checks.txt",
+      "sha256": "58d9bed74e67c10976040d93e4e5123423ba11102a07dc5edce6d076c873a3f4"
+    },
+    "scenarios": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_scenarios.json",
+      "sha256": "222a4ee5b93eeedafa90a88740b3e00758b01a1f14786d0b8d14c51482f8995a"
+    },
+    "usage": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_usage.json",
+      "sha256": "761811a22e2d54b4e77aff8de8210a969a6deaafb4ed23c5ad35634ebe419f91"
+    },
+    "result_spec": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_result_spec.json",
+      "sha256": "6678e78dcd576bf3737d511ea765fd6182040a108942e7b8811ff71ca0ab8b24"
+    },
+    "result_json": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_result.json",
+      "sha256": "149603fcecc76caecce8f806d1b92347c539b8c016b6ae865541bad76bf04352"
+    },
+    "result_md": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_result.md",
+      "sha256": "e1c39b05455d2c8b49514279743d70b081dd5eb84391bfddeae25006a493963f"
+    },
+    "findings": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_findings.md",
+      "sha256": "df10a604cb2a16ec3abb2bac5b093737a747695f564364999d7383730d82b7ec"
+    },
+    "judge_packet": {
+      "path": "results/scores/abalone/v2/setup_emphasis_2_judge_packet_manifest.json",
+      "sha256": "4acf164a61c150426d4db5f04c2fedfa76deb593827d99876f348e7aec91843a"
+    },
+    "review_events": {
+      "path": "results/scores/abalone/v2/raw/setup_emphasis_2_review_events.jsonl",
+      "sha256": "8edf9863a528fe2ca995071b022fb047693475f01998cd5f3f5004e275bd959e"
+    },
+    "raw_archive": {
+      "path": "results/scores/abalone/v2/raw/setup_emphasis_2_artifacts.tar.gz",
+      "sha256": "893d2796f08b59c85769211d2221dad46b18dbaf9793559d4990b6d590dfa3ca"
+    },
+    "replication_result": {
+      "path": "results/scores/abalone/v2/setup_emphasis_replication_v2_result.json",
+      "sha256": "a2800b24a52ec6d62796cbc4c3d705edaf95398c57d5297d1ebac1345bc8a019"
+    }
+  },
+  "implementation_changed_after_evaluation_started": false,
+  "model_packets": {
+    "replicate_1": {
+      "run_id": "v2_setup_emphasis_1",
+      "aggregate_sha256": "db8b4937d64b320714397ebb007e77b6bad99fd661ac89575634fa0156f10ea7",
+      "file_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480",
+        "SOURCE_MANIFEST.json": "831d15c23ad51f3c02c224a67f820f141df54048661e11797a1f9c22b854e8f4",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
+        "game_rules.pdf": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+        "game_rules_pages/page-1.png": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7",
+        "game_rules_pages/page-2.png": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d",
+        "game_rules_pages/page-3.png": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9",
+        "game_rules_pages/page-4.png": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee",
+        "game_rules_pages/render_manifest.json": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed",
+        "profile_fixture_self_check.py": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f",
+        "setup_emphasis_v2.json": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      },
+      "evidence_archive": {
+        "path": "results/scores/abalone/v2/raw/study_artifacts.tar.gz",
+        "member": "setup_emphasis_agentic.json",
+        "archive_sha256": "5b1f4d2d85debac2f0eabf0925f3b96783592a6c6e1e03b7e2f1314c593e4045"
+      }
+    },
+    "replicate_2": {
+      "run_id": "v2_setup_emphasis_2",
+      "aggregate_sha256": "db8b4937d64b320714397ebb007e77b6bad99fd661ac89575634fa0156f10ea7",
+      "file_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480",
+        "SOURCE_MANIFEST.json": "831d15c23ad51f3c02c224a67f820f141df54048661e11797a1f9c22b854e8f4",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
+        "game_rules.pdf": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+        "game_rules_pages/page-1.png": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7",
+        "game_rules_pages/page-2.png": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d",
+        "game_rules_pages/page-3.png": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9",
+        "game_rules_pages/page-4.png": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee",
+        "game_rules_pages/render_manifest.json": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed",
+        "profile_fixture_self_check.py": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f",
+        "setup_emphasis_v2.json": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      },
+      "evidence": {
+        "path": "outputs/abalone_codex_ag_agentic.json",
+        "sha256": "6de90d23f7279d9d4c341a53a52ebeecc03adb775f3461436ea7607ca2a8e576"
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import hashlib
 import json
 import math
 import py_compile
+import tarfile
 import unittest
 from pathlib import Path
 
@@ -46,7 +47,10 @@ class SixNimmtV2ResultTests(unittest.TestCase):
         manifest = load(V2 / "original_evaluation_manifest.json")
         self.assertEqual(manifest["status"], "complete")
         self.assertFalse(manifest["implementation_changed_after_evaluation_started"])
-        self.assertEqual(sha(ROOT / "outputs/six_nimmt_codex_ag.py"), manifest["implementation_sha256"])
+        archive_path = ROOT / manifest["artifacts"]["raw_archive"]["path"]
+        with tarfile.open(archive_path, "r:gz") as archive:
+            implementation = archive.extractfile("six_nimmt_codex_ag.py").read()
+        self.assertEqual(hashlib.sha256(implementation).hexdigest(), manifest["implementation_sha256"])
         for item in manifest["source_condition"]:
             self.assertEqual(sha(ROOT / item["path"]), item["sha256"])
         for item in manifest["evaluator"].values():

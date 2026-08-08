@@ -15,6 +15,20 @@
       "setup_emphasis_result.md": "2354244708dc40761f55a89991828d395995ede114401c744304fd7e60773f7e",
       "setup_emphasis_findings.md": "e869418290c0b0e1c0b9640fbb934db99fa723c125e52851966682d8a3db2403",
       "raw/study_artifacts.tar.gz": "5b1f4d2d85debac2f0eabf0925f3b96783592a6c6e1e03b7e2f1314c593e4045"
+    },
+    "setup_emphasis_2": {
+      "setup_emphasis_2_result.json": "149603fcecc76caecce8f806d1b92347c539b8c016b6ae865541bad76bf04352",
+      "setup_emphasis_2_result.md": "e1c39b05455d2c8b49514279743d70b081dd5eb84391bfddeae25006a493963f",
+      "setup_emphasis_2_findings.md": "df10a604cb2a16ec3abb2bac5b093737a747695f564364999d7383730d82b7ec",
+      "setup_emphasis_2_evaluation_manifest.json": "840522ac84b5c358c609aa85c24d6e3c8c5b47801b834e5931b862cc61c903a3",
+      "setup_emphasis_replication_v2_result.json": "a2800b24a52ec6d62796cbc4c3d705edaf95398c57d5297d1ebac1345bc8a019",
+      "raw/setup_emphasis_2_artifacts.tar.gz": "893d2796f08b59c85769211d2221dad46b18dbaf9793559d4990b6d590dfa3ca"
     }
+  },
+  "replication_policy": {
+    "best_of_selection": false,
+    "replicate_1_retained": true,
+    "replicate_2_declared_final_successor_before_launch": true,
+    "preregistration": "inputs/games/abalone/setup_emphasis_replication_v2.json"
   }
 }

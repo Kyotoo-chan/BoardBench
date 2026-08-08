@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "candidates": [
+    {
+      "id": "ABAL-JC-REP2-ACTION-ALIASES",
+      "status": "confirmed_regression_candidate",
+      "scored": false,
+      "reason_unscored": "Proposed by neutral Judges after the unchanged V2 scenario suite was executed; retained for a future evaluator revision and not added post hoc to the Human-Decision score.",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ABAL-G-ACTION-UNIQUE"
+      ],
+      "source": {
+        "source_id": "ABALONE-V2-RULEFACTS",
+        "evidence_type": "human_decision",
+        "locator": "Approved human decisions, item 5",
+        "quote": "Exactly one canonical serialized action represents each physical movement; group-order aliases and duplicate successor transitions are forbidden."
+      },
+      "canonical_action": {
+        "schema": "boardbench/abalone/action/1",
+        "data": {
+          "type": "move",
+          "actor": 0,
+          "args": {
+            "group": [
+              "-1,-3",
+              "0,-4"
+            ],
+            "direction": "SW"
+          }
+        }
+      },
+      "reversed_alias": {
+        "schema": "boardbench/abalone/action/1",
+        "data": {
+          "type": "move",
+          "actor": 0,
+          "args": {
+            "group": [
+              "0,-4",
+              "-1,-3"
+            ],
+            "direction": "SW"
+          }
+        }
+      },
+      "serialized_actions_differ": true,
+      "both_accepted": true,
+      "successor_states_equal": true,
+      "confirmed": true,
+      "implementation": {
+        "path": "outputs/abalone_codex_ag.py",
+        "sha256": "174b4743c056ef578cf38547713ade4260b897762dd7d3fa54cc6fc6695adc9f"
+      },
+      "scenario_context": "ABAL-R37 passes because it checks legal_actions emission; the public parsers additionally accept reordered aliases."
+    }
+  ]
+}

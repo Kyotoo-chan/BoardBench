@@ -1,0 +1,46 @@
+{
+  "identity": {
+    "game": "Abalone",
+    "condition": "v2_setup_emphasis_2 exact replicate",
+    "source_path": "../../../../inputs/games/abalone/game_rules.pdf",
+    "source_format": "publisher-pdf+clear-rule-emphasis",
+    "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+    "sources": [
+      {
+        "id": "ABALONE-RULES-SCHMIDT-4P",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/abalone/game_rules.pdf",
+        "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+      },
+      {
+        "id": "ABALONE-V2-SETUP-EMPHASIS",
+        "role": "experimenter_clarification",
+        "path": "../../../../inputs/games/abalone/setup_emphasis_v2.json",
+        "sha256": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      }
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 36,
+    "human_decision": 7,
+    "ambiguous": 0,
+    "not_testable": 3
+  },
+  "headline": "Exact setup-emphasis replicate: 33/33 configured clear-basis and 4/5 human-decision-basis scenarios pass; the forced-pass regression recurs and a post-judge replay confirms unscored action aliases.",
+  "runs": [
+    {
+      "stem": "setup_emphasis_2",
+      "agentic_evidence": "../../../../outputs/abalone_codex_ag_agentic.json",
+      "checks": "setup_emphasis_2_checks.txt",
+      "scenarios": "setup_emphasis_2_scenarios.json",
+      "usage": "setup_emphasis_2_usage.json",
+      "code": "../../../../outputs/abalone_codex_ag.py",
+      "assumptions": "../../../../outputs/abalone_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/abalone_codex_ag_judge_1.md",
+        "../../../../outputs/abalone_codex_ag_judge_2.md",
+        "../../../../outputs/abalone_codex_ag_judge_3.md"
+      ]
+    }
+  ]
+}

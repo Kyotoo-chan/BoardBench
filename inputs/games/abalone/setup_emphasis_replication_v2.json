@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "game": "abalone",
+  "study": "v2-setup-emphasis-exact-replication",
+  "status": "frozen-before-replicate-2-generation",
+  "frozen_on": "2026-08-07",
+  "purpose": "Observe whether the first setup-emphasis run's forced-pass regression recurs under an exact second generation. This does not estimate a causal effect at n=2.",
+  "conditions": {
+    "replicate_1": {
+      "run_id": "v2_setup_emphasis_1",
+      "status": "completed",
+      "retained_regardless_of_replicate_2": true
+    },
+    "replicate_2": {
+      "run_id": "v2_setup_emphasis_2",
+      "status": "planned",
+      "declared_final_successor_before_launch": true
+    }
+  },
+  "selection_policy": {
+    "best_of_selection": false,
+    "replace_prior_artifacts": false,
+    "report_both_raw_results": true,
+    "primary_presentation": "Report original, setup-emphasis replicate 1, and setup-emphasis replicate 2; summarize exact-replicate variation descriptively and never hide either emphasis run."
+  },
+  "invariants": {
+    "source_packet_byte_identical_between_emphasis_replicates": true,
+    "model": "gpt-5.6-sol",
+    "thinking": "low",
+    "verbosity": "low",
+    "profile_contract_prompt_unchanged": true,
+    "evaluator_unchanged": true,
+    "implementation_generated_fresh": true
+  },
+  "artifacts": {
+    "publisher_rulebook": {
+      "path": "inputs/games/abalone/game_rules.pdf",
+      "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+    },
+    "setup_emphasis": {
+      "path": "inputs/games/abalone/setup_emphasis_v2.json",
+      "sha256": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+    },
+    "profile": {
+      "path": "inputs/games/abalone/environment_profile_v2.json",
+      "sha256": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480"
+    },
+    "fixture_self_check": {
+      "path": "inputs/games/abalone/profile_fixture_self_check_v2.py",
+      "sha256": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f"
+    },
+    "prompt": {
+      "path": "inputs/prompts/rulebook_to_python_v2.txt",
+      "sha256": "cd9f0d942b90c7d698b249cb5f9fbe27974eb793327a873235493aad3fd33a91"
+    },
+    "contract": {
+      "path": "inputs/prompts/environment_contract_v2.md",
+      "sha256": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd"
+    },
+    "suite": {
+      "path": "checks/scenarios/abalone_v2.json",
+      "sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935"
+    },
+    "adapter": {
+      "path": "checks/scenario_adapters/abalone_v2.py",
+      "sha256": "7b83946eb17394320b77b5b2da3925172a14ef8434322243080c498c707141da"
+    },
+    "runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "c404cf532083efe223a5422c8414f15f683b4ff5352c7805eb3de7d9e371cb20"
+    },
+    "claims": {
+      "path": "inputs/games/abalone/claims_v2.json",
+      "sha256": "e576c846bf1193a106792e25fa221f82e73d02d5b5892428e77169c486c9e5f0"
+    },
+    "run_1": {
+      "path": "inputs/games/abalone/run_v2_setup_emphasis.json",
+      "sha256": "311be1bde2ba4fdbfc2f8fadcde98272b7006eafc62d30c8f899a63b16cef8db"
+    },
+    "run_2": {
+      "path": "inputs/games/abalone/run_v2_setup_emphasis_2.json",
+      "sha256": "7f16658b7cca2d27cb35a41b83f2ac9a017d1123fc6b9431fdc8401788985d9b"
+    }
+  }
+}

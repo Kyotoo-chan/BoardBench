@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "revision": "abalone-v2-setup-emphasis-2-judge-packet-1",
+  "scope": "Supplied two-player untimed Abalone base game; optional clock play excluded",
+  "sources": [
+    {
+      "source_id": "ABALONE-RULES-SCHMIDT-4P",
+      "role": "publisher_rulebook",
+      "path": "inputs/games/abalone/game_rules.pdf",
+      "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+    },
+    {
+      "source_id": "ABALONE-V2-SETUP-EMPHASIS",
+      "role": "experimenter_clarification",
+      "path": "inputs/games/abalone/setup_emphasis_v2.json",
+      "sha256": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+    },
+    {
+      "source_id": "ABALONE-V2-RULEFACTS",
+      "role": "approved_fact_inventory",
+      "path": "inputs/games/abalone/rulefacts_v2.md",
+      "sha256": "711433e0034b62d54fd7e3138018a31a00a29ece30a685c61c6242b2d05110f2"
+    },
+    {
+      "source_id": "ABALONE-V2-CLAIMS",
+      "role": "atomic_claim_inventory",
+      "path": "inputs/games/abalone/claims_v2.json",
+      "sha256": "e576c846bf1193a106792e25fa221f82e73d02d5b5892428e77169c486c9e5f0"
+    }
+  ],
+  "implementation": {
+    "path": "outputs/abalone_codex_ag.py",
+    "sha256": "174b4743c056ef578cf38547713ade4260b897762dd7d3fa54cc6fc6695adc9f"
+  },
+  "pdf_render": {
+    "dpi": 150,
+    "renderer": "pdftoppm",
+    "renderer_version": "pdftoppm version 24.04.0",
+    "page_count": 4,
+    "pages": [
+      {
+        "page": 1,
+        "file": "page-1.png",
+        "sha256": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7"
+      },
+      {
+        "page": 2,
+        "file": "page-2.png",
+        "sha256": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d"
+      },
+      {
+        "page": 3,
+        "file": "page-3.png",
+        "sha256": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9"
+      },
+      {
+        "page": 4,
+        "file": "page-4.png",
+        "sha256": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee"
+      }
+    ],
+    "manifest_path": "inputs/games/abalone/game_rules_render_manifest.json",
+    "manifest_sha256": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed"
+  },
+  "neutral": {
+    "count": 3,
+    "model": "gpt-5.6-sol",
+    "thinking": "medium",
+    "verbosity": "low",
+    "runner": {
+      "path": "checks/run_neutral_judges.py",
+      "sha256": "f5d716cb51c71526eb80b9f17ce82767e710e244c6568cb4cb3586e1040808d9"
+    },
+    "prompt": {
+      "path": "inputs/prompts/llm_judge_review.md",
+      "sha256": "d24903a2498d09dc2950807af05cdbc9b5848d1e026931477c341a8af809dec2"
+    },
+    "reviews": [
+      {
+        "path": "outputs/abalone_codex_ag_judge_1.md",
+        "sha256": "b8997d7bc4ff4d47739a7bf9acf49081605ccf1f8f41df1415ba89a0b667a597"
+      },
+      {
+        "path": "outputs/abalone_codex_ag_judge_2.md",
+        "sha256": "c50f7fd0d076cbe18e4e14a1b1de14253456f9f35343b1d4aa2c9af460d08e9a"
+      },
+      {
+        "path": "outputs/abalone_codex_ag_judge_3.md",
+        "sha256": "df5d9e35d75d2ba65f3933a78106bc7ebebd4125690632c69f1226a73571bfa6"
+      }
+    ]
+  },
+  "usage_evidence": {
+    "path": "results/scores/abalone/v2/setup_emphasis_2_usage.json",
+    "sha256": "761811a22e2d54b4e77aff8de8210a969a6deaafb4ed23c5ad35634ebe419f91",
+    "all_calls_exit_zero": true,
+    "all_calls_isolation_canary_passed": true,
+    "each_call_pdf_images": 4
+  },
+  "blinding": "No checks, scenarios, scores, prior reviews, other implementations, or other source conditions were assigned."
+}

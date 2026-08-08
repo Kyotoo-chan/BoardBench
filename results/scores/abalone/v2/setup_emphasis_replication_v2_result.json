@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "study": "abalone-v2-setup-emphasis-exact-replication",
+  "status": "complete",
+  "preregistration": {
+    "path": "inputs/games/abalone/setup_emphasis_replication_v2.json",
+    "sha256": "5f10cd3a65bc19a0297269e4c6bedbd6fa3b8e8770de2ad2ceb6ee18f2d38bce"
+  },
+  "model_packet_sha256_equal": true,
+  "replicates": [
+    {
+      "run_id": "v2_setup_emphasis_1",
+      "code_sha256": "e90443a23286c3e13645f0b464b346834db8c7641b66d6db913a4231f5c6f446",
+      "clear_basis": "33/33",
+      "human_decision_basis": "4/5",
+      "forced_pass": "FAIL",
+      "judge_mean": 0.8933333333333334
+    },
+    {
+      "run_id": "v2_setup_emphasis_2",
+      "code_sha256": "174b4743c056ef578cf38547713ade4260b897762dd7d3fa54cc6fc6695adc9f",
+      "clear_basis": "33/33",
+      "human_decision_basis": "4/5",
+      "forced_pass": "FAIL",
+      "judge_mean": 0.87
+    }
+  ],
+  "selection_policy": {
+    "best_of_selection": false,
+    "replicate_1_retained": true,
+    "replicate_2_declared_final_successor_before_launch": true
+  },
+  "interpretation": "The configured forced-pass failure recurred under an exact second model packet. At n=2 this is descriptive evidence of recurrence, not a causal estimate of setup emphasis.",
+  "model_packets": {
+    "replicate_1": {
+      "run_id": "v2_setup_emphasis_1",
+      "aggregate_sha256": "db8b4937d64b320714397ebb007e77b6bad99fd661ac89575634fa0156f10ea7",
+      "file_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480",
+        "SOURCE_MANIFEST.json": "831d15c23ad51f3c02c224a67f820f141df54048661e11797a1f9c22b854e8f4",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
+        "game_rules.pdf": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+        "game_rules_pages/page-1.png": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7",
+        "game_rules_pages/page-2.png": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d",
+        "game_rules_pages/page-3.png": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9",
+        "game_rules_pages/page-4.png": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee",
+        "game_rules_pages/render_manifest.json": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed",
+        "profile_fixture_self_check.py": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f",
+        "setup_emphasis_v2.json": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      },
+      "evidence_archive": {
+        "path": "results/scores/abalone/v2/raw/study_artifacts.tar.gz",
+        "member": "setup_emphasis_agentic.json",
+        "archive_sha256": "5b1f4d2d85debac2f0eabf0925f3b96783592a6c6e1e03b7e2f1314c593e4045"
+      }
+    },
+    "replicate_2": {
+      "run_id": "v2_setup_emphasis_2",
+      "aggregate_sha256": "db8b4937d64b320714397ebb007e77b6bad99fd661ac89575634fa0156f10ea7",
+      "file_sha256": {
+        "ENVIRONMENT_CONTRACT.md": "375083683bd290c707e93256fb5832b3202dd1082fff6687d08d0edd88ceaefd",
+        "GAME_PROFILE.json": "ad1eb366df5879c553542c6bc61689c8a3156423e64903ff873d2f0d64f77480",
+        "SOURCE_MANIFEST.json": "831d15c23ad51f3c02c224a67f820f141df54048661e11797a1f9c22b854e8f4",
+        "TASK.txt": "f54f508514ebabec09b453e0df75ecc4934c9490a66fa44b5fa4f2f20299d0c1",
+        "agentic_self_check.py": "bc52ac66228c54f25ad4f37c4dcddfa71990a9cefe1c1582ac62b9eecd5695c1",
+        "game_rules.pdf": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+        "game_rules_pages/page-1.png": "85906cae053c0636c8b3327bfc13429481c0df2a73779f0f85202d6accc98ad7",
+        "game_rules_pages/page-2.png": "b8e506426734611a80c2e5d6962ce3ec70e0e4fe8e88b124c2f0d11f97cd9b8d",
+        "game_rules_pages/page-3.png": "61851872a93ff4f2f4cbb0b5a1811d4cdc53df21e01597829b5c0168b0bfd2a9",
+        "game_rules_pages/page-4.png": "158552a259601ae4d5424014f55eafc2339f10d947f52db2727c45b104df9eee",
+        "game_rules_pages/render_manifest.json": "25fddee4024a518631e1e6989e0125f7dbc40bd6cd174f6a762bd67e2f97aeed",
+        "profile_fixture_self_check.py": "1af2a45d051f41b30e4fb3849a919c17f7509f1dde0d0062b5d527e97828a98f",
+        "setup_emphasis_v2.json": "b3a6809451c3088aadcae57b4fa48c78e733ea80846f1b94d57b0f84cd33c20a"
+      },
+      "evidence": {
+        "path": "outputs/abalone_codex_ag_agentic.json",
+        "sha256": "6de90d23f7279d9d4c341a53a52ebeecc03adb775f3461436ea7607ca2a8e576"
+      }
+    }
+  }
+}

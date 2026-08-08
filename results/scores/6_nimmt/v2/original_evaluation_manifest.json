@@ -120,6 +120,10 @@
     "review_events": {
       "path": "results/scores/6_nimmt/v2/raw/original_review_events.jsonl",
       "sha256": "26a7ca0a96148d0645196f8de63ad9c46f891bb823f4851199397d8087e12e5a"
+    },
+    "raw_archive": {
+      "path": "results/scores/6_nimmt/v2/raw/study_artifacts.tar.gz",
+      "sha256": "17eb3d968851b76d8279742c45f957c40e0f4889d74554eab94c673599a4b5ed"
     }
   },
   "implementation_changed_after_evaluation_started": false
