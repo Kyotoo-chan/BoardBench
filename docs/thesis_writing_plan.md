@@ -55,7 +55,7 @@ BoardBench-Methode und Studienaufbau in einem Kapitel. Unterabschnitte grob:
 5. Claim-Mapping und evaluated coverage;
 6. drei fallible neutrale Judges.
 
-Historische Persona-Reviews nur ergänzend nennen; sie wurden nicht für alle V2-Bedingungen einheitlich erzeugt. Kein gemischter Correctness-Gesamtscore.
+Kein gemischter Correctness-Gesamtscore.
 
 ### Game choice
 

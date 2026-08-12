@@ -9,6 +9,7 @@ Meeting 7.8. – Fragen
 - wie genau schreibe ich? englisch passt? stil? sind enumerations in ordnung? bsp workflow besteht aus 5 schritten
 
 - In Anhang Prompts die ich genutzt habe? (für llm judge oder generierung)
+- Reicht es, den Implementierungsprompt und Environment Contract in den Anhang zu packen und die game-specific Data Profiles nur im begleitenden BoardBench-Repository bereitzustellen, oder müssen die Profile ebenfalls in den Anhang?
 - Jz dann anmelden?
 
 StudyOs:

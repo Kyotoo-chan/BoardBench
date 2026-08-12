@@ -97,23 +97,9 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(assumptions, list):
             raise ValueError("assumptions must be a list")
 
-    personas: dict[str, Any] = {}
-    persona_usage: list[dict[str, Any]] = []
-    for label, value in item.get("personas", {}).items():
-        path = resolve(base, value)
-        if path is None or not path.is_file():
-            raise FileNotFoundError(f"missing persona review: {label}")
-        personas[label] = {"path": str(value), "sha256": sha256(path)}
-        usage_path = path.with_name(f"{path.stem}_usage.json")
-        if usage_path.is_file():
-            persona_usage.append(load_json(usage_path))
-
     totals = dict(usage.get("token_totals", {}))
-    for persona in persona_usage:
-        for key, value in persona.get("token_summary", {}).items():
-            totals[key] = int(totals.get(key, 0)) + int(value)
     calls = usage.get("calls", [])
-    pricing_calls = list(calls) + persona_usage
+    pricing_calls = list(calls)
     if not calls:
         pricing_calls.insert(0, {"model": evidence.get("model"), "token_summary": usage.get("token_totals", {})})
     estimated_costs = [estimate_call_cost(call) for call in pricing_calls]
@@ -149,11 +135,10 @@ def parse_run(base: Path, item: dict[str, Any]) -> dict[str, Any]:
         "neutral_judges": [parse_judge(path) for path in reviews if path],
         "judge_model": judge_models[0] if len(judge_models) == 1 else None,
         "judge_thinking": judge_efforts[0] if len(judge_efforts) == 1 else None,
-        "personas": personas,
         "assumptions": assumptions,
         "resources": {
-            "calls": int(usage.get("call_count", 0)) + len(persona_usage),
-            "provider_seconds": float(usage.get("elapsed_seconds_total", 0)) + sum(float(item.get("elapsed_seconds", 0)) for item in persona_usage),
+            "calls": int(usage.get("call_count", 0)),
+            "provider_seconds": float(usage.get("elapsed_seconds_total", 0)),
             "input_tokens": int(totals.get("input_tokens", 0)),
             "cached_input_tokens": int(totals.get("cached_input_tokens", 0)),
             "output_tokens": int(totals.get("output_tokens", 0)),
@@ -248,7 +233,6 @@ def aggregate(spec: dict[str, Any], base: Path) -> dict[str, Any]:
                 "models": sorted({str(run["judge_model"]) for run in runs if run["judge_model"]}),
                 "thinking": sorted({str(run["judge_thinking"]) for run in runs if run["judge_thinking"]}),
             },
-            "personas": {run["stem"]: run["personas"] for run in runs},
         },
         "assumption_evidence": {
             "material_count": len(assumptions),
@@ -328,7 +312,6 @@ def markdown(result: dict[str, Any]) -> str:
         "",
         "Sample SD measures variation across repeated runs; `n/a` means only one run is available.",
         f"The USD value is an API-equivalent estimate for {', '.join(result['reproducibility']['models'])} from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.",
-        "Persona reviews and raw per-run evidence remain in `result.json`.",
         "",
     ]
     return "\n".join(lines)

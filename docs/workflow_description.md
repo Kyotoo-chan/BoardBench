@@ -17,7 +17,7 @@ The workflow detects problems in an executable translation of the original ruleb
 1. **Source analysis:** archive and hash every document in the assigned source condition (including an explicitly required, edition-matched publisher companion when applicable), cite facts, and record material ambiguities plus approved evaluator interpretations without adding them to the canonical implementer input.
 2. **Isolated implementation:** give one Codex agent only its assigned source, interface contract, and evaluator-neutral self-check. Require `implementation.py`, `rule_coverage.md`, and `assumptions.json`.
 3. **Mechanical evaluation:** run checks 01–06 and deterministic cited scenarios.
-4. **Blind review:** run three neutral judges and three separate personas without exposing checks or other implementations.
+4. **Blind review:** run three neutral judges without exposing checks or other implementations.
 5. **Reporting:** write JSON/Markdown under `results/scores/<game>/<run>/` and optional PNGs under `results/plots/<game>/<run>/`.
 6. **Iteration:** when a source, test, or evaluator defect is found, correct the current workflow and run again. Git and recorded hashes identify what earlier runs used.
 

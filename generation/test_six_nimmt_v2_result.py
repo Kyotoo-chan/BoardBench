@@ -1,7 +1,6 @@
 import hashlib
 import json
 import math
-import py_compile
 import tarfile
 import unittest
 from pathlib import Path
@@ -85,9 +84,6 @@ class SixNimmtV2ResultTests(unittest.TestCase):
         self.assertEqual(candidate["actual"]["0"]["missing_played_cards"], [20])
         self.assertEqual(load(V2 / "raw/invalid_evaluator_replay_1.json")["counts"]["CRASH"], 19)
         self.assertEqual(load(V2 / "raw/invalid_evaluator_replay_2.json")["counts"]["FAIL"], 1)
-
-    def test_persona_runner_compiles(self):
-        py_compile.compile(str(ROOT / "checks/run_judge_personas_v2.py"), doraise=True)
 
 
 if __name__ == "__main__":

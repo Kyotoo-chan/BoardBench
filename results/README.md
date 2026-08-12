@@ -13,6 +13,6 @@ A run is one implementation condition or an explicitly named comparison. New stu
 Current native Codex defaults:
 
 - implementation generation: `gpt-5.6-sol:low`;
-- neutral and persona judges: `gpt-5.6-sol:medium`.
+- neutral judges: `gpt-5.6-sol:medium`.
 
 Every new result profile and plot states the settings actually used. Historical runs retain their historical settings.

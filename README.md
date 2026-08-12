@@ -29,7 +29,6 @@ Results stay separate:
 - runtime robustness 05
 - interface 06
 - cited rule scenarios
-- independent LLM review
-- separate blind judge and persona evidence
+- three independent blind LLM reviews
 
 Run Python through the `boardbench` Conda environment. See `AGENTS.md` and `docs/workflow_description.md` for details.

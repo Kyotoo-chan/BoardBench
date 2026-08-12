@@ -18,7 +18,7 @@ Exploding Kittens uses two source conditions:
 Both use the same implementation protocol, evaluator, and reporting code. Native Codex defaults are:
 
 - implementation: `gpt-5.6-sol:low`;
-- neutral and persona judges: `gpt-5.6-sol:medium`;
+- neutral judges: `gpt-5.6-sol:medium`;
 - response verbosity: explicit `low` for future native calls.
 
 ## Evidence
@@ -30,8 +30,7 @@ Keep these groups separate:
 3. interface 06;
 4. cited deterministic scenarios, split into printed rules and approved human decisions;
 5. three neutral blind judges;
-6. separate rule-fidelity, ambiguity, and executable-systems personas;
-7. assumptions, coverage, time, calls, tokens, repairs, and code size.
+6. assumptions, coverage, time, calls, tokens, repairs, and code size.
 
 No combined correctness score is produced. Scenario failures must be attributed as implementation defects, source ambiguity/omission, approved-decision differences, or evaluator defects.
 
