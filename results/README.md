@@ -5,10 +5,11 @@ Results are separated by artifact type, game, and run:
 ```text
 results/
   scores/<game>/<run>/   JSON, Markdown, CSV, logs, and evaluator evidence
-  plots/<game>/<run>/    images only
+  plots/<game>/<run>/    per-game images only
+  plots/overview/        shared thesis figures
 ```
 
-A run is one implementation condition or an explicitly named comparison. New studies normally compare one canonical rulebook and, only when useful, one clarified condition. Plot generators live under `generation/`; `results/plots/` contains no scripts or score data.
+A run is one implementation condition or an explicitly named comparison. New studies normally compare one canonical rulebook and, only when useful, one clarified condition. Shared overview figures mix each game's current presentation card; they are not one global rubric version. Plot generators live under `generation/`; `results/plots/` contains no scripts or score data.
 
 Current native Codex defaults:
 

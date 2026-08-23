@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create cross-game V2 thesis figures without combining evidence groups."""
+"""Create cross-game thesis figures without combining evidence groups."""
 
 from __future__ import annotations
 
@@ -11,7 +11,17 @@ import numpy as np
 from matplotlib.patches import Patch
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "results" / "plots" / "overview" / "v2"
+PLOTS_ROOT = ROOT / "results" / "plots"
+OVERVIEW_REL = Path("overview")
+GAME_REL = {
+    "6 nimmt!": Path("6_nimmt/v2"),
+    "Abalone": Path("abalone/v3"),
+    "Bohnanza": Path("bohnanza_base_2023/v2"),
+    "CATAN": Path("catan/v2"),
+    "Exploding Kittens": Path("exploding_kittens/v2"),
+    "Wizard": Path("wizard/v2"),
+}
+ABALONE_V2_REL = Path("abalone/v2")
 METRICS = (
     ("Clear-basis\nscenarios", "clear_basis_scenarios"),
     ("Human-decision-basis\nscenarios", "human_decision_basis_scenarios"),
@@ -24,21 +34,13 @@ COLORS = {
     "Structured clarification": "#8E6C8A",
     "Source-gap clarification": "#54A24B",
 }
-FILE_NAMES = {
-    "6 nimmt!": "6_nimmt",
-    "Abalone": "abalone",
-    "Bohnanza": "bohnanza",
-    "CATAN": "catan",
-    "Exploding Kittens": "exploding_kittens",
-    "Wizard": "wizard",
-}
 GAMES = {
     "6 nimmt!": [
         ("Original", "results/scores/6_nimmt/v2/result.json"),
     ],
     "Abalone": [
-        ("Original", "results/scores/abalone/v2/original_result.json"),
-        ("Clear-rule emphasis", "results/scores/abalone/v2/setup_emphasis_result.json"),
+        ("Original", "results/scores/abalone/v3/original_result.json"),
+        ("Clear-rule emphasis", "results/scores/abalone/v3/setup_emphasis_result.json"),
     ],
     "Bohnanza": [
         ("Original", "results/scores/bohnanza_base_2023/v2/original_result.json"),
@@ -59,6 +61,18 @@ GAMES = {
         ("Source-gap clarification", "results/scores/wizard/v2/clarified_result.json"),
     ],
 }
+ABALONE_V2 = [
+    ("Original", "results/scores/abalone/v2/original_result.json"),
+    ("Clear-rule emphasis", "results/scores/abalone/v2/setup_emphasis_result.json"),
+]
+
+
+def overview_dir() -> Path:
+    return PLOTS_ROOT / OVERVIEW_REL
+
+
+def game_dir(relative: Path) -> Path:
+    return PLOTS_ROOT / relative
 
 
 def load(relative: str) -> dict:
@@ -96,31 +110,38 @@ def draw_profile(ax, game: str, conditions: list[tuple[str, str]], label_size: i
     ax.spines[["top", "right"]].set_visible(False)
 
 
+def save_game_profile(game: str, conditions: list[tuple[str, str]], directory: Path) -> None:
+    directory.mkdir(parents=True, exist_ok=True)
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    draw_profile(ax, game, conditions, label_size=9)
+    ax.set_ylabel("Observed value")
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, frameon=False, fontsize=8, loc="lower center", bbox_to_anchor=(0.5, 0.055), ncol=len(labels))
+    fig.text(0.5, 0.005, "Separate evidence groups; no combined correctness score.", ha="center", fontsize=8)
+    fig.tight_layout(rect=(0, 0.14, 1, 1))
+    fig.savefig(directory / "evidence_profile.png", dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
 def profiles() -> None:
-    OUTPUT.mkdir(parents=True, exist_ok=True)
+    output = overview_dir()
+    output.mkdir(parents=True, exist_ok=True)
     fig, axes = plt.subplots(2, 3, figsize=(14, 8), sharey=True)
     for ax, (game, conditions) in zip(axes.flat, GAMES.items()):
         draw_profile(ax, game, conditions)
     axes[0, 0].set_ylabel("Observed value")
     axes[1, 0].set_ylabel("Observed value")
     handles = [Patch(color=color, label=label) for label, color in COLORS.items()]
-    fig.suptitle("BoardBench V2 evidence profiles by game and condition", fontsize=15)
+    fig.suptitle("BoardBench evidence profiles by game and condition", fontsize=15)
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.945), ncol=len(handles), frameon=False, fontsize=8)
     fig.text(0.5, 0.01, "Evidence groups are shown side by side and are not combined into a correctness score.", ha="center", fontsize=9)
     fig.tight_layout(rect=(0, 0.035, 1, 0.90))
-    fig.savefig(OUTPUT / "evidence_profiles.png", dpi=220, bbox_inches="tight")
+    fig.savefig(output / "evidence_profiles.png", dpi=220, bbox_inches="tight")
     plt.close(fig)
 
     for game, conditions in GAMES.items():
-        fig, ax = plt.subplots(figsize=(7, 4.5))
-        draw_profile(ax, game, conditions, label_size=9)
-        ax.set_ylabel("Observed value")
-        handles, labels = ax.get_legend_handles_labels()
-        fig.legend(handles, labels, frameon=False, fontsize=8, loc="lower center", bbox_to_anchor=(0.5, 0.055), ncol=len(labels))
-        fig.text(0.5, 0.005, "Separate evidence groups; no combined correctness score.", ha="center", fontsize=8)
-        fig.tight_layout(rect=(0, 0.14, 1, 1))
-        fig.savefig(OUTPUT / f"{FILE_NAMES[game]}.png", dpi=220, bbox_inches="tight")
-        plt.close(fig)
+        save_game_profile(game, conditions, game_dir(GAME_REL[game]))
+    save_game_profile("Abalone", ABALONE_V2, game_dir(ABALONE_V2_REL))
 
 
 def deltas() -> None:
@@ -149,11 +170,12 @@ def deltas() -> None:
         ax.set_yticks(y, [row[0] for row in rows], fontsize=8)
         ax.tick_params(axis="y", length=0)
         ax.invert_yaxis()
-    fig.suptitle("Observed change from each game's original V2 run", fontsize=15)
+    fig.suptitle("Observed change from each game's original run", fontsize=15)
     fig.text(0.5, 0.01, "Positive values indicate a higher observed value; adapted successors are not independent replicates.", ha="center", fontsize=9)
     fig.tight_layout(rect=(0, 0.035, 1, 0.95))
-    OUTPUT.mkdir(parents=True, exist_ok=True)
-    fig.savefig(OUTPUT / "intervention_deltas.png", dpi=220, bbox_inches="tight")
+    output = overview_dir()
+    output.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output / "intervention_deltas.png", dpi=220, bbox_inches="tight")
     plt.close(fig)
 
 
