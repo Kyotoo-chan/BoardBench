@@ -30,7 +30,6 @@ METRICS = (
 COLORS = {
     "Original": "#4C78A8",
     "Clear-rule emphasis": "#F58518",
-    "Clear-rule emphasis (repeat)": "#E45756",
     "Structured clarification": "#8E6C8A",
     "Source-gap clarification": "#54A24B",
 }
@@ -44,7 +43,7 @@ GAMES = {
     ],
     "Bohnanza": [
         ("Original", "results/scores/bohnanza_base_2023/v2/original_result.json"),
-        ("Clear-rule emphasis (repeat)", "results/scores/bohnanza_base_2023/v2/clear_rule_emphasis_2_result.json"),
+        ("Clear-rule emphasis", "results/scores/bohnanza_base_2023/v2/clear_rule_emphasis_1_result.json"),
         ("Structured clarification", "results/scores/bohnanza_base_2023/v2/structured_clarification_1_result.json"),
     ],
     "CATAN": [

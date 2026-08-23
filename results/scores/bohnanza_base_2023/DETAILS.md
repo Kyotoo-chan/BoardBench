@@ -33,8 +33,8 @@ Die strukturierte Bedingung ist wegen der post-evaluation Anpassung kein unabhä
 | Clear-basis | 33/38 | 30/38 | 30/38 | 33/38 |
 | Human-decision-basis | 4/4 | 3/4 | 2/4 | 3/4 |
 | Ausgewertete Abdeckung | 42/42 | 42/42 | 42/42 | 42/42 |
-| Neutral Judges | 0,68 / 0,70 / 0,55 | nicht ausgeführt | 0,38 / 0,45 / 0,44 | 0,74 / 0,68 / 0,72 |
-| Judge-Mittel (SD) | 0,643 (0,081) | – | 0,423 (0,038) | 0,713 (0,031) |
+| Neutral Judges | 0,68 / 0,70 / 0,55 | 0,50 / 0,56 / 0,62 | 0,38 / 0,45 / 0,44 | 0,74 / 0,68 / 0,72 |
+| Judge-Mittel (SD) | 0,643 (0,081) | 0,560 (0,060) | 0,423 (0,038) | 0,713 (0,031) |
 
 ## Original
 
@@ -42,7 +42,7 @@ Fünf Clear-Fehler: ungleiche Mehrkarten-Trades (`R16`, `R17`), Garden- und Soy-
 
 ## Narrow emphasis 1
 
-Die Zielmechaniken werden grundsätzlich verbessert. Neue Fehler entstehen bei optionalem zweitem Pflanzen (`R10`), separatem Zwangsernten (`R12`), Pflanzreihenfolge (`R22`–`R24`) und Red-Bohnometer (`R31`, mit Folgen für `R40`–`R42`). Dieser gültige Lauf bleibt auf Nutzerentscheidung unjudged.
+Die Zielmechaniken werden grundsätzlich verbessert. Neue Fehler entstehen bei optionalem zweitem Pflanzen (`R10`), separatem Zwangsernten (`R12`), Pflanzreihenfolge (`R22`–`R24`) und Red-Bohnometer (`R31`, mit Folgen für `R40`–`R42`). Die nachträglich ergänzten Neutral Judges (0,50 / 0,56 / 0,62) bestätigen vor allem die falsche Red-Auszahlung, die fehlende Pflanzreihenfolge und eine exponentiell wachsende Trade-Enumeration. Die Übersichtsplots nutzen diesen ersten Emphasis-Lauf; der exakte Repeat bleibt in den Tabellen.
 
 ## Narrow emphasis 2
 
@@ -75,7 +75,7 @@ Zwei Original-Replays und das erste Emphasis-2-Replay wurden vor gültigem Repor
 
 - Supplement: `inputs/games/bohnanza_base_2023/structured_clarification_v3.md`
 - Original: `v2/original_result.json`, `v2/original_findings.md`
-- Emphasis 1: `v2/clear_rule_emphasis_1_findings.md`
+- Emphasis 1: `v2/clear_rule_emphasis_1_result.json`, `v2/clear_rule_emphasis_1_findings.md`
 - Emphasis 2: `v2/clear_rule_emphasis_2_result.json`, `v2/clear_rule_emphasis_2_findings.md`
 - Structured: `v2/structured_clarification_1_result.json`, `v2/structured_clarification_1_findings.md`
 - Vergleich: `v2/COMPARISON.md`

@@ -21,7 +21,7 @@ Per-game profiles are stored next to their score iteration:
 
 Clear-basis scenarios, human-decision-basis scenarios, and neutral judge means remain separate; judge error bars show sample SD (`n=3`). Deltas are observed changes from single adapted runs, not causal estimates or independent replications.
 
-The overview uses Abalone's v3 replay, which does not score the unspecified no-move pass; the v2 Abalone profile remains in `../abalone/v2/`. Other games keep their v2 cards. Bohnanza includes the retained emphasis repeat and structured clarification. `6 nimmt!` has no intervention condition.
+The overview uses Abalone's v3 replay, which does not score the unspecified no-move pass; the v2 Abalone profile remains in `../abalone/v2/`. Other games keep their v2 cards. Bohnanza plots the first emphasis generation after its judges were added, plus structured clarification; the exact emphasis repeat remains in the score tables. `6 nimmt!` has no intervention condition.
 
 Not plotted:
 

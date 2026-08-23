@@ -1,0 +1,54 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "medium",
+  "verbosity": "low",
+  "mode": "judge",
+  "sandbox": "workspace-write",
+  "permission_profile": "boardbench-workspace-only",
+  "isolation_canary_passed": true,
+  "source_condition_kind": null,
+  "model_packet_sha256": null,
+  "started_at": "2026-08-23T13:49:42.061639+00:00",
+  "ended_at": "2026-08-23T13:57:09.325007+00:00",
+  "elapsed_seconds": 447.261,
+  "exit_code": 0,
+  "quota_before": {
+    "5h": {
+      "used_percent": 2,
+      "reset_at": 1788096387,
+      "reset_after_seconds": 603406,
+      "limit_window_seconds": 604800
+    }
+  },
+  "quota_after": {
+    "5h": {
+      "used_percent": 3,
+      "reset_at": 1788096387,
+      "reset_after_seconds": 602957,
+      "limit_window_seconds": 604800
+    }
+  },
+  "token_summary": {
+    "input_tokens": 370563,
+    "cached_input_tokens": 320000,
+    "reasoning_output_tokens": 6240,
+    "output_tokens": 9564
+  },
+  "provider_usage_records": [
+    {
+      "line": 28,
+      "path": "$.usage",
+      "input_tokens": 370563,
+      "cached_input_tokens": 320000,
+      "output_tokens": 9564,
+      "reasoning_output_tokens": 6240
+    }
+  ],
+  "events_path": "results/scores/bohnanza_base_2023/v2/raw/clear_rule_emphasis_1_judge_1_events.jsonl",
+  "response_path": "outputs/clear_rule_emphasis_1_judge_1.md",
+  "image_paths": [
+    "C:/Users/benti/AppData/Local/Temp/boardbench_clear_rule_emphasis_1_judge_1_alfdn4dk/canonical_rulebook_pages/page-001.png",
+    "C:/Users/benti/AppData/Local/Temp/boardbench_clear_rule_emphasis_1_judge_1_alfdn4dk/canonical_rulebook_pages/page-002.png"
+  ],
+  "stderr": "npm warn Unknown env config \"devdir\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n2026-08-23T13:50:00.416968Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n2026-08-23T13:50:00.449469Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n2026-08-23T13:51:04.742991Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n2026-08-23T13:51:29.060876Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n2026-08-23T13:53:05.422605Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n2026-08-23T13:56:10.433487Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit\n"
+}

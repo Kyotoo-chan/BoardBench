@@ -1,0 +1,32 @@
+{
+  "identity": {
+    "game": "Bohnanza Base Game 2023",
+    "condition": "v2_clear_rule_emphasis_2",
+    "source_path": "../../../../inputs/games/bohnanza_base_2023/game_rules.pdf",
+    "source_format": "pdf+clear-rule-emphasis",
+    "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+  },
+  "source_diagnosis": {
+    "clear": 82,
+    "ambiguous": 2,
+    "missing": 7,
+    "untestable": 1
+  },
+  "headline": "Exact retained repeat: technical gate 4/4; robustness 100/100; 30/38 clear-basis and 2/4 human-decision-basis scenarios passed; all 42 scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "bohnanza_base_2023_codex_ag",
+      "agentic_evidence": "../../../../outputs/bohnanza_base_2023_codex_ag_agentic.json",
+      "checks": "../../../../outputs/bohnanza_base_2023_codex_ag_checks.txt",
+      "scenarios": "clear_rule_emphasis_2_scenarios.json",
+      "usage": "clear_rule_emphasis_2_usage.json",
+      "code": "../../../../outputs/bohnanza_base_2023_codex_ag.py",
+      "assumptions": "../../../../outputs/bohnanza_base_2023_codex_ag_assumptions.json",
+      "neutral_reviews": [
+        "../../../../outputs/bohnanza_base_2023_codex_ag_judge_1.md",
+        "../../../../outputs/bohnanza_base_2023_codex_ag_judge_2.md",
+        "../../../../outputs/bohnanza_base_2023_codex_ag_judge_3.md"
+      ]
+    }
+  ]
+}

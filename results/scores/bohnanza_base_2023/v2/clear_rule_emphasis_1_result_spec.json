@@ -1,0 +1,32 @@
+{
+  "identity": {
+    "game": "Bohnanza Base Game 2023",
+    "condition": "v2_clear_rule_emphasis_1",
+    "source_path": "../../../../inputs/games/bohnanza_base_2023/game_rules.pdf",
+    "source_format": "pdf+clear-rule-emphasis",
+    "source_sha256": "e59f7a7d77ed2f052cdf46403b797a1d418996664dc1e3ae9baf7e498b727655"
+  },
+  "source_diagnosis": {
+    "clear": 82,
+    "ambiguous": 2,
+    "missing": 7,
+    "untestable": 1
+  },
+  "headline": "First clear-rule emphasis, now judged: technical gate 4/4; robustness 100/100; 30/38 clear-basis and 3/4 human-decision-basis scenarios passed; all 42 scenarios evaluated.",
+  "runs": [
+    {
+      "stem": "clear_rule_emphasis_1",
+      "agentic_evidence": "clear_rule_emphasis_1_agentic.json",
+      "checks": "clear_rule_emphasis_1_checks.txt",
+      "scenarios": "clear_rule_emphasis_1_scenarios.json",
+      "usage": "clear_rule_emphasis_1_usage.json",
+      "code": "clear_rule_emphasis_1.py",
+      "assumptions": "clear_rule_emphasis_1_assumptions.json",
+      "neutral_reviews": [
+        "clear_rule_emphasis_1_judge_1.md",
+        "clear_rule_emphasis_1_judge_2.md",
+        "clear_rule_emphasis_1_judge_3.md"
+      ]
+    }
+  ]
+}

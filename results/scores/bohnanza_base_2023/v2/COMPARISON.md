@@ -7,7 +7,7 @@
 3. **Clear-rule emphasis 2:** exact retained repeat of condition 2.
 4. **Structured clarification 1:** adapted successor replacing narrow emphasis with the four approved digital gap decisions plus a balanced whole-game source-derived fidelity checklist.
 
-The structured condition retains the same PDF, model/thinking, prompt, contract and profile, but changes the intervention content and methodology after inspecting prior results. It is therefore an adapted successor, not an independent replicate. No best-of selection is reported.
+The structured condition retains the same PDF, model/thinking, prompt, contract and profile, but changes the intervention content and methodology after inspecting prior results. It is therefore an adapted successor, not an independent replicate. Overview figures use the first emphasis generation after its missing judges were added; the exact repeat remains in these tables and is not dropped. No best-of implementation is selected.
 
 | Evidence | Original | Emphasis 1 | Emphasis 2 | Structured clarification |
 |---|---:|---:|---:|---:|
@@ -20,7 +20,7 @@ The structured condition retains the same PDF, model/thinking, prompt, contract 
 | Human-decision-basis scenarios | 4/4 | 3/4 | 2/4 | 3/4 |
 | Scenario evaluated coverage | 42/42 | 42/42 | 42/42 | 42/42 |
 | Clear claim mapping | 80/81 + 1 exception | same | same | same |
-| Neutral Judges | 0.643 (SD 0.081) | not run | 0.423 (SD 0.038) | 0.713 (SD 0.031) |
+| Neutral Judges | 0.643 (SD 0.081) | 0.560 (SD 0.060) | 0.423 (SD 0.038) | 0.713 (SD 0.031) |
 
 Evidence groups are not combined into one correctness score.
 

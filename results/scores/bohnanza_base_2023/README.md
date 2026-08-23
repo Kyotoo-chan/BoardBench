@@ -12,9 +12,9 @@ Die Art der Zusatzinformation macht einen deutlichen Unterschied:
 | Clear-basis | 33/38 | 30/38 | 30/38 | **33/38** |
 | Human-decision-basis | 4/4 | 3/4 | 2/4 | **3/4** |
 | Szenarioabdeckung | 42/42 | 42/42 | 42/42 | 42/42 |
-| Neutraler Judge-Mittelwert | 0,643 | nicht ausgeführt | 0,423 | **0,713** |
+| Neutraler Judge-Mittelwert | 0,643 | 0,560 | 0,423 | **0,713** |
 
-*Diese Gruppen werden nicht zu einem Gesamtscore kombiniert.*
+*Diese Gruppen werden nicht zu einem Gesamtscore kombiniert.* Die Übersichtsplots zeigen Emphasis 1 (jetzt mit Judges); Emphasis 2 bleibt in den Tabellen.
 
 Die beiden schmalen Emphasis-Pakete lenkten Aufmerksamkeit auf vier bekannte Fehlergruppen, erzeugten aber viele Regressionen. Die neue strukturierte Klarstellung kombiniert stattdessen:
 
@@ -43,4 +43,4 @@ Die strukturierte Bedingung ist ein nachträglich angepasstes Nachfolgeexperimen
 
 **[Vollständige Methodik, Fehlergruppen, Judges und Provenienz](DETAILS.md)**
 
-Maschinenprofile: [`v2/original_result.md`](v2/original_result.md) · [`v2/clear_rule_emphasis_2_result.md`](v2/clear_rule_emphasis_2_result.md) · [`v2/structured_clarification_1_result.md`](v2/structured_clarification_1_result.md) · [Vierfachvergleich](v2/COMPARISON.md)
+Maschinenprofile: [`v2/original_result.md`](v2/original_result.md) · [`v2/clear_rule_emphasis_1_result.md`](v2/clear_rule_emphasis_1_result.md) · [`v2/clear_rule_emphasis_2_result.md`](v2/clear_rule_emphasis_2_result.md) · [`v2/structured_clarification_1_result.md`](v2/structured_clarification_1_result.md) · [Vierfachvergleich](v2/COMPARISON.md)

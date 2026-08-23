@@ -1,0 +1,92 @@
+attempt 1: removed runtime metadata before repair validation: .git, __pycache__
+
+attempt 1:
+$ C:\Users\benti\.conda\envs\boardbench\python.exe -m py_compile implementation.py
+exit_code=0
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe agentic_self_check.py
+exit_code=0
+agentic-self-check OK states=300 actions=6531
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe profile_fixture_self_check.py
+exit_code=0
+profile-fixture-self-check OK
+
+$ C:\Users\benti\.conda\envs\boardbench\python.exe D:\safen\Ben_T\Studium\8.Semester\BoardBench\checks\check_player_counts.py --code-path implementation.py --profile GAME_PROFILE.json
+exit_code=0
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=2: rejected
+PASS players=6: rejected
+PLAYER_COUNTS 5/5
+
+
+=== TECHNICAL_ROBUSTNESS_INTERFACE ===
+OK   01_result_file                     1/1 score=1.000    0.00s
+OK   02_python_syntax                   1/1 score=1.000    0.01s
+OK   03_startable_game                  1/1 score=1.000    0.01s
+OK   04_required_api_v2                 9/9 score=1.000    0.01s
+OK   05_random_rollouts             100/100 score=1.000   92.27s
+OK   06_action_language     1523314/1523314 score=1.000   91.30s
+---- summary                            6/6 score=1.000  183.59s
+
+
+
+=== PLAYER_COUNTS ===
+PASS players=3
+PASS players=4
+PASS players=5
+PASS players=2: rejected
+PASS players=6: rejected
+PLAYER_COUNTS 5/5
+
+
+
+=== SCENARIOS_V4 ===
+PASS BOHN-R01-3p-inventory-setup
+PASS BOHN-R02-4p-setup
+PASS BOHN-R03-5p-setup
+PASS BOHN-R04-player-count-contract
+PASS BOHN-R05-start-card-fixed
+PASS BOHN-R06-seeded-start
+PASS BOHN-R07-opponent-front-visible
+PASS BOHN-R08-deeper-hand-private
+PASS BOHN-R09-front-plant-preserves-order
+FAIL BOHN-R10-second-optional-no-third: phase: expected 'reveal', got 'plant_second'
+PASS BOHN-R11-empty-hand-skip
+FAIL BOHN-R12-field-types: plant_legal[0]: expected False, got True
+PASS BOHN-R13-forced-harvest
+PASS BOHN-R14-four-phase-turn
+PASS BOHN-R15-reveal-two-owned
+PASS BOHN-R16-trade-legality
+PASS BOHN-R17-accepted-trade
+PASS BOHN-R18-rejected-trade
+PASS BOHN-R19-gift-consent
+PASS BOHN-R20-no-retrade
+PASS BOHN-R21-end-trade
+FAIL BOHN-R22-plant-all-owner-order: player 0 received-card choices: expected ['rote_bohne', 'sojabohne'], got ['sojabohne']
+FAIL BOHN-R23-phase3-any-player-order: player 0 received-card choices: expected ['rote_bohne', 'sojabohne'], got ['sojabohne']
+FAIL BOHN-R24-active-plants-revealed: player 0 revealed-card choices: expected ['blaue_bohne', 'feuerbohne'], got ['blaue_bohne']
+PASS BOHN-R25-draw-append-clockwise
+PASS BOHN-R26-offturn-harvest
+PASS BOHN-R27-stable-harvest-boundaries
+PASS BOHN-R28-singleton-boundaries
+PASS BOHN-R29-zero-normal-harvest
+PASS BOHN-R30-garten-curve
+FAIL BOHN-R31-rot-curve: harvest_curve[rot][2]: expected 1, got 0
+PASS BOHN-R32-augen-curve
+PASS BOHN-R33-soja-curve
+PASS BOHN-R34-brech-curve
+PASS BOHN-R35-sau-curve
+PASS BOHN-R36-feuer-curve
+PASS BOHN-R37-blau-curve
+PASS BOHN-R38-first-recycle-reveal
+PASS BOHN-R39-second-recycle-draw
+FAIL BOHN-R40-third-depletion-phase2: step 4: coins[0]: expected 1, got 0
+FAIL BOHN-R41-third-depletion-outside-phase2: step 1: winner: expected 0, got 1
+FAIL BOHN-R42-final-score-tiebreak: step 1: coins[1]: expected 3, got 2
+SCENARIOS PASS=33 FAIL=9 CRASH=0 UNREACHED=0 UNTESTABLE=0 evaluated=42/42 coverage=1.000 clear=30/38 human_decision=3/4
+CLAIMS mapped=80/81 evaluated=80/81 exceptions=1
+
+ERROR conda.cli.main_run:execute(125): `conda run python checks/run_scenarios_v4.py --code-path outputs/bohnanza_base_2023_codex_ag.py --scenarios checks/scenarios/bohnanza_base_2023_v2.json --json-output D:\safen\Ben_T\Studium\8.Semester\BoardBench\results\scores\bohnanza_base_2023\v2\clear_rule_emphasis_scenarios.json` failed. (See above for error)
