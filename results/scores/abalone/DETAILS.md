@@ -2,6 +2,8 @@
 
 [← Overview](README.md)
 
+**Current presentation:** v3 compatibility replay without scoring `ABAL-R19`. See [`v3/COMPARISON.md`](v3/COMPARISON.md). This file keeps the frozen v2 record.
+
 **Model setup:** all three implementations use `gpt-5.6-sol:low`; each has three neutral `gpt-5.6-sol:medium` Judges. PDF, prompt, Contract-v2 profile and the 38-scenario rubric are unchanged. Both Setup-Emphasis generations use byte-identical model packets.
 
 ## Design and sequence

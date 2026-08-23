@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "assumptions": [
+    {
+      "id": "A-01",
+      "material": true,
+      "source_location": "Vorbereitung, Abbildung 1",
+      "source_basis": "ambiguous",
+      "alternatives": ["The diagram is encoded as three centered rows per player containing 5, 5, and 3 marbles.", "No initial coordinate layout is implemented."],
+      "selected": "The diagram is encoded as three centered rows per player containing 5, 5, and 3 marbles.",
+      "affected_mechanics": ["state_transition"]
+    },
+    {
+      "id": "A-02",
+      "material": true,
+      "source_location": "Der Spielablauf",
+      "source_basis": "missing",
+      "alternatives": ["If a nonterminal position has no movement, its only legal action is pass.", "If a nonterminal position has no movement, it has no legal actions."],
+      "selected": "If a nonterminal position has no movement, its only legal action is pass.",
+      "affected_mechanics": ["legal_actions", "state_transition"]
+    }
+  ]
+}

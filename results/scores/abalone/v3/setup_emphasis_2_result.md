@@ -1,0 +1,48 @@
+# Abalone — result profile
+
+> Compatibility replay under v3: 33/33 configured clear-basis and 4/4 human-decision-basis scenarios passed; the unspecified no-move case is not scored.
+
+## Identity
+
+- Condition: v2_setup_emphasis_2 compatibility replay under evaluator v3
+- Format: publisher-pdf+clear-rule-emphasis
+- SHA-256: `c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550`
+- Source ABALONE-RULES-SCHMIDT-4P (publisher_rulebook): `c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550`
+- Source ABALONE-V2-SETUP-EMPHASIS (experimenter_clarification): `168f1d6a2a3fe6ad50abdc64793a96df43414edf8a05459130a7a4a33e522bd7`
+- Runs: 1
+- Generation: gpt-5.6-sol · thinking low
+- Neutral judges: gpt-5.6-sol · thinking medium
+- Response verbosity: low
+
+## Evidence
+
+| Group | Mean | Sample SD |
+|---|---:|---:|
+| Robustness | 1.000 | n/a |
+| Interface | 1.000 | n/a |
+| Clear-basis scenarios | 1.000 | n/a |
+| Human-decision-basis scenarios | 1.000 | n/a |
+| Scenario evaluated coverage | 1.000 | n/a |
+| Neutral judges | 0.870 | 0.030 |
+
+Scenario rows are pass rates over evaluated scenarios, not complete rule-fact coverage. Coverage measures only whether configured scenarios reached an evaluated outcome.
+
+## Assumptions
+
+- Structured material declarations: 3
+
+## Efficiency per run
+
+| Measure | Mean | Sample SD |
+|---|---:|---:|
+| calls | 4.000 | n/a |
+| provider_seconds | 683.444 | n/a |
+| input_tokens | 931202.000 | n/a |
+| cached_input_tokens | 744192.000 | n/a |
+| output_tokens | 25237.000 | n/a |
+| reasoning_tokens | 10565.000 | n/a |
+| api_equivalent_usd | 2.064 | n/a |
+| code_lines | 330.000 | n/a |
+
+Sample SD measures variation across repeated runs; `n/a` means only one run is available.
+The USD value is an API-equivalent estimate for gpt-5.6-sol from the recorded tokens and versioned public list price; actual Codex OAuth subscription cost is unavailable.

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "revision_id": "abalone-v3-evaluator",
+  "status": "compatibility-replay",
+  "created_on": "2026-08-23",
+  "rubric_version": "abalone-v3-atomic-2026-08-23",
+  "prior_revision": {
+    "path": "checks/scenarios/abalone_v2.json",
+    "sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935",
+    "rubric_version": "abalone-v2-atomic-2026-07-26"
+  },
+  "reason": "Unscore ABAL-R19. The publisher source does not specify no-movement behavior, the untimed base game has no timeout loss, and the sparse fixture is not a reachable deadlock. Frozen v2 implementations are replayed unchanged. v2 scores remain historical.",
+  "evaluation": {
+    "scenarios": 37,
+    "clear_basis": 33,
+    "human_decision_basis": 4,
+    "required_clear_claims": 33,
+    "unscored_scenario": "ABAL-R19-forced-pass-only-with-no-move"
+  },
+  "artifacts": {
+    "scenario_suite": {
+      "path": "checks/scenarios/abalone_v3.json",
+      "sha256": "fc3b34de40813d4c2c797713e5b4bee6bc4c304f7fe6cdde9cbacc59df40d174"
+    },
+    "scenario_adapter": {
+      "path": "checks/scenario_adapters/abalone_v2.py",
+      "sha256": "1bb6e2fa7853e15fd95890a33889a9a8a4cf499edd8f31b5137702a96d807840"
+    },
+    "scenario_runner": {
+      "path": "checks/run_scenarios_v4.py",
+      "sha256": "e3345c59f8e2a860187c02a366cb28d7350c114234311e0add03032e72af9201"
+    },
+    "claims": {
+      "path": "inputs/games/abalone/claims_v3.json",
+      "sha256": "580cc1e7cdbb51612cbb599abdb6c63fdb02b9006ffca4f5832338a5800706a0"
+    }
+  }
+}

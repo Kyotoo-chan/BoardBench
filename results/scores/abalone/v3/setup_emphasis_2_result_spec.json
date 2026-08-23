@@ -1,0 +1,46 @@
+{
+  "identity": {
+    "game": "Abalone",
+    "condition": "v2_setup_emphasis_2 compatibility replay under evaluator v3",
+    "source_path": "../../../../inputs/games/abalone/game_rules.pdf",
+    "source_format": "publisher-pdf+clear-rule-emphasis",
+    "source_sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+    "sources": [
+      {
+        "id": "ABALONE-RULES-SCHMIDT-4P",
+        "role": "publisher_rulebook",
+        "path": "../../../../inputs/games/abalone/game_rules.pdf",
+        "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550"
+      },
+      {
+        "id": "ABALONE-V2-SETUP-EMPHASIS",
+        "role": "experimenter_clarification",
+        "path": "../../../../inputs/games/abalone/setup_emphasis_v2.json",
+        "sha256": "168f1d6a2a3fe6ad50abdc64793a96df43414edf8a05459130a7a4a33e522bd7"
+      }
+    ]
+  },
+  "source_diagnosis": {
+    "clear": 36,
+    "human_decision": 6,
+    "ambiguous": 0,
+    "not_testable": 4
+  },
+  "headline": "Compatibility replay under v3: 33/33 configured clear-basis and 4/4 human-decision-basis scenarios passed; the unspecified no-move case is not scored.",
+  "runs": [
+    {
+      "stem": "setup_emphasis_2",
+      "agentic_evidence": "setup_emphasis_2_agentic.json",
+      "checks": "setup_emphasis_2_checks.txt",
+      "scenarios": "setup_emphasis_2_scenarios.json",
+      "usage": "setup_emphasis_2_usage.json",
+      "code": "setup_emphasis_2.py",
+      "assumptions": "setup_emphasis_2_assumptions.json",
+      "neutral_reviews": [
+        "setup_emphasis_2_judge_1.md",
+        "setup_emphasis_2_judge_2.md",
+        "setup_emphasis_2_judge_3.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "game": "abalone",
+  "iteration": "v3",
+  "current_presentation": true,
+  "kind": "evaluator_revision_compatibility_replay",
+  "prior_iteration": "v2",
+  "implementation_changed": false,
+  "hashes": {
+    "original_result.json": "2902e768fd57305a0b7d2f89fe06048da754c10d57e28a268a0896c20e2c74ca",
+    "original_result.md": "fe784bd931fb0be89ed132653eac669af3b23909e051da0a0d45c9847fda65b7",
+    "setup_emphasis_result.json": "c727c0cfa3121bb152dbef65247b1514f5ac42d53dfa523166d1bfec8f4c07a7",
+    "setup_emphasis_result.md": "0542db8929b680dfd729992e111f4306656e0cad7e8a09715a4a8b5e9363065a",
+    "setup_emphasis_2_result.json": "2350e5ae7b9945604e70329bd4eca32930932323c013834a68d2c62189004851",
+    "setup_emphasis_2_result.md": "fc6a32efd8b1d92ec821e725e6db9ef531d473d409c8aaf1b104feec01f9d7ea",
+    "original_scenarios.json": "78ba2a8d185fae1422a8c5a7f12da5d047ad069c12f6869d026e296a8e2ddf75",
+    "setup_emphasis_scenarios.json": "9b67b0e19ce8fc3e5f059036ca8f32dc1e3645eb738b4bd6a00cb097020a6c12",
+    "setup_emphasis_2_scenarios.json": "cee9b0df30248e531f0d741905efd168d227179d0c11350165ba5a7f14dd7eb7",
+    "COMPARISON.md": "aa0359b376149ee07ceeebde9912a7e7ca89a7a909eb076b8b4baae82b7f541f"
+  }
+}

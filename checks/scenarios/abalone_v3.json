@@ -1,0 +1,1810 @@
+{
+  "version": 4,
+  "rubric_version": "abalone-v3-atomic-2026-08-23",
+  "game": "abalone",
+  "adapter": "checks/scenario_adapters/abalone_v2.py",
+  "rulebook": {
+    "path": "inputs/games/abalone/game_rules.pdf",
+    "sha256": "c293ed5d319ccb4fa5725921613f4a05ba2453074d2b2dcdc11cdeb9f8570550",
+    "edition": "Schmidt Spiele German rules, 4 PDF pages"
+  },
+  "scenarios": [
+    {
+      "id": "ABAL-R01-exact-initial-setup",
+      "fact_ids": [
+        "ABAL-C-SETUP-FIGURE",
+        "ABAL-C-BOARD-61",
+        "ABAL-C-SETUP-COUNTS",
+        "ABAL-C-SETUP-ROWS"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 1,
+        "quote": "Setzen Sie die Kugeln wie in Abb. 1 gezeigt in ihre Startpositionen.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "initial": {
+        "current_player": 0,
+        "terminal": false,
+        "returns": [
+          0,
+          0
+        ],
+        "legal_action_count_min": 1,
+        "adapter": {
+          "marble_counts": {
+            "black": 14,
+            "white": 14
+          },
+          "positions": {
+            "black": [
+              "0,-4",
+              "1,-4",
+              "2,-4",
+              "3,-4",
+              "4,-4",
+              "-1,-3",
+              "0,-3",
+              "1,-3",
+              "2,-3",
+              "3,-3",
+              "4,-3",
+              "0,-2",
+              "1,-2",
+              "2,-2"
+            ],
+            "white": [
+              "-2,2",
+              "-1,2",
+              "0,2",
+              "-4,3",
+              "-3,3",
+              "-2,3",
+              "-1,3",
+              "0,3",
+              "1,3",
+              "-4,4",
+              "-3,4",
+              "-2,4",
+              "-1,4",
+              "0,4"
+            ]
+          },
+          "occupancy": {
+            "0,-4": "black",
+            "4,-4": "black",
+            "-1,-3": "black",
+            "4,-3": "black",
+            "0,-2": "black",
+            "2,-2": "black",
+            "0,0": "empty",
+            "-2,2": "white",
+            "0,2": "white",
+            "-4,3": "white",
+            "1,3": "white",
+            "-4,4": "white",
+            "0,4": "white"
+          },
+          "playable_cell_count": 61,
+          "empty_count": 33
+        }
+      }
+    },
+    {
+      "id": "ABAL-R02-single-marble-one-step-and-turn",
+      "fact_ids": [
+        "ABAL-C-ONE-MOVE",
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS",
+        "ABAL-C-TURN-ORDER"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 1,
+        "quote": "Eine Bewegung beinhaltet die Entfernung bis zur nächsten Mulde – nicht mehr.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ],
+        "active": "black"
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "1,0": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R03-two-marble-inline",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-SAME-DIRECTION",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-INLINE"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Eine Bewegung in gerader Linie: Die Kugeln werden geradeaus in die nächste Mulde geschoben.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-1,0": "empty",
+                "0,0": "black",
+                "1,0": "black"
+              }
+            },
+            "current_player": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R04-three-marble-broadside",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-SAME-DIRECTION",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-EMPTY-DESTINATION"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Eine Bewegung zur Seite: Die Kugeln werden seitlich in die nächsten Mulden geschoben.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0",
+          "1,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-1,0",
+                "0,0",
+                "1,0"
+              ],
+              "direction": "SE",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-1,0": "empty",
+                "0,0": "empty",
+                "1,0": "empty",
+                "-1,1": "black",
+                "0,1": "black",
+                "1,1": "black"
+              }
+            },
+            "current_player": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R05-four-marble-move-illegal",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-MAX-THREE"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 1,
+        "quote": "In einem Zug dürfen nicht mehr als drei Kugeln einer Farbe bewegt werden.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0",
+          "1,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-2,0",
+              "-1,0",
+              "0,0",
+              "1,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R06-two-v-one-sumito",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS",
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-SUMITO-ADJACENT",
+        "ABAL-C-SUMITO-FREE-BEHIND"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Ein ‚Sumito‘ ist eine Angriffs-Position, in der die Anzahl Ihrer Kugeln höher ist als die Ihres Gegners.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-1,0": "empty",
+                "0,0": "black",
+                "1,0": "black",
+                "2,0": "white"
+              }
+            },
+            "current_player": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R07-three-v-one-sumito",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Es gibt drei Sumito-Arten, die in den folgenden Beispielen zu sehen sind.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-2,0",
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-2,0": "empty",
+                "-1,0": "black",
+                "0,0": "black",
+                "1,0": "black",
+                "2,0": "white"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R08-three-v-two-sumito",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Es gibt drei Sumito-Arten, die in den folgenden Beispielen zu sehen sind.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0",
+          "2,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-2,0",
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-2,0": "empty",
+                "-1,0": "black",
+                "0,0": "black",
+                "1,0": "black",
+                "2,0": "white",
+                "3,0": "white"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R09-broadside-push-illegal",
+      "fact_ids": [
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-EMPTY-DESTINATION"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Durch eine Bewegung in gerader Linie.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "0,1"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-1,0",
+              "0,0"
+            ],
+            "direction": "SE",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R10-equal-strength-pushes-illegal",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0",
+          "2,0",
+          "3,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-2,0",
+              "-1,0",
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R11-four-v-three-still-patt",
+      "fact_ids": [
+        "ABAL-C-PATT-FOUR-THREE",
+        "ABAL-C-MAX-THREE"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 4,
+        "quote": "Ein 4 - zu - 3 zum Beispiel entspricht also einem 3- zu - 3 Patt.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-3,0",
+          "-2,0",
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0",
+          "2,0",
+          "3,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-2,0",
+              "-1,0",
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R12-blocked-sumito-illegal",
+      "fact_ids": [
+        "ABAL-C-SUMITO-FREE-BEHIND",
+        "ABAL-C-SUMITO-BLOCKED"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "hier hinter der weißen Gruppe keine freie Mulde ist.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0",
+          "2,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-1,0",
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R13-gap-does-not-push",
+      "fact_ids": [
+        "ABAL-C-SUMITO-ADJACENT",
+        "ABAL-C-SUMITO-GAP"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "hier eine leere Mulde zwischen Schwarz und Weiß ist.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "2,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "0,0": "black",
+                "1,0": "black",
+                "2,0": "white"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R14-non-collinear-push-illegal",
+      "fact_ids": [
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-SUMITO-COLLINEAR"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "hier die Kugeln nicht in einer geraden Linie liegen.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,1",
+          "0,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-1,1",
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R15-edge-ejection",
+      "fact_ids": [
+        "ABAL-C-EJECTION",
+        "ABAL-C-EDGE-EXCEPTION",
+        "ABAL-C-SUMITO-SUPERIOR"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 4,
+        "quote": "Eine Kugel ist aus dem Spiel, wenn sie aus dem Spielfeld hinaus auf den Rand geschoben wird.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "2,0",
+          "3,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "2,0",
+                "3,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": false,
+            "returns": [
+              0,
+              0
+            ],
+            "adapter": {
+              "marble_counts": {
+                "black": 2,
+                "white": 0
+              },
+              "occupancy": {
+                "3,0": "black",
+                "4,0": "black"
+              }
+            },
+            "current_player": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R16-sixth-ejection-wins",
+      "fact_ids": [
+        "ABAL-C-SIXTH-WINS",
+        "ABAL-C-EJECTION"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 4,
+        "quote": "Der Spieler, der zuerst sechs Kugeln des Gegners hinaus geschoben hat, gewinnt das Spiel!",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "2,0",
+          "3,0",
+          "0,-4",
+          "1,-4",
+          "2,-4",
+          "3,-4",
+          "4,-4",
+          "-1,-3",
+          "0,-3",
+          "1,-3",
+          "2,-3",
+          "3,-3",
+          "4,-3",
+          "0,-2"
+        ],
+        "white": [
+          "4,0",
+          "-2,2",
+          "-1,2",
+          "0,2",
+          "-4,3",
+          "-3,3",
+          "-2,3",
+          "-1,3",
+          "0,3"
+        ],
+        "captures": [
+          5,
+          0
+        ]
+      },
+      "initial": {
+        "terminal": false,
+        "adapter": {
+          "captures": [
+            5,
+            0
+          ],
+          "marble_counts": {
+            "black": 14,
+            "white": 9
+          }
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "2,0",
+                "3,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "terminal": true,
+            "adapter": {
+              "captures": [
+                6,
+                0
+              ],
+              "marble_counts": {
+                "black": 14,
+                "white": 8
+              },
+              "occupancy": {
+                "2,0": "empty",
+                "3,0": "black",
+                "4,0": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R17-sumito-is-optional",
+      "fact_ids": [
+        "ABAL-C-SUMITO-OPTIONAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "Auch wenn ein Sumito-Angriff möglich ist, muss er nicht ausgeführt werden.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0",
+          "0,-1"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal_cases": [
+            {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0,
+              "match_count": 1
+            },
+            {
+              "group": [
+                "0,-1"
+              ],
+              "direction": "NW",
+              "actor": 0,
+              "match_count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ABAL-R18-patt-may-withdraw",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL",
+        "ABAL-C-PATT-WITHDRAW"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 4,
+        "quote": "so dass sie sich nicht gegenseitig wegschieben dürfen.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "0,0"
+            ],
+            "direction": "W",
+            "actor": 0,
+            "match_count": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R20-three-marble-inline",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-INLINE"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 2,
+        "quote": "Die Kugeln werden geradeaus in die nächste Mulde geschoben.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-2,0",
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-2,0": "empty",
+                "-1,0": "black",
+                "0,0": "black",
+                "1,0": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R21-two-broadside-from-longer-row",
+      "fact_ids": [
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-SUBSET-LONG-ROW"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 1,
+        "quote": "Sie dürfen eine vorhandene, längere Kugelreihe trennen, indem Sie eine, zwei oder drei Kugeln einer Farbe bewegen.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0",
+          "1,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "adapter": {
+              "occupancy": {
+                "-2,0": "black",
+                "-1,0": "empty",
+                "0,0": "empty",
+                "1,0": "black",
+                "-1,1": "black",
+                "0,1": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R22-one-v-one-patt",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "1,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R23-two-v-two-patt",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ],
+      "basis": "clear",
+      "source": {
+        "page": 3,
+        "quote": "In einer Patt-Situation ist die Anzahl der Kugeln beider Spieler gleich.",
+        "source_id": "ABALONE-RULES-SCHMIDT-4P"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0",
+          "2,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal": {
+            "group": [
+              "-1,0",
+              "0,0"
+            ],
+            "direction": "E",
+            "actor": 0,
+            "match_count": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R24-player-count-and-bounded-playability",
+      "fact_ids": [
+        "ABAL-C-PLAYERS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "Ein Spiel für 2 Spieler"
+      },
+      "initial": {
+        "adapter": {
+          "player_count_probe": {
+            "supported": [
+              2
+            ],
+            "unsupported": [
+              1,
+              3
+            ],
+            "seed": 20260726,
+            "bounded_actions": 300,
+            "exception": "ValueError"
+          }
+        }
+      }
+    },
+    {
+      "id": "ABAL-R25-single-step-e",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "1,0": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R26-single-step-ne",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "NE",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "1,-1": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R27-single-step-nw",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "NW",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "0,-1": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R28-single-step-w",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "W",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "-1,0": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R29-single-step-sw",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "SW",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "-1,1": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R30-single-step-se",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "eine der sechs möglichen Richtungen"
+      },
+      "fixture": {
+        "black": [
+          "0,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,0": "empty",
+                "0,1": "black"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R31-invalid-group-and-destination-boundaries",
+      "fact_ids": [
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-EMPTY-DESTINATION",
+        "ABAL-C-SUMITO-INLINE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 1,
+        "quote": "Eine „Bewegung“ kann eine, zwei oder drei Kugeln umfassen."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "ABALONE-RULES-SCHMIDT-4P",
+          "page": 2,
+          "quote": "Durch eine Bewegung in gerader Linie."
+        }
+      ],
+      "fixture": {
+        "black": [
+          "-2,0",
+          "-1,0",
+          "0,0",
+          "0,1"
+        ],
+        "white": [
+          "1,1",
+          "4,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal_cases": [
+            {
+              "group": [
+                "-2,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "-1,0",
+                "0,0",
+                "0,1"
+              ],
+              "direction": "W",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "-2,0",
+                "-1,0",
+                "0,0",
+                "0,1"
+              ],
+              "direction": "W",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "4,0"
+              ],
+              "direction": "W",
+              "actor": 0,
+              "match_count": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ABAL-R32-broadside-blocked-and-offboard",
+      "fact_ids": [
+        "ABAL-G-BROADSIDE-DESTINATIONS"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "ABALONE-V2-DECISIONS",
+        "json_pointer": "/decisions/0",
+        "quote": "For a broadside move, every corresponding destination pit must be on the board and empty."
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0",
+          "3,0",
+          "4,0"
+        ],
+        "white": [
+          "0,1"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal_cases": [
+            {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "3,0",
+                "4,0"
+              ],
+              "direction": "NE",
+              "actor": 0,
+              "match_count": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ABAL-R33-patt-broadside-withdrawal",
+      "fact_ids": [
+        "ABAL-C-PATT-WITHDRAW",
+        "ABAL-C-BROADSIDE"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 4,
+        "quote": "so dass sie sich nicht gegenseitig wegschieben dürfen"
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0"
+        ],
+        "white": [
+          "1,0",
+          "2,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal_cases": [
+            {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ABAL-R34-crossing-angle-breaks-patt",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL",
+        "ABAL-C-PATT-CROSSING"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 4,
+        "quote": "Angriff über eine andere Gerade … in einem anderen Winkel"
+      },
+      "fixture": {
+        "black": [
+          "-3,0",
+          "-2,0",
+          "-1,0",
+          "0,-2",
+          "0,-1"
+        ],
+        "white": [
+          "0,0",
+          "1,0",
+          "2,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "move_legal_cases": [
+            {
+              "group": [
+                "-3,0",
+                "-2,0",
+                "-1,0"
+              ],
+              "direction": "E",
+              "actor": 0,
+              "match_count": 0
+            },
+            {
+              "group": [
+                "0,-2",
+                "0,-1"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 1
+            }
+          ]
+        }
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,-2",
+                "0,-1"
+              ],
+              "direction": "SE",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "adapter": {
+              "occupancy": {
+                "0,-2": "empty",
+                "0,-1": "black",
+                "0,0": "black",
+                "0,1": "white"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R35-three-v-two-edge-ejects-one",
+      "fact_ids": [
+        "ABAL-C-SUMITO-PATTERNS",
+        "ABAL-C-EJECTION",
+        "ABAL-C-EDGE-EXCEPTION"
+      ],
+      "basis": "clear",
+      "source": {
+        "source_id": "ABALONE-RULES-SCHMIDT-4P",
+        "page": 4,
+        "quote": "Eine Kugel ist aus dem Spiel, wenn sie aus dem Spielfeld hinaus auf den Rand geschoben wird."
+      },
+      "fixture": {
+        "black": [
+          "0,0",
+          "1,0",
+          "2,0"
+        ],
+        "white": [
+          "3,0",
+          "4,0"
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "0,0",
+                "1,0",
+                "2,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 1,
+            "terminal": false,
+            "adapter": {
+              "captures": [
+                1,
+                0
+              ],
+              "marble_counts": {
+                "black": 3,
+                "white": 1
+              },
+              "occupancy": {
+                "0,0": "empty",
+                "1,0": "black",
+                "2,0": "black",
+                "3,0": "black",
+                "4,0": "white"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R36-terminal-api-and-returns",
+      "fact_ids": [
+        "ABAL-G-TERMINAL-API",
+        "ABAL-G-RETURNS"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "ABALONE-V2-DECISIONS",
+        "json_pointer": "/decisions/2",
+        "quote": "The sixth ejection ends the game immediately, leaves current_player as the winner, and exposes no terminal legal actions."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "ABALONE-V2-DECISIONS",
+          "json_pointer": "/decisions/3",
+          "quote": "Returns are [0, 0] before terminal and [+1, -1] from player-ID order for a player-0 win, reversed for a player-1 win."
+        }
+      ],
+      "fixture": {
+        "black": [
+          "2,0",
+          "3,0",
+          "0,-4",
+          "1,-4",
+          "2,-4",
+          "3,-4",
+          "4,-4",
+          "-1,-3",
+          "0,-3",
+          "1,-3",
+          "2,-3",
+          "3,-3",
+          "4,-3",
+          "0,-2"
+        ],
+        "white": [
+          "4,0",
+          "-2,2",
+          "-1,2",
+          "0,2",
+          "-4,3",
+          "-3,3",
+          "-2,3",
+          "-1,3",
+          "0,3"
+        ],
+        "captures": [
+          5,
+          0
+        ]
+      },
+      "steps": [
+        {
+          "action": {
+            "adapter": {
+              "group": [
+                "2,0",
+                "3,0"
+              ],
+              "direction": "E",
+              "actor": 0
+            }
+          },
+          "expect": {
+            "current_player": 0,
+            "terminal": true,
+            "returns": [
+              1,
+              -1
+            ],
+            "legal_action_count": 0,
+            "adapter": {
+              "captures": [
+                6,
+                0
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ABAL-R37-action-serialization-is-unique",
+      "fact_ids": [
+        "ABAL-G-ACTION-UNIQUE"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "ABALONE-V2-DECISIONS",
+        "json_pointer": "/decisions/4",
+        "quote": "Exactly one canonical serialized action represents each physical movement; group-order aliases and duplicate successor transitions are forbidden."
+      },
+      "fixture": {
+        "black": [
+          "-1,0",
+          "0,0",
+          "1,0"
+        ],
+        "white": [
+          "4,0"
+        ]
+      },
+      "initial": {
+        "adapter": {
+          "successor_unique": 1,
+          "move_legal_cases": [
+            {
+              "group": [
+                "-1,0",
+                "0,0"
+              ],
+              "direction": "SE",
+              "actor": 0,
+              "match_count": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ABAL-R38-public-contract-observability",
+      "fact_ids": [
+        "ABAL-G-PUBLIC-STATE",
+        "ABAL-G-PLAYER-MAPPING"
+      ],
+      "basis": "human_decision",
+      "source": {
+        "source_id": "ABALONE-V2-DECISIONS",
+        "json_pointer": "/decisions/5",
+        "quote": "The canonical public contract exposes complete board occupancy, current player, capture counts, terminal status, winner, phase, and move number."
+      },
+      "supporting_sources": [
+        {
+          "source_id": "ABALONE-V2-DECISIONS",
+          "json_pointer": "/decisions/6",
+          "quote": "Software player 0 controls black and player 1 controls white; black/player 0 moves first."
+        }
+      ],
+      "initial": {
+        "current_player": 0,
+        "terminal": false,
+        "returns": [
+          0,
+          0
+        ],
+        "adapter": {
+          "playable_cell_count": 61,
+          "captures": [
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "claim_inventory": "inputs/games/abalone/claims_v3.json",
+  "prior_rubric": {
+    "path": "checks/scenarios/abalone_v2.json",
+    "sha256": "be0b349288ab099973bf2ead1e6f793a7f7b866756b4be83bae1aba07a973935",
+    "rubric_version": "abalone-v2-atomic-2026-07-26"
+  }
+}

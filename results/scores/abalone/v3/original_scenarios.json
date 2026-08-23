@@ -1,0 +1,528 @@
+{
+  "version": 4,
+  "rubric_version": "abalone-v3-atomic-2026-08-23",
+  "suite": "C:/Studium/8.Semester/BoardBench/checks/scenarios/abalone_v3.json",
+  "suite_sha256": "fc3b34de40813d4c2c797713e5b4bee6bc4c304f7fe6cdde9cbacc59df40d174",
+  "adapter": "checks/scenario_adapters/abalone_v2.py",
+  "adapter_sha256": "1bb6e2fa7853e15fd95890a33889a9a8a4cf499edd8f31b5137702a96d807840",
+  "runner_sha256": "e3345c59f8e2a860187c02a366cb28d7350c114234311e0add03032e72af9201",
+  "code": "C:/Studium/8.Semester/BoardBench/results/scores/abalone/v3/original.py",
+  "code_sha256": "4098c2dfc360915fd2760393907fe107e878c7b9a4ac3d2c4fcebab71b7e4ccd",
+  "counts": {
+    "PASS": 36,
+    "FAIL": 1,
+    "CRASH": 0,
+    "UNREACHED": 0,
+    "UNTESTABLE": 0
+  },
+  "evaluated": 37,
+  "total": 37,
+  "coverage": 1.0,
+  "basis_scores": {
+    "clear": {
+      "passed": 32,
+      "evaluated": 33,
+      "score": 0.9696969696969697
+    },
+    "human_decision": {
+      "passed": 4,
+      "evaluated": 4,
+      "score": 1.0
+    }
+  },
+  "claim_coverage": {
+    "inventory": "C:/Studium/8.Semester/BoardBench/inputs/games/abalone/claims_v3.json",
+    "required": [
+      "ABAL-C-BOARD-61",
+      "ABAL-C-BROADSIDE",
+      "ABAL-C-EDGE-EXCEPTION",
+      "ABAL-C-EJECTION",
+      "ABAL-C-EMPTY-DESTINATION",
+      "ABAL-C-GROUP-SIZE",
+      "ABAL-C-INLINE",
+      "ABAL-C-MAX-THREE",
+      "ABAL-C-ONE-MOVE",
+      "ABAL-C-ONE-STEP",
+      "ABAL-C-PATT-CROSSING",
+      "ABAL-C-PATT-EQUAL",
+      "ABAL-C-PATT-FOUR-THREE",
+      "ABAL-C-PATT-WITHDRAW",
+      "ABAL-C-PLAYERS",
+      "ABAL-C-SAME-DIRECTION",
+      "ABAL-C-SETUP-COUNTS",
+      "ABAL-C-SETUP-FIGURE",
+      "ABAL-C-SETUP-ROWS",
+      "ABAL-C-SIX-DIRECTIONS",
+      "ABAL-C-SIXTH-WINS",
+      "ABAL-C-STRAIGHT-CONTIGUOUS",
+      "ABAL-C-SUBSET-LONG-ROW",
+      "ABAL-C-SUMITO-ADJACENT",
+      "ABAL-C-SUMITO-BLOCKED",
+      "ABAL-C-SUMITO-COLLINEAR",
+      "ABAL-C-SUMITO-FREE-BEHIND",
+      "ABAL-C-SUMITO-GAP",
+      "ABAL-C-SUMITO-INLINE",
+      "ABAL-C-SUMITO-OPTIONAL",
+      "ABAL-C-SUMITO-PATTERNS",
+      "ABAL-C-SUMITO-SUPERIOR",
+      "ABAL-C-TURN-ORDER"
+    ],
+    "scenario_covered": [
+      "ABAL-C-BOARD-61",
+      "ABAL-C-BROADSIDE",
+      "ABAL-C-EDGE-EXCEPTION",
+      "ABAL-C-EJECTION",
+      "ABAL-C-EMPTY-DESTINATION",
+      "ABAL-C-GROUP-SIZE",
+      "ABAL-C-INLINE",
+      "ABAL-C-MAX-THREE",
+      "ABAL-C-ONE-MOVE",
+      "ABAL-C-ONE-STEP",
+      "ABAL-C-PATT-CROSSING",
+      "ABAL-C-PATT-EQUAL",
+      "ABAL-C-PATT-FOUR-THREE",
+      "ABAL-C-PATT-WITHDRAW",
+      "ABAL-C-PLAYERS",
+      "ABAL-C-SAME-DIRECTION",
+      "ABAL-C-SETUP-COUNTS",
+      "ABAL-C-SETUP-FIGURE",
+      "ABAL-C-SETUP-ROWS",
+      "ABAL-C-SIX-DIRECTIONS",
+      "ABAL-C-SIXTH-WINS",
+      "ABAL-C-STRAIGHT-CONTIGUOUS",
+      "ABAL-C-SUBSET-LONG-ROW",
+      "ABAL-C-SUMITO-ADJACENT",
+      "ABAL-C-SUMITO-BLOCKED",
+      "ABAL-C-SUMITO-COLLINEAR",
+      "ABAL-C-SUMITO-FREE-BEHIND",
+      "ABAL-C-SUMITO-GAP",
+      "ABAL-C-SUMITO-INLINE",
+      "ABAL-C-SUMITO-OPTIONAL",
+      "ABAL-C-SUMITO-PATTERNS",
+      "ABAL-C-SUMITO-SUPERIOR",
+      "ABAL-C-TURN-ORDER"
+    ],
+    "coverage_exceptions": [],
+    "mapping_coverage": 1.0,
+    "evaluated": [
+      "ABAL-C-BOARD-61",
+      "ABAL-C-BROADSIDE",
+      "ABAL-C-EDGE-EXCEPTION",
+      "ABAL-C-EJECTION",
+      "ABAL-C-EMPTY-DESTINATION",
+      "ABAL-C-GROUP-SIZE",
+      "ABAL-C-INLINE",
+      "ABAL-C-MAX-THREE",
+      "ABAL-C-ONE-MOVE",
+      "ABAL-C-ONE-STEP",
+      "ABAL-C-PATT-CROSSING",
+      "ABAL-C-PATT-EQUAL",
+      "ABAL-C-PATT-FOUR-THREE",
+      "ABAL-C-PATT-WITHDRAW",
+      "ABAL-C-PLAYERS",
+      "ABAL-C-SAME-DIRECTION",
+      "ABAL-C-SETUP-COUNTS",
+      "ABAL-C-SETUP-FIGURE",
+      "ABAL-C-SETUP-ROWS",
+      "ABAL-C-SIX-DIRECTIONS",
+      "ABAL-C-SIXTH-WINS",
+      "ABAL-C-STRAIGHT-CONTIGUOUS",
+      "ABAL-C-SUBSET-LONG-ROW",
+      "ABAL-C-SUMITO-ADJACENT",
+      "ABAL-C-SUMITO-BLOCKED",
+      "ABAL-C-SUMITO-COLLINEAR",
+      "ABAL-C-SUMITO-FREE-BEHIND",
+      "ABAL-C-SUMITO-GAP",
+      "ABAL-C-SUMITO-INLINE",
+      "ABAL-C-SUMITO-OPTIONAL",
+      "ABAL-C-SUMITO-PATTERNS",
+      "ABAL-C-SUMITO-SUPERIOR",
+      "ABAL-C-TURN-ORDER"
+    ],
+    "evaluated_coverage": 1.0
+  },
+  "results": [
+    {
+      "id": "ABAL-R01-exact-initial-setup",
+      "status": "FAIL",
+      "message": "marble_counts: expected {'black': 14, 'white': 14}, got {'black': 13, 'white': 13}",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SETUP-FIGURE",
+        "ABAL-C-BOARD-61",
+        "ABAL-C-SETUP-COUNTS",
+        "ABAL-C-SETUP-ROWS"
+      ]
+    },
+    {
+      "id": "ABAL-R02-single-marble-one-step-and-turn",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-MOVE",
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS",
+        "ABAL-C-TURN-ORDER"
+      ]
+    },
+    {
+      "id": "ABAL-R03-two-marble-inline",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-SAME-DIRECTION",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-INLINE"
+      ]
+    },
+    {
+      "id": "ABAL-R04-three-marble-broadside",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-SAME-DIRECTION",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-EMPTY-DESTINATION"
+      ]
+    },
+    {
+      "id": "ABAL-R05-four-marble-move-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-MAX-THREE"
+      ]
+    },
+    {
+      "id": "ABAL-R06-two-v-one-sumito",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS",
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-SUMITO-ADJACENT",
+        "ABAL-C-SUMITO-FREE-BEHIND"
+      ]
+    },
+    {
+      "id": "ABAL-R07-three-v-one-sumito",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS"
+      ]
+    },
+    {
+      "id": "ABAL-R08-three-v-two-sumito",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-SUPERIOR",
+        "ABAL-C-SUMITO-PATTERNS"
+      ]
+    },
+    {
+      "id": "ABAL-R09-broadside-push-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-EMPTY-DESTINATION"
+      ]
+    },
+    {
+      "id": "ABAL-R10-equal-strength-pushes-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ]
+    },
+    {
+      "id": "ABAL-R11-four-v-three-still-patt",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-FOUR-THREE",
+        "ABAL-C-MAX-THREE"
+      ]
+    },
+    {
+      "id": "ABAL-R12-blocked-sumito-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-FREE-BEHIND",
+        "ABAL-C-SUMITO-BLOCKED"
+      ]
+    },
+    {
+      "id": "ABAL-R13-gap-does-not-push",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-ADJACENT",
+        "ABAL-C-SUMITO-GAP"
+      ]
+    },
+    {
+      "id": "ABAL-R14-non-collinear-push-illegal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-INLINE",
+        "ABAL-C-SUMITO-COLLINEAR"
+      ]
+    },
+    {
+      "id": "ABAL-R15-edge-ejection",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-EJECTION",
+        "ABAL-C-EDGE-EXCEPTION",
+        "ABAL-C-SUMITO-SUPERIOR"
+      ]
+    },
+    {
+      "id": "ABAL-R16-sixth-ejection-wins",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SIXTH-WINS",
+        "ABAL-C-EJECTION"
+      ]
+    },
+    {
+      "id": "ABAL-R17-sumito-is-optional",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-OPTIONAL"
+      ]
+    },
+    {
+      "id": "ABAL-R18-patt-may-withdraw",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL",
+        "ABAL-C-PATT-WITHDRAW"
+      ]
+    },
+    {
+      "id": "ABAL-R20-three-marble-inline",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-INLINE"
+      ]
+    },
+    {
+      "id": "ABAL-R21-two-broadside-from-longer-row",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-BROADSIDE",
+        "ABAL-C-SUBSET-LONG-ROW"
+      ]
+    },
+    {
+      "id": "ABAL-R22-one-v-one-patt",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ]
+    },
+    {
+      "id": "ABAL-R23-two-v-two-patt",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL"
+      ]
+    },
+    {
+      "id": "ABAL-R24-player-count-and-bounded-playability",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PLAYERS"
+      ]
+    },
+    {
+      "id": "ABAL-R25-single-step-e",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R26-single-step-ne",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R27-single-step-nw",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R28-single-step-w",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R29-single-step-sw",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R30-single-step-se",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-ONE-STEP",
+        "ABAL-C-SIX-DIRECTIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R31-invalid-group-and-destination-boundaries",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-STRAIGHT-CONTIGUOUS",
+        "ABAL-C-GROUP-SIZE",
+        "ABAL-C-EMPTY-DESTINATION",
+        "ABAL-C-SUMITO-INLINE"
+      ]
+    },
+    {
+      "id": "ABAL-R32-broadside-blocked-and-offboard",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ABAL-G-BROADSIDE-DESTINATIONS"
+      ]
+    },
+    {
+      "id": "ABAL-R33-patt-broadside-withdrawal",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-WITHDRAW",
+        "ABAL-C-BROADSIDE"
+      ]
+    },
+    {
+      "id": "ABAL-R34-crossing-angle-breaks-patt",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-PATT-EQUAL",
+        "ABAL-C-PATT-CROSSING"
+      ]
+    },
+    {
+      "id": "ABAL-R35-three-v-two-edge-ejects-one",
+      "status": "PASS",
+      "message": "",
+      "basis": "clear",
+      "fact_ids": [
+        "ABAL-C-SUMITO-PATTERNS",
+        "ABAL-C-EJECTION",
+        "ABAL-C-EDGE-EXCEPTION"
+      ]
+    },
+    {
+      "id": "ABAL-R36-terminal-api-and-returns",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ABAL-G-TERMINAL-API",
+        "ABAL-G-RETURNS"
+      ]
+    },
+    {
+      "id": "ABAL-R37-action-serialization-is-unique",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ABAL-G-ACTION-UNIQUE"
+      ]
+    },
+    {
+      "id": "ABAL-R38-public-contract-observability",
+      "status": "PASS",
+      "message": "",
+      "basis": "human_decision",
+      "fact_ids": [
+        "ABAL-G-PUBLIC-STATE",
+        "ABAL-G-PLAYER-MAPPING"
+      ]
+    }
+  ]
+}
